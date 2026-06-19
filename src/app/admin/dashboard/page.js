@@ -10,6 +10,9 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [newsModalOpen, setNewsModalOpen] = useState(false);
+  const [editingNews, setEditingNews] = useState(null);
+  const [newsForm, setNewsForm] = useState({ title: '', date: '', image_url: '', source: '' });
 
   const pages = [
     { id: 'home', label: 'Home / Beranda', icon: 'ph-house' },
@@ -112,6 +115,49 @@ export default function AdminDashboard() {
     if (res && res.ok) {
       alert('Konten berhasil disimpan');
     }
+  };
+
+  const handleOpenNewsModal = (newsItem = null) => {
+    if (newsItem) {
+      setEditingNews(newsItem.id);
+      setNewsForm({
+        title: newsItem.title || '',
+        date: newsItem.date || '',
+        image_url: newsItem.image_url || '',
+        source: newsItem.source || ''
+      });
+    } else {
+      setEditingNews(null);
+      setNewsForm({ title: '', date: '', image_url: '', source: '' });
+    }
+    setNewsModalOpen(true);
+  };
+
+  const handleSaveNews = async (e) => {
+    e.preventDefault();
+    const api = process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api';
+    const method = editingNews ? 'PUT' : 'POST';
+    const url = editingNews ? `${api}/admin/news/${editingNews}` : `${api}/admin/news`;
+    
+    const res = await fetchAuth(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newsForm)
+    });
+
+    if (res && res.ok) {
+      setNewsModalOpen(false);
+      loadData();
+    } else {
+      alert('Gagal menyimpan berita');
+    }
+  };
+
+  const handleDeleteNews = async (id) => {
+    if (!confirm('Yakin ingin menghapus berita ini?')) return;
+    const api = process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api';
+    const res = await fetchAuth(`${api}/admin/news/${id}`, { method: 'DELETE' });
+    if (res && res.ok) loadData();
   };
 
   if (loading) return (
@@ -235,7 +281,9 @@ export default function AdminDashboard() {
               <div style={{ 
                 display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '24px' 
               }}>
-                <div style={{ 
+                <div 
+                  onClick={() => handleOpenNewsModal()}
+                  style={{ 
                   background: 'white', border: '2px dashed #cbd5e1', 
                   borderRadius: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
                   minHeight: '280px', cursor: 'pointer', transition: 'all 0.2s'
@@ -260,8 +308,8 @@ export default function AdminDashboard() {
                     <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', flex: 1 }}>
                       <h3 style={{ fontSize: '1.1rem', margin: '0 0 16px 0', lineHeight: '1.4', color: '#0f172a', fontWeight: '700' }}>{n.title}</h3>
                       <div style={{ marginTop: 'auto', display: 'flex', gap: '8px' }}>
-                        <button style={{ flex: 1, padding: '8px', background: '#f1f5f9', color: '#475569', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '600' }}>Edit</button>
-                        <button style={{ padding: '8px 12px', background: '#fff1f2', color: '#e11d48', border: 'none', borderRadius: '8px', cursor: 'pointer' }}><i className="ph-bold ph-trash"></i></button>
+                        <button onClick={() => handleOpenNewsModal(n)} style={{ flex: 1, padding: '8px', background: '#f1f5f9', color: '#475569', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '600' }}>Edit</button>
+                        <button onClick={() => handleDeleteNews(n.id)} style={{ padding: '8px 12px', background: '#fff1f2', color: '#e11d48', border: 'none', borderRadius: '8px', cursor: 'pointer' }}><i className="ph-bold ph-trash"></i></button>
                       </div>
                     </div>
                   </div>
@@ -391,6 +439,79 @@ export default function AdminDashboard() {
         </div>
       </div>
       
+      {/* News Modal */}
+      {newsModalOpen && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.6)', backdropFilter: 'blur(4px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+          <div className="fade-in" style={{ background: 'white', borderRadius: '16px', width: '100%', maxWidth: '600px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)', overflow: 'hidden' }}>
+            <div style={{ padding: '24px 32px', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: '800', margin: 0, color: '#0f172a' }}>{editingNews ? 'Edit Berita' : 'Tambah Berita Baru'}</h2>
+              <button onClick={() => setNewsModalOpen(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#64748b' }}>
+                <i className="ph-bold ph-x" style={{ fontSize: '1.25rem' }}></i>
+              </button>
+            </div>
+            <form onSubmit={handleSaveNews} style={{ padding: '32px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                
+                <div>
+                  <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', color: '#334155', fontSize: '0.9rem' }}>Judul Berita</label>
+                  <input 
+                    type="text" 
+                    required
+                    value={newsForm.title}
+                    onChange={(e) => setNewsForm({...newsForm, title: e.target.value})}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', background: '#f8fafc', border: '1px solid #cbd5e1', color: '#0f172a', outline: 'none' }}
+                  />
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                  <div>
+                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', color: '#334155', fontSize: '0.9rem' }}>Tanggal Berita</label>
+                    <input 
+                      type="text" 
+                      required
+                      placeholder="Contoh: 12 Agustus 2026"
+                      value={newsForm.date}
+                      onChange={(e) => setNewsForm({...newsForm, date: e.target.value})}
+                      style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', background: '#f8fafc', border: '1px solid #cbd5e1', color: '#0f172a', outline: 'none' }}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', color: '#334155', fontSize: '0.9rem' }}>Sumber / Link (Opsional)</label>
+                    <input 
+                      type="text" 
+                      value={newsForm.source}
+                      onChange={(e) => setNewsForm({...newsForm, source: e.target.value})}
+                      style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', background: '#f8fafc', border: '1px solid #cbd5e1', color: '#0f172a', outline: 'none' }}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontWeight: '600', marginBottom: '8px', color: '#334155', fontSize: '0.9rem' }}>Gambar Cover</label>
+                  {newsForm.image_url && (
+                    <img src={newsForm.image_url} alt="preview" style={{ width: '100%', height: '160px', objectFit: 'cover', borderRadius: '8px', marginBottom: '12px', border: '1px solid #e2e8f0' }} />
+                  )}
+                  <label style={{ 
+                    display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 20px', 
+                    background: 'white', border: '1px solid #cbd5e1', boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                    borderRadius: '8px', cursor: 'pointer', color: '#0f172a', fontSize: '0.9rem', fontWeight: '600'
+                  }}>
+                    <i className="ph-bold ph-upload-simple" style={{ color: '#e11d48' }}></i> {newsForm.image_url ? 'Ganti Gambar' : 'Pilih Gambar Baru'}
+                    <input type="file" accept="image/*" onChange={(e) => handleUploadImage(e, (url) => setNewsForm({...newsForm, image_url: url}))} style={{ display: 'none' }} />
+                  </label>
+                </div>
+                
+              </div>
+              
+              <div style={{ display: 'flex', gap: '12px', marginTop: '32px', paddingTop: '24px', borderTop: '1px solid #e2e8f0' }}>
+                <button type="button" onClick={() => setNewsModalOpen(false)} style={{ flex: 1, padding: '12px', background: '#f1f5f9', color: '#475569', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+                <button type="submit" style={{ flex: 1, padding: '12px', background: '#e11d48', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '600', boxShadow: '0 4px 10px rgba(225, 29, 72, 0.2)' }}>Simpan Berita</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       <style dangerouslySetInnerHTML={{__html: `
         .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn {
