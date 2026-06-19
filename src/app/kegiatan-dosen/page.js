@@ -1,16 +1,29 @@
+'use client';
+import { useState, useEffect } from 'react';
+
 export default function Page() {
-  return (
-    <div dangerouslySetInnerHTML={{ __html: `<!-- ░░░ HERO SUBPAGE ░░░ -->
-<section class="hero hero-sub" style="background: url('https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png') center/cover; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: white; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.05);">
-  <div style="position: absolute; inset: -20px; background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)); backdrop-filter: blur(12px) saturate(150%); -webkit-backdrop-filter: blur(12px) saturate(150%); z-index: 1;"></div>
-  <div class="container" style="position: relative; z-index: 2;">
-    <div class="fade-up">
-      <span style="background: var(--umiba-red); color: white; padding: 6px 16px; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; display: inline-block;">Sivitas Akademika</span>
-      <h1 style="color: white; margin-bottom: 16px;">Kegiatan Dosen</h1>
-      <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto; opacity: 0.9; color: white;">Informasi seputar aktivitas pengajaran, penelitian, dan pengabdian dosen UMIBA.</p>
-    </div>
-  </div>
-</section>
+  const [contents, setContents] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api'}/contents`)
+      .then(res => res.json())
+      .then(data => {
+        const contentMap = {};
+        data.forEach(c => contentMap[c.key] = c.value);
+        setContents(contentMap);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+
+  const heroBg = contents['kegiatan-dosen_hero_bg'] || 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png';
+  const heroTitle = contents['kegiatan-dosen_hero_title'] || 'Kegiatan Dosen';
+  const mainHtml = contents['kegiatan-dosen_html'] || `<!-- ░░░ HERO SUBPAGE ░░░ -->
+
 
 <!-- ░░░ NAVIGATION TABS ░░░ -->
 <div style="position: sticky; top: 100px; z-index: 900; margin-top: 24px; margin-bottom: 24px;">
@@ -65,6 +78,22 @@ export default function Page() {
       <a href="https://pddikti.kemdikbud.go.id/" target="_blank" class="btn btn-glass" style="width: 100%;"><i class="ph-bold ph-link" style="margin-right: 8px;"></i> Cari Dosen di PDDikti</a>
     </div>
   </div>
-</section>` }} />
+</section>`;
+
+  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>;
+
+  return (
+    <div>
+      <section className="hero hero-sub" style={{ background: `url('${heroBg}') center/cover`, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: 'white', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ position: 'absolute', inset: '-20px', background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9))', backdropFilter: 'blur(12px) saturate(150%)', WebkitBackdropFilter: 'blur(12px) saturate(150%)', zIndex: 1 }}></div>
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <div className="fade-up">
+            <span style={{ background: 'var(--umiba-red)', color: 'white', padding: '6px 16px', borderRadius: 'var(--radius-full)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '24px', display: 'inline-block' }}>UMIBA</span>
+            <h1 style={{ color: 'white', marginBottom: '16px' }}>{heroTitle}</h1>
+          </div>
+        </div>
+      </section>
+      <div dangerouslySetInnerHTML={{ __html: mainHtml }} />
+    </div>
   );
 }
