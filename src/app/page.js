@@ -219,7 +219,7 @@ export default function Home() {
       <a href="/berita" className="btn btn-glass">Lihat Semua</a>
     </div>
     <div className="grid grid-3">
-      {newsData.length > 0 ? (
+      {newsData && newsData.length > 0 ? (
         newsData.map((newsItem, index) => (
           <div key={newsItem.id} className="glass glass-card fade-up" style={{ transitionDelay: `${index * 0.1}s` }}>
             <div style={{ background: 'var(--color-muted)', height: '200px', borderRadius: 'var(--radius-sm)', marginBottom: 'var(--space-3)', overflow: 'hidden' }}>
@@ -230,7 +230,9 @@ export default function Home() {
           </div>
         ))
       ) : (
-        <div style={{ gridColumn: 'span 3', textAlign: 'center', padding: '20px' }}>Loading berita...</div>
+        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px', background: 'rgba(255,255,255,0.5)', borderRadius: '16px' }}>
+          <p style={{ color: '#64748b', fontSize: '1.1rem', margin: 0 }}>Belum ada berita yang dipublikasikan.</p>
+        </div>
       )}
     </div>
   </div>
