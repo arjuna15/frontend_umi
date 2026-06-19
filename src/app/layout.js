@@ -18,6 +18,7 @@ export const metadata = {
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import ScrollAnimations from "../components/ScrollAnimations";
 
 export default function RootLayout({ children }) {
   return (
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
         <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
       </head>
       <body className="min-h-full flex flex-col">
+        <ScrollAnimations />
         <Header />
         <main style={{ flex: 1 }}>{children}</main>
         <Footer />
