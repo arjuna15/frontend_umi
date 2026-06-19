@@ -40,7 +40,11 @@ export default function AdminDashboard() {
       router.push('/admin/login');
       return null;
     }
-    const headers = { ...options.headers, 'Authorization': `Bearer ${token}` };
+    const headers = { 
+      'Accept': 'application/json',
+      ...options.headers, 
+      'Authorization': `Bearer ${token}` 
+    };
     const res = await fetch(url, { ...options, headers });
     if (res.status === 401) {
       localStorage.removeItem('admin_token');
