@@ -6,6 +6,7 @@ export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [newsData, setNewsData] = useState([]);
   const [testiData, setTestiData] = useState([]);
+  const [contents, setContents] = useState({});
 
   useEffect(() => {
     // Basic slider logic
@@ -21,6 +22,7 @@ export default function Home() {
           const data = await res.json();
           if (data.news) setNewsData(data.news.slice(0, 3));
           if (data.testimonials) setTestiData(data.testimonials);
+          if (data.contents) setContents(data.contents);
         }
       } catch (error) {
         console.error('Failed to fetch home data:', error);
@@ -40,7 +42,7 @@ export default function Home() {
   <div className="hero" style={{ position: 'relative', overflow: 'hidden' }}>
     {/*  Slider Backgrounds  */}
     <div id="heroSlides" style={{ position: 'absolute', inset: '0', zIndex: '-2' }}>
-      <div className="hero-slide active" style={{ backgroundImage: "url('https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_1.png')" }}></div>
+      <div className="hero-slide active" style={{ backgroundImage: `url('${contents.home_hero_bg || 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_1.png'}')` }}></div>
       <div className="hero-slide" style={{ backgroundImage: "url('https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png')" }}></div>
       <div className="hero-slide" style={{ backgroundImage: "url('https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png')" }}></div>
     </div>

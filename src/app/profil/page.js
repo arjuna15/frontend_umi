@@ -1,12 +1,31 @@
+'use client';
+import { useState, useEffect } from 'react';
+
 export default function Page() {
+  const [contents, setContents] = useState({});
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api'}/contents`)
+      .then(res => res.json())
+      .then(data => {
+        const contentMap = {};
+        data.forEach(c => contentMap[c.key] = c.value);
+        setContents(contentMap);
+      })
+      .catch(console.error);
+  }, []);
+
+  const heroBg = contents.profil_hero_bg || "https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_1.png";
+  const heroTitle = contents.profil_hero_title || "Profil Universitas";
+
   return (
     <div dangerouslySetInnerHTML={{ __html: `<!-- ░░░ HERO SUBPAGE ░░░ -->
-<section class="hero hero-sub" style="background: url('https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_1.png') center/cover; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: white; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.05);">
+<section class="hero hero-sub" style="background: url('${heroBg}') center/cover; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: white; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.05);">
   <div style="position: absolute; inset: -20px; background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)); backdrop-filter: blur(12px) saturate(150%); -webkit-backdrop-filter: blur(12px) saturate(150%); z-index: 1;"></div>
   <div class="container" style="position: relative; z-index: 2;">
     <div class="fade-up">
       <span style="background: var(--umiba-red); color: white; padding: 6px 16px; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; display: inline-block;">Mengenal Kampus</span>
-      <h1 style="color: white; margin-bottom: 16px;">Profil Universitas</h1>
+      <h1 style="color: white; margin-bottom: 16px;">${heroTitle}</h1>
       <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto; opacity: 0.9; color: white;">Mengenal lebih dekat Universitas Mitra Bangsa (UMIBA).</p>
     </div>
   </div>
