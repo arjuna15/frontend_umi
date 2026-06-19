@@ -4,12 +4,30 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [newsData, setNewsData] = useState([]);
+  const [testiData, setTestiData] = useState([]);
 
   useEffect(() => {
     // Basic slider logic
     const interval = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % 3);
     }, 5000);
+
+    // Fetch dynamic data from API
+    const fetchHomeData = async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/home-data`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.news) setNewsData(data.news.slice(0, 3));
+          if (data.testimonials) setTestiData(data.testimonials);
+        }
+      } catch (error) {
+        console.error('Failed to fetch home data:', error);
+      }
+    };
+    fetchHomeData();
+
     return () => clearInterval(interval);
   }, []);
 
@@ -323,27 +341,19 @@ export default function Home() {
       <a href="berita.html" className="btn btn-glass">Lihat Semua</a>
     </div>
     <div className="grid grid-3">
-      <div className="glass glass-card fade-up">
-        <div style={{ background: 'var(--color-muted)', height: '200px', borderRadius: 'var(--radius-sm)', marginBottom: 'var(--space-3)', overflow: 'hidden' }}>
-           <img src="https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_1.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Berita"/>
-        </div>
-        <p style={{ fontSize: '0.8rem', marginBottom: '8px' }}>8 Juni 2026</p>
-        <h3 style={{ fontSize: '1.1rem' }}>Penerimaan Mahasiswa Baru Semester Gasal 2025/2026 Resmi Dibuka</h3>
-      </div>
-      <div className="glass glass-card fade-up" style={{ transitionDelay: '0.1s' }}>
-        <div style={{ background: 'var(--color-muted)', height: '200px', borderRadius: 'var(--radius-sm)', marginBottom: 'var(--space-3)', overflow: 'hidden' }}>
-           <img src="https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Berita"/>
-        </div>
-        <p style={{ fontSize: '0.8rem', marginBottom: '8px' }}>5 Juni 2026</p>
-        <h3 style={{ fontSize: '1.1rem' }}>Seminar Nasional Teknologi Informasi &amp; Aktuaria 2025</h3>
-      </div>
-      <div className="glass glass-card fade-up" style={{ transitionDelay: '0.2s' }}>
-        <div style={{ background: 'var(--color-muted)', height: '200px', borderRadius: 'var(--radius-sm)', marginBottom: 'var(--space-3)', overflow: 'hidden' }}>
-           <img src="https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Berita"/>
-        </div>
-        <p style={{ fontSize: '0.8rem', marginBottom: '8px' }}>1 Juni 2026</p>
-        <h3 style={{ fontSize: '1.1rem' }}>Mahasiswa UMIBA Raih Juara 1 Kompetisi Nasional 2025</h3>
-      </div>
+      {newsData.length > 0 ? (
+        newsData.map((newsItem, index) => (
+          <div key={newsItem.id} className="glass glass-card fade-up" style={{ transitionDelay: `${index * 0.1}s` }}>
+            <div style={{ background: 'var(--color-muted)', height: '200px', borderRadius: 'var(--radius-sm)', marginBottom: 'var(--space-3)', overflow: 'hidden' }}>
+               <img src={newsItem.image_url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={newsItem.title}/>
+            </div>
+            <p style={{ fontSize: '0.8rem', marginBottom: '8px' }}>{newsItem.date}</p>
+            <h3 style={{ fontSize: '1.1rem' }}>{newsItem.title}</h3>
+          </div>
+        ))
+      ) : (
+        <div style={{ gridColumn: 'span 3', textAlign: 'center', padding: '20px' }}>Loading berita...</div>
+      )}
     </div>
   </div>
 </section>
@@ -491,24 +501,15 @@ export default function Home() {
       <h2>Testimoni Alumni</h2>
     </div>
     <div className="testi-slider fade-up">
-      <div className="testi-card" style={{ border: 'none', background: 'transparent', boxShadow: 'none' }}>
-        <img className="alumni-img" style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }} src="https://umiba.ac.id/wp-content/uploads/2024/05/1-1.png" alt="Testimoni 1"/>
-      </div>
-      <div className="testi-card" style={{ border: 'none', background: 'transparent', boxShadow: 'none' }}>
-        <img className="alumni-img" style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }} src="https://umiba.ac.id/wp-content/uploads/2024/05/2-1.png" alt="Testimoni 2"/>
-      </div>
-      <div className="testi-card" style={{ border: 'none', background: 'transparent', boxShadow: 'none' }}>
-        <img className="alumni-img" style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }} src="https://umiba.ac.id/wp-content/uploads/2024/05/3-1.png" alt="Testimoni 3"/>
-      </div>
-      <div className="testi-card" style={{ border: 'none', background: 'transparent', boxShadow: 'none' }}>
-        <img className="alumni-img" style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }} src="https://umiba.ac.id/wp-content/uploads/2024/05/1-2.png" alt="Testimoni 4"/>
-      </div>
-      <div className="testi-card" style={{ border: 'none', background: 'transparent', boxShadow: 'none' }}>
-        <img className="alumni-img" style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }} src="https://umiba.ac.id/wp-content/uploads/2024/05/2-2.png" alt="Testimoni 5"/>
-      </div>
-      <div className="testi-card" style={{ border: 'none', background: 'transparent', boxShadow: 'none' }}>
-        <img className="alumni-img" style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }} src="https://umiba.ac.id/wp-content/uploads/2024/05/3-2.png" alt="Testimoni 6"/>
-      </div>
+      {testiData.length > 0 ? (
+        testiData.map((testi, index) => (
+          <div key={testi.id} className="testi-card" style={{ border: 'none', background: 'transparent', boxShadow: 'none' }}>
+            <img className="alumni-img" style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }} src={testi.image_url} alt={`Testimoni ${index + 1}`}/>
+          </div>
+        ))
+      ) : (
+        <div style={{ textAlign: 'center', padding: '20px' }}>Loading testimoni...</div>
+      )}
     </div>
     <input type="range" className="custom-scrollbar" data-target=".testi-slider" min="0" max="100" value="0" />
   </div>
