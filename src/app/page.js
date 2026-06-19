@@ -574,36 +574,18 @@ export default function Home() {
     </div>
   </div>
   
-  <style>
-    .footer-hover-link:hover { color: white !important; transform: translateX(4px); display: inline-block; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-  </style>
+  {/* Floating WhatsApp Button */}
 </footer>
-
-<script>
-  // Simple intersection observer for animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
-</script>
-{/*  Floating WhatsApp Button  */}
-<a href="https://wa.me/62811870114" className="wa-float" target="_blank" aria-label="WhatsApp Kami">
-  <div className="wa-badge">
-    Tanya UMIBA
-    <span><i className="ph-fill ph-circle"></i> Terhubung Sekarang</span>
-  </div>
-  <div className="wa-btn">
-    <i className="ph-fill ph-whatsapp-logo"></i>
-    <div className="wa-online-dot"></div>
-  </div>
-</a>
-
-<script src="script.js?v=3"></script>
+  <a href="https://wa.me/62811870114" className="wa-float" target="_blank" aria-label="WhatsApp Kami">
+    <div className="wa-badge">
+      Tanya UMIBA
+      <span><i className="ph-fill ph-circle"></i> Terhubung Sekarang</span>
+    </div>
+    <div className="wa-btn">
+      <i className="ph-fill ph-whatsapp-logo"></i>
+      <div className="wa-online-dot"></div>
+    </div>
+  </a>
 
 
       </div>
