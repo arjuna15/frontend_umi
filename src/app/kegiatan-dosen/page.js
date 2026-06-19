@@ -1,0 +1,70 @@
+export default function Page() {
+  return (
+    <div dangerouslySetInnerHTML={{ __html: `<!-- ░░░ HERO SUBPAGE ░░░ -->
+<section class="hero hero-sub" style="background: url('https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png') center/cover; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: white; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.05);">
+  <div style="position: absolute; inset: -20px; background: linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)); backdrop-filter: blur(12px) saturate(150%); -webkit-backdrop-filter: blur(12px) saturate(150%); z-index: 1;"></div>
+  <div class="container" style="position: relative; z-index: 2;">
+    <div class="fade-up">
+      <span style="background: var(--umiba-red); color: white; padding: 6px 16px; border-radius: var(--radius-full); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 24px; display: inline-block;">Sivitas Akademika</span>
+      <h1 style="color: white; margin-bottom: 16px;">Kegiatan Dosen</h1>
+      <p style="font-size: 1.25rem; max-width: 700px; margin: 0 auto; opacity: 0.9; color: white;">Informasi seputar aktivitas pengajaran, penelitian, dan pengabdian dosen UMIBA.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ NAVIGATION TABS ░░░ -->
+<div style="position: sticky; top: 100px; z-index: 900; margin-top: 24px; margin-bottom: 24px;">
+  <div class="container">
+    <div class="glass" style="padding: 12px; border-radius: var(--radius-full); display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
+      <a href="#tridharma" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Tridharma Perguruan Tinggi</a>
+      <a href="#publikasi" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Publikasi & Riset</a>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░ TRIDHARMA ░░░ -->
+<section id="tridharma" style="padding: var(--space-8) 0;">
+  <div class="container">
+    <div class="fade-up" style="text-align: center; margin-bottom: 48px;">
+      <span class="text-red" style="font-weight: 600; text-transform: uppercase;">Aktivitas Inti</span>
+      <h2>Tridharma Perguruan Tinggi</h2>
+      <p style="max-width: 600px; margin: 0 auto;">Dosen UMIBA tidak hanya aktif mengajar, tetapi juga terus berinovasi melalui penelitian dan terjun langsung membantu masyarakat.</p>
+    </div>
+    <div class="grid grid-3">
+      <div class="glass glass-card fade-up">
+        <i class="ph-duotone ph-chalkboard-teacher" style="font-size: 3rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
+        <h3>Pengajaran</h3>
+        <p>Proses transfer ilmu pengetahuan menggunakan metode interaktif, studi kasus, dan e-learning terintegrasi.</p>
+      </div>
+      <div class="glass glass-card fade-up" style="transition-delay: 0.1s;">
+        <i class="ph-duotone ph-flask" style="font-size: 3rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
+        <h3>Penelitian</h3>
+        <p>Eksplorasi ilmu baru yang inovatif, berkolaborasi dengan mahasiswa dan mitra industri untuk menjawab tantangan zaman.</p>
+      </div>
+      <div class="glass glass-card fade-up" style="transition-delay: 0.2s;">
+        <i class="ph-duotone ph-users-three" style="font-size: 3rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
+        <h3>Pengabdian</h3>
+        <p>Penerapan hasil riset secara langsung untuk memberdayakan dan meningkatkan taraf hidup masyarakat (UMKM & Desa Binaan).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░ PUBLIKASI ░░░ -->
+<section id="publikasi" style="padding: var(--space-8) 0; background: rgba(185, 28, 28, 0.03);">
+  <div class="container grid grid-2" style="align-items: center; gap: 40px;">
+    <div class="fade-up">
+      <span class="text-red" style="font-weight: 600; text-transform: uppercase;">Jejak Akademik</span>
+      <h2>Publikasi & Rekam Jejak</h2>
+      <p>Karya-karya ilmiah dosen UMIBA secara rutin diterbitkan di jurnal nasional terakreditasi SINTA maupun jurnal internasional bereputasi (Scopus).</p>
+      <a href="https://ejurnal.umiba.ac.id/" target="_blank" class="btn btn-primary" style="margin-top: 16px;">Akses E-Jurnal UMIBA</a>
+    </div>
+    <div class="glass glass-card fade-up" style="transition-delay: 0.1s;">
+      <h3 style="margin-bottom: 16px;">Pangkalan Data Dosen</h3>
+      <p style="font-size: 0.95rem; margin-bottom: 24px;">Informasi detail mengenai riwayat pendidikan, kepangkatan, dan portofolio penelitian dosen dapat diakses secara transparan melalui portal PDDikti.</p>
+      <a href="https://pddikti.kemdikbud.go.id/" target="_blank" class="btn btn-glass" style="width: 100%;"><i class="ph-bold ph-link" style="margin-right: 8px;"></i> Cari Dosen di PDDikti</a>
+    </div>
+  </div>
+</section>` }} />
+  );
+}
