@@ -16,7 +16,7 @@ export default function Home() {
     // Fetch dynamic data from API
     const fetchHomeData = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/home-data`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api'}/home-data`);
         if (res.ok) {
           const data = await res.json();
           if (data.news) setNewsData(data.news.slice(0, 3));
