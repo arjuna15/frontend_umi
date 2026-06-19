@@ -86,21 +86,49 @@ export default function AdminDashboard() {
     const file = e.target.files[0];
     if (!file) return;
 
-    const formData = new FormData();
-    formData.append('image', file);
+    // Compress di frontend pake Canvas
+    const canvas = document.createElement('canvas');
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = async () => {
+      let width = img.width;
+      let height = img.height;
+      if (width > 1600) {
+        height = Math.round((1600 * height) / width);
+        width = 1600;
+      }
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
 
-    const api = process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api';
-    const res = await fetchAuth(`${api}/admin/upload-image`, {
-      method: 'POST',
-      body: formData
-    });
+      canvas.toBlob(async (blob) => {
+        if (!blob) {
+          alert('Gagal memproses gambar');
+          return;
+        }
+        const formData = new FormData();
+        formData.append('image', blob, file.name.replace(/\.[^/.]+$/, "") + ".webp");
 
-    if (res && res.ok) {
-      const data = await res.json();
-      setUrlCallback(data.url);
-    } else {
-      alert('Upload gagal');
-    }
+        const api = process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api';
+        try {
+          const res = await fetchAuth(`${api}/admin/upload-image`, {
+            method: 'POST',
+            body: formData
+          });
+
+          if (res && res.ok) {
+            const data = await res.json();
+            setUrlCallback(data.url);
+          } else {
+            const errData = await res.json().catch(() => ({}));
+            alert(`Upload gagal: ${errData.message || res?.statusText || 'Server Error'}`);
+          }
+        } catch(err) {
+          alert('Upload gagal: tidak bisa connect ke server');
+        }
+      }, 'image/webp', 0.8);
+    };
   };
 
   const saveContents = async () => {
