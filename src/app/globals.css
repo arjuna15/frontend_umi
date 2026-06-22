@@ -637,6 +637,10 @@ header.top-transparent .glass {
     border-radius: 0;
   }
 }
+.hero.hero-sub h1 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 .hero-overlay-red {
   background: linear-gradient(to right, rgba(136, 17, 34, 0.95) 0%, rgba(136, 17, 34, 0.8) 45%, rgba(136, 17, 34, 0.2) 75%, transparent 100%);
 }
