@@ -34,7 +34,7 @@ export default function Home() {
     <div id="heroSlides" style={{ position: 'absolute', inset: '0', zIndex: '-2' }}>
       
       {/* SLIDE 1: Magister Manajemen */}
-      <div className={`hero-slide ${currentSlide === 0 ? 'active' : ''}`} style={{ backgroundImage: `url('/1.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 0 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 10vw' }}>
+      <div className={`hero-slide ${currentSlide === 0 ? 'active' : ''}`} style={{ backgroundImage: `url('/1.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 0 ? 1 : 0, pointerEvents: currentSlide === 0 ? 'auto' : 'none', zIndex: currentSlide === 0 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 10vw' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(136, 17, 34, 0.95) 0%, rgba(136, 17, 34, 0.8) 45%, rgba(136, 17, 34, 0.2) 75%, transparent 100%)', zIndex: 1 }}></div>
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 0 ? 1 : 0, transform: currentSlide === 0 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
@@ -98,7 +98,7 @@ export default function Home() {
       </div>
 
       {/* SLIDE 2: KIP-K */}
-      <div className={`hero-slide ${currentSlide === 1 ? 'active' : ''}`} style={{ backgroundImage: `url('/2.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 1 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 10vw' }}>
+      <div className={`hero-slide ${currentSlide === 1 ? 'active' : ''}`} style={{ backgroundImage: `url('/2.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 1 ? 1 : 0, pointerEvents: currentSlide === 1 ? 'auto' : 'none', zIndex: currentSlide === 1 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 10vw' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(30, 58, 138, 0.95) 0%, rgba(30, 58, 138, 0.8) 45%, rgba(30, 58, 138, 0.2) 75%, transparent 100%)', zIndex: 1 }}></div>
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 1 ? 1 : 0, transform: currentSlide === 1 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
@@ -142,7 +142,7 @@ export default function Home() {
       </div>
 
       {/* SLIDE 3: Penerimaan Umum S1 S2 */}
-      <div className={`hero-slide ${currentSlide === 2 ? 'active' : ''}`} style={{ backgroundImage: `url('/3.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 2 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 10vw' }}>
+      <div className={`hero-slide ${currentSlide === 2 ? 'active' : ''}`} style={{ backgroundImage: `url('/3.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 2 ? 1 : 0, pointerEvents: currentSlide === 2 ? 'auto' : 'none', zIndex: currentSlide === 2 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 10vw' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(136, 17, 34, 0.95) 0%, rgba(136, 17, 34, 0.8) 45%, rgba(136, 17, 34, 0.2) 75%, transparent 100%)', zIndex: 1 }}></div>
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 2 ? 1 : 0, transform: currentSlide === 2 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
