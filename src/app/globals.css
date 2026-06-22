@@ -1551,3 +1551,26 @@ header.top-transparent .menu-toggle span {
     margin: 0 auto; /* Evenly distributes remaining space */
   }
 }
+
+/* Active Navbar Link State */
+.nav-link.active {
+  color: var(--umiba-red) !important;
+  font-weight: 800 !important;
+  position: relative;
+}
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 12px;
+  right: 12px;
+  height: 3px;
+  background-color: var(--umiba-red);
+  border-radius: 3px;
+}
+header.top-transparent .nav-link.active {
+  color: #FDE047 !important; /* Yellowish for transparent mode */
+}
+header.top-transparent .nav-link.active::after {
+  background-color: #FDE047;
+}
