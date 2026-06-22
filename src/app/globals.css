@@ -1524,15 +1524,29 @@ header.top-transparent .menu-toggle span {
 }
 
 
-/* Pure center alignment for nav links on desktop */
+/* Smart center alignment for nav links on desktop */
 @media (min-width: 901px) {
-  header .glass {
-    position: relative; /* Ensure the absolute positioning of nav-links is relative to the glass container */
+  /* When at the top (lots of space), use absolute pure centering */
+  header.top-transparent .glass {
+    position: relative;
   }
-  header .nav-links {
+  header.top-transparent .nav-links {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: max-content; /* Ensure it doesn't collapse */
+    width: max-content;
+  }
+  
+  /* When scrolled (in pill), use flex centering to prevent overlap */
+  header.scrolled .glass {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header.scrolled .nav-links {
+    position: static;
+    left: auto;
+    transform: none;
+    margin: 0 auto; /* Evenly distributes remaining space */
   }
 }
