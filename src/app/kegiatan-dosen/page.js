@@ -6,7 +6,7 @@ export default function Page() {
     
   
   const heroBg = 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png';
-  const heroTitle = (lang === "en" ? "Page" : 'Kegiatan Dosen');
+  const heroTitle = (lang === "en" ? "Lecturer Activities" : 'Kegiatan Dosen');
   const mainHtml = `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 

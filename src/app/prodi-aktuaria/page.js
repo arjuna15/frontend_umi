@@ -6,7 +6,7 @@ export default function Page() {
     
   
   const heroBg = 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png';
-  const heroTitle = (lang === "en" ? "Page" : 'S1 Ilmu Aktuaria');
+  const heroTitle = (lang === "en" ? "Bachelor of Actuarial Science" : 'S1 Ilmu Aktuaria');
   const mainHtml = `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 

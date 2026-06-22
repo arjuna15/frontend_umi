@@ -6,7 +6,7 @@ export default function Page() {
     
   
   const heroBg = 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png';
-  const heroTitle = (lang === "en" ? "Page" : '${lang === "en" ? "Information Center" : "Pusat Informasi"}');
+  const heroTitle = (lang === "en" ? "Information Center" : 'Pusat Informasi');
   const mainHtml = `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 

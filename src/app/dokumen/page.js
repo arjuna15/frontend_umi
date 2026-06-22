@@ -6,7 +6,7 @@ export default function Page() {
     
   
   const heroBg = 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png';
-  const heroTitle = (lang === "en" ? "Page" : 'Dokumen Resmi');
+  const heroTitle = (lang === "en" ? "Official Documents" : 'Dokumen Resmi');
   const mainHtml = `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 

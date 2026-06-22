@@ -6,7 +6,7 @@ export default function Page() {
     
   
   const heroBg = 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png';
-  const heroTitle = (lang === "en" ? "Page" : 'S2 Magister Manajemen');
+  const heroTitle = (lang === "en" ? "Master of Management" : 'S2 Magister Manajemen');
   const mainHtml = `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
