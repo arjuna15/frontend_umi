@@ -1522,3 +1522,17 @@ header.top-transparent .menu-toggle span {
   background: #ffffff !important;
   box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
+
+
+/* Pure center alignment for nav links on desktop */
+@media (min-width: 901px) {
+  header .glass {
+    position: relative; /* Ensure the absolute positioning of nav-links is relative to the glass container */
+  }
+  header .nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content; /* Ensure it doesn't collapse */
+  }
+}
