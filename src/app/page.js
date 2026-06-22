@@ -361,7 +361,7 @@ export default function Home() {
 {/*  ░░░ BERITA TERBARU ░░░  */}
 <section id="berita" style={{ padding: 'var(--space-8) 0' }}>
   <div className="container">
-    <div className="flex" style={{ justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 'var(--space-6)' }} className="fade-up">
+    <div className="flex fade-up" style={{ justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 'var(--space-6)' }}>
       <div>
         <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.kabar_kampus")}</span>
         <h2 style={{ marginBottom: '0' }}>{t("home.berita_pengumuman")}</h2>
