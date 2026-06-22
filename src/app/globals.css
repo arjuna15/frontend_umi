@@ -406,8 +406,7 @@ header.scrolled {
 
 header.top-transparent {
   top: 0px;
-  left: 0 !important;
-  transform: none !important;
+  /* Keep the default left: 50% and transform: translateX(-50%) so it shrinks symmetrically */
   width: 100%;
   max-width: 100%;
   border-radius: 0;
