@@ -31,7 +31,13 @@ export default function RootLayout({ children }) {
         <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
       </head>
       <body className="min-h-full flex flex-col">
+        
         <Providers>
+          <div className="ambient-orbs">
+            <div className="orb orb-1"></div>
+            <div className="orb orb-2"></div>
+            <div className="orb orb-3"></div>
+          </div>
           <ScrollAnimations />
           <HeaderWrapper />
           <main style={{ flex: 1 }}>{children}</main>
