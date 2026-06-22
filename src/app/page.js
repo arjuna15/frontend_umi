@@ -36,7 +36,7 @@ export default function Home() {
       {/* SLIDE 1: Magister Manajemen */}
       <div className={`hero-slide ${currentSlide === 0 ? 'active' : ''}`} style={{ backgroundImage: `url('/1.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 0 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 5%' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(136, 17, 34, 0.95) 0%, rgba(136, 17, 34, 0.8) 40%, rgba(136, 17, 34, 0.2) 70%, transparent 100%)', zIndex: 1 }}></div>
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '850px', color: 'white' }} className={currentSlide === 0 ? 'fade-up active' : 'fade-up'}>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '850px', color: 'white', opacity: currentSlide === 0 ? 1 : 0, transform: currentSlide === 0 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', lineHeight: '1.1', marginBottom: '8px', fontWeight: 900, textTransform: 'uppercase', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
             PENERIMAAN MAHASISWA BARU TA. 2026/27
           </h1>
@@ -74,7 +74,7 @@ export default function Home() {
       {/* SLIDE 2: KIP-K */}
       <div className={`hero-slide ${currentSlide === 1 ? 'active' : ''}`} style={{ backgroundImage: `url('/2.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 1 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 5%' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(30, 58, 138, 0.95) 0%, rgba(30, 58, 138, 0.8) 45%, rgba(30, 58, 138, 0.2) 75%, transparent 100%)', zIndex: 1 }}></div>
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '850px', color: 'white' }} className={currentSlide === 1 ? 'fade-up active' : 'fade-up'}>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '850px', color: 'white', opacity: currentSlide === 1 ? 1 : 0, transform: currentSlide === 1 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
           <h1 style={{ fontSize: 'clamp(2.2rem, 4.5vw, 4rem)', lineHeight: '1.1', marginBottom: '8px', fontWeight: 900, textTransform: 'uppercase', textShadow: '2px 2px 4px rgba(0,0,0,0.5)', color: '#FDE047' }}>
             PENERIMAAN MAHASISWA BARU
@@ -113,7 +113,7 @@ export default function Home() {
       {/* SLIDE 3: Penerimaan Umum S1 S2 */}
       <div className={`hero-slide ${currentSlide === 2 ? 'active' : ''}`} style={{ backgroundImage: `url('/3.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 2 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 5%' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(136, 17, 34, 0.95) 0%, rgba(136, 17, 34, 0.8) 45%, rgba(136, 17, 34, 0.2) 75%, transparent 100%)', zIndex: 1 }}></div>
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '850px', color: 'white' }} className={currentSlide === 2 ? 'fade-up active' : 'fade-up'}>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '850px', color: 'white', opacity: currentSlide === 2 ? 1 : 0, transform: currentSlide === 2 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
           <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', lineHeight: '1.1', marginBottom: '8px', fontWeight: 900, textTransform: 'uppercase', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
             PENERIMAAN MAHASISWA BARU
