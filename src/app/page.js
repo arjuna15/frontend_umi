@@ -9,6 +9,10 @@ export default function Home() {
   const [newsData, setNewsData] = useState([]);
   const [testiData, setTestiData] = useState([]);
   
+  useEffect(() => {
+    const api = process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api';
+    fetch(`${api}/news`).then(r => r.json()).then(d => setNewsData(d.news || [])).catch(e => console.error(e));
+  }, []);
   
   return (
     <>
