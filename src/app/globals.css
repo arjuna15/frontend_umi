@@ -1491,3 +1491,34 @@ body.dark-mode .orb {
     transform: translate(-30px, 50px) scale(0.9);
   }
 }
+
+
+/* Make text and icons white when header is transparent over the dark banner */
+header.top-transparent .nav-link,
+header.top-transparent .dropdown-icon,
+header.top-transparent .theme-toggle,
+header.top-transparent .lang-switch .lang-btn:not(.active) {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Add slight shadow for better readability */
+}
+
+/* Turn the logo completely white using CSS filters */
+header.top-transparent .logo img {
+  filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+header.top-transparent .theme-toggle {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+header.top-transparent .lang-switch {
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Ensure hamburger menu icon is white on mobile */
+header.top-transparent .menu-toggle span {
+  background: #ffffff !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
