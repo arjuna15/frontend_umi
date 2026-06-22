@@ -81,10 +81,10 @@ export default function Home() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <a href="#" className="btn" style={{ background: '#FDE047', color: '#881122', padding: '10px 24px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: 'bold', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 15px rgba(253, 224, 71, 0.3)' }}>
+            <a href="https://pmb.umiba.ac.id/" target="_blank" className="btn" style={{ background: '#FDE047', color: '#881122', padding: '10px 24px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: 'bold', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 15px rgba(253, 224, 71, 0.3)' }}>
               {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
             </a>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white' }}>
+            <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
               <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex' }}>
                 <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
               </div>
@@ -92,7 +92,7 @@ export default function Home() {
                 <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
                 <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', letterSpacing: '1px' }}>0811 870 114</div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -131,13 +131,13 @@ export default function Home() {
             </ul>
           </div>
 
-          <div style={{ background: 'white', padding: '12px 24px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '12px', color: '#1E3A8A', boxShadow: '0 8px 20px rgba(255,255,255,0.2)' }}>
+          <a href="https://wa.me/62811870114" target="_blank" style={{ background: 'white', padding: '12px 24px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '12px', color: '#1E3A8A', boxShadow: '0 8px 20px rgba(255,255,255,0.2)', textDecoration: 'none' }}>
             <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '2rem' }}></i>
             <div>
               <div style={{ fontSize: '0.8rem', fontWeight: 'bold', opacity: 0.8, textTransform: 'uppercase' }}>Informasi Pendaftaran</div>
               <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 900, letterSpacing: '1px' }}>0811 870 114</div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 
@@ -172,10 +172,10 @@ export default function Home() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <a href="#" className="btn" style={{ background: '#FDE047', color: '#881122', padding: '10px 24px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: 'bold', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 15px rgba(253, 224, 71, 0.3)' }}>
+            <a href="https://pmb.umiba.ac.id/" target="_blank" className="btn" style={{ background: '#FDE047', color: '#881122', padding: '10px 24px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: 'bold', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 15px rgba(253, 224, 71, 0.3)' }}>
               {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
             </a>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white' }}>
+            <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
               <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex' }}>
                 <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
               </div>
@@ -183,7 +183,7 @@ export default function Home() {
                 <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
                 <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', letterSpacing: '1px' }}>0811 870 114</div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
