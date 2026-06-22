@@ -1018,6 +1018,7 @@ header.top-transparent .glass {
   header .glass { padding: 0 var(--space-4); }
   .menu-toggle { display: flex; }
   .d-none-mobile { display: none !important; }
+  .hero-arrow { display: none !important; }
   
   .nav-links {
     position: absolute;

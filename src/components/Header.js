@@ -128,12 +128,7 @@ export default function Header() {
         </div>
       </li>
     </ul>
-    <button className="menu-toggle" aria-label="Toggle Menu" onClick={() => setMenuOpen(!menuOpen)}>
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
       <div className="lang-switch d-none-mobile">
         <a href="#" className={`lang-btn ${lang === 'id' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); changeLang('id'); }}>ID</a>
         <a href="#" className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); changeLang('en'); }}>EN</a>
@@ -141,6 +136,11 @@ export default function Header() {
       <a href="https://pmb.umiba.ac.id/" target="_blank" className="btn btn-primary d-none-mobile">{t('nav.daftar_sekarang')}</a>
       <button className="theme-toggle" aria-label="Toggle Theme" onClick={toggleTheme}>
         <i className={`ph-bold ${theme === 'light' ? 'ph-moon' : 'ph-sun'}`}></i>
+      </button>
+      <button className={`menu-toggle ${menuOpen ? 'active' : ''}`} aria-label="Toggle Menu" onClick={() => setMenuOpen(!menuOpen)}>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </div>
   </div>
