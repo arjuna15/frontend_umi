@@ -16,12 +16,13 @@ export default function Home() {
     const api = process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api';
     fetch(`${api}/news`).then(r => r.json()).then(d => setNewsData(d.news || [])).catch(e => console.error(e));
     
-    // Fallback/Dummy data for Testimoni since there is no API endpoint yet
     setTestiData([
       { id: 1, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/1-1.png' },
-      { id: 2, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/1-1.png' },
-      { id: 3, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/1-1.png' },
-      { id: 4, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/1-1.png' }
+      { id: 2, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/2-1.png' },
+      { id: 3, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/3-1.png' },
+      { id: 4, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/1-2.png' },
+      { id: 5, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/2-2.png' },
+      { id: 6, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/3-2.png' }
     ]);
 
     const slideInterval = setInterval(nextSlide, 5000);
