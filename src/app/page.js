@@ -354,7 +354,7 @@ export default function Home() {
         <img src="https://umiba.ac.id/wp-content/uploads/2025/05/Sertifikat_RPL_S2_2025-2026_Ganjil-768x502.jpg" alt="Sertifikat RPL S2"/>
       </div>
     </div>
-    <input type="range" className="custom-scrollbar" data-target=".cert-slider" min="0" max="100" value="0" />
+    <input type="range" className="custom-scrollbar" data-target=".cert-slider" min="0" max="100" defaultValue="0" />
   </div>
 </section>
 
@@ -541,7 +541,7 @@ export default function Home() {
         <div style={{ textAlign: 'center', padding: '20px' }}>{t("home.loading_testimoni")}</div>
       )}
     </div>
-    <input type="range" className="custom-scrollbar" data-target=".testi-slider" min="0" max="100" value="0" />
+    <input type="range" className="custom-scrollbar" data-target=".testi-slider" min="0" max="100" defaultValue="0" />
   </div>
 </section>
 

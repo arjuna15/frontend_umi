@@ -30,9 +30,40 @@ export default function ScrollAnimations() {
 
       observeElements();
 
+      // Scrollbar sync logic
+      const setupScrollbars = () => {
+        const scrollbars = document.querySelectorAll('.custom-scrollbar');
+        scrollbars.forEach(scrollbar => {
+          if (!scrollbar.hasAttribute('data-scroll-handled')) {
+            const targetSelector = scrollbar.getAttribute('data-target');
+            const targetEl = document.querySelector(targetSelector);
+            
+            if (targetEl) {
+              // Update target scroll when range input changes
+              scrollbar.addEventListener('input', (e) => {
+                const maxScroll = targetEl.scrollWidth - targetEl.clientWidth;
+                targetEl.scrollLeft = (e.target.value / 100) * maxScroll;
+              });
+
+              // Update range input when target scrolls
+              targetEl.addEventListener('scroll', () => {
+                const maxScroll = targetEl.scrollWidth - targetEl.clientWidth;
+                if (maxScroll > 0) {
+                  scrollbar.value = (targetEl.scrollLeft / maxScroll) * 100;
+                }
+              });
+            }
+            scrollbar.setAttribute('data-scroll-handled', 'true');
+          }
+        });
+      };
+      
+      setupScrollbars();
+
       // Watch for dynamically added elements (like fetched news)
       const mutationObserver = new MutationObserver(() => {
         observeElements();
+        setupScrollbars();
       });
 
       mutationObserver.observe(document.body, { childList: true, subtree: true });
