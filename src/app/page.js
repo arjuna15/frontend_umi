@@ -4,15 +4,39 @@ import { useEffect, useState } from 'react';
 import { useLanguage } from '../context/Providers';
 
 export default function Home() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [newsData, setNewsData] = useState([]);
   const [testiData, setTestiData] = useState([]);
   
   const heroSlidesData = [
-    'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_1.png',
-    'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png',
-    'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png'
+    {
+      bg: '/1.jpeg',
+      tag: lang === "en" ? "Postgraduate Program" : "Program Pascasarjana",
+      title: lang === "en" ? "New Student Admission 2026/2027" : "Penerimaan Mahasiswa Baru TA 2026/2027",
+      subtitle: lang === "en" ? "Master of Management Study Program" : "Program Studi Magister Manajemen",
+      features: ['Dual Certificate: Ijazah & BNSP', 'Blended Learning', 'Career Network', 'Flexible Tuition Payment'],
+      link: '#',
+      btnText: lang === "en" ? "Register Now" : "Daftar Sekarang"
+    },
+    {
+      bg: '/2.jpeg',
+      tag: lang === "en" ? "KIP-K Scholarship" : "Jalur Beasiswa KIP-K",
+      title: lang === "en" ? "Quality & Free Tuition at UMIBA" : "Kuliah Berkualitas & Gratis di UMIBA",
+      subtitle: lang === "en" ? "Limited Quota! Open for High School Equivalency Graduates." : "Kuota Terbatas! Terbuka untuk Lulusan SMA/SMK/MA Sederajat.",
+      features: ['Ter-Akreditasi BAIK SEKALI', 'Kuliah Tanpa Biaya', 'Pendaftaran Mudah & Transparan'],
+      link: '#',
+      btnText: lang === "en" ? "More Info" : "Informasi Beasiswa"
+    },
+    {
+      bg: '/3.jpeg',
+      tag: lang === "en" ? "Academic Year 2026/2027" : "Tahun Akademik 2026/2027",
+      title: lang === "en" ? "New Student Admission" : "Penerimaan Mahasiswa Baru",
+      subtitle: lang === "en" ? "Universitas Mitra Bangsa" : "Universitas Mitra Bangsa",
+      features: ['(S2) Magister Manajemen', '(S1) Manajemen', '(S1) Ilmu Aktuaria', '(S1) Ilmu Komputer', '(S1) Hukum', '(S1) Sistem Informasi'],
+      link: '#',
+      btnText: lang === "en" ? "Register Now" : "Daftar Sekarang"
+    }
   ];
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % heroSlidesData.length);
@@ -35,8 +59,38 @@ export default function Home() {
   <div className="hero" style={{ position: 'relative', overflow: 'hidden' }}>
     {/*  Slider Backgrounds  */}
     <div id="heroSlides" style={{ position: 'absolute', inset: '0', zIndex: '-2' }}>
-      {heroSlidesData.map((url, index) => (
-        <div key={index} className={`hero-slide ${index === currentSlide ? 'active' : ''}`} style={{ backgroundImage: `url('${url}')` }}></div>
+      {heroSlidesData.map((slide, index) => (
+        <div key={index} className={`hero-slide ${index === currentSlide ? 'active' : ''}`} style={{ backgroundImage: `url('${slide.bg}')`, position: 'absolute', inset: 0, opacity: index === currentSlide ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 5%' }}>
+          {/* Dark gradient overlay for readability */}
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(2, 6, 23, 0.95) 0%, rgba(2, 6, 23, 0.7) 40%, rgba(2, 6, 23, 0.2) 70%, transparent 100%)', zIndex: 1 }}></div>
+          
+          {/* Content wrapper */}
+          <div style={{ position: 'relative', zIndex: 2, maxWidth: '800px', color: 'white' }} className={index === currentSlide ? 'fade-up active' : 'fade-up'}>
+            <span style={{ display: 'inline-block', background: 'var(--umiba-red)', color: 'white', padding: '6px 16px', borderRadius: '30px', fontSize: '0.85rem', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '20px', letterSpacing: '1px' }}>
+              {slide.tag}
+            </span>
+            <h1 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: '1.2', marginBottom: '16px', textShadow: '0 4px 12px rgba(0,0,0,0.5)', color: 'white', fontWeight: 800 }}>
+              {slide.title}
+            </h1>
+            <p style={{ fontSize: '1.25rem', opacity: 0.9, marginBottom: '32px', textShadow: '0 2px 4px rgba(0,0,0,0.5)', color: 'white' }}>
+              {slide.subtitle}
+            </p>
+            
+            {/* Features List */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', marginBottom: '36px' }}>
+              {slide.features.map((feat, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.1)', padding: '10px 16px', borderRadius: '8px', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  <i className="ph-fill ph-check-circle" style={{ color: '#4ade80', fontSize: '1.2rem' }}></i>
+                  <span style={{ fontSize: '0.95rem', fontWeight: 600, color: 'white' }}>{feat}</span>
+                </div>
+              ))}
+            </div>
+            
+            <a href={slide.link} className="btn btn-primary" style={{ padding: '16px 36px', fontSize: '1.1rem', boxShadow: '0 10px 25px -5px rgba(220, 38, 38, 0.5)' }}>
+              {slide.btnText}
+            </a>
+          </div>
+        </div>
       ))}
     </div>
     
