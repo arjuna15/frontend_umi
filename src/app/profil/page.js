@@ -5,8 +5,8 @@ export default function Page() {
   const { lang, t } = useLanguage();
     
   
-  const heroBg = '${heroBg}';
-  const heroTitle = (lang === "en" ? "Page" : '${heroTitle}');
+  const heroBg = '/3.jpeg';
+  const heroTitle = (lang === "en" ? "Profile" : 'PROFIL UMIBA');
   const mainHtml = `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 

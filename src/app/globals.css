@@ -1571,7 +1571,10 @@ header.top-transparent .menu-toggle span {
 header.top-transparent .nav-link.active {
   color: var(--umiba-red) !important;
   background-color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+header.top-transparent .nav-link.active .dropdown-icon {
+  color: var(--umiba-red) !important;
+  text-shadow: none !important;
 }
 header.top-transparent .nav-link.active::after {
   display: none;
