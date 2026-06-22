@@ -27,8 +27,8 @@ export default function Home() {
       
 
 {/*  ░░░ HERO SECTION ░░░  */}
-<section className="hero-wrapper" id="beranda" style={{ minHeight: '80vh', position: 'relative' }}>
-  <div className="hero" style={{ position: 'relative', overflow: 'hidden', height: '100%', width: '100%', minHeight: '80vh' }}>
+<section id="beranda" style={{ width: '100%', minHeight: '100vh', position: 'relative', margin: 0, padding: 0 }}>
+  <div style={{ position: 'relative', overflow: 'hidden', height: '100%', width: '100%', minHeight: '100vh' }}>
     
     {/*  Slider Backgrounds & Contents  */}
     <div id="heroSlides" style={{ position: 'absolute', inset: '0', zIndex: '-2' }}>
