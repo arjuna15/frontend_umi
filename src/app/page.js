@@ -34,63 +34,63 @@ export default function Home() {
     <div id="heroSlides" style={{ position: 'absolute', inset: '0', zIndex: '-2' }}>
       
       {/* SLIDE 1: Magister Manajemen */}
-      <div className={`hero-slide ${currentSlide === 0 ? 'active' : ''}`} style={{ backgroundImage: `url('/1.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 0 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 6%' }}>
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(136, 17, 34, 0.95) 0%, rgba(136, 17, 34, 0.75) 45%, rgba(136, 17, 34, 0.1) 75%, transparent 100%)', zIndex: 1 }}></div>
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '800px', color: 'white', opacity: currentSlide === 0 ? 1 : 0, transform: currentSlide === 0 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
+      <div className={`hero-slide ${currentSlide === 0 ? 'active' : ''}`} style={{ backgroundImage: `url('/1.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 0 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 5%' }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(136, 17, 34, 0.95) 0%, rgba(136, 17, 34, 0.8) 45%, rgba(136, 17, 34, 0.2) 75%, transparent 100%)', zIndex: 1 }}></div>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 0 ? 1 : 0, transform: currentSlide === 0 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
-          <h1 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: '1.2', marginBottom: '12px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)', letterSpacing: '1px' }}>
+          <h1 style={{ color: 'white', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '8px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)', letterSpacing: '1px' }}>
             {lang === "en" ? "New Student Admission 2026/27" : "Penerimaan Mahasiswa Baru TA. 2026/27"}
           </h1>
-          <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(255, 255, 255, 0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '6px 20px', fontSize: '1.1rem', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '24px', letterSpacing: '1px', borderRadius: '30px' }}>
-            <i className="ph-fill ph-student" style={{ marginRight: '8px', fontSize: '1.3rem' }}></i>
+          <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(255, 255, 255, 0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.85rem, 2vw, 1rem)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '1px', borderRadius: '30px' }}>
+            <i className="ph-fill ph-student" style={{ marginRight: '8px', fontSize: '1.2rem' }}></i>
             {lang === "en" ? "Master of Management Program" : "Program Studi Magister Manajemen"}
           </div>
           
           {/* Keunggulan Glass Card */}
-          <div style={{ background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '24px', marginBottom: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
-            <h3 style={{ color: '#FDE047', fontSize: '1.1rem', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '8px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          <div style={{ background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '16px', marginBottom: '16px', boxShadow: '0 8px 24px rgba(0,0,0,0.2)' }}>
+            <h3 style={{ color: '#FDE047', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', marginBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '6px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
               {lang === "en" ? "Why study Master's at UMIBA?" : "Keunggulan Kuliah S2 di UMIBA"}
             </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px' }}>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                <div style={{ background: 'rgba(253, 224, 71, 0.15)', padding: '8px', borderRadius: '50%' }}><i className="ph-fill ph-certificate" style={{ color: '#FDE047', fontSize: '1.4rem' }}></i></div>
-                <div><strong style={{ display: 'block', fontSize: '1rem' }}>Dual Certificate</strong><span style={{ fontSize: '0.85rem', opacity: 0.8 }}>Ijazah & BNSP</span></div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ background: 'rgba(253, 224, 71, 0.15)', padding: '6px', borderRadius: '50%', display: 'flex' }}><i className="ph-fill ph-certificate" style={{ color: '#FDE047', fontSize: '1.2rem' }}></i></div>
+                <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem' }}>Dual Certificate</strong><span style={{ fontSize: '0.75rem', opacity: 0.8 }}>Ijazah & BNSP</span></div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                <div style={{ background: 'rgba(253, 224, 71, 0.15)', padding: '8px', borderRadius: '50%' }}><i className="ph-fill ph-laptop" style={{ color: '#FDE047', fontSize: '1.4rem' }}></i></div>
-                <div><strong style={{ display: 'block', fontSize: '1rem' }}>Blended Learning</strong><span style={{ fontSize: '0.85rem', opacity: 0.8 }}>Online + Offline</span></div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ background: 'rgba(253, 224, 71, 0.15)', padding: '6px', borderRadius: '50%', display: 'flex' }}><i className="ph-fill ph-laptop" style={{ color: '#FDE047', fontSize: '1.2rem' }}></i></div>
+                <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem' }}>Blended Learning</strong><span style={{ fontSize: '0.75rem', opacity: 0.8 }}>Online + Offline</span></div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                <div style={{ background: 'rgba(253, 224, 71, 0.15)', padding: '8px', borderRadius: '50%' }}><i className="ph-fill ph-users-three" style={{ color: '#FDE047', fontSize: '1.4rem' }}></i></div>
-                <div><strong style={{ display: 'block', fontSize: '1rem' }}>Career Network</strong><span style={{ fontSize: '0.85rem', opacity: 0.8 }}>Jaringan Luas</span></div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ background: 'rgba(253, 224, 71, 0.15)', padding: '6px', borderRadius: '50%', display: 'flex' }}><i className="ph-fill ph-users-three" style={{ color: '#FDE047', fontSize: '1.2rem' }}></i></div>
+                <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem' }}>Career Network</strong><span style={{ fontSize: '0.75rem', opacity: 0.8 }}>Jaringan Luas</span></div>
               </div>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                <div style={{ background: 'rgba(253, 224, 71, 0.15)', padding: '8px', borderRadius: '50%' }}><i className="ph-fill ph-wallet" style={{ color: '#FDE047', fontSize: '1.4rem' }}></i></div>
-                <div><strong style={{ display: 'block', fontSize: '1rem' }}>Flexible Tuition</strong><span style={{ fontSize: '0.85rem', opacity: 0.8 }}>Bisa Diangsur</span></div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ background: 'rgba(253, 224, 71, 0.15)', padding: '6px', borderRadius: '50%', display: 'flex' }}><i className="ph-fill ph-wallet" style={{ color: '#FDE047', fontSize: '1.2rem' }}></i></div>
+                <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem' }}>Flexible Tuition</strong><span style={{ fontSize: '0.75rem', opacity: 0.8 }}>Bisa Diangsur</span></div>
               </div>
             </div>
             
-            <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-              <span style={{ fontSize: '0.9rem', fontWeight: 'bold', marginRight: '12px', opacity: 0.9 }}>{lang === "en" ? "Concentrations:" : "Konsentrasi:"}</span>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '8px' }}>
+            <div style={{ marginTop: '12px', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+              <span style={{ color: 'white', fontSize: '0.85rem', fontWeight: 'bold', marginRight: '8px', opacity: 0.9 }}>{lang === "en" ? "Concentrations:" : "Konsentrasi:"}</span>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
                 {['Manajemen SDM', 'Manajemen Keuangan', 'Manajemen Pemasaran', 'Manajemen Rumah Sakit', 'Manajemen K3'].map(k => (
-                  <span key={k} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.8rem' }}>{k}</span>
+                  <span key={k} style={{ color: 'white', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '3px 10px', borderRadius: '20px', fontSize: '0.75rem' }}>{k}</span>
                 ))}
               </div>
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap', marginTop: '30px' }}>
-            <a href="#" className="btn" style={{ background: '#FDE047', color: '#881122', padding: '16px 36px', fontSize: '1.1rem', fontWeight: 'bold', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 10px 25px rgba(253, 224, 71, 0.3)', transition: 'transform 0.2s ease' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+            <a href="#" className="btn" style={{ background: '#FDE047', color: '#881122', padding: '10px 24px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: 'bold', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 15px rgba(253, 224, 71, 0.3)' }}>
               {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
             </a>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ background: 'white', padding: '10px', borderRadius: '50%' }}>
-                <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.8rem', display: 'block' }}></i>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white' }}>
+              <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex' }}>
+                <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
               </div>
               <div>
-                <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
-                <div style={{ fontSize: '1.3rem', fontWeight: 'bold', letterSpacing: '1px' }}>0811 870 114</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
+                <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', letterSpacing: '1px' }}>0811 870 114</div>
               </div>
             </div>
           </div>
@@ -98,90 +98,90 @@ export default function Home() {
       </div>
 
       {/* SLIDE 2: KIP-K */}
-      <div className={`hero-slide ${currentSlide === 1 ? 'active' : ''}`} style={{ backgroundImage: `url('/2.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 1 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 6%' }}>
+      <div className={`hero-slide ${currentSlide === 1 ? 'active' : ''}`} style={{ backgroundImage: `url('/2.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 1 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 5%' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(30, 58, 138, 0.95) 0%, rgba(30, 58, 138, 0.8) 45%, rgba(30, 58, 138, 0.2) 75%, transparent 100%)', zIndex: 1 }}></div>
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '800px', color: 'white', opacity: currentSlide === 1 ? 1 : 0, transform: currentSlide === 1 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 1 ? 1 : 0, transform: currentSlide === 1 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
-          <div style={{ display: 'flex', gap: '12px', marginBottom: '16px', flexWrap: 'wrap' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '6px 20px', fontSize: '1rem', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px' }}>
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', flexWrap: 'wrap' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px' }}>
               TAHUN AKADEMIK 2026/2027
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', background: '#FDE047', color: '#1E3A8A', padding: '6px 20px', fontSize: '1rem', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px', animation: 'pulse 2s infinite' }}>
-              <i className="ph-fill ph-warning-circle" style={{ marginRight: '6px', fontSize: '1.2rem' }}></i> KUOTA TERBATAS!
+            <span style={{ display: 'inline-flex', alignItems: 'center', background: '#FDE047', color: '#1E3A8A', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px', animation: 'pulse 2s infinite' }}>
+              <i className="ph-fill ph-warning-circle" style={{ marginRight: '6px', fontSize: '1.1rem' }}></i> KUOTA TERBATAS!
             </span>
           </div>
 
-          <h1 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: '1.2', marginBottom: '8px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
+          <h1 style={{ color: 'white', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '4px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
             {lang === "en" ? "NEW STUDENT ADMISSION" : "PENERIMAAN MAHASISWA BARU"}
           </h1>
-          <h2 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '24px', fontWeight: 900, textTransform: 'uppercase', color: '#FDE047', textShadow: '0 4px 10px rgba(0,0,0,0.3)' }}>
+          <h2 style={{ color: '#FDE047', fontSize: 'clamp(1.3rem, 3vw, 2.5rem)', lineHeight: '1.2', marginBottom: '16px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.3)' }}>
             {lang === "en" ? "KIP-K SCHOLARSHIP TRACK" : "JALUR BEASISWA KIP-K"}
           </h2>
           
           {/* List Glass Card */}
-          <div style={{ background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '24px', marginBottom: '30px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '16px', color: 'white', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '12px' }}>
+          <div style={{ background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '16px', marginBottom: '20px', boxShadow: '0 8px 24px rgba(0,0,0,0.2)' }}>
+            <h3 style={{ color: 'white', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: 'bold', marginBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '8px' }}>
               {lang === "en" ? "QUALITY & FREE EDUCATION AT UMIBA" : "KULIAH BERKUALITAS & GRATIS DI UMIBA"}
             </h3>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: '1rem', lineHeight: '1.6', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}><i className="ph-fill ph-check-circle" style={{ color: '#4ade80', fontSize: '1.4rem', marginTop: '2px' }}></i> <span>Ter-Akreditasi <b>BAIK SEKALI</b></span></li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}><i className="ph-fill ph-check-circle" style={{ color: '#4ade80', fontSize: '1.4rem', marginTop: '2px' }}></i> <span>Kuliah <b>Tanpa Biaya</b>, Hidup Lebih Tenang</span></li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}><i className="ph-fill ph-check-circle" style={{ color: '#4ade80', fontSize: '1.4rem', marginTop: '2px' }}></i> <span>Terbuka untuk Lulusan SMA/SMK/MA Sederajat <b>2024, 2025, 2026</b></span></li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}><i className="ph-fill ph-check-circle" style={{ color: '#4ade80', fontSize: '1.4rem', marginTop: '2px' }}></i> <span>Pendaftaran <b>Mudah & Transparan</b> via Portal KIP-K</span></li>
+            <ul style={{ color: 'white', listStyle: 'none', padding: 0, margin: 0, fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', lineHeight: '1.5', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}><i className="ph-fill ph-check-circle" style={{ color: '#4ade80', fontSize: '1.2rem', marginTop: '2px' }}></i> <span>Ter-Akreditasi <b>BAIK SEKALI</b></span></li>
+              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}><i className="ph-fill ph-check-circle" style={{ color: '#4ade80', fontSize: '1.2rem', marginTop: '2px' }}></i> <span>Kuliah <b>Tanpa Biaya</b>, Hidup Lebih Tenang</span></li>
+              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}><i className="ph-fill ph-check-circle" style={{ color: '#4ade80', fontSize: '1.2rem', marginTop: '2px' }}></i> <span>Terbuka untuk Lulusan SMA/SMK/MA Sederajat <b>2024, 2025, 2026</b></span></li>
+              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}><i className="ph-fill ph-check-circle" style={{ color: '#4ade80', fontSize: '1.2rem', marginTop: '2px' }}></i> <span>Pendaftaran <b>Mudah & Transparan</b> via Portal KIP-K</span></li>
             </ul>
           </div>
 
-          <div style={{ background: 'white', padding: '16px 32px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '16px', color: '#1E3A8A', boxShadow: '0 10px 25px rgba(255,255,255,0.2)' }}>
-            <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '2.5rem' }}></i>
+          <div style={{ background: 'white', padding: '12px 24px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '12px', color: '#1E3A8A', boxShadow: '0 8px 20px rgba(255,255,255,0.2)' }}>
+            <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '2rem' }}></i>
             <div>
-              <div style={{ fontSize: '0.9rem', fontWeight: 'bold', opacity: 0.8, textTransform: 'uppercase' }}>Informasi Pendaftaran</div>
-              <div style={{ fontSize: '1.5rem', fontWeight: 900, letterSpacing: '1px' }}>0811 870 114</div>
+              <div style={{ fontSize: '0.8rem', fontWeight: 'bold', opacity: 0.8, textTransform: 'uppercase' }}>Informasi Pendaftaran</div>
+              <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 900, letterSpacing: '1px' }}>0811 870 114</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* SLIDE 3: Penerimaan Umum S1 S2 */}
-      <div className={`hero-slide ${currentSlide === 2 ? 'active' : ''}`} style={{ backgroundImage: `url('/3.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 2 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 6%' }}>
+      <div className={`hero-slide ${currentSlide === 2 ? 'active' : ''}`} style={{ backgroundImage: `url('/3.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 2 ? 1 : 0, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', padding: '0 5%' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(136, 17, 34, 0.95) 0%, rgba(136, 17, 34, 0.8) 45%, rgba(136, 17, 34, 0.2) 75%, transparent 100%)', zIndex: 1 }}></div>
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '800px', color: 'white', opacity: currentSlide === 2 ? 1 : 0, transform: currentSlide === 2 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 2 ? 1 : 0, transform: currentSlide === 2 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
-          <div style={{ display: 'inline-block', background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '6px 20px', fontSize: '1rem', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '20px', borderRadius: '30px', letterSpacing: '1px' }}>
+          <div style={{ display: 'inline-block', background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px', borderRadius: '30px', letterSpacing: '1px' }}>
             TAHUN AKADEMIK 2026/2027
           </div>
 
-          <h1 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', lineHeight: '1.2', marginBottom: '8px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
+          <h1 style={{ color: 'white', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '4px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
             PENERIMAAN MAHASISWA BARU
           </h1>
-          <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', lineHeight: '1.2', marginBottom: '24px', fontWeight: 900, textTransform: 'uppercase', fontStyle: 'italic', color: '#FDE047', textShadow: '0 4px 10px rgba(0,0,0,0.3)' }}>
+          <h2 style={{ color: '#FDE047', fontSize: 'clamp(1.3rem, 2.5vw, 2.2rem)', lineHeight: '1.2', marginBottom: '20px', fontWeight: 900, textTransform: 'uppercase', fontStyle: 'italic', textShadow: '0 4px 10px rgba(0,0,0,0.3)' }}>
             UNIVERSITAS MITRA BANGSA
           </h2>
 
-          <div style={{ background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '24px', marginBottom: '30px', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          <div style={{ background: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', padding: '16px', marginBottom: '20px', boxShadow: '0 8px 24px rgba(0,0,0,0.2)' }}>
+            <h3 style={{ color: 'white', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: 'bold', marginBottom: '12px', borderBottom: '1px solid rgba(255,255,255,0.2)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
               {lang === "en" ? "Available Study Programs:" : "Program Studi Pilihan:"}
             </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '8px' }}>
               {['(S2) Magister Manajemen', '(S1) Manajemen', '(S1) Ilmu Aktuaria', '(S1) Ilmu Komputer', '(S1) Hukum', '(S1) Sistem & Teknologi Informasi'].map((prodi, idx) => (
-                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(0,0,0,0.2)', padding: '12px 16px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                  <div style={{ background: '#FDE047', borderRadius: '50%', padding: '4px', display: 'flex' }}><i className="ph-bold ph-check" style={{ color: '#881122', fontSize: '1rem' }}></i></div>
-                  <span style={{ fontSize: '0.95rem', fontWeight: 600 }}>{prodi}</span>
+                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', background: 'rgba(0,0,0,0.2)', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div style={{ background: '#FDE047', borderRadius: '50%', padding: '3px', display: 'flex' }}><i className="ph-bold ph-check" style={{ color: '#881122', fontSize: '0.9rem' }}></i></div>
+                  <span style={{ color: 'white', fontSize: 'clamp(0.8rem, 1.5vw, 0.9rem)', fontWeight: 600 }}>{prodi}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
-            <a href="#" className="btn" style={{ background: '#FDE047', color: '#881122', padding: '16px 36px', fontSize: '1.1rem', fontWeight: 'bold', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 10px 25px rgba(253, 224, 71, 0.3)', transition: 'transform 0.2s ease' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+            <a href="#" className="btn" style={{ background: '#FDE047', color: '#881122', padding: '10px 24px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: 'bold', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 15px rgba(253, 224, 71, 0.3)' }}>
               {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
             </a>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ background: 'white', padding: '10px', borderRadius: '50%' }}>
-                <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.8rem', display: 'block' }}></i>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white' }}>
+              <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex' }}>
+                <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
               </div>
               <div>
-                <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
-                <div style={{ fontSize: '1.3rem', fontWeight: 'bold', letterSpacing: '1px' }}>0811 870 114</div>
+                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
+                <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', letterSpacing: '1px' }}>0811 870 114</div>
               </div>
             </div>
           </div>
