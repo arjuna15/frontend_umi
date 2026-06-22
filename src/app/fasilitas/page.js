@@ -23,8 +23,8 @@ export default function Page() {
   }, []);
 
   const heroBg = contents['fasilitas_hero_bg'] || 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_1.png';
-  const heroTitle = contents['fasilitas_hero_title'] || (lang === "en" ? "Page" : 'Fasilitas UMIBA');
-  const mainHtml = contents['fasilitas_html'] || `<!-- ░░░ HERO SUBPAGE ░░░ -->
+  const heroTitle = (lang === 'en' ? contents['fasilitas_hero_title_en'] : contents['fasilitas_hero_title']) || (lang === "en" ? "Page" : 'Fasilitas UMIBA');
+  const mainHtml = (lang === 'en' ? contents['fasilitas_html_en'] : contents['fasilitas_html']) || `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
 <!-- ░░░ NAVIGATION TABS ░░░ -->

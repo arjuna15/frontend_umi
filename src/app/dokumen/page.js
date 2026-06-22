@@ -23,8 +23,8 @@ export default function Page() {
   }, []);
 
   const heroBg = contents['dokumen_hero_bg'] || 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png';
-  const heroTitle = contents['dokumen_hero_title'] || (lang === "en" ? "Page" : 'Dokumen Resmi');
-  const mainHtml = contents['dokumen_html'] || `<!-- ░░░ HERO SUBPAGE ░░░ -->
+  const heroTitle = (lang === 'en' ? contents['dokumen_hero_title_en'] : contents['dokumen_hero_title']) || (lang === "en" ? "Page" : 'Dokumen Resmi');
+  const mainHtml = (lang === 'en' ? contents['dokumen_html_en'] : contents['dokumen_html']) || `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
 <!-- ░░░ NAVIGATION TABS ░░░ -->

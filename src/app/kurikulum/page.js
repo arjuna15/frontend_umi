@@ -23,8 +23,8 @@ export default function Page() {
   }, []);
 
   const heroBg = contents['kurikulum_hero_bg'] || 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png';
-  const heroTitle = contents['kurikulum_hero_title'] || (lang === "en" ? "Page" : 'Kurikulum & Akademik');
-  const mainHtml = contents['kurikulum_html'] || `<!-- ░░░ HERO SUBPAGE ░░░ -->
+  const heroTitle = (lang === 'en' ? contents['kurikulum_hero_title_en'] : contents['kurikulum_hero_title']) || (lang === "en" ? "Page" : 'Kurikulum & Akademik');
+  const mainHtml = (lang === 'en' ? contents['kurikulum_html_en'] : contents['kurikulum_html']) || `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
 <!-- ░░░ NAVIGATION TABS ░░░ -->

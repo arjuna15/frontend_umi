@@ -23,8 +23,8 @@ export default function Page() {
   }, []);
 
   const heroBg = contents['lppm_hero_bg'] || 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png';
-  const heroTitle = contents['lppm_hero_title'] || (lang === "en" ? "Page" : 'LPPM UMIBA');
-  const mainHtml = contents['lppm_html'] || `<!-- ░░░ HERO SUBPAGE ░░░ -->
+  const heroTitle = (lang === 'en' ? contents['lppm_hero_title_en'] : contents['lppm_hero_title']) || (lang === "en" ? "Page" : 'LPPM UMIBA');
+  const mainHtml = (lang === 'en' ? contents['lppm_html_en'] : contents['lppm_html']) || `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
 <!-- ░░░ NAVIGATION TABS ░░░ -->

@@ -23,8 +23,8 @@ export default function Page() {
   }, []);
 
   const heroBg = contents['profil_hero_bg'] || '${heroBg}';
-  const heroTitle = contents['profil_hero_title'] || (lang === "en" ? "Page" : '${heroTitle}');
-  const mainHtml = contents['profil_html'] || `<!-- ░░░ HERO SUBPAGE ░░░ -->
+  const heroTitle = (lang === 'en' ? contents['profil_hero_title_en'] : contents['profil_hero_title']) || (lang === "en" ? "Page" : '${heroTitle}');
+  const mainHtml = (lang === 'en' ? contents['profil_html_en'] : contents['profil_html']) || `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
 <!-- ░░░ NAVIGATION TABS ░░░ -->

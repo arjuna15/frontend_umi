@@ -23,8 +23,8 @@ export default function Page() {
   }, []);
 
   const heroBg = contents['informasi_hero_bg'] || 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png';
-  const heroTitle = contents['informasi_hero_title'] || (lang === "en" ? "Page" : 'Pusat Informasi');
-  const mainHtml = contents['informasi_html'] || `<!-- ░░░ HERO SUBPAGE ░░░ -->
+  const heroTitle = (lang === 'en' ? contents['informasi_hero_title_en'] : contents['informasi_hero_title']) || (lang === "en" ? "Page" : 'Pusat Informasi');
+  const mainHtml = (lang === 'en' ? contents['informasi_html_en'] : contents['informasi_html']) || `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
 <!-- ░░░ NAVIGATION TABS ░░░ -->
