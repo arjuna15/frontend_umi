@@ -18,10 +18,10 @@ export default function Home() {
     
     // Fallback/Dummy data for Testimoni since there is no API endpoint yet
     setTestiData([
-      { id: 1, image_url: 'https://via.placeholder.com/400x600/f1f5f9/B91C1C?text=Testimoni+Alumni+1' },
-      { id: 2, image_url: 'https://via.placeholder.com/400x600/f1f5f9/B91C1C?text=Testimoni+Alumni+2' },
-      { id: 3, image_url: 'https://via.placeholder.com/400x600/f1f5f9/B91C1C?text=Testimoni+Alumni+3' },
-      { id: 4, image_url: 'https://via.placeholder.com/400x600/f1f5f9/B91C1C?text=Testimoni+Alumni+4' }
+      { id: 1, image_url: 'https://picsum.photos/400/600?random=1' },
+      { id: 2, image_url: 'https://picsum.photos/400/600?random=2' },
+      { id: 3, image_url: 'https://picsum.photos/400/600?random=3' },
+      { id: 4, image_url: 'https://picsum.photos/400/600?random=4' }
     ]);
 
     const slideInterval = setInterval(nextSlide, 5000);
@@ -244,7 +244,7 @@ export default function Home() {
 <section id="sambutan" style={{ padding: 'var(--space-8) 0' }}>
   <div className="container grid grid-2" style={{ alignItems: 'center' }}>
     <div className="glass glass-card fade-up" style={{ padding: '0', overflow: 'hidden', position: 'relative' }}>
-      <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} onerror="this.src='https://via.placeholder.com/600x600/f1f5f9/B91C1C?text=Rektor+UMIBA'"/>
+      <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} onerror="this.src='https://picsum.photos/400/600?random=A'"/>
       <div className="glass" style={{ position: 'absolute', bottom: 'var(--space-4)', left: 'var(--space-4)', right: 'var(--space-4)', padding: 'var(--space-3)' }}>
         <h3 style={{ margin: '0', fontSize: '1.2rem' }}>{t("home.sambutan_rektor")}</h3>
         <p style={{ margin: '0', fontSize: '0.9rem' }}>{t("home.quote_rektor")}</p>
