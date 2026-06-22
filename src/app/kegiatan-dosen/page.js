@@ -36,12 +36,12 @@ export default function Page() {
       </div>
       <div class="glass glass-card fade-up" style="transition-delay: 0.1s;">
         <i class="ph-duotone ph-flask" style="font-size: 3rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
-        <h3>Penelitian</h3>
+        <h3>${lang === "en" ? "Research" : "Penelitian"}</h3>
         <p>Eksplorasi ilmu baru yang inovatif, berkolaborasi dengan mahasiswa dan mitra industri untuk menjawab tantangan zaman.</p>
       </div>
       <div class="glass glass-card fade-up" style="transition-delay: 0.2s;">
         <i class="ph-duotone ph-users-three" style="font-size: 3rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
-        <h3>Pengabdian</h3>
+        <h3>${lang === "en" ? "Community Service" : "Pengabdian"}</h3>
         <p>Penerapan hasil riset secara langsung untuk memberdayakan dan meningkatkan taraf hidup masyarakat (UMKM & Desa Binaan).</p>
       </div>
     </div>

@@ -6,7 +6,7 @@ export default function Page() {
     
   
   const heroBg = 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png';
-  const heroTitle = (lang === "en" ? "Page" : 'Pusat Informasi');
+  const heroTitle = (lang === "en" ? "Page" : '${lang === "en" ? "Information Center" : "Pusat Informasi"}');
   const mainHtml = `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
@@ -15,7 +15,7 @@ export default function Page() {
   <div class="container">
     <div class="glass" style="padding: 12px; border-radius: var(--radius-full); display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
       <a href="#biaya" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Tuition Fees" : "Biaya Pendidikan"}</a>
-      <a href="#infografis" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Info Grafis</a>
+      <a href="#infografis" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Infographics" : "Info Grafis"}</a>
     </div>
   </div>
 </div>
@@ -24,43 +24,43 @@ export default function Page() {
 <section id="biaya" style="padding: var(--space-8) 0;">
   <div class="container">
     <div class="glass glass-card fade-up">
-      <span class="text-red" style="font-weight: 600; text-transform: uppercase;">Informasi Terkini</span>
-      <h2>Biaya Pendidikan Tahun Ajaran 2025/2026</h2>
-      <p>Universitas Mitra Bangsa berkomitmen memberikan pendidikan berkualitas dengan biaya yang terjangkau. Kami juga menyediakan berbagai program beasiswa bagi mahasiswa berprestasi dan mahasiswa kurang mampu.</p>
+      <span class="text-red" style="font-weight: 600; text-transform: uppercase;">${lang === "en" ? "Latest Information" : "Informasi Terkini"}</span>
+      <h2>${lang === "en" ? "Tuition Fees for Academic Year 2025/2026" : "Biaya Pendidikan Tahun Ajaran 2025/2026"}</h2>
+      <p>${lang === "en" ? "Universitas Mitra Bangsa is committed to providing quality education at affordable costs. We also provide various scholarship programs for outstanding and underprivileged students." : "Universitas Mitra Bangsa berkomitmen memberikan pendidikan berkualitas dengan biaya yang terjangkau. Kami juga menyediakan berbagai program beasiswa bagi mahasiswa berprestasi dan mahasiswa kurang mampu."}</p>
       
       <table style="width: 100%; border-collapse: collapse; margin-top: var(--space-4); text-align: left;">
         <thead>
           <tr style="border-bottom: 2px solid var(--umiba-red);">
-            <th style="padding: 12px; color: var(--color-text);">Program Studi</th>
+            <th style="padding: 12px; color: var(--color-text);">${lang === "en" ? "Study Program" : "Program Studi"}</th>
             <th style="padding: 12px; color: var(--color-text);">${lang === "en" ? "Admission Fee" : "Uang Pangkal"}</th>
-            <th style="padding: 12px; color: var(--color-text);">SPP / Semester</th>
+            <th style="padding: 12px; color: var(--color-text);">${lang === "en" ? "Tuition / Semester" : "SPP / Semester"}</th>
           </tr>
         </thead>
         <tbody>
           <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
-            <td style="padding: 12px;">S1 Manajemen / Hukum</td>
+            <td style="padding: 12px;">${lang === "en" ? "Bachelor of Management / Law" : "S1 Manajemen / Hukum"}</td>
             <td style="padding: 12px;">Rp 5.500.000</td>
             <td style="padding: 12px;">Rp 4.000.000</td>
           </tr>
           <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
-            <td style="padding: 12px;">S1 Ilmu Komputer / Sistem TI</td>
+            <td style="padding: 12px;">${lang === "en" ? "Bachelor of Computer Science / IT Systems" : "S1 Ilmu Komputer / Sistem TI"}</td>
             <td style="padding: 12px;">Rp 6.000.000</td>
             <td style="padding: 12px;">Rp 4.500.000</td>
           </tr>
           <tr style="border-bottom: 1px solid rgba(0,0,0,0.1);">
-            <td style="padding: 12px;">S1 Ilmu Aktuaria</td>
+            <td style="padding: 12px;">${lang === "en" ? "Bachelor of Actuarial Science" : "S1 Ilmu Aktuaria"}</td>
             <td style="padding: 12px;">Rp 6.500.000</td>
             <td style="padding: 12px;">Rp 4.800.000</td>
           </tr>
           <tr>
-            <td style="padding: 12px;">S2 Magister Manajemen</td>
+            <td style="padding: 12px;">${lang === "en" ? "Master of Management" : "S2 Magister Manajemen"}</td>
             <td style="padding: 12px;">Rp 8.000.000</td>
             <td style="padding: 12px;">Rp 7.000.000</td>
           </tr>
         </tbody>
       </table>
       
-      <p style="margin-top: var(--space-4); font-size: 0.9rem; color: var(--color-muted);">*Biaya di atas adalah estimasi dan dapat berubah sewaktu-waktu. Untuk informasi rincian biaya lengkap, silakan unduh brosur atau hubungi bagian pendaftaran.</p>
+      <p style="margin-top: var(--space-4); font-size: 0.9rem; color: var(--color-muted);">${lang === "en" ? "*The above costs are estimates and may change at any time. For complete cost details, please download the brochure or contact the admissions department." : "*Biaya di atas adalah estimasi dan dapat berubah sewaktu-waktu. Untuk informasi rincian biaya lengkap, silakan unduh brosur atau hubungi bagian pendaftaran."}</p>
     </div>
   </div>
 </section>
@@ -69,14 +69,14 @@ export default function Page() {
 <section id="infografis" style="padding: var(--space-8) 0; background: var(--color-surface);">
   <div class="container grid grid-2">
     <div class="glass glass-card fade-up">
-      <h2 class="text-red">Unduh Brosur</h2>
-      <p>Dapatkan informasi lengkap tentang visi misi, fakultas, program studi, kegiatan kemahasiswaan, dan panduan lengkap tata cara pendaftaran mahasiswa baru.</p>
-      <a href="https://umiba.ac.id/doc/brosur/BrosurUMIBA2025.pdf" target="_blank" class="btn btn-primary" style="margin-top: var(--space-3);">Download Brosur (PDF)</a>
+      <h2 class="text-red">${lang === "en" ? "Download Brochure" : "Unduh Brosur"}</h2>
+      <p>${lang === "en" ? "Get complete information about the vision, mission, faculties, study programs, student activities, and complete guidelines on the new student admission procedure." : "Dapatkan informasi lengkap tentang visi misi, fakultas, program studi, kegiatan kemahasiswaan, dan panduan lengkap tata cara pendaftaran mahasiswa baru."}</p>
+      <a href="https://umiba.ac.id/doc/brosur/BrosurUMIBA2025.pdf" target="_blank" class="btn btn-primary" style="margin-top: var(--space-3);">${lang === "en" ? "Download Brochure (PDF)" : "Download Brosur (PDF)"}</a>
     </div>
     <div class="glass glass-card fade-up" style="transition-delay: 0.1s;">
-      <h2 class="text-red">Info Grafis</h2>
-      <p>Melihat visualisasi data tentang pencapaian Universitas Mitra Bangsa, statistik kelulusan, penyerapan kerja alumni, dan persebaran mahasiswa di seluruh Indonesia.</p>
-      <a href="#" class="btn btn-glass" style="margin-top: var(--space-3);">Lihat Info Grafis</a>
+      <h2 class="text-red">${lang === "en" ? "Infographics" : "Info Grafis"}</h2>
+      <p>${lang === "en" ? "View data visualization regarding Universitas Mitra Bangsa achievements, graduation statistics, alumni employment, and student distribution across Indonesia." : "Melihat visualisasi data tentang pencapaian Universitas Mitra Bangsa, statistik kelulusan, penyerapan kerja alumni, dan persebaran mahasiswa di seluruh Indonesia."}</p>
+      <a href="#" class="btn btn-glass" style="margin-top: var(--space-3);">Lihat ${lang === "en" ? "Infographics" : "Info Grafis"}</a>
     </div>
   </div>
 </section>`;

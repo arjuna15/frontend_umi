@@ -31,7 +31,7 @@ export default function Page() {
     </div>
     
     <div class="glass glass-card fade-up" style="transition-delay: 0.1s;">
-      <h3 class="text-red">Sistem Penjaminan Mutu Internal (SPMI)</h3>
+      <h3 class="text-red">${lang === "en" ? "Internal Quality Assurance System (SPMI)" : "Sistem Penjaminan Mutu Internal (SPMI)"}</h3>
       <p>Tahapan SPMI yang diterapkan di UMIBA mencakup siklus PPEPP:</p>
       <ul style="padding-left: var(--space-4); margin-top: var(--space-3);">
         <li style="margin-bottom: 8px;"><strong>P</strong>enetapan Standar Mutu</li>
