@@ -152,7 +152,7 @@ export default function Page() {
 </section>
 
 <!-- ░░░ BERITA & PENGUMUMAN SECTION ░░░ -->
-<section id="berita" style="padding: var(--space-8) 0; background: rgba(185, 28, 28, 0.03);">
+<section id="berita" style="padding: var(--space-8) 0; background: var(--umiba-red-alpha);">
   <div class="container">
     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px;" class="fade-up">
       <div>

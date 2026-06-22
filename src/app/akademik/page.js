@@ -43,15 +43,15 @@ export default function Page() {
   <div class="container">
     <div class="glass glass-card fade-up">
       <span class="text-red" style="font-weight: 600; text-transform: uppercase;">${lang === "en" ? "Main Faculty" : "Fakultas Utama"}</span>
-      <h2>Fakultas Manajemen dan Bisnis</h2>
-      <p>Fakultas Manajemen dan Bisnis UMIBA bertujuan mencetak wirausahawan dan profesional di bidang manajemen yang mampu menghadapi dinamika bisnis global.</p>
+      <h2>${lang === "en" ? "Faculty of Management and Business" : "Fakultas Manajemen dan Bisnis"}</h2>
+      <p>${lang === "en" ? "UMIBA Faculty of Management and Business aims to produce entrepreneurs and professionals in the management field capable of facing global business dynamics." : "Fakultas Manajemen dan Bisnis UMIBA bertujuan mencetak wirausahawan dan profesional di bidang manajemen yang mampu menghadapi dinamika bisnis global."}</p>
       
       <div class="grid grid-2" style="margin-top: var(--space-5);">
         <div class="glass glass-card">
           <h3 class="text-red">S1 Manajemen</h3>
-          <p>Membekali mahasiswa dengan kemampuan analisis bisnis, pemasaran, keuangan, dan sumber daya manusia dengan pendekatan kurikulum berbasis industri.</p>
+          <p>${lang === "en" ? "Equips students with business analysis, marketing, finance, and human resources skills with an industry-based curriculum approach." : "Membekali mahasiswa dengan kemampuan analisis bisnis, pemasaran, keuangan, dan sumber daya manusia dengan pendekatan kurikulum berbasis industri."}</p>
           
-          <div style="margin: 16px 0; padding: 12px; background: rgba(0,0,0,0.05); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.1);">
+          <div style="margin: 16px 0; padding: 12px; background: var(--color-border); border-radius: var(--radius-sm); border: var(--glass-border);">
             <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-muted); display: block; margin-bottom: 4px;">${lang === "en" ? "Head of Program" : "Ketua Program Studi"}</span>
             <div style="display: flex; align-items: center; gap: 8px;">
               <i class="ph-fill ph-user-circle" style="font-size: 1.5rem; color: var(--umiba-red);"></i>
@@ -63,7 +63,7 @@ export default function Page() {
         </div>
         <div class="glass glass-card" id="magister" style="display: flex; flex-direction: column;">
           <h3 class="text-red">S2 Magister Manajemen</h3>
-          <p>Program pascasarjana untuk mendalami strategi kepemimpinan dan manajemen korporasi tingkat lanjut bagi para profesional.</p>
+          <p>${lang === "en" ? "Postgraduate program to deepen advanced leadership strategies and corporate management for professionals." : "Program pascasarjana untuk mendalami strategi kepemimpinan dan manajemen korporasi tingkat lanjut bagi para profesional."}</p>
           <a href="/prodi-magister" class="btn btn-glass" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
         </div>
       </div>
@@ -72,18 +72,18 @@ export default function Page() {
 </section>
 
 <!-- ░░░ FAKULTAS HUKUM ░░░ -->
-<section id="hukum" style="padding: var(--space-8) 0; background: rgba(255, 255, 255, 0.4);">
+<section id="hukum" style="padding: var(--space-8) 0; background: var(--color-surface);">
   <div class="container">
     <div class="glass glass-card fade-up">
       <span class="text-red" style="font-weight: 600; text-transform: uppercase;">${lang === "en" ? "Career Options" : "Pilihan Profesi"}</span>
-      <h2>Fakultas Hukum</h2>
-      <p>Menjadikan mahasiswa lulusan ilmu hukum yang kritis, berintegritas, dan menjunjung tinggi nilai-nilai keadilan sosial di Indonesia maupun taraf internasional.</p>
+      <h2>${lang === "en" ? "Faculty of Law" : "Fakultas Hukum"}</h2>
+      <p>${lang === "en" ? "Making law graduates critical, possessing integrity, and upholding the values of social justice in Indonesia and internationally." : "Menjadikan mahasiswa lulusan ilmu hukum yang kritis, berintegritas, dan menjunjung tinggi nilai-nilai keadilan sosial di Indonesia maupun taraf internasional."}</p>
       
       <div class="glass glass-card" style="margin-top: var(--space-5); max-width: 600px; display: flex; flex-direction: column;">
         <h3 class="text-red">S1 Ilmu Hukum</h3>
-        <p>Program studi dengan konsentrasi Hukum Perdata, Pidana, dan Hukum Tata Negara. Mahasiswa difasilitasi dengan praktik peradilan semu (Moot Court).</p>
+        <p>${lang === "en" ? "Study program with concentrations in Civil Law, Criminal Law, and Constitutional Law. Students are facilitated with moot court practices." : "Program studi dengan konsentrasi Hukum Perdata, Pidana, dan Hukum Tata Negara. Mahasiswa difasilitasi dengan praktik peradilan semu (Moot Court)."}</p>
         
-        <div style="margin: 16px 0; padding: 12px; background: rgba(0,0,0,0.05); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.1);">
+        <div style="margin: 16px 0; padding: 12px; background: var(--color-border); border-radius: var(--radius-sm); border: var(--glass-border);">
           <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-muted); display: block; margin-bottom: 4px;">${lang === "en" ? "Head of Program" : "Ketua Program Studi"}</span>
           <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
             <i class="ph-fill ph-user-circle" style="font-size: 1.5rem; color: var(--umiba-red);"></i>
@@ -106,15 +106,15 @@ export default function Page() {
   <div class="container">
     <div class="glass glass-card fade-up">
       <span class="text-red" style="font-weight: 600; text-transform: uppercase;">${lang === "en" ? "Digital Future" : "Masa Depan Digital"}</span>
-      <h2>Fakultas Teknologi Informasi dan Aktuaria</h2>
-      <p>Mencetak talenta unggul di bidang komputasi cerdas, keamanan siber, dan analisis aktuaria untuk memenuhi kebutuhan industri 4.0.</p>
+      <h2>${lang === "en" ? "Faculty of Information Technology and Actuarial Science" : "Fakultas Teknologi Informasi dan Aktuaria"}</h2>
+      <p>${lang === "en" ? "Producing superior talents in intelligent computing, cybersecurity, and actuarial analysis to meet Industry 4.0 needs." : "Mencetak talenta unggul di bidang komputasi cerdas, keamanan siber, dan analisis aktuaria untuk memenuhi kebutuhan industri 4.0."}</p>
       
       <div class="grid grid-3" style="margin-top: var(--space-5);">
         <div class="glass glass-card" style="display: flex; flex-direction: column;">
           <h3 class="text-red">S1 Ilmu Komputer</h3>
-          <p>Fokus pada kecerdasan buatan, rekayasa perangkat lunak, dan sains data.</p>
+          <p>${lang === "en" ? "Focuses on artificial intelligence, software engineering, and data science." : "Fokus pada kecerdasan buatan, rekayasa perangkat lunak, dan sains data."}</p>
           
-          <div style="margin: 16px 0; padding: 12px; background: rgba(0,0,0,0.05); border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.1);">
+          <div style="margin: 16px 0; padding: 12px; background: var(--color-border); border-radius: var(--radius-sm); border: var(--glass-border);">
             <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-muted); display: block; margin-bottom: 4px;">${lang === "en" ? "Head of Program" : "Ketua Program Studi"}</span>
             <div style="display: flex; align-items: center; gap: 8px;">
               <i class="ph-fill ph-user-circle" style="font-size: 1.5rem; color: var(--umiba-red);"></i>
@@ -125,13 +125,13 @@ export default function Page() {
           <a href="/prodi-komputer" class="btn btn-glass" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
         </div>
         <div class="glass glass-card" id="sistem" style="display: flex; flex-direction: column;">
-          <h3 class="text-red">S1 Sistem &amp; Teknologi Informasi</h3>
-          <p>Memadukan teknologi informasi dengan proses bisnis untuk mengelola sistem enterprise.</p>
+          <h3 class="text-red">${lang === "en" ? "Bachelor of Information Systems & Technology" : "S1 Sistem &amp; Teknologi Informasi"}</h3>
+          <p>${lang === "en" ? "Integrating information technology with business processes to manage enterprise systems." : "Memadukan teknologi informasi dengan proses bisnis untuk mengelola sistem enterprise."}</p>
           <a href="/prodi-sistem" class="btn btn-glass" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
         </div>
         <div class="glass glass-card" id="aktuaria" style="display: flex; flex-direction: column;">
           <h3 class="text-red">S1 Ilmu Aktuaria</h3>
-          <p>Mempelajari statistika, matematika, dan manajemen risiko asuransi dan keuangan.</p>
+          <p>${lang === "en" ? "Studying statistics, mathematics, and insurance and financial risk management." : "Mempelajari statistika, matematika, dan manajemen risiko asuransi dan keuangan."}</p>
           <a href="/prodi-aktuaria" class="btn btn-glass" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
         </div>
       </div>

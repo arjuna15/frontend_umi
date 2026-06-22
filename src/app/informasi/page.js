@@ -31,7 +31,7 @@ export default function Page() {
 <div style="position: sticky; top: 100px; z-index: 900; margin-top: 24px; margin-bottom: 24px;">
   <div class="container">
     <div class="glass" style="padding: 12px; border-radius: var(--radius-full); display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
-      <a href="#biaya" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Biaya Pendidikan</a>
+      <a href="#biaya" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Tuition Fees" : "Biaya Pendidikan"}</a>
       <a href="#infografis" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Info Grafis</a>
     </div>
   </div>
@@ -49,7 +49,7 @@ export default function Page() {
         <thead>
           <tr style="border-bottom: 2px solid var(--umiba-red);">
             <th style="padding: 12px; color: var(--color-text);">Program Studi</th>
-            <th style="padding: 12px; color: var(--color-text);">Uang Pangkal</th>
+            <th style="padding: 12px; color: var(--color-text);">${lang === "en" ? "Admission Fee" : "Uang Pangkal"}</th>
             <th style="padding: 12px; color: var(--color-text);">SPP / Semester</th>
           </tr>
         </thead>
@@ -83,7 +83,7 @@ export default function Page() {
 </section>
 
 <!-- ░░░ BROSUR & INFOGRAFIS ░░░ -->
-<section id="infografis" style="padding: var(--space-8) 0; background: rgba(255, 255, 255, 0.4);">
+<section id="infografis" style="padding: var(--space-8) 0; background: var(--color-surface);">
   <div class="container grid grid-2">
     <div class="glass glass-card fade-up">
       <h2 class="text-red">Unduh Brosur</h2>

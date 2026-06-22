@@ -133,7 +133,7 @@ export default function Home() {
     <div className="grid grid-3">
       {/*  Card 1  */}
       <div className="glass glass-card fade-up">
-        <div style={{ background: 'rgba(185, 28, 28, 0.08)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
+        <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
           <i className="ph-duotone ph-briefcase" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
         <div style={{ minHeight: '240px' }}>
@@ -149,7 +149,7 @@ export default function Home() {
       
       {/*  Card 2  */}
       <div className="glass glass-card fade-up" style={{ transitionDelay: '0.1s' }}>
-        <div style={{ background: 'rgba(185, 28, 28, 0.08)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
+        <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
           <i className="ph-duotone ph-scales" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
         <div style={{ minHeight: '240px' }}>
@@ -164,7 +164,7 @@ export default function Home() {
       
       {/*  Card 3  */}
       <div className="glass glass-card fade-up" style={{ transitionDelay: '0.2s' }}>
-        <div style={{ background: 'rgba(185, 28, 28, 0.08)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
+        <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
           <i className="ph-duotone ph-laptop" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
         <div style={{ minHeight: '240px' }}>
@@ -183,7 +183,7 @@ export default function Home() {
 </section>
 
 {/*  ░░░ AKREDITASI ░░░  */}
-<section id="akreditasi" style={{ padding: 'var(--space-8) 0', background: 'rgba(255, 255, 255, 0.4)' }}>
+<section id="akreditasi" style={{ padding: 'var(--space-8) 0', background: 'var(--color-surface)' }}>
   <div className="container">
     <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }} className="fade-up">
       <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.kepercayaan_kualitas")}</span>
@@ -232,7 +232,7 @@ export default function Home() {
           </div>
         ))
       ) : (
-        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px', background: 'rgba(255,255,255,0.5)', borderRadius: '16px' }}>
+        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px', background: 'var(--color-surface)', borderRadius: '16px' }}>
           <p style={{ color: '#64748b', fontSize: '1.1rem', margin: 0 }}>{t("home.belum_ada_berita")}</p>
         </div>
       )}
@@ -276,7 +276,7 @@ export default function Home() {
 {/*  ░░░ PMB CTA ░░░  */}
 <section style={{ padding: 'var(--space-8) 0' }}>
   <div className="container">
-    <div className="glass glass-card grid grid-2 fade-up" style={{ alignItems: 'center', background: 'linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4))' }}>
+    <div className="glass glass-card grid grid-2 fade-up" style={{ alignItems: 'center', background: 'var(--glass-bg)' }}>
       <div>
         <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.pendaftaran_dibuka")}</span>
         <h2 style={{ marginTop: '8px' }}>{t("home.penerimaan_maba")}</h2>

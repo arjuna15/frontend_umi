@@ -86,7 +86,7 @@ export default function Page() {
 </section>
 
 <!-- ░░░ PROFIL LULUSAN & PEMINATAN ░░░ -->
-<section id="profil" style="padding: var(--space-8) 0; background: rgba(185, 28, 28, 0.03);">
+<section id="profil" style="padding: var(--space-8) 0; background: var(--umiba-red-alpha);">
   <div class="container grid grid-2" style="gap: 40px;">
     
     <!-- Peminatan -->

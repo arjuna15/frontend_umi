@@ -31,8 +31,8 @@ export default function Page() {
 <div style="position: sticky; top: 100px; z-index: 900; margin-top: 24px; margin-bottom: 24px;">
   <div class="container">
     <div class="glass" style="padding: 12px; border-radius: var(--radius-full); display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
-      <a href="#akademik" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Fasilitas Akademik</a>
-      <a href="#non-akademik" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Fasilitas Umum</a>
+      <a href="#akademik" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Academic Facilities" : "Fasilitas Akademik"}</a>
+      <a href="#non-akademik" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Public Facilities" : "Fasilitas Umum"}</a>
     </div>
   </div>
 </div>
@@ -41,48 +41,48 @@ export default function Page() {
 <section id="akademik" style="padding: var(--space-8) 0;">
   <div class="container">
     <div class="fade-up" style="text-align: center; margin-bottom: 48px;">
-      <span class="text-red" style="font-weight: 600; text-transform: uppercase;">Penunjang Belajar</span>
-      <h2>Fasilitas Akademik</h2>
+      <span class="text-red" style="font-weight: 600; text-transform: uppercase;">${lang === "en" ? "Learning Support" : "Penunjang Belajar"}</span>
+      <h2>${lang === "en" ? "Academic Facilities" : "Fasilitas Akademik"}</h2>
     </div>
     <div class="grid grid-3">
       <div class="glass glass-card fade-up">
         <i class="ph-duotone ph-books" style="font-size: 3rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
-        <h3>Perpustakaan Digital</h3>
-        <p>Akses ribuan jurnal internasional, e-book, dan ruang baca yang nyaman dilengkapi dengan akses internet berkecepatan tinggi.</p>
+        <h3>${lang === "en" ? "Digital Library" : "Perpustakaan Digital"}</h3>
+        <p>${lang === "en" ? "Access thousands of international journals, e-books, and comfortable reading rooms equipped with high-speed internet." : "Akses ribuan jurnal internasional, e-book, dan ruang baca yang nyaman dilengkapi dengan akses internet berkecepatan tinggi."}</p>
       </div>
       <div class="glass glass-card fade-up" style="transition-delay: 0.1s;">
         <i class="ph-duotone ph-desktop" style="font-size: 3rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
-        <h3>Laboratorium Komputer</h3>
-        <p>Dilengkapi dengan PC spesifikasi tinggi standar industri (i7/Ryzen 7) untuk mendukung praktikum prodi IT dan Sistem Informasi.</p>
+        <h3>${lang === "en" ? "Computer Laboratory" : "Laboratorium Komputer"}</h3>
+        <p>${lang === "en" ? "Equipped with industry-standard high-spec PCs (i7/Ryzen 7) to support IT and Information Systems practicums." : "Dilengkapi dengan PC spesifikasi tinggi standar industri (i7/Ryzen 7) untuk mendukung praktikum prodi IT dan Sistem Informasi."}</p>
       </div>
       <div class="glass glass-card fade-up" style="transition-delay: 0.2s;">
         <i class="ph-duotone ph-scales" style="font-size: 3rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
-        <h3>Ruang Peradilan Semu</h3>
-        <p>Moot Court khusus untuk mahasiswa Fakultas Hukum untuk simulasi praktik peradilan yang didesain persis seperti pengadilan nyata.</p>
+        <h3>${lang === "en" ? "Moot Court" : "Ruang Peradilan Semu"}</h3>
+        <p>${lang === "en" ? "Special Moot Court for Law students for court practice simulations designed exactly like a real court." : "Moot Court khusus untuk mahasiswa Fakultas Hukum untuk simulasi praktik peradilan yang didesain persis seperti pengadilan nyata."}</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="non-akademik" style="padding: var(--space-8) 0; background: rgba(185, 28, 28, 0.03);">
+<section id="non-akademik" style="padding: var(--space-8) 0; background: var(--umiba-red-alpha);">
   <div class="container">
     <div class="fade-up" style="text-align: center; margin-bottom: 48px;">
-      <span class="text-red" style="font-weight: 600; text-transform: uppercase;">Penunjang Mahasiswa</span>
-      <h2>Fasilitas Umum</h2>
+      <span class="text-red" style="font-weight: 600; text-transform: uppercase;">${lang === "en" ? "Student Support" : "Penunjang Mahasiswa"}</span>
+      <h2>${lang === "en" ? "Public Facilities" : "Fasilitas Umum"}</h2>
     </div>
     <div class="grid grid-2">
       <div class="glass glass-card fade-up" style="display: flex; gap: 20px; align-items: center;">
         <i class="ph-duotone ph-coffee" style="font-size: 4rem; color: var(--umiba-red);"></i>
         <div>
           <h3>Student Lounge & Cafe</h3>
-          <p style="margin:0;">Ruang komunal yang didesain modern untuk diskusi kelompok atau sekadar bersantai, lengkap dengan colokan listrik dan Wi-Fi.</p>
+          <p style="margin:0;">${lang === "en" ? "A modernly designed communal space for group discussions or just relaxing, complete with power outlets and Wi-Fi." : "Ruang komunal yang didesain modern untuk diskusi kelompok atau sekadar bersantai, lengkap dengan colokan listrik dan Wi-Fi."}</p>
         </div>
       </div>
       <div class="glass glass-card fade-up" style="transition-delay: 0.1s; display: flex; gap: 20px; align-items: center;">
         <i class="ph-duotone ph-mosque" style="font-size: 4rem; color: var(--umiba-red);"></i>
         <div>
-          <h3>Masjid Kampus</h3>
-          <p style="margin:0;">Fasilitas ibadah yang luas dan bersih, mendukung kegiatan kerohanian mahasiswa dan dosen.</p>
+          <h3>${lang === "en" ? "Campus Mosque" : "Masjid Kampus"}</h3>
+          <p style="margin:0;">${lang === "en" ? "Spacious and clean worship facilities, supporting the spiritual activities of students and lecturers." : "Fasilitas ibadah yang luas dan bersih, mendukung kegiatan kerohanian mahasiswa dan dosen."}</p>
         </div>
       </div>
     </div>

@@ -66,7 +66,7 @@ export default function Page() {
   </div>
 </section>
 
-<section id="mahasiswa" style="padding: var(--space-8) 0; background: rgba(185, 28, 28, 0.03);">
+<section id="mahasiswa" style="padding: var(--space-8) 0; background: var(--umiba-red-alpha);">
   <div class="container">
     <div class="fade-up" style="margin-bottom: 40px;">
       <span class="text-red" style="font-weight: 600; text-transform: uppercase;">Kemahasiswaan</span>

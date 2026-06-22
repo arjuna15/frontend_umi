@@ -78,7 +78,7 @@ export default function Page() {
 </section>
 
 <!-- ░░░ KALENDER AKADEMIK ░░░ -->
-<section id="kalender" style="padding: var(--space-8) 0; background: rgba(185, 28, 28, 0.03);">
+<section id="kalender" style="padding: var(--space-8) 0; background: var(--umiba-red-alpha);">
   <div class="container">
     <div class="fade-up" style="text-align: center; margin-bottom: 48px;">
       <span class="text-red" style="font-weight: 600; text-transform: uppercase;">Jadwal</span>
