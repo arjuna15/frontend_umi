@@ -7,7 +7,6 @@ export default function ScrollAnimations() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Small delay to ensure DOM is fully rendered (especially with dangerouslySetInnerHTML)
     const timeoutId = setTimeout(() => {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -18,19 +17,34 @@ export default function ScrollAnimations() {
         });
       }, { threshold: 0.05, rootMargin: "0px 0px -50px 0px" });
 
-      const elements = document.querySelectorAll('.fade-up, .scale-up, .slide-in-left, .slide-in-right');
-      elements.forEach(el => {
-        // Reset visibility if it was already visible (useful on route changes)
-        // Note: For Next.js App Router, components might remount or persist. 
-        // We ensure the observer catches them.
-        observer.observe(el);
+      // Observe current elements
+      const observeElements = () => {
+        const elements = document.querySelectorAll('.fade-up:not(.visible), .scale-up:not(.visible), .slide-in-left:not(.visible), .slide-in-right:not(.visible)');
+        elements.forEach(el => {
+          if (!el.hasAttribute('data-observed')) {
+            observer.observe(el);
+            el.setAttribute('data-observed', 'true');
+          }
+        });
+      };
+
+      observeElements();
+
+      // Watch for dynamically added elements (like fetched news)
+      const mutationObserver = new MutationObserver(() => {
+        observeElements();
       });
 
-      return () => observer.disconnect();
+      mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+      return () => {
+        observer.disconnect();
+        mutationObserver.disconnect();
+      };
     }, 100);
 
     return () => clearTimeout(timeoutId);
-  }, [pathname]); // Re-run when route changes
+  }, [pathname]);
 
-  return null; // This component doesn't render anything visually
+  return null;
 }
