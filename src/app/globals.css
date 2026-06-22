@@ -367,7 +367,7 @@ header .glass {
   height: 100%;
 }
 .logo { display: flex; flex-shrink: 0; align-items: center; gap: 12px; text-decoration: none; }
-.logo img { height: 40px; }
+.logo img { height: 55px; transition: all 0.3s ease; }
 .logo-text { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; color: var(--umiba-red-dark); }
 .nav-links { display: flex; gap: var(--space-3); list-style: none; margin: 0; padding: 0; }
 .nav-item { position: relative; }
