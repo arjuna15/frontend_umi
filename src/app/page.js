@@ -16,6 +16,14 @@ export default function Home() {
     const api = process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api';
     fetch(`${api}/news`).then(r => r.json()).then(d => setNewsData(d.news || [])).catch(e => console.error(e));
     
+    // Fallback/Dummy data for Testimoni since there is no API endpoint yet
+    setTestiData([
+      { id: 1, image_url: 'https://via.placeholder.com/400x600/f1f5f9/B91C1C?text=Testimoni+Alumni+1' },
+      { id: 2, image_url: 'https://via.placeholder.com/400x600/f1f5f9/B91C1C?text=Testimoni+Alumni+2' },
+      { id: 3, image_url: 'https://via.placeholder.com/400x600/f1f5f9/B91C1C?text=Testimoni+Alumni+3' },
+      { id: 4, image_url: 'https://via.placeholder.com/400x600/f1f5f9/B91C1C?text=Testimoni+Alumni+4' }
+    ]);
+
     const slideInterval = setInterval(nextSlide, 5000);
     return () => clearInterval(slideInterval);
   }, []);
