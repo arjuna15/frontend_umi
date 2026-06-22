@@ -78,7 +78,7 @@ body.dark-mode::after {
 }
 
 body.dark-mode .glass,
-body.dark-mode header .glass {
+body.dark-mode header:not(.top-transparent) .glass {
   background: rgba(15, 23, 42, 0.8) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
@@ -1569,8 +1569,8 @@ header.top-transparent .menu-toggle span {
   border-radius: 3px;
 }
 header.top-transparent .nav-link.active {
-  color: #FDE047 !important; /* Yellowish for transparent mode */
+  color: var(--umiba-red) !important;
 }
 header.top-transparent .nav-link.active::after {
-  background-color: #FDE047;
+  background-color: var(--umiba-red);
 }
