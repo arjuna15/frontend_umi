@@ -4,7 +4,7 @@ export default function Footer() {
       <footer className="unique-footer" style={{ background: 'radial-gradient(circle at top right, #ef4444 0%, #b91c1c 40%, #7f1d1d 80%, #450a0a 100%)', color: 'white', padding: 'var(--space-8) 0 var(--space-4)', position: 'relative', overflow: 'hidden', marginTop: 'var(--space-8)' }}>
   
   {/*  Motif Belah Ketupat (Diamond Pattern) Overlay  */}
-  <div style={{ position: 'absolute', inset: '0', backgroundImage: "url('data:image/svg+xml,%3Csvg width=\\'80\\' height=\\'80\\' viewBox=\\'0 0 80 80\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'none\\' fill-rule=\\'evenodd\\'%3E%3Cg fill=\\'%23B91C1C\\' fill-opacity=\\'0.03\\'%3E%3Cpath d=\\'M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z\\' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E')", backgroundSize: '80px 80px', zIndex: '0', pointerEvents: 'none' }}></div>
+  <div style={{ position: 'absolute', inset: '0', backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\" fill-rule=\"evenodd\"%3E%3Cpath d=\"M20 0L40 20L20 40L0 20z\"/%3E%3C/g%3E%3C/svg%3E')", backgroundSize: '40px 40px', zIndex: '0', pointerEvents: 'none' }}></div>
   
   <div className="container" style={{ position: 'relative', zIndex: '1' }}>
     <div className="footer-main">
