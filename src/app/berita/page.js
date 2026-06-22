@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../../context/Providers';
 
 export default function BeritaPage() {
   const [newsData, setNewsData] = useState([]);

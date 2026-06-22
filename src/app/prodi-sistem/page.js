@@ -1,7 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../../context/Providers';
 
 export default function Page() {
+  const { lang, t } = useLanguage();
   const [contents, setContents] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +23,7 @@ export default function Page() {
   }, []);
 
   const heroBg = contents['prodi-sistem_hero_bg'] || 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png';
-  const heroTitle = contents['prodi-sistem_hero_title'] || 'S1 Sistem Informasi';
+  const heroTitle = contents['prodi-sistem_hero_title'] || (lang === "en" ? "Page" : 'S1 Sistem Informasi');
   const mainHtml = contents['prodi-sistem_html'] || `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
@@ -30,7 +32,7 @@ export default function Page() {
   <div class="container">
     <div class="glass" style="padding: 12px; border-radius: var(--radius-full); display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
       <a href="#sambutan" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Sambutan Kaprodi</a>
-      <a href="#visimisi" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Visi & Misi</a>
+      <a href="#visimisi" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Vision & Mission" : "Visi & Misi"}</a>
       <a href="#profil" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Profil & Karir</a>
       <a href="#dokumen" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Kurikulum & SK</a>
     </div>
@@ -172,7 +174,7 @@ export default function Page() {
   </div>
 </section>`;
 
-  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>;
+  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>${lang === "en" ? "Loading..." : "Loading..."}</div>;
 
   return (
     <div>

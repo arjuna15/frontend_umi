@@ -1,7 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../../context/Providers';
 
 export default function Page() {
+  const { lang, t } = useLanguage();
   const [contents, setContents] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +23,7 @@ export default function Page() {
   }, []);
 
   const heroBg = contents['mutu_hero_bg'] || 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_1.png';
-  const heroTitle = contents['mutu_hero_title'] || 'LPM UMIBA';
+  const heroTitle = contents['mutu_hero_title'] || (lang === "en" ? "Page" : 'LPM UMIBA');
   const mainHtml = contents['mutu_html'] || `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
@@ -59,7 +61,7 @@ export default function Page() {
   </div>
 </section>`;
 
-  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>;
+  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>${lang === "en" ? "Loading..." : "Loading..."}</div>;
 
   return (
     <div>

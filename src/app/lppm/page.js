@@ -1,7 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../../context/Providers';
 
 export default function Page() {
+  const { lang, t } = useLanguage();
   const [contents, setContents] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +23,7 @@ export default function Page() {
   }, []);
 
   const heroBg = contents['lppm_hero_bg'] || 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png';
-  const heroTitle = contents['lppm_hero_title'] || 'LPPM UMIBA';
+  const heroTitle = contents['lppm_hero_title'] || (lang === "en" ? "Page" : 'LPPM UMIBA');
   const mainHtml = contents['lppm_html'] || `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
@@ -49,12 +51,12 @@ export default function Page() {
         <div class="grid grid-2" style="margin-top: 32px; gap: 20px;">
           <div class="glass glass-card" style="padding: 24px;">
             <i class="ph-duotone ph-eye" style="font-size: 2.5rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
-            <h3 style="font-size: 1.25rem;">Visi</h3>
+            <h3 style="font-size: 1.25rem;">${lang === "en" ? "Vision" : "Visi"}</h3>
             <p style="font-size: 0.9rem; margin: 0;">Menjadi lembaga unggulan dalam pengembangan IPTEK berbasis kearifan lokal yang diakui secara nasional.</p>
           </div>
           <div class="glass glass-card" style="padding: 24px;">
             <i class="ph-duotone ph-target" style="font-size: 2.5rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
-            <h3 style="font-size: 1.25rem;">Misi</h3>
+            <h3 style="font-size: 1.25rem;">${lang === "en" ? "Mission" : "Misi"}</h3>
             <p style="font-size: 0.9rem; margin: 0;">Memfasilitasi riset inovatif dan program pengabdian yang solutif bagi permasalahan bangsa.</p>
           </div>
         </div>
@@ -209,7 +211,7 @@ export default function Page() {
   </div>
 </section>`;
 
-  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>;
+  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>${lang === "en" ? "Loading..." : "Loading..."}</div>;
 
   return (
     <div>

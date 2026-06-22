@@ -1,7 +1,9 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../../context/Providers';
 
 export default function Page() {
+  const { lang, t } = useLanguage();
   const [contents, setContents] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +23,7 @@ export default function Page() {
   }, []);
 
   const heroBg = contents['profil_hero_bg'] || '${heroBg}';
-  const heroTitle = contents['profil_hero_title'] || '${heroTitle}';
+  const heroTitle = contents['profil_hero_title'] || (lang === "en" ? "Page" : '${heroTitle}');
   const mainHtml = contents['profil_html'] || `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
@@ -29,11 +31,11 @@ export default function Page() {
 <div style="position: sticky; top: 100px; z-index: 900; margin-top: 24px; margin-bottom: 24px;">
   <div class="container">
     <div class="glass" style="padding: 12px; border-radius: var(--radius-full); display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
-      <a href="#sejarah" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Sejarah</a>
-      <a href="#visi-misi" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Visi & Misi</a>
-      <a href="#tujuan" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Tujuan</a>
-      <a href="#sasaran" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Sasaran & Strategi</a>
-      <a href="#struktur" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Struktur Organisasi</a>
+      <a href="#sejarah" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "History" : "Sejarah"}</a>
+      <a href="#visi-misi" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Vision & Mission" : "Visi & Misi"}</a>
+      <a href="#tujuan" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Goals" : "Tujuan"}</a>
+      <a href="#sasaran" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Strategy" : "Sasaran & Strategi"}</a>
+      <a href="#struktur" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Org Structure" : "Struktur Organisasi"}</a>
     </div>
   </div>
 </div>
@@ -54,11 +56,11 @@ export default function Page() {
 <section id="visi-misi" style="padding: var(--space-8) 0; background: rgba(255, 255, 255, 0.4);">
   <div class="container grid grid-2">
     <div class="glass glass-card fade-up">
-      <h2 class="text-red">Visi</h2>
+      <h2 class="text-red">${lang === "en" ? "Vision" : "Visi"}</h2>
       <p>Menjadi Universitas yang unggul, berdaya saing global, dan berkarakter dalam pengembangan ilmu pengetahuan dan teknologi pada tahun 2030.</p>
     </div>
     <div class="glass glass-card fade-up" style="transition-delay: 0.1s;">
-      <h2 class="text-red">Misi</h2>
+      <h2 class="text-red">${lang === "en" ? "Mission" : "Misi"}</h2>
       <ul style="padding-left: var(--space-4);">
         <li style="margin-bottom: 8px;">Menyelenggarakan pendidikan tinggi yang bermutu dan relevan dengan kebutuhan masyarakat dan industri.</li>
         <li style="margin-bottom: 8px;">Melaksanakan penelitian inovatif yang berkontribusi pada perkembangan IPTEK.</li>
@@ -195,7 +197,7 @@ export default function Page() {
   </div>
 </section>`;
 
-  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading...</div>;
+  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>${lang === "en" ? "Loading..." : "Loading..."}</div>;
 
   return (
     <div>
