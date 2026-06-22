@@ -637,6 +637,13 @@ header.top-transparent .glass {
     border-radius: 0;
   }
 }
+.hero-overlay-red {
+  background: linear-gradient(to right, rgba(136, 17, 34, 0.95) 0%, rgba(136, 17, 34, 0.8) 45%, rgba(136, 17, 34, 0.2) 75%, transparent 100%);
+}
+.hero-overlay-blue {
+  background: linear-gradient(to right, rgba(30, 58, 138, 0.95) 0%, rgba(30, 58, 138, 0.8) 45%, rgba(30, 58, 138, 0.2) 75%, transparent 100%);
+}
+
 .hero-slide {
   position: absolute;
   inset: 0; /* Remove inset -20px since we are not zooming anymore */
@@ -1007,6 +1014,17 @@ header.top-transparent .glass {
 
 /* Responsive */
 @media (max-width: 992px) {
+  .hero-overlay-red {
+    background: linear-gradient(to top, rgba(136, 17, 34, 1) 0%, rgba(136, 17, 34, 0.9) 60%, rgba(136, 17, 34, 0.2) 90%, transparent 100%) !important;
+  }
+  .hero-overlay-blue {
+    background: linear-gradient(to top, rgba(30, 58, 138, 1) 0%, rgba(30, 58, 138, 0.9) 60%, rgba(30, 58, 138, 0.2) 90%, transparent 100%) !important;
+  }
+  .hero-slide {
+    align-items: flex-end !important;
+    padding: 120px 20px 80px 20px !important;
+  }
+  
   :root {
   --footer-bg: radial-gradient(circle at top right, #ef4444 0%, #b91c1c 40%, #7f1d1d 80%, #450a0a 100%);
 
