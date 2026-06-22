@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState('news_management');
   const [news, setNews] = useState([]);
   const [contents, setContents] = useState({});
   const [loading, setLoading] = useState(true);

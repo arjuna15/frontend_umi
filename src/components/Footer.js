@@ -5,7 +5,7 @@ export default function Footer() {
   const { t } = useLanguage();
   return (
     <>
-      <footer className="unique-footer" style={{ background: 'radial-gradient(circle at top right, #ef4444 0%, #b91c1c 40%, #7f1d1d 80%, #450a0a 100%)', color: 'white', padding: 'var(--space-8) 0 var(--space-4)', position: 'relative', overflow: 'hidden', marginTop: 'var(--space-8)' }}>
+      <footer className="unique-footer" style={{ background: 'var(--footer-bg)', color: 'white', padding: 'var(--space-8) 0 var(--space-4)', position: 'relative', overflow: 'hidden', marginTop: 'var(--space-8)' }}>
   
   {/*  Motif Belah Ketupat (Diamond Pattern) Overlay  */}
   <div style={{ position: 'absolute', inset: '0', backgroundImage: "url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\" fill-rule=\"evenodd\"%3E%3Cpath d=\"M20 0L40 20L20 40L0 20z\"/%3E%3C/g%3E%3C/svg%3E')", backgroundSize: '40px 40px', zIndex: '0', pointerEvents: 'none' }}></div>
@@ -24,9 +24,9 @@ export default function Footer() {
         <div>
           <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: 'var(--space-3)', fontWeight: '600' }}>{t("footer.fakultas")}</h4>
           <ul style={{ listStyle: 'none', padding: '0', margin: '0', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <li><a href="/prodi-komputer" className="footer-hover-link" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: '0.3s' }}>{t("nav.ilmu_komputer")}</a></li>
+            <li><a href="/prodi-komputer" className="footer-hover-link" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: '0.3s' }}>{t("nav.s1_komputer")}</a></li>
             <li><a href="/prodi-sistem" className="footer-hover-link" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: '0.3s' }}>{t("nav.s1_sistem")}</a></li>
-            <li><a href="/prodi-hukum" className="footer-hover-link" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: '0.3s' }}>{t("nav.ilmu_hukum")}</a></li>
+            <li><a href="/prodi-hukum" className="footer-hover-link" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: '0.3s' }}>{t("nav.s1_hukum")}</a></li>
             <li><a href="/prodi-manajemen" className="footer-hover-link" style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', transition: '0.3s' }}>{t("nav.s1_manajemen")}</a></li>
           </ul>
         </div>

@@ -1,30 +1,13 @@
 'use client';
-import { useState, useEffect } from 'react';
 import { useLanguage } from '../../context/Providers';
 
 export default function Page() {
   const { lang, t } = useLanguage();
-  const [contents, setContents] = useState({});
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api'}/contents`)
-      .then(res => res.json())
-      .then(data => {
-        const contentMap = {};
-        data.forEach(c => contentMap[c.key] = c.value);
-        setContents(contentMap);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
-
-  const heroBg = contents['profil_hero_bg'] || '${heroBg}';
-  const heroTitle = (lang === 'en' ? contents['profil_hero_title_en'] : contents['profil_hero_title']) || (lang === "en" ? "Page" : '${heroTitle}');
-  const mainHtml = (lang === 'en' ? contents['profil_html_en'] : contents['profil_html']) || `<!-- ░░░ HERO SUBPAGE ░░░ -->
+    
+  
+  const heroBg = '${heroBg}';
+  const heroTitle = (lang === "en" ? "Page" : '${heroTitle}');
+  const mainHtml = `<!-- ░░░ HERO SUBPAGE ░░░ -->
 
 
 <!-- ░░░ NAVIGATION TABS ░░░ -->
@@ -197,8 +180,7 @@ export default function Page() {
   </div>
 </section>`;
 
-  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>${lang === "en" ? "Loading..." : "Loading..."}</div>;
-
+  
   return (
     <div>
       <section className="hero hero-sub" style={{ background: `url('${heroBg}') center/cover`, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: 'white', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>

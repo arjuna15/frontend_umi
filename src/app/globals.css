@@ -12,6 +12,8 @@
 
 /* -------------------- Tokens -------------------- */
 :root {
+  --footer-bg: radial-gradient(circle at top right, #ef4444 0%, #b91c1c 40%, #7f1d1d 80%, #450a0a 100%);
+
   /* Brand Palette (UMIBA Red) */
   --umiba-red: #B91C1C;
   --umiba-red-dark: #7F1D1D;
@@ -957,6 +959,8 @@ header .glass {
 /* Responsive */
 @media (max-width: 992px) {
   :root {
+  --footer-bg: radial-gradient(circle at top right, #ef4444 0%, #b91c1c 40%, #7f1d1d 80%, #450a0a 100%);
+
     --space-6: 32px;
     --space-7: 48px;
     --space-8: 64px;
