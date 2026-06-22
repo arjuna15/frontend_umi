@@ -9,9 +9,21 @@ export default function Home() {
   const [newsData, setNewsData] = useState([]);
   const [testiData, setTestiData] = useState([]);
   
+  const heroSlidesData = [
+    'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_1.png',
+    'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png',
+    'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png'
+  ];
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % heroSlidesData.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + heroSlidesData.length) % heroSlidesData.length);
+
   useEffect(() => {
     const api = process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api';
     fetch(`${api}/news`).then(r => r.json()).then(d => setNewsData(d.news || [])).catch(e => console.error(e));
+    
+    const slideInterval = setInterval(nextSlide, 5000);
+    return () => clearInterval(slideInterval);
   }, []);
   
   return (
@@ -23,22 +35,22 @@ export default function Home() {
   <div className="hero" style={{ position: 'relative', overflow: 'hidden' }}>
     {/*  Slider Backgrounds  */}
     <div id="heroSlides" style={{ position: 'absolute', inset: '0', zIndex: '-2' }}>
-      <div className="hero-slide active" style={{ backgroundImage: `url('https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_1.png')` }}></div>
-      <div className="hero-slide" style={{ backgroundImage: "url('https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png')" }}></div>
-      <div className="hero-slide" style={{ backgroundImage: "url('https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_3.png')" }}></div>
+      {heroSlidesData.map((url, index) => (
+        <div key={index} className={`hero-slide ${index === currentSlide ? 'active' : ''}`} style={{ backgroundImage: `url('${url}')` }}></div>
+      ))}
     </div>
     
     {/*  Slider Controls  */}
-    <button className="hero-arrow prev" aria-label="Previous Slide">
+    <button className="hero-arrow prev" aria-label="Previous Slide" onClick={prevSlide}>
       <i className="ph-bold ph-caret-left"></i>
     </button>
-    <button className="hero-arrow next" aria-label="Next Slide">
+    <button className="hero-arrow next" aria-label="Next Slide" onClick={nextSlide}>
       <i className="ph-bold ph-caret-right"></i>
     </button>
     <div className="hero-controls">
-      <button className="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
-      <button className="hero-dot" data-slide="1" aria-label="Slide 2"></button>
-      <button className="hero-dot" data-slide="2" aria-label="Slide 3"></button>
+      {heroSlidesData.map((_, index) => (
+        <button key={index} className={`hero-dot ${index === currentSlide ? 'active' : ''}`} onClick={() => setCurrentSlide(index)} aria-label={`Slide ${index + 1}`}></button>
+      ))}
     </div>
   </div>
 </section>
