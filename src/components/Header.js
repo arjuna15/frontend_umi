@@ -1,13 +1,28 @@
 'use client';
 import { useTheme, useLanguage } from '../context/Providers';
+import { useState, useEffect } from 'react';
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
   const { lang, changeLang, t } = useLanguage();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <header id="site-header">
+      <header id="site-header" className={isScrolled ? 'scrolled' : 'top-transparent'}>
   <div className="glass">
     <a href="#" className="logo" aria-label="UMIBA Home">
       <img src="/erasebg-transformed.png" alt="Logo UMIBA" onerror="this.onerror=null;this.src='https://via.placeholder.com/40x40/B91C1C/fff?text=U'"/>
