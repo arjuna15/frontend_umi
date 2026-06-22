@@ -33,11 +33,6 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         
         <Providers>
-          <div className="ambient-orbs">
-            <div className="orb orb-1"></div>
-            <div className="orb orb-2"></div>
-            <div className="orb orb-3"></div>
-          </div>
           <ScrollAnimations />
           <HeaderWrapper />
           <main style={{ flex: 1 }}>{children}</main>
