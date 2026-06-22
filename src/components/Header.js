@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
+  const [menuOpen, setMenuOpen] = useState(false);
   const { lang, changeLang, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
@@ -29,7 +30,7 @@ export default function Header() {
     <a href="#" className="logo" aria-label="UMIBA Home">
       <img src="/erasebg-transformed.png" alt="Logo UMIBA" onerror="this.onerror=null;this.src='https://via.placeholder.com/40x40/B91C1C/fff?text=U'"/>
     </a>
-    <ul className="nav-links">
+    <ul className={menuOpen ? "nav-links active" : "nav-links"}>
       <li className="nav-item"><a href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>{t("nav.home")}</a></li>
       <li className="nav-item">
         <a href="/profil" className={`nav-link ${pathname?.startsWith("/profil") ? "active" : ""}`}>{t("nav.profil")} <span className="dropdown-icon">▼</span></a>
@@ -127,7 +128,7 @@ export default function Header() {
         </div>
       </li>
     </ul>
-    <button className="menu-toggle" aria-label="Toggle Menu">
+    <button className="menu-toggle" aria-label="Toggle Menu" onClick={() => setMenuOpen(!menuOpen)}>
       <span></span>
       <span></span>
       <span></span>

@@ -18,10 +18,10 @@ export default function Home() {
     
     // Fallback/Dummy data for Testimoni since there is no API endpoint yet
     setTestiData([
-      { id: 1, image_url: 'https://picsum.photos/400/600?random=1' },
-      { id: 2, image_url: 'https://picsum.photos/400/600?random=2' },
-      { id: 3, image_url: 'https://picsum.photos/400/600?random=3' },
-      { id: 4, image_url: 'https://picsum.photos/400/600?random=4' }
+      { id: 1, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/1-1.png' },
+      { id: 2, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/1-1.png' },
+      { id: 3, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/1-1.png' },
+      { id: 4, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/1-1.png' }
     ]);
 
     const slideInterval = setInterval(nextSlide, 5000);
