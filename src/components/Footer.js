@@ -12,14 +12,11 @@ export default function Footer() {
             {/* Kolom 1: Identitas & Logo */}
             <div>
               <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '16px', marginBottom: '24px', textDecoration: 'none', position: 'relative' }}>
-                {/* Connecting Flare / Drip Shape (Eraser for Transparent Cutout) */}
-                <svg style={{ position: 'absolute', top: '-100px', left: '50px', transform: 'translateX(-50%)', width: '200px', height: '150px', mixBlendMode: 'destination-out', zIndex: '0' }} viewBox="0 0 200 150" preserveAspectRatio="none">
-                  <path d="M0,0 L200,0 C100,0 110,80 150,150 L50,150 C90,80 100,0 0,0 Z" fill="#000000" />
-                </svg>
+                {/* Connecting Flare / Drip Shape (With Grid Pattern) */}
+                <div className="droplet-bg" style={{ position: 'absolute', top: '-100px', left: '50px', transform: 'translateX(-50%)', width: '200px', height: '150px', clipPath: 'path("M0,0 L200,0 C100,0 110,80 150,150 L50,150 C90,80 100,0 0,0 Z")', zIndex: '0' }}></div>
                 {/* Logo Circle */}
                 <div style={{ position: 'relative', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.2))', zIndex: '1' }}>
-                  <div style={{
-                    background: '#ffffff',
+                  <div className="droplet-bg" style={{
                     borderRadius: '50%',
                     padding: '8px',
                     display: 'flex',
