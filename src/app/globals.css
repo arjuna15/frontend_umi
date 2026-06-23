@@ -642,10 +642,10 @@ header.top-transparent .glass {
   letter-spacing: 1px;
 }
 .hero-overlay-red {
-  background: linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.7) 45%, rgba(15, 23, 42, 0.1) 85%, transparent 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(15, 23, 42, 0.95) 15%, rgba(15, 23, 42, 0.6) 50%, rgba(15, 23, 42, 0.1) 85%, transparent 100%);
 }
 .hero-overlay-blue {
-  background: linear-gradient(to right, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.7) 45%, rgba(15, 23, 42, 0.1) 85%, transparent 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(15, 23, 42, 0.95) 15%, rgba(15, 23, 42, 0.6) 50%, rgba(15, 23, 42, 0.1) 85%, transparent 100%);
 }
 
 .hero-slide {
@@ -1019,10 +1019,10 @@ header.top-transparent .glass {
 /* Responsive */
 @media (max-width: 992px) {
   .hero-overlay-red {
-    background: linear-gradient(to top, rgba(15, 23, 42, 1) 0%, rgba(15, 23, 42, 0.9) 55%, rgba(15, 23, 42, 0.3) 85%, transparent 100%) !important;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(15, 23, 42, 0.95) 20%, rgba(15, 23, 42, 0.8) 55%, rgba(15, 23, 42, 0.3) 85%, transparent 100%) !important;
   }
   .hero-overlay-blue {
-    background: linear-gradient(to top, rgba(15, 23, 42, 1) 0%, rgba(15, 23, 42, 0.9) 55%, rgba(15, 23, 42, 0.3) 85%, transparent 100%) !important;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(15, 23, 42, 0.95) 20%, rgba(15, 23, 42, 0.8) 55%, rgba(15, 23, 42, 0.3) 85%, transparent 100%) !important;
   }
   .hero-slide {
     align-items: flex-end !important;
@@ -1526,22 +1526,7 @@ header.top-transparent .lang-switch .lang-btn:not(.active) {
   text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Add slight shadow for better readability */
 }
 
-/* User request: White spotlight on top-left for the logo, keeping original colors */
-header.top-transparent .logo {
-  position: relative;
-}
-header.top-transparent .logo::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 30px;
-  transform: translate(-50%, -50%);
-  width: 130px;
-  height: 130px;
-  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 65%);
-  z-index: -1;
-  pointer-events: none;
-}
+/* User request: Diagonal gradient makes logo legible so we just apply a subtle drop shadow to it */
 header.top-transparent .logo img {
   height: 60px;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); /* subtle shadow for depth */
