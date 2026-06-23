@@ -478,10 +478,7 @@ header.top-transparent .glass {
     transform: translateX(-50%) translateY(15px) !important;
     justify-content: center;
   }
-  .mega-menu.grid-3 {
-    width: calc(100% - 48px) !important; /* Stretch to full width for 3-column menus */
-    max-width: 1200px;
-  }
+  /* All mega menus will now use max-content width from the base .mega-menu class */
   .nav-item:hover .mega-menu {
     transform: translateX(-50%) translateY(0) !important;
   }
