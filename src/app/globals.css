@@ -1625,63 +1625,146 @@ header.top-transparent .nav-link.active::after {
   }
 }
 
-/* Premium Footer Redesign */
-.premium-footer {
-  background: linear-gradient(145deg, #0c0202 0%, #1a0505 100%);
+/* TravHub Style Footer */
+.travhub-footer {
+  background: #0d0606; /* Very dark red/black for UMIBA */
   position: relative;
+  overflow: hidden;
+  margin-top: 0;
+  padding-bottom: 0;
 }
-.premium-footer::before {
+.travhub-footer::before {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 10%;
-  width: 60vw;
-  height: 60vh;
-  background: radial-gradient(circle, rgba(185, 28, 28, 0.15) 0%, transparent 70%);
+  top: 0;
+  right: 10%;
+  width: 400px;
+  height: 400px;
+  background-image: url('/erasebg-transformed.png'); /* Watermark Logo */
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.03;
   pointer-events: none;
-  z-index: 0;
+  transform: rotate(-15deg);
 }
-.footer-glass-box {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 32px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+
+/* Wavy Shape Divider */
+.footer-shape-divider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: translateY(-1px); /* Prevent subpixel gap */
 }
-.footer-glass-box:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(185,28,28,0.2);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.footer-shape-divider svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 60px;
 }
-.footer-link-modern {
+.footer-shape-divider .shape-fill {
+  fill: #f8fafc; /* Match body background */
+}
+
+/* TravHub Links & Bullets */
+.travhub-link {
   color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
   padding: 4px 0;
 }
-.footer-link-modern i {
-  color: rgba(255, 255, 255, 0.3);
+.travhub-bullet {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--umiba-red); /* Red bullet */
+  border-radius: 50%;
+  margin-right: 12px;
+  transition: all 0.3s ease;
+}
+.travhub-link:hover {
+  color: #ffffff;
+  transform: translateX(5px);
+}
+.travhub-link:hover .travhub-bullet {
+  transform: scale(1.5);
+  box-shadow: 0 0 8px var(--umiba-red);
+}
+
+/* TravHub Social Icons */
+.travhub-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.6);
   font-size: 1.1rem;
   transition: all 0.3s ease;
 }
-.footer-link-modern:hover {
+.travhub-social:hover {
+  background: var(--umiba-red);
   color: #ffffff;
-  transform: translateX(6px);
-  text-shadow: 0 0 10px rgba(255,255,255,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(185, 28, 28, 0.4);
 }
-.footer-link-modern:hover i {
+
+/* Newsletter Input */
+.travhub-newsletter-wrap {
+  display: flex;
+  background: rgba(255,255,255,0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.travhub-newsletter-wrap input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px 16px;
+  color: white;
+  font-size: 0.9rem;
+  outline: none;
+}
+.travhub-newsletter-wrap input::placeholder {
+  color: rgba(255,255,255,0.4);
+}
+.travhub-newsletter-wrap button {
+  background: var(--umiba-red);
+  color: white;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.travhub-newsletter-wrap button:hover {
+  background: #991b1b;
+}
+
+/* Stats */
+.travhub-stat-number {
   color: var(--umiba-red);
-  transform: scale(1.1);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 2px;
 }
-.footer-bottom-divider {
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding-top: 24px;
-  margin-top: 40px;
+.travhub-stat-label {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+}
+
+/* Bottom Bar */
+.travhub-bottom-bar {
+  background: #060202; /* Darker than footer bg */
+  padding: 24px 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
 }
