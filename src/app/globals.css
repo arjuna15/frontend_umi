@@ -353,7 +353,7 @@ header {
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);
-  max-width: 1400px;
+  max-width: 1200px;
   height: 72px;
   z-index: 1000;
   transition: all var(--duration) var(--ease);
@@ -401,7 +401,7 @@ body.dark-mode header.scrolled .glass {
 header.scrolled {
   top: 16px; /* Slides up smoothly since top-banner scrolls away */
   width: calc(100% - 32px);
-  max-width: 1400px; /* Needs to be wide enough to fit all nav items and logo */
+  max-width: 1200px; /* Needs to be wide enough to fit all nav items and logo */
 }
 
 header.top-transparent {

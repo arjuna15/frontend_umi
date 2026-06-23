@@ -118,60 +118,38 @@ export default function Header() {
         <div className="mega-menu grid-3 align-center" style={{ gap: '24px' }}>
           {/* Rector Featured Card */}
           <div style={{
-            position: 'relative',
+            background: 'linear-gradient(to bottom right, rgba(185, 28, 28, 0.02), rgba(185, 28, 28, 0.08))',
             borderRadius: 'var(--radius-lg)',
-            overflow: 'hidden',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'flex-end',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center',
             minHeight: '280px',
             padding: '24px',
-            boxShadow: '0 10px 25px rgba(185, 28, 28, 0.25)',
-            marginTop: '-8px', /* Adjust alignment slightly */
+            border: '1px solid rgba(185, 28, 28, 0.1)',
+            marginTop: '-8px',
             marginBottom: '-8px'
           }}>
-            {/* Background Image */}
-            <div style={{
-              position: 'absolute',
-              top: 0, left: 0, right: 0, bottom: 0,
-              backgroundImage: 'url("https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg")',
-              backgroundSize: 'cover',
-              backgroundPosition: 'top center',
-              zIndex: 0,
-              transition: 'transform 0.5s ease'
-            }} className="mega-card-bg"></div>
-            {/* Gradient Overlay */}
-            <div style={{
-              position: 'absolute',
-              top: 0, left: 0, right: 0, bottom: 0,
-              background: 'linear-gradient(to top, rgba(135, 15, 15, 0.95) 0%, rgba(185, 28, 28, 0.7) 40%, rgba(185, 28, 28, 0) 100%)',
-              zIndex: 1
-            }}></div>
-            {/* Content */}
-            <div style={{ position: 'relative', zIndex: 2, color: 'white', textAlign: 'left' }}>
-              <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: '800', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>Prof. Dr. Rektor UMIBA, M.Si.</h4>
-              <p style={{ margin: '0 0 16px 0', fontSize: '0.8rem', opacity: 0.9, fontWeight: '500' }}>Rektor Universitas Mitra Bangsa</p>
-              <a href="/profil#sambutan" style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                background: '#FBBF24', /* Yellow / Amber */
-                color: '#7F1D1D', /* Dark Red */
-                padding: '6px 16px',
-                borderRadius: '20px',
-                fontSize: '0.8rem',
-                fontWeight: '800',
-                textDecoration: 'none',
-                boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
-                transition: 'all 0.2s ease'
-              }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.05)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
-                Sambutan <i className="ph-bold ph-caret-right"></i>
-              </a>
-            </div>
-            {/* Hover Effect using a style tag specifically for this card */}
-            <style jsx>{`
-              div:hover > .mega-card-bg { transform: scale(1.05); }
-            `}</style>
+            <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', marginBottom: '16px', border: '3px solid white', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }} />
+            <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: '800', color: 'var(--umiba-red)' }}>Prof. Dr. Rektor UMIBA, M.Si.</h4>
+            <p style={{ margin: '0 0 16px 0', fontSize: '0.8rem', color: 'var(--color-text-muted)', fontWeight: '500' }}>Rektor Universitas Mitra Bangsa</p>
+            <a href="/profil#sambutan" style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: 'var(--umiba-red)',
+              color: 'white',
+              padding: '8px 20px',
+              borderRadius: '30px',
+              fontSize: '0.8rem',
+              fontWeight: '700',
+              textDecoration: 'none',
+              boxShadow: '0 4px 10px rgba(185, 28, 28, 0.25)',
+              transition: 'all 0.2s ease'
+            }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.05)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
+              Sambutan <i className="ph-bold ph-caret-right"></i>
+            </a>
           </div>
 
           <div style={{ padding: '8px 0' }}>
@@ -228,7 +206,12 @@ export default function Header() {
       <li className="nav-item"><a href="/mutu" className={`nav-link ${pathname?.startsWith("/mutu") ? "active" : ""}`}>{t("nav.mutu")}</a></li>
       <li className="nav-item">
         <a href="#" className="nav-link" onClick={handleDropdownClick}>{t("nav.portal")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
-        <div className="mega-menu grid-2 align-right">
+        <div className="mega-menu grid-3 align-right" style={{ gap: '24px' }}>
+          {/* UMIBA Featured Column */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px', background: 'var(--umiba-red-alpha)', borderRadius: 'var(--radius-md)' }}>
+            <img src="/erasebg-transformed.png" alt="UMIBA Logo" style={{ width: '90px', marginBottom: '16px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))' }} onerror="this.src='https://via.placeholder.com/90x90/B91C1C/fff?text=U'"/>
+            <h4 style={{ color: 'var(--umiba-red)', fontSize: '0.9rem', fontWeight: 'bold', margin: '0', textAlign: 'center', textTransform: 'uppercase' }}>Portal Sivitas<br/>Akademika</h4>
+          </div>
           <div>
             <h4 style={{ fontWeight: 'bold', fontSize: '0.8rem', color: 'var(--umiba-red)', marginBottom: '12px', textTransform: 'uppercase', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '8px' }}>{t("nav.sistem_akademik")}</h4>
             <a href="https://umiba.siakadcloud.com/" target="_blank" className="dropdown-link" style={{ padding: '8px 12px', fontSize: '0.9rem' }}><i className="ph-bold ph-student" style={{ marginRight: '8px' }}></i>{t("nav.siakad_student")}</a>
@@ -243,7 +226,12 @@ export default function Header() {
       </li>
       <li className="nav-item">
         <a href="/informasi" className={`nav-link ${pathname?.startsWith("/informasi") || pathname?.startsWith("/berita") || pathname?.startsWith("/dokumen") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.informasi")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
-        <div className="mega-menu grid-2 align-right">
+        <div className="mega-menu grid-3 align-right" style={{ gap: '24px' }}>
+          {/* UMIBA Featured Column */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px', background: 'var(--umiba-red-alpha)', borderRadius: 'var(--radius-md)' }}>
+            <img src="/erasebg-transformed.png" alt="UMIBA Logo" style={{ width: '90px', marginBottom: '16px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))' }} onerror="this.src='https://via.placeholder.com/90x90/B91C1C/fff?text=U'"/>
+            <h4 style={{ color: 'var(--umiba-red)', fontSize: '0.9rem', fontWeight: 'bold', margin: '0', textAlign: 'center', textTransform: 'uppercase' }}>Pusat Informasi<br/>& Layanan</h4>
+          </div>
           <div>
             <h4 style={{ fontWeight: 'bold', fontSize: '0.8rem', color: 'var(--umiba-red)', marginBottom: '12px', textTransform: 'uppercase', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '8px' }}>{t("nav.pendaftaran_biaya")}</h4>
             <a href="/informasi#biaya" className="dropdown-link" style={{ padding: '8px 12px', fontSize: '0.9rem' }}><i className="ph-bold ph-wallet" style={{ marginRight: '8px' }}></i>{t("nav.biaya_pendidikan")}</a>
