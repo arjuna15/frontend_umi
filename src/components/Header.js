@@ -41,15 +41,11 @@ export default function Header() {
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center', 
-        position: 'fixed',
-        top: 0,
-        left: 0,
+        position: 'relative',
         width: '100%',
         zIndex: 1002,
         fontFamily: 'var(--font-primary)',
-        borderBottom: '1px solid rgba(255,255,255,0.1)',
-        transform: isScrolled ? 'translateY(-100%)' : 'translateY(0)',
-        transition: 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)'
+        borderBottom: '1px solid rgba(255,255,255,0.1)'
       }}>
         {/* Kiri: Info PMB */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
