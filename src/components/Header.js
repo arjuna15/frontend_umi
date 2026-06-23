@@ -115,8 +115,66 @@ export default function Header() {
       <li className="nav-item"><a href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>{t("nav.home")}</a></li>
       <li className="nav-item">
         <a href="/profil" className={`nav-link ${pathname?.startsWith("/profil") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.profil")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
-        <div className="mega-menu grid-2 align-center">
-          <div>
+        <div className="mega-menu grid-3 align-center" style={{ gap: '24px' }}>
+          {/* Rector Featured Card */}
+          <div style={{
+            position: 'relative',
+            borderRadius: 'var(--radius-lg)',
+            overflow: 'hidden',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            minHeight: '280px',
+            padding: '24px',
+            boxShadow: '0 10px 25px rgba(185, 28, 28, 0.25)',
+            marginTop: '-8px', /* Adjust alignment slightly */
+            marginBottom: '-8px'
+          }}>
+            {/* Background Image */}
+            <div style={{
+              position: 'absolute',
+              top: 0, left: 0, right: 0, bottom: 0,
+              backgroundImage: 'url("https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'top center',
+              zIndex: 0,
+              transition: 'transform 0.5s ease'
+            }} className="mega-card-bg"></div>
+            {/* Gradient Overlay */}
+            <div style={{
+              position: 'absolute',
+              top: 0, left: 0, right: 0, bottom: 0,
+              background: 'linear-gradient(to top, rgba(135, 15, 15, 0.95) 0%, rgba(185, 28, 28, 0.7) 40%, rgba(185, 28, 28, 0) 100%)',
+              zIndex: 1
+            }}></div>
+            {/* Content */}
+            <div style={{ position: 'relative', zIndex: 2, color: 'white', textAlign: 'left' }}>
+              <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: '800', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>Prof. Dr. Rektor UMIBA, M.Si.</h4>
+              <p style={{ margin: '0 0 16px 0', fontSize: '0.8rem', opacity: 0.9, fontWeight: '500' }}>Rektor Universitas Mitra Bangsa</p>
+              <a href="/profil#sambutan" style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: '#FBBF24', /* Yellow / Amber */
+                color: '#7F1D1D', /* Dark Red */
+                padding: '6px 16px',
+                borderRadius: '20px',
+                fontSize: '0.8rem',
+                fontWeight: '800',
+                textDecoration: 'none',
+                boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
+                transition: 'all 0.2s ease'
+              }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.05)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
+                Sambutan <i className="ph-bold ph-caret-right"></i>
+              </a>
+            </div>
+            {/* Hover Effect using a style tag specifically for this card */}
+            <style jsx>{`
+              div:hover > .mega-card-bg { transform: scale(1.05); }
+            `}</style>
+          </div>
+
+          <div style={{ padding: '8px 0' }}>
             <h4 style={{ fontWeight: 'bold', fontSize: '0.8rem', color: 'var(--umiba-red)', marginBottom: '12px', textTransform: 'uppercase', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '8px' }}>{t("nav.identitas_kampus")}</h4>
             <a href="/profil#sejarah" className="dropdown-link" style={{ padding: '8px 12px', fontSize: '0.9rem' }}><i className="ph-bold ph-clock-counter-clockwise" style={{ marginRight: '8px' }}></i>{t("nav.sejarah")}</a>
             <a href="/profil#visi-misi" className="dropdown-link" style={{ padding: '8px 12px', fontSize: '0.9rem' }}><i className="ph-bold ph-target" style={{ marginRight: '8px' }}></i>{t("nav.visi_misi")}</a>
