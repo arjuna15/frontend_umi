@@ -5,7 +5,7 @@ export default function Footer() {
   const { t, lang } = useLanguage();
   return (
     <>
-      <footer className="travhub-footer" style={{ marginTop: 'var(--space-8)' }}>
+      <footer className="travhub-footer">
         
         {/* Wavy Shape Divider (TravHub style) */}
         <div className="footer-shape-divider">
