@@ -371,7 +371,7 @@ header .glass {
 .logo-text { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 800; color: var(--umiba-red-dark); }
 .nav-links { display: flex; gap: var(--space-3); list-style: none; margin: 0; padding: 0; }
 .nav-item { position: relative; }
-.nav-link { color: var(--color-text); font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: all 0.2s; padding: 8px 12px; border-radius: var(--radius-md); display: flex; align-items: center; gap: 4px; }
+.nav-link { position: relative; z-index: 200; color: var(--color-text); font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: all 0.2s; padding: 8px 12px; border-radius: var(--radius-md); display: flex; align-items: center; gap: 4px; }
 .nav-link:hover { color: var(--umiba-red); background: rgba(255, 255, 255, 0.5); }
 
 

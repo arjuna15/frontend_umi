@@ -132,8 +132,8 @@ export default function Header() {
             marginBottom: '-8px'
           }}>
             <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', marginBottom: '16px', border: '3px solid white', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }} />
-            <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: '800', color: 'var(--umiba-red)' }}>Prof. Dr. Rektor UMIBA, M.Si.</h4>
-            <p style={{ margin: '0 0 16px 0', fontSize: '0.8rem', color: 'var(--color-text-muted)', fontWeight: '500' }}>Rektor Universitas Mitra Bangsa</p>
+            <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: '800', color: 'var(--umiba-red)', whiteSpace: 'normal', wordWrap: 'break-word' }}>Prof. Dr. Rektor UMIBA, M.Si.</h4>
+            <p style={{ margin: '0 0 16px 0', fontSize: '0.8rem', color: 'var(--color-text-muted)', fontWeight: '500', whiteSpace: 'normal', wordWrap: 'break-word' }}>Rektor Universitas Mitra Bangsa</p>
             <a href="/profil#sambutan" style={{
               display: 'inline-flex',
               alignItems: 'center',
