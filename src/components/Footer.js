@@ -15,25 +15,19 @@ export default function Footer() {
                 <div style={{
                   background: '#ffffff',
                   borderRadius: '50%',
-                  padding: '6px',
+                  padding: '8px',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
                   boxShadow: '0 8px 24px rgba(0,0,0,0.2)'
                 }}>
-                  <img src="/erasebg-transformed.png" alt="Logo UMIBA" style={{ width: '42px', height: '42px', objectFit: 'contain' }} />
+                  <img src="/erasebg-transformed.png" alt="Logo UMIBA" style={{ width: '84px', height: '84px', objectFit: 'contain' }} />
                 </div>
-                <span style={{ color: 'white', fontSize: '1.5rem', fontWeight: '800', letterSpacing: '1px' }}>UMIBA</span>
+                <span style={{ color: 'white', fontSize: '1.8rem', fontWeight: '800', letterSpacing: '1px' }}>UMIBA</span>
               </a>
               <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', marginBottom: '32px', lineHeight: '1.8' }}>
                 {lang === "en" ? "Universitas Mitra Bangsa creates superior generations ready to face global challenges and the digital work world through high quality education." : "Universitas Mitra Bangsa mencetak generasi unggul yang siap menghadapi tantangan global dan dunia kerja digital melalui pendidikan berkualitas."}
               </p>
-              <div style={{ display: 'flex', gap: '12px' }}>
-                <a href="#" className="travhub-social" aria-label="Facebook"><i className="ph-fill ph-facebook-logo"></i></a>
-                <a href="#" className="travhub-social" aria-label="Twitter"><i className="ph-fill ph-twitter-logo"></i></a>
-                <a href="#" className="travhub-social" aria-label="LinkedIn"><i className="ph-fill ph-linkedin-logo"></i></a>
-                <a href="#" className="travhub-social" aria-label="Instagram"><i className="ph-fill ph-instagram-logo"></i></a>
-              </div>
             </div>
             
             {/* Kolom 2: Fakultas */}
@@ -78,6 +72,14 @@ export default function Footer() {
                   <div className="travhub-stat-number">"B"</div>
                   <div className="travhub-stat-label">{lang === "en" ? "Accreditation" : "Akreditasi Kampus"}</div>
                 </div>
+              </div>
+
+              {/* Social Icons moved here */}
+              <div style={{ display: 'flex', gap: '12px', marginTop: '24px' }}>
+                <a href="#" className="travhub-social" aria-label="Facebook"><i className="ph-fill ph-facebook-logo"></i></a>
+                <a href="#" className="travhub-social" aria-label="Twitter"><i className="ph-fill ph-twitter-logo"></i></a>
+                <a href="#" className="travhub-social" aria-label="LinkedIn"><i className="ph-fill ph-linkedin-logo"></i></a>
+                <a href="#" className="travhub-social" aria-label="Instagram"><i className="ph-fill ph-instagram-logo"></i></a>
               </div>
             </div>
 
