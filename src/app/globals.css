@@ -499,9 +499,13 @@ header.top-transparent .glass {
 .nav-item:hover .mega-menu.align-center {
   transform: translateX(-50%) translateY(0);
 }
-.mega-menu.grid-3 { grid-template-columns: repeat(3, minmax(280px, 1fr)); gap: var(--space-4); }
-.mega-menu.grid-2 { grid-template-columns: repeat(2, minmax(280px, 1fr)); gap: var(--space-4); }
-.mega-menu.grid-1 { grid-template-columns: repeat(1, minmax(280px, 1fr)); gap: var(--space-2); }
+.mega-menu.grid-3 { grid-template-columns: repeat(3, 280px); gap: var(--space-4); }
+.mega-menu.grid-2 { grid-template-columns: repeat(2, 280px); gap: var(--space-4); }
+.mega-menu.grid-1 { grid-template-columns: repeat(1, 280px); gap: var(--space-2); }
+
+/* Restore flexible columns for full-width menus so they can stretch to 1200px */
+.mega-menu.full-width.grid-3 { grid-template-columns: repeat(3, minmax(280px, 1fr)); }
+.mega-menu.full-width.grid-2 { grid-template-columns: repeat(2, minmax(280px, 1fr)); }
 
 .mega-menu-item {
   display: flex;
