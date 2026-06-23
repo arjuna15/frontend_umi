@@ -1526,10 +1526,9 @@ header.top-transparent .lang-switch .lang-btn:not(.active) {
   text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Add slight shadow for better readability */
 }
 
-/* User request: Diagonal gradient makes logo legible so we just apply a subtle drop shadow to it */
+/* User request: Radial gradient makes logo legible so we don't need any shadow */
 header.top-transparent .logo img {
   height: 60px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); /* subtle shadow for depth */
 }
 
 header.top-transparent .theme-toggle {
