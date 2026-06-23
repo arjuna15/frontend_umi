@@ -13,10 +13,19 @@ export default function Footer() {
             <div>
               <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '16px', marginBottom: '24px', textDecoration: 'none', position: 'relative' }}>
                 {/* Connecting Flare / Drip Shape (With Grid Pattern) */}
-                <div className="droplet-bg" style={{ position: 'absolute', top: '-100px', left: '50px', transform: 'translateX(-50%)', width: '200px', height: '150px', clipPath: 'path("M0,0 L200,0 C100,0 110,80 150,150 L50,150 C90,80 100,0 0,0 Z")', zIndex: '0' }}></div>
+                <svg style={{ position: 'absolute', top: '-100px', left: '50px', transform: 'translateX(-50%)', width: '200px', height: '150px', zIndex: '0', pointerEvents: 'none', color: 'var(--color-text)' }} viewBox="0 0 200 150" preserveAspectRatio="none">
+                  <defs>
+                    <pattern id="dripGrid" width="30" height="30" patternUnits="userSpaceOnUse" patternTransform="translate(15, 0)">
+                      <rect width="30" height="30" fill="var(--color-bg)" />
+                      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.05" />
+                    </pattern>
+                  </defs>
+                  <path d="M0,0 L200,0 C100,0 110,80 150,150 L50,150 C90,80 100,0 0,0 Z" fill="url(#dripGrid)" />
+                </svg>
                 {/* Logo Circle */}
                 <div style={{ position: 'relative', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.2))', zIndex: '1' }}>
-                  <div className="droplet-bg" style={{
+                  <div style={{
+                    background: 'var(--color-bg)',
                     borderRadius: '50%',
                     padding: '8px',
                     display: 'flex',
