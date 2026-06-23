@@ -649,8 +649,8 @@ header.top-transparent .glass {
 }
 
 .hero-slide {
-  position: absolute;
-  inset: 0; /* Remove inset -20px since we are not zooming anymore */
+  position: relative;
+  grid-area: 1 / 1;
   background-size: cover;
   background-position: center;
   opacity: 0;
@@ -1610,17 +1610,10 @@ header.top-transparent .nav-link.active::after {
 .hero-content-padding {
   padding: 0 10vw !important;
   align-items: center !important;
-  overflow-y: hidden;
 }
 @media (max-width: 992px) {
   .hero-content-padding {
     padding: 120px 6vw 80px 6vw !important;
     align-items: flex-start !important;
-    overflow-y: auto !important;
-  }
-  /* Hide scrollbar for clean UI but keep functionality */
-  .hero-content-padding::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
   }
 }
