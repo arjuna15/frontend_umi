@@ -13,9 +13,9 @@ export default function Footer() {
             <div>
               <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '16px', marginBottom: '24px', textDecoration: 'none', position: 'relative' }}>
                 <div style={{ position: 'relative', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.2))' }}>
-                  {/* Connecting Flare / Drip Shape */}
-                  <svg style={{ position: 'absolute', bottom: '50%', left: '50%', transform: 'translateX(-50%)', width: '240px', height: '150px', zIndex: '-1' }} viewBox="0 0 240 150" preserveAspectRatio="none">
-                    <path d="M0,0 L240,0 C240,60 170,100 170,150 L70,150 C70,100 0,60 0,0 Z" fill="#ffffff" />
+                  {/* Connecting Flare / Drip Shape (Hourglass / Gooey Effect) */}
+                  <svg style={{ position: 'absolute', bottom: '50%', left: '50%', transform: 'translateX(-50%)', width: '200px', height: '150px', zIndex: '-1' }} viewBox="0 0 200 150" preserveAspectRatio="none">
+                    <path d="M0,0 L200,0 C100,0 110,80 150,150 L50,150 C90,80 100,0 0,0 Z" fill="#ffffff" />
                   </svg>
                   {/* Logo Circle */}
                   <div style={{
