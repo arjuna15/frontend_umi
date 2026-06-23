@@ -399,7 +399,7 @@ body.dark-mode header.scrolled .glass {
 }
 
 header.scrolled {
-  top: 40px; /* Sticks right under the top banner */
+  top: 16px; /* Slides up smoothly since top-banner scrolls away */
   width: calc(100% - 32px);
   max-width: 1200px; /* Needs to be wide enough to fit all nav items and logo */
 }
@@ -1037,7 +1037,7 @@ header.top-transparent .glass {
     --space-8: 64px;
   }
   header { top: 48px; width: calc(100% - 16px); }
-  header.scrolled { top: 40px; }
+  header.scrolled { top: 16px; }
   header .glass { padding: 0 var(--space-4); }
   .menu-toggle { display: flex; }
   .d-none-mobile { display: none !important; }

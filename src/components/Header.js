@@ -34,37 +34,38 @@ export default function Header() {
   return (
     <>
       <div className="top-banner" style={{
-        background: '#FDE047', 
-        color: '#1E3A8A', 
+        background: 'linear-gradient(to right, #881122, #B91C1C)', 
+        color: '#ffffff', 
         padding: '8px 24px', 
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center', 
         fontSize: '0.85rem', 
-        fontWeight: 'bold',
-        position: 'fixed',
+        fontWeight: '500',
+        position: 'absolute',
         top: 0,
         left: 0,
         width: '100%',
         zIndex: 1001,
         fontFamily: 'var(--font-primary)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-           <i className="ph-fill ph-megaphone" style={{ fontSize: '1.2rem' }}></i>
-           <a href="https://pmb.umiba.ac.id/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>Pendaftaran Mahasiswa Baru 2026/2027</a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+           <i className="ph-fill ph-megaphone" style={{ fontSize: '1.2rem', color: '#FDE047' }}></i>
+           <a href="https://pmb.umiba.ac.id/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none', letterSpacing: '0.5px' }}>Pendaftaran Mahasiswa Baru 2026/2027</a>
+           <span style={{ background: '#FDE047', color: '#881122', padding: '2px 8px', borderRadius: '12px', fontSize: '0.7rem', fontWeight: 'bold' }}>BUKA</span>
         </div>
         <div className="top-banner-right d-none-mobile" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-           <div className="search-bar" style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.7)', borderRadius: '20px', padding: '4px 12px' }}>
-             <input type="text" placeholder="Cari..." style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '120px', color: '#1E3A8A' }} />
-             <i className="ph-bold ph-magnifying-glass"></i>
+           <div className="search-bar" style={{ display: 'flex', alignItems: 'center', background: 'rgba(0,0,0,0.2)', borderRadius: '20px', padding: '4px 12px', border: '1px solid rgba(255,255,255,0.1)' }}>
+             <input type="text" placeholder="Cari..." style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '120px', color: '#ffffff' }} />
+             <i className="ph-bold ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.7)' }}></i>
            </div>
-           <div className="socials" style={{ display: 'flex', gap: '12px', fontSize: '1.2rem' }}>
-             <a href="#" style={{ color: 'inherit' }}><i className="ph-bold ph-youtube-logo"></i></a>
-             <a href="#" style={{ color: 'inherit' }}><i className="ph-bold ph-instagram-logo"></i></a>
-             <a href="#" style={{ color: 'inherit' }}><i className="ph-bold ph-linkedin-logo"></i></a>
+           <div className="socials" style={{ display: 'flex', gap: '14px', fontSize: '1.2rem' }}>
+             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='rgba(255,255,255,0.8)'}><i className="ph-fill ph-youtube-logo"></i></a>
+             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='rgba(255,255,255,0.8)'}><i className="ph-fill ph-instagram-logo"></i></a>
+             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='rgba(255,255,255,0.8)'}><i className="ph-fill ph-linkedin-logo"></i></a>
            </div>
-           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-             <i className="ph-fill ph-phone-call" style={{ fontSize: '1.2rem' }}></i> <span>0811 870 114</span>
+           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 'bold' }}>
+             <i className="ph-fill ph-phone-call" style={{ fontSize: '1.2rem', color: '#FDE047' }}></i> <span>0811 870 114</span>
            </div>
         </div>
       </div>
