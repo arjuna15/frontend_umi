@@ -642,10 +642,10 @@ header.top-transparent .glass {
   letter-spacing: 1px;
 }
 .hero-overlay-red {
-  background: linear-gradient(to right, rgba(136, 17, 34, 0.95) 0%, rgba(136, 17, 34, 0.8) 45%, rgba(136, 17, 34, 0.2) 75%, transparent 100%);
+  background: transparent;
 }
 .hero-overlay-blue {
-  background: linear-gradient(to right, rgba(30, 58, 138, 0.95) 0%, rgba(30, 58, 138, 0.8) 45%, rgba(30, 58, 138, 0.2) 75%, transparent 100%);
+  background: transparent;
 }
 
 .hero-slide {
@@ -1019,10 +1019,10 @@ header.top-transparent .glass {
 /* Responsive */
 @media (max-width: 992px) {
   .hero-overlay-red {
-    background: linear-gradient(to top, rgba(136, 17, 34, 1) 0%, rgba(136, 17, 34, 0.9) 60%, rgba(136, 17, 34, 0.2) 90%, transparent 100%) !important;
+    background: transparent !important;
   }
   .hero-overlay-blue {
-    background: linear-gradient(to top, rgba(30, 58, 138, 1) 0%, rgba(30, 58, 138, 0.9) 60%, rgba(30, 58, 138, 0.2) 90%, transparent 100%) !important;
+    background: transparent !important;
   }
   .hero-slide {
     align-items: flex-end !important;
