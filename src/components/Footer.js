@@ -11,19 +11,27 @@ export default function Footer() {
             
             {/* Kolom 1: Identitas & Logo */}
             <div>
-              <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '16px', marginBottom: '24px', textDecoration: 'none' }}>
-                <div style={{
-                  background: '#ffffff',
-                  borderRadius: '50%',
-                  padding: '8px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.2)'
-                }}>
-                  <img src="/erasebg-transformed.png" alt="Logo UMIBA" style={{ width: '84px', height: '84px', objectFit: 'contain' }} />
+              <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '16px', marginBottom: '24px', textDecoration: 'none', position: 'relative' }}>
+                <div style={{ position: 'relative', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.2))' }}>
+                  {/* Connecting Flare / Drip Shape */}
+                  <svg style={{ position: 'absolute', bottom: '50%', left: '50%', transform: 'translateX(-50%)', width: '240px', height: '150px', zIndex: '-1' }} viewBox="0 0 240 150" preserveAspectRatio="none">
+                    <path d="M0,0 L240,0 C240,60 170,100 170,150 L70,150 C70,100 0,60 0,0 Z" fill="#ffffff" />
+                  </svg>
+                  {/* Logo Circle */}
+                  <div style={{
+                    background: '#ffffff',
+                    borderRadius: '50%',
+                    padding: '8px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: '100px',
+                    height: '100px'
+                  }}>
+                    <img src="/erasebg-transformed.png" alt="Logo UMIBA" style={{ width: '84px', height: '84px', objectFit: 'contain' }} />
+                  </div>
                 </div>
-                <span style={{ color: 'white', fontSize: '1.8rem', fontWeight: '800', letterSpacing: '1px' }}>UMIBA</span>
+                <span style={{ color: 'white', fontSize: '1.8rem', fontWeight: '800', letterSpacing: '1px', zIndex: '1' }}>UMIBA</span>
               </a>
               <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', marginBottom: '32px', lineHeight: '1.8' }}>
                 {lang === "en" ? "Universitas Mitra Bangsa creates superior generations ready to face global challenges and the digital work world through high quality education." : "Universitas Mitra Bangsa mencetak generasi unggul yang siap menghadapi tantangan global dan dunia kerja digital melalui pendidikan berkualitas."}

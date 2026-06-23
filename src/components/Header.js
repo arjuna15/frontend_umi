@@ -109,13 +109,13 @@ export default function Header() {
       >
   <div className="glass">
     <a href="#" className="logo" aria-label="UMIBA Home">
-      <img src="/erasebg-transformed.png" alt="Logo UMIBA" onerror="this.onerror=null;this.src='https://via.placeholder.com/40x40/B91C1C/fff?text=U'"/>
+      <img src="/erasebg-transformed.png" alt="Logo UMIBA" onError={(e)=>{e.target.onerror=null;e.target.src='https://via.placeholder.com/40x40/B91C1C/fff?text=U'}}/>
     </a>
     <ul className={menuOpen ? "nav-links active" : "nav-links"}>
       <li className="nav-item"><a href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>{t("nav.home")}</a></li>
       <li className="nav-item">
         <a href="/profil" className={`nav-link ${pathname?.startsWith("/profil") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.profil")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
-        <div className="mega-menu grid-3 align-center" style={{ gap: '24px' }}>
+        <div className="mega-menu profile-mega grid-3 align-center" style={{ gap: '32px' }}>
           {/* Rector Featured Card */}
           <div style={{
             background: 'linear-gradient(to bottom right, rgba(185, 28, 28, 0.02), rgba(185, 28, 28, 0.08))',
@@ -132,7 +132,7 @@ export default function Header() {
             marginBottom: '-8px'
           }}>
             <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', marginBottom: '16px', border: '3px solid white', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }} />
-            <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: '800', color: 'var(--umiba-red)', whiteSpace: 'normal', wordWrap: 'break-word' }}>Prof. Dr. Rektor UMIBA, M.Si.</h4>
+            <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: '800', color: 'var(--umiba-red)', whiteSpace: 'normal', wordWrap: 'break-word' }}>Sri Wahyuningsih, SE., MM</h4>
             <p style={{ margin: '0 0 16px 0', fontSize: '0.8rem', color: 'var(--color-text-muted)', fontWeight: '500', whiteSpace: 'normal', wordWrap: 'break-word' }}>Rektor Universitas Mitra Bangsa</p>
             <a href="/profil#sambutan" style={{
               display: 'inline-flex',
@@ -206,10 +206,10 @@ export default function Header() {
       <li className="nav-item"><a href="/mutu" className={`nav-link ${pathname?.startsWith("/mutu") ? "active" : ""}`}>{t("nav.mutu")}</a></li>
       <li className="nav-item">
         <a href="#" className="nav-link" onClick={handleDropdownClick}>{t("nav.portal")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
-        <div className="mega-menu grid-3 align-right" style={{ gap: '24px' }}>
+        <div className="mega-menu portal-mega grid-3 align-right" style={{ gap: '24px' }}>
           {/* UMIBA Featured Column */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px', background: 'var(--umiba-red-alpha)', borderRadius: 'var(--radius-md)' }}>
-            <img src="/erasebg-transformed.png" alt="UMIBA Logo" style={{ width: '90px', marginBottom: '16px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))' }} onerror="this.src='https://via.placeholder.com/90x90/B91C1C/fff?text=U'"/>
+            <img src="/erasebg-transformed.png" alt="UMIBA Logo" style={{ width: '90px', marginBottom: '16px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))' }} onError={(e)=>{e.target.src='https://via.placeholder.com/90x90/B91C1C/fff?text=U'}}/>
             <h4 style={{ color: 'var(--umiba-red)', fontSize: '0.9rem', fontWeight: 'bold', margin: '0', textAlign: 'center', textTransform: 'uppercase' }}>Portal Sivitas<br/>Akademika</h4>
           </div>
           <div>
@@ -226,10 +226,10 @@ export default function Header() {
       </li>
       <li className="nav-item">
         <a href="/informasi" className={`nav-link ${pathname?.startsWith("/informasi") || pathname?.startsWith("/berita") || pathname?.startsWith("/dokumen") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.informasi")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
-        <div className="mega-menu grid-3 align-right" style={{ gap: '24px' }}>
+        <div className="mega-menu info-mega grid-3 align-right" style={{ gap: '24px' }}>
           {/* UMIBA Featured Column */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px', background: 'var(--umiba-red-alpha)', borderRadius: 'var(--radius-md)' }}>
-            <img src="/erasebg-transformed.png" alt="UMIBA Logo" style={{ width: '90px', marginBottom: '16px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))' }} onerror="this.src='https://via.placeholder.com/90x90/B91C1C/fff?text=U'"/>
+            <img src="/erasebg-transformed.png" alt="UMIBA Logo" style={{ width: '90px', marginBottom: '16px', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.1))' }} onError={(e)=>{e.target.src='https://via.placeholder.com/90x90/B91C1C/fff?text=U'}}/>
             <h4 style={{ color: 'var(--umiba-red)', fontSize: '0.9rem', fontWeight: 'bold', margin: '0', textAlign: 'center', textTransform: 'uppercase' }}>Pusat Informasi<br/>& Layanan</h4>
           </div>
           <div>
