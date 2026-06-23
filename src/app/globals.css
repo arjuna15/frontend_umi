@@ -1526,9 +1526,10 @@ header.top-transparent .lang-switch .lang-btn:not(.active) {
   text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Add slight shadow for better readability */
 }
 
-/* User request: Radial gradient makes logo legible so we don't need any shadow */
+/* User request: Radial gradient makes logo legible, and we boost brightness/saturation slightly to make the red pop */
 header.top-transparent .logo img {
   height: 60px;
+  filter: brightness(1.15) saturate(1.25);
 }
 
 header.top-transparent .theme-toggle {
