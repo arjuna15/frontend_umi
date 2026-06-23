@@ -1632,6 +1632,30 @@ header.top-transparent .nav-link.active::after {
   overflow: hidden;
   margin-top: 0;
   padding-bottom: 0;
+  -webkit-mask-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='black'/%3E%3C/svg%3E"),
+    linear-gradient(black, black);
+  -webkit-mask-size: 
+    100% 60px,
+    100% calc(100% - 59px);
+  -webkit-mask-position: 
+    top left,
+    bottom left;
+  -webkit-mask-repeat: 
+    no-repeat,
+    no-repeat;
+  mask-image: 
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='black'/%3E%3C/svg%3E"),
+    linear-gradient(black, black);
+  mask-size: 
+    100% 60px,
+    100% calc(100% - 59px);
+  mask-position: 
+    top left,
+    bottom left;
+  mask-repeat: 
+    no-repeat,
+    no-repeat;
 }
 .travhub-footer::before {
   content: '';
@@ -1647,26 +1671,6 @@ header.top-transparent .nav-link.active::after {
   opacity: 0.08; /* Perfect balance between subtle and visible */
   pointer-events: none;
   filter: invert(1); /* Make the black SVG white */
-}
-
-/* Wavy Shape Divider */
-.footer-shape-divider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  transform: translateY(-1px); /* Prevent subpixel gap */
-}
-.footer-shape-divider svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 60px;
-}
-.footer-shape-divider .shape-fill {
-  fill: #f8fafc; /* Match body background */
 }
 
 /* TravHub Links & Bullets */
