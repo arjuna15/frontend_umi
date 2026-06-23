@@ -457,16 +457,20 @@ header.top-transparent .glass {
     position: relative;
   }
   .mega-menu {
-    left: 24px !important;
-    right: 24px !important;
-    margin: 0 auto;
-    width: calc(100% - 48px) !important;
-    max-width: 1200px;
-    transform: translateY(15px) !important;
+    left: 50% !important;
+    right: auto !important;
+    margin: 0;
+    width: max-content !important; /* Shrink to fit content for 1 or 2 columns */
+    max-width: calc(100% - 48px);
+    transform: translateX(-50%) translateY(15px) !important;
     justify-content: center;
   }
+  .mega-menu.grid-3 {
+    width: calc(100% - 48px) !important; /* Stretch to full width for 3-column menus */
+    max-width: 1200px;
+  }
   .nav-item:hover .mega-menu {
-    transform: translateY(0) !important;
+    transform: translateX(-50%) translateY(0) !important;
   }
 }
 
