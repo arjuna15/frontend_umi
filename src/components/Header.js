@@ -12,7 +12,8 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      // Tunggu sampai top-banner (~70px) terscroll sebelum sticky navbar muncul sepenuhnya
+      if (window.scrollY > 80) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -34,36 +35,57 @@ export default function Header() {
   return (
     <>
       <div className="top-banner" style={{
-        background: 'linear-gradient(to right, #881122, #B91C1C)', 
+        background: 'linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #991b1b 100%)', 
         color: '#ffffff', 
-        padding: '8px 24px', 
+        padding: '12px 4vw', 
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center', 
-        fontSize: '0.85rem', 
-        fontWeight: '500',
         position: 'relative',
         width: '100%',
         zIndex: 1001,
-        fontFamily: 'var(--font-primary)'
+        fontFamily: 'var(--font-primary)',
+        boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+        borderBottom: '1px solid rgba(255,255,255,0.1)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-           <i className="ph-fill ph-megaphone" style={{ fontSize: '1.2rem', color: '#FDE047' }}></i>
-           <a href="https://pmb.umiba.ac.id/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none', letterSpacing: '0.5px' }}>Pendaftaran Mahasiswa Baru 2026/2027</a>
-           <span style={{ background: '#FDE047', color: '#881122', padding: '2px 8px', borderRadius: '12px', fontSize: '0.7rem', fontWeight: 'bold' }}>BUKA</span>
+        {/* Kiri: Info PMB */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.1)', padding: '8px', borderRadius: '50%', boxShadow: '0 0 15px rgba(253, 224, 71, 0.2)' }}>
+             <i className="ph-fill ph-megaphone" style={{ fontSize: '1.4rem', color: '#FDE047' }}></i>
+           </div>
+           <div style={{ display: 'flex', flexDirection: 'column' }}>
+             <span style={{ fontSize: '0.9rem', fontWeight: '800', letterSpacing: '0.5px', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
+               PENDAFTARAN MAHASISWA BARU 2026/2027
+             </span>
+             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
+               <span style={{ display: 'inline-flex', position: 'relative', width: '8px', height: '8px' }}>
+                 <span style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', background: '#4ade80', opacity: '0.7', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }}></span>
+                 <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '8px', width: '8px', background: '#22c55e' }}></span>
+               </span>
+               <span style={{ fontSize: '0.75rem', color: '#f8fafc', fontWeight: '600', letterSpacing: '0.5px' }}>Gelombang 1 Dibuka</span>
+             </div>
+           </div>
+           <a href="https://pmb.umiba.ac.id/" target="_blank" rel="noreferrer" className="d-none-mobile" style={{ 
+             background: '#FDE047', color: '#7f1d1d', padding: '6px 16px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '800', marginLeft: '16px', transition: 'all 0.3s', boxShadow: '0 4px 10px rgba(253, 224, 71, 0.3)', textDecoration: 'none'
+           }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}>
+             DAFTAR SEKARANG <i className="ph-bold ph-arrow-right" style={{ marginLeft: '4px' }}></i>
+           </a>
         </div>
+
+        {/* Kanan: Search & Sosmed */}
         <div className="top-banner-right d-none-mobile" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-           <div className="search-bar" style={{ display: 'flex', alignItems: 'center', background: 'rgba(0,0,0,0.2)', borderRadius: '20px', padding: '4px 12px', border: '1px solid rgba(255,255,255,0.1)' }}>
-             <input type="text" placeholder="Cari..." style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '120px', color: '#ffffff' }} />
-             <i className="ph-bold ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.7)' }}></i>
+           <div className="search-bar" style={{ display: 'flex', alignItems: 'center', background: 'rgba(0,0,0,0.25)', borderRadius: '20px', padding: '6px 16px', border: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', width: '200px' }}>
+             <i className="ph-bold ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.6)', marginRight: '8px' }}></i>
+             <input type="text" placeholder="Cari informasi..." style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '100%', color: '#ffffff' }} />
            </div>
-           <div className="socials" style={{ display: 'flex', gap: '14px', fontSize: '1.2rem' }}>
-             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='rgba(255,255,255,0.8)'}><i className="ph-fill ph-youtube-logo"></i></a>
-             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='rgba(255,255,255,0.8)'}><i className="ph-fill ph-instagram-logo"></i></a>
-             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'color 0.2s' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='rgba(255,255,255,0.8)'}><i className="ph-fill ph-linkedin-logo"></i></a>
+           <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.2)' }}></div>
+           <div className="socials" style={{ display: 'flex', gap: '16px', fontSize: '1.2rem' }}>
+             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#FDE047'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-youtube-logo"></i></a>
+             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#FDE047'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-instagram-logo"></i></a>
+             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#FDE047'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-linkedin-logo"></i></a>
            </div>
-           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 'bold' }}>
-             <i className="ph-fill ph-phone-call" style={{ fontSize: '1.2rem', color: '#FDE047' }}></i> <span>0811 870 114</span>
+           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '700', background: 'rgba(255,255,255,0.1)', padding: '6px 16px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.15)' }}>
+             <i className="ph-fill ph-headset" style={{ fontSize: '1.2rem', color: '#FDE047' }}></i> <span style={{ fontSize: '0.9rem' }}>0811 870 114</span>
            </div>
         </div>
       </div>
