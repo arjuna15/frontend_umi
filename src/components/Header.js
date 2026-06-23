@@ -12,8 +12,8 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Tunggu sampai top-banner (~70px) terscroll sebelum sticky navbar muncul sepenuhnya
-      if (window.scrollY > 80) {
+      // Threshold 20px so it immediately reacts
+      if (window.scrollY > 20) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -41,11 +41,15 @@ export default function Header() {
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center', 
-        position: 'relative',
+        position: 'fixed',
+        top: 0,
+        left: 0,
         width: '100%',
-        zIndex: 1001,
+        zIndex: 1002,
         fontFamily: 'var(--font-primary)',
-        borderBottom: '1px solid rgba(255,255,255,0.1)'
+        borderBottom: '1px solid rgba(255,255,255,0.1)',
+        transform: isScrolled ? 'translateY(-100%)' : 'translateY(0)',
+        transition: 'transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1)'
       }}>
         {/* Kiri: Info PMB */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -58,8 +62,8 @@ export default function Header() {
              </span>
              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
                <span style={{ display: 'inline-flex', position: 'relative', width: '8px', height: '8px' }}>
-                 <span style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', background: '#ffffff', opacity: '0.6', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }}></span>
-                 <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '8px', width: '8px', background: '#ffffff' }}></span>
+                 <span style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', background: '#4ade80', opacity: '0.7', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }}></span>
+                 <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '8px', width: '8px', background: '#22c55e' }}></span>
                </span>
                <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.9)', fontWeight: '600', letterSpacing: '0.5px' }}>Gelombang 1 Dibuka</span>
              </div>

@@ -615,7 +615,7 @@ header.top-transparent .glass {
 .hero.hero-sub {
   aspect-ratio: auto;
   min-height: 45vh;
-  padding-top: 72px; /* account for header */
+  padding-top: 160px; /* account for fixed top banner + header */
   border-radius: 0;
   margin: 0;
   width: 100%;
