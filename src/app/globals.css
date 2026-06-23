@@ -349,7 +349,7 @@ p { margin-bottom: var(--space-3); color: var(--color-muted); font-size: 1.05rem
 /* -------------------- Header & Navigation -------------------- */
 header {
   position: fixed;
-  top: 16px;
+  top: 48px; /* 40px banner + 8px gap */
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);
@@ -399,13 +399,13 @@ body.dark-mode header.scrolled .glass {
 }
 
 header.scrolled {
-  top: 16px;
+  top: 40px; /* Sticks right under the top banner */
   width: calc(100% - 32px);
   max-width: 1200px; /* Needs to be wide enough to fit all nav items and logo */
 }
 
 header.top-transparent {
-  top: 0px;
+  top: 40px; /* Start right under the top banner */
   /* Keep the default left: 50% and transform: translateX(-50%) so it shrinks symmetrically */
   width: 100%;
   max-width: 100%;
@@ -1036,7 +1036,8 @@ header.top-transparent .glass {
     --space-7: 48px;
     --space-8: 64px;
   }
-  header { top: 8px; width: calc(100% - 16px); }
+  header { top: 48px; width: calc(100% - 16px); }
+  header.scrolled { top: 40px; }
   header .glass { padding: 0 var(--space-4); }
   .menu-toggle { display: flex; }
   .d-none-mobile { display: none !important; }

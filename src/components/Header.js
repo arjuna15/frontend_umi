@@ -33,6 +33,41 @@ export default function Header() {
 
   return (
     <>
+      <div className="top-banner" style={{
+        background: '#FDE047', 
+        color: '#1E3A8A', 
+        padding: '8px 24px', 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        fontSize: '0.85rem', 
+        fontWeight: 'bold',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        zIndex: 1001,
+        fontFamily: 'var(--font-primary)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+           <i className="ph-fill ph-megaphone" style={{ fontSize: '1.2rem' }}></i>
+           <a href="https://pmb.umiba.ac.id/" target="_blank" rel="noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>Pendaftaran Mahasiswa Baru 2026/2027</a>
+        </div>
+        <div className="top-banner-right d-none-mobile" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+           <div className="search-bar" style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.7)', borderRadius: '20px', padding: '4px 12px' }}>
+             <input type="text" placeholder="Cari..." style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '120px', color: '#1E3A8A' }} />
+             <i className="ph-bold ph-magnifying-glass"></i>
+           </div>
+           <div className="socials" style={{ display: 'flex', gap: '12px', fontSize: '1.2rem' }}>
+             <a href="#" style={{ color: 'inherit' }}><i className="ph-bold ph-youtube-logo"></i></a>
+             <a href="#" style={{ color: 'inherit' }}><i className="ph-bold ph-instagram-logo"></i></a>
+             <a href="#" style={{ color: 'inherit' }}><i className="ph-bold ph-linkedin-logo"></i></a>
+           </div>
+           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+             <i className="ph-fill ph-phone-call" style={{ fontSize: '1.2rem' }}></i> <span>0811 870 114</span>
+           </div>
+        </div>
+      </div>
       <header id="site-header" className={isScrolled || menuOpen ? 'scrolled' : 'top-transparent'}>
   <div className="glass">
     <a href="#" className="logo" aria-label="UMIBA Home">
