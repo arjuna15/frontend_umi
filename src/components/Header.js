@@ -35,7 +35,7 @@ export default function Header() {
   return (
     <>
       <div className="top-banner" style={{
-        background: 'linear-gradient(135deg, #7f1d1d 0%, #b91c1c 50%, #991b1b 100%)', 
+        background: '#B91C1C', 
         color: '#ffffff', 
         padding: '12px 4vw', 
         display: 'flex', 
@@ -45,28 +45,27 @@ export default function Header() {
         width: '100%',
         zIndex: 1001,
         fontFamily: 'var(--font-primary)',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
         borderBottom: '1px solid rgba(255,255,255,0.1)'
       }}>
         {/* Kiri: Info PMB */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.1)', padding: '8px', borderRadius: '50%', boxShadow: '0 0 15px rgba(253, 224, 71, 0.2)' }}>
-             <i className="ph-fill ph-megaphone" style={{ fontSize: '1.4rem', color: '#FDE047' }}></i>
+           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.15)', padding: '8px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)' }}>
+             <i className="ph-fill ph-megaphone" style={{ fontSize: '1.4rem', color: '#ffffff' }}></i>
            </div>
            <div style={{ display: 'flex', flexDirection: 'column' }}>
-             <span style={{ fontSize: '0.9rem', fontWeight: '800', letterSpacing: '0.5px', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
+             <span style={{ fontSize: '0.9rem', fontWeight: '800', letterSpacing: '0.5px' }}>
                PENDAFTARAN MAHASISWA BARU 2026/2027
              </span>
              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
                <span style={{ display: 'inline-flex', position: 'relative', width: '8px', height: '8px' }}>
-                 <span style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', background: '#4ade80', opacity: '0.7', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }}></span>
-                 <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '8px', width: '8px', background: '#22c55e' }}></span>
+                 <span style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', background: '#ffffff', opacity: '0.6', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }}></span>
+                 <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '8px', width: '8px', background: '#ffffff' }}></span>
                </span>
-               <span style={{ fontSize: '0.75rem', color: '#f8fafc', fontWeight: '600', letterSpacing: '0.5px' }}>Gelombang 1 Dibuka</span>
+               <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.9)', fontWeight: '600', letterSpacing: '0.5px' }}>Gelombang 1 Dibuka</span>
              </div>
            </div>
            <a href="https://pmb.umiba.ac.id/" target="_blank" rel="noreferrer" className="d-none-mobile" style={{ 
-             background: '#FDE047', color: '#7f1d1d', padding: '6px 16px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '800', marginLeft: '16px', transition: 'all 0.3s', boxShadow: '0 4px 10px rgba(253, 224, 71, 0.3)', textDecoration: 'none'
+             background: '#ffffff', color: '#B91C1C', padding: '6px 16px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '800', marginLeft: '16px', transition: 'all 0.3s', textDecoration: 'none'
            }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}>
              DAFTAR SEKARANG <i className="ph-bold ph-arrow-right" style={{ marginLeft: '4px' }}></i>
            </a>
@@ -74,18 +73,18 @@ export default function Header() {
 
         {/* Kanan: Search & Sosmed */}
         <div className="top-banner-right d-none-mobile" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-           <div className="search-bar" style={{ display: 'flex', alignItems: 'center', background: 'rgba(0,0,0,0.25)', borderRadius: '20px', padding: '6px 16px', border: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)', width: '200px' }}>
-             <i className="ph-bold ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.6)', marginRight: '8px' }}></i>
+           <div className="search-bar" style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.15)', borderRadius: '20px', padding: '6px 16px', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)', width: '200px' }}>
+             <i className="ph-bold ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.8)', marginRight: '8px' }}></i>
              <input type="text" placeholder="Cari informasi..." style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '100%', color: '#ffffff' }} />
            </div>
-           <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.2)' }}></div>
+           <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.3)' }}></div>
            <div className="socials" style={{ display: 'flex', gap: '16px', fontSize: '1.2rem' }}>
-             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#FDE047'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-youtube-logo"></i></a>
-             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#FDE047'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-instagram-logo"></i></a>
-             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#FDE047'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-linkedin-logo"></i></a>
+             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-youtube-logo"></i></a>
+             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-instagram-logo"></i></a>
+             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-linkedin-logo"></i></a>
            </div>
-           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '700', background: 'rgba(255,255,255,0.1)', padding: '6px 16px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.15)' }}>
-             <i className="ph-fill ph-headset" style={{ fontSize: '1.2rem', color: '#FDE047' }}></i> <span style={{ fontSize: '0.9rem' }}>0811 870 114</span>
+           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '700', background: 'rgba(255,255,255,0.15)', padding: '6px 16px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.2)' }}>
+             <i className="ph-fill ph-headset" style={{ fontSize: '1.2rem', color: '#ffffff' }}></i> <span style={{ fontSize: '0.9rem' }}>0811 870 114</span>
            </div>
         </div>
       </div>
