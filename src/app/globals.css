@@ -499,13 +499,14 @@ header.top-transparent .glass {
 .nav-item:hover .mega-menu.align-center {
   transform: translateX(-50%) translateY(0);
 }
-.mega-menu.grid-3 { grid-template-columns: repeat(3, 280px); gap: var(--space-4); }
-.mega-menu.grid-2 { grid-template-columns: repeat(2, 280px); gap: var(--space-4); }
-.mega-menu.grid-1 { grid-template-columns: repeat(1, 280px); gap: var(--space-2); }
+/* Compact menus use fixed column sizes so width: max-content works correctly */
+.mega-menu.grid-3 { grid-template-columns: repeat(3, 220px); gap: 20px; width: max-content !important; }
+.mega-menu.grid-2 { grid-template-columns: repeat(2, 220px); gap: 20px; width: max-content !important; }
+.mega-menu.grid-1 { grid-template-columns: repeat(1, 220px); gap: 12px; width: max-content !important; }
 
-/* Restore flexible columns for full-width menus so they can stretch to 1200px */
-.mega-menu.full-width.grid-3 { grid-template-columns: repeat(3, minmax(280px, 1fr)); }
-.mega-menu.full-width.grid-2 { grid-template-columns: repeat(2, minmax(280px, 1fr)); }
+/* Full-width menus override to stretch properly */
+.mega-menu.full-width.grid-3 { grid-template-columns: repeat(3, 1fr); width: 1200px !important; max-width: calc(100vw - 48px) !important; }
+.mega-menu.full-width.grid-2 { grid-template-columns: repeat(2, 1fr); width: 1200px !important; max-width: calc(100vw - 48px) !important; }
 
 .mega-menu-item {
   display: flex;
