@@ -365,6 +365,7 @@ header .glass {
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  transition: all 0.4s var(--ease);
 }
 .logo { display: flex; flex-shrink: 0; align-items: center; gap: 12px; text-decoration: none; }
 .logo img { height: 55px; transition: all 0.3s ease; }
@@ -477,6 +478,10 @@ header.top-transparent .glass {
     max-width: calc(100% - 48px);
     transform: translateX(-50%) translateY(15px) !important;
     justify-content: center;
+  }
+  .mega-menu.full-width {
+    width: calc(100% - 48px) !important;
+    max-width: 1200px;
   }
   /* All mega menus will now use max-content width from the base .mega-menu class */
   .nav-item:hover .mega-menu {

@@ -168,7 +168,7 @@ export default function Header() {
       </li>
       <li className="nav-item">
         <a href="/akademik" className={`nav-link ${pathname?.startsWith("/akademik") || pathname?.startsWith("/prodi-") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.akademik")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
-        <div className="mega-menu grid-3 align-center">
+        <div className="mega-menu grid-3 full-width align-center">
           
           {/*  Column 1: Fakultas & Prodi  */}
           <div>

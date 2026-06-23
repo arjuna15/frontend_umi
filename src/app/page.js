@@ -244,8 +244,8 @@ export default function Home() {
 {/*  ░░░ SAMBUTAN REKTOR ░░░  */}
 <section id="sambutan" style={{ padding: 'var(--space-8) 0' }}>
   <div className="container grid grid-2" style={{ alignItems: 'center' }}>
-    <div className="glass glass-card fade-up" style={{ padding: '0', overflow: 'hidden', position: 'relative' }}>
-      <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100%', height: 'auto', objectFit: 'cover' }} onerror="this.src='https://picsum.photos/400/600?random=A'"/>
+    <div className="glass glass-card fade-up" style={{ padding: '0', overflow: 'hidden', position: 'relative', maxWidth: '400px', margin: '0 auto' }}>
+      <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block' }} onerror="this.src='https://picsum.photos/400/600?random=A'"/>
       <div className="glass" style={{ position: 'absolute', bottom: 'var(--space-4)', left: 'var(--space-4)', right: 'var(--space-4)', padding: 'var(--space-3)' }}>
         <h3 style={{ margin: '0', fontSize: '1.2rem' }}>{t("home.sambutan_rektor")}</h3>
         <p style={{ margin: '0', fontSize: '0.9rem' }}>{t("home.quote_rektor")}</p>
