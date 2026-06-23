@@ -33,7 +33,7 @@ export default function Header() {
   };
 
   return (
-    <>
+    <div style={{ position: 'relative', width: '100%', zIndex: 1000 }}>
       <div className="top-banner" style={{
         background: '#B91C1C', 
         color: '#ffffff', 
@@ -207,7 +207,7 @@ export default function Header() {
       </button>
     </div>
   </div>
-</header>
-    </>
+      </header>
+    </div>
   );
 }

@@ -405,12 +405,13 @@ header.scrolled {
 }
 
 header.top-transparent {
-  top: 80px; /* Start right under the top banner */
+  position: absolute !important;
+  top: 100% !important; /* Start exactly under the top banner wrapper */
   /* Keep the default left: 50% and transform: translateX(-50%) so it shrinks symmetrically */
   width: 100%;
   max-width: 100%;
   border-radius: 0;
-  padding: 20px 4vw;
+  padding: 16px 4vw;
 }
 header.top-transparent .glass {
   border-radius: 0 !important;
@@ -1604,4 +1605,14 @@ header.top-transparent .nav-link.active .dropdown-icon {
 }
 header.top-transparent .nav-link.active::after {
   display: none;
+}
+
+/* Hero Mobile Fix */
+.hero-content-padding {
+  padding: 0 10vw !important;
+}
+@media (max-width: 992px) {
+  .hero-content-padding {
+    padding: 140px 6vw 80px 6vw !important;
+  }
 }
