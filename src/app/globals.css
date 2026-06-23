@@ -439,6 +439,19 @@ header.top-transparent .glass {
   z-index: 100;
   border: 1px solid rgba(0,0,0,0.05);
 }
+
+/* Invisible hover bridge to prevent mega menu from closing on diagonal mouse movement */
+.mega-menu::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: -30vw;
+  right: -30vw;
+  height: 60px;
+  background: transparent;
+  z-index: -1;
+}
+
 .mega-menu.align-right {
   left: auto;
   right: -20px;
