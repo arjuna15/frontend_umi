@@ -1688,6 +1688,7 @@ header.top-transparent .nav-link.active::after {
   overflow: visible;
   margin-top: 0;
   padding-bottom: 0;
+  isolation: isolate;
 }
 .travhub-footer::before {
   content: '';
