@@ -480,8 +480,9 @@ header.top-transparent .glass {
     justify-content: center;
   }
   .mega-menu.full-width {
-    width: calc(100% - 48px) !important;
-    max-width: 1200px;
+    width: 1200px !important;
+    max-width: calc(100vw - 48px) !important;
+    justify-content: normal !important;
   }
   /* All mega menus will now use max-content width from the base .mega-menu class */
   .nav-item:hover .mega-menu {
