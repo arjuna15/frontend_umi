@@ -69,7 +69,7 @@ export default function Footer() {
                   <div className="travhub-stat-label">{lang === "en" ? "Active Students" : "Mahasiswa Aktif"}</div>
                 </div>
                 <div>
-                  <div className="travhub-stat-number">"B"</div>
+                  <div className="travhub-stat-number">BAIK SEKALI</div>
                   <div className="travhub-stat-label">{lang === "en" ? "Accreditation" : "Akreditasi Kampus"}</div>
                 </div>
               </div>

@@ -283,7 +283,7 @@ body::after {
 }
 
 /* -------------------- Layout Utilities -------------------- */
-.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--space-4); }
+.container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 var(--space-4); }
 .flex { display: flex; }
 .flex-center { display: flex; align-items: center; justify-content: center; }
 .grid { display: grid; gap: var(--space-5); }
@@ -353,7 +353,7 @@ header {
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 32px);
-  max-width: 1200px;
+  max-width: 1400px;
   height: 72px;
   z-index: 1000;
   transition: all var(--duration) var(--ease);
@@ -401,7 +401,7 @@ body.dark-mode header.scrolled .glass {
 header.scrolled {
   top: 16px; /* Slides up smoothly since top-banner scrolls away */
   width: calc(100% - 32px);
-  max-width: 1200px; /* Needs to be wide enough to fit all nav items and logo */
+  max-width: 1400px; /* Needs to be wide enough to fit all nav items and logo */
 }
 
 header.top-transparent {
@@ -447,6 +447,29 @@ header.top-transparent .glass {
   left: 50%;
   transform: translateX(-50%) translateY(15px);
 }
+
+/* -------------------- Desktop Full-Width Centered Mega Menu -------------------- */
+@media (min-width: 1024px) {
+  .nav-item {
+    position: static; /* Let dropdown position relative to header */
+  }
+  header .glass {
+    position: relative;
+  }
+  .mega-menu {
+    left: 24px !important;
+    right: 24px !important;
+    margin: 0 auto;
+    width: calc(100% - 48px) !important;
+    max-width: 1200px;
+    transform: translateY(15px) !important;
+    justify-content: center;
+  }
+  .nav-item:hover .mega-menu {
+    transform: translateY(0) !important;
+  }
+}
+
 .nav-item:hover .mega-menu {
   opacity: 1;
   visibility: visible;
@@ -456,9 +479,9 @@ header.top-transparent .glass {
 .nav-item:hover .mega-menu.align-center {
   transform: translateX(-50%) translateY(0);
 }
-.mega-menu.grid-3 { grid-template-columns: repeat(3, 280px); gap: var(--space-4); }
-.mega-menu.grid-2 { grid-template-columns: repeat(2, 280px); gap: var(--space-4); }
-.mega-menu.grid-1 { grid-template-columns: repeat(1, 280px); gap: var(--space-2); }
+.mega-menu.grid-3 { grid-template-columns: repeat(3, minmax(280px, 1fr)); gap: var(--space-4); }
+.mega-menu.grid-2 { grid-template-columns: repeat(2, minmax(280px, 1fr)); gap: var(--space-4); }
+.mega-menu.grid-1 { grid-template-columns: repeat(1, minmax(280px, 1fr)); gap: var(--space-2); }
 
 .mega-menu-item {
   display: flex;
