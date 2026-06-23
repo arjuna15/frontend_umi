@@ -1644,9 +1644,10 @@ header.top-transparent .nav-link.active::after {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.15; /* Subtle overlay */
+  opacity: 0.04; /* Reduced opacity for true subtle watermark */
   pointer-events: none;
   filter: invert(1); /* Make the black SVG white */
+  mix-blend-mode: overlay; /* Better blending with the gradient */
 }
 
 /* Wavy Shape Divider */
