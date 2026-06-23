@@ -1526,12 +1526,15 @@ header.top-transparent .lang-switch .lang-btn:not(.active) {
   text-shadow: 0 2px 4px rgba(0,0,0,0.5); /* Add slight shadow for better readability */
 }
 
-/* Keep original logo colors but add a white pill background to make it visible against dark banners */
+/* Keep original logo colors but add a white circular background to make it visible against dark banners */
 header.top-transparent .logo img {
   background: rgba(255, 255, 255, 0.95);
-  padding: 4px 12px;
-  border-radius: 30px;
+  padding: 8px;
+  border-radius: 50%;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  height: 70px;
+  width: 70px;
+  object-fit: contain;
 }
 
 header.top-transparent .theme-toggle {
