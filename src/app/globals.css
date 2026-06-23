@@ -559,17 +559,22 @@ header.top-transparent .glass {
   margin-left: 0;
 }
 .dropdown-icon {
-  font-size: 0.7rem;
-  opacity: 0.7;
-  transition: transform 0.3s var(--ease);
-  display: inline-block;
-  margin-left: 4px;
+  font-size: 0.85em; /* Better size relative to text */
+  opacity: 0.75; /* Slightly softer */
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  display: inline-flex; /* Better alignment */
+  vertical-align: middle;
+  align-items: center;
+  margin-left: 6px; /* A bit more breathing room */
+  margin-top: -2px; /* Visual optical alignment */
 }
 .nav-item:hover > a > .dropdown-icon {
   transform: rotate(180deg);
+  opacity: 1; /* Fully visible on hover */
 }
 .dropdown-submenu:hover > a > .dropdown-icon {
-  transform: rotate(90deg);
+  transform: rotate(-90deg); /* If sub-menu flies out to right, arrow should point right */
+  opacity: 1;
 }
 
 /* -------------------- Hero Section -------------------- */

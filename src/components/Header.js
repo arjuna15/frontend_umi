@@ -114,7 +114,7 @@ export default function Header() {
     <ul className={menuOpen ? "nav-links active" : "nav-links"}>
       <li className="nav-item"><a href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>{t("nav.home")}</a></li>
       <li className="nav-item">
-        <a href="/profil" className={`nav-link ${pathname?.startsWith("/profil") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.profil")} <span className="dropdown-icon">▼</span></a>
+        <a href="/profil" className={`nav-link ${pathname?.startsWith("/profil") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.profil")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
         <div className="mega-menu grid-2 align-center">
           <div>
             <h4 style={{ fontWeight: 'bold', fontSize: '0.8rem', color: 'var(--umiba-red)', marginBottom: '12px', textTransform: 'uppercase', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '8px' }}>{t("nav.identitas_kampus")}</h4>
@@ -131,7 +131,7 @@ export default function Header() {
         </div>
       </li>
       <li className="nav-item">
-        <a href="/akademik" className={`nav-link ${pathname?.startsWith("/akademik") || pathname?.startsWith("/prodi-") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.akademik")} <span className="dropdown-icon">▼</span></a>
+        <a href="/akademik" className={`nav-link ${pathname?.startsWith("/akademik") || pathname?.startsWith("/prodi-") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.akademik")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
         <div className="mega-menu grid-3 align-center">
           
           {/*  Column 1: Fakultas & Prodi  */}
@@ -169,7 +169,7 @@ export default function Header() {
       <li className="nav-item"><a href="/lppm" className={`nav-link ${pathname?.startsWith("/lppm") ? "active" : ""}`}>{t("nav.lppm")}</a></li>
       <li className="nav-item"><a href="/mutu" className={`nav-link ${pathname?.startsWith("/mutu") ? "active" : ""}`}>{t("nav.mutu")}</a></li>
       <li className="nav-item">
-        <a href="#" className="nav-link" onClick={handleDropdownClick}>{t("nav.portal")} <span className="dropdown-icon">▼</span></a>
+        <a href="#" className="nav-link" onClick={handleDropdownClick}>{t("nav.portal")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
         <div className="mega-menu grid-2 align-right">
           <div>
             <h4 style={{ fontWeight: 'bold', fontSize: '0.8rem', color: 'var(--umiba-red)', marginBottom: '12px', textTransform: 'uppercase', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '8px' }}>{t("nav.sistem_akademik")}</h4>
@@ -184,7 +184,7 @@ export default function Header() {
         </div>
       </li>
       <li className="nav-item">
-        <a href="/informasi" className={`nav-link ${pathname?.startsWith("/informasi") || pathname?.startsWith("/berita") || pathname?.startsWith("/dokumen") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.informasi")} <span className="dropdown-icon">▼</span></a>
+        <a href="/informasi" className={`nav-link ${pathname?.startsWith("/informasi") || pathname?.startsWith("/berita") || pathname?.startsWith("/dokumen") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.informasi")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
         <div className="mega-menu grid-2 align-right">
           <div>
             <h4 style={{ fontWeight: 'bold', fontSize: '0.8rem', color: 'var(--umiba-red)', marginBottom: '12px', textTransform: 'uppercase', borderBottom: '1px solid rgba(0,0,0,0.1)', paddingBottom: '8px' }}>{t("nav.pendaftaran_biaya")}</h4>
