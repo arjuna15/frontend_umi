@@ -8,6 +8,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { lang, changeLang, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [bannerHeight, setBannerHeight] = useState(48); // default approx
   const pathname = usePathname();
 
   useEffect(() => {
@@ -19,9 +20,22 @@ export default function Header() {
         setIsScrolled(false);
       }
     };
+    
+    const updateBannerHeight = () => {
+      const banner = document.querySelector('.top-banner');
+      if (banner) setBannerHeight(banner.offsetHeight);
+    };
+
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', updateBannerHeight);
+    
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    updateBannerHeight();
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', updateBannerHeight);
+    };
   }, []);
 
   const handleDropdownClick = (e) => {
@@ -87,8 +101,13 @@ export default function Header() {
              <i className="ph-fill ph-headset" style={{ fontSize: '1.2rem', color: '#ffffff' }}></i> <span style={{ fontSize: '0.9rem' }}>0811 870 114</span>
            </div>
         </div>
+         </div>
       </div>
-      <header id="site-header" className={isScrolled || menuOpen ? 'scrolled' : 'top-transparent'}>
+      <header 
+        id="site-header" 
+        className={isScrolled || menuOpen ? 'scrolled' : 'top-transparent'}
+        style={{ top: (isScrolled || menuOpen) ? undefined : `${bannerHeight}px` }}
+      >
   <div className="glass">
     <a href="#" className="logo" aria-label="UMIBA Home">
       <img src="/erasebg-transformed.png" alt="Logo UMIBA" onerror="this.onerror=null;this.src='https://via.placeholder.com/40x40/B91C1C/fff?text=U'"/>

@@ -405,8 +405,7 @@ header.scrolled {
 }
 
 header.top-transparent {
-  position: absolute !important;
-  top: 100% !important; /* Start exactly under the top banner wrapper */
+  position: fixed;
   /* Keep the default left: 50% and transform: translateX(-50%) so it shrinks symmetrically */
   width: 100%;
   max-width: 100%;
