@@ -42,9 +42,7 @@ export default function Header() {
         alignItems: 'center', 
         fontSize: '0.85rem', 
         fontWeight: '500',
-        position: 'absolute',
-        top: 0,
-        left: 0,
+        position: 'relative',
         width: '100%',
         zIndex: 1001,
         fontFamily: 'var(--font-primary)'
