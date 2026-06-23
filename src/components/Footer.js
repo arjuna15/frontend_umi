@@ -24,8 +24,7 @@ export default function Footer() {
                 </svg>
                 {/* Logo Circle */}
                 <div style={{ position: 'relative', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.2))', zIndex: '1' }}>
-                  <div style={{
-                    background: 'var(--color-bg)',
+                  <div className="droplet-bg" style={{
                     borderRadius: '50%',
                     padding: '8px',
                     display: 'flex',
