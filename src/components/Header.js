@@ -101,7 +101,6 @@ export default function Header() {
              <i className="ph-fill ph-headset" style={{ fontSize: '1.2rem', color: '#ffffff' }}></i> <span style={{ fontSize: '0.9rem' }}>0811 870 114</span>
            </div>
         </div>
-         </div>
       </div>
       <header 
         id="site-header" 
