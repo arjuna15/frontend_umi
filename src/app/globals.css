@@ -135,13 +135,27 @@ body.dark-mode .media-content {
 
 .logo-badge {
   background: var(--color-bg) !important;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px) !important;
+  background-size: 30px 30px !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
   border: 1px solid var(--color-border) !important;
 }
 
+.logo-badge img {
+  filter: brightness(1.3) saturate(1.2);
+}
+
 body.dark-mode .logo-badge {
   background: var(--color-bg) !important;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px) !important;
+  background-size: 30px 30px !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+body.dark-mode .logo-badge img {
+  filter: brightness(1.6) saturate(1.3);
 }
 
 body.dark-mode .btn[style*="background: white"] {
@@ -1736,7 +1750,7 @@ header.top-transparent .nav-link.active::after {
   width: 100%;
   height: 100%;
   background-image: url('/indonesia-map.svg'); /* Indonesia Map Watermark */
-  background-size: cover;
+  background-size: 70%;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0.08; /* Perfect balance between subtle and visible */
