@@ -15,14 +15,15 @@ export default function Footer() {
                 {/* Logo Circle */}
                 <div style={{ position: 'relative', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.2))', zIndex: '1' }}>
                   <div style={{
-                    background: 'transparent',
+                    background: 'var(--color-bg)',
                     borderRadius: '50%',
                     padding: '8px',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     width: '100px',
-                    height: '100px'
+                    height: '100px',
+                    border: '1px solid var(--color-border)'
                   }}>
                     <img src="/erasebg-transformed.png" alt="Logo UMIBA" style={{ width: '84px', height: '84px', objectFit: 'contain' }} />
                   </div>
