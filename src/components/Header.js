@@ -1,7 +1,20 @@
 'use client';
 import { useTheme, useLanguage } from '../context/Providers';
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+
+const mockSearchData = [
+  { title: "Berita & Pengumuman", url: "/berita", type: "Halaman" },
+  { title: "Profil Kampus", url: "/profil", type: "Halaman" },
+  { title: "Pendaftaran Mahasiswa Baru (PMB)", url: "https://pmb.umiba.ac.id/", type: "Link Luar" },
+  { title: "Program Studi Magister Manajemen", url: "/prodi-magister", type: "S2" },
+  { title: "Program Studi Manajemen", url: "/prodi-manajemen", type: "S1" },
+  { title: "Program Studi Hukum", url: "/prodi-hukum", type: "S1" },
+  { title: "Program Studi Sistem Informasi", url: "/prodi-sistem", type: "S1" },
+  { title: "Program Studi Ilmu Komputer", url: "/prodi-komputer", type: "S1" },
+  { title: "Fasilitas Kampus", url: "/fasilitas", type: "Halaman" },
+  { title: "Informasi Beasiswa KIP-K", url: "/informasi", type: "Halaman" },
+];
 
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
@@ -10,6 +23,13 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [bannerHeight, setBannerHeight] = useState(48); // default approx
   const pathname = usePathname();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+
+  const filteredResults = mockSearchData.filter(item => 
+    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,58 +67,101 @@ export default function Header() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', zIndex: 1000 }}>
+    <div style={{ position: 'relative', width: '100%', zIndex: 100000 }}>
       <div className="top-banner" style={{
         background: '#B91C1C', 
         color: '#ffffff', 
-        padding: '12px 4vw', 
+        padding: '10px 4vw', 
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center', 
         position: 'relative',
         width: '100%',
-        zIndex: 1002,
+        zIndex: 100001,
         fontFamily: 'var(--font-primary)',
         borderBottom: '1px solid rgba(255,255,255,0.1)'
       }}>
         {/* Kiri: Info PMB */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.15)', padding: '8px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)' }}>
-             <i className="ph-fill ph-megaphone" style={{ fontSize: '1.4rem', color: '#ffffff' }}></i>
+        <div className="top-banner-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.15)', padding: '6px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)', flexShrink: 0 }}>
+             <i className="ph-fill ph-megaphone" style={{ fontSize: '1.2rem', color: '#ffffff' }}></i>
            </div>
-           <div style={{ display: 'flex', flexDirection: 'column' }}>
-             <span style={{ fontSize: '0.9rem', fontWeight: '800', letterSpacing: '0.5px' }}>
-               PENDAFTARAN MAHASISWA BARU 2026/2027
+           <div className="pmb-text-container" style={{ display: 'flex', flexDirection: 'column', flexGrow: 1, overflow: 'hidden' }}>
+             <span className="pmb-title" style={{ fontSize: 'clamp(0.75rem, 2.5vw, 0.9rem)', fontWeight: '800', letterSpacing: '0.5px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+               <span className="d-none-mobile">PENDAFTARAN MAHASISWA BARU </span>
+               <span className="d-none-desktop">PMB </span>
+               2026/2027
              </span>
              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px' }}>
-               <span style={{ display: 'inline-flex', position: 'relative', width: '8px', height: '8px' }}>
+               <span style={{ display: 'inline-flex', position: 'relative', width: '6px', height: '6px', flexShrink: 0 }}>
                  <span style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', background: '#4ade80', opacity: '0.7', animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite' }}></span>
-                 <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '8px', width: '8px', background: '#22c55e' }}></span>
+                 <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '6px', width: '6px', background: '#22c55e' }}></span>
                </span>
-               <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.9)', fontWeight: '600', letterSpacing: '0.5px' }}>Gelombang 1 Dibuka</span>
+               <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.9)', fontWeight: '600', letterSpacing: '0.5px', whiteSpace: 'nowrap' }}>Gelombang 1 Dibuka</span>
              </div>
            </div>
-           <a href="https://pmb.umiba.ac.id/" target="_blank" rel="noreferrer" className="d-none-mobile" style={{ 
-             background: '#ffffff', color: '#B91C1C', padding: '6px 16px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '800', marginLeft: '16px', transition: 'all 0.3s', textDecoration: 'none'
+           <a href="https://pmb.umiba.ac.id/" target="_blank" rel="noreferrer" className="btn-daftar-top" style={{ 
+             background: '#ffffff', color: '#B91C1C', padding: '6px 16px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '800', marginLeft: 'auto', transition: 'all 0.3s', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0
            }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}>
-             DAFTAR SEKARANG <i className="ph-bold ph-arrow-right" style={{ marginLeft: '4px' }}></i>
+             <span className="d-none-mobile">DAFTAR SEKARANG</span>
+             <span className="d-none-desktop">DAFTAR</span>
+             <i className="ph-bold ph-arrow-right" style={{ marginLeft: '4px' }}></i>
            </a>
         </div>
 
         {/* Kanan: Search & Sosmed */}
-        <div className="top-banner-right d-none-mobile" style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-           <div className="search-bar" style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.15)', borderRadius: '20px', padding: '6px 16px', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)', width: '200px' }}>
-             <i className="ph-bold ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.8)', marginRight: '8px' }}></i>
-             <input type="text" placeholder="Cari informasi..." style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '100%', color: '#ffffff' }} />
+        <div className="top-banner-right" style={{ display: 'flex', alignItems: 'center', gap: '24px', flexShrink: 0 }}>
+           <div className="search-bar" style={{ position: 'relative', display: 'flex', alignItems: 'center', width: '100%', zIndex: 99999 }}>
+             <form onSubmit={(e) => { e.preventDefault(); if (searchQuery.trim() && filteredResults.length > 0) router.push(filteredResults[0].url); }} style={{ display: 'flex', width: '100%', alignItems: 'center', padding: '6px 16px', background: 'rgba(255,255,255,0.15)', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)' }}>
+               <i className="ph-bold ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.8)', marginRight: '8px' }}></i>
+               <input type="text" placeholder="Cari..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '100%', color: '#ffffff' }} />
+               {searchQuery && (
+                 <i className="ph-bold ph-x" onClick={() => setSearchQuery('')} style={{ color: 'rgba(255,255,255,0.8)', cursor: 'pointer', marginLeft: '8px', fontSize: '0.8rem' }}></i>
+               )}
+             </form>
+             {searchQuery.trim() !== '' && (
+               <div style={{ position: 'absolute', top: '40px', left: 0, width: '280px', maxWidth: 'calc(100vw - 32px)', background: '#ffffff', borderRadius: '12px', padding: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)', zIndex: 99999, display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                 {filteredResults.length > 0 ? (
+                   <>
+                     {filteredResults.slice(0, 2).map((item, idx) => (
+                       <a key={idx} href={item.url} onClick={() => setSearchQuery('')} style={{ padding: '8px 12px', borderRadius: '8px', color: '#1f2937', textDecoration: 'none', display: 'flex', flexDirection: 'column', transition: 'background 0.2s' }} onMouseOver={e=>e.currentTarget.style.background='rgba(0,0,0,0.05)'} onMouseOut={e=>e.currentTarget.style.background='transparent'}>
+                         <span style={{ fontSize: '0.85rem', fontWeight: '700' }}>{item.title}</span>
+                         <span style={{ fontSize: '0.7rem', color: '#B91C1C', fontWeight: '600' }}>{item.type}</span>
+                       </a>
+                     ))}
+                     {filteredResults.length > 2 && (
+                       <a href={`/berita?q=${encodeURIComponent(searchQuery)}`} onClick={() => setSearchQuery('')} style={{ padding: '8px', textAlign: 'center', fontSize: '0.75rem', color: '#B91C1C', fontWeight: '700', textDecoration: 'none', borderTop: '1px solid #e5e7eb', marginTop: '4px' }} onMouseOver={e=>e.currentTarget.style.textDecoration='underline'} onMouseOut={e=>e.currentTarget.style.textDecoration='none'}>
+                         Lihat {filteredResults.length - 2} hasil lainnya...
+                       </a>
+                     )}
+                   </>
+                 ) : (
+                   <div style={{ padding: '24px 16px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                     <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(185,28,28,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#B91C1C', marginBottom: '4px' }}>
+                       <i className="ph-fill ph-magnifying-glass-minus" style={{ fontSize: '1.5rem' }}></i>
+                     </div>
+                     <span style={{ color: '#1f2937', fontSize: '0.9rem', fontWeight: '700' }}>
+                       Duh, nggak ketemu nih!
+                     </span>
+                     <span style={{ color: '#6b7280', fontSize: '0.75rem', lineHeight: '1.4' }}>
+                       Pencarian untuk <strong>"{searchQuery}"</strong> tidak ada hasilnya. Coba cek ejaan atau gunakan kata kunci lain.
+                     </span>
+                   </div>
+                 )}
+               </div>
+             )}
            </div>
-           <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.3)' }}></div>
+           <div className="top-divider" style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.3)' }}></div>
+           
+           <div className="top-banner-phone" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '700', background: 'rgba(255,255,255,0.15)', padding: '4px 10px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.2)', flexShrink: 0 }}>
+             <i className="ph-fill ph-headset" style={{ fontSize: '1.2rem', color: '#ffffff' }}></i> 
+             <span style={{ fontSize: '0.85rem', whiteSpace: 'nowrap' }}>0811 870 114</span>
+           </div>
+
            <div className="socials" style={{ display: 'flex', gap: '16px', fontSize: '1.2rem' }}>
              <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-youtube-logo"></i></a>
              <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-instagram-logo"></i></a>
              <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-linkedin-logo"></i></a>
-           </div>
-           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '700', background: 'rgba(255,255,255,0.15)', padding: '6px 16px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.2)' }}>
-             <i className="ph-fill ph-headset" style={{ fontSize: '1.2rem', color: '#ffffff' }}></i> <span style={{ fontSize: '0.9rem' }}>0811 870 114</span>
            </div>
         </div>
       </div>

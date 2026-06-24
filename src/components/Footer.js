@@ -12,19 +12,10 @@ export default function Footer() {
             {/* Kolom 1: Identitas & Logo */}
             <div>
               <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '16px', marginBottom: '24px', textDecoration: 'none', position: 'relative' }}>
-                {/* Connecting Flare / Drip Shape (With Grid Pattern) */}
-                <svg style={{ position: 'absolute', top: '-100px', left: '50px', transform: 'translateX(-50%)', width: '200px', height: '150px', zIndex: '0', pointerEvents: 'none', color: 'var(--color-text)' }} viewBox="0 0 200 150" preserveAspectRatio="none">
-                  <defs>
-                    <pattern id="dripGrid" width="30" height="30" patternUnits="userSpaceOnUse" patternTransform="translate(15, 0)">
-                      <rect width="30" height="30" fill="var(--color-bg)" />
-                      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.05" />
-                    </pattern>
-                  </defs>
-                  <path d="M0,0 L200,0 C100,0 110,80 150,150 L50,150 C90,80 100,0 0,0 Z" fill="url(#dripGrid)" />
-                </svg>
                 {/* Logo Circle */}
                 <div style={{ position: 'relative', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.2))', zIndex: '1' }}>
-                  <div className="droplet-bg" style={{
+                  <div style={{
+                    background: '#ffffff',
                     borderRadius: '50%',
                     padding: '8px',
                     display: 'flex',
@@ -36,7 +27,10 @@ export default function Footer() {
                     <img src="/erasebg-transformed.png" alt="Logo UMIBA" style={{ width: '84px', height: '84px', objectFit: 'contain' }} />
                   </div>
                 </div>
-                <span style={{ color: 'white', fontSize: '1.8rem', fontWeight: '800', letterSpacing: '1px', position: 'relative', zIndex: '1' }}>UMIBA</span>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <span style={{ color: 'white', fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', fontWeight: '900', letterSpacing: '1px', lineHeight: '1.2', position: 'relative', zIndex: '1' }}>UNIVERSITAS</span>
+                  <span style={{ color: 'white', fontSize: 'clamp(1.1rem, 2vw, 1.5rem)', fontWeight: '900', letterSpacing: '1px', lineHeight: '1.2', position: 'relative', zIndex: '1' }}>MITRA BANGSA</span>
+                </div>
               </a>
               <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.6)', marginBottom: '32px', lineHeight: '1.8' }}>
                 {lang === "en" ? "Universitas Mitra Bangsa creates superior generations ready to face global challenges and the digital work world through high quality education." : "Universitas Mitra Bangsa mencetak generasi unggul yang siap menghadapi tantangan global dan dunia kerja digital melalui pendidikan berkualitas."}

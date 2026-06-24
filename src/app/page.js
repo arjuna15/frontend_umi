@@ -162,9 +162,37 @@ export default function Home() {
           <h1 style={{ color: 'white', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '4px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
             PENERIMAAN MAHASISWA BARU
           </h1>
-          <h2 style={{ color: '#FFFFFF', fontSize: 'clamp(1.3rem, 2.5vw, 2.2rem)', lineHeight: '1.2', marginBottom: '20px', fontWeight: 900, textTransform: 'uppercase', fontStyle: 'italic', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
-            UNIVERSITAS MITRA BANGSA
-          </h2>
+          <div style={{ marginBottom: '24px' }}>
+            <div style={{ 
+              display: 'inline-flex', 
+              flexDirection: 'column',
+              background: '#FFFFFF', 
+              padding: '12px 28px',
+              borderRadius: '12px',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+              margin: 0,
+              alignItems: 'center'
+            }}>
+              <h2 style={{ 
+                color: '#B91C1C', 
+                fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)', 
+                lineHeight: '1.4', 
+                fontWeight: 900, 
+                textTransform: 'uppercase', 
+                margin: 0,
+              }}>
+                UNIVERSITAS MITRA BANGSA
+              </h2>
+              <div style={{
+                height: '4px',
+                background: '#B91C1C',
+                borderRadius: '2px',
+                marginTop: '4px',
+                width: '100%',
+                animation: 'expandWidth 2s ease-in-out infinite alternate'
+              }}></div>
+            </div>
+          </div>
 
           <div style={{ background: 'rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '16px', padding: '20px', marginBottom: '24px', boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}>
             <h3 style={{ color: '#FFFFFF', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
@@ -369,15 +397,17 @@ export default function Home() {
       </div>
       <a href="/berita" className="btn btn-glass">{t("home.lihat_semua")}</a>
     </div>
-    <div className="grid grid-3">
+    <div className="grid grid-3 scroll-mobile">
       {newsData && newsData.length > 0 ? (
         newsData.map((newsItem, index) => (
-          <div key={newsItem.id} className="glass glass-card fade-up" style={{ transitionDelay: `${index * 0.1}s` }}>
-            <div style={{ background: 'var(--color-muted)', height: '200px', borderRadius: 'var(--radius-sm)', marginBottom: 'var(--space-3)', overflow: 'hidden' }}>
+          <div key={newsItem.id} className="glass glass-card fade-up" style={{ transitionDelay: `${index * 0.1}s`, padding: 0, overflow: 'hidden' }}>
+            <div style={{ background: 'var(--color-muted)', height: '200px', overflow: 'hidden' }}>
                <img src={newsItem.image_url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={newsItem.title}/>
             </div>
-            <p style={{ fontSize: '0.8rem', marginBottom: '8px' }}>{newsItem.date}</p>
-            <h3 style={{ fontSize: '1.1rem' }}>{newsItem.title}</h3>
+            <div style={{ padding: 'var(--space-4)' }}>
+              <p style={{ fontSize: '0.8rem', marginBottom: '8px', color: 'var(--slate-500)' }}>{newsItem.date}</p>
+              <h3 style={{ fontSize: '1.1rem', margin: 0, lineHeight: '1.4' }}>{newsItem.title}</h3>
+            </div>
           </div>
         ))
       ) : (
@@ -415,7 +445,7 @@ export default function Home() {
           {t("home.alamat_bintaro")}
         </p>
         <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', height: '300px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7931.8354716433105!2d106.76112597521758!3d-6.274546893714218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f029893119b5%3A0x83f8e2bcc968c64a!2sUniversitas%20Mitra%20Bangsa%20Bintaro%20(UMIBA)!5e0!3m2!1sid!2sid!4v1780999658632!5m2!1sid!2sid" width="100%" height="100%" style={{ border: '0' }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7931.8354716433105!2d106.76112597521758!3d-6.274546893714218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f029893119b5%3A0x83f8e2bcc968c64a!2sUniversitas%20Mitra%20Bangsa%20Bintaro%20(UMIBA)!5e0!3m2!1sid!2sid!4v1780999658632!5m2!1sid!2sid" width="100%" height="100%" style={{ border: '0' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>
@@ -446,7 +476,7 @@ export default function Home() {
       <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.kabar_terkini")}</span>
       <h2>{t("home.liputan_media")}</h2>
     </div>
-    <div className="grid grid-4">
+    <div className="grid grid-4 scroll-mobile">
       <div className="glass glass-card media-card fade-up">
         <div className="media-img-wrap">
           <img src="https://umiba.ac.id/wp-content/uploads/2025/12/umiba-4pilar-1536x938-1.jpeg" alt="Berita 1"/>

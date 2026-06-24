@@ -355,7 +355,7 @@ header {
   width: calc(100% - 32px);
   max-width: 1200px;
   height: 72px;
-  z-index: 1000;
+  z-index: 9999;
   transition: all var(--duration) var(--ease);
 }
 header .glass {
@@ -1523,10 +1523,7 @@ body.dark-mode {
     color: rgba(255,255,255,0.03);
   }
 
-body.dark-mode .droplet-bg {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-}
+
 
 .ambient-orbs {
   position: fixed;
@@ -1687,9 +1684,12 @@ header.top-transparent .nav-link.active::after {
 }
 @media (max-width: 992px) {
   .hero-content-padding {
-    padding: 120px 6vw 80px 6vw !important;
+    padding: 120px 6vw 0px 6vw !important;
     align-items: flex-start !important;
     overflow-y: auto !important;
+  }
+  .hero-content-padding > div:nth-child(2) {
+    padding-bottom: 120px !important;
   }
   /* Hide scrollbar for clean UI but keep functionality */
   .hero-content-padding::-webkit-scrollbar {
@@ -1702,10 +1702,17 @@ header.top-transparent .nav-link.active::after {
 .travhub-footer {
   background: linear-gradient(135deg, #b91c1c 0%, #4a0404 100%);
   position: relative;
-  overflow: visible;
-  margin-top: 0;
+  overflow: hidden;
+  margin-top: 120px;
+  border-radius: 50% 50% 0 0 / 120px 120px 0 0;
   padding-bottom: 0;
   isolation: isolate;
+}
+@media (max-width: 768px) {
+  .travhub-footer {
+    margin-top: 50px;
+    border-radius: 50% 50% 0 0 / 50px 50px 0 0;
+  }
 }
 .travhub-footer::before {
   content: '';
@@ -1824,4 +1831,98 @@ header.top-transparent .nav-link.active::after {
   text-align: center;
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes expandWidth {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@media (max-width: 768px) {
+  .scroll-mobile {
+    display: grid !important;
+    grid-template-rows: 1fr !important;
+    grid-auto-flow: column !important;
+    grid-auto-columns: calc(88% - 16px) !important;
+    grid-template-columns: none !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 16px;
+    gap: 16px !important;
+  }
+  .scroll-mobile > * {
+    scroll-snap-align: start;
+  }
+  .scroll-mobile::-webkit-scrollbar {
+    height: 6px;
+  }
+  .scroll-mobile::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+    border-radius: 4px;
+  }
+  .scroll-mobile::-webkit-scrollbar-thumb {
+    background: #B91C1C;
+    border-radius: 4px;
+  }
+}
+
+/* UT-Style Top Banner Mobile Layout */
+@media (max-width: 992px) {
+  .top-banner {
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 12px !important;
+    overflow: visible !important;
+  }
+  .top-banner-left {
+    width: 100% !important;
+    justify-content: space-between !important;
+    overflow: visible !important;
+  }
+  .top-banner-left .pmb-title {
+    font-size: 0.75rem !important;
+  }
+  .top-banner-right {
+    width: 100% !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    flex-wrap: nowrap !important;
+    overflow: visible !important;
+  }
+  .top-banner-right .search-bar {
+    flex-grow: 1 !important;
+    padding: 6px 12px !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+  .top-banner-right .search-bar input {
+    font-size: 0.7rem !important;
+    width: 100% !important;
+  }
+  .top-divider {
+    display: none !important;
+  }
+  .top-banner-right .socials {
+    gap: 6px !important;
+    flex: 0 0 auto !important;
+  }
+  .top-banner-right .socials i {
+    font-size: 1rem !important;
+  }
+  .top-banner-left .btn-daftar-top {
+    padding: 6px 12px !important;
+    font-size: 0.7rem !important;
+  }
+  .top-banner-right .top-banner-phone {
+    display: flex !important;
+    padding: 4px 8px !important;
+    flex: 0 0 auto !important;
+  }
+  .top-banner-right .top-banner-phone span {
+    font-size: 0.75rem !important;
+  }
+  .top-banner-right .top-banner-phone i {
+    font-size: 1rem !important;
+  }
 }
