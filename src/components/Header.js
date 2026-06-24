@@ -77,7 +77,7 @@ export default function Header() {
         alignItems: 'center', 
         position: 'relative',
         width: '100%',
-        zIndex: 100001,
+        zIndex: 100000,
         fontFamily: 'var(--font-primary)',
         borderBottom: '1px solid rgba(255,255,255,0.1)'
       }}>
@@ -168,7 +168,7 @@ export default function Header() {
       <header 
         id="site-header" 
         className={isScrolled || menuOpen ? 'scrolled' : 'top-transparent'}
-        style={{ top: (isScrolled || menuOpen) ? undefined : `${bannerHeight}px` }}
+        style={{ top: (isScrolled || menuOpen) ? undefined : `${bannerHeight}px`, zIndex: 100002 }}
       >
   <div className="glass">
     <a href="#" className="logo" aria-label="UMIBA Home">
