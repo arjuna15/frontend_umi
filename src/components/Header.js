@@ -67,7 +67,7 @@ export default function Header() {
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', zIndex: 100000 }}>
+    <div style={{ width: '100%' }}>
       <div className="top-banner" style={{
         background: '#B91C1C', 
         color: '#ffffff', 
@@ -77,7 +77,7 @@ export default function Header() {
         alignItems: 'center', 
         position: 'relative',
         width: '100%',
-        zIndex: 100000,
+        zIndex: searchQuery.trim() !== '' ? 100005 : 999,
         fontFamily: 'var(--font-primary)',
         borderBottom: '1px solid rgba(255,255,255,0.1)'
       }}>
@@ -144,7 +144,7 @@ export default function Header() {
                        Duh, nggak ketemu nih!
                      </span>
                      <span style={{ color: '#6b7280', fontSize: '0.75rem', lineHeight: '1.4' }}>
-                       Pencarian untuk <strong>"{searchQuery}"</strong> tidak ada hasilnya. Coba cek ejaan atau gunakan kata kunci lain.
+                       Pencarian untuk <strong>&quot;{searchQuery}&quot;</strong> tidak ada hasilnya. Coba cek ejaan atau gunakan kata kunci lain.
                      </span>
                    </div>
                  )}
