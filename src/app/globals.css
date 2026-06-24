@@ -84,8 +84,12 @@ body.dark-mode header:not(.top-transparent) .glass {
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
 }
 
-body.dark-mode .logo img {
+body.dark-mode header.scrolled .logo img {
   filter: brightness(1.8) saturate(1.3) !important;
+}
+
+body.dark-mode header.top-transparent .logo img {
+  filter: brightness(1.25) saturate(1.15) !important;
 }
 
 body.dark-mode .nav-link {
