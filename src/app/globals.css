@@ -133,9 +133,14 @@ body.dark-mode .media-content {
   background: rgba(30, 41, 59, 0.8);
 }
 
+.logo-badge {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 body.dark-mode .logo-badge {
-  background: #0f172a !important;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent !important;
+  border: none !important;
 }
 
 body.dark-mode .btn[style*="background: white"] {
