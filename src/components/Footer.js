@@ -14,7 +14,7 @@ export default function Footer() {
               <a href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '16px', marginBottom: '24px', textDecoration: 'none', position: 'relative' }}>
                 {/* Logo Circle */}
                 <div style={{ position: 'relative', filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.2))', zIndex: '1' }}>
-                  <div style={{
+                  <div className="logo-badge" style={{
                     background: 'var(--color-bg)',
                     borderRadius: '50%',
                     padding: '8px',
