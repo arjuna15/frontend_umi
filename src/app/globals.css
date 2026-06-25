@@ -1753,7 +1753,7 @@ header.top-transparent .nav-link.active::after {
     left: -100% !important;
     right: auto !important;
     transform: rotate(90deg) !important;
-    background-size: 75% auto !important;
+    background-size: 115% auto !important;
   }
 }
 .travhub-footer::before {
