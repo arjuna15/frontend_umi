@@ -1747,12 +1747,13 @@ header.top-transparent .nav-link.active::after {
     border-radius: 50% 50% 0 0 / 50px 50px 0 0;
   }
   .travhub-footer::before {
-    width: 300%;
-    height: 300%;
-    top: -100%;
-    left: -100%;
-    transform: rotate(90deg);
-    background-size: 45% auto;
+    width: 300% !important;
+    height: 300% !important;
+    top: -100% !important;
+    left: -100% !important;
+    right: auto !important;
+    transform: rotate(90deg) !important;
+    background-size: 35% auto !important;
   }
 }
 .travhub-footer::before {
