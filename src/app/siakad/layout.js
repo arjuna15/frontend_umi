@@ -9,7 +9,7 @@ export default function SiakadLayout({ children }) {
 
   useEffect(() => {
     setRole(localStorage.getItem('siakad_role'));
-  }, []);
+  }, [pathname]);
 
   const isLoginPage = pathname === '/siakad/login';
   if (isLoginPage) return <>{children}</>;
