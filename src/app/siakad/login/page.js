@@ -38,7 +38,7 @@ export default function SiakadLogin() {
       } else if (data.user.role === 'dosen') {
         router.push('/siakad/dosen');
       } else {
-        router.push('/admin');
+        router.push('/siakad/admin');
       }
     } catch (err) {
       setError(err.message);
