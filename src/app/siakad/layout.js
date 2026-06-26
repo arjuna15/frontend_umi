@@ -96,15 +96,15 @@ export default function SiakadLayout({ children }) {
       <main className="siakad-main">
         {/* Sleek Glass Header */}
         <header className="siakad-header">
-          <div className="siakad-user-badge">
+          <Link href="/siakad/profile" className="siakad-user-badge" style={{ textDecoration: 'none' }} title="Pengaturan Profil">
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#1e293b' }}>Portal Akademik</div>
+              <div style={{ fontSize: '0.95rem', fontWeight: '800', color: '#1e293b' }}>Portal Akademik</div>
               <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500' }}>Tahun Ajaran 2026/2027</div>
             </div>
-            <Link href="/siakad/profile" className="siakad-avatar" style={{ textDecoration: 'none', cursor: 'pointer' }} title="Pengaturan Profil">
+            <div className="siakad-avatar">
               <i className="ph-user-circle" style={{ fontSize: '28px' }}></i>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </header>
 
         {/* Scrollable Content */}
