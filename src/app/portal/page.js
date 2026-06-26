@@ -21,7 +21,7 @@ export default function PortalGateway() {
       title: 'SIAKAD Mahasiswa',
       desc: 'Akses portal akademik, KRS, KHS, jadwal, dan informasi perkuliahan.',
       icon: 'ph-student',
-      link: 'https://umiba.siakadcloud.com/gate/login',
+      link: '/siakad/login',
       color: '#3B82F6' // Blue
     },
     {
@@ -29,7 +29,7 @@ export default function PortalGateway() {
       title: 'SIAKAD Dosen',
       desc: 'Sistem manajemen akademik khusus untuk Dosen dan Staf Pengajar.',
       icon: 'ph-chalkboard-teacher',
-      link: 'https://umiba.siakadcloud.com/gate/login',
+      link: '/siakad/login',
       color: '#10B981' // Green
     },
     {
@@ -37,7 +37,7 @@ export default function PortalGateway() {
       title: 'E-Learning (SPADA)',
       desc: 'Platform pembelajaran daring, materi, dan ujian (CBT).',
       icon: 'ph-laptop',
-      link: 'https://umiba.siakadcloud.com/gate/login',
+      link: '/siakad/login',
       color: '#8B5CF6' // Purple
     },
     {
