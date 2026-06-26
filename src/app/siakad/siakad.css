@@ -181,6 +181,7 @@
   font-size: 1.5rem;
   box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
   transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 .siakad-user-badge:hover .siakad-avatar {
   transform: rotate(10deg) scale(1.05);
