@@ -7,28 +7,49 @@ export default function KeuanganPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchDashboard = async () => {
-      const token = localStorage.getItem('siakad_token');
-      if (!token) return router.push('/siakad/login');
+  const fetchDashboard = async () => {
+    const token = localStorage.getItem('siakad_token');
+    if (!token) return router.push('/siakad/login');
 
-      try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-        const res = await fetch(`${apiUrl}/siakad/dashboard`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        if (!res.ok) throw new Error('Failed to fetch');
-        const result = await res.json();
-        if (result.user.role !== 'mahasiswa') return router.push('/siakad/login');
-        setData(result);
-      } catch (err) {
-        router.push('/siakad/login');
-      } finally {
-        setLoading(false);
-      }
-    };
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      const res = await fetch(`${apiUrl}/siakad/dashboard`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error('Failed to fetch');
+      const result = await res.json();
+      if (result.user.role !== 'mahasiswa') return router.push('/siakad/login');
+      setData(result);
+    } catch (err) {
+      router.push('/siakad/login');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchDashboard();
   }, [router]);
+
+  const handlePay = async (id) => {
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/billing/${id}/pay`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        alert('Pembayaran berhasil dikonfirmasi (Simulasi).');
+        fetchDashboard();
+      } else {
+        alert('Gagal memproses pembayaran');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
 
   if (loading || !data) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
@@ -54,7 +75,8 @@ export default function KeuanganPage() {
                   <th style={{ padding: '16px', borderRadius: '8px 0 0 8px', fontWeight: '600' }}>Deskripsi Tagihan</th>
                   <th style={{ padding: '16px', fontWeight: '600' }}>Jatuh Tempo</th>
                   <th style={{ padding: '16px', fontWeight: '600' }}>Nominal (Rp)</th>
-                  <th style={{ padding: '16px', borderRadius: '0 8px 8px 0', fontWeight: '600' }}>Status</th>
+                  <th style={{ padding: '16px', fontWeight: '600' }}>Status</th>
+                  <th style={{ padding: '16px', borderRadius: '0 8px 8px 0', fontWeight: '600' }}>Aksi</th>
                 </tr>
               </thead>
               <tbody style={{ color: '#374151', fontSize: '0.95rem' }}>
@@ -75,6 +97,13 @@ export default function KeuanganPage() {
                       }}>
                         {bill.status}
                       </span>
+                    </td>
+                    <td style={{ padding: '16px' }}>
+                      {bill.status !== 'Lunas' && (
+                        <button onClick={() => handlePay(bill.id)} style={{ padding: '6px 12px', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem' }}>
+                          Bayar (Simulasi)
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}

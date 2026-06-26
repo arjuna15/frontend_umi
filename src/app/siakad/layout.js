@@ -16,7 +16,7 @@ export default function SiakadLayout({ children }) {
   if (isLoginPage) return <>{children}</>;
 
   let menuItems = [];
-  if (role === 'admin' || role === 'superadmin') {
+  if (role === 'admin' || role === 'superadmin' || role === 'kaprodi') {
     menuItems = [
       { label: 'Admin Dashboard', icon: 'ph-chart-pie-slice', path: '/siakad/admin' },
       { label: 'Manajemen Pengguna', icon: 'ph-users-three', path: '/siakad/admin/users' },
@@ -101,9 +101,9 @@ export default function SiakadLayout({ children }) {
               <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#1e293b' }}>Portal Akademik</div>
               <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500' }}>Tahun Ajaran 2026/2027</div>
             </div>
-            <div className="siakad-avatar">
+            <Link href="/siakad/profile" className="siakad-avatar" style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }} title="Pengaturan Profil">
               <i className="ph-user-circle" style={{ fontSize: '28px' }}></i>
-            </div>
+            </Link>
           </div>
         </header>
 

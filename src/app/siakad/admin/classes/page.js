@@ -5,10 +5,12 @@ import { useRouter } from 'next/navigation';
 export default function AdminClassesPage() {
   const router = useRouter();
   const [courses, setCourses] = useState([]);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchCourses();
+    fetchUsers();
   }, []);
 
   const fetchCourses = async () => {
@@ -27,6 +29,23 @@ export default function AdminClassesPage() {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchUsers = async () => {
+    const token = localStorage.getItem('siakad_token');
+    if (!token) return;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/admin/users`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setUsers(data.filter(u => u.role === 'dosen'));
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -93,7 +112,7 @@ export default function AdminClassesPage() {
 
       <div className="siakad-card stagger-1" style={{ marginBottom: '24px', padding: '24px' }}>
         <h3 style={{ marginTop: 0, marginBottom: '16px', color: '#374151', fontSize: '1.2rem', fontWeight: 'bold' }}>Tambah Mata Kuliah Baru</h3>
-        <form onSubmit={handleCreateCourse} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '16px', alignItems: 'end' }}>
+        <form onSubmit={handleCreateCourse} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr auto', gap: '16px', alignItems: 'end' }}>
           <div>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Kode Mata Kuliah</label>
             <input name="code" required placeholder="Contoh: CS101..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
@@ -105,6 +124,15 @@ export default function AdminClassesPage() {
           <div>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Jumlah SKS</label>
             <input type="number" name="sks" required min="1" max="6" placeholder="SKS..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Dosen Pengampu</label>
+            <select name="dosen_id" required style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'white' }}>
+              <option value="">Pilih Dosen...</option>
+              {users.map(u => (
+                <option key={u.id} value={u.id}>{u.name}</option>
+              ))}
+            </select>
           </div>
           <div>
             <button type="submit" style={{ background: '#10b981', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.2)' }}>

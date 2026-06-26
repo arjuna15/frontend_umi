@@ -93,22 +93,33 @@ export default function AdminUsersPage() {
 
       <div className="siakad-card stagger-1" style={{ marginBottom: '24px', padding: '24px' }}>
         <h3 style={{ marginTop: 0, marginBottom: '16px', color: '#374151', fontSize: '1.2rem', fontWeight: 'bold' }}>Tambah Pengguna Baru</h3>
-        <form onSubmit={handleCreateUser} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '16px', alignItems: 'end' }}>
+        <form onSubmit={handleCreateUser} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr auto', gap: '16px', alignItems: 'end' }}>
           <div>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Nama Lengkap</label>
             <input name="name" required placeholder="Masukkan nama..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Email</label>
-            <input type="email" name="email" required placeholder="Masukkan email..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>NIM / NIP</label>
+            <input name="nim_nip" required placeholder="Masukkan NIM/NIP..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Role / Peran</label>
-            <select name="role" required style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'white' }}>
-              <option value="mahasiswa">Mahasiswa</option>
-              <option value="dosen">Dosen</option>
-              <option value="admin">Admin</option>
-            </select>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Password</label>
+            <input type="password" name="password" required placeholder="Min. 6 karakter..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
+          </div>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Role</label>
+              <select name="role" required style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'white' }}>
+                <option value="mahasiswa">Mahasiswa</option>
+                <option value="dosen">Dosen</option>
+                <option value="admin">Admin</option>
+                <option value="kaprodi">Kaprodi</option>
+              </select>
+            </div>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Prodi</label>
+              <input name="prodi" placeholder="Prodi..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
+            </div>
           </div>
           <div>
             <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
@@ -124,7 +135,7 @@ export default function AdminUsersPage() {
             <thead style={{ background: 'rgba(249, 250, 251, 0.8)', borderBottom: '1px solid #e5e7eb' }}>
               <tr>
                 <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>Nama</th>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>Email</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>NIM / NIP</th>
                 <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>Role</th>
                 <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem', textAlign: 'right' }}>Aksi</th>
               </tr>
@@ -133,7 +144,7 @@ export default function AdminUsersPage() {
               {users.map((user, idx) => (
                 <tr key={user.id} style={{ borderBottom: '1px solid #e5e7eb', background: idx % 2 === 0 ? 'white' : 'rgba(249, 250, 251, 0.3)' }}>
                   <td style={{ padding: '16px 24px', color: '#111827', fontWeight: '500' }}>{user.name}</td>
-                  <td style={{ padding: '16px 24px', color: '#4b5563', fontSize: '0.95rem' }}>{user.email}</td>
+                  <td style={{ padding: '16px 24px', color: '#4b5563', fontSize: '0.95rem' }}>{user.nim_nip}</td>
                   <td style={{ padding: '16px 24px' }}>
                     <span style={{ 
                       padding: '4px 12px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold',
