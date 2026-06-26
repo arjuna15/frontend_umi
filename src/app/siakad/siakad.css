@@ -140,6 +140,7 @@
 }
 .siakad-header {
   height: 88px;
+  width: 100%;
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -163,6 +164,7 @@
   box-shadow: 0 4px 15px rgba(0,0,0,0.03);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  margin-left: auto;
 }
 .siakad-user-badge:hover {
   background: rgba(255, 255, 255, 0.95);
