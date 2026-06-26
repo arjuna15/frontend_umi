@@ -1,0 +1,221 @@
+/* SIAKAD V3 Ultimate - 10/10 Hyper-Glassmorphism UI */
+
+/* Core Layout Adjustments */
+.siakad-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  overflow: hidden; /* Prevent body scroll, let main scroll */
+  position: relative;
+}
+
+/* Background Animated Blobs */
+.siakad-bg-shapes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.siakad-blob {
+  position: absolute;
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: blobBounce 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+.siakad-blob-1 {
+  top: -10%; left: -10%; width: 50vw; height: 50vw;
+  background: radial-gradient(circle, rgba(239,68,68,0.4) 0%, rgba(255,255,255,0) 70%);
+  animation-delay: 0s;
+}
+.siakad-blob-2 {
+  bottom: -20%; right: -10%; width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, rgba(255,255,255,0) 70%);
+  animation-delay: -5s;
+}
+.siakad-blob-3 {
+  top: 40%; left: 30%; width: 40vw; height: 40vw;
+  background: radial-gradient(circle, rgba(168,85,247,0.2) 0%, rgba(255,255,255,0) 70%);
+  animation-delay: -10s;
+}
+
+@keyframes blobBounce {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(5%, 10%) scale(1.1); }
+  100% { transform: translate(-5%, -5%) scale(0.9); }
+}
+
+/* Modern Floating Sidebar */
+.siakad-sidebar {
+  width: 280px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border-right: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 10px 0 30px rgba(0,0,0,0.02);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 16px 0 16px 16px;
+  border-radius: 24px;
+}
+.siakad-sidebar-header {
+  padding: 32px 24px 24px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.siakad-sidebar-logo {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
+  border-radius: 14px;
+  padding: 8px;
+  box-shadow: 0 8px 20px rgba(185,28,28,0.3);
+  animation: pulseLogo 3s infinite alternate;
+}
+@keyframes pulseLogo {
+  0% { box-shadow: 0 8px 20px rgba(185,28,28,0.3); }
+  100% { box-shadow: 0 12px 28px rgba(185,28,28,0.5); }
+}
+
+.siakad-nav {
+  padding: 0 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.siakad-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-radius: 16px;
+  color: #475569;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+.siakad-nav-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(185,28,28,0.1) 0%, rgba(255,255,255,0) 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+.siakad-nav-item:hover {
+  color: #b91c1c;
+  transform: translateX(6px);
+}
+.siakad-nav-item:hover::before {
+  opacity: 1;
+}
+.siakad-nav-item.active {
+  background: #b91c1c;
+  color: white;
+  box-shadow: 0 8px 20px rgba(185,28,28,0.3);
+}
+.siakad-nav-item.active:hover {
+  transform: none;
+  color: white;
+}
+
+/* Top Header */
+.siakad-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+  z-index: 5;
+}
+.siakad-header {
+  height: 88px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.7);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.siakad-user-badge {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255,255,255,0.6);
+  padding: 8px 24px 8px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.9);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.siakad-user-badge:hover {
+  background: white;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+.siakad-avatar {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+  color: #0f766e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.8);
+}
+
+/* Page Content */
+.siakad-content {
+  padding: 40px;
+  overflow-y: auto;
+  flex: 1;
+  height: calc(100vh - 88px);
+  animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glass Cards */
+.siakad-card {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(31,38,135,0.05), inset 0 0 0 1px rgba(255,255,255,0.5);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+.siakad-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(31,38,135,0.1), inset 0 0 0 1px rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Animations for Staggering items */
+.stagger-1 { animation: fadeSlideUp 0.5s ease forwards 0.1s; opacity: 0; }
+.stagger-2 { animation: fadeSlideUp 0.5s ease forwards 0.2s; opacity: 0; }
+.stagger-3 { animation: fadeSlideUp 0.5s ease forwards 0.3s; opacity: 0; }
+.stagger-4 { animation: fadeSlideUp 0.5s ease forwards 0.4s; opacity: 0; }
+.stagger-5 { animation: fadeSlideUp 0.5s ease forwards 0.5s; opacity: 0; }
