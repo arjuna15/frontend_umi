@@ -98,11 +98,11 @@ export default function SiakadLayout({ children }) {
         <header className="siakad-header">
           <Link href="/siakad/profile" className="siakad-user-badge" style={{ textDecoration: 'none' }} title="Pengaturan Profil">
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '0.95rem', fontWeight: '800', color: '#1e293b' }}>Portal Akademik</div>
-              <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500' }}>Tahun Ajaran 2026/2027</div>
+              <div style={{ fontSize: '0.95rem', fontWeight: '800', color: '#1e293b', whiteSpace: 'nowrap' }}>Portal Akademik</div>
+              <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500', whiteSpace: 'nowrap' }}>Tahun Ajaran 2026/2027</div>
             </div>
-            <div className="siakad-avatar">
-              <i className="ph-user-circle" style={{ fontSize: '28px' }}></i>
+            <div className="siakad-avatar" style={{ flexShrink: 0 }}>
+              <i className="ph-user-circle" style={{ fontSize: '28px', color: 'white' }}></i>
             </div>
           </Link>
         </header>
