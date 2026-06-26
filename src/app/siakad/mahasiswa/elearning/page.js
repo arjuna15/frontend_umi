@@ -86,7 +86,9 @@ export default function ElearningPage() {
                 </h4>
                 {item.course?.assignments && item.course.assignments.length > 0 ? (
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    {item.course.assignments.map((ass, j) => (
+                    {item.course.assignments.map((ass, j) => {
+                      const submission = ass.submissions?.find(s => s.mahasiswa_id === data.user.id);
+                      return (
                       <li key={j} style={{ padding: '16px', border: '1px solid #fecaca', background: '#fef2f2', borderRadius: '8px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                           <strong style={{ color: '#b91c1c', fontSize: '0.95rem' }}>{ass.title}</strong>
@@ -94,18 +96,41 @@ export default function ElearningPage() {
                         </div>
                         <p style={{ margin: '0 0 12px 0', fontSize: '0.9rem', color: '#7f1d1d' }}>{ass.description}</p>
                         
-                        {ass.submissions && ass.submissions.find(s => s.mahasiswa_id === data.user.id) ? (
+                        {submission ? (
                           <div style={{ padding: '8px 12px', background: '#dcfce7', color: '#166534', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold' }}>
-                            <i className="ph-check-circle"></i> Tugas sudah dikumpulkan. Nilai: {ass.submissions.find(s => s.mahasiswa_id === data.user.id).grade || 'Belum dinilai'}
+                            <i className="ph-check-circle"></i> Tugas sudah dikumpulkan. Nilai: {submission.grade || 'Belum dinilai'}
                           </div>
                         ) : (
-                          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                            <input type="file" style={{ fontSize: '0.85rem' }} />
-                            <button style={{ background: 'white', border: '1px solid #fca5a5', color: '#b91c1c', padding: '6px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}>Upload & Kumpulkan</button>
-                          </div>
+                          <form 
+                            onSubmit={async (e) => {
+                              e.preventDefault();
+                              const formData = new FormData(e.target);
+                              const token = localStorage.getItem('siakad_token');
+                              const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+                              try {
+                                const res = await fetch(`${apiUrl}/siakad/assignment/${ass.id}/submit`, {
+                                  method: 'POST',
+                                  headers: { 'Authorization': `Bearer ${token}` },
+                                  body: formData,
+                                });
+                                if (res.ok) {
+                                  alert('Tugas berhasil dikumpulkan!');
+                                  window.location.reload();
+                                } else {
+                                  alert('Gagal mengumpulkan tugas');
+                                }
+                              } catch (err) {
+                                alert('Error: ' + err.message);
+                              }
+                            }}
+                            style={{ display: 'flex', gap: '8px', alignItems: 'center' }}
+                          >
+                            <input type="file" name="file" required style={{ fontSize: '0.85rem' }} />
+                            <button type="submit" style={{ background: 'white', border: '1px solid #fca5a5', color: '#b91c1c', padding: '6px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}>Upload & Kumpulkan</button>
+                          </form>
                         )}
                       </li>
-                    ))}
+                    )})}
                   </ul>
                 ) : (
                   <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: 0, fontStyle: 'italic' }}>Belum ada tugas.</p>

@@ -60,6 +60,25 @@ export default function MahasiswaForumPage() {
                   <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#3730a3', fontWeight: 'bold' }}>{course.name}</h3>
                   <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: '#4f46e5' }}>{course.code}</span>
                 </div>
+                <button onClick={async () => {
+                  const title = prompt('Judul topik diskusi:');
+                  if (!title) return;
+                  const content = prompt('Isi diskusi:');
+                  if (!content) return;
+                  const token = localStorage.getItem('siakad_token');
+                  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+                  try {
+                    const res = await fetch(`${apiUrl}/siakad/forum/${course.id}`, {
+                      method: 'POST',
+                      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ title, content })
+                    });
+                    if (res.ok) window.location.reload();
+                    else alert('Gagal membuat topik');
+                  } catch (err) { alert('Error: ' + err.message); }
+                }} style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)' }}>
+                  <i className="ph-plus"></i> Buat Topik Baru
+                </button>
               </div>
               
               <div style={{ padding: '24px' }}>
@@ -91,10 +110,25 @@ export default function MahasiswaForumPage() {
                               <p style={{ margin: '4px 0 0 0', fontSize: '0.9rem', color: '#4b5563' }}>{reply.content}</p>
                             </div>
                           ))}
-                          <div style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
-                            <input type="text" placeholder="Tulis balasan..." style={{ flex: 1, padding: '8px 12px', borderRadius: '6px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }} />
-                            <button style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Kirim</button>
-                          </div>
+                          <form onSubmit={async (e) => {
+                            e.preventDefault();
+                            const content = e.target.content.value;
+                            if (!content.trim()) return;
+                            const token = localStorage.getItem('siakad_token');
+                            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+                            try {
+                              const res = await fetch(`${apiUrl}/siakad/forum/${forum.id}/reply`, {
+                                method: 'POST',
+                                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ content })
+                              });
+                              if (res.ok) window.location.reload();
+                              else alert('Gagal mengirim balasan');
+                            } catch (err) { alert('Error: ' + err.message); }
+                          }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
+                            <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, padding: '8px 12px', borderRadius: '6px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }} />
+                            <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Kirim</button>
+                          </form>
                         </div>
                       </div>
                     ))}
