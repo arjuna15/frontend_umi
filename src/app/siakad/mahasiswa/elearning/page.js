@@ -45,18 +45,24 @@ export default function ElearningPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
         {data.krs.map((item, i) => (
-          <div key={i} style={{ background: 'white', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6', overflow: 'hidden' }}>
-            <div style={{ background: '#f8fafc', padding: '20px 24px', borderBottom: '1px solid #e2e8f0' }}>
-              <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#0f172a', fontWeight: 'bold' }}>{item.course?.name}</h3>
-              <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: '#64748b' }}>{item.course?.code} • {item.course?.sks} SKS</span>
+          <div key={i} className={`siakad-card stagger-${(i % 5) + 1}`}>
+            <div style={{ background: 'linear-gradient(90deg, rgba(238,242,255,0.7) 0%, rgba(255,255,255,0) 100%)', padding: '24px 32px', borderBottom: '1px solid rgba(199,210,254,0.3)', position: 'relative', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', right: '-20px', top: '-20px', fontSize: '10rem', color: 'rgba(99,102,241,0.03)', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
+                <i className="ph-laptop"></i>
+              </div>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#312e81', fontWeight: '800', letterSpacing: '-0.02em' }}>{item.course?.name}</h3>
+              <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: '#4f46e5', fontWeight: '600', padding: '4px 12px', background: 'rgba(79, 70, 229, 0.1)', borderRadius: '999px' }}>{item.course?.code} • {item.course?.sks} SKS</span>
             </div>
             
-            <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
               
               {/* Materials Section */}
               <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 'bold', color: '#334155', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <i className="ph-folder" style={{ color: '#3b82f6' }}></i> Materi Perkuliahan
+                <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#334155', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(59,130,246,0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="ph-folder-open"></i>
+                  </div>
+                  Materi Perkuliahan
                 </h4>
                 {item.course?.materials && item.course.materials.length > 0 ? (
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
