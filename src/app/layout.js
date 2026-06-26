@@ -12,7 +12,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Universitas Mitra Bangsa | Kampus Unggulan",
+  title: {
+    template: "%s | Universitas Mitra Bangsa",
+    default: "Universitas Mitra Bangsa | Kampus Unggulan",
+  },
   description: "Universitas Mitra Bangsa (UMIBA) adalah kampus unggulan di Jakarta yang menawarkan pendidikan berkualitas dengan program S1 dan S2, serta jalur beasiswa.",
   keywords: ["UMIBA", "Universitas Mitra Bangsa", "Kampus Jakarta", "Kuliah S1", "Kuliah S2", "Beasiswa KIP-K"],
   openGraph: {
