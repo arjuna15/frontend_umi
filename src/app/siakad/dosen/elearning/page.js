@@ -105,9 +105,16 @@ export default function DosenElearningPage() {
 
   if (loading || !data) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat E-Learning...
+      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat data kelas Anda...
     </div>
   );
+
+  const getFileUrl = (path) => {
+    if (!path) return '#';
+    if (path.startsWith('http')) return path;
+    const backendUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api').replace('/api', '');
+    return backendUrl + (path.startsWith('/') ? path : '/' + path);
+  };
 
   return (
     <div>
@@ -156,7 +163,7 @@ export default function DosenElearningPage() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#334155', fontSize: '0.95rem', fontWeight: '600' }}>
                           <i className="ph-file-pdf" style={{ fontSize: '1.4rem', color: '#ef4444' }}></i> {mat.title}
                         </div>
-                        <a href={mat.content_link} target="_blank" rel="noreferrer" style={{ background: '#f8fafc', padding: '8px 12px', borderRadius: '8px', color: '#0ea5e9', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 'bold', border: '1px solid #e0f2fe' }}>Download</a>
+                        <a href={getFileUrl(mat.content_link)} target="_blank" rel="noreferrer" style={{ background: '#f8fafc', padding: '8px 12px', borderRadius: '8px', color: '#0ea5e9', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 'bold', border: '1px solid #e0f2fe' }}>Download</a>
                       </li>
                     ))}
                   </ul>

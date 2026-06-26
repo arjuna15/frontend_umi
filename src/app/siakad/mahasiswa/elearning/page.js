@@ -31,10 +31,17 @@ export default function ElearningPage() {
   }, [router]);
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
       <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat ruang kelas virtual...
     </div>
   );
+
+  const getFileUrl = (path) => {
+    if (!path) return '#';
+    if (path.startsWith('http')) return path;
+    const backendUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api').replace('/api', '');
+    return backendUrl + (path.startsWith('/') ? path : '/' + path);
+  };
 
   return (
     <div>
@@ -68,7 +75,7 @@ export default function ElearningPage() {
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {item.course.materials.map((mat, j) => (
                       <li key={j}>
-                        <a href={mat.content_link} target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 16px', background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '8px', textDecoration: 'none', color: '#0369a1', fontSize: '0.9rem', transition: 'background 0.2s' }}>
+                        <a href={getFileUrl(mat.content_link)} target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 16px', background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '8px', textDecoration: 'none', color: '#0369a1', fontSize: '0.9rem', transition: 'background 0.2s' }}>
                           <i className="ph-file-pdf" style={{ fontSize: '1.2rem' }}></i> {mat.title}
                         </a>
                       </li>
