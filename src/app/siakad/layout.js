@@ -101,7 +101,7 @@ export default function SiakadLayout({ children }) {
               <div style={{ fontSize: '0.9rem', fontWeight: '800', color: '#1e293b' }}>Portal Akademik</div>
               <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500' }}>Tahun Ajaran 2026/2027</div>
             </div>
-            <Link href="/siakad/profile" className="siakad-avatar" style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }} title="Pengaturan Profil">
+            <Link href="/siakad/profile" className="siakad-avatar" style={{ textDecoration: 'none', cursor: 'pointer' }} title="Pengaturan Profil">
               <i className="ph-user-circle" style={{ fontSize: '28px' }}></i>
             </Link>
           </div>

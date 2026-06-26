@@ -74,7 +74,7 @@ export default function DosenDashboard() {
                 <span style={{ display: 'inline-block', padding: '4px 10px', background: '#e0e7ff', color: '#4338ca', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold', marginBottom: '8px' }}>{course.code} • {course.sks} SKS</span>
                 <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#0f172a' }}>{course.name}</h3>
               </div>
-              <button style={{ background: 'white', border: '1px solid #cbd5e1', padding: '8px 16px', borderRadius: '8px', color: '#334155', fontWeight: '500', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem' }}>
+              <button onClick={() => router.push('/siakad/dosen/gradebook')} style={{ background: 'white', border: '1px solid #cbd5e1', padding: '8px 16px', borderRadius: '8px', color: '#334155', fontWeight: '500', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem' }}>
                 <i className="ph-pencil-simple"></i> Input Nilai
               </button>
             </div>
