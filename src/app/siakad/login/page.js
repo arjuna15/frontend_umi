@@ -16,7 +16,8 @@ export default function SiakadLogin() {
     setError('');
 
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/siakad/login', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      const res = await fetch(`${apiUrl}/siakad/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nim_nip: nim, password })
