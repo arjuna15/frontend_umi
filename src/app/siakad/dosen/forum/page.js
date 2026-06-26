@@ -1,0 +1,109 @@
+"use client";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function DosenForumPage() {
+  const router = useRouter();
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      const token = localStorage.getItem('siakad_token');
+      if (!token) return router.push('/siakad/login');
+
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+        const res = await fetch(`${apiUrl}/siakad/dashboard`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!res.ok) throw new Error('Failed to fetch');
+        const result = await res.json();
+        if (result.user.role !== 'dosen') return router.push('/siakad/login');
+        setData(result);
+      } catch (err) {
+        router.push('/siakad/login');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDashboard();
+  }, [router]);
+
+  if (loading || !data) return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat forum diskusi...
+    </div>
+  );
+
+  return (
+    <div>
+      <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Forum Diskusi Kelas 💬</h1>
+          <p style={{ color: '#6b7280', margin: 0 }}>Berinteraksi dan jawab pertanyaan mahasiswa secara real-time.</p>
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
+        {data.jadwal.map((course, i) => (
+          <div key={i} style={{ 
+            background: 'rgba(255, 255, 255, 0.7)', backdropFilter: 'blur(10px)',
+            borderRadius: '16px', boxShadow: '0 8px 32px rgba(31, 38, 135, 0.05)', 
+            border: '1px solid rgba(255, 255, 255, 0.18)', overflow: 'hidden' 
+          }}>
+            <div style={{ background: 'linear-gradient(90deg, rgba(255,247,237,1) 0%, rgba(255,255,255,0) 100%)', padding: '20px 24px', borderBottom: '1px solid rgba(253, 186, 116, 0.3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#9a3412', fontWeight: 'bold' }}>{course.name}</h3>
+                <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: '#c2410c' }}>{course.code}</span>
+              </div>
+              <button style={{ background: '#f97316', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(249, 115, 22, 0.3)' }}>
+                <i className="ph-plus"></i> Buat Topik Baru
+              </button>
+            </div>
+            
+            <div style={{ padding: '24px' }}>
+              {course.forums && course.forums.length > 0 ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  {course.forums.map((forum, j) => (
+                    <div key={j} style={{ background: 'white', border: '1px solid rgba(229, 231, 235, 0.5)', borderRadius: '12px', padding: '20px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                        <div style={{ width: '40px', height: '40px', background: '#fce7f3', color: '#be185d', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
+                          D
+                        </div>
+                        <div>
+                          <strong style={{ display: 'block', color: '#1f2937' }}>{forum.title}</strong>
+                          <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>Diposting oleh Anda (Dosen)</span>
+                        </div>
+                      </div>
+                      <p style={{ margin: '0 0 16px 0', color: '#4b5563', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                        {forum.content}
+                      </p>
+                      
+                      {/* Replies */}
+                      <div style={{ background: '#f9fafb', borderRadius: '8px', padding: '16px', borderLeft: '4px solid #f97316' }}>
+                        <h4 style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Balasan ({forum.replies?.length || 0})</h4>
+                        {forum.replies && forum.replies.map((reply, k) => (
+                          <div key={k} style={{ marginBottom: k === forum.replies.length - 1 ? 0 : '12px', paddingBottom: k === forum.replies.length - 1 ? 0 : '12px', borderBottom: k === forum.replies.length - 1 ? 'none' : '1px solid #e5e7eb' }}>
+                            <strong style={{ fontSize: '0.85rem', color: '#374151', display: 'block' }}>{reply.user_id === data.user.id ? 'Anda' : 'Mahasiswa'}</strong>
+                            <p style={{ margin: '4px 0 0 0', fontSize: '0.9rem', color: '#4b5563' }}>{reply.content}</p>
+                          </div>
+                        ))}
+                        <div style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
+                          <input type="text" placeholder="Tulis balasan..." style={{ flex: 1, padding: '8px 12px', borderRadius: '6px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }} />
+                          <button style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Kirim</button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p style={{ color: '#9ca3af', fontSize: '0.9rem', margin: 0, fontStyle: 'italic', textAlign: 'center' }}>Belum ada topik diskusi di kelas ini.</p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

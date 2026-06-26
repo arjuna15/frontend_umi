@@ -14,18 +14,38 @@ export default function SiakadLayout({ children }) {
   const isLoginPage = pathname === '/siakad/login';
   if (isLoginPage) return <>{children}</>;
 
-  const menuItems = role === 'dosen' ? [
-    { label: 'Dashboard Dosen', icon: 'ph-chalkboard-teacher', path: '/siakad/dosen' },
-    { label: 'E-Learning (Tugas/Materi)', icon: 'ph-books', path: '/siakad/dosen/elearning' },
-  ] : [
-    { label: 'Dashboard & KHS', icon: 'ph-squares-four', path: '/siakad/mahasiswa' },
-    { label: 'KRS Online', icon: 'ph-list-checks', path: '/siakad/mahasiswa/krs' },
-    { label: 'Ruang Kelas (E-Learning)', icon: 'ph-laptop', path: '/siakad/mahasiswa/elearning' },
-    { label: 'Tagihan & Keuangan', icon: 'ph-wallet', path: '/siakad/mahasiswa/keuangan' },
-  ];
+  let menuItems = [];
+  if (role === 'admin' || role === 'superadmin') {
+    menuItems = [
+      { label: 'Admin Dashboard', icon: 'ph-chart-pie-slice', path: '/siakad/admin' },
+      { label: 'Manajemen Pengguna', icon: 'ph-users-three', path: '/siakad/admin/users' },
+      { label: 'Manajemen Kelas', icon: 'ph-chalkboard', path: '/siakad/admin/classes' },
+    ];
+  } else if (role === 'dosen') {
+    menuItems = [
+      { label: 'Dashboard Dosen', icon: 'ph-chalkboard-teacher', path: '/siakad/dosen' },
+      { label: 'E-Learning (Materi & Tugas)', icon: 'ph-books', path: '/siakad/dosen/elearning' },
+      { label: 'Presensi Mahasiswa', icon: 'ph-calendar-check', path: '/siakad/dosen/presensi' },
+      { label: 'Gradebook & Nilai', icon: 'ph-exam', path: '/siakad/dosen/gradebook' },
+      { label: 'Forum Diskusi', icon: 'ph-chats', path: '/siakad/dosen/forum' },
+    ];
+  } else {
+    // Default Mahasiswa
+    menuItems = [
+      { label: 'Dashboard & KHS', icon: 'ph-squares-four', path: '/siakad/mahasiswa' },
+      { label: 'KRS Online', icon: 'ph-list-checks', path: '/siakad/mahasiswa/krs' },
+      { label: 'Ruang Kelas (E-Learning)', icon: 'ph-laptop', path: '/siakad/mahasiswa/elearning' },
+      { label: 'Forum Diskusi', icon: 'ph-chats', path: '/siakad/mahasiswa/forum' },
+      { label: 'Tagihan & Keuangan', icon: 'ph-wallet', path: '/siakad/mahasiswa/keuangan' },
+    ];
+  }
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#f3f4f6' }}>
+    <div style={{ 
+      display: 'flex', minHeight: '100vh', 
+      background: 'linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)',
+      fontFamily: 'Inter, sans-serif'
+    }}>
       {/* Sidebar */}
       <aside style={{ 
         width: '280px', 

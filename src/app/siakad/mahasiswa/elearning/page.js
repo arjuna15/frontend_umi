@@ -87,7 +87,17 @@ export default function ElearningPage() {
                           <span style={{ background: '#ef4444', color: 'white', padding: '2px 8px', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 'bold' }}>Deadline: {ass.deadline}</span>
                         </div>
                         <p style={{ margin: '0 0 12px 0', fontSize: '0.9rem', color: '#7f1d1d' }}>{ass.description}</p>
-                        <button style={{ background: 'white', border: '1px solid #fca5a5', color: '#b91c1c', padding: '8px 16px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}>Kumpulkan Tugas</button>
+                        
+                        {ass.submissions && ass.submissions.find(s => s.mahasiswa_id === data.user.id) ? (
+                          <div style={{ padding: '8px 12px', background: '#dcfce7', color: '#166534', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold' }}>
+                            <i className="ph-check-circle"></i> Tugas sudah dikumpulkan. Nilai: {ass.submissions.find(s => s.mahasiswa_id === data.user.id).grade || 'Belum dinilai'}
+                          </div>
+                        ) : (
+                          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                            <input type="file" style={{ fontSize: '0.85rem' }} />
+                            <button style={{ background: 'white', border: '1px solid #fca5a5', color: '#b91c1c', padding: '6px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}>Upload & Kumpulkan</button>
+                          </div>
+                        )}
                       </li>
                     ))}
                   </ul>
