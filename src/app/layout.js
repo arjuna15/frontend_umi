@@ -12,8 +12,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Universitas Mitra Bangsa",
-  description: "Kampus Unggulan di Jakarta",
+  title: "Universitas Mitra Bangsa | Kampus Unggulan",
+  description: "Universitas Mitra Bangsa (UMIBA) adalah kampus unggulan di Jakarta yang menawarkan pendidikan berkualitas dengan program S1 dan S2, serta jalur beasiswa.",
+  keywords: ["UMIBA", "Universitas Mitra Bangsa", "Kampus Jakarta", "Kuliah S1", "Kuliah S2", "Beasiswa KIP-K"],
+  openGraph: {
+    title: "Universitas Mitra Bangsa | Kampus Unggulan",
+    description: "Universitas Mitra Bangsa (UMIBA) adalah kampus unggulan di Jakarta.",
+    url: "https://umiba.ac.id",
+    siteName: "Universitas Mitra Bangsa",
+    images: [
+      {
+        url: "https://umiba.ac.id/wp-content/uploads/2024/05/logo-umiba.png",
+        width: 800,
+        height: 600,
+        alt: "Logo UMIBA",
+      },
+    ],
+    locale: "id_ID",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Universitas Mitra Bangsa",
+    description: "Kampus unggulan dengan berbagai pilihan program studi terbaik.",
+    images: ["https://umiba.ac.id/wp-content/uploads/2024/05/logo-umiba.png"],
+  },
 };
 
 import HeaderWrapper from "../components/HeaderWrapper";
@@ -24,7 +47,7 @@ import { Providers } from "../context/Providers";
 export default function RootLayout({ children }) {
   return (
     <html
-      lang="en"
+      lang="id"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>

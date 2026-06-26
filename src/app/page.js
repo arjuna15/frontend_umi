@@ -1,6 +1,7 @@
 
 "use client";
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useLanguage } from '../context/Providers';
 
 export default function Home() {
@@ -273,7 +274,7 @@ export default function Home() {
 <section id="sambutan" style={{ padding: 'var(--space-8) 0' }}>
   <div className="container grid grid-2" style={{ alignItems: 'center' }}>
     <div className="glass glass-card fade-up" style={{ padding: '0', overflow: 'hidden', position: 'relative', maxWidth: '400px', margin: '0 auto' }}>
-      <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block' }} onError={(e)=>{e.target.src='https://picsum.photos/400/600?random=A'}}/>
+      <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" width={400} height={600} style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block' }} onError={(e)=>{e.target.src='https://picsum.photos/400/600?random=A'}}/>
       <div className="glass" style={{ position: 'absolute', bottom: 'var(--space-4)', left: 'var(--space-4)', right: 'var(--space-4)', padding: 'var(--space-3)' }}>
         <h3 style={{ margin: '0', fontSize: '1.2rem' }}>{t("home.sambutan_rektor")}</h3>
         <p style={{ margin: '0', fontSize: '0.9rem' }}>{t("home.quote_rektor")}</p>
@@ -368,19 +369,19 @@ export default function Home() {
     </div>
     <div className="cert-slider fade-up" style={{ marginTop: 'var(--space-5)' }}>
       <div className="cert-slide">
-        <img src="https://umiba.ac.id/wp-content/uploads/2026/05/Serifikat-Lamsama-BaikAKTUARIA-768x543.webp" alt="Akreditasi S1 Ilmu Aktuaria"/>
+        <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/Serifikat-Lamsama-BaikAKTUARIA-768x543.webp" alt="Akreditasi S1 Ilmu Aktuaria" width={768} height={543} style={{ width: '100%', height: 'auto' }} />
       </div>
       <div className="cert-slide">
-        <img src="https://umiba.ac.id/wp-content/uploads/2025/05/Sertifikat-UMIBA_page-0001-768x543.jpg" alt="Akreditasi Institusi UMIBA"/>
+        <Image src="https://umiba.ac.id/wp-content/uploads/2025/05/Sertifikat-UMIBA_page-0001-768x543.jpg" alt="Akreditasi Institusi UMIBA" width={768} height={543} style={{ width: '100%', height: 'auto' }} />
       </div>
       <div className="cert-slide">
-        <img src="https://umiba.ac.id/wp-content/uploads/2024/05/Sertifikat-Akreditasi-S1-Manajemen-UMIBA-768x543.jpg" alt="Akreditasi S1 Manajemen"/>
+        <Image src="https://umiba.ac.id/wp-content/uploads/2024/05/Sertifikat-Akreditasi-S1-Manajemen-UMIBA-768x543.jpg" alt="Akreditasi S1 Manajemen" width={768} height={543} style={{ width: '100%', height: 'auto' }} />
       </div>
       <div className="cert-slide">
-        <img src="https://umiba.ac.id/wp-content/uploads/2025/01/WhatsApp-Image-2025-01-23-at-3.58.34-PM-768x536.jpeg" alt="Akreditasi S2 Manajemen"/>
+        <Image src="https://umiba.ac.id/wp-content/uploads/2025/01/WhatsApp-Image-2025-01-23-at-3.58.34-PM-768x536.jpeg" alt="Akreditasi S2 Manajemen" width={768} height={536} style={{ width: '100%', height: 'auto' }} />
       </div>
       <div className="cert-slide">
-        <img src="https://umiba.ac.id/wp-content/uploads/2025/05/Sertifikat_RPL_S2_2025-2026_Ganjil-768x502.jpg" alt="Sertifikat RPL S2"/>
+        <Image src="https://umiba.ac.id/wp-content/uploads/2025/05/Sertifikat_RPL_S2_2025-2026_Ganjil-768x502.jpg" alt="Sertifikat RPL S2" width={768} height={502} style={{ width: '100%', height: 'auto' }} />
       </div>
     </div>
     <input type="range" className="custom-scrollbar" data-target=".cert-slider" min="0" max="100" defaultValue="0" />
@@ -402,7 +403,7 @@ export default function Home() {
         newsData.map((newsItem, index) => (
           <div key={newsItem.id} className="glass glass-card fade-up" style={{ transitionDelay: `${index * 0.1}s`, padding: 0, overflow: 'hidden' }}>
             <div style={{ background: 'var(--color-muted)', height: '200px', overflow: 'hidden' }}>
-               <img src={newsItem.image_url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={newsItem.title}/>
+               <Image src={newsItem.image_url} width={400} height={300} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={newsItem.title}/>
             </div>
             <div style={{ padding: 'var(--space-4)' }}>
               <p style={{ fontSize: '0.8rem', marginBottom: '8px', color: 'var(--slate-500)' }}>{newsItem.date}</p>
@@ -479,7 +480,7 @@ export default function Home() {
     <div className="grid grid-4 scroll-mobile">
       <div className="glass glass-card media-card fade-up">
         <div className="media-img-wrap">
-          <img src="https://umiba.ac.id/wp-content/uploads/2025/12/umiba-4pilar-1536x938-1.jpeg" alt="Berita 1"/>
+          <Image src="https://umiba.ac.id/wp-content/uploads/2025/12/umiba-4pilar-1536x938-1.jpeg" alt="Berita 1" width={1536} height={938} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
           <div className="media-source"><i className="ph-fill ph-newspaper"></i> kompaskampus.id</div>
@@ -488,7 +489,7 @@ export default function Home() {
       </div>
       <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.1s' }}>
         <div className="media-img-wrap">
-          <img src="https://umiba.ac.id/wp-content/uploads/2025/10/serba-serbi_155621_big.webp" alt="Berita 2"/>
+          <Image src="https://umiba.ac.id/wp-content/uploads/2025/10/serba-serbi_155621_big.webp" alt="Berita 2" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
           <div className="media-source"><i className="ph-fill ph-newspaper"></i> wartaekonomi.co.id</div>
@@ -497,7 +498,7 @@ export default function Home() {
       </div>
       <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.2s' }}>
         <div className="media-img-wrap">
-          <img src="https://umiba.ac.id/wp-content/uploads/2025/10/medium_tscom_news_photo_1759914601.jpg" alt="Berita 3"/>
+          <Image src="https://umiba.ac.id/wp-content/uploads/2025/10/medium_tscom_news_photo_1759914601.jpg" alt="Berita 3" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
           <div className="media-source"><i className="ph-fill ph-newspaper"></i> teropongsenayan.com</div>
@@ -506,7 +507,7 @@ export default function Home() {
       </div>
       <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.3s' }}>
         <div className="media-img-wrap">
-          <img src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 4"/>
+          <Image src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 4" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
           <div className="media-source"><i className="ph-fill ph-newspaper"></i> newsdetik.co</div>
@@ -516,7 +517,7 @@ export default function Home() {
       
       <div className="glass glass-card media-card fade-up">
         <div className="media-img-wrap">
-          <img src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 5"/>
+          <Image src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 5" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
           <div className="media-source"><i className="ph-fill ph-newspaper"></i> kompaskampus.id</div>
@@ -525,7 +526,7 @@ export default function Home() {
       </div>
       <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.1s' }}>
         <div className="media-img-wrap">
-          <img src="https://umiba.ac.id/wp-content/uploads/2025/07/pilarparlemen.jpg" style={{ objectFit: 'contain', background: '#fff' }} alt="Berita 6"/>
+          <Image src="https://umiba.ac.id/wp-content/uploads/2025/07/pilarparlemen.jpg" style={{ objectFit: 'contain', background: '#fff', width: '100%', height: 'auto' }} width={800} height={600} alt="Berita 6"/>
         </div>
         <div className="media-content">
           <div className="media-source"><i className="ph-fill ph-newspaper"></i> pilarparlemen.id</div>
@@ -534,7 +535,7 @@ export default function Home() {
       </div>
       <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.2s' }}>
         <div className="media-img-wrap">
-          <img src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 7"/>
+          <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 7" width={300} height={158} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
           <div className="media-source"><i className="ph-fill ph-newspaper"></i> kompaskampus.id</div>
@@ -543,7 +544,7 @@ export default function Home() {
       </div>
       <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.3s' }}>
         <div className="media-img-wrap">
-          <img src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 8"/>
+          <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 8" width={300} height={158} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
           <div className="media-source"><i className="ph-fill ph-newspaper"></i> newsdetik.co</div>
@@ -565,7 +566,7 @@ export default function Home() {
       {testiData.length > 0 ? (
         testiData.map((testi, index) => (
           <div key={testi.id} className="testi-card" style={{ border: 'none', background: 'transparent', boxShadow: 'none' }}>
-            <img className="alumni-img" style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }} src={testi.image_url} alt={`Testimoni ${index + 1}`}/>
+            <Image className="alumni-img" style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)', objectFit: 'cover' }} src={testi.image_url} width={300} height={400} alt={`Testimoni ${index + 1}`}/>
           </div>
         ))
       ) : (
