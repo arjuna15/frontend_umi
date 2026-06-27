@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function AdminKeuangan() {
   const [billings, setBillings] = useState([]);
@@ -252,17 +253,13 @@ export default function AdminKeuangan() {
               {!isEdit && (
                 <div style={{ marginBottom: '16px' }}>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: '#334155', marginBottom: '8px' }}>Pilih Mahasiswa</label>
-                  <select 
+                  <CustomSelect 
+                    name="user_id"
                     value={formData.user_id} 
-                    onChange={(e) => setFormData({...formData, user_id: e.target.value})}
-                    required
-                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none', background: '#f8fafc' }}
-                  >
-                    <option value="">-- Pilih Mahasiswa --</option>
-                    {users.map(u => (
-                      <option key={u.id} value={u.id}>{u.name} ({u.npm || u.email})</option>
-                    ))}
-                  </select>
+                    onChange={(val) => setFormData({...formData, user_id: val})}
+                    placeholder="-- Pilih Mahasiswa --"
+                    options={users.map(u => ({ value: u.id, label: `${u.name} (${u.npm || u.email})`, icon: 'ph ph-user' }))}
+                  />
                 </div>
               )}
               
@@ -304,15 +301,15 @@ export default function AdminKeuangan() {
               {isEdit && (
                 <div style={{ marginBottom: '24px' }}>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: '#334155', marginBottom: '8px' }}>Status Pembayaran</label>
-                  <select 
+                  <CustomSelect 
+                    name="status"
                     value={formData.status} 
-                    onChange={(e) => setFormData({...formData, status: e.target.value})}
-                    required
-                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none', background: '#f8fafc' }}
-                  >
-                    <option value="Belum Lunas">Belum Lunas</option>
-                    <option value="Lunas">Lunas</option>
-                  </select>
+                    onChange={(val) => setFormData({...formData, status: val})}
+                    options={[
+                      { value: 'Belum Lunas', label: 'Belum Lunas', icon: 'ph ph-x-circle' },
+                      { value: 'Lunas', label: 'Lunas', icon: 'ph ph-check-circle' }
+                    ]}
+                  />
                 </div>
               )}
 

@@ -1,8 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import CustomSelect from '../../../../components/CustomSelect';
 
-export default function QuizBuilder() {
+export default function DosenQuizCreate() {
   const router = useRouter();
   const [title, setTitle] = useState('');
   const [duration, setDuration] = useState(60);
@@ -89,8 +90,8 @@ export default function QuizBuilder() {
         </div>
 
         {questions.map((q, idx) => (
-          <div key={idx} className={`siakad-card stagger-${(idx % 5) + 2}`} style={{ padding: '24px', marginBottom: '24px', position: 'relative' }}>
-            <div style={{ position: 'absolute', top: '24px', right: '24px' }}>
+          <div key={idx} className={`stagger-${(idx % 5) + 2}`} style={{ background: 'white', padding: '24px', borderRadius: '16px', marginBottom: '24px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)', border: '1px solid #e5e7eb', position: 'relative', zIndex: 50 - idx }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               {questions.length > 1 && (
                 <button type="button" onClick={() => removeQuestion(idx)} style={{ background: '#fee2e2', color: '#ef4444', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}>Hapus Soal</button>
               )}
@@ -125,12 +126,18 @@ export default function QuizBuilder() {
 
             <div style={{ marginTop: '20px' }}>
               <label style={{ fontWeight: 600, color: '#10b981' }}>Jawaban Benar (Kunci)</label>
-              <select value={q.correct_answer} onChange={e=>handleChange(idx, 'correct_answer', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '8px', border: '2px solid #10b981', background: '#ecfdf5' }}>
-                <option value="A">Opsi A</option>
-                <option value="B">Opsi B</option>
-                <option value="C">Opsi C</option>
-                <option value="D">Opsi D</option>
-              </select>
+              <CustomSelect 
+                name="correct_answer"
+                value={q.correct_answer} 
+                onChange={(val) => handleChange(idx, 'correct_answer', val)}
+                options={[
+                  { value: 'A', label: 'Opsi A', icon: 'ph ph-check-circle' },
+                  { value: 'B', label: 'Opsi B', icon: 'ph ph-check-circle' },
+                  { value: 'C', label: 'Opsi C', icon: 'ph ph-check-circle' },
+                  { value: 'D', label: 'Opsi D', icon: 'ph ph-check-circle' }
+                ]}
+                style={{ marginTop: '8px' }}
+              />
             </div>
           </div>
         ))}

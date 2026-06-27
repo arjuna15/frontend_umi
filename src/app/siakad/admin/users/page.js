@@ -136,7 +136,7 @@ export default function AdminUsersPage() {
         <p style={{ color: '#6b7280', margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
       </div>
 
-      <div className="siakad-card fade-in" style={{ padding: '24px', marginBottom: '24px' }}>
+      <div className="siakad-card fade-in" style={{ padding: '24px', marginBottom: '24px', position: 'relative', zIndex: 50 }}>
         <h3 style={{ margin: '0 0 16px 0', fontSize: '1.1rem' }}>Tambah Pengguna Baru</h3>
         <form onSubmit={handleCreateUser} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 150px' }}>

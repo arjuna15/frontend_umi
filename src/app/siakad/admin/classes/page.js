@@ -1,12 +1,14 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function AdminClassesPage() {
   const router = useRouter();
   const [courses, setCourses] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedDosen, setSelectedDosen] = useState("");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({
     id: '', code: '', name: '', sks: '', dosen_id: ''
@@ -152,7 +154,7 @@ export default function AdminClassesPage() {
         <p style={{ color: '#6b7280', margin: 0 }}>Kelola daftar mata kuliah dan dosen pengampunya.</p>
       </div>
 
-      <div className="siakad-card stagger-1" style={{ marginBottom: '24px', padding: '24px' }}>
+      <div className="siakad-card stagger-1" style={{ marginBottom: '24px', padding: '24px', position: 'relative', zIndex: 50 }}>
         <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: '0 0 20px 0' }}>Tambah Mata Kuliah Baru</h2>
         <form onSubmit={handleCreateCourse} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 150px' }}>
@@ -169,12 +171,12 @@ export default function AdminClassesPage() {
           </div>
           <div style={{ flex: '1 1 200px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Dosen Pengampu</label>
-            <select className="siakad-select" name="dosen_id" required style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'white' }}>
-              <option value="">Pilih Dosen...</option>
-              {users.map(u => (
-                <option key={u.id} value={u.id}>{u.name}</option>
-              ))}
-            </select>
+            <CustomSelect
+              name="dosen_id"
+              value={selectedDosen}
+              onChange={setSelectedDosen}
+              options={[{value: '', label: 'Pilih Dosen...'}, ...users.map(u => ({ value: u.id, label: u.name, icon: 'ph ph-user' }))]}
+            />
           </div>
           <div>
             <button type="submit" style={{ background: '#10b981', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.2)' }}>
@@ -247,12 +249,11 @@ export default function AdminClassesPage() {
                 </div>
                 <div style={{ flex: 2 }}>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Dosen Pengampu</label>
-                  <select className="siakad-select" value={editFormData.dosen_id} onChange={(e) => setEditFormData({...editFormData, dosen_id: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }}>
-                    <option value="">Pilih Dosen...</option>
-                    {users.map(u => (
-                      <option key={u.id} value={u.id}>{u.name}</option>
-                    ))}
-                  </select>
+                  <CustomSelect
+                    value={editFormData.dosen_id}
+                    onChange={(val) => setEditFormData({...editFormData, dosen_id: val})}
+                    options={[{value: '', label: 'Pilih Dosen...'}, ...users.map(u => ({ value: u.id, label: u.name, icon: 'ph ph-user' }))]}
+                  />
                 </div>
               </div>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>

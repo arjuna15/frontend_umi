@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function KaprodiPlotting() {
   const router = useRouter();
@@ -111,18 +112,13 @@ export default function KaprodiPlotting() {
                     )}
                   </td>
                   <td>
-                    <select 
-                      className="siakad-select" 
-                      style={{ padding: '6px 12px', width: '100%' }}
+                    <CustomSelect
                       disabled={assigningId === course.id}
-                      onChange={(e) => handleAssign(course.id, e.target.value)}
-                      defaultValue=""
-                    >
-                      <option value="" disabled>{assigningId === course.id ? 'Menyimpan...' : 'Pilih Dosen...'}</option>
-                      {dosens.map(dosen => (
-                        <option key={dosen.id} value={dosen.id}>{dosen.name}</option>
-                      ))}
-                    </select>
+                      onChange={(val) => handleAssign(course.id, val)}
+                      placeholder={assigningId === course.id ? 'Menyimpan...' : 'Pilih Dosen...'}
+                      options={dosens.map(dosen => ({ value: dosen.id, label: dosen.name, icon: 'ph ph-user' }))}
+                      style={{ minWidth: '200px' }}
+                    />
                   </td>
                 </tr>
               ))
