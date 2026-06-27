@@ -523,7 +523,7 @@ export default function SiakadLogin() {
             <div className="logo-container">
               <Image src="/icon.png" width={80} height={80} alt="Logo UMIBA" style={{ filter: 'drop-shadow(0px 10px 20px rgba(0,0,0,0.5))' }} />
             </div>
-            <h2>SIAKAD V3<br/><span style={{ color: '#e11d48', textShadow: '0 0 20px rgba(225, 29, 72, 0.5)' }}>Ultimate</span></h2>
+            <h2>SIAKAD UMIBA</h2>
             <p>Sistem Informasi Akademik Digital terdepan Universitas Bina Bangsa.</p>
           </div>
         </section>
