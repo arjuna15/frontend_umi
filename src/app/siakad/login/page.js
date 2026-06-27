@@ -45,20 +45,23 @@ export default function SiakadLogin() {
 
   return (
     <main className="neu-container">
-      <style jsx global>{`
-        body { margin: 0; padding: 0; background: #e8ecf1; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-        
+      <style jsx>{`
         .neu-container {
-          width: 100%;
-          padding: 20px;
+          width: 100vw;
+          min-height: 100vh;
           display: flex;
           align-items: center;
           justify-content: center;
+          padding: 20px;
+          background-color: #e8ecf1;
+          background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+          background-size: 20px 20px;
+          font-family: 'Inter', sans-serif;
         }
 
         .neu-card {
           width: 100%;
-          max-width: 950px;
+          max-width: 1100px;
           height: 600px;
           background: #ffffff;
           border-radius: 40px;
@@ -84,14 +87,14 @@ export default function SiakadLogin() {
           margin-bottom: 40px;
         }
         .neu-header h1 {
-          font-size: 2.5rem;
+          font-size: 2.8rem;
           color: #1e293b;
           margin: 0 0 8px 0;
           font-weight: 800;
         }
         .neu-header p {
           color: #64748b;
-          font-size: 1rem;
+          font-size: 1.05rem;
           margin: 0;
         }
 
@@ -100,7 +103,7 @@ export default function SiakadLogin() {
           position: relative;
           margin-bottom: 25px;
           width: 100%;
-          max-width: 380px;
+          max-width: 400px;
           margin-left: auto;
           margin-right: auto;
         }
@@ -157,7 +160,7 @@ export default function SiakadLogin() {
         .neu-options {
           display: flex;
           justify-content: space-between;
-          max-width: 380px;
+          max-width: 400px;
           margin: 0 auto 40px auto;
           font-size: 0.9rem;
           color: #64748b;
@@ -187,14 +190,14 @@ export default function SiakadLogin() {
         .neu-btn {
           display: block;
           width: 100%;
-          max-width: 200px;
+          max-width: 220px;
           margin: 0 auto;
           padding: 16px;
           border-radius: 30px;
           border: none;
           background: linear-gradient(135deg, #ef4444, #b91c1c);
           color: white;
-          font-size: 1.05rem;
+          font-size: 1.1rem;
           font-weight: 700;
           cursor: pointer;
           box-shadow: 5px 5px 15px rgba(239, 68, 68, 0.4), -5px -5px 15px rgba(255, 255, 255, 0.8);
@@ -218,7 +221,6 @@ export default function SiakadLogin() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          color: white;
           text-align: center;
           padding: 40px;
         }
@@ -238,16 +240,18 @@ export default function SiakadLogin() {
           position: relative;
         }
         .neu-color-content h2 {
-          font-size: 2.5rem;
-          font-weight: 800;
+          font-size: 2.8rem;
+          font-weight: 900;
           margin: 0 0 16px 0;
+          color: #ffffff !important;
           text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
         }
         .neu-color-content p {
-          font-size: 1.05rem;
+          font-size: 1.1rem;
           line-height: 1.6;
-          opacity: 0.9;
-          max-width: 280px;
+          color: #ffffff !important;
+          opacity: 0.95;
+          max-width: 320px;
           margin: 0 auto;
         }
 
@@ -258,8 +262,8 @@ export default function SiakadLogin() {
           padding: 12px;
           border-radius: 12px;
           margin: 0 auto 24px auto;
-          max-width: 380px;
-          font-size: 0.9rem;
+          max-width: 400px;
+          font-size: 0.95rem;
           display: flex;
           align-items: center;
           gap: 10px;
@@ -295,7 +299,7 @@ export default function SiakadLogin() {
               <input 
                 type="text" 
                 className="neu-input" 
-                placeholder="NIM / NIP" 
+                placeholder="NIM / NIP / Username" 
                 value={nim}
                 onChange={e => setNim(e.target.value)}
                 required
@@ -328,7 +332,7 @@ export default function SiakadLogin() {
                 </div>
                 Ingat saya
               </label>
-              <a href="#" style={{ color: '#64748b', textDecoration: 'none' }}>Lupa password?</a>
+              <a href="#" style={{ color: '#ef4444', fontWeight: '600', textDecoration: 'none' }}>Lupa password?</a>
             </div>
 
             <button type="submit" disabled={loading} className="neu-btn">
@@ -338,13 +342,12 @@ export default function SiakadLogin() {
         </section>
 
         <section className="neu-color-section">
-          {/* Custom SVG Wave for the edge */}
           <svg className="neu-wave" preserveAspectRatio="none" viewBox="0 0 100 100">
             <path d="M100,0 C30,30 30,70 100,100 L100,0 Z" fill="#b91c1c" style={{ transform: 'scaleX(2.5)', transformOrigin: 'right center' }} />
           </svg>
 
           <div className="neu-color-content">
-            <Image src="/icon.png" width={80} height={80} alt="Logo" style={{ marginBottom: '20px', filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.3))' }} />
+            <Image src="/icon.png" width={90} height={90} alt="Logo" style={{ marginBottom: '24px', filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.3))' }} />
             <h2>Selamat Datang!</h2>
             <p>Sistem Informasi Akademik Digital Universitas Bina Bangsa.</p>
           </div>
