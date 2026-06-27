@@ -25,8 +25,13 @@ export default function SiakadLayout({ children }) {
     ];
   } else if (role === 'kaprodi') {
     menuItems = [
-      { label: 'Dashboard Kaprodi', icon: 'ph-chart-line-up', path: '/siakad/kaprodi' },
-      { label: 'Persetujuan KRS', icon: 'ph-file-signature', path: '/siakad/kaprodi' }, // same page but highlights it
+      { label: 'Dashboard Statistik', icon: 'ph-chart-line-up', path: '/siakad/kaprodi' },
+      { label: 'Persetujuan KRS', icon: 'ph-check-square-offset', path: '/siakad/kaprodi/krs' },
+      { label: 'Monitoring Perkuliahan', icon: 'ph-chalkboard-teacher', path: '/siakad/kaprodi/monitoring' },
+      { label: 'Plotting Dosen', icon: 'ph-users-three', path: '/siakad/kaprodi/plotting' },
+      { label: 'Distribusi Nilai', icon: 'ph-student', path: '/siakad/kaprodi/students' },
+      { label: 'Hasil EDOM', icon: 'ph-star-half', path: '/siakad/kaprodi/edom' },
+      { label: 'Laporan Akreditasi', icon: 'ph-file-pdf', path: '/siakad/kaprodi/reports' },
     ];
   } else if (role === 'dosen') {
     menuItems = [
