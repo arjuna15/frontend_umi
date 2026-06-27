@@ -444,4 +444,114 @@
     border-top-left-radius: 20px;
     box-shadow: 0 -10px 0 0 #f8fafc;
   }
+
+  /* Drawer Overlay */
+  .siakad-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 200;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: flex-end;
+    animation: fadeIn 0.3s ease;
+  }
+
+  /* Drawer Content */
+  .siakad-drawer-content {
+    background: #ffffff;
+    width: 100%;
+    border-radius: 24px 24px 0 0;
+    padding: 24px;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+    animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .siakad-drawer-content .drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .siakad-drawer-content .drawer-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .siakad-drawer-content .drawer-header button {
+    background: #f1f5f9;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+
+  .siakad-drawer-content .drawer-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .siakad-drawer-content .drawer-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 16px;
+    text-decoration: none;
+    color: #334155;
+    transition: 0.2s;
+  }
+
+  .siakad-drawer-content .drawer-item:active {
+    background: #e2e8f0;
+    transform: scale(0.98);
+  }
+
+  .siakad-drawer-content .drawer-item .icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4f46e5;
+    font-size: 1.2rem;
+    margin-right: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .siakad-drawer-content .drawer-item .label {
+    flex: 1;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .siakad-drawer-content .drawer-item .chevron {
+    color: #94a3b8;
+    font-size: 1.1rem;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
 }
