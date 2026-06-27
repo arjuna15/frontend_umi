@@ -16,12 +16,17 @@ export default function SiakadLayout({ children }) {
   if (isLoginPage) return <>{children}</>;
 
   let menuItems = [];
-  if (role === 'admin' || role === 'superadmin' || role === 'kaprodi') {
+  if (role === 'admin' || role === 'superadmin') {
     menuItems = [
       { label: 'Admin Dashboard', icon: 'ph-chart-pie-slice', path: '/siakad/admin' },
       { label: 'Manajemen Pengguna', icon: 'ph-users-three', path: '/siakad/admin/users' },
       { label: 'Manajemen Kelas', icon: 'ph-chalkboard', path: '/siakad/admin/classes' },
       { label: 'Manajemen Keuangan', icon: 'ph-wallet', path: '/siakad/admin/keuangan' },
+    ];
+  } else if (role === 'kaprodi') {
+    menuItems = [
+      { label: 'Dashboard Kaprodi', icon: 'ph-chart-line-up', path: '/siakad/kaprodi' },
+      { label: 'Persetujuan KRS', icon: 'ph-file-signature', path: '/siakad/kaprodi' }, // same page but highlights it
     ];
   } else if (role === 'dosen') {
     menuItems = [

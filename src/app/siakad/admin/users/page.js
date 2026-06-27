@@ -84,16 +84,59 @@ export default function AdminUsersPage() {
     </div>
   );
 
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editFormData, setEditFormData] = useState({
+    id: '', name: '', nim_nip: '', role: '', prodi: '', password: ''
+  });
+
+  const handleOpenEditModal = (user) => {
+    setEditFormData({
+      id: user.id,
+      name: user.name,
+      nim_nip: user.nim_nip,
+      role: user.role,
+      prodi: user.prodi || '',
+      password: ''
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateUser = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    
+    try {
+      const res = await fetch(`${apiUrl}/siakad/admin/users/${editFormData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editFormData)
+      });
+      if (res.ok) {
+        setIsEditModalOpen(false);
+        fetchUsers();
+      } else {
+        const errorData = await res.json();
+        alert('Gagal mengupdate user: ' + (errorData.message || 'Error'));
+      }
+    } catch (err) {
+      alert('Error: ' + err.message);
+    }
+  };
+
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Manajemen Pengguna 👥</h1>
-        <p style={{ color: '#6b7280', margin: 0 }}>Kelola data dosen dan mahasiswa dalam sistem.</p>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Manajemen Pengguna</h1>
+        <p style={{ color: '#6b7280', margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
       </div>
 
       <div className="siakad-card stagger-1" style={{ marginBottom: '24px', padding: '24px' }}>
-        <h3 style={{ marginTop: 0, marginBottom: '16px', color: '#374151', fontSize: '1.2rem', fontWeight: 'bold' }}>Tambah Pengguna Baru</h3>
-        <form onSubmit={handleCreateUser} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr auto', gap: '16px', alignItems: 'end' }}>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: '0 0 20px 0' }}>Tambah Pengguna Baru</h2>
+        <form onSubmit={handleCreateUser} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 2fr auto', gap: '16px', alignItems: 'end' }}>
           <div>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Nama Lengkap</label>
             <input name="name" required placeholder="Masukkan nama..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
@@ -155,14 +198,18 @@ export default function AdminUsersPage() {
                     </span>
                   </td>
                   <td style={{ padding: '16px 24px', textAlign: 'right' }}>
-                    <button 
-                      onClick={() => handleDeleteUser(user.id)}
-                      style={{ background: 'transparent', border: '1px solid #fecaca', color: '#dc2626', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '600', transition: 'all 0.2s' }}
-                      onMouseOver={(e) => { e.target.style.background = '#fef2f2' }}
-                      onMouseOut={(e) => { e.target.style.background = 'transparent' }}
-                    >
-                      Hapus
-                    </button>
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                      <button 
+                        onClick={() => handleOpenEditModal(user)}
+                        style={{ background: '#eff6ff', color: '#1d4ed8', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                        title="Edit Pengguna"
+                      ><i className="ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
+                      <button 
+                        onClick={() => handleDeleteUser(user.id)}
+                        style={{ background: '#fef2f2', color: '#b91c1c', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                        title="Hapus Pengguna"
+                      ><i className="ph-trash" style={{ fontSize: '1rem' }}></i></button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -175,6 +222,47 @@ export default function AdminUsersPage() {
           </table>
         </div>
       </div>
+
+      {isEditModalOpen && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
+          <div style={{ background: 'white', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
+            <h2 style={{ margin: '0 0 20px 0', fontSize: '1.25rem', fontWeight: 'bold' }}>Edit Pengguna</h2>
+            <form onSubmit={handleUpdateUser}>
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Nama Lengkap</label>
+                <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+              </div>
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>NIM / NIP</label>
+                <input value={editFormData.nim_nip} onChange={(e) => setEditFormData({...editFormData, nim_nip: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+              </div>
+              <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
+                <div style={{ flex: 1 }}>
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Role</label>
+                  <select value={editFormData.role} onChange={(e) => setEditFormData({...editFormData, role: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }}>
+                    <option value="mahasiswa">Mahasiswa</option>
+                    <option value="dosen">Dosen</option>
+                    <option value="admin">Admin</option>
+                    <option value="kaprodi">Kaprodi</option>
+                  </select>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Prodi</label>
+                  <input value={editFormData.prodi} onChange={(e) => setEditFormData({...editFormData, prodi: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+                </div>
+              </div>
+              <div style={{ marginBottom: '24px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Password Baru (Opsional)</label>
+                <input type="password" value={editFormData.password} onChange={(e) => setEditFormData({...editFormData, password: e.target.value})} placeholder="Biarkan kosong jika tidak ingin mengubah..." style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+              </div>
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+                <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 16px', background: 'transparent', border: '1px solid #d1d5db', borderRadius: '8px', cursor: 'pointer' }}>Batal</button>
+                <button type="submit" style={{ padding: '10px 16px', background: '#4f46e5', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Simpan Perubahan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

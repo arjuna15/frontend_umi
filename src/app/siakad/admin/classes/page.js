@@ -103,15 +103,57 @@ export default function AdminClassesPage() {
     </div>
   );
 
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editFormData, setEditFormData] = useState({
+    id: '', code: '', name: '', sks: '', dosen_id: ''
+  });
+
+  const handleOpenEditModal = (course) => {
+    setEditFormData({
+      id: course.id,
+      code: course.code,
+      name: course.name,
+      sks: course.sks,
+      dosen_id: course.dosen_id || ''
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateCourse = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    
+    try {
+      const res = await fetch(`${apiUrl}/siakad/admin/courses/${editFormData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editFormData)
+      });
+      if (res.ok) {
+        setIsEditModalOpen(false);
+        fetchCourses();
+      } else {
+        const errorData = await res.json();
+        alert('Gagal mengupdate mata kuliah: ' + (errorData.message || 'Error'));
+      }
+    } catch (err) {
+      alert('Error: ' + err.message);
+    }
+  };
+
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Manajemen Mata Kuliah / Kelas 📚</h1>
-        <p style={{ color: '#6b7280', margin: 0 }}>Kelola daftar kelas dan mata kuliah akademik.</p>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Manajemen Kelas & Mata Kuliah</h1>
+        <p style={{ color: '#6b7280', margin: 0 }}>Kelola daftar mata kuliah dan dosen pengampunya.</p>
       </div>
 
       <div className="siakad-card stagger-1" style={{ marginBottom: '24px', padding: '24px' }}>
-        <h3 style={{ marginTop: 0, marginBottom: '16px', color: '#374151', fontSize: '1.2rem', fontWeight: 'bold' }}>Tambah Mata Kuliah Baru</h3>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: '0 0 20px 0' }}>Tambah Mata Kuliah Baru</h2>
         <form onSubmit={handleCreateCourse} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr auto', gap: '16px', alignItems: 'end' }}>
           <div>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Kode Mata Kuliah</label>
@@ -160,14 +202,18 @@ export default function AdminClassesPage() {
                   <td style={{ padding: '16px 24px', color: '#111827', fontWeight: '500' }}>{course.name}</td>
                   <td style={{ padding: '16px 24px', color: '#4b5563' }}>{course.sks} SKS</td>
                   <td style={{ padding: '16px 24px', textAlign: 'right' }}>
-                    <button 
-                      onClick={() => handleDeleteCourse(course.id)}
-                      style={{ background: 'transparent', border: '1px solid #fecaca', color: '#dc2626', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '600', transition: 'all 0.2s' }}
-                      onMouseOver={(e) => { e.target.style.background = '#fef2f2' }}
-                      onMouseOut={(e) => { e.target.style.background = 'transparent' }}
-                    >
-                      Hapus
-                    </button>
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                      <button 
+                        onClick={() => handleOpenEditModal(course)}
+                        style={{ background: '#eff6ff', color: '#1d4ed8', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                        title="Edit Mata Kuliah"
+                      ><i className="ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
+                      <button 
+                        onClick={() => handleDeleteCourse(course.id)}
+                        style={{ background: '#fef2f2', color: '#b91c1c', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                        title="Hapus Mata Kuliah"
+                      ><i className="ph-trash" style={{ fontSize: '1rem' }}></i></button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -180,6 +226,43 @@ export default function AdminClassesPage() {
           </table>
         </div>
       </div>
+
+      {isEditModalOpen && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
+          <div style={{ background: 'white', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
+            <h2 style={{ margin: '0 0 20px 0', fontSize: '1.25rem', fontWeight: 'bold' }}>Edit Mata Kuliah</h2>
+            <form onSubmit={handleUpdateCourse}>
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Kode Mata Kuliah</label>
+                <input value={editFormData.code} onChange={(e) => setEditFormData({...editFormData, code: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+              </div>
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Nama Mata Kuliah</label>
+                <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+              </div>
+              <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
+                <div style={{ flex: 1 }}>
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>SKS</label>
+                  <input type="number" min="1" max="6" value={editFormData.sks} onChange={(e) => setEditFormData({...editFormData, sks: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+                </div>
+                <div style={{ flex: 2 }}>
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Dosen Pengampu</label>
+                  <select value={editFormData.dosen_id} onChange={(e) => setEditFormData({...editFormData, dosen_id: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }}>
+                    <option value="">Pilih Dosen...</option>
+                    {users.map(u => (
+                      <option key={u.id} value={u.id}>{u.name}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+                <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 16px', background: 'transparent', border: '1px solid #d1d5db', borderRadius: '8px', cursor: 'pointer' }}>Batal</button>
+                <button type="submit" style={{ padding: '10px 16px', background: '#10b981', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Simpan Perubahan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

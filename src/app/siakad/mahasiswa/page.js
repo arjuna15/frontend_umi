@@ -75,12 +75,27 @@ export default function MahasiswaDashboard() {
         </div>
       </div>
 
-      <div style={{ background: 'white', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+      <div id="khs-print-section" style={{ background: 'white', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }} className="no-print">
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>Kartu Hasil Studi (KHS)</h2>
-          <button style={{ background: '#f3f4f6', border: 'none', padding: '8px 16px', borderRadius: '8px', color: '#4b5563', fontWeight: '500', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <i className="ph-printer"></i> Cetak KHS
+          <button onClick={() => window.print()} style={{ background: '#4f46e5', border: 'none', padding: '8px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
+            <i className="ph-printer"></i> Cetak KHS Resmi
           </button>
+        </div>
+        
+        <div className="print-header" style={{ display: 'none', marginBottom: '30px', textAlign: 'center' }}>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: '0 0 5px 0' }}>KARTU HASIL STUDI (KHS)</h1>
+          <h2 style={{ fontSize: '1.2rem', margin: '0 0 20px 0' }}>UNIVERSITAS BINA BANGSA</h2>
+          <div style={{ display: 'flex', justifyContent: 'space-between', textAlign: 'left', marginBottom: '20px' }}>
+            <div>
+              <p style={{ margin: '0 0 5px 0' }}><strong>Nama:</strong> {data.user.name}</p>
+              <p style={{ margin: 0 }}><strong>NIM:</strong> {data.user.nim_nip}</p>
+            </div>
+            <div>
+              <p style={{ margin: '0 0 5px 0' }}><strong>Prodi:</strong> {data.user.prodi}</p>
+              <p style={{ margin: 0 }}><strong>IPK Sementara:</strong> 3.75</p>
+            </div>
+          </div>
         </div>
         
         <div style={{ overflowX: 'auto' }}>

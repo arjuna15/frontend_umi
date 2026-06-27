@@ -7,9 +7,31 @@ export default function DosenGradebookPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // States to hold the current grades being edited by the user
+  // We will track raw components: kehadiran (10%), tugas (20%), uts (30%), uas (40%)
   const [editedGrades, setEditedGrades] = useState({});
   const [savingGrades, setSavingGrades] = useState(false);
+  const [activeCourseId, setActiveCourseId] = useState(null);
+
+  const calculateScoreAndGrade = (components) => {
+    const k = parseFloat(components.kehadiran) || 0;
+    const t = parseFloat(components.tugas) || 0;
+    const ut = parseFloat(components.uts) || 0;
+    const ua = parseFloat(components.uas) || 0;
+    
+    const finalScore = (k * 0.1) + (t * 0.2) + (ut * 0.3) + (ua * 0.4);
+    
+    let grade = 'E';
+    if (finalScore >= 85) grade = 'A';
+    else if (finalScore >= 80) grade = 'A-';
+    else if (finalScore >= 75) grade = 'B+';
+    else if (finalScore >= 70) grade = 'B';
+    else if (finalScore >= 65) grade = 'B-';
+    else if (finalScore >= 60) grade = 'C+';
+    else if (finalScore >= 55) grade = 'C';
+    else if (finalScore >= 40) grade = 'D';
+
+    return { score: finalScore.toFixed(1), grade };
+  };
 
   const fetchDashboard = async () => {
     const token = localStorage.getItem('siakad_token');
@@ -24,12 +46,18 @@ export default function DosenGradebookPage() {
       if (result.user.role !== 'dosen') return router.push('/siakad/login');
       setData(result);
       
-      // Initialize editedGrades
       const initialEdits = {};
       result.jadwal.forEach(course => {
         if (course.grades) {
           course.grades.forEach(g => {
+            // Since we don't store raw components in DB for this demo, 
+            // we reverse engineer roughly from the final score if it exists, or just set to 0.
+            const s = g.score || 0;
             initialEdits[g.id] = {
+              kehadiran: s ? s : '',
+              tugas: s ? s : '',
+              uts: s ? s : '',
+              uas: s ? s : '',
               score: g.score || '',
               grade: g.grade || ''
             };
@@ -37,6 +65,7 @@ export default function DosenGradebookPage() {
         }
       });
       setEditedGrades(initialEdits);
+      if (result.jadwal.length > 0) setActiveCourseId(result.jadwal[0].id);
     } catch (err) {
       router.push('/siakad/login');
     } finally {
@@ -49,13 +78,19 @@ export default function DosenGradebookPage() {
   }, [router]);
 
   const handleGradeChange = (gradeId, field, value) => {
-    setEditedGrades(prev => ({
-      ...prev,
-      [gradeId]: {
-        ...prev[gradeId],
-        [field]: value
-      }
-    }));
+    setEditedGrades(prev => {
+      const current = prev[gradeId];
+      const updated = { ...current, [field]: value };
+      const { score, grade } = calculateScoreAndGrade(updated);
+      return {
+        ...prev,
+        [gradeId]: {
+          ...updated,
+          score,
+          grade
+        }
+      };
+    });
   };
 
   const handleSaveGrades = async (courseId) => {
@@ -70,10 +105,9 @@ export default function DosenGradebookPage() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
 
     try {
-      // Create an array of fetch promises for each grade in this course
       const promises = course.grades.map(g => {
         const edits = editedGrades[g.id];
-        if (!edits) return Promise.resolve(); // nothing to update
+        if (!edits) return Promise.resolve();
         
         return fetch(`${apiUrl}/siakad/grade/${g.id}`, {
           method: 'POST',
@@ -89,8 +123,6 @@ export default function DosenGradebookPage() {
       });
 
       await Promise.all(promises);
-      
-      // Refresh data
       await fetchDashboard();
       alert('Berhasil menyimpan nilai untuk mata kuliah ini!');
     } catch (err) {
@@ -102,97 +134,158 @@ export default function DosenGradebookPage() {
   };
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat gradebook...
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Gradebook...
     </div>
   );
 
   return (
     <div>
-      <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
-          <h1 style={{ fontSize: '2.2rem', fontWeight: '800', color: '#0f172a', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Gradebook & Nilai 📊</h1>
-          <p style={{ color: '#475569', margin: 0, fontSize: '1.05rem' }}>Input dan kelola skor mahasiswa secara Real-Time.</p>
-        </div>
-        <button style={{ background: '#2563eb', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(37, 99, 235, 0.3)', transition: 'all 0.3s' }}>
-          <i className="ph-file-xls" style={{ fontSize: '1.2rem' }}></i> Export ke Excel
-        </button>
+      <div style={{ marginBottom: '24px' }}>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Sistem Penilaian (Gradebook) 📊</h1>
+        <p style={{ color: '#6b7280', margin: 0 }}>Input nilai komponen mahasiswa secara interaktif. Nilai akhir akan dihitung otomatis.</p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
-        {data.jadwal.map((course, i) => (
-          <div key={i} className={`siakad-card stagger-${(i % 5) + 1}`}>
-            <div style={{ background: 'linear-gradient(90deg, rgba(239,246,255,0.8) 0%, rgba(255,255,255,0) 100%)', padding: '24px 32px', borderBottom: '1px solid rgba(219, 234, 254, 0.5)', position: 'relative', overflow: 'hidden' }}>
-              <div style={{ position: 'absolute', right: '-20px', top: '-20px', fontSize: '10rem', color: 'rgba(37, 99, 235, 0.03)', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
-                <i className="ph-exam"></i>
+      <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', overflowX: 'auto', paddingBottom: '8px' }}>
+        {data.jadwal.map(course => (
+          <button 
+            key={course.id}
+            onClick={() => setActiveCourseId(course.id)}
+            style={{
+              padding: '10px 20px', borderRadius: '999px', fontWeight: 'bold', whiteSpace: 'nowrap',
+              background: activeCourseId === course.id ? '#4f46e5' : 'white',
+              color: activeCourseId === course.id ? 'white' : '#4b5563',
+              border: activeCourseId === course.id ? 'none' : '1px solid #d1d5db',
+              boxShadow: activeCourseId === course.id ? '0 4px 10px rgba(79, 70, 229, 0.3)' : 'none',
+              cursor: 'pointer', transition: 'all 0.2s'
+            }}
+          >
+            {course.code} - {course.name}
+          </button>
+        ))}
+      </div>
+
+      {data.jadwal.map(course => {
+        if (course.id !== activeCourseId) return null;
+        
+        return (
+          <div key={course.id} className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden', border: '1px solid #e5e7eb', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
+            <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <h2 style={{ color: 'white', margin: '0 0 4px 0', fontSize: '1.25rem' }}>{course.name}</h2>
+                <p style={{ color: '#c7d2fe', margin: 0, fontSize: '0.9rem' }}>{course.semester} • {course.sks} SKS</p>
               </div>
-              <div style={{ zIndex: 1 }}>
-                <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#1e3a8a', fontWeight: '800' }}>{course.name}</h3>
-                <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: '#1d4ed8', fontWeight: '600', padding: '4px 12px', background: 'rgba(29, 78, 216, 0.1)', borderRadius: '999px' }}>{course.code} • {course.sks} SKS</span>
-              </div>
+              <button 
+                onClick={() => handleSaveGrades(course.id)}
+                disabled={savingGrades}
+                style={{
+                  background: '#10b981', color: 'white', border: 'none', padding: '10px 20px', 
+                  borderRadius: '8px', cursor: savingGrades ? 'not-allowed' : 'pointer', fontWeight: 'bold',
+                  display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 10px rgba(16, 185, 129, 0.3)',
+                  transition: 'transform 0.1s'
+                }}
+                onMouseDown={e => e.currentTarget.style.transform = 'scale(0.95)'}
+                onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                <i className={savingGrades ? "ph-spinner ph-spin" : "ph-floppy-disk"}></i> {savingGrades ? 'Menyimpan...' : 'Simpan Nilai'}
+              </button>
             </div>
             
-            <div style={{ padding: '0', overflowX: 'auto', background: 'rgba(255,255,255,0.3)' }}>
+            <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
                 <thead>
-                  <tr style={{ background: 'rgba(241, 245, 249, 0.8)' }}>
-                    <th style={{ padding: '16px 32px', fontWeight: '800', color: '#475569', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Mahasiswa</th>
-                    <th style={{ padding: '16px 32px', fontWeight: '800', color: '#475569', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Kehadiran</th>
-                    <th style={{ padding: '16px 32px', fontWeight: '800', color: '#475569', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Skor Akhir (0-100)</th>
-                    <th style={{ padding: '16px 32px', fontWeight: '800', color: '#475569', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Nilai Huruf</th>
+                  <tr style={{ background: '#f9fafb', color: '#4b5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '1px solid #e5e7eb' }}>
+                    <th style={{ padding: '16px 24px', fontWeight: 'bold' }}>Mahasiswa</th>
+                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Kehadiran (10%)</th>
+                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Tugas (20%)</th>
+                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UTS (30%)</th>
+                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UAS (40%)</th>
+                    <th style={{ padding: '16px', fontWeight: 'bold', width: '100px', background: '#eff6ff', color: '#1e40af' }}>Nilai Akhir</th>
+                    <th style={{ padding: '16px 24px', fontWeight: 'bold', width: '100px', background: '#eff6ff', color: '#1e40af' }}>Grade</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {course.grades && course.grades.map((grade, j) => {
-                    const attendanceCount = course.attendances?.length || 0;
-                    const presentCount = course.attendances?.filter(a => a.records?.find(r => r.mahasiswa_id === grade.mahasiswa_id && r.status === 'present'))?.length || 0;
-                    const attendancePercentage = attendanceCount > 0 ? Math.round((presentCount / attendanceCount) * 100) : 100;
-                    
-                    const editState = editedGrades[grade.id] || { score: '', grade: '' };
+                  {course.grades && course.grades.map((grade, idx) => {
+                    const edits = editedGrades[grade.id] || {};
+                    const isPassed = parseFloat(edits.score) >= 60;
                     
                     return (
-                      <tr key={j} style={{ borderBottom: j === course.grades.length - 1 ? 'none' : '1px solid rgba(226, 232, 240, 0.5)' }}>
-                        <td style={{ padding: '20px 32px' }}>
-                          <strong style={{ display: 'block', color: '#0f172a', fontSize: '1.05rem', fontWeight: '700' }}>{grade.mahasiswa?.name}</strong>
-                          <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: '500' }}>NIM: {grade.mahasiswa?.nim_nip}</span>
+                      <tr key={grade.id} style={{ borderBottom: '1px solid #f3f4f6', background: idx % 2 === 0 ? 'white' : 'rgba(249, 250, 251, 0.5)' }}>
+                        <td style={{ padding: '16px 24px' }}>
+                          <p style={{ margin: 0, fontWeight: 'bold', color: '#111827' }}>{grade.mahasiswa?.name}</p>
+                          <p style={{ margin: 0, fontSize: '0.85rem', color: '#6b7280' }}>{grade.mahasiswa?.nim_nip}</p>
                         </td>
-                        <td style={{ padding: '20px 32px', color: attendancePercentage < 75 ? '#ef4444' : '#10b981', fontWeight: '800', fontSize: '1.1rem' }}>
-                          {attendancePercentage}%
+                        <td style={{ padding: '16px' }}>
+                          <input 
+                            type="number" min="0" max="100" placeholder="0-100"
+                            value={edits.kehadiran || ''}
+                            onChange={(e) => handleGradeChange(grade.id, 'kehadiran', e.target.value)}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'rgba(255,255,255,0.8)', transition: 'border 0.2s', fontWeight: '500' }}
+                            onFocus={e => e.target.style.borderColor = '#4f46e5'}
+                            onBlur={e => e.target.style.borderColor = '#d1d5db'}
+                          />
                         </td>
-                        <td style={{ padding: '20px 32px' }}>
-                          <input type="number" min="0" max="100" value={editState.score} onChange={e => handleGradeChange(grade.id, 'score', e.target.value)} style={{ width: '80px', padding: '10px', borderRadius: '12px', border: '1px solid #cbd5e1', textAlign: 'center', fontSize: '1rem', fontWeight: '700', color: '#0f172a', background: 'rgba(255,255,255,0.8)', outline: 'none' }} placeholder="--" />
+                        <td style={{ padding: '16px' }}>
+                          <input 
+                            type="number" min="0" max="100" placeholder="0-100"
+                            value={edits.tugas || ''}
+                            onChange={(e) => handleGradeChange(grade.id, 'tugas', e.target.value)}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'rgba(255,255,255,0.8)', transition: 'border 0.2s', fontWeight: '500' }}
+                            onFocus={e => e.target.style.borderColor = '#4f46e5'}
+                            onBlur={e => e.target.style.borderColor = '#d1d5db'}
+                          />
                         </td>
-                        <td style={{ padding: '20px 32px' }}>
-                          <select value={editState.grade} onChange={e => handleGradeChange(grade.id, 'grade', e.target.value)} style={{ padding: '10px 16px', borderRadius: '12px', border: '1px solid #cbd5e1', fontWeight: '800', outline: 'none', fontSize: '1rem', color: '#0f172a', background: 'rgba(255,255,255,0.8)', cursor: 'pointer' }}>
-                            <option value="">--</option>
-                            <option value="A">A</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="B">B</option>
-                            <option value="C+">C+</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
-                          </select>
+                        <td style={{ padding: '16px' }}>
+                          <input 
+                            type="number" min="0" max="100" placeholder="0-100"
+                            value={edits.uts || ''}
+                            onChange={(e) => handleGradeChange(grade.id, 'uts', e.target.value)}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'rgba(255,255,255,0.8)', transition: 'border 0.2s', fontWeight: '500' }}
+                            onFocus={e => e.target.style.borderColor = '#4f46e5'}
+                            onBlur={e => e.target.style.borderColor = '#d1d5db'}
+                          />
+                        </td>
+                        <td style={{ padding: '16px' }}>
+                          <input 
+                            type="number" min="0" max="100" placeholder="0-100"
+                            value={edits.uas || ''}
+                            onChange={(e) => handleGradeChange(grade.id, 'uas', e.target.value)}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'rgba(255,255,255,0.8)', transition: 'border 0.2s', fontWeight: '500' }}
+                            onFocus={e => e.target.style.borderColor = '#4f46e5'}
+                            onBlur={e => e.target.style.borderColor = '#d1d5db'}
+                          />
+                        </td>
+                        <td style={{ padding: '16px', background: '#eff6ff', borderLeft: '1px solid #bfdbfe' }}>
+                          <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1e40af' }}>{edits.score || '-'}</div>
+                        </td>
+                        <td style={{ padding: '16px 24px', background: '#eff6ff' }}>
+                          <div style={{ 
+                            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                            width: '40px', height: '40px', borderRadius: '8px', fontWeight: 'bold', fontSize: '1.2rem',
+                            background: edits.grade ? (isPassed ? '#dcfce7' : '#fee2e2') : 'rgba(255,255,255,0.5)',
+                            color: edits.grade ? (isPassed ? '#166534' : '#991b1b') : '#9ca3af',
+                            border: `1px solid ${edits.grade ? (isPassed ? '#86efac' : '#f87171') : '#d1d5db'}`
+                          }}>
+                            {edits.grade || '-'}
+                          </div>
                         </td>
                       </tr>
                     );
                   })}
+                  {(!course.grades || course.grades.length === 0) && (
+                    <tr>
+                      <td colSpan="7" style={{ padding: '30px', textAlign: 'center', color: '#6b7280' }}>
+                        <i className="ph-users-slash" style={{ fontSize: '3rem', color: '#9ca3af', margin: '0 auto 10px', display: 'block' }}></i>
+                        Belum ada mahasiswa yang terdaftar di kelas ini
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
-              {(!course.grades || course.grades.length === 0) && (
-                <div style={{ padding: '40px', textAlign: 'center', color: '#94a3b8', fontStyle: 'italic', fontSize: '0.95rem' }}>Tidak ada mahasiswa yang terdaftar di kelas ini.</div>
-              )}
-            </div>
-            
-            <div style={{ padding: '24px 32px', background: 'rgba(248, 250, 252, 0.8)', borderTop: '1px solid rgba(226, 232, 240, 0.8)', textAlign: 'right' }}>
-              <button disabled={savingGrades} onClick={() => handleSaveGrades(course.id)} style={{ background: savingGrades ? '#94a3b8' : '#4f46e5', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '12px', fontWeight: 'bold', cursor: savingGrades ? 'not-allowed' : 'pointer', boxShadow: '0 4px 15px rgba(79, 70, 229, 0.3)', transition: 'all 0.3s' }}>
-                {savingGrades ? 'Menyimpan...' : 'Simpan Perubahan Nilai'}
-              </button>
             </div>
           </div>
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 }
