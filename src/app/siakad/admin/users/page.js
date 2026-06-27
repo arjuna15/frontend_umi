@@ -134,25 +134,25 @@ export default function AdminUsersPage() {
         <p style={{ color: '#6b7280', margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
       </div>
 
-      <div className="siakad-card stagger-1" style={{ marginBottom: '24px', padding: '24px' }}>
-        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: '0 0 20px 0' }}>Tambah Pengguna Baru</h2>
-        <form onSubmit={handleCreateUser} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 2fr auto', gap: '16px', alignItems: 'end' }}>
-          <div>
+      <div className="siakad-card fade-in" style={{ padding: '24px', marginBottom: '24px' }}>
+        <h3 style={{ margin: '0 0 16px 0', fontSize: '1.1rem' }}>Tambah Pengguna Baru</h3>
+        <form onSubmit={handleCreateUser} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
+          <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Nama Lengkap</label>
             <input name="name" required placeholder="Masukkan nama..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>NIM / NIP</label>
             <input name="nim_nip" required placeholder="Masukkan NIM/NIP..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Password</label>
             <input type="password" name="password" required placeholder="Min. 6 karakter..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <div style={{ flex: 1 }}>
+          <div style={{ display: 'flex', gap: '8px', flex: '1 1 250px', flexWrap: 'wrap' }}>
+            <div style={{ flex: '1 1 100px' }}>
               <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Role</label>
-              <select name="role" required style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'white' }}>
+              <select className="siakad-select" name="role" required style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'white' }}>
                 <option value="mahasiswa">Mahasiswa</option>
                 <option value="dosen">Dosen</option>
                 <option value="admin">Admin</option>
@@ -239,7 +239,7 @@ export default function AdminUsersPage() {
               <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
                 <div style={{ flex: 1 }}>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Role</label>
-                  <select value={editFormData.role} onChange={(e) => setEditFormData({...editFormData, role: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }}>
+                  <select className="siakad-select" value={editFormData.role} onChange={(e) => setEditFormData({...editFormData, role: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }}>
                     <option value="mahasiswa">Mahasiswa</option>
                     <option value="dosen">Dosen</option>
                     <option value="admin">Admin</option>

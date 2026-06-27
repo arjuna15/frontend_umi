@@ -154,22 +154,22 @@ export default function AdminClassesPage() {
 
       <div className="siakad-card stagger-1" style={{ marginBottom: '24px', padding: '24px' }}>
         <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: '0 0 20px 0' }}>Tambah Mata Kuliah Baru</h2>
-        <form onSubmit={handleCreateCourse} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr auto', gap: '16px', alignItems: 'end' }}>
-          <div>
+        <form onSubmit={handleCreateCourse} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
+          <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Kode Mata Kuliah</label>
             <input name="code" required placeholder="Contoh: CS101..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Nama Mata Kuliah</label>
             <input name="name" required placeholder="Algoritma & Pemrograman..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 120px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Jumlah SKS</label>
             <input type="number" name="sks" required min="1" max="6" placeholder="SKS..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 200px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Dosen Pengampu</label>
-            <select name="dosen_id" required style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'white' }}>
+            <select className="siakad-select" name="dosen_id" required style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'white' }}>
               <option value="">Pilih Dosen...</option>
               {users.map(u => (
                 <option key={u.id} value={u.id}>{u.name}</option>
@@ -247,7 +247,7 @@ export default function AdminClassesPage() {
                 </div>
                 <div style={{ flex: 2 }}>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Dosen Pengampu</label>
-                  <select value={editFormData.dosen_id} onChange={(e) => setEditFormData({...editFormData, dosen_id: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }}>
+                  <select className="siakad-select" value={editFormData.dosen_id} onChange={(e) => setEditFormData({...editFormData, dosen_id: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }}>
                     <option value="">Pilih Dosen...</option>
                     {users.map(u => (
                       <option key={u.id} value={u.id}>{u.name}</option>
