@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import CustomSelect from '../../../../components/CustomSelect';
+import CustomSelect from '../../../components/CustomSelect';
 
 export default function DosenQuizCreate() {
   const router = useRouter();
