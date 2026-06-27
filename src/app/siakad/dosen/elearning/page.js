@@ -59,8 +59,8 @@ export default function DosenElearningPage() {
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
-      <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
+      <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+        <div style={{ flex: '1 1 300px' }}>
           <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
             Manajemen Sesi E-Learning <i className="ph ph-books" style={{ color: '#3b82f6' }}></i>
           </h2>
@@ -68,15 +68,15 @@ export default function DosenElearningPage() {
         </div>
         <button 
           onClick={() => router.push('/siakad/dosen/elearning/quiz')}
-          style={{ background: '#3b82f6', color: 'white', padding: '10px 20px', borderRadius: '8px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}
+          style={{ background: '#3b82f6', color: 'white', padding: '10px 20px', borderRadius: '8px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', flexShrink: 0 }}
         >
           <i className="ph ph-plus-circle"></i> Buat Kuis / Ujian (CBT)
         </button>
       </div>
 
-      <div style={{ display: 'flex', gap: '24px' }}>
+      <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
         {/* Course Sidebar */}
-        <div className="siakad-card" style={{ width: '300px', padding: '20px', height: 'fit-content' }}>
+        <div className="siakad-card" style={{ flex: '1 1 300px', padding: '20px', height: 'fit-content' }}>
           <h3 style={{ margin: '0 0 16px 0', fontSize: '1rem', color: '#1f2937' }}>Mata Kuliah Saya</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {courses.map(course => (
@@ -100,7 +100,7 @@ export default function DosenElearningPage() {
         </div>
 
         {/* Sessions Content */}
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: '1 1 300px', minWidth: 0 }}>
           {!selectedCourse ? (
             <div className="siakad-card" style={{ padding: '40px', textAlign: 'center', color: '#6b7280' }}>
               <i className="ph ph-arrow-circle-left" style={{ fontSize: '3rem', color: '#cbd5e1', marginBottom: '16px' }}></i>
@@ -109,10 +109,10 @@ export default function DosenElearningPage() {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {sessions.map((sess, idx) => (
-                <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div>
+                <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
+                  <div style={{ flex: '1 1 300px' }}>
                     <h3 style={{ margin: '0 0 8px 0', color: '#1f2937', fontSize: '1.1rem' }}>Sesi {sess.session}: {sess.title}</h3>
-                    <div style={{ display: 'flex', gap: '16px', color: '#6b7280', fontSize: '0.9rem' }}>
+                    <div style={{ display: 'flex', gap: '16px', color: '#6b7280', fontSize: '0.9rem', flexWrap: 'wrap' }}>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <i className="ph ph-file-pdf"></i> {sess.material_count} Materi Terupload
                       </span>
@@ -121,7 +121,7 @@ export default function DosenElearningPage() {
                       </span>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', gap: '8px' }}>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                     <button style={{ background: '#f3f4f6', border: '1px solid #d1d5db', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <i className="ph ph-upload-simple"></i> Upload
                     </button>
