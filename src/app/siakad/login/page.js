@@ -10,6 +10,10 @@ export default function SiakadLogin() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  
+  // Floating label states
+  const [focusedNIM, setFocusedNIM] = useState(false);
+  const [focusedPass, setFocusedPass] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,23 +30,16 @@ export default function SiakadLogin() {
 
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(data.message || 'Login gagal. Periksa kembali NIM/NIP dan Password Anda.');
+        throw new Error(data.message || 'Kredensial tidak valid. Silakan periksa kembali.');
       }
 
-      // Save token and role
       localStorage.setItem('siakad_token', data.token);
       localStorage.setItem('siakad_role', data.user.role);
 
-      // Redirect based on role
-      if (data.user.role === 'mahasiswa') {
-        router.push('/siakad/mahasiswa');
-      } else if (data.user.role === 'dosen') {
-        router.push('/siakad/dosen');
-      } else if (data.user.role === 'kaprodi') {
-        router.push('/siakad/kaprodi');
-      } else {
-        router.push('/siakad/admin');
-      }
+      if (data.user.role === 'mahasiswa') router.push('/siakad/mahasiswa');
+      else if (data.user.role === 'dosen') router.push('/siakad/dosen');
+      else if (data.user.role === 'kaprodi') router.push('/siakad/kaprodi');
+      else router.push('/siakad/admin');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -51,205 +48,380 @@ export default function SiakadLogin() {
   };
 
   return (
-    <section style={{ 
-      position: 'relative', 
-      minHeight: '100vh', 
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      overflow: 'hidden',
-      background: '#0f172a'
-    }}>
-      
-      {/* Animated Background Elements */}
-      <div style={{
-        position: 'absolute', top: '-10%', left: '-10%', width: '50vw', height: '50vw',
-        background: 'radial-gradient(circle, rgba(220,38,38,0.15) 0%, rgba(0,0,0,0) 70%)',
-        borderRadius: '50%', filter: 'blur(60px)', animation: 'float 8s ease-in-out infinite'
-      }}></div>
-      
-      <div style={{
-        position: 'absolute', bottom: '-20%', right: '-10%', width: '60vw', height: '60vw',
-        background: 'radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(0,0,0,0) 70%)',
-        borderRadius: '50%', filter: 'blur(80px)', animation: 'float 12s ease-in-out infinite reverse'
-      }}></div>
-      
-      <div style={{ position: 'absolute', inset: 0, zIndex: 0, opacity: 0.3 }}>
-        <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Background" fill style={{ objectFit: 'cover', filter: 'grayscale(100%)' }} unoptimized />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.7) 100%)' }}></div>
-      </div>
+    <main className="premium-container">
+      <style jsx global>{`
+        body { margin: 0; padding: 0; overflow: hidden; background: #0f172a; font-family: 'Inter', sans-serif; }
+        
+        /* Animations */
+        @keyframes floatSlow {
+          0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+          50% { transform: translateY(-40px) rotate(5deg) scale(1.05); }
+        }
+        @keyframes blobBounce {
+          0% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+          100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes gradientMove {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes slideInUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes revealRight {
+          from { opacity: 0; transform: translateX(40px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
 
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(-30px) scale(1.05); }
+        .premium-container {
+          display: flex;
+          height: 100vh;
+          width: 100vw;
         }
-        .login-input-group {
+
+        /* LEFT SIDE - BRANDING */
+        .brand-section {
+          flex: 1.2;
+          background: linear-gradient(-45deg, #7f1d1d, #b91c1c, #991b1b, #450a0a);
+          background-size: 400% 400%;
+          animation: gradientMove 15s ease infinite;
           position: relative;
-          margin-bottom: 24px;
-        }
-        .login-input {
-          width: 100%;
-          padding: 16px 16px 16px 48px;
-          border-radius: 12px;
-          border: 1px solid rgba(255,255,255,0.1);
-          background: rgba(255,255,255,0.05);
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 80px;
           color: white;
-          font-size: 1rem;
-          outline: none;
-          transition: all 0.3s ease;
         }
-        .login-input:focus {
-          border-color: #ef4444;
-          background: rgba(255,255,255,0.1);
-          box-shadow: 0 0 0 4px rgba(239,68,68,0.1);
+
+        .brand-blob-1 {
+          position: absolute; top: -10%; left: -10%; width: 50vw; height: 50vw;
+          background: radial-gradient(circle, rgba(239,68,68,0.4) 0%, rgba(0,0,0,0) 60%);
+          animation: blobBounce 20s infinite alternate ease-in-out;
         }
-        .login-input::placeholder {
-          color: rgba(255,255,255,0.4);
+        .brand-blob-2 {
+          position: absolute; bottom: -20%; right: -10%; width: 60vw; height: 60vw;
+          background: radial-gradient(circle, rgba(245,158,11,0.2) 0%, rgba(0,0,0,0) 60%);
+          animation: blobBounce 25s infinite alternate ease-in-out reverse;
         }
-        .input-icon {
-          position: absolute;
-          left: 16px;
-          top: 50%;
-          transform: translateY(-50%);
-          color: rgba(255,255,255,0.5);
-          font-size: 1.2rem;
-          transition: color 0.3s ease;
+
+        .brand-content {
+          position: relative;
+          z-index: 10;
+          animation: slideInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        .login-input:focus + .input-icon {
-          color: #ef4444;
+        
+        .logo-glass {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 28px;
+          padding: 20px;
+          display: inline-flex;
+          margin-bottom: 40px;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+          animation: floatSlow 8s infinite;
         }
-        .login-btn {
-          width: 100%;
-          padding: 16px;
-          border-radius: 12px;
-          background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-          color: white;
-          font-weight: 700;
-          font-size: 1.1rem;
-          letter-spacing: 0.5px;
-          border: none;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 15px rgba(220,38,38,0.3);
+
+        .hero-title {
+          font-size: 4.5rem;
+          font-weight: 900;
+          line-height: 1.1;
+          letter-spacing: -2px;
+          margin: 0 0 20px 0;
+          background: linear-gradient(135deg, #ffffff 0%, #fca5a5 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+          font-size: 1.3rem;
+          line-height: 1.6;
+          color: rgba(255, 255, 255, 0.8);
+          max-width: 500px;
+          font-weight: 300;
+        }
+
+        /* RIGHT SIDE - FORM */
+        .form-section {
+          flex: 1;
+          background: #ffffff;
+          position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 10px;
+          padding: 40px;
+          box-shadow: -20px 0 50px rgba(0,0,0,0.3);
+          z-index: 20;
         }
-        .login-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(220,38,38,0.4);
-          background: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
+
+        .form-wrapper {
+          width: 100%;
+          max-width: 420px;
+          animation: revealRight 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+          opacity: 0;
         }
-        .login-btn:active {
+
+        .form-header {
+          margin-bottom: 40px;
+        }
+        .form-header h2 {
+          font-size: 2.2rem;
+          color: #0f172a;
+          margin: 0 0 8px 0;
+          font-weight: 800;
+          letter-spacing: -1px;
+        }
+        .form-header p {
+          color: #64748b;
+          margin: 0;
+          font-size: 1.05rem;
+        }
+
+        /* Floating Inputs */
+        .input-group {
+          position: relative;
+          margin-bottom: 28px;
+        }
+        .input-control {
+          width: 100%;
+          padding: 16px 20px;
+          border-radius: 16px;
+          border: 2px solid #e2e8f0;
+          background: #f8fafc;
+          font-size: 1.05rem;
+          color: #1e293b;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          outline: none;
+        }
+        .input-control:focus, .input-control:not(:placeholder-shown) {
+          background: #ffffff;
+          border-color: #ef4444;
+          box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.15);
+        }
+        
+        .floating-label {
+          position: absolute;
+          left: 20px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #94a3b8;
+          font-size: 1.05rem;
+          pointer-events: none;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          background: transparent;
+          padding: 0 4px;
+        }
+        .input-control:focus ~ .floating-label,
+        .input-control:not(:placeholder-shown) ~ .floating-label {
+          top: 0;
+          transform: translateY(-50%) scale(0.85);
+          color: #ef4444;
+          background: #ffffff;
+          font-weight: 600;
+        }
+
+        .input-icon-right {
+          position: absolute;
+          right: 20px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #94a3b8;
+          font-size: 1.2rem;
+          cursor: pointer;
+          transition: color 0.3s;
+        }
+        .input-icon-right:hover {
+          color: #ef4444;
+        }
+
+        /* Premium Button */
+        .btn-submit {
+          width: 100%;
+          padding: 18px;
+          border-radius: 16px;
+          background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+          color: white;
+          font-size: 1.15rem;
+          font-weight: 700;
+          border: none;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 10px 30px -5px rgba(239, 68, 68, 0.4);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 12px;
+        }
+        .btn-submit::before {
+          content: '';
+          position: absolute;
+          top: 0; left: -100%; width: 100%; height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+          transition: left 0.5s ease;
+        }
+        .btn-submit:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 20px 40px -10px rgba(239, 68, 68, 0.6);
+        }
+        .btn-submit:hover::before {
+          left: 100%;
+        }
+        .btn-submit:active {
           transform: translateY(1px);
         }
-        .login-btn:disabled {
-          opacity: 0.7;
-          cursor: not-allowed;
-          transform: none;
+
+        /* Error Alert */
+        .error-alert {
+          background: #fef2f2;
+          border-left: 4px solid #ef4444;
+          color: #b91c1c;
+          padding: 16px;
+          border-radius: 12px;
+          margin-bottom: 24px;
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          font-size: 0.95rem;
+          animation: slideInUp 0.3s ease forwards;
+        }
+
+        /* Options row */
+        .options-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 32px;
+          font-size: 0.95rem;
+        }
+        .checkbox-container {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          color: #64748b;
+        }
+        .checkbox-custom {
+          width: 20px;
+          height: 20px;
+          border: 2px solid #cbd5e1;
+          border-radius: 6px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: all 0.2s;
+        }
+        input[type="checkbox"]:checked + .checkbox-custom {
+          background: #ef4444;
+          border-color: #ef4444;
+        }
+        
+        @media (max-width: 900px) {
+          .premium-container { flex-direction: column; }
+          .brand-section { flex: none; padding: 40px 20px; text-align: center; justify-content: center; align-items: center; min-height: 40vh; }
+          .hero-title { font-size: 3rem; }
+          .form-section { border-radius: 40px 40px 0 0; margin-top: -40px; }
         }
       `}</style>
 
-      <div className="fade-in" style={{ 
-        width: '100%', maxWidth: '440px', padding: '48px', 
-        borderRadius: '24px', 
-        background: 'rgba(30, 41, 59, 0.6)', 
-        backdropFilter: 'blur(20px)', 
-        WebkitBackdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255,255,255,0.1)', 
-        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
-        zIndex: 10
-      }}>
+      {/* LEFT SECTION */}
+      <section className="brand-section">
+        <div className="brand-blob-1"></div>
+        <div className="brand-blob-2"></div>
         
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <div style={{ 
-            background: 'white', width: '80px', height: '80px', 
-            borderRadius: '24px', margin: '0 auto 24px', 
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-            transform: 'rotate(-5deg)',
-            transition: 'transform 0.3s ease'
-          }}
-          onMouseEnter={e => e.currentTarget.style.transform = 'rotate(0deg) scale(1.05)'}
-          onMouseLeave={e => e.currentTarget.style.transform = 'rotate(-5deg) scale(1)'}
-          >
-            <Image src="/icon.png" width={55} height={55} alt="Logo" style={{ transform: 'rotate(5deg)' }} />
+        <div className="brand-content">
+          <div className="logo-glass">
+            <Image src="/icon.png" width={60} height={60} alt="Logo UMIBA" />
           </div>
-          <h2 style={{ color: 'white', fontSize: '1.8rem', fontWeight: 800, letterSpacing: '1px', margin: '0 0 8px 0' }}>SIAKAD<span style={{color: '#ef4444'}}>.</span>UMIBA</h2>
-          <p style={{ color: '#94a3b8', fontSize: '0.95rem', margin: 0 }}>Portal Akademik Digital Terpadu</p>
+          <h1 className="hero-title">Sistem Akademik<br/>Masa Depan.</h1>
+          <p className="hero-subtitle">
+            Selamat datang di portal akademik digital Universitas Bina Bangsa. Dirancang dengan teknologi terkini untuk pengalaman belajar yang luar biasa.
+          </p>
         </div>
+      </section>
 
-        {error && (
-          <div className="fade-in" style={{ 
-            background: 'rgba(239, 68, 68, 0.1)', 
-            border: '1px solid rgba(239, 68, 68, 0.3)',
-            color: '#fca5a5', padding: '12px 16px', borderRadius: '12px', 
-            marginBottom: '24px', fontSize: '0.9rem', display: 'flex', gap: '10px', alignItems: 'flex-start' 
-          }}>
-            <i className="ph-warning-circle" style={{ fontSize: '1.2rem', marginTop: '2px', color: '#ef4444' }}></i>
-            <span style={{ lineHeight: 1.5 }}>{error}</span>
+      {/* RIGHT SECTION */}
+      <section className="form-section">
+        <div className="form-wrapper">
+          <div className="form-header">
+            <h2>Masuk ke Akun Anda</h2>
+            <p>Silakan masukkan kredensial untuk melanjutkan.</p>
           </div>
-        )}
 
-        <form onSubmit={handleLogin}>
-          <div className="login-input-group">
-            <input 
-              type="text" 
-              required 
-              value={nim} 
-              onChange={e => setNim(e.target.value)} 
-              className="login-input" 
-              placeholder="NIM / NIP / Username" 
-            />
-            <i className="ph-user input-icon"></i>
-          </div>
+          {error && (
+            <div className="error-alert">
+              <i className="ph-warning-circle" style={{ fontSize: '1.2rem', marginTop: '2px' }}></i>
+              <span>{error}</span>
+            </div>
+          )}
+
+          <form onSubmit={handleLogin}>
+            <div className="input-group">
+              <input
+                type="text"
+                id="nim"
+                className="input-control"
+                placeholder=" "
+                value={nim}
+                onChange={e => setNim(e.target.value)}
+                onFocus={() => setFocusedNIM(true)}
+                onBlur={() => setFocusedNIM(false)}
+                required
+              />
+              <label htmlFor="nim" className="floating-label">NIM / NIP / Username</label>
+            </div>
+
+            <div className="input-group">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                className="input-control"
+                placeholder=" "
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                onFocus={() => setFocusedPass(true)}
+                onBlur={() => setFocusedPass(false)}
+                required
+              />
+              <label htmlFor="password" className="floating-label">Password</label>
+              <i 
+                className={`input-icon-right ${showPassword ? 'ph-eye-slash' : 'ph-eye'}`}
+                onClick={() => setShowPassword(!showPassword)}
+              ></i>
+            </div>
+
+            <div className="options-row">
+              <label className="checkbox-container">
+                <input type="checkbox" style={{ display: 'none' }} />
+                <div className="checkbox-custom">
+                  <i className="ph-check" style={{ color: 'white', fontSize: '12px', opacity: 0 }} />
+                </div>
+                <span>Ingat Saya</span>
+              </label>
+              <a href="#" style={{ color: '#ef4444', textDecoration: 'none', fontWeight: 600 }}>Lupa Password?</a>
+            </div>
+
+            <button type="submit" disabled={loading} className="btn-submit">
+              {loading ? (
+                <><i className="ph-spinner ph-spin"></i> Autentikasi...</>
+              ) : (
+                <>Lanjutkan <i className="ph-arrow-right"></i></>
+              )}
+            </button>
+          </form>
           
-          <div className="login-input-group">
-            <input 
-              type={showPassword ? "text" : "password"}
-              required 
-              value={password} 
-              onChange={e => setPassword(e.target.value)} 
-              className="login-input" 
-              placeholder="Password" 
-              style={{ paddingRight: '48px' }}
-            />
-            <i className="ph-lock-key input-icon"></i>
-            <i 
-              className={showPassword ? "ph-eye-slash" : "ph-eye"} 
-              onClick={() => setShowPassword(!showPassword)}
-              style={{
-                position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)',
-                color: 'rgba(255,255,255,0.4)', cursor: 'pointer', fontSize: '1.2rem', transition: 'color 0.3s'
-              }}
-              onMouseEnter={e => e.currentTarget.style.color = 'white'}
-              onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
-            ></i>
+          <div style={{ textAlign: 'center', marginTop: '40px', color: '#94a3b8', fontSize: '0.85rem' }}>
+            &copy; {new Date().getFullYear()} Universitas Bina Bangsa.<br/>All rights reserved.
           </div>
-          
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', padding: '0 4px' }}>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#94a3b8', fontSize: '0.9rem', cursor: 'pointer' }}>
-              <input type="checkbox" style={{ accentColor: '#ef4444', width: '16px', height: '16px' }} />
-              Ingat Saya
-            </label>
-            <a href="#" style={{ color: '#ef4444', fontSize: '0.9rem', textDecoration: 'none', transition: 'color 0.3s' }} onMouseEnter={e=>e.currentTarget.style.color='#f87171'} onMouseLeave={e=>e.currentTarget.style.color='#ef4444'}>Lupa Password?</a>
-          </div>
-
-          <button type="submit" disabled={loading} className="login-btn">
-            {loading ? (
-              <><i className="ph-spinner ph-spin"></i> Memvalidasi...</>
-            ) : (
-              <>Masuk ke Portal <i className="ph-arrow-right" style={{ fontWeight: 'bold' }}></i></>
-            )}
-          </button>
-        </form>
-
-        <div style={{ textAlign: 'center', marginTop: '32px', color: '#64748b', fontSize: '0.85rem' }}>
-          &copy; {new Date().getFullYear()} Universitas Bina Bangsa.<br/>All rights reserved.
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }
