@@ -126,6 +126,48 @@ export default function SiakadLayout({ children }) {
           {children}
         </div>
       </main>
+
+      {/* MOBILE BOTTOM NAVIGATION */}
+      <nav className="siakad-bottom-nav">
+        {(() => {
+          const maxVisible = 5;
+          const displayItems = menuItems.length > maxVisible ? [...menuItems.slice(0, 4), { label: 'Lainnya', icon: 'ph ph-dots-three-circle', path: '#' }] : menuItems;
+          
+          let activeIndex = displayItems.findIndex(item => pathname === item.path);
+          if (activeIndex === -1) activeIndex = 0; // fallback
+
+          const indicatorLeft = `calc((100% / ${displayItems.length}) * ${activeIndex} + (100% / ${displayItems.length} / 2) - 30px)`;
+
+          return (
+            <>
+              <div className="siakad-bottom-indicator" style={{ left: indicatorLeft }}></div>
+              {displayItems.map((item, i) => {
+                const isActive = i === activeIndex;
+                const isMore = item.label === 'Lainnya';
+                
+                return (
+                  <Link 
+                    key={i} 
+                    href={item.path} 
+                    className={`siakad-bottom-nav-item ${isActive ? 'active' : ''}`}
+                    onClick={(e) => {
+                      if(isMore) {
+                        e.preventDefault();
+                        alert('Menu tambahan akan muncul di sini (Drawer).');
+                      }
+                    }}
+                  >
+                    <div className="icon-wrapper">
+                      <i className={item.icon}></i>
+                    </div>
+                    <span className="label">{item.label.split(' ')[0]}</span>
+                  </Link>
+                );
+              })}
+            </>
+          );
+        })()}
+      </nav>
     </div>
   );
 }

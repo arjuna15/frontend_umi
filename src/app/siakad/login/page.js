@@ -275,6 +275,16 @@ export default function SiakadLogin() {
           .neu-color-section { padding: 60px 20px; border-radius: 0 0 40px 40px; }
           .neu-wave { display: none; }
         }
+
+        @media (max-width: 480px) {
+          .neu-container { padding: 16px; background-size: 16px 16px; }
+          .neu-card { border-radius: 24px; }
+          .neu-header h1 { font-size: 2.2rem; }
+          .neu-color-content h2 { font-size: 2rem; }
+          .neu-input { padding-left: 60px; font-size: 0.95rem; }
+          .neu-icon-box { left: 10px; width: 36px; height: 36px; }
+          .neu-color-section { border-radius: 0 0 24px 24px; padding: 40px 20px; }
+        }
       `}</style>
 
       <div className="neu-card">
