@@ -41,6 +41,7 @@ export default function SiakadLayout({ children }) {
       { label: 'Gradebook & Nilai', icon: 'ph-exam', path: '/siakad/dosen/gradebook' },
       { label: 'Forum Diskusi', icon: 'ph-chats', path: '/siakad/dosen/forum' },
     ];
+  } else {
     // Default Mahasiswa
     menuItems = [
       { label: 'Dashboard & Info', icon: 'ph ph-squares-four', path: '/siakad/mahasiswa' },
