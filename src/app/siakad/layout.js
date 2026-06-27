@@ -41,14 +41,15 @@ export default function SiakadLayout({ children }) {
       { label: 'Gradebook & Nilai', icon: 'ph-exam', path: '/siakad/dosen/gradebook' },
       { label: 'Forum Diskusi', icon: 'ph-chats', path: '/siakad/dosen/forum' },
     ];
-  } else {
     // Default Mahasiswa
     menuItems = [
-      { label: 'Dashboard & KHS', icon: 'ph-squares-four', path: '/siakad/mahasiswa' },
-      { label: 'KRS Online', icon: 'ph-list-checks', path: '/siakad/mahasiswa/krs' },
-      { label: 'Ruang Kelas', icon: 'ph-laptop', path: '/siakad/mahasiswa/elearning' },
-      { label: 'Forum Diskusi', icon: 'ph-chats', path: '/siakad/mahasiswa/forum' },
-      { label: 'Keuangan', icon: 'ph-wallet', path: '/siakad/mahasiswa/keuangan' },
+      { label: 'Dashboard & Info', icon: 'ph ph-squares-four', path: '/siakad/mahasiswa' },
+      { label: 'KRS Online', icon: 'ph ph-list-checks', path: '/siakad/mahasiswa/krs' },
+      { label: 'Ruang Kelas & Kuis', icon: 'ph ph-laptop', path: '/siakad/mahasiswa/elearning' },
+      { label: 'Presensi Mandiri', icon: 'ph ph-calendar-check', path: '/siakad/mahasiswa/presensi' },
+      { label: 'Rapor & Transkrip', icon: 'ph ph-exam', path: '/siakad/mahasiswa/gradebook' },
+      { label: 'Forum Diskusi', icon: 'ph ph-chats', path: '/siakad/mahasiswa/forum' },
+      { label: 'Keuangan', icon: 'ph ph-wallet', path: '/siakad/mahasiswa/keuangan' },
     ];
   }
 

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 export default function MahasiswaDashboard() {
   const router = useRouter();
   const [data, setData] = useState(null);
+  const [dashboardExt, setDashboardExt] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,15 +15,28 @@ export default function MahasiswaDashboard() {
 
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+        
+        // Fetch basic info
         const res = await fetch(`${apiUrl}/siakad/dashboard`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!res.ok) throw new Error('Failed to fetch');
         const result = await res.json();
         if (result.user.role !== 'mahasiswa') return router.push('/siakad/login');
+        
         setData(result);
+
+        // Fetch extended dashboard (Schedules & Deadlines)
+        const extRes = await fetch(`${apiUrl}/siakad/mahasiswa/dashboard`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (extRes.ok) {
+          const extResult = await extRes.json();
+          setDashboardExt(extResult);
+        }
+
       } catch (err) {
-        router.push('/siakad/login');
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -31,7 +45,7 @@ export default function MahasiswaDashboard() {
   }, [router]);
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat data akademik...
     </div>
   );
@@ -45,8 +59,9 @@ export default function MahasiswaDashboard() {
         <p style={{ color: '#6b7280', margin: 0 }}>Selamat datang kembali di Portal Akademik Anda.</p>
       </div>
 
+      {/* Statistik Atas */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '32px' }}>
-        <div style={{ background: 'white', padding: '24px', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6', display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ width: '50px', height: '50px', background: '#eff6ff', color: '#3b82f6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
             <i className="ph ph-student"></i>
           </div>
@@ -55,7 +70,7 @@ export default function MahasiswaDashboard() {
             <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>{data.user.prodi}</h3>
           </div>
         </div>
-        <div style={{ background: 'white', padding: '24px', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6', display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ width: '50px', height: '50px', background: '#fef2f2', color: '#ef4444', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
             <i className="ph ph-books"></i>
           </div>
@@ -64,7 +79,7 @@ export default function MahasiswaDashboard() {
             <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>{totalSKS} <span style={{ fontSize: '0.9rem', fontWeight: 'normal', color: '#9ca3af' }}>SKS</span></h3>
           </div>
         </div>
-        <div style={{ background: 'white', padding: '24px', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6', display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ width: '50px', height: '50px', background: '#ecfdf5', color: '#10b981', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
             <i className="ph ph-chart-line-up"></i>
           </div>
@@ -75,56 +90,98 @@ export default function MahasiswaDashboard() {
         </div>
       </div>
 
-      <div id="khs-print-section" style={{ background: 'white', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
+      {/* Grid Utama (Jadwal & Deadline) */}
+      {dashboardExt && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '32px' }}>
+          
+          {/* Jadwal Kuliah Hari Ini */}
+          <div className="siakad-card" style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+              <div style={{ background: '#e0e7ff', color: '#4f46e5', padding: '10px', borderRadius: '12px' }}>
+                <i className="ph ph-calendar-check" style={{ fontSize: '1.4rem' }}></i>
+              </div>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>Jadwal Hari Ini</h2>
+            </div>
+
+            {dashboardExt.schedule_today?.length > 0 ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {dashboardExt.schedule_today.map((schedule, idx) => (
+                  <div key={idx} style={{ padding: '16px', background: '#f8fafc', borderLeft: '4px solid #4f46e5', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', color: '#1e293b' }}>{schedule.course}</h4>
+                      <div style={{ display: 'flex', gap: '12px', fontSize: '0.85rem', color: '#64748b' }}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><i className="ph ph-clock"></i> {schedule.time}</span>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><i className="ph ph-map-pin"></i> {schedule.room}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p style={{ color: '#94a3b8', fontSize: '0.95rem', margin: 0, fontStyle: 'italic' }}>Tidak ada jadwal kuliah hari ini. Waktunya bersantai!</p>
+            )}
+          </div>
+
+          {/* Upcoming Deadlines (To-Do List) */}
+          <div className="siakad-card" style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+              <div style={{ background: '#fee2e2', color: '#ef4444', padding: '10px', borderRadius: '12px' }}>
+                <i className="ph ph-warning-circle" style={{ fontSize: '1.4rem' }}></i>
+              </div>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>Timeline & Deadline</h2>
+            </div>
+
+            {dashboardExt.upcoming_deadlines?.length > 0 ? (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {dashboardExt.upcoming_deadlines.map((deadline, idx) => (
+                  <div key={idx} style={{ padding: '16px', background: deadline.due_in_days <= 1 ? '#fef2f2' : '#fff7ed', border: `1px solid ${deadline.due_in_days <= 1 ? '#fecaca' : '#fed7aa'}`, borderRadius: '12px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                      <h4 style={{ margin: 0, fontSize: '1rem', color: '#1e293b', fontWeight: '700' }}>{deadline.title}</h4>
+                      <span style={{ fontSize: '0.75rem', fontWeight: 'bold', padding: '4px 8px', borderRadius: '999px', background: deadline.due_in_days <= 1 ? '#ef4444' : '#f97316', color: 'white' }}>
+                        H-{deadline.due_in_days}
+                      </span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: '#64748b' }}><i className="ph ph-book-open"></i> {deadline.course}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p style={{ color: '#94a3b8', fontSize: '0.95rem', margin: 0, fontStyle: 'italic' }}>Wah, aman! Tidak ada tugas atau kuis dalam waktu dekat.</p>
+            )}
+          </div>
+
+        </div>
+      )}
+
+      {/* Kartu Hasil Studi (KHS) Summary */}
+      <div id="khs-print-section" className="siakad-card" style={{ padding: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }} className="no-print">
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>Kartu Hasil Studi (KHS)</h2>
-          <button onClick={() => window.print()} style={{ background: '#4f46e5', border: 'none', padding: '8px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
+          <button onClick={() => window.print()} style={{ background: '#4f46e5', border: 'none', padding: '10px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
             <i className="ph ph-printer"></i> Cetak KHS Resmi
           </button>
         </div>
         
-        <div className="print-header" style={{ display: 'none', marginBottom: '30px', textAlign: 'center' }}>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: '0 0 5px 0' }}>KARTU HASIL STUDI (KHS)</h1>
-          <h2 style={{ fontSize: '1.2rem', margin: '0 0 20px 0' }}>UNIVERSITAS BINA BANGSA</h2>
-          <div style={{ display: 'flex', justifyContent: 'space-between', textAlign: 'left', marginBottom: '20px' }}>
-            <div>
-              <p style={{ margin: '0 0 5px 0' }}><strong>Nama:</strong> {data.user.name}</p>
-              <p style={{ margin: 0 }}><strong>NIM:</strong> {data.user.nim_nip}</p>
-            </div>
-            <div>
-              <p style={{ margin: '0 0 5px 0' }}><strong>Prodi:</strong> {data.user.prodi}</p>
-              <p style={{ margin: 0 }}><strong>IPK Sementara:</strong> 3.75</p>
-            </div>
-          </div>
-        </div>
-        
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
+          <table className="siakad-table">
             <thead>
-              <tr style={{ background: '#f9fafb', color: '#6b7280', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                <th style={{ padding: '16px', borderRadius: '8px 0 0 8px', fontWeight: '600' }}>Kode MK</th>
-                <th style={{ padding: '16px', fontWeight: '600' }}>Mata Kuliah</th>
-                <th style={{ padding: '16px', fontWeight: '600' }}>Semester</th>
-                <th style={{ padding: '16px', fontWeight: '600' }}>SKS</th>
-                <th style={{ padding: '16px', fontWeight: '600' }}>Skor</th>
-                <th style={{ padding: '16px', borderRadius: '0 8px 8px 0', fontWeight: '600' }}>Nilai</th>
+              <tr>
+                <th>Kode MK</th>
+                <th>Mata Kuliah</th>
+                <th>Semester</th>
+                <th>SKS</th>
+                <th>Nilai</th>
               </tr>
             </thead>
-            <tbody style={{ color: '#374151', fontSize: '0.95rem' }}>
+            <tbody>
               {data.krs.map((item, i) => (
-                <tr key={i} style={{ borderBottom: i === data.krs.length - 1 ? 'none' : '1px solid #f3f4f6' }}>
-                  <td style={{ padding: '16px', fontWeight: '500' }}>{item.course?.code}</td>
-                  <td style={{ padding: '16px' }}>{item.course?.name}</td>
-                  <td style={{ padding: '16px', color: '#6b7280' }}>{item.course?.semester}</td>
-                  <td style={{ padding: '16px' }}>{item.course?.sks}</td>
-                  <td style={{ padding: '16px' }}>{item.score || '-'}</td>
-                  <td style={{ padding: '16px' }}>
-                    <span style={{
-                      display: 'inline-block',
-                      padding: '4px 12px',
-                      borderRadius: '999px',
-                      fontSize: '0.85rem',
-                      fontWeight: 'bold',
+                <tr key={i}>
+                  <td>{item.course?.code}</td>
+                  <td>{item.course?.name}</td>
+                  <td style={{ color: '#6b7280' }}>{item.course?.semester}</td>
+                  <td>{item.course?.sks}</td>
+                  <td>
+                    <span className="siakad-badge" style={{
                       background: item.grade === 'A' || item.grade === 'A-' ? '#ecfdf5' : 
                                  item.grade === 'B+' || item.grade === 'B' ? '#eff6ff' : 
                                  item.grade ? '#fef2f2' : '#f3f4f6',
