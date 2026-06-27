@@ -21,6 +21,7 @@ export default function SiakadLayout({ children }) {
       { label: 'Admin Dashboard', icon: 'ph-chart-pie-slice', path: '/siakad/admin' },
       { label: 'Manajemen Pengguna', icon: 'ph-users-three', path: '/siakad/admin/users' },
       { label: 'Manajemen Kelas', icon: 'ph-chalkboard', path: '/siakad/admin/classes' },
+      { label: 'Manajemen Keuangan', icon: 'ph-wallet', path: '/siakad/admin/keuangan' },
     ];
   } else if (role === 'dosen') {
     menuItems = [
