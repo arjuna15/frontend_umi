@@ -44,35 +44,70 @@ export default function SiakadLogin() {
   };
 
   return (
-    <main className="neu-container">
+    <main className="glass-container">
       <style jsx>{`
-        .neu-container {
+        .glass-container {
           width: 100vw;
           min-height: 100vh;
           display: flex;
           align-items: center;
           justify-content: center;
           padding: 20px;
-          background-color: #e8ecf1;
-          background-image: radial-gradient(#d1d5db 1px, transparent 1px);
-          background-size: 20px 20px;
-          font-family: 'Inter', sans-serif;
+          background: #f1f5f9;
+          font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+          position: relative;
+          overflow: hidden;
         }
 
-        .neu-card {
+        /* Ambient Animated Blobs */
+        .ambient-blob {
+          position: absolute;
+          filter: blur(80px);
+          opacity: 0.7;
+          border-radius: 50%;
+          animation: floatBlob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+          pointer-events: none;
+        }
+        .blob-1 {
+          top: -10%; left: -5%; width: 50vw; height: 50vw;
+          background: radial-gradient(circle, rgba(239, 68, 68, 0.5) 0%, rgba(239, 68, 68, 0) 70%);
+          animation-delay: 0s;
+        }
+        .blob-2 {
+          bottom: -20%; right: -10%; width: 60vw; height: 60vw;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%);
+          animation-delay: -5s;
+        }
+        .blob-3 {
+          top: 30%; left: 30%; width: 40vw; height: 40vw;
+          background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, rgba(168, 85, 247, 0) 70%);
+          animation-delay: -10s;
+        }
+
+        @keyframes floatBlob {
+          0% { transform: translate(0, 0) scale(1); }
+          50% { transform: translate(5%, 10%) scale(1.1); }
+          100% { transform: translate(-5%, -5%) scale(0.9); }
+        }
+
+        .glass-card {
           width: 100%;
           max-width: 1100px;
           height: 600px;
-          background: #ffffff;
-          border-radius: 40px;
-          box-shadow: 20px 20px 60px #c5c9cd, -20px -20px 60px #ffffff;
+          background: rgba(255, 255, 255, 0.4);
+          backdrop-filter: blur(40px);
+          -webkit-backdrop-filter: blur(40px);
+          border: 1px solid rgba(255, 255, 255, 0.8);
+          border-radius: 32px;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
           display: flex;
           overflow: hidden;
           position: relative;
+          z-index: 10;
         }
 
         /* LEFT SIDE - FORM */
-        .neu-form-section {
+        .glass-form-section {
           flex: 0 0 55%;
           padding: 60px;
           display: flex;
@@ -82,70 +117,72 @@ export default function SiakadLogin() {
           z-index: 10;
         }
 
-        .neu-header {
+        .glass-header {
           text-align: center;
           margin-bottom: 40px;
         }
-        .neu-header h1 {
+        .glass-header h1 {
           font-size: 2.8rem;
-          color: #1e293b;
+          color: #0f172a;
           margin: 0 0 8px 0;
           font-weight: 800;
+          letter-spacing: -0.05em;
         }
-        .neu-header p {
-          color: #64748b;
+        .glass-header p {
+          color: #475569;
           font-size: 1.05rem;
           margin: 0;
+          font-weight: 500;
         }
 
-        /* Neumorphic Input */
-        .neu-input-group {
+        /* Inputs */
+        .glass-input-group {
           position: relative;
-          margin-bottom: 25px;
+          margin-bottom: 24px;
           width: 100%;
           max-width: 400px;
           margin-left: auto;
           margin-right: auto;
         }
-        .neu-icon-box {
+        .glass-icon-box {
           position: absolute;
-          left: 15px;
+          left: 20px;
           top: 50%;
           transform: translateY(-50%);
-          width: 40px;
-          height: 40px;
-          background: #ffffff;
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 5px 5px 10px #e2e8f0, -5px -5px 10px #ffffff;
-          color: #ef4444;
-          font-size: 1.2rem;
+          color: #64748b;
+          font-size: 1.25rem;
           z-index: 5;
-        }
-        .neu-input {
-          width: 100%;
-          padding: 18px 20px 18px 70px;
-          border: none;
-          background: #f8fafc;
-          border-radius: 20px;
-          font-size: 1rem;
-          color: #334155;
-          outline: none;
-          box-shadow: inset 5px 5px 10px #e2e8f0, inset -5px -5px 10px #ffffff;
           transition: all 0.3s ease;
         }
-        .neu-input:focus {
-          background: #ffffff;
-          box-shadow: inset 2px 2px 5px #e2e8f0, inset -2px -2px 5px #ffffff;
+        .glass-input {
+          width: 100%;
+          padding: 16px 20px 16px 56px;
+          border: 2px solid transparent;
+          background: rgba(255, 255, 255, 0.6);
+          border-radius: 16px;
+          font-size: 1rem;
+          color: #1e293b;
+          outline: none;
+          box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          font-weight: 500;
         }
-        .neu-input::placeholder {
+        .glass-input:focus {
+          background: rgba(255, 255, 255, 0.9);
+          border-color: #3b82f6;
+          box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+        .glass-input:focus + .glass-icon-box, 
+        .glass-input-group:focus-within .glass-icon-box {
+          color: #3b82f6;
+          transform: translateY(-50%) scale(1.1);
+        }
+        .glass-input::placeholder {
           color: #94a3b8;
           font-weight: 500;
         }
 
-        .neu-eye {
+        .glass-eye {
           position: absolute;
           right: 20px;
           top: 50%;
@@ -155,67 +192,71 @@ export default function SiakadLogin() {
           font-size: 1.2rem;
           transition: color 0.3s;
         }
-        .neu-eye:hover { color: #ef4444; }
+        .glass-eye:hover { color: #3b82f6; }
 
-        .neu-options {
+        .glass-options {
           display: flex;
           justify-content: space-between;
           max-width: 400px;
           margin: 0 auto 40px auto;
           font-size: 0.9rem;
-          color: #64748b;
+          color: #475569;
+          font-weight: 500;
         }
         
-        .neu-checkbox-wrapper {
+        .glass-checkbox-wrapper {
           display: flex;
           align-items: center;
           gap: 10px;
           cursor: pointer;
         }
-        .neu-checkbox {
-          width: 22px;
-          height: 22px;
+        .glass-checkbox {
+          width: 20px;
+          height: 20px;
           border-radius: 6px;
-          background: #f8fafc;
-          box-shadow: inset 3px 3px 6px #e2e8f0, inset -3px -3px 6px #ffffff;
+          background: rgba(255, 255, 255, 0.8);
+          border: 1px solid #cbd5e1;
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: all 0.2s;
         }
-        input:checked + .neu-checkbox {
-          background: #ef4444;
-          box-shadow: inset 3px 3px 6px #b91c1c, inset -3px -3px 6px #f87171;
+        input:checked + .glass-checkbox {
+          background: #3b82f6;
+          border-color: #3b82f6;
         }
 
-        .neu-btn {
+        .glass-btn {
           display: block;
           width: 100%;
-          max-width: 220px;
+          max-width: 400px;
           margin: 0 auto;
-          padding: 16px;
-          border-radius: 30px;
+          padding: 18px;
+          border-radius: 16px;
           border: none;
-          background: linear-gradient(135deg, #ef4444, #b91c1c);
+          background: linear-gradient(135deg, #ef4444, #dc2626);
           color: white;
           font-size: 1.1rem;
           font-weight: 700;
           cursor: pointer;
-          box-shadow: 5px 5px 15px rgba(239, 68, 68, 0.4), -5px -5px 15px rgba(255, 255, 255, 0.8);
-          transition: all 0.3s ease;
+          box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.4);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          letter-spacing: 0.05em;
         }
-        .neu-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 8px 8px 20px rgba(239, 68, 68, 0.5), -5px -5px 15px rgba(255, 255, 255, 0.8);
+        .glass-btn:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 15px 25px -5px rgba(239, 68, 68, 0.5);
+          background: linear-gradient(135deg, #f87171, #ef4444);
         }
-        .neu-btn:active {
-          transform: translateY(2px);
-          box-shadow: inset 5px 5px 10px rgba(153, 27, 27, 0.5), inset -5px -5px 10px rgba(248, 113, 113, 0.5);
+        .glass-btn:active {
+          transform: translateY(1px);
+          box-shadow: 0 5px 10px -5px rgba(239, 68, 68, 0.4);
         }
 
-        /* RIGHT SIDE - COLORED WAVE */
-        .neu-color-section {
+        /* RIGHT SIDE - COLOR PANE */
+        .glass-color-section {
           flex: 0 0 45%;
-          background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+          background: linear-gradient(135deg, rgba(239, 68, 68, 0.9), rgba(153, 27, 27, 0.9));
           position: relative;
           display: flex;
           flex-direction: column;
@@ -223,43 +264,50 @@ export default function SiakadLogin() {
           align-items: center;
           text-align: center;
           padding: 40px;
+          overflow: hidden;
         }
 
-        /* The SVG Wave Separator */
-        .neu-wave {
+        /* Inner Glass Effect for Right Side */
+        .glass-color-section::before {
+          content: '';
           position: absolute;
-          left: -140px;
-          top: 0;
-          height: 100%;
-          width: 150px;
-          z-index: 5;
+          inset: 0;
+          background: url('https://www.transparenttextures.com/patterns/cubes.png');
+          opacity: 0.1;
         }
 
-        .neu-color-content {
+        .glass-color-content {
           z-index: 10;
           position: relative;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          padding: 40px 30px;
+          border-radius: 24px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
-        .neu-color-content h2 {
-          font-size: 2.8rem;
-          font-weight: 900;
+        .glass-color-content h2 {
+          font-size: 2.5rem;
+          font-weight: 800;
           margin: 0 0 16px 0;
-          color: #ffffff !important;
-          text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+          color: #ffffff;
+          letter-spacing: -0.03em;
         }
-        .neu-color-content p {
+        .glass-color-content p {
           font-size: 1.1rem;
           line-height: 1.6;
-          color: #ffffff !important;
-          opacity: 0.95;
-          max-width: 320px;
+          color: rgba(255, 255, 255, 0.9);
+          max-width: 280px;
           margin: 0 auto;
         }
 
         .error-alert {
-          background: #fef2f2;
+          background: rgba(254, 242, 242, 0.8);
+          backdrop-filter: blur(8px);
           border: 1px solid #f87171;
           color: #ef4444;
-          padding: 12px;
+          padding: 12px 16px;
           border-radius: 12px;
           margin: 0 auto 24px auto;
           max-width: 400px;
@@ -267,97 +315,104 @@ export default function SiakadLogin() {
           display: flex;
           align-items: center;
           gap: 10px;
+          font-weight: 600;
+          animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 900px) {
-          .neu-card { flex-direction: column; height: auto; }
-          .neu-form-section { padding: 40px 20px; }
-          .neu-color-section { padding: 60px 20px; border-radius: 0 0 40px 40px; }
-          .neu-wave { display: none; }
+          .glass-card { flex-direction: column; height: auto; }
+          .glass-form-section { padding: 40px 20px; }
+          .glass-color-section { padding: 40px 20px; }
+          .glass-color-content { padding: 30px 20px; }
         }
 
         @media (max-width: 480px) {
-          .neu-container { padding: 16px; background-size: 16px 16px; }
-          .neu-card { border-radius: 24px; }
-          .neu-header h1 { font-size: 2.2rem; }
-          .neu-color-content h2 { font-size: 2rem; }
-          .neu-input { padding-left: 60px; font-size: 0.95rem; }
-          .neu-icon-box { left: 10px; width: 36px; height: 36px; }
-          .neu-color-section { border-radius: 0 0 24px 24px; padding: 40px 20px; }
+          .glass-container { padding: 16px; }
+          .glass-card { border-radius: 24px; }
+          .glass-header h1 { font-size: 2.2rem; }
+          .glass-color-content h2 { font-size: 1.8rem; }
         }
       `}</style>
 
-      <div className="neu-card">
-        
-        <section className="neu-form-section">
-          <div className="neu-header">
+      {/* Ambient Background */}
+      <div className="ambient-blob blob-1"></div>
+      <div className="ambient-blob blob-2"></div>
+      <div className="ambient-blob blob-3"></div>
+
+      <div className="glass-card">
+
+        <section className="glass-form-section">
+          <div className="glass-header">
             <h1>Halo!</h1>
             <p>Masuk ke portal SIAKAD UMIBA</p>
           </div>
 
           {error && (
             <div className="error-alert">
-              <i className="ph ph-warning-circle"></i> {error}
+              <i className="ph ph-warning-circle" style={{ fontSize: '1.2rem' }}></i> {error}
             </div>
           )}
 
           <form onSubmit={handleLogin}>
-            <div className="neu-input-group">
-              <div className="neu-icon-box">
-                <i className="ph ph-envelope-simple"></i>
-              </div>
-              <input 
-                type="text" 
-                className="neu-input" 
-                placeholder="NIM / NIP / Username" 
+            <div className="glass-input-group">
+              <i className="ph ph-envelope-simple glass-icon-box"></i>
+              <input
+                type="text"
+                className="glass-input"
+                placeholder="NIM / NIP / Username"
                 value={nim}
                 onChange={e => setNim(e.target.value)}
                 required
               />
             </div>
 
-            <div className="neu-input-group">
-              <div className="neu-icon-box">
-                <i className="ph ph-lock-key"></i>
-              </div>
-              <input 
-                type={showPassword ? "text" : "password"} 
-                className="neu-input" 
-                placeholder="Password" 
+            <div className="glass-input-group">
+              <i className="ph ph-lock-key glass-icon-box"></i>
+              <input
+                type={showPassword ? "text" : "password"}
+                className="glass-input"
+                placeholder="Password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 required
               />
-              <i 
-                className={`neu-eye ${showPassword ? 'ph ph-eye-slash' : 'ph ph-eye'}`} 
+              <i
+                className={`glass-eye ${showPassword ? 'ph ph-eye-slash' : 'ph ph-eye'}`}
                 onClick={() => setShowPassword(!showPassword)}
               ></i>
             </div>
 
-            <div className="neu-options">
-              <label className="neu-checkbox-wrapper">
+            <div className="glass-options">
+              <label className="glass-checkbox-wrapper">
                 <input type="checkbox" style={{ display: 'none' }} />
-                <div className="neu-checkbox">
-                  <i className="ph ph-check" style={{ color: 'white', fontSize: '14px', opacity: 0 }}></i>
+                <div className="glass-checkbox">
+                  <i className="ph ph-check" style={{ color: 'white', fontSize: '14px', fontWeight: 'bold' }}></i>
                 </div>
                 Ingat saya
               </label>
-              <a href="#" style={{ color: '#ef4444', fontWeight: '600', textDecoration: 'none' }}>Lupa password?</a>
+              <a href="#" style={{ color: '#ef4444', fontWeight: '600', textDecoration: 'none', transition: 'color 0.2s' }}>
+                Lupa password?
+              </a>
             </div>
 
-            <button type="submit" disabled={loading} className="neu-btn">
+            <button type="submit" disabled={loading} className="glass-btn">
               {loading ? 'Validasi...' : 'MASUK'}
             </button>
           </form>
         </section>
 
-        <section className="neu-color-section">
-          <svg className="neu-wave" preserveAspectRatio="none" viewBox="0 0 100 100">
-            <path d="M100,0 C30,30 30,70 100,100 L100,0 Z" fill="#b91c1c" style={{ transform: 'scaleX(2.5)', transformOrigin: 'right center' }} />
-          </svg>
-
-          <div className="neu-color-content">
-            <Image src="/icon.png" width={90} height={90} alt="Logo" style={{ marginBottom: '24px', filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.3))' }} />
+        <section className="glass-color-section">
+          <div className="glass-color-content">
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+              <div style={{ background: 'white', padding: '16px', borderRadius: '50%', boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}>
+                <Image src="/icon.png" width={70} height={70} alt="Logo" style={{ filter: 'drop-shadow(0px 4px 6px rgba(0,0,0,0.1))' }} />
+              </div>
+            </div>
             <h2>Selamat Datang!</h2>
             <p>Sistem Informasi Akademik Digital Universitas Bina Bangsa.</p>
           </div>
