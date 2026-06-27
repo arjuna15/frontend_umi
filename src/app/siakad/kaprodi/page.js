@@ -84,8 +84,8 @@ export default function KaprodiPage() {
             <i className="ph-users-three" style={{ fontSize: '2rem', color: '#3b82f6' }}></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', color: '#6b7280', fontSize: '0.9rem' }}>Total Mahasiswa</p>
-            <h3 style={{ margin: 0, fontSize: '1.8rem', color: '#1f2937' }}>{data.stats.total_mahasiswa}</h3>
+            <p style={{ margin: '0 0 4px 0', color: '#6b7280', fontSize: '0.9rem' }}>Total Pengguna</p>
+            <h3 style={{ margin: 0, fontSize: '1.8rem', color: '#1f2937' }}>{data.users_count || 0}</h3>
           </div>
         </div>
         <div className="siakad-card stagger-2" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '4px solid #f59e0b' }}>
