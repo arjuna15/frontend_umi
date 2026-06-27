@@ -140,8 +140,26 @@ export default function KRSPage() {
       <div style={{ background: 'white', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>Daftar Mata Kuliah Tersedia</h2>
-          <div style={{ background: '#f3f4f6', padding: '6px 16px', borderRadius: '999px', fontSize: '0.9rem', fontWeight: 'bold', color: '#4b5563' }}>
-            Total: {totalSKS} SKS
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{ background: '#f3f4f6', padding: '10px 16px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', color: '#4b5563' }}>
+              Total: {totalSKS} SKS
+            </div>
+            {(!submission || submission?.status === 'rejected') && (
+              <button 
+                onClick={handleSubmit}
+                disabled={isSubmitting || selectedCourses.length === 0}
+                style={{
+                  background: (isSubmitting || selectedCourses.length === 0) ? '#9ca3af' : '#2563eb',
+                  color: 'white', border: 'none', padding: '10px 20px', borderRadius: '12px',
+                  fontWeight: 'bold', cursor: (isSubmitting || selectedCourses.length === 0) ? 'not-allowed' : 'pointer',
+                  display: 'flex', alignItems: 'center', gap: '8px',
+                  boxShadow: '0 4px 6px -1px rgba(37, 99, 235, 0.2)', transition: 'all 0.2s',
+                  fontSize: '1rem'
+                }}
+              >
+                <i className="ph ph-paper-plane-right"></i> {isSubmitting ? 'Mengajukan...' : 'Ajukan KRS'}
+              </button>
+            )}
           </div>
         </div>
         
@@ -193,23 +211,6 @@ export default function KRSPage() {
           </table>
         </div>
 
-        {(!submission || submission.status === 'rejected') && (
-          <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'flex-end' }}>
-            <button 
-              onClick={handleSubmit}
-              disabled={isSubmitting || selectedCourses.length === 0}
-              style={{
-                background: (isSubmitting || selectedCourses.length === 0) ? '#9ca3af' : '#2563eb',
-                color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px',
-                fontWeight: 'bold', cursor: (isSubmitting || selectedCourses.length === 0) ? 'not-allowed' : 'pointer',
-                display: 'flex', alignItems: 'center', gap: '8px',
-                boxShadow: '0 4px 6px -1px rgba(37, 99, 235, 0.2)', transition: 'all 0.2s'
-              }}
-            >
-              <i className="ph ph-paper-plane-right"></i> {isSubmitting ? 'Mengajukan...' : 'Ajukan KRS'}
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );
