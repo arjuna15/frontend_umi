@@ -168,7 +168,7 @@ export default function AdminKeuangan() {
           <div style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>Memuat data keuangan...</div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+            <table style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid #e2e8f0' }}>
                   <th style={{ padding: '16px', color: '#64748b', fontSize: '0.85rem', fontWeight: '700' }}>MAHASISWA</th>

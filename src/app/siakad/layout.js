@@ -139,7 +139,10 @@ export default function SiakadLayout({ children }) {
             : [...menuItems.slice(0, maxVisible - 1), { label: 'Lainnya', icon: 'ph ph-dots-three-circle', path: '#' }];
           
           let activeIndex = displayItems.findIndex(item => pathname === item.path);
-          if (activeIndex === -1) activeIndex = 0; // fallback
+          if (activeIndex === -1) {
+            const inOverflow = menuItems.some(item => pathname === item.path);
+            activeIndex = inOverflow ? displayItems.length - 1 : 0;
+          }
 
           return (
             <>
