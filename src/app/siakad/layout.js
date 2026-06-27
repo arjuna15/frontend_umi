@@ -73,7 +73,6 @@ export default function SiakadLayout({ children }) {
           </div>
           <div>
             <h2 style={{ fontSize: '1.4rem', fontWeight: '800', margin: 0, letterSpacing: '1px', color: '#0f172a' }}>SIAKAD</h2>
-            <p style={{ fontSize: '0.75rem', color: '#64748b', margin: 0, fontWeight: '600' }}>V3 ULTIMATE</p>
           </div>
         </div>
 

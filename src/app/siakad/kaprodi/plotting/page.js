@@ -112,7 +112,7 @@ export default function KaprodiPlotting() {
                   </td>
                   <td>
                     <select 
-                      className="siakad-input" 
+                      className="siakad-select" 
                       style={{ padding: '6px 12px', width: '100%' }}
                       disabled={assigningId === course.id}
                       onChange={(e) => handleAssign(course.id, e.target.value)}

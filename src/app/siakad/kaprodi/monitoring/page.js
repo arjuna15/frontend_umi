@@ -51,7 +51,8 @@ export default function KaprodiMonitoring() {
       </div>
 
       <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
-        <table className="siakad-table">
+        <div style={{ overflowX: 'auto' }}>
+          <table className="siakad-table" style={{ minWidth: '800px' }}>
           <thead>
             <tr>
               <th>Mata Kuliah</th>
@@ -95,8 +96,9 @@ export default function KaprodiMonitoring() {
                 </tr>
               ))
             )}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
