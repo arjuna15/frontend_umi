@@ -1,11 +1,12 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import './siakad.css';
 
 export default function SiakadLayout({ children }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [role, setRole] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
