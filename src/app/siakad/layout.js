@@ -7,6 +7,7 @@ import './siakad.css';
 export default function SiakadLayout({ children }) {
   const pathname = usePathname();
   const [role, setRole] = useState(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
     setRole(localStorage.getItem('siakad_role'));
@@ -154,7 +155,7 @@ export default function SiakadLayout({ children }) {
                     onClick={(e) => {
                       if(isMore) {
                         e.preventDefault();
-                        alert('Menu tambahan akan muncul di sini (Drawer).');
+                        setIsDrawerOpen(true);
                       }
                     }}
                   >
@@ -169,6 +170,27 @@ export default function SiakadLayout({ children }) {
           );
         })()}
       </nav>
+
+      {/* MOBILE DRAWER OVERLAY */}
+      {isDrawerOpen && (
+        <div className="siakad-drawer-overlay" onClick={() => setIsDrawerOpen(false)}>
+          <div className="siakad-drawer-content" onClick={e => e.stopPropagation()}>
+            <div className="drawer-header">
+              <h3>Menu Tambahan</h3>
+              <button onClick={() => setIsDrawerOpen(false)}><i className="ph ph-x"></i></button>
+            </div>
+            <div className="drawer-body">
+              {menuItems.slice(4).map((item, i) => (
+                <Link key={i} href={item.path} className="drawer-item" onClick={() => setIsDrawerOpen(false)}>
+                  <div className="icon"><i className={item.icon}></i></div>
+                  <div className="label">{item.label}</div>
+                  <i className="ph ph-caret-right chevron"></i>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
