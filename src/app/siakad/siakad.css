@@ -327,6 +327,9 @@
   .siakad-sidebar {
     display: none !important;
   }
+  .siakad-header {
+    display: none !important;
+  }
   
   .siakad-header {
     padding: 0 20px;
@@ -412,38 +415,7 @@
     transform: translateY(0);
   }
 
-  /* The indicator that slides and creates the curved cutout */
-  .siakad-bottom-indicator {
-    position: absolute;
-    top: -25px;
-    width: 60px;
-    height: 60px;
-    background: #f8fafc; /* Matches body background */
-    border-radius: 50%;
-    z-index: 1;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  
-  /* Curved inverted corners using box-shadow on pseudo elements */
-  .siakad-bottom-indicator::before,
-  .siakad-bottom-indicator::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 20px;
-    height: 20px;
-    background: transparent;
-  }
-  .siakad-bottom-indicator::before {
-    left: -22px;
-    border-top-right-radius: 20px;
-    box-shadow: 0 -10px 0 0 #f8fafc;
-  }
-  .siakad-bottom-indicator::after {
-    right: -22px;
-    border-top-left-radius: 20px;
-    box-shadow: 0 -10px 0 0 #f8fafc;
-  }
+  /* Remove old indicator cutout to satisfy user request for transparency and no white sticking out */
 
   /* Drawer Overlay */
   .siakad-drawer-overlay {
@@ -471,30 +443,72 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     padding-bottom: 16px;
     border-bottom: 1px solid #f1f5f9;
   }
 
-  .siakad-drawer-content .drawer-header h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1e293b;
+  .drawer-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
-  .siakad-drawer-content .drawer-header button {
+  .drawer-avatar {
+    width: 48px;
+    height: 48px;
+    background: #eff6ff;
+    color: #3b82f6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .drawer-user-info h4 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    color: #1e293b;
+    font-weight: 700;
+  }
+  .drawer-user-info p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #64748b;
+    text-transform: capitalize;
+  }
+
+  .drawer-close-btn {
     background: #f1f5f9;
     border: none;
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #64748b;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     cursor: pointer;
+    transition: 0.2s;
+  }
+  .drawer-logout-btn {
+    background: #fef2f2;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ef4444;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .drawer-logout-btn:active {
+    background: #fee2e2;
   }
 
   .siakad-drawer-content .drawer-body {

@@ -97,9 +97,9 @@ export default function ElearningPage() {
                       const submission = ass.submissions?.find(s => s.mahasiswa_id === data.user.id);
                       return (
                       <li key={j} style={{ padding: '16px', border: '1px solid #fecaca', background: '#fef2f2', borderRadius: '8px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                          <strong style={{ color: '#b91c1c', fontSize: '0.95rem' }}>{ass.title}</strong>
-                          <span style={{ background: '#ef4444', color: 'white', padding: '2px 8px', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 'bold' }}>Deadline: {ass.deadline}</span>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                          <strong style={{ color: '#b91c1c', fontSize: '0.95rem', flex: '1 1 100%' }}>{ass.title}</strong>
+                          <span style={{ background: '#ef4444', color: 'white', padding: '4px 12px', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 'bold', display: 'inline-block' }}>Deadline: {ass.deadline}</span>
                         </div>
                         <p style={{ margin: '0 0 12px 0', fontSize: '0.9rem', color: '#7f1d1d' }}>{ass.description}</p>
                         

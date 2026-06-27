@@ -19,28 +19,28 @@ export default function SiakadLayout({ children }) {
   let menuItems = [];
   if (role === 'admin' || role === 'superadmin') {
     menuItems = [
-      { label: 'Admin Dashboard', icon: 'ph-chart-pie-slice', path: '/siakad/admin' },
-      { label: 'Manajemen Pengguna', icon: 'ph-users-three', path: '/siakad/admin/users' },
-      { label: 'Manajemen Kelas', icon: 'ph-chalkboard', path: '/siakad/admin/classes' },
-      { label: 'Manajemen Keuangan', icon: 'ph-wallet', path: '/siakad/admin/keuangan' },
+      { label: 'Admin Dashboard', icon: 'ph ph-chart-pie-slice', path: '/siakad/admin' },
+      { label: 'Manajemen Pengguna', icon: 'ph ph-users-three', path: '/siakad/admin/users' },
+      { label: 'Manajemen Kelas', icon: 'ph ph-chalkboard', path: '/siakad/admin/classes' },
+      { label: 'Manajemen Keuangan', icon: 'ph ph-wallet', path: '/siakad/admin/keuangan' },
     ];
   } else if (role === 'kaprodi') {
     menuItems = [
-      { label: 'Dashboard Statistik', icon: 'ph-chart-line-up', path: '/siakad/kaprodi' },
-      { label: 'Persetujuan KRS', icon: 'ph-check-square-offset', path: '/siakad/kaprodi/krs' },
-      { label: 'Monitoring Perkuliahan', icon: 'ph-chalkboard-teacher', path: '/siakad/kaprodi/monitoring' },
-      { label: 'Plotting Dosen', icon: 'ph-users-three', path: '/siakad/kaprodi/plotting' },
-      { label: 'Distribusi Nilai', icon: 'ph-student', path: '/siakad/kaprodi/students' },
-      { label: 'Hasil EDOM', icon: 'ph-star-half', path: '/siakad/kaprodi/edom' },
-      { label: 'Laporan Akreditasi', icon: 'ph-file-pdf', path: '/siakad/kaprodi/reports' },
+      { label: 'Dashboard Statistik', icon: 'ph ph-chart-line-up', path: '/siakad/kaprodi' },
+      { label: 'Persetujuan KRS', icon: 'ph ph-check-square-offset', path: '/siakad/kaprodi/krs' },
+      { label: 'Monitoring Perkuliahan', icon: 'ph ph-chalkboard-teacher', path: '/siakad/kaprodi/monitoring' },
+      { label: 'Plotting Dosen', icon: 'ph ph-users-three', path: '/siakad/kaprodi/plotting' },
+      { label: 'Distribusi Nilai', icon: 'ph ph-student', path: '/siakad/kaprodi/students' },
+      { label: 'Hasil EDOM', icon: 'ph ph-star-half', path: '/siakad/kaprodi/edom' },
+      { label: 'Laporan Akreditasi', icon: 'ph ph-file-pdf', path: '/siakad/kaprodi/reports' },
     ];
   } else if (role === 'dosen') {
     menuItems = [
-      { label: 'Dashboard Dosen', icon: 'ph-chalkboard-teacher', path: '/siakad/dosen' },
-      { label: 'E-Learning', icon: 'ph-books', path: '/siakad/dosen/elearning' },
-      { label: 'Presensi Mahasiswa', icon: 'ph-calendar-check', path: '/siakad/dosen/presensi' },
-      { label: 'Gradebook & Nilai', icon: 'ph-exam', path: '/siakad/dosen/gradebook' },
-      { label: 'Forum Diskusi', icon: 'ph-chats', path: '/siakad/dosen/forum' },
+      { label: 'Dashboard Dosen', icon: 'ph ph-chalkboard-teacher', path: '/siakad/dosen' },
+      { label: 'E-Learning', icon: 'ph ph-books', path: '/siakad/dosen/elearning' },
+      { label: 'Presensi Mahasiswa', icon: 'ph ph-calendar-check', path: '/siakad/dosen/presensi' },
+      { label: 'Gradebook & Nilai', icon: 'ph ph-exam', path: '/siakad/dosen/gradebook' },
+      { label: 'Forum Diskusi', icon: 'ph ph-chats', path: '/siakad/dosen/forum' },
     ];
   } else {
     // Default Mahasiswa
@@ -138,11 +138,8 @@ export default function SiakadLayout({ children }) {
           let activeIndex = displayItems.findIndex(item => pathname === item.path);
           if (activeIndex === -1) activeIndex = 0; // fallback
 
-          const indicatorLeft = `calc((100% / ${displayItems.length}) * ${activeIndex} + (100% / ${displayItems.length} / 2) - 30px)`;
-
           return (
             <>
-              <div className="siakad-bottom-indicator" style={{ left: indicatorLeft }}></div>
               {displayItems.map((item, i) => {
                 const isActive = i === activeIndex;
                 const isMore = item.label === 'Lainnya';
@@ -176,10 +173,31 @@ export default function SiakadLayout({ children }) {
         <div className="siakad-drawer-overlay" onClick={() => setIsDrawerOpen(false)}>
           <div className="siakad-drawer-content" onClick={e => e.stopPropagation()}>
             <div className="drawer-header">
-              <h3>Menu Tambahan</h3>
-              <button onClick={() => setIsDrawerOpen(false)}><i className="ph ph-x"></i></button>
+              <div className="drawer-profile">
+                <div className="drawer-avatar"><i className="ph ph-user"></i></div>
+                <div className="drawer-user-info">
+                  <h4>User</h4>
+                  <p>{role}</p>
+                </div>
+              </div>
+              <div style={{ display: 'flex', gap: '8px' }}>
+                <button 
+                  className="drawer-logout-btn" 
+                  title="Logout"
+                  onClick={() => {
+                    localStorage.removeItem('siakad_token');
+                    localStorage.removeItem('siakad_role');
+                    router.push('/siakad/login');
+                  }}
+                >
+                  <i className="ph ph-sign-out"></i>
+                </button>
+                <button className="drawer-close-btn" onClick={() => setIsDrawerOpen(false)}><i className="ph ph-x"></i></button>
+              </div>
             </div>
+            
             <div className="drawer-body">
+              <h4 style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>Menu Lainnya</h4>
               {menuItems.slice(4).map((item, i) => (
                 <Link key={i} href={item.path} className="drawer-item" onClick={() => setIsDrawerOpen(false)}>
                   <div className="icon"><i className={item.icon}></i></div>
