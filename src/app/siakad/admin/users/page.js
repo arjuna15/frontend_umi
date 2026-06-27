@@ -1,11 +1,13 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function AdminUsersPage() {
   const router = useRouter();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedRole, setSelectedRole] = useState("mahasiswa");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({
     id: '', name: '', nim_nip: '', role: '', prodi: '', password: ''
@@ -152,12 +154,17 @@ export default function AdminUsersPage() {
           <div style={{ display: 'flex', gap: '8px', flex: '1 1 250px', flexWrap: 'wrap' }}>
             <div style={{ flex: '1 1 100px' }}>
               <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Role</label>
-              <select className="siakad-select" name="role" required style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'white' }}>
-                <option value="mahasiswa">Mahasiswa</option>
-                <option value="dosen">Dosen</option>
-                <option value="admin">Admin</option>
-                <option value="kaprodi">Kaprodi</option>
-              </select>
+              <CustomSelect 
+                name="role"
+                value={selectedRole}
+                onChange={(val) => setSelectedRole(val)}
+                options={[
+                  { value: 'mahasiswa', label: 'Mahasiswa', icon: 'ph ph-student' },
+                  { value: 'dosen', label: 'Dosen', icon: 'ph ph-chalkboard-teacher' },
+                  { value: 'admin', label: 'Admin', icon: 'ph ph-shield-check' },
+                  { value: 'kaprodi', label: 'Kaprodi', icon: 'ph ph-briefcase' }
+                ]}
+              />
             </div>
             <div style={{ flex: 1 }}>
               <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Prodi</label>
@@ -239,12 +246,16 @@ export default function AdminUsersPage() {
               <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
                 <div style={{ flex: 1 }}>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Role</label>
-                  <select className="siakad-select" value={editFormData.role} onChange={(e) => setEditFormData({...editFormData, role: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }}>
-                    <option value="mahasiswa">Mahasiswa</option>
-                    <option value="dosen">Dosen</option>
-                    <option value="admin">Admin</option>
-                    <option value="kaprodi">Kaprodi</option>
-                  </select>
+                  <CustomSelect
+                    value={editFormData.role}
+                    onChange={(val) => setEditFormData({...editFormData, role: val})}
+                    options={[
+                      { value: 'mahasiswa', label: 'Mahasiswa', icon: 'ph ph-student' },
+                      { value: 'dosen', label: 'Dosen', icon: 'ph ph-chalkboard-teacher' },
+                      { value: 'admin', label: 'Admin', icon: 'ph ph-shield-check' },
+                      { value: 'kaprodi', label: 'Kaprodi', icon: 'ph ph-briefcase' }
+                    ]}
+                  />
                 </div>
                 <div style={{ flex: 1 }}>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Prodi</label>
