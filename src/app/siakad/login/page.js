@@ -524,7 +524,7 @@ export default function SiakadLogin() {
               <Image src="/icon.png" width={80} height={80} alt="Logo UMIBA" style={{ filter: 'drop-shadow(0px 10px 20px rgba(0,0,0,0.5))' }} />
             </div>
             <h2>SIAKAD UMIBA</h2>
-            <p>Sistem Informasi Akademik Digital terdepan Universitas Bina Bangsa.</p>
+            <p>Sistem Informasi Akademik Digital terdepan Universitas Mitra Bangsa.</p>
           </div>
         </section>
 
