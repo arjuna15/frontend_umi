@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 export default function AdminKeuangan() {
   const [billings, setBillings] = useState([]);
@@ -21,17 +20,20 @@ export default function AdminKeuangan() {
   const fetchData = async () => {
     try {
       const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      
       const [billingRes, userRes] = await Promise.all([
-        axios.get('https://backend-umi.vercel.app/api/siakad/admin/billings', {
-          headers: { Authorization: `Bearer ${token}` }
-        }),
-        axios.get('https://backend-umi.vercel.app/api/siakad/admin/users', {
-          headers: { Authorization: `Bearer ${token}` }
-        })
+        fetch(`${apiUrl}/siakad/admin/billings`, { headers: { Authorization: `Bearer ${token}` } }),
+        fetch(`${apiUrl}/siakad/admin/users`, { headers: { Authorization: `Bearer ${token}` } })
       ]);
-      setBillings(billingRes.data);
-      // Filter only mahasiswa for billing assignment
-      setUsers(userRes.data.filter(u => u.role === 'mahasiswa'));
+      
+      if (!billingRes.ok || !userRes.ok) throw new Error('Failed to fetch data');
+      
+      const billingData = await billingRes.json();
+      const userData = await userRes.json();
+      
+      setBillings(billingData);
+      setUsers(userData.filter(u => u.role === 'mahasiswa'));
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -74,19 +76,38 @@ export default function AdminKeuangan() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      let res;
+      
       if (isEdit) {
-        await axios.put(`https://backend-umi.vercel.app/api/siakad/admin/billings/${formData.id}`, formData, {
-          headers: { Authorization: `Bearer ${token}` }
+        res = await fetch(`${apiUrl}/siakad/admin/billings/${formData.id}`, {
+          method: 'PUT',
+          headers: { 
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
         });
       } else {
-        await axios.post('https://backend-umi.vercel.app/api/siakad/admin/billings', formData, {
-          headers: { Authorization: `Bearer ${token}` }
+        res = await fetch(`${apiUrl}/siakad/admin/billings`, {
+          method: 'POST',
+          headers: { 
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
         });
       }
+      
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.message || 'Request failed');
+      }
+      
       closeModal();
       fetchData();
     } catch (error) {
-      alert('Terjadi kesalahan: ' + (error.response?.data?.message || error.message));
+      alert('Terjadi kesalahan: ' + error.message);
     }
   };
 
@@ -94,9 +115,15 @@ export default function AdminKeuangan() {
     if (confirm('Yakin ingin menghapus tagihan ini?')) {
       try {
         const token = localStorage.getItem('siakad_token');
-        await axios.delete(`https://backend-umi.vercel.app/api/siakad/admin/billings/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+        
+        const res = await fetch(`${apiUrl}/siakad/admin/billings/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
         });
+        
+        if (!res.ok) throw new Error('Request failed');
+        
         fetchData();
       } catch (error) {
         alert('Gagal menghapus tagihan');
