@@ -6,6 +6,10 @@ export default function AdminUsersPage() {
   const router = useRouter();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editFormData, setEditFormData] = useState({
+    id: '', name: '', nim_nip: '', role: '', prodi: '', password: ''
+  });
 
   useEffect(() => {
     fetchUsers();
@@ -84,10 +88,6 @@ export default function AdminUsersPage() {
     </div>
   );
 
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editFormData, setEditFormData] = useState({
-    id: '', name: '', nim_nip: '', role: '', prodi: '', password: ''
-  });
 
   const handleOpenEditModal = (user) => {
     setEditFormData({

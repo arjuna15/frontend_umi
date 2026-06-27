@@ -7,6 +7,10 @@ export default function AdminClassesPage() {
   const [courses, setCourses] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editFormData, setEditFormData] = useState({
+    id: '', code: '', name: '', sks: '', dosen_id: ''
+  });
 
   useEffect(() => {
     fetchCourses();
@@ -103,10 +107,6 @@ export default function AdminClassesPage() {
     </div>
   );
 
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editFormData, setEditFormData] = useState({
-    id: '', code: '', name: '', sks: '', dosen_id: ''
-  });
 
   const handleOpenEditModal = (course) => {
     setEditFormData({
