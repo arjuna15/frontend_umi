@@ -137,6 +137,7 @@
   height: 100vh;
   position: relative;
   z-index: 5;
+  min-width: 0;
 }
 .siakad-header {
   height: 88px;
@@ -341,7 +342,8 @@
   .siakad-bottom-nav {
     display: flex;
     position: fixed;
-    bottom: 0;
+    bottom: -1px;
+    padding-bottom: 1px;
     left: 0;
     width: 100%;
     height: 70px;
