@@ -32,7 +32,7 @@ export default function MahasiswaForumPage() {
 
   if (loading || !data) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat forum diskusi...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat forum diskusi...
     </div>
   );
 
@@ -77,7 +77,7 @@ export default function MahasiswaForumPage() {
                     else alert('Gagal membuat topik');
                   } catch (err) { alert('Error: ' + err.message); }
                 }} style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)' }}>
-                  <i className="ph-plus"></i> Buat Topik Baru
+                  <i className="ph ph-plus"></i> Buat Topik Baru
                 </button>
               </div>
               

@@ -98,7 +98,7 @@ export default function SiakadLayout({ children }) {
           onMouseOver={(e) => { e.currentTarget.style.background = '#fef2f2'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
           onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.7)'; e.currentTarget.style.transform = 'none'; }}
           >
-            <i className="ph-sign-out" style={{ fontSize: '1.2rem' }}></i> Keluar
+            <i className="ph ph-sign-out" style={{ fontSize: '1.2rem' }}></i> Keluar
           </button>
         </div>
       </aside>

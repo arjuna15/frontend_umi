@@ -67,7 +67,7 @@ export default function KaprodiPlotting() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Data Kelas...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Data Kelas...
     </div>
   );
 
@@ -75,7 +75,7 @@ export default function KaprodiPlotting() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
         <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          Plotting Dosen & Kelas <i className="ph-users-three" style={{ color: '#3b82f6' }}></i>
+          Plotting Dosen & Kelas <i className="ph ph-users-three" style={{ color: '#3b82f6' }}></i>
         </h2>
         <p style={{ margin: 0, color: '#6b7280' }}>Tugaskan dosen pengampu untuk masing-masing mata kuliah.</p>
       </div>

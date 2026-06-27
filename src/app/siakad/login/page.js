@@ -287,14 +287,14 @@ export default function SiakadLogin() {
 
           {error && (
             <div className="error-alert">
-              <i className="ph-warning-circle"></i> {error}
+              <i className="ph ph-warning-circle"></i> {error}
             </div>
           )}
 
           <form onSubmit={handleLogin}>
             <div className="neu-input-group">
               <div className="neu-icon-box">
-                <i className="ph-envelope-simple"></i>
+                <i className="ph ph-envelope-simple"></i>
               </div>
               <input 
                 type="text" 
@@ -308,7 +308,7 @@ export default function SiakadLogin() {
 
             <div className="neu-input-group">
               <div className="neu-icon-box">
-                <i className="ph-lock-key"></i>
+                <i className="ph ph-lock-key"></i>
               </div>
               <input 
                 type={showPassword ? "text" : "password"} 
@@ -319,7 +319,7 @@ export default function SiakadLogin() {
                 required
               />
               <i 
-                className={`neu-eye ${showPassword ? 'ph-eye-slash' : 'ph-eye'}`} 
+                className={`neu-eye ${showPassword ? 'ph ph-eye-slash' : 'ph ph-eye'}`} 
                 onClick={() => setShowPassword(!showPassword)}
               ></i>
             </div>
@@ -328,7 +328,7 @@ export default function SiakadLogin() {
               <label className="neu-checkbox-wrapper">
                 <input type="checkbox" style={{ display: 'none' }} />
                 <div className="neu-checkbox">
-                  <i className="ph-check" style={{ color: 'white', fontSize: '14px', opacity: 0 }}></i>
+                  <i className="ph ph-check" style={{ color: 'white', fontSize: '14px', opacity: 0 }}></i>
                 </div>
                 Ingat saya
               </label>

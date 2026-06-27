@@ -32,7 +32,7 @@ export default function ElearningPage() {
 
   if (loading || !data) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat ruang kelas virtual...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat ruang kelas virtual...
     </div>
   );
 
@@ -55,7 +55,7 @@ export default function ElearningPage() {
           <div key={i} className={`siakad-card stagger-${(i % 5) + 1}`}>
             <div style={{ background: 'linear-gradient(90deg, rgba(238,242,255,0.7) 0%, rgba(255,255,255,0) 100%)', padding: '24px 32px', borderBottom: '1px solid rgba(199,210,254,0.3)', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', right: '-20px', top: '-20px', fontSize: '10rem', color: 'rgba(99,102,241,0.03)', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
-                <i className="ph-laptop"></i>
+                <i className="ph ph-laptop"></i>
               </div>
               <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#312e81', fontWeight: '800', letterSpacing: '-0.02em' }}>{item.course?.name}</h3>
               <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: '#4f46e5', fontWeight: '600', padding: '4px 12px', background: 'rgba(79, 70, 229, 0.1)', borderRadius: '999px' }}>{item.course?.code} • {item.course?.sks} SKS</span>
@@ -67,7 +67,7 @@ export default function ElearningPage() {
               <div>
                 <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#334155', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(59,130,246,0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className="ph-folder-open"></i>
+                    <i className="ph ph-folder-open"></i>
                   </div>
                   Materi Perkuliahan
                 </h4>
@@ -76,7 +76,7 @@ export default function ElearningPage() {
                     {item.course.materials.map((mat, j) => (
                       <li key={j}>
                         <a href={getFileUrl(mat.content_link)} target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 16px', background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '8px', textDecoration: 'none', color: '#0369a1', fontSize: '0.9rem', transition: 'background 0.2s' }}>
-                          <i className="ph-file-pdf" style={{ fontSize: '1.2rem' }}></i> {mat.title}
+                          <i className="ph ph-file-pdf" style={{ fontSize: '1.2rem' }}></i> {mat.title}
                         </a>
                       </li>
                     ))}
@@ -89,7 +89,7 @@ export default function ElearningPage() {
               {/* Assignments Section */}
               <div>
                 <h4 style={{ fontSize: '1rem', fontWeight: 'bold', color: '#334155', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <i className="ph-clipboard-text" style={{ color: '#ef4444' }}></i> Tugas & Kuis
+                  <i className="ph ph-clipboard-text" style={{ color: '#ef4444' }}></i> Tugas & Kuis
                 </h4>
                 {item.course?.assignments && item.course.assignments.length > 0 ? (
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -105,7 +105,7 @@ export default function ElearningPage() {
                         
                         {submission ? (
                           <div style={{ padding: '8px 12px', background: '#dcfce7', color: '#166534', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold' }}>
-                            <i className="ph-check-circle"></i> Tugas sudah dikumpulkan. Nilai: {submission.grade || 'Belum dinilai'}
+                            <i className="ph ph-check-circle"></i> Tugas sudah dikumpulkan. Nilai: {submission.grade || 'Belum dinilai'}
                           </div>
                         ) : (
                           <form 

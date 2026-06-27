@@ -212,7 +212,7 @@ export default function AdminDashboard() {
       <div className="mobile-header" style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '60px', background: 'white', borderBottom: '1px solid #e2e8f0', zIndex: 50, display: 'none', alignItems: 'center', padding: '0 20px', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{ background: '#e11d48', padding: '6px', borderRadius: '8px' }}>
-            <i className="ph-fill ph-shield-check" style={{ color: 'white' }}></i>
+            <i className="ph ph-fill ph-shield-check" style={{ color: 'white' }}></i>
           </div>
           <span style={{ fontWeight: '700' }}>Admin UMIBA</span>
         </div>
@@ -240,7 +240,7 @@ export default function AdminDashboard() {
       }}>
         <div className="desktop-logo" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid #f1f5f9' }}>
           <div style={{ background: '#e11d48', padding: '10px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(225, 29, 72, 0.2)' }}>
-            <i className="ph-fill ph-shield-check" style={{ fontSize: '1.5rem', color: 'white' }}></i>
+            <i className="ph ph-fill ph-shield-check" style={{ fontSize: '1.5rem', color: 'white' }}></i>
           </div>
           <div>
             <h2 style={{ fontSize: '1.2rem', fontWeight: '800', margin: 0, color: '#0f172a' }}>UMIBA</h2>
@@ -261,7 +261,7 @@ export default function AdminDashboard() {
               marginBottom: '24px'
             }}
           >
-            <i className="ph-duotone ph-newspaper-clipping" style={{ fontSize: '1.25rem' }}></i>
+            <i className="ph ph-duotone ph-newspaper-clipping" style={{ fontSize: '1.25rem' }}></i>
             Kelola Berita Baru
           </button>
 
@@ -294,7 +294,7 @@ export default function AdminDashboard() {
               borderRadius: '8px', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' 
             }}
           >
-            <i className="ph-bold ph-sign-out"></i> Logout
+            <i className="ph ph-bold ph-sign-out"></i> Logout
           </button>
         </div>
       </div>
@@ -321,7 +321,7 @@ export default function AdminDashboard() {
                   minHeight: '280px', cursor: 'pointer', transition: 'all 0.2s'
                 }}>
                   <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: '#fff1f2', color: '#e11d48', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
-                    <i className="ph-bold ph-plus" style={{ fontSize: '1.5rem' }}></i>
+                    <i className="ph ph-bold ph-plus" style={{ fontSize: '1.5rem' }}></i>
                   </div>
                   <span style={{ fontWeight: '600', color: '#475569' }}>Tambah Berita Baru</span>
                 </div>
@@ -341,7 +341,7 @@ export default function AdminDashboard() {
                       <h3 style={{ fontSize: '1.1rem', margin: '0 0 16px 0', lineHeight: '1.4', color: '#0f172a', fontWeight: '700' }}>{n.title}</h3>
                       <div style={{ marginTop: 'auto', display: 'flex', gap: '8px' }}>
                         <button onClick={() => handleOpenNewsModal(n)} style={{ flex: 1, padding: '8px', background: '#f1f5f9', color: '#475569', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: '600' }}>Edit</button>
-                        <button onClick={() => handleDeleteNews(n.id)} style={{ padding: '8px 12px', background: '#fff1f2', color: '#e11d48', border: 'none', borderRadius: '8px', cursor: 'pointer' }}><i className="ph-bold ph-trash"></i></button>
+                        <button onClick={() => handleDeleteNews(n.id)} style={{ padding: '8px 12px', background: '#fff1f2', color: '#e11d48', border: 'none', borderRadius: '8px', cursor: 'pointer' }}><i className="ph ph-bold ph-trash"></i></button>
                       </div>
                     </div>
                   </div>
@@ -368,7 +368,7 @@ export default function AdminDashboard() {
                   {saving ? (
                     <><div style={{ width: '16px', height: '16px', borderRadius: '50%', border: '2px solid white', borderTopColor: 'transparent', animation: 'spin 1s linear infinite' }}></div> Menyimpan...</>
                   ) : (
-                    <><i className="ph-bold ph-floppy-disk" style={{ fontSize: '1.2rem' }}></i> Simpan Halaman</>
+                    <><i className="ph ph-bold ph-floppy-disk" style={{ fontSize: '1.2rem' }}></i> Simpan Halaman</>
                   )}
                 </button>
               </div>
@@ -430,7 +430,7 @@ export default function AdminDashboard() {
                           background: 'white', border: '1px solid #cbd5e1', boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
                           borderRadius: '8px', cursor: 'pointer', color: '#0f172a', fontSize: '0.9rem', fontWeight: '600'
                         }}>
-                          <i className="ph-bold ph-upload-simple" style={{ color: '#e11d48' }}></i> Pilih Gambar Baru
+                          <i className="ph ph-bold ph-upload-simple" style={{ color: '#e11d48' }}></i> Pilih Gambar Baru
                           <input type="file" accept="image/*" onChange={(e) => handleUploadImage(e, (url) => setContents({...contents, [`${activeTab}_hero_bg`]: url}))} style={{ display: 'none' }} />
                         </label>
                         <p style={{ fontSize: '0.85rem', color: '#64748b', marginTop: '12px', lineHeight: '1.6' }}>Upload gambar (JPG/PNG). Sistem akan otomatis mengompresnya menjadi <b>.webp</b> untuk akses website yang lebih ringan.</p>
@@ -458,7 +458,7 @@ export default function AdminDashboard() {
                         />
                       </div>
                       <div style={{ display: 'flex', gap: '8px', marginTop: '12px', alignItems: 'flex-start' }}>
-                        <i className="ph-fill ph-warning-circle" style={{ color: '#f59e0b', fontSize: '1.2rem', marginTop: '2px' }}></i>
+                        <i className="ph ph-fill ph-warning-circle" style={{ color: '#f59e0b', fontSize: '1.2rem', marginTop: '2px' }}></i>
                         <p style={{ fontSize: '0.85rem', color: '#64748b', margin: 0, lineHeight: '1.6' }}><b>Perhatian:</b> Anda sedang mengedit <i>raw HTML</i>. Pastikan setiap tag pembuka seperti <code>&lt;div&gt;</code> memiliki tag penutup <code>&lt;/div&gt;</code> yang benar agar struktur web tidak hancur.</p>
                       </div>
                     </div>
@@ -478,7 +478,7 @@ export default function AdminDashboard() {
             <div style={{ padding: '24px 32px', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <h2 style={{ fontSize: '1.25rem', fontWeight: '800', margin: 0, color: '#0f172a' }}>{editingNews ? 'Edit Berita' : 'Tambah Berita Baru'}</h2>
               <button onClick={() => setNewsModalOpen(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#64748b' }}>
-                <i className="ph-bold ph-x" style={{ fontSize: '1.25rem' }}></i>
+                <i className="ph ph-bold ph-x" style={{ fontSize: '1.25rem' }}></i>
               </button>
             </div>
             <form onSubmit={handleSaveNews} style={{ padding: '32px' }}>
@@ -528,7 +528,7 @@ export default function AdminDashboard() {
                     background: 'white', border: '1px solid #cbd5e1', boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
                     borderRadius: '8px', cursor: 'pointer', color: '#0f172a', fontSize: '0.9rem', fontWeight: '600'
                   }}>
-                    <i className="ph-bold ph-upload-simple" style={{ color: '#e11d48' }}></i> {newsForm.image_url ? 'Ganti Gambar' : 'Pilih Gambar Baru'}
+                    <i className="ph ph-bold ph-upload-simple" style={{ color: '#e11d48' }}></i> {newsForm.image_url ? 'Ganti Gambar' : 'Pilih Gambar Baru'}
                     <input type="file" accept="image/*" onChange={(e) => handleUploadImage(e, (url) => setNewsForm({...newsForm, image_url: url}))} style={{ display: 'none' }} />
                   </label>
                 </div>

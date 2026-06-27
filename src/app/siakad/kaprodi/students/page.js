@@ -37,7 +37,7 @@ export default function KaprodiStudents() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Data Nilai...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Data Nilai...
     </div>
   );
 
@@ -45,7 +45,7 @@ export default function KaprodiStudents() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
         <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          Monitoring Nilai Mahasiswa <i className="ph-student" style={{ color: '#3b82f6' }}></i>
+          Monitoring Nilai Mahasiswa <i className="ph ph-student" style={{ color: '#3b82f6' }}></i>
         </h2>
         <p style={{ margin: 0, color: '#6b7280' }}>Distribusi dan rekapitulasi nilai akhir seluruh mahasiswa di prodi.</p>
       </div>

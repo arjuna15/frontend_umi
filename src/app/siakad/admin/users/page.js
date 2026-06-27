@@ -84,7 +84,7 @@ export default function AdminUsersPage() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat data pengguna...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat data pengguna...
     </div>
   );
 
@@ -166,7 +166,7 @@ export default function AdminUsersPage() {
           </div>
           <div>
             <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
-              <i className="ph-plus-circle"></i> Tambah
+              <i className="ph ph-plus-circle"></i> Tambah
             </button>
           </div>
         </form>
@@ -203,12 +203,12 @@ export default function AdminUsersPage() {
                         onClick={() => handleOpenEditModal(user)}
                         style={{ background: '#eff6ff', color: '#1d4ed8', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
                         title="Edit Pengguna"
-                      ><i className="ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
+                      ><i className="ph ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
                       <button 
                         onClick={() => handleDeleteUser(user.id)}
                         style={{ background: '#fef2f2', color: '#b91c1c', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
                         title="Hapus Pengguna"
-                      ><i className="ph-trash" style={{ fontSize: '1rem' }}></i></button>
+                      ><i className="ph ph-trash" style={{ fontSize: '1rem' }}></i></button>
                     </div>
                   </td>
                 </tr>

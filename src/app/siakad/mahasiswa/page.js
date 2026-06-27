@@ -32,7 +32,7 @@ export default function MahasiswaDashboard() {
 
   if (loading || !data) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat data akademik...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat data akademik...
     </div>
   );
 
@@ -48,7 +48,7 @@ export default function MahasiswaDashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         <div style={{ background: 'white', padding: '24px', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6', display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ width: '50px', height: '50px', background: '#eff6ff', color: '#3b82f6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
-            <i className="ph-student"></i>
+            <i className="ph ph-student"></i>
           </div>
           <div>
             <p style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 4px 0' }}>Program Studi</p>
@@ -57,7 +57,7 @@ export default function MahasiswaDashboard() {
         </div>
         <div style={{ background: 'white', padding: '24px', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6', display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ width: '50px', height: '50px', background: '#fef2f2', color: '#ef4444', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
-            <i className="ph-books"></i>
+            <i className="ph ph-books"></i>
           </div>
           <div>
             <p style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 4px 0' }}>Total SKS Diambil</p>
@@ -66,7 +66,7 @@ export default function MahasiswaDashboard() {
         </div>
         <div style={{ background: 'white', padding: '24px', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6', display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ width: '50px', height: '50px', background: '#ecfdf5', color: '#10b981', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
-            <i className="ph-chart-line-up"></i>
+            <i className="ph ph-chart-line-up"></i>
           </div>
           <div>
             <p style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 4px 0' }}>IPK Sementara</p>
@@ -79,7 +79,7 @@ export default function MahasiswaDashboard() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }} className="no-print">
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>Kartu Hasil Studi (KHS)</h2>
           <button onClick={() => window.print()} style={{ background: '#4f46e5', border: 'none', padding: '8px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
-            <i className="ph-printer"></i> Cetak KHS Resmi
+            <i className="ph ph-printer"></i> Cetak KHS Resmi
           </button>
         </div>
         

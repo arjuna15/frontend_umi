@@ -135,7 +135,7 @@ export default function DosenGradebookPage() {
 
   if (loading || !data) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Gradebook...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Gradebook...
     </div>
   );
 
@@ -275,7 +275,7 @@ export default function DosenGradebookPage() {
                   {(!course.grades || course.grades.length === 0) && (
                     <tr>
                       <td colSpan="7" style={{ padding: '30px', textAlign: 'center', color: '#6b7280' }}>
-                        <i className="ph-users-slash" style={{ fontSize: '3rem', color: '#9ca3af', margin: '0 auto 10px', display: 'block' }}></i>
+                        <i className="ph ph-users-slash" style={{ fontSize: '3rem', color: '#9ca3af', margin: '0 auto 10px', display: 'block' }}></i>
                         Belum ada mahasiswa yang terdaftar di kelas ini
                       </td>
                     </tr>

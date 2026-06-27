@@ -52,7 +52,7 @@ export default function Home() {
             {lang === "en" ? "New Student Admission 2026/27" : "Penerimaan Mahasiswa Baru TA. 2026/27"}
           </h1>
           <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(255, 255, 255, 0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.85rem, 2vw, 1rem)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '1px', borderRadius: '30px' }}>
-            <i className="ph-fill ph-student" style={{ marginRight: '8px', fontSize: '1.2rem' }}></i>
+            <i className="ph ph-fill ph-student" style={{ marginRight: '8px', fontSize: '1.2rem' }}></i>
             {lang === "en" ? "Master of Management Program" : "Program Studi Magister Manajemen"}
           </div>
           
@@ -63,19 +63,19 @@ export default function Home() {
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph-fill ph-certificate" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph ph-fill ph-certificate" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Dual Certificate</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Ijazah & BNSP</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph-fill ph-laptop" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph ph-fill ph-laptop" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Blended Learning</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Online + Offline</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph-fill ph-users-three" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph ph-fill ph-users-three" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Career Network</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Jaringan Luas</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph-fill ph-wallet" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph ph-fill ph-wallet" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Flexible Tuition</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Bisa Diangsur</span></div>
               </div>
             </div>
@@ -96,7 +96,7 @@ export default function Home() {
             </a>
             <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
               <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex' }}>
-                <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
+                <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
               </div>
               <div>
                 <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
@@ -117,7 +117,7 @@ export default function Home() {
               TAHUN AKADEMIK 2026/2027
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', background: 'linear-gradient(135deg, #B91C1C, #E11D48)', color: '#FFFFFF', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px', animation: 'pulse 2s infinite', boxShadow: '0 4px 15px rgba(185, 28, 28, 0.4)' }}>
-              <i className="ph-fill ph-warning-circle" style={{ marginRight: '6px', fontSize: '1.1rem' }}></i> KUOTA TERBATAS!
+              <i className="ph ph-fill ph-warning-circle" style={{ marginRight: '6px', fontSize: '1.1rem' }}></i> KUOTA TERBATAS!
             </span>
           </div>
 
@@ -134,15 +134,15 @@ export default function Home() {
               {lang === "en" ? "QUALITY & FREE EDUCATION AT UMIBA" : "KULIAH BERKUALITAS & GRATIS DI UMIBA"}
             </h3>
             <ul style={{ color: 'white', listStyle: 'none', padding: 0, margin: 0, fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', lineHeight: '1.5', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Ter-Akreditasi <b style={{ opacity: 1 }}>BAIK SEKALI</b></span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Kuliah <b style={{ opacity: 1 }}>Tanpa Biaya</b>, Hidup Lebih Tenang</span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Lulusan SMA/SMK/MA <b style={{ opacity: 1 }}>2024, 2025, 2026</b></span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Pendaftaran <b style={{ opacity: 1 }}>Mudah & Transparan</b></span></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Ter-Akreditasi <b style={{ opacity: 1 }}>BAIK SEKALI</b></span></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Kuliah <b style={{ opacity: 1 }}>Tanpa Biaya</b>, Hidup Lebih Tenang</span></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Lulusan SMA/SMK/MA <b style={{ opacity: 1 }}>2024, 2025, 2026</b></span></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Pendaftaran <b style={{ opacity: 1 }}>Mudah & Transparan</b></span></li>
             </ul>
           </div>
 
           <a href="https://wa.me/62811870114" target="_blank" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '12px', boxShadow: '0 6px 20px rgba(255,255,255,0.3)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
-            <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '2.2rem' }}></i>
+            <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '2.2rem' }}></i>
             <div style={{ textAlign: 'left' }}>
               <div style={{ fontSize: '0.75rem', fontWeight: '800', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Informasi Pendaftaran</div>
               <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 900, letterSpacing: '1px', lineHeight: '1' }}>0811 870 114</div>
@@ -202,7 +202,7 @@ export default function Home() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px' }}>
               {['(S2) Magister Manajemen', '(S1) Manajemen', '(S1) Ilmu Aktuaria', '(S1) Ilmu Komputer', '(S1) Hukum', '(S1) Sistem & Teknologi Informasi'].map((prodi, idx) => (
                 <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', background: 'rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.15)', transition: 'background 0.3s ease' }}>
-                  <div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div>
+                  <div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div>
                   <span style={{ color: 'white', fontSize: 'clamp(0.8rem, 1.5vw, 0.9rem)', fontWeight: 700 }}>{prodi}</span>
                 </div>
               ))}
@@ -215,7 +215,7 @@ export default function Home() {
             </a>
             <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
               <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex' }}>
-                <i className="ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
+                <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
               </div>
               <div style={{ textAlign: 'left' }}>
                 <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
@@ -229,10 +229,10 @@ export default function Home() {
     </div>
     {/*  Slider Controls  */}
     <button className="hero-arrow prev" aria-label="Previous Slide" onClick={prevSlide}>
-      <i className="ph-bold ph-caret-left"></i>
+      <i className="ph ph-bold ph-caret-left"></i>
     </button>
     <button className="hero-arrow next" aria-label="Next Slide" onClick={nextSlide}>
-      <i className="ph-bold ph-caret-right"></i>
+      <i className="ph ph-bold ph-caret-right"></i>
     </button>
     <div className="hero-controls">
       {slideBg.map((_, index) => (
@@ -247,22 +247,22 @@ export default function Home() {
   <div className="container">
     <div className="glass glass-card grid grid-4 fade-up" style={{ textAlign: 'center', padding: 'var(--space-5)' }}>
       <div>
-        <i className="ph-duotone ph-users-three" style={{ fontSize: '3rem', color: 'var(--umiba-red)', marginBottom: '12px' }}></i>
+        <i className="ph ph-duotone ph-users-three" style={{ fontSize: '3rem', color: 'var(--umiba-red)', marginBottom: '12px' }}></i>
         <h2 style={{ margin: '0' }} className="text-gradient">5000+</h2>
         <p style={{ margin: '0', fontSize: '1.05rem', fontWeight: '500' }}>{t("home.mahasiswa_aktif")}</p>
       </div>
       <div>
-        <i className="ph-duotone ph-chalkboard-teacher" style={{ fontSize: '3rem', color: 'var(--umiba-red)', marginBottom: '12px' }}></i>
+        <i className="ph ph-duotone ph-chalkboard-teacher" style={{ fontSize: '3rem', color: 'var(--umiba-red)', marginBottom: '12px' }}></i>
         <h2 style={{ margin: '0' }} className="text-gradient">150+</h2>
         <p style={{ margin: '0', fontSize: '1.05rem', fontWeight: '500' }}>{t("home.dosen_berkualitas")}</p>
       </div>
       <div>
-        <i className="ph-duotone ph-books" style={{ fontSize: '3rem', color: 'var(--umiba-red)', marginBottom: '12px' }}></i>
+        <i className="ph ph-duotone ph-books" style={{ fontSize: '3rem', color: 'var(--umiba-red)', marginBottom: '12px' }}></i>
         <h2 style={{ margin: '0' }} className="text-gradient">7</h2>
         <p style={{ margin: '0', fontSize: '1.05rem', fontWeight: '500' }}>{t("home.program_studi")}</p>
       </div>
       <div>
-        <i className="ph-duotone ph-medal" style={{ fontSize: '3rem', color: 'var(--umiba-red)', marginBottom: '12px' }}></i>
+        <i className="ph ph-duotone ph-medal" style={{ fontSize: '3rem', color: 'var(--umiba-red)', marginBottom: '12px' }}></i>
         <h2 style={{ margin: '0' }} className="text-gradient">30+</h2>
         <p style={{ margin: '0', fontSize: '1.05rem', fontWeight: '500' }}>{t("home.tahun_berpengalaman")}</p>
       </div>
@@ -312,15 +312,15 @@ export default function Home() {
       {/*  Card 1  */}
       <div className="glass glass-card fade-up">
         <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
-          <i className="ph-duotone ph-briefcase" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
+          <i className="ph ph-duotone ph-briefcase" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
         <div style={{ minHeight: '240px' }}>
           <h3 style={{ fontSize: '1.4rem' }}>{t("home.fak_manajemen")}</h3>
           <p>{t("home.fak_manajemen_desc")}</p>
         </div>
         <ul style={{ listStyle: 'none', padding: '0', marginBottom: 'var(--space-4)', color: 'var(--color-muted)' }}>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Manajemen</li>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S2 Magister Manajemen</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Manajemen</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S2 Magister Manajemen</li>
         </ul>
         <a href="/akademik?tab=manajemen" className="btn btn-glass" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
       </div>
@@ -328,14 +328,14 @@ export default function Home() {
       {/*  Card 2  */}
       <div className="glass glass-card fade-up" style={{ transitionDelay: '0.1s' }}>
         <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
-          <i className="ph-duotone ph-scales" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
+          <i className="ph ph-duotone ph-scales" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
         <div style={{ minHeight: '240px' }}>
           <h3 style={{ fontSize: '1.4rem' }}>{t("home.fak_hukum")}</h3>
           <p>{t("home.fak_hukum_desc")}</p>
         </div>
         <ul style={{ listStyle: 'none', padding: '0', marginBottom: 'var(--space-4)', color: 'var(--color-muted)' }}>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Hukum</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Hukum</li>
         </ul>
         <a href="/akademik?tab=hukum" className="btn btn-glass" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
       </div>
@@ -343,16 +343,16 @@ export default function Home() {
       {/*  Card 3  */}
       <div className="glass glass-card fade-up" style={{ transitionDelay: '0.2s' }}>
         <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
-          <i className="ph-duotone ph-laptop" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
+          <i className="ph ph-duotone ph-laptop" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
         <div style={{ minHeight: '240px' }}>
           <h3 style={{ fontSize: '1.4rem' }}>{t("home.fak_ti")}</h3>
           <p>{t("home.fak_ti_desc")}</p>
         </div>
         <ul style={{ listStyle: 'none', padding: '0', marginBottom: 'var(--space-4)', color: 'var(--color-muted)' }}>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Komputer</li>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Sistem &amp; TI</li>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Aktuaria</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Komputer</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Sistem &amp; TI</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Aktuaria</li>
         </ul>
         <a href="/akademik?tab=it" className="btn btn-glass" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
       </div>
@@ -430,7 +430,7 @@ export default function Home() {
     <div className="grid grid-2" style={{ gap: 'var(--space-6)' }}>
       {/*  Kampus Pasar Minggu  */}
       <div className="glass glass-card" style={{ padding: 'var(--space-4)' }}>
-        <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)' }}><i className="ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_pasar_minggu")}</h3>
+        <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)' }}><i className="ph ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_pasar_minggu")}</h3>
         <p style={{ color: 'var(--slate-600)', marginBottom: 'var(--space-4)', lineHeight: '1.5', fontSize: '0.95rem' }}>
           {t("home.alamat_pm")}
         </p>
@@ -441,7 +441,7 @@ export default function Home() {
       
       {/*  Kampus Bintaro  */}
       <div className="glass glass-card" style={{ padding: 'var(--space-4)' }}>
-        <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)' }}><i className="ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_bintaro")}</h3>
+        <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)' }}><i className="ph ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_bintaro")}</h3>
         <p style={{ color: 'var(--slate-600)', marginBottom: 'var(--space-4)', lineHeight: '1.5', fontSize: '0.95rem' }}>
           {t("home.alamat_bintaro")}
         </p>
@@ -483,7 +483,7 @@ export default function Home() {
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/12/umiba-4pilar-1536x938-1.jpeg" alt="Berita 1" width={1536} height={938} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
-          <div className="media-source"><i className="ph-fill ph-newspaper"></i> kompaskampus.id</div>
+          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> kompaskampus.id</div>
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>UMIBA Gelar Seminar Kebangsaan, Teguhkan Budaya Kampus Berbasis 4 Pilar Kebangsaan</h3>
         </div>
       </div>
@@ -492,7 +492,7 @@ export default function Home() {
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/10/serba-serbi_155621_big.webp" alt="Berita 2" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
-          <div className="media-source"><i className="ph-fill ph-newspaper"></i> wartaekonomi.co.id</div>
+          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> wartaekonomi.co.id</div>
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>IKADIM dan Universitas Mitra Bangsa Teken MoU untuk Tingkatkan Kualitas Tri Dharma Perguruan Tinggi</h3>
         </div>
       </div>
@@ -501,7 +501,7 @@ export default function Home() {
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/10/medium_tscom_news_photo_1759914601.jpg" alt="Berita 3" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
-          <div className="media-source"><i className="ph-fill ph-newspaper"></i> teropongsenayan.com</div>
+          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> teropongsenayan.com</div>
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>IKADIM dan Universitas Mitra Bangsa Teken MoU untuk Tingkatkan Kualitas Tri Dharma Perguruan Tinggi</h3>
         </div>
       </div>
@@ -510,7 +510,7 @@ export default function Home() {
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 4" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
-          <div className="media-source"><i className="ph-fill ph-newspaper"></i> newsdetik.co</div>
+          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> newsdetik.co</div>
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Universitas Mitra Bangsa Selenggarakan Gebyar Kemerdekaan HUT-RI Ke-80</h3>
         </div>
       </div>
@@ -520,7 +520,7 @@ export default function Home() {
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 5" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
-          <div className="media-source"><i className="ph-fill ph-newspaper"></i> kompaskampus.id</div>
+          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> kompaskampus.id</div>
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Universitas Mitra Bangsa Gelar Gebyar Kemerdekaan HUT-RI</h3>
         </div>
       </div>
@@ -529,7 +529,7 @@ export default function Home() {
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/07/pilarparlemen.jpg" style={{ objectFit: 'contain', background: '#fff', width: '100%', height: 'auto' }} width={800} height={600} alt="Berita 6"/>
         </div>
         <div className="media-content">
-          <div className="media-source"><i className="ph-fill ph-newspaper"></i> pilarparlemen.id</div>
+          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> pilarparlemen.id</div>
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>BEM UMIBA Desak Pemkot Jakarta Selatan Atasi Penumpukan Sampah di Sekitar Kampus</h3>
         </div>
       </div>
@@ -538,7 +538,7 @@ export default function Home() {
           <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 7" width={300} height={158} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
-          <div className="media-source"><i className="ph-fill ph-newspaper"></i> kompaskampus.id</div>
+          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> kompaskampus.id</div>
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Kampus UMIBA Terima Kunjungan Kehormatan dari Anggota DPR RI dan Ketua Umum IKADIM, Dr. Jazuli Juwaini, MA</h3>
         </div>
       </div>
@@ -547,7 +547,7 @@ export default function Home() {
           <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 8" width={300} height={158} style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="media-content">
-          <div className="media-source"><i className="ph-fill ph-newspaper"></i> newsdetik.co</div>
+          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> newsdetik.co</div>
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Kampus UMIBA Terima Kunjungan Kehormatan dari Anggota DPR RI dan Ketua Umum IKADIM, Dr. Jazuli Juwaini, MA</h3>
         </div>
       </div>

@@ -65,7 +65,7 @@ export default function QuizBuilder() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px', display: 'flex', gap: '16px', alignItems: 'center' }}>
         <button onClick={() => router.back()} style={{ background: '#f1f5f9', border: 'none', padding: '8px 12px', borderRadius: '8px', cursor: 'pointer' }}>
-          <i className="ph-arrow-left"></i> Kembali
+          <i className="ph ph-arrow-left"></i> Kembali
         </button>
         <div>
           <h2 style={{ margin: '0 0 4px 0', color: '#1f2937' }}>CBT Engine: Kuis Pilihan Ganda</h2>
@@ -137,7 +137,7 @@ export default function QuizBuilder() {
 
         <div style={{ display: 'flex', gap: '16px' }}>
           <button type="button" onClick={addQuestion} style={{ flex: 1, background: '#f3f4f6', color: '#374151', border: '2px dashed #d1d5db', padding: '16px', borderRadius: '12px', cursor: 'pointer', fontWeight: 600 }}>
-            <i className="ph-plus"></i> Tambah Soal
+            <i className="ph ph-plus"></i> Tambah Soal
           </button>
           <button type="submit" disabled={loading} style={{ flex: 1, background: '#3b82f6', color: 'white', border: 'none', padding: '16px', borderRadius: '12px', cursor: loading ? 'not-allowed' : 'pointer', fontWeight: 600, fontSize: '1.1rem' }}>
             {loading ? 'Menyimpan...' : 'Terbitkan Kuis Sekarang'}

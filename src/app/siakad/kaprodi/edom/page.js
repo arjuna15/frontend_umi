@@ -37,7 +37,7 @@ export default function KaprodiEdom() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Hasil EDOM...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Hasil EDOM...
     </div>
   );
 
@@ -45,7 +45,7 @@ export default function KaprodiEdom() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
         <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          Evaluasi Dosen Oleh Mahasiswa <i className="ph-star-half" style={{ color: '#3b82f6' }}></i>
+          Evaluasi Dosen Oleh Mahasiswa <i className="ph ph-star-half" style={{ color: '#3b82f6' }}></i>
         </h2>
         <p style={{ margin: 0, color: '#6b7280' }}>Lihat hasil rating dan kritik dari mahasiswa secara anonim.</p>
       </div>
@@ -62,7 +62,7 @@ export default function KaprodiEdom() {
                   <span style={{ fontSize: '0.9rem', color: '#6b7280' }}>{edom.course?.name}</span>
                 </div>
                 <div style={{ background: '#fef3c7', padding: '6px 12px', borderRadius: '8px', color: '#b45309', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <i className="ph-star-fill"></i> {edom.score} / 5
+                  <i className="ph ph-star-fill"></i> {edom.score} / 5
                 </div>
               </div>
               

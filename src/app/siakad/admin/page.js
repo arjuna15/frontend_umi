@@ -32,7 +32,7 @@ export default function AdminDashboard() {
 
   if (loading || !data) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat panel admin...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat panel admin...
     </div>
   );
 
@@ -52,7 +52,7 @@ export default function AdminDashboard() {
           border: '1px solid rgba(255, 255, 255, 0.18)', display: 'flex', alignItems: 'center', gap: '16px' 
         }}>
           <div style={{ width: '50px', height: '50px', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
-            <i className="ph-users"></i>
+            <i className="ph ph-users"></i>
           </div>
           <div>
             <p style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 4px 0' }}>Total Pengguna</p>
@@ -66,7 +66,7 @@ export default function AdminDashboard() {
           border: '1px solid rgba(255, 255, 255, 0.18)', display: 'flex', alignItems: 'center', gap: '16px' 
         }}>
           <div style={{ width: '50px', height: '50px', background: 'linear-gradient(135deg, #10b981 0%, #047857 100%)', color: 'white', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
-            <i className="ph-chalkboard"></i>
+            <i className="ph ph-chalkboard"></i>
           </div>
           <div>
             <p style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 4px 0' }}>Total Kelas Aktif</p>

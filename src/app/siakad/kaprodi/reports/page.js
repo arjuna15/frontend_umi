@@ -25,14 +25,14 @@ export default function KaprodiReports() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
         <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          Laporan Akreditasi <i className="ph-file-pdf" style={{ color: '#ef4444' }}></i>
+          Laporan Akreditasi <i className="ph ph-file-pdf" style={{ color: '#ef4444' }}></i>
         </h2>
         <p style={{ margin: 0, color: '#6b7280' }}>Ekspor seluruh data akademik prodi untuk keperluan BAN-PT.</p>
       </div>
 
       <div className="siakad-card stagger-1" style={{ padding: '40px', textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
         <div style={{ width: '80px', height: '80px', background: '#fee2e2', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto' }}>
-          <i className="ph-file-xls" style={{ fontSize: '3rem', color: '#ef4444' }}></i>
+          <i className="ph ph-file-xls" style={{ fontSize: '3rem', color: '#ef4444' }}></i>
         </div>
         
         <h3 style={{ margin: '0 0 10px 0', color: '#1f2937' }}>Generate Laporan Komprehensif</h3>
@@ -60,9 +60,9 @@ export default function KaprodiReports() {
           }}
         >
           {downloading ? (
-            <><i className="ph-spinner ph-spin"></i> Memproses Data...</>
+            <><i className="ph ph-spinner ph-spin"></i> Memproses Data...</>
           ) : (
-            <><i className="ph-download-simple"></i> Download Laporan CSV</>
+            <><i className="ph ph-download-simple"></i> Download Laporan CSV</>
           )}
         </button>
       </div>

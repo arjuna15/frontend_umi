@@ -37,7 +37,7 @@ export default function KaprodiMonitoring() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Data BAP...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Data BAP...
     </div>
   );
 
@@ -45,7 +45,7 @@ export default function KaprodiMonitoring() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
         <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          Monitoring Perkuliahan <i className="ph-chalkboard-teacher" style={{ color: '#3b82f6' }}></i>
+          Monitoring Perkuliahan <i className="ph ph-chalkboard-teacher" style={{ color: '#3b82f6' }}></i>
         </h2>
         <p style={{ margin: 0, color: '#6b7280' }}>Pantau Berita Acara Perkuliahan (BAP) dan keaktifan kelas.</p>
       </div>
@@ -73,13 +73,13 @@ export default function KaprodiMonitoring() {
                   <td>{course.dosen ? course.dosen.name : <span style={{ color: '#ef4444' }}>Belum di-assign</span>}</td>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <i className="ph-users" style={{ color: '#10b981' }}></i>
+                      <i className="ph ph-users" style={{ color: '#10b981' }}></i>
                       {course.attendances?.length || 0} / 14 Sesi
                     </div>
                   </td>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <i className="ph-file-pdf" style={{ color: '#ef4444' }}></i>
+                      <i className="ph ph-file-pdf" style={{ color: '#ef4444' }}></i>
                       {course.materials?.length || 0} Dokumen
                     </div>
                   </td>

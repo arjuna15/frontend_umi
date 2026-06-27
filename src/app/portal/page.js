@@ -96,7 +96,7 @@ export default function PortalGateway() {
               borderRadius: '30px', 
               letterSpacing: '1px' 
             }}>
-              <i className="ph-fill ph-squares-four" style={{ marginRight: '8px', fontSize: '1.2rem' }}></i>
+              <i className="ph ph-fill ph-squares-four" style={{ marginRight: '8px', fontSize: '1.2rem' }}></i>
               Layanan Sistem Informasi
             </div>
 
@@ -192,7 +192,7 @@ export default function PortalGateway() {
                   borderRadius: '30px',
                   transition: 'background 0.3s'
                 }} className="portal-btn">
-                  Masuk Portal <i className="ph-bold ph-arrow-right"></i>
+                  Masuk Portal <i className="ph ph-bold ph-arrow-right"></i>
                 </div>
               </a>
             ))}

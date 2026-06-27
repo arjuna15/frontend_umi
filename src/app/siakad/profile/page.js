@@ -65,7 +65,7 @@ export default function ProfilePage() {
 
   if (loading || !user) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat profil...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat profil...
     </div>
   );
 
@@ -79,7 +79,7 @@ export default function ProfilePage() {
       <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '24px', alignItems: 'start' }}>
         <div style={{ background: 'white', padding: '32px', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', textAlign: 'center' }}>
           <div style={{ width: '120px', height: '120px', borderRadius: '50%', background: '#e0e7ff', color: '#4f46e5', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: '3rem' }}>
-            <i className="ph-user-circle"></i>
+            <i className="ph ph-user-circle"></i>
           </div>
           <h2 style={{ margin: '0 0 8px', color: '#1f2937', fontSize: '1.2rem' }}>{user.name}</h2>
           <p style={{ margin: '0 0 8px', color: '#6b7280', fontSize: '0.9rem' }}>NIM/NIP: {user.nim_nip}</p>

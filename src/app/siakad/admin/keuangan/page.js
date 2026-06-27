@@ -140,7 +140,7 @@ export default function AdminKeuangan() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div>
           <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: '#0f172a', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <i className="ph-wallet" style={{ color: '#0891b2' }}></i> Manajemen Keuangan
+            <i className="ph ph-wallet" style={{ color: '#0891b2' }}></i> Manajemen Keuangan
           </h1>
           <p style={{ color: '#64748b', marginTop: '4px' }}>Kelola seluruh tagihan dan pembayaran mahasiswa.</p>
         </div>
@@ -155,7 +155,7 @@ export default function AdminKeuangan() {
           onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
           onMouseOut={(e) => e.currentTarget.style.transform = 'none'}
         >
-          <i className="ph-plus-circle"></i> Tambah Tagihan
+          <i className="ph ph-plus-circle"></i> Tambah Tagihan
         </button>
       </div>
 
@@ -197,7 +197,7 @@ export default function AdminKeuangan() {
                         background: billing.status === 'Lunas' ? '#dcfce7' : '#fee2e2',
                         color: billing.status === 'Lunas' ? '#166534' : '#991b1b'
                       }}>
-                        {billing.status === 'Lunas' ? <i className="ph-check-circle"></i> : <i className="ph-clock-circle"></i>}
+                        {billing.status === 'Lunas' ? <i className="ph ph-check-circle"></i> : <i className="ph ph-clock-circle"></i>}
                         {billing.status}
                       </span>
                     </td>
@@ -210,7 +210,7 @@ export default function AdminKeuangan() {
                             borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s'
                           }}
                           title="Edit Tagihan"
-                        ><i className="ph-pencil-simple" style={{ fontSize: '1.2rem' }}></i></button>
+                        ><i className="ph ph-pencil-simple" style={{ fontSize: '1.2rem' }}></i></button>
                         <button 
                           onClick={() => handleDelete(billing.id)}
                           style={{
@@ -218,7 +218,7 @@ export default function AdminKeuangan() {
                             borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s'
                           }}
                           title="Hapus Tagihan"
-                        ><i className="ph-trash" style={{ fontSize: '1.2rem' }}></i></button>
+                        ><i className="ph ph-trash" style={{ fontSize: '1.2rem' }}></i></button>
                       </div>
                     </td>
                   </tr>
@@ -244,7 +244,7 @@ export default function AdminKeuangan() {
                 {isEdit ? 'Edit Tagihan' : 'Tambah Tagihan Baru'}
               </h2>
               <button onClick={closeModal} style={{ background: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: '1.2rem' }}>
-                <i className="ph-x"></i>
+                <i className="ph ph-x"></i>
               </button>
             </div>
             

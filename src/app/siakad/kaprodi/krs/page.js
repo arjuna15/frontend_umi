@@ -68,7 +68,7 @@ export default function KaprodiKrs() {
 
   if (loading || !data) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat tabel KRS...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat tabel KRS...
     </div>
   );
 
@@ -77,7 +77,7 @@ export default function KaprodiKrs() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
         <div>
           <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            Persetujuan KRS Mahasiswa <i className="ph-file-signature" style={{ color: '#3b82f6' }}></i>
+            Persetujuan KRS Mahasiswa <i className="ph ph-file-signature" style={{ color: '#3b82f6' }}></i>
           </h2>
           <p style={{ margin: 0, color: '#6b7280' }}>Tinjau dan setujui Kartu Rencana Studi mahasiswa.</p>
         </div>
@@ -124,7 +124,7 @@ export default function KaprodiKrs() {
                         fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', margin: '0 auto'
                       }}
                     >
-                      <i className="ph-check-circle"></i> Setujui
+                      <i className="ph ph-check-circle"></i> Setujui
                     </button>
                   </td>
                 </tr>

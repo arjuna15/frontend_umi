@@ -104,7 +104,7 @@ export default function DosenPresensiPage() {
 
   if (loading || !data) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat modul absensi...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat modul absensi...
     </div>
   );
 
@@ -122,14 +122,14 @@ export default function DosenPresensiPage() {
           <div key={i} className={`siakad-card stagger-${(i % 5) + 1}`}>
             <div style={{ background: 'linear-gradient(90deg, rgba(236,253,245,0.8) 0%, rgba(255,255,255,0) 100%)', padding: '24px 32px', borderBottom: '1px solid rgba(209, 213, 219, 0.3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', right: '-20px', top: '-20px', fontSize: '10rem', color: 'rgba(16, 185, 129, 0.03)', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
-                <i className="ph-calendar-check"></i>
+                <i className="ph ph-calendar-check"></i>
               </div>
               <div style={{ zIndex: 1 }}>
                 <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#064e3b', fontWeight: '800' }}>{course.name}</h3>
                 <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: '#047857', fontWeight: '600', padding: '4px 12px', background: 'rgba(5, 150, 105, 0.1)', borderRadius: '999px' }}>{course.code} • {course.sks} SKS</span>
               </div>
               <button onClick={() => { setSelectedCourseId(course.id); setShowSessionModal(true); }} style={{ zIndex: 1, background: '#10b981', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <i className="ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Buka Sesi Baru
+                <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Buka Sesi Baru
               </button>
             </div>
 
@@ -141,7 +141,7 @@ export default function DosenPresensiPage() {
                       <div>
                         <strong style={{ color: '#1f2937', display: 'block', marginBottom: '8px', fontSize: '1.1rem', fontWeight: '800' }}>Pertemuan ke-{att.meeting_number}</strong>
                         <span style={{ fontSize: '0.9rem', color: '#6b7280', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <i className="ph-calendar-blank"></i> {att.date}
+                          <i className="ph ph-calendar-blank"></i> {att.date}
                         </span>
                       </div>
                       <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
@@ -197,7 +197,7 @@ export default function DosenPresensiPage() {
                 <p style={{ margin: 0, color: '#64748b', fontSize: '0.9rem' }}>Pertemuan ke-{selectedAttendance.meeting_number} • {selectedAttendance.date}</p>
               </div>
               <button onClick={() => setShowDetailModal(false)} style={{ background: '#f1f5f9', border: 'none', width: '36px', height: '36px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b' }}>
-                <i className="ph-x" style={{ fontSize: '1.2rem' }}></i>
+                <i className="ph ph-x" style={{ fontSize: '1.2rem' }}></i>
               </button>
             </div>
 

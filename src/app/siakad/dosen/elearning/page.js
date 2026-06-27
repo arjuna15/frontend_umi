@@ -53,7 +53,7 @@ export default function DosenElearningPage() {
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat E-Learning...
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat E-Learning...
     </div>
   );
 
@@ -62,7 +62,7 @@ export default function DosenElearningPage() {
       <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
           <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            Manajemen Sesi E-Learning <i className="ph-books" style={{ color: '#3b82f6' }}></i>
+            Manajemen Sesi E-Learning <i className="ph ph-books" style={{ color: '#3b82f6' }}></i>
           </h2>
           <p style={{ margin: 0, color: '#6b7280' }}>Kelola materi pembelajaran, absensi, dan kuis untuk 14 sesi pertemuan.</p>
         </div>
@@ -70,7 +70,7 @@ export default function DosenElearningPage() {
           onClick={() => router.push('/siakad/dosen/elearning/quiz')}
           style={{ background: '#3b82f6', color: 'white', padding: '10px 20px', borderRadius: '8px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}
         >
-          <i className="ph-plus-circle"></i> Buat Kuis / Ujian (CBT)
+          <i className="ph ph-plus-circle"></i> Buat Kuis / Ujian (CBT)
         </button>
       </div>
 
@@ -103,7 +103,7 @@ export default function DosenElearningPage() {
         <div style={{ flex: 1 }}>
           {!selectedCourse ? (
             <div className="siakad-card" style={{ padding: '40px', textAlign: 'center', color: '#6b7280' }}>
-              <i className="ph-arrow-circle-left" style={{ fontSize: '3rem', color: '#cbd5e1', marginBottom: '16px' }}></i>
+              <i className="ph ph-arrow-circle-left" style={{ fontSize: '3rem', color: '#cbd5e1', marginBottom: '16px' }}></i>
               <p>Pilih mata kuliah di samping kiri untuk mengelola 14 sesi pertemuannya.</p>
             </div>
           ) : (
@@ -114,19 +114,19 @@ export default function DosenElearningPage() {
                     <h3 style={{ margin: '0 0 8px 0', color: '#1f2937', fontSize: '1.1rem' }}>Sesi {sess.session}: {sess.title}</h3>
                     <div style={{ display: 'flex', gap: '16px', color: '#6b7280', fontSize: '0.9rem' }}>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <i className="ph-file-pdf"></i> {sess.material_count} Materi Terupload
+                        <i className="ph ph-file-pdf"></i> {sess.material_count} Materi Terupload
                       </span>
                       <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <i className="ph-files"></i> 0 Tugas Terlampir
+                        <i className="ph ph-files"></i> 0 Tugas Terlampir
                       </span>
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '8px' }}>
                     <button style={{ background: '#f3f4f6', border: '1px solid #d1d5db', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <i className="ph-upload-simple"></i> Upload
+                      <i className="ph ph-upload-simple"></i> Upload
                     </button>
                     <button style={{ background: '#f3f4f6', border: '1px solid #d1d5db', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <i className="ph-video-camera"></i> Link Meet
+                      <i className="ph ph-video-camera"></i> Link Meet
                     </button>
                   </div>
                 </div>
