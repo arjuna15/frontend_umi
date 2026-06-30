@@ -52,7 +52,7 @@ export default function KeuanganPage() {
 
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat data keuangan...
     </div>
   );
@@ -60,18 +60,18 @@ export default function KeuanganPage() {
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Tagihan & Keuangan 💰</h1>
-        <p style={{ color: '#6b7280', margin: 0 }}>Cek status pembayaran SPP/UKT Anda di sini.</p>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Tagihan & Keuangan 💰</h1>
+        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Cek status pembayaran SPP/UKT Anda di sini.</p>
       </div>
 
-      <div style={{ background: 'white', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
-        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: '0 0 20px 0' }}>Daftar Tagihan Anda</h2>
+      <div style={{ background: 'var(--color-bg)', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Daftar Tagihan Anda</h2>
         
         {data.billings && data.billings.length > 0 ? (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
               <thead>
-                <tr style={{ background: '#f9fafb', color: '#6b7280', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                <tr style={{ background: 'var(--color-bg)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   <th style={{ padding: '16px', borderRadius: '8px 0 0 8px', fontWeight: '600' }}>Deskripsi Tagihan</th>
                   <th style={{ padding: '16px', fontWeight: '600' }}>Jatuh Tempo</th>
                   <th style={{ padding: '16px', fontWeight: '600' }}>Nominal (Rp)</th>
@@ -79,7 +79,7 @@ export default function KeuanganPage() {
                   <th style={{ padding: '16px', borderRadius: '0 8px 8px 0', fontWeight: '600' }}>Aksi</th>
                 </tr>
               </thead>
-              <tbody style={{ color: '#374151', fontSize: '0.95rem' }}>
+              <tbody style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>
                 {data.billings.map((bill, i) => (
                   <tr key={i} style={{ borderBottom: i === data.billings.length - 1 ? 'none' : '1px solid #f3f4f6' }}>
                     <td style={{ padding: '16px', fontWeight: '500' }}>{bill.description}</td>
@@ -111,7 +111,7 @@ export default function KeuanganPage() {
             </table>
           </div>
         ) : (
-          <p style={{ color: '#6b7280', fontStyle: 'italic' }}>Tidak ada tagihan yang harus dibayar saat ini.</p>
+          <p style={{ color: 'var(--color-muted)', fontStyle: 'italic' }}>Tidak ada tagihan yang harus dibayar saat ini.</p>
         )}
       </div>
     </div>

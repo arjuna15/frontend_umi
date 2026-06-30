@@ -24,10 +24,10 @@ export default function KaprodiReports() {
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
-        <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
           Laporan Akreditasi <i className="ph ph-file-pdf" style={{ color: '#ef4444' }}></i>
         </h2>
-        <p style={{ margin: 0, color: '#6b7280' }}>Ekspor seluruh data akademik prodi untuk keperluan BAN-PT.</p>
+        <p style={{ margin: 0, color: 'var(--color-muted)' }}>Ekspor seluruh data akademik prodi untuk keperluan BAN-PT.</p>
       </div>
 
       <div className="siakad-card stagger-1" style={{ padding: '40px', textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
@@ -35,8 +35,8 @@ export default function KaprodiReports() {
           <i className="ph ph-file-xls" style={{ fontSize: '3rem', color: '#ef4444' }}></i>
         </div>
         
-        <h3 style={{ margin: '0 0 10px 0', color: '#1f2937' }}>Generate Laporan Komprehensif</h3>
-        <p style={{ color: '#6b7280', marginBottom: '30px' }}>
+        <h3 style={{ margin: '0 0 10px 0', color: 'var(--color-text)' }}>Generate Laporan Komprehensif</h3>
+        <p style={{ color: 'var(--color-muted)', marginBottom: '30px' }}>
           Laporan ini mencakup seluruh data nilai, aktivitas dosen, kehadiran mahasiswa, dan EDOM untuk semester berjalan. Laporan dikemas dalam format CSV/Excel.
         </p>
 

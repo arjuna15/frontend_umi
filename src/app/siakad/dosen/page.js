@@ -30,7 +30,7 @@ export default function DosenDashboard() {
   }, [router]);
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Dashboard...
     </div>
   );
@@ -38,35 +38,35 @@ export default function DosenDashboard() {
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
-        <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
           Jadwal & Pengingat Anda <i className="ph ph-calendar-check" style={{ color: '#3b82f6' }}></i>
         </h2>
-        <p style={{ margin: 0, color: '#6b7280' }}>Selamat datang kembali! Berikut adalah ringkasan hari ini.</p>
+        <p style={{ margin: 0, color: 'var(--color-muted)' }}>Selamat datang kembali! Berikut adalah ringkasan hari ini.</p>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginBottom: '30px' }}>
         <div className="siakad-card stagger-1" style={{ padding: '24px' }}>
-          <h3 style={{ margin: '0 0 20px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <h3 style={{ margin: '0 0 20px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <i className="ph ph-clock" style={{ color: '#8b5cf6' }}></i> Jadwal Hari Ini
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {data.schedule && data.schedule.length > 0 ? data.schedule.map((sch, i) => (
               <div key={i} style={{ padding: '16px', background: '#f8fafc', borderRadius: '12px', borderLeft: '4px solid #8b5cf6' }}>
-                <h4 style={{ margin: '0 0 4px 0', color: '#1f2937' }}>{sch.course}</h4>
-                <div style={{ display: 'flex', gap: '16px', fontSize: '0.9rem', color: '#6b7280' }}>
+                <h4 style={{ margin: '0 0 4px 0', color: 'var(--color-text)' }}>{sch.course}</h4>
+                <div style={{ display: 'flex', gap: '16px', fontSize: '0.9rem', color: 'var(--color-muted)' }}>
                   <span><i className="ph ph-clock"></i> {sch.time}</span>
                   <span><i className="ph ph-map-pin"></i> {sch.room}</span>
                   <span><i className="ph ph-chalkboard"></i> Sesi {sch.meeting}</span>
                 </div>
               </div>
             )) : (
-              <div style={{ color: '#9ca3af', fontStyle: 'italic' }}>Tidak ada jadwal kelas hari ini.</div>
+              <div style={{ color: 'var(--color-muted)', fontStyle: 'italic' }}>Tidak ada jadwal kelas hari ini.</div>
             )}
           </div>
         </div>
 
         <div className="siakad-card stagger-2" style={{ padding: '24px' }}>
-          <h3 style={{ margin: '0 0 20px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <h3 style={{ margin: '0 0 20px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <i className="ph ph-list-checks" style={{ color: '#10b981' }}></i> To-Do List & Notifikasi
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>

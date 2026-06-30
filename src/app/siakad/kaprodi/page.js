@@ -59,10 +59,10 @@ export default function KaprodiDashboard() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
         <div>
-          <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
             Dashboard Statistik <i className="ph ph-chart-pie-slice" style={{ color: '#3b82f6' }}></i>
           </h2>
-          <p style={{ margin: 0, color: '#6b7280' }}>Overview dan metrik utama Program Studi Anda.</p>
+          <p style={{ margin: 0, color: 'var(--color-muted)' }}>Overview dan metrik utama Program Studi Anda.</p>
         </div>
       </div>
 
@@ -73,8 +73,8 @@ export default function KaprodiDashboard() {
             <i className="ph ph-books" style={{ fontSize: '2rem', color: '#3b82f6' }}></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', color: '#6b7280', fontSize: '0.9rem' }}>Total Kelas Aktif</p>
-            <h3 style={{ margin: 0, fontSize: '1.8rem', color: '#1f2937' }}>{stats.total_classes}</h3>
+            <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Kelas Aktif</p>
+            <h3 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--color-text)' }}>{stats.total_classes}</h3>
           </div>
         </div>
         
@@ -83,8 +83,8 @@ export default function KaprodiDashboard() {
             <i className="ph ph-student" style={{ fontSize: '2rem', color: '#10b981' }}></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', color: '#6b7280', fontSize: '0.9rem' }}>Total Mahasiswa</p>
-            <h3 style={{ margin: 0, fontSize: '1.8rem', color: '#1f2937' }}>{stats.total_students}</h3>
+            <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Mahasiswa</p>
+            <h3 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--color-text)' }}>{stats.total_students}</h3>
           </div>
         </div>
 
@@ -93,8 +93,8 @@ export default function KaprodiDashboard() {
             <i className="ph ph-chalkboard-teacher" style={{ fontSize: '2rem', color: '#8b5cf6' }}></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', color: '#6b7280', fontSize: '0.9rem' }}>Total Dosen</p>
-            <h3 style={{ margin: 0, fontSize: '1.8rem', color: '#1f2937' }}>{stats.total_dosens}</h3>
+            <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Dosen</p>
+            <h3 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--color-text)' }}>{stats.total_dosens}</h3>
           </div>
         </div>
 
@@ -129,7 +129,7 @@ export default function KaprodiDashboard() {
       </div>
 
       <div className="siakad-card stagger-5" style={{ padding: '24px' }}>
-        <h3 style={{ margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '8px', color: '#1f2937' }}>
+        <h3 style={{ margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-text)' }}>
           <i className="ph ph-bell-ringing" style={{ color: '#ef4444' }}></i> Peringatan Sistem
         </h3>
         <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '12px', padding: '16px', color: '#991b1b', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>

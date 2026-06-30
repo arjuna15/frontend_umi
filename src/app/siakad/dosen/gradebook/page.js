@@ -134,7 +134,7 @@ export default function DosenGradebookPage() {
   };
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Gradebook...
     </div>
   );
@@ -142,8 +142,8 @@ export default function DosenGradebookPage() {
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Sistem Penilaian (Gradebook) 📊</h1>
-        <p style={{ color: '#6b7280', margin: 0 }}>Input nilai komponen mahasiswa secara interaktif. Nilai akhir akan dihitung otomatis.</p>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Sistem Penilaian (Gradebook) 📊</h1>
+        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Input nilai komponen mahasiswa secara interaktif. Nilai akhir akan dihitung otomatis.</p>
       </div>
 
       <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', overflowX: 'auto', paddingBottom: '8px' }}>
@@ -194,7 +194,7 @@ export default function DosenGradebookPage() {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
                 <thead>
-                  <tr style={{ background: '#f9fafb', color: '#4b5563', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '1px solid #e5e7eb' }}>
+                  <tr style={{ background: 'var(--color-bg)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '1px solid #e5e7eb' }}>
                     <th style={{ padding: '16px 24px', fontWeight: 'bold' }}>Mahasiswa</th>
                     <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Kehadiran (10%)</th>
                     <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Tugas (20%)</th>
@@ -212,15 +212,15 @@ export default function DosenGradebookPage() {
                     return (
                       <tr key={grade.id} style={{ borderBottom: '1px solid #f3f4f6', background: idx % 2 === 0 ? 'white' : 'rgba(249, 250, 251, 0.5)' }}>
                         <td style={{ padding: '16px 24px' }}>
-                          <p style={{ margin: 0, fontWeight: 'bold', color: '#111827' }}>{grade.mahasiswa?.name}</p>
-                          <p style={{ margin: 0, fontSize: '0.85rem', color: '#6b7280' }}>{grade.mahasiswa?.nim_nip}</p>
+                          <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--color-text)' }}>{grade.mahasiswa?.name}</p>
+                          <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{grade.mahasiswa?.nim_nip}</p>
                         </td>
                         <td style={{ padding: '16px' }}>
                           <input 
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.kehadiran || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'kehadiran', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'rgba(255,255,255,0.8)', transition: 'border 0.2s', fontWeight: '500' }}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'var(--glass-bg)', transition: 'border 0.2s', fontWeight: '500' }}
                             onFocus={e => e.target.style.borderColor = '#4f46e5'}
                             onBlur={e => e.target.style.borderColor = '#d1d5db'}
                           />
@@ -230,7 +230,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.tugas || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'tugas', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'rgba(255,255,255,0.8)', transition: 'border 0.2s', fontWeight: '500' }}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'var(--glass-bg)', transition: 'border 0.2s', fontWeight: '500' }}
                             onFocus={e => e.target.style.borderColor = '#4f46e5'}
                             onBlur={e => e.target.style.borderColor = '#d1d5db'}
                           />
@@ -240,7 +240,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.uts || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'uts', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'rgba(255,255,255,0.8)', transition: 'border 0.2s', fontWeight: '500' }}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'var(--glass-bg)', transition: 'border 0.2s', fontWeight: '500' }}
                             onFocus={e => e.target.style.borderColor = '#4f46e5'}
                             onBlur={e => e.target.style.borderColor = '#d1d5db'}
                           />
@@ -250,7 +250,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.uas || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'uas', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'rgba(255,255,255,0.8)', transition: 'border 0.2s', fontWeight: '500' }}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'var(--glass-bg)', transition: 'border 0.2s', fontWeight: '500' }}
                             onFocus={e => e.target.style.borderColor = '#4f46e5'}
                             onBlur={e => e.target.style.borderColor = '#d1d5db'}
                           />
@@ -274,8 +274,8 @@ export default function DosenGradebookPage() {
                   })}
                   {(!course.grades || course.grades.length === 0) && (
                     <tr>
-                      <td colSpan="7" style={{ padding: '30px', textAlign: 'center', color: '#6b7280' }}>
-                        <i className="ph ph-users-slash" style={{ fontSize: '3rem', color: '#9ca3af', margin: '0 auto 10px', display: 'block' }}></i>
+                      <td colSpan="7" style={{ padding: '30px', textAlign: 'center', color: 'var(--color-muted)' }}>
+                        <i className="ph ph-users-slash" style={{ fontSize: '3rem', color: 'var(--color-muted)', margin: '0 auto 10px', display: 'block' }}></i>
                         Belum ada mahasiswa yang terdaftar di kelas ini
                       </td>
                     </tr>

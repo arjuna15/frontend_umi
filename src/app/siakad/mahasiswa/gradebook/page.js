@@ -30,7 +30,7 @@ export default function MahasiswaGradebook() {
   }, [router]);
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat rapor akademik...
     </div>
   );
@@ -72,7 +72,7 @@ export default function MahasiswaGradebook() {
           </div>
           <div>
             <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: '#64748b' }}>Total SKS Lulus</p>
-            <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: '800', color: '#1f2937' }}>{totalSks}</h1>
+            <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: '800', color: 'var(--color-text)' }}>{totalSks}</h1>
           </div>
         </div>
       </div>

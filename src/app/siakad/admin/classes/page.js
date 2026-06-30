@@ -104,7 +104,7 @@ export default function AdminClassesPage() {
   };
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat data kelas...
     </div>
   );
@@ -150,27 +150,27 @@ export default function AdminClassesPage() {
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Manajemen Kelas & Mata Kuliah</h1>
-        <p style={{ color: '#6b7280', margin: 0 }}>Kelola daftar mata kuliah dan dosen pengampunya.</p>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Manajemen Kelas & Mata Kuliah</h1>
+        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Kelola daftar mata kuliah dan dosen pengampunya.</p>
       </div>
 
       <div className="siakad-card stagger-1" style={{ marginBottom: '24px', padding: '24px', position: 'relative', zIndex: 50 }}>
-        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: '0 0 20px 0' }}>Tambah Mata Kuliah Baru</h2>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Tambah Mata Kuliah Baru</h2>
         <form onSubmit={handleCreateCourse} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 150px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Kode Mata Kuliah</label>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Kode Mata Kuliah</label>
             <input name="code" required placeholder="Contoh: CS101..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Nama Mata Kuliah</label>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Mata Kuliah</label>
             <input name="name" required placeholder="Algoritma & Pemrograman..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
           <div style={{ flex: '1 1 120px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Jumlah SKS</label>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jumlah SKS</label>
             <input type="number" name="sks" required min="1" max="6" placeholder="SKS..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
           <div style={{ flex: '1 1 200px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Dosen Pengampu</label>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Dosen Pengampu</label>
             <CustomSelect
               name="dosen_id"
               value={selectedDosen}
@@ -191,18 +191,18 @@ export default function AdminClassesPage() {
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead style={{ background: 'rgba(249, 250, 251, 0.8)', borderBottom: '1px solid #e5e7eb' }}>
               <tr>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>Kode</th>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>Nama Mata Kuliah</th>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>SKS</th>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem', textAlign: 'right' }}>Aksi</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem' }}>Kode</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem' }}>Nama Mata Kuliah</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem' }}>SKS</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem', textAlign: 'right' }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
               {courses.map((course, idx) => (
                 <tr key={course.id} style={{ borderBottom: '1px solid #e5e7eb', background: idx % 2 === 0 ? 'white' : 'rgba(249, 250, 251, 0.3)' }}>
                   <td style={{ padding: '16px 24px', color: '#4f46e5', fontWeight: 'bold', fontSize: '0.95rem' }}>{course.code}</td>
-                  <td style={{ padding: '16px 24px', color: '#111827', fontWeight: '500' }}>{course.name}</td>
-                  <td style={{ padding: '16px 24px', color: '#4b5563' }}>{course.sks} SKS</td>
+                  <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: '500' }}>{course.name}</td>
+                  <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.sks} SKS</td>
                   <td style={{ padding: '16px 24px', textAlign: 'right' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                       <button 
@@ -221,7 +221,7 @@ export default function AdminClassesPage() {
               ))}
               {courses.length === 0 && (
                 <tr>
-                  <td colSpan="4" style={{ padding: '24px', textAlign: 'center', color: '#6b7280' }}>Tidak ada data kelas/mata kuliah</td>
+                  <td colSpan="4" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data kelas/mata kuliah</td>
                 </tr>
               )}
             </tbody>
@@ -231,7 +231,7 @@ export default function AdminClassesPage() {
 
       {isEditModalOpen && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
-          <div style={{ background: 'white', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
+          <div style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
             <h2 style={{ margin: '0 0 20px 0', fontSize: '1.25rem', fontWeight: 'bold' }}>Edit Mata Kuliah</h2>
             <form onSubmit={handleUpdateCourse}>
               <div style={{ marginBottom: '16px' }}>

@@ -53,7 +53,7 @@ export default function MahasiswaPresensi() {
   };
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat modul presensi...
     </div>
   );
@@ -73,8 +73,8 @@ export default function MahasiswaPresensi() {
           return (
             <div key={idx} className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div>
-                <h3 style={{ margin: '0 0 4px 0', fontSize: '1.2rem', color: '#1f2937', fontWeight: 'bold' }}>{course.course_name}</h3>
-                <span style={{ fontSize: '0.85rem', color: '#6b7280', fontWeight: '600' }}>{course.course_code}</span>
+                <h3 style={{ margin: '0 0 4px 0', fontSize: '1.2rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.course_name}</h3>
+                <span style={{ fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{course.course_code}</span>
               </div>
               
               <div>

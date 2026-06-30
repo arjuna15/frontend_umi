@@ -36,7 +36,7 @@ export default function KaprodiMonitoring() {
   };
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Data BAP...
     </div>
   );
@@ -44,10 +44,10 @@ export default function KaprodiMonitoring() {
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
-        <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
           Monitoring Perkuliahan <i className="ph ph-chalkboard-teacher" style={{ color: '#3b82f6' }}></i>
         </h2>
-        <p style={{ margin: 0, color: '#6b7280' }}>Pantau Berita Acara Perkuliahan (BAP) dan keaktifan kelas.</p>
+        <p style={{ margin: 0, color: 'var(--color-muted)' }}>Pantau Berita Acara Perkuliahan (BAP) dan keaktifan kelas.</p>
       </div>
 
       <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
@@ -70,7 +70,7 @@ export default function KaprodiMonitoring() {
             ) : (
               courses.map(course => (
                 <tr key={course.id}>
-                  <td style={{ fontWeight: 600 }}>{course.name} <br/><small style={{ color: '#6b7280', fontWeight: 'normal' }}>{course.code}</small></td>
+                  <td style={{ fontWeight: 600 }}>{course.name} <br/><small style={{ color: 'var(--color-muted)', fontWeight: 'normal' }}>{course.code}</small></td>
                   <td>{course.dosen ? course.dosen.name : <span style={{ color: '#ef4444' }}>Belum di-assign</span>}</td>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>

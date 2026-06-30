@@ -85,7 +85,7 @@ export default function AdminUsersPage() {
   };
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat data pengguna...
     </div>
   );
@@ -132,28 +132,28 @@ export default function AdminUsersPage() {
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Manajemen Pengguna</h1>
-        <p style={{ color: '#6b7280', margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Manajemen Pengguna</h1>
+        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
       </div>
 
       <div className="siakad-card fade-in" style={{ padding: '24px', marginBottom: '24px', position: 'relative', zIndex: 50 }}>
         <h3 style={{ margin: '0 0 16px 0', fontSize: '1.1rem' }}>Tambah Pengguna Baru</h3>
         <form onSubmit={handleCreateUser} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 150px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Nama Lengkap</label>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Lengkap</label>
             <input name="name" required placeholder="Masukkan nama..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>NIM / NIP</label>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>NIM / NIP</label>
             <input name="nim_nip" required placeholder="Masukkan NIM/NIP..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Password</label>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Password</label>
             <input type="password" name="password" required placeholder="Min. 6 karakter..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
           <div style={{ display: 'flex', gap: '8px', flex: '1 1 250px', flexWrap: 'wrap' }}>
             <div style={{ flex: '1 1 100px' }}>
-              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Role</label>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Role</label>
               <CustomSelect 
                 name="role"
                 value={selectedRole}
@@ -167,7 +167,7 @@ export default function AdminUsersPage() {
               />
             </div>
             <div style={{ flex: 1 }}>
-              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: '#4b5563', fontWeight: '600' }}>Prodi</label>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Prodi</label>
               <input name="prodi" placeholder="Prodi..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
             </div>
           </div>
@@ -184,17 +184,17 @@ export default function AdminUsersPage() {
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead style={{ background: 'rgba(249, 250, 251, 0.8)', borderBottom: '1px solid #e5e7eb' }}>
               <tr>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>Nama</th>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>NIM / NIP</th>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>Role</th>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: '#374151', fontSize: '0.9rem', textAlign: 'right' }}>Aksi</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem' }}>Nama</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem' }}>NIM / NIP</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem' }}>Role</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem', textAlign: 'right' }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user, idx) => (
                 <tr key={user.id} style={{ borderBottom: '1px solid #e5e7eb', background: idx % 2 === 0 ? 'white' : 'rgba(249, 250, 251, 0.3)' }}>
-                  <td style={{ padding: '16px 24px', color: '#111827', fontWeight: '500' }}>{user.name}</td>
-                  <td style={{ padding: '16px 24px', color: '#4b5563', fontSize: '0.95rem' }}>{user.nim_nip}</td>
+                  <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: '500' }}>{user.name}</td>
+                  <td style={{ padding: '16px 24px', color: 'var(--color-muted)', fontSize: '0.95rem' }}>{user.nim_nip}</td>
                   <td style={{ padding: '16px 24px' }}>
                     <span style={{ 
                       padding: '4px 12px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold',
@@ -222,7 +222,7 @@ export default function AdminUsersPage() {
               ))}
               {users.length === 0 && (
                 <tr>
-                  <td colSpan="4" style={{ padding: '24px', textAlign: 'center', color: '#6b7280' }}>Tidak ada data pengguna</td>
+                  <td colSpan="4" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data pengguna</td>
                 </tr>
               )}
             </tbody>
@@ -232,7 +232,7 @@ export default function AdminUsersPage() {
 
       {isEditModalOpen && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
-          <div style={{ background: 'white', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
+          <div style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
             <h2 style={{ margin: '0 0 20px 0', fontSize: '1.25rem', fontWeight: 'bold' }}>Edit Pengguna</h2>
             <form onSubmit={handleUpdateUser}>
               <div style={{ marginBottom: '16px' }}>

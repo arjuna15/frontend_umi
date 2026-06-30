@@ -53,37 +53,37 @@ export default function AdminDashboard() {
     <div>
       <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Panel Administrator 🛡️</h1>
-          <p style={{ color: '#6b7280', margin: 0 }}>Kelola pengguna, kelas, dan pantau aktivitas akademik.</p>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Panel Administrator 🛡️</h1>
+          <p style={{ color: 'var(--color-muted)', margin: 0 }}>Kelola pengguna, kelas, dan pantau aktivitas akademik.</p>
         </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         <div style={{ 
-          background: 'rgba(255, 255, 255, 0.7)', backdropFilter: 'blur(10px)',
-          padding: '24px', borderRadius: '16px', boxShadow: '0 8px 32px rgba(31, 38, 135, 0.05)', 
-          border: '1px solid rgba(255, 255, 255, 0.18)', display: 'flex', alignItems: 'center', gap: '16px' 
+          background: 'var(--glass-bg)', backdropFilter: 'blur(10px)',
+          padding: '24px', borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
+          border: 'var(--glass-border)', display: 'flex', alignItems: 'center', gap: '16px' 
         }}>
           <div style={{ width: '50px', height: '50px', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
             <i className="ph ph-users"></i>
           </div>
           <div>
-            <p style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 4px 0' }}>Total Pengguna</p>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>{data.users_count}</h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>Total Pengguna</p>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{data.users_count}</h3>
           </div>
         </div>
         
         <div style={{ 
-          background: 'rgba(255, 255, 255, 0.7)', backdropFilter: 'blur(10px)',
-          padding: '24px', borderRadius: '16px', boxShadow: '0 8px 32px rgba(31, 38, 135, 0.05)', 
-          border: '1px solid rgba(255, 255, 255, 0.18)', display: 'flex', alignItems: 'center', gap: '16px' 
+          background: 'var(--glass-bg)', backdropFilter: 'blur(10px)',
+          padding: '24px', borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
+          border: 'var(--glass-border)', display: 'flex', alignItems: 'center', gap: '16px' 
         }}>
           <div style={{ width: '50px', height: '50px', background: 'linear-gradient(135deg, #10b981 0%, #047857 100%)', color: 'white', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
             <i className="ph ph-chalkboard"></i>
           </div>
           <div>
-            <p style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 4px 0' }}>Total Kelas Aktif</p>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>{data.courses?.length || 0}</h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>Total Kelas Aktif</p>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{data.courses?.length || 0}</h3>
           </div>
         </div>
       </div>
@@ -114,19 +114,19 @@ export default function AdminDashboard() {
         background: 'var(--glass-bg)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '24px', 
         boxShadow: 'var(--glass-shadow)', border: 'var(--glass-border)'
       }}>
-        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: '0 0 20px 0' }}>Daftar Kelas (Overview)</h2>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Daftar Kelas (Overview)</h2>
         
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
             <thead>
-              <tr style={{ background: 'rgba(243, 244, 246, 0.5)', color: '#6b7280', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <tr style={{ background: 'rgba(243, 244, 246, 0.5)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 <th style={{ padding: '16px', borderRadius: '8px 0 0 8px', fontWeight: '600' }}>Kode MK</th>
                 <th style={{ padding: '16px', fontWeight: '600' }}>Mata Kuliah</th>
                 <th style={{ padding: '16px', fontWeight: '600' }}>Dosen Pengampu</th>
                 <th style={{ padding: '16px', borderRadius: '0 8px 8px 0', fontWeight: '600' }}>SKS</th>
               </tr>
             </thead>
-            <tbody style={{ color: '#374151', fontSize: '0.95rem' }}>
+            <tbody style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>
               {data.courses && data.courses.map((c, i) => (
                 <tr key={i} style={{ borderBottom: i === data.courses.length - 1 ? 'none' : '1px solid rgba(229, 231, 235, 0.5)' }}>
                   <td style={{ padding: '16px', fontWeight: 'bold', color: '#0f172a' }}>{c.code}</td>

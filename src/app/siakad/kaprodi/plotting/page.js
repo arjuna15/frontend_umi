@@ -67,7 +67,7 @@ export default function KaprodiPlotting() {
   };
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Data Kelas...
     </div>
   );
@@ -75,10 +75,10 @@ export default function KaprodiPlotting() {
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
-        <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
           Plotting Dosen & Kelas <i className="ph ph-users-three" style={{ color: '#3b82f6' }}></i>
         </h2>
-        <p style={{ margin: 0, color: '#6b7280' }}>Tugaskan dosen pengampu untuk masing-masing mata kuliah.</p>
+        <p style={{ margin: 0, color: 'var(--color-muted)' }}>Tugaskan dosen pengampu untuk masing-masing mata kuliah.</p>
       </div>
 
       <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
@@ -102,11 +102,11 @@ export default function KaprodiPlotting() {
               courses.map(course => (
                 <tr key={course.id}>
                   <td style={{ fontWeight: 600 }}>{course.name}</td>
-                  <td style={{ color: '#6b7280' }}>{course.code}</td>
+                  <td style={{ color: 'var(--color-muted)' }}>{course.code}</td>
                   <td>{course.sks} SKS</td>
                   <td>
                     {course.dosen ? (
-                      <span style={{ fontWeight: 500, color: '#1f2937' }}>{course.dosen.name}</span>
+                      <span style={{ fontWeight: 500, color: 'var(--color-text)' }}>{course.dosen.name}</span>
                     ) : (
                       <span className="siakad-badge" style={{ background: '#fef2f2', color: '#ef4444' }}>Kosong</span>
                     )}

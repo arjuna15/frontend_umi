@@ -161,7 +161,7 @@ export default function AdminKeuangan() {
       </div>
 
       <div style={{
-        background: 'rgba(255, 255, 255, 0.7)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
+        background: 'var(--glass-bg)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
         border: '1px solid rgba(255,255,255,0.8)', borderRadius: '24px', padding: '24px',
         boxShadow: '0 10px 40px rgba(0,0,0,0.03)'
       }}>
@@ -236,7 +236,7 @@ export default function AdminKeuangan() {
           display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, padding: '24px'
         }}>
           <div style={{
-            background: 'white', borderRadius: '24px', width: '100%', maxWidth: '500px',
+            background: 'var(--color-bg)', borderRadius: '24px', width: '100%', maxWidth: '500px',
             boxShadow: '0 20px 40px rgba(0,0,0,0.2)', overflow: 'hidden',
             animation: 'fadeSlideUp 0.3s ease-out'
           }}>

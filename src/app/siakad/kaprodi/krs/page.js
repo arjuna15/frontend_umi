@@ -93,7 +93,7 @@ export default function KaprodiKrs() {
   };
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat tabel KRS...
     </div>
   );
@@ -102,10 +102,10 @@ export default function KaprodiKrs() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
         <div>
-          <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
             Persetujuan KRS Mahasiswa <i className="ph ph-file-signature" style={{ color: '#3b82f6' }}></i>
           </h2>
-          <p style={{ margin: 0, color: '#6b7280' }}>Tinjau dan setujui Kartu Rencana Studi mahasiswa.</p>
+          <p style={{ margin: 0, color: 'var(--color-muted)' }}>Tinjau dan setujui Kartu Rencana Studi mahasiswa.</p>
         </div>
       </div>
 
@@ -124,16 +124,16 @@ export default function KaprodiKrs() {
           <tbody>
             {submissions.length === 0 ? (
               <tr>
-                <td colSpan="5" style={{ textAlign: 'center', color: '#9ca3af', padding: '40px 20px' }}>
+                <td colSpan="5" style={{ textAlign: 'center', color: 'var(--color-muted)', padding: '40px 20px' }}>
                   Belum ada pengajuan KRS yang pending.
                 </td>
               </tr>
             ) : (
               submissions.map(sub => (
                 <tr key={sub.id}>
-                  <td style={{ fontWeight: 500, color: '#1f2937' }}>
+                  <td style={{ fontWeight: 500, color: 'var(--color-text)' }}>
                     {sub.mahasiswa?.name} <br/>
-                    <small style={{ color: '#6b7280' }}>{sub.mahasiswa?.nim_nip}</small>
+                    <small style={{ color: 'var(--color-muted)' }}>{sub.mahasiswa?.nim_nip}</small>
                   </td>
                   <td>{sub.semester}</td>
                   <td>
@@ -143,7 +143,7 @@ export default function KaprodiKrs() {
                       return (
                         <>
                           <div>{cIds.length} Matkul</div>
-                          {cCodes && <div style={{ fontSize: '0.8rem', color: '#6b7280', marginTop: '4px', maxWidth: '200px', lineHeight: '1.4' }}>{cCodes}</div>}
+                          {cCodes && <div style={{ fontSize: '0.8rem', color: 'var(--color-muted)', marginTop: '4px', maxWidth: '200px', lineHeight: '1.4' }}>{cCodes}</div>}
                         </>
                       );
                     })()}

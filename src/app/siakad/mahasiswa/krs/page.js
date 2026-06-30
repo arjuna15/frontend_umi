@@ -118,8 +118,8 @@ export default function KRSPage() {
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>KRS Online 📝</h1>
-        <p style={{ color: '#6b7280', margin: 0 }}>Pilih dan ajukan mata kuliah untuk semester ini.</p>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>KRS Online 📝</h1>
+        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Pilih dan ajukan mata kuliah untuk semester ini.</p>
       </div>
 
       {!krsOpen && (
@@ -156,12 +156,12 @@ export default function KRSPage() {
       )}
 
       {krsOpen && (
-        <div style={{ background: 'white', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
+        <div style={{ background: 'var(--color-bg)', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>Daftar Mata Kuliah Tersedia</h2>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Daftar Mata Kuliah Tersedia</h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{ background: '#f3f4f6', padding: '10px 16px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', color: '#4b5563' }}>
+            <div style={{ background: 'var(--color-border)', padding: '10px 16px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-muted)' }}>
               Total: {totalSKS} SKS
             </div>
             {(!submission?.status || submission?.status === 'rejected') && (
@@ -186,7 +186,7 @@ export default function KRSPage() {
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
             <thead>
-              <tr style={{ background: '#f9fafb', color: '#6b7280', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <tr style={{ background: 'var(--color-bg)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 <th style={{ padding: '16px', borderRadius: '8px 0 0 8px', fontWeight: '600', width: '50px' }}>Pilih</th>
                 <th style={{ padding: '16px', fontWeight: '600' }}>Kode MK</th>
                 <th style={{ padding: '16px', fontWeight: '600' }}>Mata Kuliah</th>
@@ -221,9 +221,9 @@ export default function KRSPage() {
                       </div>
                     </td>
                     <td style={{ padding: '16px', fontWeight: 'bold', color: '#4f46e5' }}>{course.code}</td>
-                    <td style={{ padding: '16px', fontWeight: '600', color: '#1f2937' }}>{course.name}</td>
-                    <td style={{ padding: '16px', color: '#4b5563' }}>{course.dosen?.name || 'Belum Ditentukan'}</td>
-                    <td style={{ padding: '16px', color: '#4b5563', fontWeight: '600' }}>{course.sks}</td>
+                    <td style={{ padding: '16px', fontWeight: '600', color: 'var(--color-text)' }}>{course.name}</td>
+                    <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{course.dosen?.name || 'Belum Ditentukan'}</td>
+                    <td style={{ padding: '16px', color: 'var(--color-muted)', fontWeight: '600' }}>{course.sks}</td>
                   </tr>
                 );
               })}

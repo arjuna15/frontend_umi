@@ -36,7 +36,7 @@ export default function KaprodiStudents() {
   };
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Data Nilai...
     </div>
   );
@@ -44,10 +44,10 @@ export default function KaprodiStudents() {
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
-        <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
           Monitoring Nilai Mahasiswa <i className="ph ph-student" style={{ color: '#3b82f6' }}></i>
         </h2>
-        <p style={{ margin: 0, color: '#6b7280' }}>Distribusi dan rekapitulasi nilai akhir seluruh mahasiswa di prodi.</p>
+        <p style={{ margin: 0, color: 'var(--color-muted)' }}>Distribusi dan rekapitulasi nilai akhir seluruh mahasiswa di prodi.</p>
       </div>
 
       <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
@@ -70,7 +70,7 @@ export default function KaprodiStudents() {
             ) : (
               grades.map(grade => (
                 <tr key={grade.id}>
-                  <td style={{ fontWeight: 600 }}>{grade.mahasiswa?.name} <br/><small style={{ color: '#6b7280', fontWeight: 'normal' }}>{grade.mahasiswa?.nim_nip}</small></td>
+                  <td style={{ fontWeight: 600 }}>{grade.mahasiswa?.name} <br/><small style={{ color: 'var(--color-muted)', fontWeight: 'normal' }}>{grade.mahasiswa?.nim_nip}</small></td>
                   <td>{grade.course?.name}</td>
                   <td>{grade.score !== null ? grade.score : '-'}</td>
                   <td style={{ fontWeight: 800, color: ['A', 'A-'].includes(grade.grade) ? '#10b981' : ['E', 'D'].includes(grade.grade) ? '#ef4444' : '#1f2937' }}>
@@ -78,7 +78,7 @@ export default function KaprodiStudents() {
                   </td>
                   <td>
                     {grade.grade === null ? (
-                      <span className="siakad-badge" style={{ background: '#f3f4f6', color: '#6b7280' }}>Belum Dinilai</span>
+                      <span className="siakad-badge" style={{ background: 'var(--color-border)', color: 'var(--color-muted)' }}>Belum Dinilai</span>
                     ) : ['E', 'D'].includes(grade.grade) ? (
                       <span className="siakad-badge" style={{ background: '#fef2f2', color: '#ef4444' }}>Tidak Lulus</span>
                     ) : (

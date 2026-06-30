@@ -45,7 +45,7 @@ export default function MahasiswaDashboard() {
   }, [router]);
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat data akademik...
     </div>
   );
@@ -55,8 +55,8 @@ export default function MahasiswaDashboard() {
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Halo, {data.user.name.split(' ')[0]}! 👋</h1>
-        <p style={{ color: '#6b7280', margin: 0 }}>Selamat datang kembali di Portal Akademik Anda.</p>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Halo, {data.user.name.split(' ')[0]}! 👋</h1>
+        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Selamat datang kembali di Portal Akademik Anda.</p>
       </div>
 
       {/* Statistik Atas */}
@@ -66,8 +66,8 @@ export default function MahasiswaDashboard() {
             <i className="ph ph-student"></i>
           </div>
           <div>
-            <p style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 4px 0' }}>Program Studi</p>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>{data.user.prodi}</h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>Program Studi</p>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{data.user.prodi}</h3>
           </div>
         </div>
         <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -75,8 +75,8 @@ export default function MahasiswaDashboard() {
             <i className="ph ph-books"></i>
           </div>
           <div>
-            <p style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 4px 0' }}>Total SKS Diambil</p>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>{totalSKS} <span style={{ fontSize: '0.9rem', fontWeight: 'normal', color: '#9ca3af' }}>SKS</span></h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>Total SKS Diambil</p>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{totalSKS} <span style={{ fontSize: '0.9rem', fontWeight: 'normal', color: 'var(--color-muted)' }}>SKS</span></h3>
           </div>
         </div>
         <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -84,8 +84,8 @@ export default function MahasiswaDashboard() {
             <i className="ph ph-chart-line-up"></i>
           </div>
           <div>
-            <p style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 4px 0' }}>IPK Sementara</p>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>3.75</h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>IPK Sementara</p>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>3.75</h3>
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ export default function MahasiswaDashboard() {
               <div style={{ background: '#e0e7ff', color: '#4f46e5', padding: '10px', borderRadius: '12px' }}>
                 <i className="ph ph-calendar-check" style={{ fontSize: '1.4rem' }}></i>
               </div>
-              <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>Jadwal Hari Ini</h2>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Jadwal Hari Ini</h2>
             </div>
 
             {dashboardExt.schedule_today?.length > 0 ? (
@@ -128,7 +128,7 @@ export default function MahasiswaDashboard() {
               <div style={{ background: '#fee2e2', color: '#ef4444', padding: '10px', borderRadius: '12px' }}>
                 <i className="ph ph-warning-circle" style={{ fontSize: '1.4rem' }}></i>
               </div>
-              <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>Timeline & Deadline</h2>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Timeline & Deadline</h2>
             </div>
 
             {dashboardExt.upcoming_deadlines?.length > 0 ? (
@@ -156,7 +156,7 @@ export default function MahasiswaDashboard() {
       {/* Kartu Hasil Studi (KHS) Summary */}
       <div id="khs-print-section" className="siakad-card" style={{ padding: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }} className="no-print">
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>Kartu Hasil Studi (KHS)</h2>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Kartu Hasil Studi (KHS)</h2>
           <button onClick={() => window.print()} style={{ background: '#4f46e5', border: 'none', padding: '10px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
             <i className="ph ph-printer"></i> Cetak KHS Resmi
           </button>
@@ -178,7 +178,7 @@ export default function MahasiswaDashboard() {
                 <tr key={i}>
                   <td>{item.course?.code}</td>
                   <td>{item.course?.name}</td>
-                  <td style={{ color: '#6b7280' }}>{item.course?.semester}</td>
+                  <td style={{ color: 'var(--color-muted)' }}>{item.course?.semester}</td>
                   <td>{item.course?.sks}</td>
                   <td>
                     <span className="siakad-badge" style={{

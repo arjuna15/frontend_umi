@@ -103,7 +103,7 @@ export default function DosenPresensiPage() {
   };
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat modul absensi...
     </div>
   );
@@ -137,10 +137,10 @@ export default function DosenPresensiPage() {
               {course.attendances && course.attendances.length > 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   {course.attendances.map((att, j) => (
-                    <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', padding: '20px', background: 'rgba(255, 255, 255, 0.8)', border: '1px solid rgba(229, 231, 235, 0.8)', borderRadius: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
+                    <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', padding: '20px', background: 'var(--glass-bg)', border: '1px solid rgba(229, 231, 235, 0.8)', borderRadius: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
                       <div style={{ flex: '1 1 150px' }}>
-                        <strong style={{ color: '#1f2937', display: 'block', marginBottom: '8px', fontSize: '1.1rem', fontWeight: '800' }}>Pertemuan ke-{att.meeting_number}</strong>
-                        <span style={{ fontSize: '0.9rem', color: '#6b7280', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: 'var(--color-text)', display: 'block', marginBottom: '8px', fontSize: '1.1rem', fontWeight: '800' }}>Pertemuan ke-{att.meeting_number}</strong>
+                        <span style={{ fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <i className="ph ph-calendar-blank"></i> {att.date}
                         </span>
                       </div>
@@ -151,13 +151,13 @@ export default function DosenPresensiPage() {
                         <div style={{ fontSize: '0.85rem', color: '#dc2626', background: '#fee2e2', padding: '6px 16px', borderRadius: '999px', fontWeight: 'bold' }}>
                           {att.records?.filter(r => r.status === 'absent').length || 0} Alpa
                         </div>
-                        <button onClick={() => { setSelectedAttendance(att); setSelectedCourseId(course.id); setShowDetailModal(true); }} style={{ background: 'white', border: '1px solid #d1d5db', padding: '8px 16px', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', color: '#374151', fontWeight: 'bold', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>Input & Detail</button>
+                        <button onClick={() => { setSelectedAttendance(att); setSelectedCourseId(course.id); setShowDetailModal(true); }} style={{ background: 'var(--color-bg)', border: '1px solid #d1d5db', padding: '8px 16px', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>Input & Detail</button>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p style={{ color: '#9ca3af', fontSize: '0.95rem', margin: 0, fontStyle: 'italic', padding: '16px', background: 'rgba(243,244,246,0.5)', borderRadius: '12px', border: '1px dashed #d1d5db', textAlign: 'center' }}>Belum ada sesi absensi untuk kelas ini.</p>
+                <p style={{ color: 'var(--color-muted)', fontSize: '0.95rem', margin: 0, fontStyle: 'italic', padding: '16px', background: 'rgba(243,244,246,0.5)', borderRadius: '12px', border: '1px dashed #d1d5db', textAlign: 'center' }}>Belum ada sesi absensi untuk kelas ini.</p>
               )}
             </div>
           </div>
@@ -167,7 +167,7 @@ export default function DosenPresensiPage() {
       {/* Buat Sesi Modal */}
       {showSessionModal && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(8px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ background: 'white', width: '100%', maxWidth: '400px', borderRadius: '24px', padding: '32px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)' }}>
+          <div style={{ background: 'var(--color-bg)', width: '100%', maxWidth: '400px', borderRadius: '24px', padding: '32px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)' }}>
             <h3 style={{ margin: '0 0 24px 0', fontSize: '1.4rem', fontWeight: '800', color: '#0f172a' }}>Buka Sesi Presensi</h3>
             <form onSubmit={handleCreateSession} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div>
@@ -190,7 +190,7 @@ export default function DosenPresensiPage() {
       {/* Input Detail Modal */}
       {showDetailModal && selectedAttendance && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(8px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ background: 'white', width: '100%', maxWidth: '600px', borderRadius: '24px', padding: '32px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', maxHeight: '90vh', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ background: 'var(--color-bg)', width: '100%', maxWidth: '600px', borderRadius: '24px', padding: '32px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', maxHeight: '90vh', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
               <div>
                 <h3 style={{ margin: '0 0 4px 0', fontSize: '1.4rem', fontWeight: '800', color: '#0f172a' }}>Input Presensi</h3>

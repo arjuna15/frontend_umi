@@ -69,8 +69,8 @@ export default function DosenQuizCreate() {
           <i className="ph ph-arrow-left"></i> Kembali
         </button>
         <div>
-          <h2 style={{ margin: '0 0 4px 0', color: '#1f2937' }}>CBT Engine: Kuis Pilihan Ganda</h2>
-          <p style={{ margin: 0, color: '#6b7280' }}>Buat kuis otomatis dengan durasi dan nilai instan.</p>
+          <h2 style={{ margin: '0 0 4px 0', color: 'var(--color-text)' }}>CBT Engine: Kuis Pilihan Ganda</h2>
+          <p style={{ margin: 0, color: 'var(--color-muted)' }}>Buat kuis otomatis dengan durasi dan nilai instan.</p>
         </div>
       </div>
 
@@ -90,7 +90,7 @@ export default function DosenQuizCreate() {
         </div>
 
         {questions.map((q, idx) => (
-          <div key={idx} className={`stagger-${(idx % 5) + 2}`} style={{ background: 'white', padding: '24px', borderRadius: '16px', marginBottom: '24px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)', border: '1px solid #e5e7eb', position: 'relative', zIndex: 50 - idx }}>
+          <div key={idx} className={`stagger-${(idx % 5) + 2}`} style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '16px', marginBottom: '24px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)', border: '1px solid #e5e7eb', position: 'relative', zIndex: 50 - idx }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               {questions.length > 1 && (
                 <button type="button" onClick={() => removeQuestion(idx)} style={{ background: '#fee2e2', color: '#ef4444', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}>Hapus Soal</button>
@@ -143,7 +143,7 @@ export default function DosenQuizCreate() {
         ))}
 
         <div style={{ display: 'flex', gap: '16px' }}>
-          <button type="button" onClick={addQuestion} style={{ flex: 1, background: '#f3f4f6', color: '#374151', border: '2px dashed #d1d5db', padding: '16px', borderRadius: '12px', cursor: 'pointer', fontWeight: 600 }}>
+          <button type="button" onClick={addQuestion} style={{ flex: 1, background: 'var(--color-border)', color: 'var(--color-text)', border: '2px dashed #d1d5db', padding: '16px', borderRadius: '12px', cursor: 'pointer', fontWeight: 600 }}>
             <i className="ph ph-plus"></i> Tambah Soal
           </button>
           <button type="submit" disabled={loading} style={{ flex: 1, background: '#3b82f6', color: 'white', border: 'none', padding: '16px', borderRadius: '12px', cursor: loading ? 'not-allowed' : 'pointer', fontWeight: 600, fontSize: '1.1rem' }}>

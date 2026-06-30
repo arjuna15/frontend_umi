@@ -89,7 +89,7 @@ export default function MahasiswaQuiz() {
   };
 
   if (loading) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Kuis...
     </div>
   );
@@ -102,7 +102,7 @@ export default function MahasiswaQuiz() {
         <div style={{ width: '80px', height: '80px', background: '#ecfdf5', color: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', margin: '0 auto 20px auto' }}>
           <i className="ph ph-check-circle"></i>
         </div>
-        <h2 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#1f2937', marginBottom: '10px' }}>Selesai!</h2>
+        <h2 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '10px' }}>Selesai!</h2>
         <p style={{ color: '#64748b', marginBottom: '24px' }}>{result.message}</p>
         <div style={{ background: '#f8fafc', padding: '24px', borderRadius: '16px', border: '1px solid #e2e8f0', marginBottom: '32px' }}>
           <p style={{ margin: '0 0 8px 0', fontSize: '1.1rem', color: '#475569' }}>Nilai Kamu:</p>
@@ -128,9 +128,9 @@ export default function MahasiswaQuiz() {
   return (
     <div style={{ paddingBottom: '80px' }}>
       {/* Sticky Header with Timer */}
-      <div style={{ position: 'sticky', top: 0, background: 'white', padding: '20px 24px', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', zIndex: 10 }}>
+      <div style={{ position: 'sticky', top: 0, background: 'var(--color-bg)', padding: '20px 24px', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', zIndex: 10 }}>
         <div>
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 'bold', color: '#1f2937', margin: '0 0 4px 0' }}>{quizData.title}</h2>
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 4px 0' }}>{quizData.title}</h2>
           <p style={{ color: '#64748b', margin: 0, fontSize: '0.9rem' }}>Mata Kuliah: {quizData.course?.name} • Soal: {quizData.questions?.length || 0}</p>
         </div>
         <div style={{ background: isWarningTime ? '#fef2f2' : '#f0fdf4', border: `2px solid ${isWarningTime ? '#ef4444' : '#10b981'}`, padding: '12px 24px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -148,7 +148,7 @@ export default function MahasiswaQuiz() {
               <div style={{ width: '36px', height: '36px', background: '#3b82f6', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0 }}>
                 {idx + 1}
               </div>
-              <h3 style={{ fontSize: '1.2rem', color: '#1f2937', margin: 0, lineHeight: 1.5 }}>
+              <h3 style={{ fontSize: '1.2rem', color: 'var(--color-text)', margin: 0, lineHeight: 1.5 }}>
                 {q.question}
               </h3>
             </div>

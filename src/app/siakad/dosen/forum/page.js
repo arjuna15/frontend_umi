@@ -31,7 +31,7 @@ export default function DosenForumPage() {
   }, [router]);
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat forum diskusi...
     </div>
   );
@@ -40,17 +40,17 @@ export default function DosenForumPage() {
     <div>
       <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#111827', margin: '0 0 8px 0' }}>Forum Diskusi Kelas 💬</h1>
-          <p style={{ color: '#6b7280', margin: 0 }}>Berinteraksi dan jawab pertanyaan mahasiswa secara real-time.</p>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Forum Diskusi Kelas 💬</h1>
+          <p style={{ color: 'var(--color-muted)', margin: 0 }}>Berinteraksi dan jawab pertanyaan mahasiswa secara real-time.</p>
         </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
         {data.jadwal.map((course, i) => (
           <div key={i} style={{ 
-            background: 'rgba(255, 255, 255, 0.7)', backdropFilter: 'blur(10px)',
-            borderRadius: '16px', boxShadow: '0 8px 32px rgba(31, 38, 135, 0.05)', 
-            border: '1px solid rgba(255, 255, 255, 0.18)', overflow: 'hidden' 
+            background: 'var(--glass-bg)', backdropFilter: 'blur(10px)',
+            borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
+            border: 'var(--glass-border)', overflow: 'hidden' 
           }}>
             <div style={{ background: 'linear-gradient(90deg, rgba(255,247,237,1) 0%, rgba(255,255,255,0) 100%)', padding: '20px 24px', borderBottom: '1px solid rgba(253, 186, 116, 0.3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
@@ -82,27 +82,27 @@ export default function DosenForumPage() {
               {course.forums && course.forums.length > 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   {course.forums.map((forum, j) => (
-                    <div key={j} style={{ background: 'white', border: '1px solid rgba(229, 231, 235, 0.5)', borderRadius: '12px', padding: '20px' }}>
+                    <div key={j} style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '20px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
                         <div style={{ width: '40px', height: '40px', background: '#fce7f3', color: '#be185d', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
                           D
                         </div>
                         <div>
-                          <strong style={{ display: 'block', color: '#1f2937' }}>{forum.title}</strong>
-                          <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>Diposting oleh Anda (Dosen)</span>
+                          <strong style={{ display: 'block', color: 'var(--color-text)' }}>{forum.title}</strong>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Diposting oleh Anda (Dosen)</span>
                         </div>
                       </div>
-                      <p style={{ margin: '0 0 16px 0', color: '#4b5563', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                      <p style={{ margin: '0 0 16px 0', color: 'var(--color-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>
                         {forum.content}
                       </p>
                       
                       {/* Replies */}
-                      <div style={{ background: '#f9fafb', borderRadius: '8px', padding: '16px', borderLeft: '4px solid #f97316' }}>
-                        <h4 style={{ fontSize: '0.85rem', color: '#6b7280', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Balasan ({forum.replies?.length || 0})</h4>
+                      <div style={{ background: 'var(--color-bg)', borderRadius: '8px', padding: '16px', borderLeft: '4px solid #f97316' }}>
+                        <h4 style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Balasan ({forum.replies?.length || 0})</h4>
                         {forum.replies && forum.replies.map((reply, k) => (
                           <div key={k} style={{ marginBottom: k === forum.replies.length - 1 ? 0 : '12px', paddingBottom: k === forum.replies.length - 1 ? 0 : '12px', borderBottom: k === forum.replies.length - 1 ? 'none' : '1px solid #e5e7eb' }}>
-                            <strong style={{ fontSize: '0.85rem', color: '#374151', display: 'block' }}>{reply.user_id === data.user.id ? 'Anda' : 'Mahasiswa'}</strong>
-                            <p style={{ margin: '4px 0 0 0', fontSize: '0.9rem', color: '#4b5563' }}>{reply.content}</p>
+                            <strong style={{ fontSize: '0.85rem', color: 'var(--color-text)', display: 'block' }}>{reply.user_id === data.user.id ? 'Anda' : 'Mahasiswa'}</strong>
+                            <p style={{ margin: '4px 0 0 0', fontSize: '0.9rem', color: 'var(--color-muted)' }}>{reply.content}</p>
                           </div>
                         ))}
                           <form onSubmit={async (e) => {
@@ -129,7 +129,7 @@ export default function DosenForumPage() {
                   ))}
                 </div>
               ) : (
-                <p style={{ color: '#9ca3af', fontSize: '0.9rem', margin: 0, fontStyle: 'italic', textAlign: 'center' }}>Belum ada topik diskusi di kelas ini.</p>
+                <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0, fontStyle: 'italic', textAlign: 'center' }}>Belum ada topik diskusi di kelas ini.</p>
               )}
             </div>
           </div>

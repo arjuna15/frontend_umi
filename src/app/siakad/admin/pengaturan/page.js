@@ -33,15 +33,15 @@ export default function AdminPengaturan() {
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
-        <h2 style={{ margin: '0 0 8px 0', color: '#111827', fontSize: '1.8rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.8rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px' }}>
           Pengaturan Sistem & Akademik <i className="ph ph-gear-six" style={{ color: '#b91c1c' }}></i>
         </h2>
-        <p style={{ margin: 0, color: '#6b7280', fontSize: '1.05rem' }}>Kelola periode akademik dan status operasional sistem SIAKAD dengan aman.</p>
+        <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '1.05rem' }}>Kelola periode akademik dan status operasional sistem SIAKAD dengan aman.</p>
       </div>
 
       <div className="siakad-card stagger-1" style={{ 
         maxWidth: '650px', 
-        background: 'white', 
+        background: 'var(--color-bg)', 
         borderRadius: '24px', 
         padding: '32px', 
         boxShadow: '0 10px 40px -10px rgba(0,0,0,0.08)',
@@ -54,20 +54,20 @@ export default function AdminPengaturan() {
             <div style={{ background: '#fef2f2', padding: '8px', borderRadius: '10px', color: '#b91c1c', display: 'flex' }}>
               <i className="ph ph-calendar-blank" style={{ fontSize: '1.2rem' }}></i>
             </div>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>
               Periode Akademik
             </h3>
           </div>
           
           <div style={{ marginBottom: '16px', padding: '0 4px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#4b5563', fontSize: '0.95rem' }}>Tahun Ajaran Aktif</label>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-muted)', fontSize: '0.95rem' }}>Tahun Ajaran Aktif</label>
             <CustomSelect 
               value={semester}
               onChange={(val) => setSemester(val)}
               options={semesterOptions}
               placeholder="Pilih Semester Aktif"
             />
-            <p style={{ margin: '8px 0 0 0', fontSize: '0.8rem', color: '#9ca3af' }}>Perubahan semester aktif akan berdampak pada seluruh modul sistem.</p>
+            <p style={{ margin: '8px 0 0 0', fontSize: '0.8rem', color: 'var(--color-muted)' }}>Perubahan semester aktif akan berdampak pada seluruh modul sistem.</p>
           </div>
         </div>
 
@@ -77,20 +77,20 @@ export default function AdminPengaturan() {
             <div style={{ background: '#fef2f2', padding: '8px', borderRadius: '10px', color: '#b91c1c', display: 'flex' }}>
               <i className="ph ph-shield-check" style={{ fontSize: '1.2rem' }}></i>
             </div>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>
               Kontrol Akses Mahasiswa
             </h3>
           </div>
 
           <div style={{ 
             display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
-            padding: '20px', background: '#f9fafb', borderRadius: '16px', 
+            padding: '20px', background: 'var(--color-bg)', borderRadius: '16px', 
             border: '1px solid #e5e7eb', transition: 'all 0.2s',
             boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)'
           }}>
             <div>
-              <div style={{ fontWeight: 700, color: '#111827', fontSize: '1.05rem', marginBottom: '4px' }}>Pengisian KRS Online</div>
-              <div style={{ fontSize: '0.85rem', color: '#6b7280', lineHeight: '1.4' }}>Buka akses bagi mahasiswa untuk mulai memilih <br/>mata kuliah semester ini.</div>
+              <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Pengisian KRS Online</div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Buka akses bagi mahasiswa untuk mulai memilih <br/>mata kuliah semester ini.</div>
             </div>
             
             {/* Premium Toggle Switch */}
@@ -104,7 +104,7 @@ export default function AdminPengaturan() {
               }}
             >
               <div style={{
-                width: '28px', height: '28px', background: 'white', borderRadius: '50%',
+                width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%',
                 position: 'absolute', top: '4px', left: krsOpen ? '32px' : '4px',
                 transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', 
                 boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
