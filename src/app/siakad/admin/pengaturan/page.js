@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function AdminPengaturan() {
   const [krsOpen, setKrsOpen] = useState(true);
@@ -9,71 +10,110 @@ export default function AdminPengaturan() {
     alert('Pengaturan sistem berhasil disimpan!');
   };
 
+  const semesterOptions = [
+    { value: 'Ganjil 2026/2027', label: 'Ganjil 2026/2027', icon: 'ph ph-calendar' },
+    { value: 'Genap 2026/2027', label: 'Genap 2026/2027', icon: 'ph ph-calendar' },
+    { value: 'Ganjil 2027/2028', label: 'Ganjil 2027/2028', icon: 'ph ph-calendar' }
+  ];
+
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
-        <h2 style={{ margin: '0 0 8px 0', color: '#1f2937', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          Pengaturan Sistem & Akademik <i className="ph ph-gear" style={{ color: '#3b82f6' }}></i>
+        <h2 style={{ margin: '0 0 8px 0', color: '#111827', fontSize: '1.8rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          Pengaturan Sistem & Akademik <i className="ph ph-gear-six" style={{ color: '#b91c1c' }}></i>
         </h2>
-        <p style={{ margin: 0, color: '#6b7280' }}>Kelola periode akademik dan status operasional sistem SIAKAD.</p>
+        <p style={{ margin: 0, color: '#6b7280', fontSize: '1.05rem' }}>Kelola periode akademik dan status operasional sistem SIAKAD dengan aman.</p>
       </div>
 
-      <div className="siakad-card stagger-1" style={{ maxWidth: '600px' }}>
-        <div style={{ marginBottom: '24px' }}>
-          <h3 style={{ fontSize: '1.1rem', color: '#374151', marginBottom: '16px', borderBottom: '1px solid #e5e7eb', paddingBottom: '8px' }}>
-            Periode Akademik
-          </h3>
-          <div style={{ marginBottom: '16px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#4b5563' }}>Tahun Ajaran Aktif</label>
-            <select 
+      <div className="siakad-card stagger-1" style={{ 
+        maxWidth: '650px', 
+        background: 'white', 
+        borderRadius: '24px', 
+        padding: '32px', 
+        boxShadow: '0 10px 40px -10px rgba(0,0,0,0.08)',
+        border: '1px solid rgba(255,255,255,0.6)'
+      }}>
+        
+        {/* Section 1: Periode Akademik */}
+        <div style={{ marginBottom: '32px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>
+            <div style={{ background: '#fef2f2', padding: '8px', borderRadius: '10px', color: '#b91c1c', display: 'flex' }}>
+              <i className="ph ph-calendar-blank" style={{ fontSize: '1.2rem' }}></i>
+            </div>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>
+              Periode Akademik
+            </h3>
+          </div>
+          
+          <div style={{ marginBottom: '16px', padding: '0 4px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: '#4b5563', fontSize: '0.95rem' }}>Tahun Ajaran Aktif</label>
+            <CustomSelect 
               value={semester}
-              onChange={(e) => setSemester(e.target.value)}
-              style={{ width: '100%', padding: '10px 16px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }}
-            >
-              <option value="Ganjil 2026/2027">Ganjil 2026/2027</option>
-              <option value="Genap 2026/2027">Genap 2026/2027</option>
-              <option value="Ganjil 2027/2028">Ganjil 2027/2028</option>
-            </select>
+              onChange={(val) => setSemester(val)}
+              options={semesterOptions}
+              placeholder="Pilih Semester Aktif"
+            />
+            <p style={{ margin: '8px 0 0 0', fontSize: '0.8rem', color: '#9ca3af' }}>Perubahan semester aktif akan berdampak pada seluruh modul sistem.</p>
           </div>
         </div>
 
-        <div style={{ marginBottom: '32px' }}>
-          <h3 style={{ fontSize: '1.1rem', color: '#374151', marginBottom: '16px', borderBottom: '1px solid #e5e7eb', paddingBottom: '8px' }}>
-            Kontrol Akses Mahasiswa
-          </h3>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px', background: '#f9fafb', borderRadius: '8px', border: '1px solid #e5e7eb' }}>
+        {/* Section 2: Kontrol Akses Mahasiswa */}
+        <div style={{ marginBottom: '40px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>
+            <div style={{ background: '#fef2f2', padding: '8px', borderRadius: '10px', color: '#b91c1c', display: 'flex' }}>
+              <i className="ph ph-shield-check" style={{ fontSize: '1.2rem' }}></i>
+            </div>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>
+              Kontrol Akses Mahasiswa
+            </h3>
+          </div>
+
+          <div style={{ 
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
+            padding: '20px', background: '#f9fafb', borderRadius: '16px', 
+            border: '1px solid #e5e7eb', transition: 'all 0.2s',
+            boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)'
+          }}>
             <div>
-              <div style={{ fontWeight: 600, color: '#1f2937' }}>Pengisian KRS Online</div>
-              <div style={{ fontSize: '0.85rem', color: '#6b7280' }}>Buka atau tutup akses mahasiswa untuk mengajukan KRS.</div>
+              <div style={{ fontWeight: 700, color: '#111827', fontSize: '1.05rem', marginBottom: '4px' }}>Pengisian KRS Online</div>
+              <div style={{ fontSize: '0.85rem', color: '#6b7280', lineHeight: '1.4' }}>Buka akses bagi mahasiswa untuk mulai memilih <br/>mata kuliah semester ini.</div>
             </div>
             
-            {/* Custom Toggle Switch */}
+            {/* Premium Toggle Switch */}
             <div 
               onClick={() => setKrsOpen(!krsOpen)}
               style={{
-                width: '56px', height: '32px', borderRadius: '16px', 
-                background: krsOpen ? '#10b981' : '#d1d5db',
-                position: 'relative', cursor: 'pointer', transition: 'background 0.3s'
+                width: '64px', height: '36px', borderRadius: '20px', 
+                background: krsOpen ? '#10b981' : '#e5e7eb',
+                position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease',
+                boxShadow: krsOpen ? 'inset 0 2px 4px rgba(0,0,0,0.1)' : 'inset 0 2px 4px rgba(0,0,0,0.05)'
               }}
             >
               <div style={{
-                width: '24px', height: '24px', background: 'white', borderRadius: '50%',
-                position: 'absolute', top: '4px', left: krsOpen ? '28px' : '4px',
-                transition: 'left 0.3s', boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                width: '28px', height: '28px', background: 'white', borderRadius: '50%',
+                position: 'absolute', top: '4px', left: krsOpen ? '32px' : '4px',
+                transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', 
+                boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
               }} />
             </div>
           </div>
         </div>
 
+        {/* Save Button */}
         <button 
           onClick={handleSave}
           style={{ 
-            background: '#2563eb', color: 'white', border: 'none', padding: '12px 24px', 
-            borderRadius: '8px', fontWeight: 600, cursor: 'pointer', width: '100%',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px'
+            background: 'linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)', 
+            color: 'white', border: 'none', padding: '16px 24px', 
+            borderRadius: '16px', fontWeight: 700, cursor: 'pointer', width: '100%',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
+            fontSize: '1.05rem', boxShadow: '0 10px 20px -5px rgba(185, 28, 28, 0.4)',
+            transition: 'transform 0.2s, box-shadow 0.2s'
           }}
+          onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+          onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
         >
-          <i className="ph ph-floppy-disk"></i> Simpan Pengaturan
+          <i className="ph ph-floppy-disk" style={{ fontSize: '1.3rem' }}></i> Simpan Konfigurasi Sistem
         </button>
       </div>
     </div>
