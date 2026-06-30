@@ -35,7 +35,7 @@ export default function KaprodiKrs() {
         const dashData = await dashRes.json();
         const krsData = await krsRes.json();
         setData(dashData);
-        setSubmissions(krsData);
+        setSubmissions(Array.isArray(krsData) ? krsData : []);
       } else {
         router.push('/siakad/login');
       }
@@ -110,7 +110,7 @@ export default function KaprodiKrs() {
                     <small style={{ color: '#6b7280' }}>{sub.mahasiswa?.nim_nip}</small>
                   </td>
                   <td>{sub.semester}</td>
-                  <td>{sub.course_ids ? JSON.parse(sub.course_ids).length : 0} Matkul</td>
+                  <td>{sub.course_ids ? (typeof sub.course_ids === 'string' ? JSON.parse(sub.course_ids).length : sub.course_ids.length) : 0} Matkul</td>
                   <td>
                     <span className="siakad-badge" style={{ background: '#fef3c7', color: '#d97706' }}>
                       {sub.status}
