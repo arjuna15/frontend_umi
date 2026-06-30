@@ -79,17 +79,36 @@ export default function KaprodiPlotting() {
     }
   };
 
-  const handleSaveSchedule = (e) => {
+  const handleSaveSchedule = async (e) => {
     e.preventDefault();
-    // Simulasi save ke backend
-    setCourses(prev => prev.map(c => {
-      if (c.id === selectedCourse.id) {
-        return { ...c, ...scheduleForm };
+    try {
+      const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      const res = await fetch(`${apiUrl}/siakad/kaprodi/courses/${selectedCourse.id}/schedule`, {
+        method: 'POST',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          hari: scheduleForm.hari,
+          jamMulai: scheduleForm.jamMulai,
+          jamSelesai: scheduleForm.jamSelesai,
+          ruang: scheduleForm.ruang
+        })
+      });
+      if (res.ok) {
+        alert('Jadwal dan Ruangan berhasil disimpan permanen ke database!');
+        fetchData();
+      } else {
+        const errData = await res.json();
+        alert('Gagal simpan jadwal: ' + JSON.stringify(errData));
       }
-      return c;
-    }));
-    setShowScheduleModal(false);
-    alert('Simulasi: Jadwal dan Ruangan berhasil disimpan!');
+    } catch (err) {
+      alert('Error: ' + err.message);
+    } finally {
+      setShowScheduleModal(false);
+    }
   };
 
   const openScheduleModal = (course) => {
