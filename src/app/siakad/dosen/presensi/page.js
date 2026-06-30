@@ -125,7 +125,7 @@ export default function DosenPresensiPage() {
                 <i className="ph ph-calendar-check"></i>
               </div>
               <div style={{ zIndex: 1, flex: '1 1 200px' }}>
-                <h3 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--color-text)', fontWeight: '800' }}>{course.name}</h3>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#10b981', fontWeight: '800' }}>{course.name}</h3>
                 <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: 'var(--color-text)', fontWeight: '600', padding: '4px 12px', background: 'var(--glass-bg)', borderRadius: '999px' }}>{course.code} • {course.sks} SKS</span>
               </div>
               <button onClick={() => { setSelectedCourseId(course.id); setShowSessionModal(true); }} style={{ zIndex: 1, flexShrink: 0, background: '#10b981', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -145,10 +145,10 @@ export default function DosenPresensiPage() {
                         </span>
                       </div>
                       <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                        <div style={{ fontSize: '0.85rem', color: 'var(--color-text)', background: 'var(--glass-bg)', padding: '6px 16px', borderRadius: '999px', fontWeight: 'bold' }}>
+                        <div className="siakad-badge" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
                           {att.records?.filter(r => r.status === 'present').length || 0} Hadir
                         </div>
-                        <div style={{ fontSize: '0.85rem', color: '#dc2626', background: 'var(--glass-bg)', padding: '6px 16px', borderRadius: '999px', fontWeight: 'bold' }}>
+                        <div className="siakad-badge" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
                           {att.records?.filter(r => r.status === 'absent').length || 0} Alpa
                         </div>
                         <button onClick={() => { setSelectedAttendance(att); setSelectedCourseId(course.id); setShowDetailModal(true); }} style={{ background: 'var(--color-bg)', border: '1px solid #d1d5db', padding: '8px 16px', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>Input & Detail</button>
