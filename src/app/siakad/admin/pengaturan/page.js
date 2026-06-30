@@ -1,13 +1,27 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CustomSelect from '../../components/CustomSelect';
 
 export default function AdminPengaturan() {
   const [krsOpen, setKrsOpen] = useState(true);
   const [semester, setSemester] = useState('Ganjil 2026/2027');
 
+  useEffect(() => {
+    const savedKrs = localStorage.getItem('siakad_krs_open');
+    const savedSemester = localStorage.getItem('siakad_semester');
+    
+    if (savedKrs !== null) {
+      setKrsOpen(savedKrs === 'true');
+    }
+    if (savedSemester) {
+      setSemester(savedSemester);
+    }
+  }, []);
+
   const handleSave = () => {
-    alert('Pengaturan sistem berhasil disimpan!');
+    localStorage.setItem('siakad_krs_open', krsOpen);
+    localStorage.setItem('siakad_semester', semester);
+    alert('Pengaturan sistem berhasil disimpan permanen!');
   };
 
   const semesterOptions = [
