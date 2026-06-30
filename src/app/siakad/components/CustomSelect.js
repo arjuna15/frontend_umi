@@ -24,8 +24,8 @@ export default function CustomSelect({ name, options, value, onChange, placehold
         onClick={() => !disabled && setIsOpen(!isOpen)}
         style={{
           padding: '12px 16px',
-          background: disabled ? '#f1f5f9' : '#ffffff',
-          border: isOpen ? '2px solid #3b82f6' : '1px solid #cbd5e1',
+          background: disabled ? 'var(--glass-bg)' : 'var(--color-bg)',
+          border: isOpen ? '2px solid #3b82f6' : '1px solid var(--color-border)',
           borderRadius: '12px',
           cursor: disabled ? 'not-allowed' : 'pointer',
           display: 'flex',
@@ -33,7 +33,7 @@ export default function CustomSelect({ name, options, value, onChange, placehold
           alignItems: 'center',
           boxShadow: isOpen ? '0 0 0 4px rgba(59, 130, 246, 0.1)' : '0 2px 4px rgba(0,0,0,0.02)',
           transition: 'all 0.2s ease',
-          color: selectedOption ? '#0f172a' : '#94a3b8',
+          color: selectedOption ? 'var(--color-text)' : 'var(--color-muted)',
           fontWeight: '500',
           fontSize: '0.95rem'
         }}
@@ -50,7 +50,7 @@ export default function CustomSelect({ name, options, value, onChange, placehold
           right: 0,
           marginTop: '8px',
           background: 'var(--color-bg)',
-          border: '1px solid #e2e8f0',
+          border: '1px solid var(--color-border)',
           borderRadius: '12px',
           boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
           zIndex: 50,
