@@ -8,6 +8,7 @@ export default function AdminUsersPage() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedRole, setSelectedRole] = useState("mahasiswa");
+  const [selectedProdi, setSelectedProdi] = useState("");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({
     id: '', name: '', nim_nip: '', role: '', prodi: '', password: ''
@@ -55,6 +56,8 @@ export default function AdminUsersPage() {
       if (res.ok) {
         alert('User created successfully');
         e.target.reset();
+        setSelectedRole("mahasiswa");
+        setSelectedProdi("");
         fetchUsers();
       } else {
         alert('Failed to create user');
@@ -168,7 +171,19 @@ export default function AdminUsersPage() {
             </div>
             <div style={{ flex: 1 }}>
               <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Prodi</label>
-              <input name="prodi" placeholder="Prodi..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
+              <CustomSelect 
+                name="prodi"
+                value={selectedProdi}
+                onChange={(val) => setSelectedProdi(val)}
+                placeholder="Pilih Prodi..."
+                options={[
+                  { value: '', label: 'Tidak Ada / Global' },
+                  { value: 'Teknik Informatika', label: 'Teknik Informatika' },
+                  { value: 'Sistem Informasi', label: 'Sistem Informasi' },
+                  { value: 'Teknik Komputer', label: 'Teknik Komputer' },
+                  { value: 'Manajemen Bisnis', label: 'Manajemen Bisnis' }
+                ]}
+              />
             </div>
           </div>
           <div>
@@ -259,7 +274,18 @@ export default function AdminUsersPage() {
                 </div>
                 <div style={{ flex: 1 }}>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Prodi</label>
-                  <input value={editFormData.prodi} onChange={(e) => setEditFormData({...editFormData, prodi: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+                  <CustomSelect
+                    value={editFormData.prodi}
+                    onChange={(val) => setEditFormData({...editFormData, prodi: val})}
+                    placeholder="Pilih Prodi..."
+                    options={[
+                      { value: '', label: 'Tidak Ada / Global' },
+                      { value: 'Teknik Informatika', label: 'Teknik Informatika' },
+                      { value: 'Sistem Informasi', label: 'Sistem Informasi' },
+                      { value: 'Teknik Komputer', label: 'Teknik Komputer' },
+                      { value: 'Manajemen Bisnis', label: 'Manajemen Bisnis' }
+                    ]}
+                  />
                 </div>
               </div>
               <div style={{ marginBottom: '24px' }}>
