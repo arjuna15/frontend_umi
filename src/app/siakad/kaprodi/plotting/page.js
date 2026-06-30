@@ -108,7 +108,7 @@ export default function KaprodiPlotting() {
                     {course.dosen ? (
                       <span style={{ fontWeight: 500, color: 'var(--color-text)' }}>{course.dosen.name}</span>
                     ) : (
-                      <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: '#ef4444' }}>Kosong</span>
+                      <span className="siakad-badge" style={{ background: '#fee2e2', color: '#b91c1c' }}>Kosong</span>
                     )}
                   </td>
                   <td>

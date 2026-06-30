@@ -86,11 +86,11 @@ export default function KaprodiMonitoring() {
                   </td>
                   <td>
                     {course.materials?.length >= 2 ? (
-                      <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: 'var(--color-text)' }}>Lancar</span>
+                      <span className="siakad-badge" style={{ background: '#dcfce7', color: '#166534' }}>Lancar</span>
                     ) : course.materials?.length > 0 ? (
-                      <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: '#d97706' }}>Kurang Aktif</span>
+                      <span className="siakad-badge" style={{ background: '#fef3c7', color: '#b45309' }}>Kurang Aktif</span>
                     ) : (
-                      <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: '#dc2626' }}>Kosong</span>
+                      <span className="siakad-badge" style={{ background: '#fee2e2', color: '#b91c1c' }}>Kosong</span>
                     )}
                   </td>
                 </tr>

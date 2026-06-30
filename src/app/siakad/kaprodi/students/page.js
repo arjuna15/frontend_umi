@@ -80,9 +80,9 @@ export default function KaprodiStudents() {
                     {grade.grade === null ? (
                       <span className="siakad-badge" style={{ background: 'var(--color-border)', color: 'var(--color-muted)' }}>Belum Dinilai</span>
                     ) : ['E', 'D'].includes(grade.grade) ? (
-                      <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: '#ef4444' }}>Tidak Lulus</span>
+                      <span className="siakad-badge" style={{ background: '#fee2e2', color: '#b91c1c' }}>Tidak Lulus</span>
                     ) : (
-                      <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: 'var(--color-text)' }}>Lulus</span>
+                      <span className="siakad-badge" style={{ background: '#dcfce7', color: '#166534' }}>Lulus</span>
                     )}
                   </td>
                 </tr>

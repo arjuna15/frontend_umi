@@ -149,7 +149,7 @@ export default function KaprodiKrs() {
                     })()}
                   </td>
                   <td>
-                    <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: '#d97706' }}>
+                    <span className="siakad-badge" style={{ background: '#fef3c7', color: '#b45309' }}>
                       {sub.status}
                     </span>
                   </td>
@@ -168,7 +168,7 @@ export default function KaprodiKrs() {
                       <button 
                         onClick={() => rejectKrs(sub.id)}
                         style={{ 
-                          background: 'var(--glass-bg)', color: 'white', border: 'none', 
+                          background: '#ef4444', color: 'white', border: 'none', 
                           padding: '8px 16px', borderRadius: '8px', cursor: 'pointer',
                           fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px'
                         }}
