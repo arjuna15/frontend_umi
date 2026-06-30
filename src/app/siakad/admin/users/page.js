@@ -139,7 +139,7 @@ export default function AdminUsersPage() {
         <p style={{ color: 'var(--color-muted)', margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
       </div>
 
-      <div className="siakad-card fade-in" style={{ padding: '24px', marginBottom: '24px', position: 'relative', zIndex: 50 }}>
+      <div className="siakad-card fade-in" style={{ padding: '24px', marginBottom: '24px', position: 'relative', zIndex: 99 }}>
         <h3 style={{ margin: '0 0 16px 0', fontSize: '1.1rem' }}>Tambah Pengguna Baru</h3>
         <form onSubmit={handleCreateUser} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 150px' }}>
@@ -154,39 +154,37 @@ export default function AdminUsersPage() {
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Password</label>
             <input type="password" name="password" required placeholder="Min. 6 karakter..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
           </div>
-          <div style={{ display: 'flex', gap: '8px', flex: '1 1 250px', flexWrap: 'wrap' }}>
-            <div style={{ flex: '1 1 100px' }}>
-              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Role</label>
-              <CustomSelect 
-                name="role"
-                value={selectedRole}
-                onChange={(val) => setSelectedRole(val)}
-                options={[
-                  { value: 'mahasiswa', label: 'Mahasiswa', icon: 'ph ph-student' },
-                  { value: 'dosen', label: 'Dosen', icon: 'ph ph-chalkboard-teacher' },
-                  { value: 'admin', label: 'Admin', icon: 'ph ph-shield-check' },
-                  { value: 'kaprodi', label: 'Kaprodi', icon: 'ph ph-briefcase' }
-                ]}
-              />
-            </div>
-            <div style={{ flex: 1 }}>
-              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Prodi</label>
-              <CustomSelect 
-                name="prodi"
-                value={selectedProdi}
-                onChange={(val) => setSelectedProdi(val)}
-                placeholder="Pilih Prodi..."
-                options={[
-                  { value: '', label: 'Tidak Ada / Global' },
-                  { value: 'Teknik Informatika', label: 'Teknik Informatika' },
-                  { value: 'Sistem Informasi', label: 'Sistem Informasi' },
-                  { value: 'Teknik Komputer', label: 'Teknik Komputer' },
-                  { value: 'Manajemen Bisnis', label: 'Manajemen Bisnis' }
-                ]}
-              />
-            </div>
+          <div style={{ flex: '1 1 150px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Role</label>
+            <CustomSelect 
+              name="role"
+              value={selectedRole}
+              onChange={(val) => setSelectedRole(val)}
+              options={[
+                { value: 'mahasiswa', label: 'Mahasiswa', icon: 'ph ph-student' },
+                { value: 'dosen', label: 'Dosen', icon: 'ph ph-chalkboard-teacher' },
+                { value: 'admin', label: 'Admin', icon: 'ph ph-shield-check' },
+                { value: 'kaprodi', label: 'Kaprodi', icon: 'ph ph-briefcase' }
+              ]}
+            />
           </div>
-          <div>
+          <div style={{ flex: '1 1 200px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Prodi</label>
+            <CustomSelect 
+              name="prodi"
+              value={selectedProdi}
+              onChange={(val) => setSelectedProdi(val)}
+              placeholder="Pilih Prodi..."
+              options={[
+                { value: '', label: 'Tidak Ada / Global' },
+                { value: 'Teknik Informatika', label: 'Teknik Informatika' },
+                { value: 'Sistem Informasi', label: 'Sistem Informasi' },
+                { value: 'Teknik Komputer', label: 'Teknik Komputer' },
+                { value: 'Manajemen Bisnis', label: 'Manajemen Bisnis' }
+              ]}
+            />
+          </div>
+          <div style={{ flex: '0 0 auto' }}>
             <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
               <i className="ph ph-plus-circle"></i> Tambah
             </button>
