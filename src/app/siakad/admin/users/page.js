@@ -182,7 +182,7 @@ export default function AdminUsersPage() {
       <div className="siakad-card stagger-2" style={{ padding: '0', overflow: 'hidden' }}>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-            <thead style={{ background: 'rgba(249, 250, 251, 0.8)', borderBottom: '1px solid #e5e7eb' }}>
+            <thead style={{ background: 'var(--glass-bg)', borderBottom: '1px solid #e5e7eb' }}>
               <tr>
                 <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem' }}>Nama</th>
                 <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem' }}>NIM / NIP</th>
@@ -208,12 +208,12 @@ export default function AdminUsersPage() {
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                       <button 
                         onClick={() => handleOpenEditModal(user)}
-                        style={{ background: '#eff6ff', color: '#1d4ed8', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                        style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
                         title="Edit Pengguna"
                       ><i className="ph ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
                       <button 
                         onClick={() => handleDeleteUser(user.id)}
-                        style={{ background: '#fef2f2', color: '#b91c1c', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                        style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
                         title="Hapus Pengguna"
                       ><i className="ph ph-trash" style={{ fontSize: '1rem' }}></i></button>
                     </div>
@@ -231,7 +231,7 @@ export default function AdminUsersPage() {
       </div>
 
       {isEditModalOpen && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
+        <div style={{ position: 'fixed', inset: 0, background: 'var(--glass-bg)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
           <div style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
             <h2 style={{ margin: '0 0 20px 0', fontSize: '1.25rem', fontWeight: 'bold' }}>Edit Pengguna</h2>
             <form onSubmit={handleUpdateUser}>

@@ -140,10 +140,10 @@ export default function AdminKeuangan() {
     <div style={{ padding: '24px', maxWidth: '1200px', margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: '#0f172a', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <i className="ph ph-wallet" style={{ color: '#0891b2' }}></i> Manajemen Keuangan
+          <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <i className="ph ph-wallet" style={{ color: 'var(--color-text)' }}></i> Manajemen Keuangan
           </h1>
-          <p style={{ color: '#64748b', marginTop: '4px' }}>Kelola seluruh tagihan dan pembayaran mahasiswa.</p>
+          <p style={{ color: 'var(--color-text)', marginTop: '4px' }}>Kelola seluruh tagihan dan pembayaran mahasiswa.</p>
         </div>
         <button 
           onClick={() => openModal()}
@@ -166,31 +166,31 @@ export default function AdminKeuangan() {
         boxShadow: '0 10px 40px rgba(0,0,0,0.03)'
       }}>
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>Memuat data keuangan...</div>
+          <div style={{ textAlign: 'center', padding: '40px', color: 'var(--color-text)' }}>Memuat data keuangan...</div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid #e2e8f0' }}>
-                  <th style={{ padding: '16px', color: '#64748b', fontSize: '0.85rem', fontWeight: '700' }}>MAHASISWA</th>
-                  <th style={{ padding: '16px', color: '#64748b', fontSize: '0.85rem', fontWeight: '700' }}>DESKRIPSI TAGIHAN</th>
-                  <th style={{ padding: '16px', color: '#64748b', fontSize: '0.85rem', fontWeight: '700' }}>NOMINAL</th>
-                  <th style={{ padding: '16px', color: '#64748b', fontSize: '0.85rem', fontWeight: '700' }}>JATUH TEMPO</th>
-                  <th style={{ padding: '16px', color: '#64748b', fontSize: '0.85rem', fontWeight: '700' }}>STATUS</th>
-                  <th style={{ padding: '16px', color: '#64748b', fontSize: '0.85rem', fontWeight: '700' }}>AKSI</th>
+                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>MAHASISWA</th>
+                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>DESKRIPSI TAGIHAN</th>
+                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>NOMINAL</th>
+                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>JATUH TEMPO</th>
+                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>STATUS</th>
+                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>AKSI</th>
                 </tr>
               </thead>
               <tbody>
                 {billings.length === 0 ? (
                   <tr>
-                    <td colSpan="6" style={{ textAlign: 'center', padding: '32px', color: '#94a3b8' }}>Belum ada tagihan.</td>
+                    <td colSpan="6" style={{ textAlign: 'center', padding: '32px', color: 'var(--color-text)' }}>Belum ada tagihan.</td>
                   </tr>
                 ) : billings.map((billing) => (
                   <tr key={billing.id} style={{ borderBottom: '1px solid #f1f5f9', transition: 'background 0.3s' }}>
-                    <td style={{ padding: '16px', fontWeight: '600', color: '#0f172a' }}>{billing.user?.name || 'User Tidak Diketahui'}</td>
-                    <td style={{ padding: '16px', color: '#334155' }}>{billing.description}</td>
-                    <td style={{ padding: '16px', color: '#0f172a', fontWeight: '700' }}>{formatRupiah(billing.amount)}</td>
-                    <td style={{ padding: '16px', color: '#64748b' }}>{billing.due_date}</td>
+                    <td style={{ padding: '16px', fontWeight: '600', color: 'var(--color-text)' }}>{billing.user?.name || 'User Tidak Diketahui'}</td>
+                    <td style={{ padding: '16px', color: 'var(--color-text)' }}>{billing.description}</td>
+                    <td style={{ padding: '16px', color: 'var(--color-text)', fontWeight: '700' }}>{formatRupiah(billing.amount)}</td>
+                    <td style={{ padding: '16px', color: 'var(--color-text)' }}>{billing.due_date}</td>
                     <td style={{ padding: '16px' }}>
                       <span style={{
                         display: 'inline-flex', alignItems: 'center', gap: '6px',
@@ -207,7 +207,7 @@ export default function AdminKeuangan() {
                         <button 
                           onClick={() => openModal(billing)}
                           style={{
-                            background: '#eff6ff', color: '#1d4ed8', border: 'none', padding: '8px', 
+                            background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '8px', 
                             borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s'
                           }}
                           title="Edit Tagihan"
@@ -215,7 +215,7 @@ export default function AdminKeuangan() {
                         <button 
                           onClick={() => handleDelete(billing.id)}
                           style={{
-                            background: '#fef2f2', color: '#b91c1c', border: 'none', padding: '8px', 
+                            background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '8px', 
                             borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s'
                           }}
                           title="Hapus Tagihan"
@@ -232,7 +232,7 @@ export default function AdminKeuangan() {
 
       {isModalOpen && (
         <div style={{
-          position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(8px)',
+          position: 'fixed', inset: 0, background: 'var(--glass-bg)', backdropFilter: 'blur(8px)',
           display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, padding: '24px'
         }}>
           <div style={{
@@ -241,10 +241,10 @@ export default function AdminKeuangan() {
             animation: 'fadeSlideUp 0.3s ease-out'
           }}>
             <div style={{ padding: '24px', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h2 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: '#0f172a' }}>
+              <h2 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)' }}>
                 {isEdit ? 'Edit Tagihan' : 'Tambah Tagihan Baru'}
               </h2>
-              <button onClick={closeModal} style={{ background: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', fontSize: '1.2rem' }}>
+              <button onClick={closeModal} style={{ background: 'transparent', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontSize: '1.2rem' }}>
                 <i className="ph ph-x"></i>
               </button>
             </div>
@@ -252,7 +252,7 @@ export default function AdminKeuangan() {
             <form onSubmit={handleSubmit} style={{ padding: '24px' }}>
               {!isEdit && (
                 <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: '#334155', marginBottom: '8px' }}>Pilih Mahasiswa</label>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Pilih Mahasiswa</label>
                   <CustomSelect 
                     name="user_id"
                     value={formData.user_id} 
@@ -264,7 +264,7 @@ export default function AdminKeuangan() {
               )}
               
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: '#334155', marginBottom: '8px' }}>Deskripsi Tagihan</label>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Deskripsi Tagihan</label>
                 <input 
                   type="text" 
                   value={formData.description} 
@@ -276,7 +276,7 @@ export default function AdminKeuangan() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: '#334155', marginBottom: '8px' }}>Nominal (Rp)</label>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Nominal (Rp)</label>
                 <input 
                   type="number" 
                   value={formData.amount} 
@@ -288,7 +288,7 @@ export default function AdminKeuangan() {
               </div>
 
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: '#334155', marginBottom: '8px' }}>Jatuh Tempo</label>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Jatuh Tempo</label>
                 <input 
                   type="date" 
                   value={formData.due_date} 
@@ -300,7 +300,7 @@ export default function AdminKeuangan() {
 
               {isEdit && (
                 <div style={{ marginBottom: '24px' }}>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: '#334155', marginBottom: '8px' }}>Status Pembayaran</label>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Status Pembayaran</label>
                   <CustomSelect 
                     name="status"
                     value={formData.status} 

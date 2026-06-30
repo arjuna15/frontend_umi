@@ -34,7 +34,7 @@ export default function AdminPengaturan() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
         <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.8rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          Pengaturan Sistem & Akademik <i className="ph ph-gear-six" style={{ color: '#b91c1c' }}></i>
+          Pengaturan Sistem & Akademik <i className="ph ph-gear-six" style={{ color: 'var(--color-text)' }}></i>
         </h2>
         <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '1.05rem' }}>Kelola periode akademik dan status operasional sistem SIAKAD dengan aman.</p>
       </div>
@@ -51,7 +51,7 @@ export default function AdminPengaturan() {
         {/* Section 1: Periode Akademik */}
         <div style={{ marginBottom: '32px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>
-            <div style={{ background: '#fef2f2', padding: '8px', borderRadius: '10px', color: '#b91c1c', display: 'flex' }}>
+            <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
               <i className="ph ph-calendar-blank" style={{ fontSize: '1.2rem' }}></i>
             </div>
             <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>
@@ -74,7 +74,7 @@ export default function AdminPengaturan() {
         {/* Section 2: Kontrol Akses Mahasiswa */}
         <div style={{ marginBottom: '40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>
-            <div style={{ background: '#fef2f2', padding: '8px', borderRadius: '10px', color: '#b91c1c', display: 'flex' }}>
+            <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
               <i className="ph ph-shield-check" style={{ fontSize: '1.2rem' }}></i>
             </div>
             <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>

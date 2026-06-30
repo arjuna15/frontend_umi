@@ -119,7 +119,7 @@ export default function AdminDashboard() {
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
             <thead>
-              <tr style={{ background: 'rgba(243, 244, 246, 0.5)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 <th style={{ padding: '16px', borderRadius: '8px 0 0 8px', fontWeight: '600' }}>Kode MK</th>
                 <th style={{ padding: '16px', fontWeight: '600' }}>Mata Kuliah</th>
                 <th style={{ padding: '16px', fontWeight: '600' }}>Dosen Pengampu</th>
@@ -129,7 +129,7 @@ export default function AdminDashboard() {
             <tbody style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>
               {data.courses && data.courses.map((c, i) => (
                 <tr key={i} style={{ borderBottom: i === data.courses.length - 1 ? 'none' : '1px solid rgba(229, 231, 235, 0.5)' }}>
-                  <td style={{ padding: '16px', fontWeight: 'bold', color: '#0f172a' }}>{c.code}</td>
+                  <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{c.code}</td>
                   <td style={{ padding: '16px' }}>{c.name}</td>
                   <td style={{ padding: '16px' }}>{c.dosen?.name || '-'}</td>
                   <td style={{ padding: '16px', fontWeight: 'bold' }}>{c.sks}</td>

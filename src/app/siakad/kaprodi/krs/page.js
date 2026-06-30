@@ -103,7 +103,7 @@ export default function KaprodiKrs() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
         <div>
           <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            Persetujuan KRS Mahasiswa <i className="ph ph-file-signature" style={{ color: '#3b82f6' }}></i>
+            Persetujuan KRS Mahasiswa <i className="ph ph-file-signature" style={{ color: 'var(--color-text)' }}></i>
           </h2>
           <p style={{ margin: 0, color: 'var(--color-muted)' }}>Tinjau dan setujui Kartu Rencana Studi mahasiswa.</p>
         </div>
@@ -149,7 +149,7 @@ export default function KaprodiKrs() {
                     })()}
                   </td>
                   <td>
-                    <span className="siakad-badge" style={{ background: '#fef3c7', color: '#d97706' }}>
+                    <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: '#d97706' }}>
                       {sub.status}
                     </span>
                   </td>
@@ -168,7 +168,7 @@ export default function KaprodiKrs() {
                       <button 
                         onClick={() => rejectKrs(sub.id)}
                         style={{ 
-                          background: '#ef4444', color: 'white', border: 'none', 
+                          background: 'var(--glass-bg)', color: 'white', border: 'none', 
                           padding: '8px 16px', borderRadius: '8px', cursor: 'pointer',
                           fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px'
                         }}

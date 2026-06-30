@@ -45,7 +45,7 @@ export default function KaprodiStudents() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
         <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          Monitoring Nilai Mahasiswa <i className="ph ph-student" style={{ color: '#3b82f6' }}></i>
+          Monitoring Nilai Mahasiswa <i className="ph ph-student" style={{ color: 'var(--color-text)' }}></i>
         </h2>
         <p style={{ margin: 0, color: 'var(--color-muted)' }}>Distribusi dan rekapitulasi nilai akhir seluruh mahasiswa di prodi.</p>
       </div>
@@ -80,9 +80,9 @@ export default function KaprodiStudents() {
                     {grade.grade === null ? (
                       <span className="siakad-badge" style={{ background: 'var(--color-border)', color: 'var(--color-muted)' }}>Belum Dinilai</span>
                     ) : ['E', 'D'].includes(grade.grade) ? (
-                      <span className="siakad-badge" style={{ background: '#fef2f2', color: '#ef4444' }}>Tidak Lulus</span>
+                      <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: '#ef4444' }}>Tidak Lulus</span>
                     ) : (
-                      <span className="siakad-badge" style={{ background: '#ecfdf5', color: '#10b981' }}>Lulus</span>
+                      <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: 'var(--color-text)' }}>Lulus</span>
                     )}
                   </td>
                 </tr>

@@ -62,7 +62,7 @@ export default function DosenElearningPage() {
       <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
         <div style={{ flex: '1 1 300px' }}>
           <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            Manajemen Sesi E-Learning <i className="ph ph-books" style={{ color: '#3b82f6' }}></i>
+            Manajemen Sesi E-Learning <i className="ph ph-books" style={{ color: 'var(--color-text)' }}></i>
           </h2>
           <p style={{ margin: 0, color: 'var(--color-muted)' }}>Kelola materi pembelajaran, absensi, dan kuis untuk 14 sesi pertemuan.</p>
         </div>
@@ -103,7 +103,7 @@ export default function DosenElearningPage() {
         <div style={{ flex: '1 1 300px', minWidth: 0 }}>
           {!selectedCourse ? (
             <div className="siakad-card" style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>
-              <i className="ph ph-arrow-circle-left" style={{ fontSize: '3rem', color: '#cbd5e1', marginBottom: '16px' }}></i>
+              <i className="ph ph-arrow-circle-left" style={{ fontSize: '3rem', color: 'var(--color-text)', marginBottom: '16px' }}></i>
               <p>Pilih mata kuliah di samping kiri untuk mengelola 14 sesi pertemuannya.</p>
             </div>
           ) : (

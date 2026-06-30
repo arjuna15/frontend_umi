@@ -78,13 +78,13 @@ export default function ProfilePage() {
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'flex-start' }}>
         <div style={{ flex: '1 1 250px', background: 'var(--color-bg)', padding: '32px', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', textAlign: 'center' }}>
-          <div style={{ width: '120px', height: '120px', borderRadius: '50%', background: '#e0e7ff', color: '#4f46e5', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: '3rem' }}>
+          <div style={{ width: '120px', height: '120px', borderRadius: '50%', background: 'var(--glass-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', fontSize: '3rem' }}>
             <i className="ph ph-user-circle"></i>
           </div>
           <h2 style={{ margin: '0 0 8px', color: 'var(--color-text)', fontSize: '1.2rem' }}>{user.name}</h2>
           <p style={{ margin: '0 0 8px', color: 'var(--color-muted)', fontSize: '0.9rem' }}>NIM/NIP: {user.nim_nip}</p>
           <p style={{ margin: 0 }}>
-            <span style={{ padding: '4px 12px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold', background: '#ecfdf5', color: '#059669', textTransform: 'capitalize' }}>
+            <span style={{ padding: '4px 12px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold', background: 'var(--glass-bg)', color: 'var(--color-text)', textTransform: 'capitalize' }}>
               {user.role}
             </span>
           </p>

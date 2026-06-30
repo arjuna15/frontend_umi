@@ -39,7 +39,7 @@ export default function DosenDashboard() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
         <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          Jadwal & Pengingat Anda <i className="ph ph-calendar-check" style={{ color: '#3b82f6' }}></i>
+          Jadwal & Pengingat Anda <i className="ph ph-calendar-check" style={{ color: 'var(--color-text)' }}></i>
         </h2>
         <p style={{ margin: 0, color: 'var(--color-muted)' }}>Selamat datang kembali! Berikut adalah ringkasan hari ini.</p>
       </div>
@@ -47,11 +47,11 @@ export default function DosenDashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginBottom: '30px' }}>
         <div className="siakad-card stagger-1" style={{ padding: '24px' }}>
           <h3 style={{ margin: '0 0 20px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <i className="ph ph-clock" style={{ color: '#8b5cf6' }}></i> Jadwal Hari Ini
+            <i className="ph ph-clock" style={{ color: 'var(--color-text)' }}></i> Jadwal Hari Ini
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {data.schedule && data.schedule.length > 0 ? data.schedule.map((sch, i) => (
-              <div key={i} style={{ padding: '16px', background: '#f8fafc', borderRadius: '12px', borderLeft: '4px solid #8b5cf6' }}>
+              <div key={i} style={{ padding: '16px', background: 'var(--glass-bg)', borderRadius: '12px', borderLeft: '4px solid #8b5cf6' }}>
                 <h4 style={{ margin: '0 0 4px 0', color: 'var(--color-text)' }}>{sch.course}</h4>
                 <div style={{ display: 'flex', gap: '16px', fontSize: '0.9rem', color: 'var(--color-muted)' }}>
                   <span><i className="ph ph-clock"></i> {sch.time}</span>
@@ -67,12 +67,12 @@ export default function DosenDashboard() {
 
         <div className="siakad-card stagger-2" style={{ padding: '24px' }}>
           <h3 style={{ margin: '0 0 20px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <i className="ph ph-list-checks" style={{ color: '#10b981' }}></i> To-Do List & Notifikasi
+            <i className="ph ph-list-checks" style={{ color: 'var(--color-text)' }}></i> To-Do List & Notifikasi
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {data.todos && data.todos.map((todo, i) => (
-              <div key={i} style={{ padding: '12px 16px', background: '#ecfdf5', borderRadius: '8px', color: '#065f46', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                <i className="ph ph-warning-circle" style={{ marginTop: '2px', color: '#10b981' }}></i>
+              <div key={i} style={{ padding: '12px 16px', background: 'var(--glass-bg)', borderRadius: '8px', color: 'var(--color-text)', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                <i className="ph ph-warning-circle" style={{ marginTop: '2px', color: 'var(--color-text)' }}></i>
                 <span style={{ fontSize: '0.95rem' }}>{todo}</span>
               </div>
             ))}

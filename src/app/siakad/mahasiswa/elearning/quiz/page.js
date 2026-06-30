@@ -99,14 +99,14 @@ export default function MahasiswaQuiz() {
   if (result) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
       <div className="siakad-card" style={{ padding: '40px', textAlign: 'center', maxWidth: '500px', width: '100%' }}>
-        <div style={{ width: '80px', height: '80px', background: '#ecfdf5', color: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', margin: '0 auto 20px auto' }}>
+        <div style={{ width: '80px', height: '80px', background: 'var(--glass-bg)', color: 'var(--color-text)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', margin: '0 auto 20px auto' }}>
           <i className="ph ph-check-circle"></i>
         </div>
         <h2 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '10px' }}>Selesai!</h2>
-        <p style={{ color: '#64748b', marginBottom: '24px' }}>{result.message}</p>
-        <div style={{ background: '#f8fafc', padding: '24px', borderRadius: '16px', border: '1px solid #e2e8f0', marginBottom: '32px' }}>
-          <p style={{ margin: '0 0 8px 0', fontSize: '1.1rem', color: '#475569' }}>Nilai Kamu:</p>
-          <h1 style={{ fontSize: '4rem', margin: 0, color: '#3b82f6', fontWeight: '900' }}>{result.score}</h1>
+        <p style={{ color: 'var(--color-text)', marginBottom: '24px' }}>{result.message}</p>
+        <div style={{ background: 'var(--glass-bg)', padding: '24px', borderRadius: '16px', border: '1px solid #e2e8f0', marginBottom: '32px' }}>
+          <p style={{ margin: '0 0 8px 0', fontSize: '1.1rem', color: 'var(--color-text)' }}>Nilai Kamu:</p>
+          <h1 style={{ fontSize: '4rem', margin: 0, color: 'var(--color-text)', fontWeight: '900' }}>{result.score}</h1>
         </div>
         <button onClick={() => router.push('/siakad/mahasiswa/elearning')} style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '14px 24px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%' }}>
           Kembali ke Kelas
@@ -131,7 +131,7 @@ export default function MahasiswaQuiz() {
       <div style={{ position: 'sticky', top: 0, background: 'var(--color-bg)', padding: '20px 24px', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', zIndex: 10 }}>
         <div>
           <h2 style={{ fontSize: '1.4rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 4px 0' }}>{quizData.title}</h2>
-          <p style={{ color: '#64748b', margin: 0, fontSize: '0.9rem' }}>Mata Kuliah: {quizData.course?.name} • Soal: {quizData.questions?.length || 0}</p>
+          <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '0.9rem' }}>Mata Kuliah: {quizData.course?.name} • Soal: {quizData.questions?.length || 0}</p>
         </div>
         <div style={{ background: isWarningTime ? '#fef2f2' : '#f0fdf4', border: `2px solid ${isWarningTime ? '#ef4444' : '#10b981'}`, padding: '12px 24px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <i className="ph ph-timer" style={{ fontSize: '1.5rem', color: isWarningTime ? '#ef4444' : '#10b981' }}></i>
@@ -162,16 +162,16 @@ export default function MahasiswaQuiz() {
                     value={opt} 
                     checked={answers[q.id] === opt} 
                     onChange={() => handleAnswer(q.id, opt)}
-                    style={{ width: '20px', height: '20px', accentColor: '#3b82f6' }}
+                    style={{ width: '20px', height: '20px', accentcolor: 'var(--color-text)' }}
                   />
                   <span style={{ fontWeight: 'bold', textTransform: 'uppercase', color: answers[q.id] === opt ? '#2563eb' : '#64748b' }}>{opt}.</span>
-                  <span style={{ fontSize: '1rem', color: '#334155' }}>{q[`option_${opt}`]}</span>
+                  <span style={{ fontSize: '1rem', color: 'var(--color-text)' }}>{q[`option_${opt}`]}</span>
                 </label>
               ))}
             </div>
           </div>
         )) : (
-          <div style={{ padding: '40px', textAlign: 'center', color: '#64748b' }}>Belum ada soal untuk kuis ini.</div>
+          <div style={{ padding: '40px', textAlign: 'center', color: 'var(--color-text)' }}>Belum ada soal untuk kuis ini.</div>
         )}
 
         {quizData.questions && quizData.questions.length > 0 && (

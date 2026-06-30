@@ -76,7 +76,7 @@ export default function KaprodiPlotting() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px' }}>
         <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          Plotting Dosen & Kelas <i className="ph ph-users-three" style={{ color: '#3b82f6' }}></i>
+          Plotting Dosen & Kelas <i className="ph ph-users-three" style={{ color: 'var(--color-text)' }}></i>
         </h2>
         <p style={{ margin: 0, color: 'var(--color-muted)' }}>Tugaskan dosen pengampu untuk masing-masing mata kuliah.</p>
       </div>
@@ -108,7 +108,7 @@ export default function KaprodiPlotting() {
                     {course.dosen ? (
                       <span style={{ fontWeight: 500, color: 'var(--color-text)' }}>{course.dosen.name}</span>
                     ) : (
-                      <span className="siakad-badge" style={{ background: '#fef2f2', color: '#ef4444' }}>Kosong</span>
+                      <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: '#ef4444' }}>Kosong</span>
                     )}
                   </td>
                   <td>

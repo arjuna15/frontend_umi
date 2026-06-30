@@ -173,7 +173,7 @@ export default function DosenGradebookPage() {
             <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <h2 style={{ color: 'white', margin: '0 0 4px 0', fontSize: '1.25rem' }}>{course.name}</h2>
-                <p style={{ color: '#c7d2fe', margin: 0, fontSize: '0.9rem' }}>{course.semester} • {course.sks} SKS</p>
+                <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '0.9rem' }}>{course.semester} • {course.sks} SKS</p>
               </div>
               <button 
                 onClick={() => handleSaveGrades(course.id)}
@@ -200,8 +200,8 @@ export default function DosenGradebookPage() {
                     <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Tugas (20%)</th>
                     <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UTS (30%)</th>
                     <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UAS (40%)</th>
-                    <th style={{ padding: '16px', fontWeight: 'bold', width: '100px', background: '#eff6ff', color: '#1e40af' }}>Nilai Akhir</th>
-                    <th style={{ padding: '16px 24px', fontWeight: 'bold', width: '100px', background: '#eff6ff', color: '#1e40af' }}>Grade</th>
+                    <th style={{ padding: '16px', fontWeight: 'bold', width: '100px', background: 'var(--glass-bg)', color: 'var(--color-text)' }}>Nilai Akhir</th>
+                    <th style={{ padding: '16px 24px', fontWeight: 'bold', width: '100px', background: 'var(--glass-bg)', color: 'var(--color-text)' }}>Grade</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -255,10 +255,10 @@ export default function DosenGradebookPage() {
                             onBlur={e => e.target.style.borderColor = '#d1d5db'}
                           />
                         </td>
-                        <td style={{ padding: '16px', background: '#eff6ff', borderLeft: '1px solid #bfdbfe' }}>
-                          <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#1e40af' }}>{edits.score || '-'}</div>
+                        <td style={{ padding: '16px', background: 'var(--glass-bg)', borderLeft: '1px solid #bfdbfe' }}>
+                          <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{edits.score || '-'}</div>
                         </td>
-                        <td style={{ padding: '16px 24px', background: '#eff6ff' }}>
+                        <td style={{ padding: '16px 24px', background: 'var(--glass-bg)' }}>
                           <div style={{ 
                             display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                             width: '40px', height: '40px', borderRadius: '8px', fontWeight: 'bold', fontSize: '1.2rem',

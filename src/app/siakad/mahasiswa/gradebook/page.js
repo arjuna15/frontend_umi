@@ -51,40 +51,40 @@ export default function MahasiswaGradebook() {
   return (
     <div>
       <div style={{ marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '2.2rem', fontWeight: '800', color: '#0f172a', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Rapor & Transkrip 🎓</h1>
-        <p style={{ color: '#475569', margin: 0, fontSize: '1.05rem' }}>Detail evaluasi akademik semester ini, dari tugas harian hingga UAS.</p>
+        <h1 style={{ fontSize: '2.2rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Rapor & Transkrip 🎓</h1>
+        <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '1.05rem' }}>Detail evaluasi akademik semester ini, dari tugas harian hingga UAS.</p>
       </div>
 
       <div style={{ display: 'flex', gap: '20px', marginBottom: '32px', flexWrap: 'wrap' }}>
         <div className="siakad-card" style={{ flex: '1 1 200px', padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', background: 'linear-gradient(135deg, #1e293b, #0f172a)', color: 'white' }}>
-          <div style={{ width: '60px', height: '60px', background: 'rgba(255,255,255,0.1)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
+          <div style={{ width: '60px', height: '60px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
             <i className="ph ph-medal"></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: '#cbd5e1' }}>Indeks Prestasi Semester</p>
+            <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)' }}>Indeks Prestasi Semester</p>
             <h1 style={{ margin: 0, fontSize: '2.5rem', fontWeight: '900', color: '#ffffff' }}>{ipSemester}</h1>
           </div>
         </div>
         
         <div className="siakad-card" style={{ flex: '1 1 200px', padding: '24px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <div style={{ width: '60px', height: '60px', background: '#f0fdf4', color: '#10b981', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
+          <div style={{ width: '60px', height: '60px', background: 'var(--glass-bg)', color: 'var(--color-text)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
             <i className="ph ph-books"></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: '#64748b' }}>Total SKS Lulus</p>
+            <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)' }}>Total SKS Lulus</p>
             <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: '800', color: 'var(--color-text)' }}>{totalSks}</h1>
           </div>
         </div>
       </div>
 
       <div className="siakad-card" style={{ overflow: 'hidden' }}>
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid #e2e8f0', background: '#f8fafc' }}>
-          <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#1e293b', fontWeight: 'bold' }}>Rincian Nilai Mata Kuliah</h3>
+        <div style={{ padding: '20px 24px', borderBottom: '1px solid #e2e8f0', background: 'var(--glass-bg)' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Rincian Nilai Mata Kuliah</h3>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table className="siakad-table" style={{ width: '100%', minWidth: '800px' }}>
             <thead>
-              <tr style={{ background: '#f1f5f9' }}>
+              <tr style={{ background: 'var(--glass-bg)' }}>
                 <th style={{ padding: '16px 24px', textAlign: 'left' }}>Mata Kuliah</th>
                 <th style={{ padding: '16px 24px', textAlign: 'center' }}>SKS</th>
                 <th style={{ padding: '16px 24px', textAlign: 'center' }}>Tugas (20%)</th>
@@ -98,8 +98,8 @@ export default function MahasiswaGradebook() {
             <tbody>
               {data.map((item, idx) => (
                 <tr key={idx} style={{ borderBottom: '1px solid #e2e8f0' }}>
-                  <td style={{ padding: '16px 24px', fontWeight: '600', color: '#334155' }}>{item.course_name}</td>
-                  <td style={{ padding: '16px 24px', textAlign: 'center', color: '#64748b' }}>{item.sks}</td>
+                  <td style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)' }}>{item.course_name}</td>
+                  <td style={{ padding: '16px 24px', textAlign: 'center', color: 'var(--color-text)' }}>{item.sks}</td>
                   <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.tugas}</td>
                   <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.kuis}</td>
                   <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.uts}</td>

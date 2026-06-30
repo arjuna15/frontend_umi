@@ -54,8 +54,8 @@ export default function DosenForumPage() {
           }}>
             <div style={{ background: 'linear-gradient(90deg, rgba(255,247,237,1) 0%, rgba(255,255,255,0) 100%)', padding: '20px 24px', borderBottom: '1px solid rgba(253, 186, 116, 0.3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#9a3412', fontWeight: 'bold' }}>{course.name}</h3>
-                <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: '#c2410c' }}>{course.code}</span>
+                <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
+                <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-text)' }}>{course.code}</span>
               </div>
               <button onClick={async () => {
                 const title = prompt('Judul topik diskusi:');
@@ -73,7 +73,7 @@ export default function DosenForumPage() {
                   if (res.ok) window.location.reload();
                   else alert('Gagal membuat topik');
                 } catch (err) { alert('Error: ' + err.message); }
-              }} style={{ background: '#f97316', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(249, 115, 22, 0.3)' }}>
+              }} style={{ background: 'var(--glass-bg)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(249, 115, 22, 0.3)' }}>
                 <i className="ph ph-plus"></i> Buat Topik Baru
               </button>
             </div>
@@ -84,7 +84,7 @@ export default function DosenForumPage() {
                   {course.forums.map((forum, j) => (
                     <div key={j} style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '20px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                        <div style={{ width: '40px', height: '40px', background: '#fce7f3', color: '#be185d', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
+                        <div style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', color: 'var(--color-text)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
                           D
                         </div>
                         <div>

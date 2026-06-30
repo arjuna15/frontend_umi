@@ -65,7 +65,7 @@ export default function DosenQuizCreate() {
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px', display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <button onClick={() => router.back()} style={{ background: '#f1f5f9', border: 'none', padding: '8px 12px', borderRadius: '8px', cursor: 'pointer' }}>
+        <button onClick={() => router.back()} style={{ background: 'var(--glass-bg)', border: 'none', padding: '8px 12px', borderRadius: '8px', cursor: 'pointer' }}>
           <i className="ph ph-arrow-left"></i> Kembali
         </button>
         <div>
@@ -93,10 +93,10 @@ export default function DosenQuizCreate() {
           <div key={idx} className={`stagger-${(idx % 5) + 2}`} style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '16px', marginBottom: '24px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)', border: '1px solid #e5e7eb', position: 'relative', zIndex: 50 - idx }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               {questions.length > 1 && (
-                <button type="button" onClick={() => removeQuestion(idx)} style={{ background: '#fee2e2', color: '#ef4444', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}>Hapus Soal</button>
+                <button type="button" onClick={() => removeQuestion(idx)} style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}>Hapus Soal</button>
               )}
             </div>
-            <h3 style={{ margin: '0 0 16px 0', color: '#3b82f6' }}>Soal {idx + 1}</h3>
+            <h3 style={{ margin: '0 0 16px 0', color: 'var(--color-text)' }}>Soal {idx + 1}</h3>
             <textarea 
               required
               value={q.question} onChange={e=>handleChange(idx, 'question', e.target.value)}
@@ -125,7 +125,7 @@ export default function DosenQuizCreate() {
             </div>
 
             <div style={{ marginTop: '20px' }}>
-              <label style={{ fontWeight: 600, color: '#10b981' }}>Jawaban Benar (Kunci)</label>
+              <label style={{ fontWeight: 600, color: 'var(--color-text)' }}>Jawaban Benar (Kunci)</label>
               <CustomSelect 
                 name="correct_answer"
                 value={q.correct_answer} 

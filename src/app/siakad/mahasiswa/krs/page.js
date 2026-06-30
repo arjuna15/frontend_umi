@@ -123,33 +123,33 @@ export default function KRSPage() {
       </div>
 
       {!krsOpen && (
-        <div style={{ background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ background: 'var(--glass-bg)', border: '1px solid #fca5a5', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <i className="ph ph-warning-circle" style={{ color: '#dc2626', fontSize: '1.5rem' }}></i>
           <div>
-            <p style={{ margin: 0, color: '#991b1b', fontSize: '1rem', fontWeight: 'bold' }}>Periode Pengisian KRS Ditutup</p>
-            <p style={{ margin: '4px 0 0 0', color: '#b91c1c', fontSize: '0.9rem' }}>Saat ini Anda tidak dapat mengisi atau mengubah KRS. Silakan hubungi Admin atau Kaprodi jika ada pertanyaan.</p>
+            <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '1rem', fontWeight: 'bold' }}>Periode Pengisian KRS Ditutup</p>
+            <p style={{ margin: '4px 0 0 0', color: 'var(--color-text)', fontSize: '0.9rem' }}>Saat ini Anda tidak dapat mengisi atau mengubah KRS. Silakan hubungi Admin atau Kaprodi jika ada pertanyaan.</p>
           </div>
         </div>
       )}
 
       {submission?.status === 'approved' && (
-        <div style={{ background: '#dcfce7', border: '1px solid #86efac', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className="ph ph-check-circle" style={{ color: '#166534', fontSize: '1.5rem' }}></i>
-          <p style={{ margin: 0, color: '#14532d', fontSize: '0.9rem' }}>KRS Anda untuk Semester Ganjil 2026/2027 telah <strong>DISETUJUI</strong> oleh Kaprodi/Dosen Wali. Selamat belajar!</p>
+        <div style={{ background: 'var(--glass-bg)', border: '1px solid #86efac', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <i className="ph ph-check-circle" style={{ color: 'var(--color-text)', fontSize: '1.5rem' }}></i>
+          <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>KRS Anda untuk Semester Ganjil 2026/2027 telah <strong>DISETUJUI</strong> oleh Kaprodi/Dosen Wali. Selamat belajar!</p>
         </div>
       )}
 
       {submission?.status === 'pending' && (
-        <div style={{ background: '#fef3c7', border: '1px solid #fde68a', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className="ph ph-clock-circle" style={{ color: '#b45309', fontSize: '1.5rem' }}></i>
-          <p style={{ margin: 0, color: '#92400e', fontSize: '0.9rem' }}>KRS Anda sedang <strong>MENUNGGU PERSETUJUAN</strong> Kaprodi/Dosen Wali.</p>
+        <div style={{ background: 'var(--glass-bg)', border: '1px solid #fde68a', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <i className="ph ph-clock-circle" style={{ color: 'var(--color-text)', fontSize: '1.5rem' }}></i>
+          <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>KRS Anda sedang <strong>MENUNGGU PERSETUJUAN</strong> Kaprodi/Dosen Wali.</p>
         </div>
       )}
       
       {(!submission?.status || submission?.status === 'rejected') && krsOpen && (
-        <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className="ph ph-info" style={{ color: '#3b82f6', fontSize: '1.5rem' }}></i>
-          <p style={{ margin: 0, color: '#1e40af', fontSize: '0.9rem' }}>
+        <div style={{ background: 'var(--glass-bg)', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <i className="ph ph-info" style={{ color: 'var(--color-text)', fontSize: '1.5rem' }}></i>
+          <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>
             {submission?.status === 'rejected' ? 'KRS Anda ditolak. Silakan susun ulang.' : 'Silakan pilih mata kuliah yang ingin diambil semester ini.'}
           </p>
         </div>
@@ -220,7 +220,7 @@ export default function KRSPage() {
                         {isSelected && <i className="ph ph-check" style={{ color: 'white', fontSize: '0.8rem', fontWeight: 'bold' }}></i>}
                       </div>
                     </td>
-                    <td style={{ padding: '16px', fontWeight: 'bold', color: '#4f46e5' }}>{course.code}</td>
+                    <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{course.code}</td>
                     <td style={{ padding: '16px', fontWeight: '600', color: 'var(--color-text)' }}>{course.name}</td>
                     <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{course.dosen?.name || 'Belum Ditentukan'}</td>
                     <td style={{ padding: '16px', color: 'var(--color-muted)', fontWeight: '600' }}>{course.sks}</td>

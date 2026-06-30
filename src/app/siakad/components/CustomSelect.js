@@ -39,7 +39,7 @@ export default function CustomSelect({ name, options, value, onChange, placehold
         }}
       >
         <span>{selectedOption ? selectedOption.label : placeholder}</span>
-        <i className={`ph ph-caret-${isOpen ? 'up' : 'down'}`} style={{ color: '#64748b', transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}></i>
+        <i className={`ph ph-caret-${isOpen ? 'up' : 'down'}`} style={{ color: 'var(--color-text)', transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}></i>
       </div>
 
       {isOpen && (
@@ -88,7 +88,7 @@ export default function CustomSelect({ name, options, value, onChange, placehold
               >
                 {opt.icon && <i className={opt.icon} style={{ fontSize: '1.1rem' }}></i>}
                 {opt.label}
-                {opt.value === value && <i className="ph ph-check" style={{ marginLeft: 'auto', color: '#3b82f6', fontWeight: 'bold' }}></i>}
+                {opt.value === value && <i className="ph ph-check" style={{ marginLeft: 'auto', color: 'var(--color-text)', fontWeight: 'bold' }}></i>}
               </div>
             ))}
           </div>

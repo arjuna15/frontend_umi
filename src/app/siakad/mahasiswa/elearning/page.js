@@ -57,16 +57,16 @@ export default function ElearningPage() {
               <div style={{ position: 'absolute', right: '-20px', top: '-20px', fontSize: '10rem', color: 'rgba(99,102,241,0.03)', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
                 <i className="ph ph-laptop"></i>
               </div>
-              <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#312e81', fontWeight: '800', letterSpacing: '-0.02em' }}>{item.course?.name}</h3>
-              <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: '#4f46e5', fontWeight: '600', padding: '4px 12px', background: 'rgba(79, 70, 229, 0.1)', borderRadius: '999px' }}>{item.course?.code} • {item.course?.sks} SKS</span>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--color-text)', fontWeight: '800', letterSpacing: '-0.02em' }}>{item.course?.name}</h3>
+              <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: 'var(--color-text)', fontWeight: '600', padding: '4px 12px', background: 'var(--glass-bg)', borderRadius: '999px' }}>{item.course?.code} • {item.course?.sks} SKS</span>
             </div>
             
             <div style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
               
               {/* Materials Section */}
               <div>
-                <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: '#334155', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(59,130,246,0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: 'var(--color-text)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'var(--glass-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className="ph ph-folder-open"></i>
                   </div>
                   Materi Perkuliahan
@@ -75,20 +75,20 @@ export default function ElearningPage() {
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {item.course.materials.map((mat, j) => (
                       <li key={j}>
-                        <a href={getFileUrl(mat.content_link)} target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 16px', background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '8px', textDecoration: 'none', color: '#0369a1', fontSize: '0.9rem', transition: 'background 0.2s' }}>
+                        <a href={getFileUrl(mat.content_link)} target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 16px', background: 'var(--glass-bg)', border: '1px solid #bae6fd', borderRadius: '8px', textDecoration: 'none', color: 'var(--color-text)', fontSize: '0.9rem', transition: 'background 0.2s' }}>
                           <i className="ph ph-file-pdf" style={{ fontSize: '1.2rem' }}></i> {mat.title}
                         </a>
                       </li>
                     ))}
                   </ul>
                 ) : (
-                  <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: 0, fontStyle: 'italic' }}>Belum ada materi diunggah.</p>
+                  <p style={{ color: 'var(--color-text)', fontSize: '0.9rem', margin: 0, fontStyle: 'italic' }}>Belum ada materi diunggah.</p>
                 )}
               </div>
 
               {/* Assignments Section */}
               <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 'bold', color: '#334155', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <h4 style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <i className="ph ph-clipboard-text" style={{ color: '#ef4444' }}></i> Tugas & Kuis
                 </h4>
                 {item.course?.assignments && item.course.assignments.length > 0 ? (
@@ -96,15 +96,15 @@ export default function ElearningPage() {
                     {item.course.assignments.map((ass, j) => {
                       const submission = ass.submissions?.find(s => s.mahasiswa_id === data.user.id);
                       return (
-                      <li key={j} style={{ padding: '16px', border: '1px solid #fecaca', background: '#fef2f2', borderRadius: '8px' }}>
+                      <li key={j} style={{ padding: '16px', border: '1px solid #fecaca', background: 'var(--glass-bg)', borderRadius: '8px' }}>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-                          <strong style={{ color: '#b91c1c', fontSize: '0.95rem', flex: '1 1 100%' }}>{ass.title}</strong>
-                          <span style={{ background: '#ef4444', color: 'white', padding: '4px 12px', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 'bold', display: 'inline-block' }}>Deadline: {ass.deadline}</span>
+                          <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem', flex: '1 1 100%' }}>{ass.title}</strong>
+                          <span style={{ background: 'var(--glass-bg)', color: 'white', padding: '4px 12px', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 'bold', display: 'inline-block' }}>Deadline: {ass.deadline}</span>
                         </div>
-                        <p style={{ margin: '0 0 12px 0', fontSize: '0.9rem', color: '#7f1d1d' }}>{ass.description}</p>
+                        <p style={{ margin: '0 0 12px 0', fontSize: '0.9rem', color: 'var(--color-text)' }}>{ass.description}</p>
                         
                         {submission ? (
-                          <div style={{ padding: '8px 12px', background: '#dcfce7', color: '#166534', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold' }}>
+                          <div style={{ padding: '8px 12px', background: 'var(--glass-bg)', color: 'var(--color-text)', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold' }}>
                             <i className="ph ph-check-circle"></i> Tugas sudah dikumpulkan. Nilai: {submission.grade || 'Belum dinilai'}
                           </div>
                         ) : (
@@ -133,14 +133,14 @@ export default function ElearningPage() {
                             style={{ display: 'flex', gap: '8px', alignItems: 'center' }}
                           >
                             <input type="file" name="file" required style={{ fontSize: '0.85rem' }} />
-                            <button type="submit" style={{ background: 'var(--color-bg)', border: '1px solid #fca5a5', color: '#b91c1c', padding: '6px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}>Upload & Kumpulkan</button>
+                            <button type="submit" style={{ background: 'var(--color-bg)', border: '1px solid #fca5a5', color: 'var(--color-text)', padding: '6px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}>Upload & Kumpulkan</button>
                           </form>
                         )}
                       </li>
                     )})}
                   </ul>
                 ) : (
-                  <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: 0, fontStyle: 'italic' }}>Belum ada tugas.</p>
+                  <p style={{ color: 'var(--color-text)', fontSize: '0.9rem', margin: 0, fontStyle: 'italic' }}>Belum ada tugas.</p>
                 )}
               </div>
 

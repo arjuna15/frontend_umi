@@ -76,12 +76,12 @@ export default function SiakadLayout({ children }) {
             <img src="/icon.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
           </div>
           <div>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: '800', margin: 0, letterSpacing: '1px', color: '#0f172a' }}>SIAKAD</h2>
+            <h2 style={{ fontSize: '1.4rem', fontWeight: '800', margin: 0, letterSpacing: '1px', color: 'var(--color-text)' }}>SIAKAD</h2>
           </div>
         </div>
 
         <nav className="siakad-nav">
-          <p style={{ padding: '0 20px', fontSize: '0.7rem', textTransform: 'uppercase', color: '#94a3b8', fontWeight: '800', marginBottom: '8px', letterSpacing: '1px' }}>Menu Utama</p>
+          <p style={{ padding: '0 20px', fontSize: '0.7rem', textTransform: 'uppercase', color: 'var(--color-text)', fontWeight: '800', marginBottom: '8px', letterSpacing: '1px' }}>Menu Utama</p>
           {menuItems.map((item, i) => {
             const isActive = pathname === item.path;
             return (
@@ -99,7 +99,7 @@ export default function SiakadLayout({ children }) {
             window.location.href = '/siakad/login';
           }} style={{ 
             width: '100%', padding: '14px', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.9)',
-            color: '#b91c1c', borderRadius: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+            color: 'var(--color-text)', borderRadius: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
             transition: 'all 0.3s', fontWeight: 'bold', fontSize: '0.95rem', boxShadow: '0 4px 15px rgba(0,0,0,0.03)'
           }}
           onMouseOver={(e) => { e.currentTarget.style.background = '#fef2f2'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
@@ -119,7 +119,7 @@ export default function SiakadLayout({ children }) {
             onClick={toggleTheme} 
             title="Toggle Dark Mode"
             style={{
-              background: 'rgba(255,255,255,0.2)',
+              background: 'var(--glass-bg)',
               border: '1px solid rgba(255,255,255,0.4)',
               borderRadius: '50%',
               width: '40px', height: '40px',
@@ -134,8 +134,8 @@ export default function SiakadLayout({ children }) {
 
           <Link href="/siakad/profile" className="siakad-user-badge" style={{ textDecoration: 'none', margin: 0 }} title="Pengaturan Profil">
             <div style={{ textAlign: 'right', marginRight: '4px' }}>
-              <div style={{ fontSize: '0.95rem', fontWeight: '800', color: '#0f172a', lineHeight: '1.2' }}>Portal Akademik</div>
-              <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500', marginTop: '2px' }}>Tahun Ajaran 2026/2027</div>
+              <div style={{ fontSize: '0.95rem', fontWeight: '800', color: 'var(--color-text)', lineHeight: '1.2' }}>Portal Akademik</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--color-text)', fontWeight: '500', marginTop: '2px' }}>Tahun Ajaran 2026/2027</div>
             </div>
             <div className="siakad-avatar">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
@@ -239,7 +239,7 @@ export default function SiakadLayout({ children }) {
             </div>
             
             <div className="drawer-body">
-              <h4 style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '1px' }}>Menu Lainnya</h4>
+              <h4 style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: 'var(--color-text)', textTransform: 'uppercase', letterSpacing: '1px' }}>Menu Lainnya</h4>
               {menuItems.slice(4).map((item, i) => (
                 <Link key={i} href={item.path} className="drawer-item" onClick={() => setIsDrawerOpen(false)}>
                   <div className="icon"><i className={item.icon}></i></div>
