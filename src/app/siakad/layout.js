@@ -97,13 +97,7 @@ export default function SiakadLayout({ children }) {
           <button onClick={() => {
             localStorage.removeItem('siakad_token');
             window.location.href = '/siakad/login';
-          }} style={{ 
-            width: '100%', padding: '14px', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.9)',
-            color: 'var(--color-text)', borderRadius: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-            transition: 'all 0.3s', fontWeight: 'bold', fontSize: '0.95rem', boxShadow: '0 4px 15px rgba(0,0,0,0.03)'
-          }}
-          onMouseOver={(e) => { e.currentTarget.style.background = '#fef2f2'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-          onMouseOut={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.7)'; e.currentTarget.style.transform = 'none'; }}
+          }} className="btn-logout"
           >
             <i className="ph ph-sign-out" style={{ fontSize: '1.2rem' }}></i> Keluar
           </button>
