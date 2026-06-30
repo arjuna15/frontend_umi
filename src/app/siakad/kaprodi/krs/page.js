@@ -6,6 +6,7 @@ export default function KaprodiKrs() {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [submissions, setSubmissions] = useState([]);
+  const [availableCourses, setAvailableCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -22,11 +23,14 @@ export default function KaprodiKrs() {
       
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
 
-      const [dashRes, krsRes] = await Promise.all([
+      const [dashRes, krsRes, availRes] = await Promise.all([
         fetch(`${apiUrl}/siakad/dashboard`, {
           headers: { 'Authorization': `Bearer ${token}` }
         }),
         fetch(`${apiUrl}/siakad/krs/pending`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        }),
+        fetch(`${apiUrl}/siakad/krs/available`, {
           headers: { 'Authorization': `Bearer ${token}` }
         })
       ]);
@@ -34,7 +38,9 @@ export default function KaprodiKrs() {
       if (dashRes.ok && krsRes.ok) {
         const dashData = await dashRes.json();
         const krsData = await krsRes.json();
+        const availData = availRes.ok ? await availRes.json() : [];
         setData(dashData);
+        setAvailableCourses(availData);
         setSubmissions(Array.isArray(krsData) ? krsData : []);
       } else {
         router.push('/siakad/login');
@@ -110,7 +116,18 @@ export default function KaprodiKrs() {
                     <small style={{ color: '#6b7280' }}>{sub.mahasiswa?.nim_nip}</small>
                   </td>
                   <td>{sub.semester}</td>
-                  <td>{sub.course_ids ? (typeof sub.course_ids === 'string' ? JSON.parse(sub.course_ids).length : sub.course_ids.length) : 0} Matkul</td>
+                  <td>
+                    {(() => {
+                      const cIds = sub.course_ids ? (typeof sub.course_ids === 'string' ? JSON.parse(sub.course_ids) : sub.course_ids) : [];
+                      const cCodes = cIds.map(id => availableCourses.find(c => c.id === parseInt(id))?.code).filter(Boolean).join(', ');
+                      return (
+                        <>
+                          <div>{cIds.length} Matkul</div>
+                          {cCodes && <div style={{ fontSize: '0.8rem', color: '#6b7280', marginTop: '4px', maxWidth: '200px', lineHeight: '1.4' }}>{cCodes}</div>}
+                        </>
+                      );
+                    })()}
+                  </td>
                   <td>
                     <span className="siakad-badge" style={{ background: '#fef3c7', color: '#d97706' }}>
                       {sub.status}
