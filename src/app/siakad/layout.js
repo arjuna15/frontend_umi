@@ -140,8 +140,12 @@ export default function SiakadLayout({ children }) {
           
           let activeIndex = displayItems.findIndex(item => pathname === item.path);
           if (activeIndex === -1) {
-            const inOverflow = menuItems.some(item => pathname === item.path);
-            activeIndex = inOverflow ? displayItems.length - 1 : 0;
+            if (pathname === '/siakad/profile') {
+              activeIndex = -1;
+            } else {
+              const inOverflow = menuItems.some(item => pathname === item.path);
+              activeIndex = inOverflow ? displayItems.length - 1 : 0;
+            }
           }
 
           return (
@@ -211,6 +215,14 @@ export default function SiakadLayout({ children }) {
                   <i className="ph ph-caret-right chevron"></i>
                 </Link>
               ))}
+
+              <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #e2e8f0' }}>
+                <Link href="/siakad/profile" className="drawer-item" onClick={() => setIsDrawerOpen(false)}>
+                  <div className="icon"><i className="ph ph-user-gear"></i></div>
+                  <div className="label">Pengaturan Profil</div>
+                  <i className="ph ph-caret-right chevron"></i>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
