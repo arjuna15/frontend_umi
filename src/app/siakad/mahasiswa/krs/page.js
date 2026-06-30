@@ -128,7 +128,7 @@ export default function KRSPage() {
         </div>
       )}
       
-      {(!submission || submission?.status === 'rejected') && (
+      {(!submission?.status || submission?.status === 'rejected') && (
         <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <i className="ph ph-info" style={{ color: '#3b82f6', fontSize: '1.5rem' }}></i>
           <p style={{ margin: 0, color: '#1e40af', fontSize: '0.9rem' }}>
@@ -144,7 +144,7 @@ export default function KRSPage() {
             <div style={{ background: '#f3f4f6', padding: '10px 16px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', color: '#4b5563' }}>
               Total: {totalSKS} SKS
             </div>
-            {(!submission || submission?.status === 'rejected') && (
+            {(!submission?.status || submission?.status === 'rejected') && (
               <button 
                 onClick={handleSubmit}
                 disabled={isSubmitting || selectedCourses.length === 0}
