@@ -10,6 +10,7 @@ export default function KRSPage() {
   const [selectedCourses, setSelectedCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [krsOpen, setKrsOpen] = useState(true);
 
   const fetchDashboard = async () => {
     const token = localStorage.getItem('siakad_token');
@@ -46,6 +47,10 @@ export default function KRSPage() {
   };
 
   useEffect(() => {
+    const savedKrsStatus = localStorage.getItem('siakad_krs_open');
+    if (savedKrsStatus === 'false') {
+      setKrsOpen(false);
+    }
     fetchDashboard();
   }, [router]);
 
@@ -114,6 +119,16 @@ export default function KRSPage() {
         <p style={{ color: '#6b7280', margin: 0 }}>Pilih dan ajukan mata kuliah untuk semester ini.</p>
       </div>
 
+      {!krsOpen && (
+        <div style={{ background: '#fef2f2', border: '1px solid #fca5a5', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <i className="ph ph-warning-circle" style={{ color: '#dc2626', fontSize: '1.5rem' }}></i>
+          <div>
+            <p style={{ margin: 0, color: '#991b1b', fontSize: '1rem', fontWeight: 'bold' }}>Periode Pengisian KRS Ditutup</p>
+            <p style={{ margin: '4px 0 0 0', color: '#b91c1c', fontSize: '0.9rem' }}>Saat ini Anda tidak dapat mengisi atau mengubah KRS. Silakan hubungi Admin atau Kaprodi jika ada pertanyaan.</p>
+          </div>
+        </div>
+      )}
+
       {submission?.status === 'approved' && (
         <div style={{ background: '#dcfce7', border: '1px solid #86efac', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <i className="ph ph-check-circle" style={{ color: '#166534', fontSize: '1.5rem' }}></i>
@@ -128,7 +143,7 @@ export default function KRSPage() {
         </div>
       )}
       
-      {(!submission?.status || submission?.status === 'rejected') && (
+      {(!submission?.status || submission?.status === 'rejected') && krsOpen && (
         <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <i className="ph ph-info" style={{ color: '#3b82f6', fontSize: '1.5rem' }}></i>
           <p style={{ margin: 0, color: '#1e40af', fontSize: '0.9rem' }}>
@@ -137,7 +152,9 @@ export default function KRSPage() {
         </div>
       )}
 
-      <div style={{ background: 'white', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
+      {krsOpen && (
+        <div style={{ background: 'white', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
+
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: 0 }}>Daftar Mata Kuliah Tersedia</h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -211,7 +228,8 @@ export default function KRSPage() {
           </table>
         </div>
 
-      </div>
+        </div>
+      )}
     </div>
   );
 }
