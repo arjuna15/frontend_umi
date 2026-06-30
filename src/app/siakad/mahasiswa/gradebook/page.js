@@ -57,7 +57,7 @@ export default function MahasiswaGradebook() {
 
       <div style={{ display: 'flex', gap: '20px', marginBottom: '32px', flexWrap: 'wrap' }}>
         <div className="siakad-card" style={{ flex: '1 1 200px', padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', background: 'linear-gradient(135deg, #1e293b, #0f172a)', color: 'white' }}>
-          <div style={{ width: '60px', height: '60px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
+          <div style={{ width: '60px', height: '60px', background: 'rgba(255, 255, 255, 0.15)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
             <i className="ph ph-medal"></i>
           </div>
           <div>
@@ -67,7 +67,7 @@ export default function MahasiswaGradebook() {
         </div>
         
         <div className="siakad-card" style={{ flex: '1 1 200px', padding: '24px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <div style={{ width: '60px', height: '60px', background: 'var(--glass-bg)', color: 'var(--color-text)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
+          <div style={{ width: '60px', height: '60px', background: 'var(--glass-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
             <i className="ph ph-books"></i>
           </div>
           <div>
