@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import SkeletonLoader from '../../components/SkeletonLoader';
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -31,10 +33,21 @@ export default function AdminDashboard() {
   }, [router]);
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat panel admin...
+    <div style={{ padding: '24px' }}>
+      <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat panel admin...</h1>
+      <SkeletonLoader type="card" />
+      <SkeletonLoader type="chart" />
+      <SkeletonLoader type="table" />
     </div>
   );
+
+  // Prepare chart data
+  const chartData = [
+    { name: 'Sistem Informasi', users: 120 },
+    { name: 'Teknik Informatika', users: 180 },
+    { name: 'Manajemen', users: 200 },
+    { name: 'Akuntansi', users: 150 }
+  ];
 
   return (
     <div>
@@ -75,9 +88,31 @@ export default function AdminDashboard() {
         </div>
       </div>
 
+      <div style={{ marginBottom: '32px', background: 'var(--glass-bg)', padding: '24px', borderRadius: '16px', boxShadow: 'var(--glass-shadow)', border: 'var(--glass-border)' }}>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Distribusi Mahasiswa per Prodi</h2>
+        <div style={{ height: '300px', width: '100%' }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+              <XAxis dataKey="name" stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)' }} axisLine={false} tickLine={false} />
+              <YAxis stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)' }} axisLine={false} tickLine={false} />
+              <Tooltip 
+                contentStyle={{ background: 'var(--color-bg)', border: 'var(--glass-border)', borderRadius: '8px', color: 'var(--color-text)' }}
+                cursor={{ fill: 'var(--color-border)', opacity: 0.4 }}
+              />
+              <Bar dataKey="users" radius={[8, 8, 0, 0]}>
+                {chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#3b82f6' : '#10b981'} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
       <div style={{ 
-        background: 'rgba(255, 255, 255, 0.8)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '24px', 
-        boxShadow: '0 8px 32px rgba(31, 38, 135, 0.05)', border: '1px solid rgba(255, 255, 255, 0.18)' 
+        background: 'var(--glass-bg)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '24px', 
+        boxShadow: 'var(--glass-shadow)', border: 'var(--glass-border)'
       }}>
         <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#1f2937', margin: '0 0 20px 0' }}>Daftar Kelas (Overview)</h2>
         

@@ -2,11 +2,14 @@
 import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../../context/ThemeContext';
 import './siakad.css';
 
 export default function SiakadLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
+  const { theme, toggleTheme } = useTheme();
   const [role, setRole] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -110,8 +113,26 @@ export default function SiakadLayout({ children }) {
       {/* Main Content Area */}
       <main className="siakad-main">
         {/* Sleek Glass Header */}
-        <header className="siakad-header">
-          <Link href="/siakad/profile" className="siakad-user-badge" style={{ textDecoration: 'none' }} title="Pengaturan Profil">
+        <header className="siakad-header" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '16px' }}>
+          
+          <button 
+            onClick={toggleTheme} 
+            title="Toggle Dark Mode"
+            style={{
+              background: 'rgba(255,255,255,0.2)',
+              border: '1px solid rgba(255,255,255,0.4)',
+              borderRadius: '50%',
+              width: '40px', height: '40px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer',
+              color: 'var(--color-text)',
+              transition: 'all 0.3s'
+            }}
+          >
+            {theme === 'dark' ? <i className="ph ph-sun" style={{ fontSize: '1.2rem' }}></i> : <i className="ph ph-moon" style={{ fontSize: '1.2rem' }}></i>}
+          </button>
+
+          <Link href="/siakad/profile" className="siakad-user-badge" style={{ textDecoration: 'none', margin: 0 }} title="Pengaturan Profil">
             <div style={{ textAlign: 'right', marginRight: '4px' }}>
               <div style={{ fontSize: '0.95rem', fontWeight: '800', color: '#0f172a', lineHeight: '1.2' }}>Portal Akademik</div>
               <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '500', marginTop: '2px' }}>Tahun Ajaran 2026/2027</div>
@@ -126,7 +147,18 @@ export default function SiakadLayout({ children }) {
 
         {/* Scrollable Content */}
         <div className="siakad-content" id="siakad-scroll-area">
-          {children}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={pathname}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              style={{ minHeight: '100%' }}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </main>
 

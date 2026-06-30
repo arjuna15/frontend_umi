@@ -1,6 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import SkeletonLoader from '../../components/SkeletonLoader';
 
 export default function KaprodiDashboard() {
   const router = useRouter();
@@ -39,10 +41,19 @@ export default function KaprodiDashboard() {
   };
 
   if (loading || !stats) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Statistik...
+    <div style={{ padding: '24px' }}>
+      <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat Statistik...</h1>
+      <SkeletonLoader type="card" />
+      <SkeletonLoader type="chart" />
     </div>
   );
+
+  const pieData = [
+    { name: 'Hadir Penuh', value: 85 },
+    { name: 'Izin', value: 10 },
+    { name: 'Alpa', value: 5 },
+  ];
+  const COLORS = ['#10b981', '#f59e0b', '#ef4444'];
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
@@ -89,7 +100,35 @@ export default function KaprodiDashboard() {
 
       </div>
 
-      <div className="siakad-card stagger-4" style={{ padding: '24px' }}>
+      <div className="siakad-card stagger-4" style={{ marginBottom: '30px', padding: '24px' }}>
+        <h3 style={{ margin: '0 0 20px 0', color: 'var(--color-text)' }}>Persentase Kehadiran Dosen (Bulan Ini)</h3>
+        <div style={{ height: '300px', width: '100%' }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={pieData}
+                cx="50%"
+                cy="50%"
+                innerRadius={80}
+                outerRadius={110}
+                paddingAngle={5}
+                dataKey="value"
+              >
+                {pieData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
+              <Tooltip 
+                contentStyle={{ background: 'var(--color-bg)', border: 'var(--glass-border)', borderRadius: '8px', color: 'var(--color-text)' }}
+                itemStyle={{ color: 'var(--color-text)' }}
+              />
+              <Legend verticalAlign="bottom" height={36} />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      <div className="siakad-card stagger-5" style={{ padding: '24px' }}>
         <h3 style={{ margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '8px', color: '#1f2937' }}>
           <i className="ph ph-bell-ringing" style={{ color: '#ef4444' }}></i> Peringatan Sistem
         </h3>

@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "../context/ThemeContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,13 +58,14 @@ export default function RootLayout({ children }) {
         <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
       </head>
       <body className="min-h-full flex flex-col">
-        
-        <Providers>
-          <ScrollAnimations />
-          <HeaderWrapper />
-          <main style={{ flex: 1 }}>{children}</main>
-          <FooterWrapper />
-        </Providers>
+        <ThemeProvider>
+          <Providers>
+            <ScrollAnimations />
+            <HeaderWrapper />
+            <main style={{ flex: 1 }}>{children}</main>
+            <FooterWrapper />
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );

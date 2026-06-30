@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import SkeletonLoader from '../../components/SkeletonLoader';
 
 export default function KRSPage() {
   const router = useRouter();
@@ -103,8 +104,10 @@ export default function KRSPage() {
   };
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
-      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat KRS Online...
+    <div style={{ padding: '24px' }}>
+      <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat KRS...</h1>
+      <SkeletonLoader type="card" />
+      <SkeletonLoader type="table" />
     </div>
   );
 
