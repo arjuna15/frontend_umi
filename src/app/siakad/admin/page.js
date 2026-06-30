@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import SkeletonLoader from '../../components/SkeletonLoader';
+import SkeletonLoader from '../components/SkeletonLoader';
 
 export default function AdminDashboard() {
   const router = useRouter();

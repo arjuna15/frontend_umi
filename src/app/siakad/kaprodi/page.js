@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import SkeletonLoader from '../../components/SkeletonLoader';
+import SkeletonLoader from '../components/SkeletonLoader';
 
 export default function KaprodiDashboard() {
   const router = useRouter();
