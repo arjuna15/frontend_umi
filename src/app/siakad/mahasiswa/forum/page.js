@@ -55,9 +55,9 @@ export default function MahasiswaForumPage() {
               borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
               border: 'var(--glass-border)', overflow: 'hidden' 
             }}>
-              <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid rgba(199, 210, 254, 0.3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ background: 'linear-gradient(90deg, rgba(238,242,255,0.8) 0%, rgba(255,255,255,0) 100%)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
+                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#3730a3', fontWeight: 'bold' }}>{course.name}</h3>
                   <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-text)' }}>{course.code}</span>
                 </div>
                 <button onClick={async () => {
@@ -87,7 +87,7 @@ export default function MahasiswaForumPage() {
                     {course.forums.map((forum, j) => (
                       <div key={j} style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '20px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                          <div style={{ width: '40px', height: '40px', background: 'var(--glass-bg)', color: 'var(--color-text)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
+                          <div style={{ width: '40px', height: '40px', background: 'rgba(99, 102, 241, 0.1)', color: '#4f46e5', border: '1px solid rgba(99, 102, 241, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
                             D
                           </div>
                           <div>

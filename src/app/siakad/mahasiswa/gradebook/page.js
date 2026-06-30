@@ -61,7 +61,7 @@ export default function MahasiswaGradebook() {
             <i className="ph ph-medal"></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)' }}>Indeks Prestasi Semester</p>
+            <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: '#94a3b8' }}>Indeks Prestasi Semester</p>
             <h1 style={{ margin: 0, fontSize: '2.5rem', fontWeight: '900', color: '#ffffff' }}>{ipSemester}</h1>
           </div>
         </div>
