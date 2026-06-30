@@ -72,6 +72,26 @@ export default function KaprodiKrs() {
     }
   };
 
+  const rejectKrs = async (id) => {
+    if (!confirm('Tolak pengajuan KRS ini?')) return;
+    try {
+      const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      const res = await fetch(`${apiUrl}/siakad/krs/reject/${id}`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        alert('KRS berhasil ditolak!');
+        fetchData(); // reload
+      } else {
+        alert('Gagal menolak KRS');
+      }
+    } catch (err) {
+      alert('Error: ' + err.message);
+    }
+  };
+
   if (loading || !data) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: '#6b7280' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat tabel KRS...
@@ -134,16 +154,28 @@ export default function KaprodiKrs() {
                     </span>
                   </td>
                   <td style={{ textAlign: 'center' }}>
-                    <button 
-                      onClick={() => approveKrs(sub.id)}
-                      style={{ 
-                        background: '#10b981', color: 'white', border: 'none', 
-                        padding: '8px 16px', borderRadius: '8px', cursor: 'pointer',
-                        fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px', margin: '0 auto'
-                      }}
-                    >
-                      <i className="ph ph-check-circle"></i> Setujui
-                    </button>
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                      <button 
+                        onClick={() => approveKrs(sub.id)}
+                        style={{ 
+                          background: '#10b981', color: 'white', border: 'none', 
+                          padding: '8px 16px', borderRadius: '8px', cursor: 'pointer',
+                          fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px'
+                        }}
+                      >
+                        <i className="ph ph-check-circle"></i> Setujui
+                      </button>
+                      <button 
+                        onClick={() => rejectKrs(sub.id)}
+                        style={{ 
+                          background: '#ef4444', color: 'white', border: 'none', 
+                          padding: '8px 16px', borderRadius: '8px', cursor: 'pointer',
+                          fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px'
+                        }}
+                      >
+                        <i className="ph ph-x-circle"></i> Tolak
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
