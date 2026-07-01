@@ -304,6 +304,8 @@
   font-size: 0.85rem;
   font-weight: 700;
   display: inline-block;
+  min-width: 110px;
+  text-align: center;
 }
 
 /* Inputs & Selects */

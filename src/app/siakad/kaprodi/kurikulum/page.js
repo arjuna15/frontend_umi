@@ -98,9 +98,11 @@ export default function KaprodiKurikulumPage() {
                   <td style={{ padding: '16px' }}>
                     <span style={{ background: c.type === 'Wajib' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(245, 158, 11, 0.1)', color: c.type === 'Wajib' ? '#3b82f6' : '#f59e0b', padding: '4px 10px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold' }}>{c.type}</span>
                   </td>
-                  <td style={{ padding: '16px', textAlign: 'right' }}>
-                    <button onClick={() => { setEditFormData(c); setIsEditModalOpen(true); }} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', marginRight: '8px' }}><i className="ph ph-pencil-simple"></i></button>
-                    <button onClick={() => handleDelete(c.id)} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}><i className="ph ph-trash"></i></button>
+                  <td style={{ padding: '16px' }}>
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
+                      <button onClick={() => { setEditFormData(c); setIsEditModalOpen(true); }} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0 }}><i className="ph ph-pencil-simple"></i></button>
+                      <button onClick={() => handleDelete(c.id)} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0 }}><i className="ph ph-trash"></i></button>
+                    </div>
                   </td>
                 </tr>
               ))}

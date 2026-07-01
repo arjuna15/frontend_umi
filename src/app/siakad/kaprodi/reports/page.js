@@ -37,7 +37,7 @@ export default function KaprodiReports() {
       </div>
 
 
-      <div className="siakad-card stagger-1" style={{ padding: '40px', textAlign: 'center', width: '90%', maxWidth: '800px', maxHeight: '90vh', overflowY: 'auto', margin: '0 auto' }}>
+      <div className="siakad-card stagger-1" style={{ padding: '40px', textAlign: 'center', margin: '0 auto' }}>
         <div style={{ width: '80px', height: '80px', background: 'var(--glass-bg)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto' , flexShrink: 0 }}>
           <i className="ph ph-file-xls" style={{ fontSize: '3rem', color: '#ef4444' }}></i>
         </div>
