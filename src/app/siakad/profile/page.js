@@ -142,12 +142,12 @@ export default function ProfilePage() {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'flex-start' }}>
         
         {/* Left Sidebar: Profile Card */}
-        <div style={{ flex: '1 1 250px', background: 'var(--color-bg)', padding: '32px 24px', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', textAlign: 'center' }}>
+        <div className="siakad-card" style={{ flex: '1 1 250px', padding: '32px 24px', textAlign: 'center' }}>
           <div style={{ position: 'relative', width: '120px', height: '120px', margin: '0 auto 16px' }}>
             {user.avatar_url ? (
-              <img src={user.avatar_url} alt="Profile" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', border: '3px solid #4f46e5' }} />
+              <img src={user.avatar_url} alt="Profile" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', border: '4px solid var(--glass-bg)', boxShadow: '0 8px 16px rgba(0,0,0,0.1)' }} />
             ) : (
-              <div style={{ width: '100%', height: '100%', borderRadius: '50%', background: 'var(--glass-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.5rem', border: '3px solid #e5e7eb' }}>
+              <div style={{ width: '100%', height: '100%', borderRadius: '50%', background: 'linear-gradient(135deg, #4f46e5 0%, #ec4899 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.5rem', boxShadow: '0 8px 16px rgba(0,0,0,0.1)' }}>
                 <i className="ph ph-user-circle"></i>
               </div>
             )}
@@ -177,7 +177,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Right Content: Tabs & Forms */}
-        <div style={{ flex: '2 1 450px', background: 'var(--color-bg)', borderRadius: '16px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', overflow: 'hidden' }}>
+        <div className="siakad-card" style={{ flex: '2 1 450px', padding: 0, overflow: 'hidden' }}>
           
           {/* Tab Navigation */}
           <div style={{ display: 'flex', borderBottom: '1px solid var(--color-border)', background: 'var(--glass-bg)' }}>
@@ -211,22 +211,22 @@ export default function ProfilePage() {
                   <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
                     <div style={{ flex: '1 1 200px' }}>
                       <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Email</label>
-                      <input type="email" name="email" defaultValue={user.email} placeholder="contoh@kampus.ac.id" style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+                      <input type="email" name="email" defaultValue={user.email} placeholder="contoh@kampus.ac.id" style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)' }} />
                     </div>
                     <div style={{ flex: '1 1 200px' }}>
                       <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nomor HP</label>
-                      <input type="tel" name="phone" defaultValue={user.phone} placeholder="08123456789" style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+                      <input type="tel" name="phone" defaultValue={user.phone} placeholder="08123456789" style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)' }} />
                     </div>
                   </div>
                   
                   <div>
                     <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Alamat Lengkap</label>
-                    <textarea name="address" defaultValue={user.address} rows="3" placeholder="Jl. Raya Kampus No. 1..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', resize: 'vertical' }}></textarea>
+                    <textarea name="address" defaultValue={user.address} rows="3" placeholder="Jl. Raya Kampus No. 1..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', resize: 'vertical' }}></textarea>
                   </div>
                   
                   <div>
                     <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Bio Singkat</label>
-                    <textarea name="bio" defaultValue={user.bio} rows="2" placeholder="Tuliskan sedikit tentang diri Anda..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', resize: 'vertical' }}></textarea>
+                    <textarea name="bio" defaultValue={user.bio} rows="2" placeholder="Tuliskan sedikit tentang diri Anda..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', resize: 'vertical' }}></textarea>
                   </div>
 
                   <div style={{ marginTop: '8px' }}>
@@ -245,15 +245,15 @@ export default function ProfilePage() {
                 <form onSubmit={handleUpdatePassword} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                   <div>
                     <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Password Saat Ini</label>
-                    <input type="password" name="current_password" required placeholder="Masukkan password lama..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+                    <input type="password" name="current_password" required placeholder="Masukkan password lama..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)' }} />
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Password Baru</label>
-                    <input type="password" name="password" required minLength="6" placeholder="Masukkan password baru..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+                    <input type="password" name="password" required minLength="6" placeholder="Masukkan password baru..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)' }} />
                   </div>
                   <div>
                     <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Konfirmasi Password Baru</label>
-                    <input type="password" name="confirm" required minLength="6" placeholder="Ulangi password baru..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+                    <input type="password" name="confirm" required minLength="6" placeholder="Ulangi password baru..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)' }} />
                   </div>
                   <div style={{ marginTop: '8px' }}>
                     <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
