@@ -863,3 +863,35 @@
   color: #fca5a5;
   border-color: rgba(239, 68, 68, 0.4);
 }
+
+.profile-overview-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  background: var(--glass-bg);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.profile-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .profile-overview-card {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .profile-badges {
+    justify-content: center;
+    margin-top: 4px;
+  }
+}
+
