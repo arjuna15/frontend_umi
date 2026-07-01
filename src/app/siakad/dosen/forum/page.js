@@ -58,9 +58,9 @@ export default function DosenForumPage() {
                 <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-text)' }}>{course.code}</span>
               </div>
               <button onClick={async () => {
-                const title = prompt('Judul topik diskusi:');
+                const title = await window.toast.prompt('Judul topik diskusi:');
                 if (!title) return;
-                const content = prompt('Isi diskusi:');
+                const content = await window.toast.prompt('Isi diskusi:');
                 if (!content) return;
                 const token = localStorage.getItem('siakad_token');
                 const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';

@@ -24,6 +24,12 @@ toast.confirm = (msg) => {
     window.dispatchEvent(event);
   });
 };
+toast.prompt = (msg, defaultValue = '') => {
+  return new Promise((resolve) => {
+    const event = new CustomEvent('siakad_prompt', { detail: { message: msg, defaultValue, resolve } });
+    window.dispatchEvent(event);
+  });
+};
 
 if (typeof window !== 'undefined') {
   window.toast = toast;
@@ -88,6 +94,76 @@ export function ConfirmModal() {
           to { transform: scale(1); opacity: 1; }
         }
       `}</style>
+    </div>
+  );
+}
+
+export function PromptModal() {
+  const [modal, setModal] = useState(null);
+  const [inputValue, setInputValue] = useState('');
+
+  useEffect(() => {
+    const handlePrompt = (e) => {
+      setModal(e.detail);
+      setInputValue(e.detail.defaultValue || '');
+    };
+    window.addEventListener('siakad_prompt', handlePrompt);
+    return () => window.removeEventListener('siakad_prompt', handlePrompt);
+  }, []);
+
+  if (!modal) return null;
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0, left: 0, right: 0, bottom: 0,
+      background: 'rgba(0,0,0,0.5)',
+      backdropFilter: 'blur(4px)',
+      zIndex: 10001,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <div style={{
+        background: 'var(--color-bg)',
+        border: '1px solid var(--color-border)',
+        borderRadius: '16px',
+        padding: '32px',
+        maxWidth: '400px',
+        width: '90%',
+        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+        animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+        textAlign: 'left'
+      }}>
+        <h3 style={{ margin: '0 0 16px 0', color: 'var(--color-text)', fontSize: '1.2rem' }}>{modal.message}</h3>
+        <input 
+          autoFocus
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              modal.resolve(inputValue);
+              setModal(null);
+            }
+          }}
+          style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', marginBottom: '24px' }}
+        />
+        <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+          <button 
+            onClick={() => { modal.resolve(null); setModal(null); }}
+            style={{ padding: '10px 20px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer' }}
+          >
+            Batal
+          </button>
+          <button 
+            onClick={() => { modal.resolve(inputValue); setModal(null); }}
+            style={{ padding: '10px 20px', borderRadius: '8px', border: 'none', background: '#4f46e5', color: 'white', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)' }}
+          >
+            OK
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
