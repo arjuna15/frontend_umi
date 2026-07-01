@@ -2,6 +2,12 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
+const STATUS_STYLES = {
+  pending:  { label: 'Menunggu', bg: 'rgba(245,158,11,0.15)', color: '#f59e0b', border: 'rgba(245,158,11,0.3)' },
+  approved: { label: 'Disetujui', bg: 'rgba(16,185,129,0.15)', color: '#10b981', border: 'rgba(16,185,129,0.3)' },
+  rejected: { label: 'Ditolak', bg: 'rgba(239,68,68,0.15)', color: '#ef4444', border: 'rgba(239,68,68,0.3)' },
+};
+
 export default function KrsApprovalPage() {
   const router = useRouter();
   const [submissions, setSubmissions] = useState([]);
@@ -10,196 +16,198 @@ export default function KrsApprovalPage() {
   const [notes, setNotes] = useState('');
   const [processing, setProcessing] = useState(false);
 
-  useEffect(() => {
-    fetchSubmissions();
-  }, []);
+  useEffect(() => { fetchSubmissions(); }, []);
 
   const fetchSubmissions = async () => {
     const token = localStorage.getItem('siakad_token');
     if (!token) return router.push('/siakad/login');
-
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-      const res = await fetch(`${apiUrl}/siakad/dosen/krs`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) {
-        const result = await res.json();
-        setSubmissions(result.submissions || []);
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
+      const res = await fetch(`${apiUrl}/siakad/dosen/krs`, { headers: { 'Authorization': `Bearer ${token}` } });
+      if (res.ok) { const result = await res.json(); setSubmissions(result.submissions || []); }
+    } catch (err) { console.error(err); }
+    finally { setLoading(false); }
   };
 
   const handleAction = async (status) => {
     if (!selectedSub) return;
     setProcessing(true);
-    
     const token = localStorage.getItem('siakad_token');
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-
     try {
       const res = await fetch(`${apiUrl}/siakad/dosen/krs/approve`, {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          submission_id: selectedSub.id,
-          status: status,
-          notes: notes
-        })
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ submission_id: selectedSub.id, status, notes })
       });
-
       if (res.ok) {
-        window.toast(`KRS berhasil di-${status === 'approved' ? 'Setujui' : 'Tolak'}!`);
-        setSelectedSub(null);
-        setNotes('');
-        fetchSubmissions();
+        window.toast && window.toast(`KRS berhasil di-${status === 'approved' ? 'Setujui' : 'Tolak'}!`);
+        setSelectedSub(null); setNotes(''); fetchSubmissions();
       } else {
         const err = await res.json();
-        window.toast('Gagal: ' + (err.message || 'Server Error'));
+        window.toast && window.toast('Gagal: ' + (err.message || 'Error'));
       }
-    } catch (err) {
-      window.toast('Error: ' + err.message);
-    } finally {
-      setProcessing(false);
-    }
+    } catch (err) { window.toast && window.toast('Error: ' + err.message); }
+    finally { setProcessing(false); }
   };
 
   const pendingCount = submissions.filter(s => s.status === 'pending').length;
 
-  if (loading) return <div style={{ padding: '40px', color: 'var(--color-text)' }}>Memuat data KRS...</div>;
+  if (loading) return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', gap: '12px', color: 'var(--color-muted)' }}>
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem' }}></i> Memuat data KRS...
+    </div>
+  );
 
   return (
-    <div className="siakad-page">
-      <div className="siakad-header-block mb-4">
-        <h1 className="siakad-title">Persetujuan KRS (Dosen Wali)</h1>
-        <p className="siakad-subtitle">Validasi rencana studi mahasiswa bimbingan Anda. {pendingCount > 0 && <span style={{ color: 'var(--umiba-red)', fontWeight: 'bold' }}>Ada {pendingCount} KRS menunggu persetujuan.</span>}</p>
+    <div className="fade-in" style={{ paddingBottom: '40px' }}>
+      {/* Hero Header */}
+      <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)', borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '220px', height: '220px', borderRadius: '50%', background: 'rgba(196,30,58,0.25)', filter: 'blur(50px)', pointerEvents: 'none' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '20%', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(99,102,241,0.2)', filter: 'blur(40px)', pointerEvents: 'none' }}></div>
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
+          <div>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', margin: '0 0 8px 0', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: '600' }}>SIAKAD — DOSEN WALI</p>
+            <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Persetujuan KRS Mahasiswa</h1>
+            <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Validasi rencana studi mahasiswa bimbingan Anda untuk semester ini.</p>
+          </div>
+          <div style={{ display: 'flex', gap: '12px' }}>
+            {[
+              { label: 'Total Mahasiswa', value: submissions.length, icon: 'ph-users', color: '#6366f1' },
+              { label: 'Menunggu', value: pendingCount, icon: 'ph-clock', color: '#f59e0b' },
+              { label: 'Disetujui', value: submissions.filter(s=>s.status==='approved').length, icon: 'ph-check-circle', color: '#10b981' },
+            ].map((s, i) => (
+              <div key={i} style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: `1px solid ${pendingCount > 0 && s.icon === 'ph-clock' ? 'rgba(245,158,11,0.5)' : 'rgba(255,255,255,0.15)'}` }}>
+                <i className={`ph ${s.icon}`} style={{ fontSize: '1.3rem', color: s.color, display: 'block', marginBottom: '4px' }}></i>
+                <p style={{ color: 'white', fontWeight: '800', fontSize: '1.5rem', margin: '0 0 2px 0' }}>{s.value}</p>
+                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.65rem', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="siakad-card p-4 md:col-span-1" style={{ overflowY: 'auto', maxHeight: '70vh' }}>
-          <h3 style={{ marginBottom: '16px', fontWeight: 'bold' }}>Daftar Mahasiswa</h3>
-          {submissions.length === 0 ? (
-            <div style={{ color: 'var(--color-muted)', textAlign: 'center', padding: '20px' }}>Tidak ada data mahasiswa bimbingan.</div>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {submissions.map(sub => (
-                <button
-                  key={sub.id}
-                  onClick={() => {
-                    setSelectedSub(sub);
-                    setNotes(sub.notes || '');
-                  }}
-                  style={{
-                    padding: '12px',
-                    textAlign: 'left',
-                    background: selectedSub?.id === sub.id ? 'var(--umiba-red)' : 'var(--glass-bg)',
-                    color: selectedSub?.id === sub.id ? 'white' : 'var(--color-text)',
-                    border: '1px solid var(--color-border)',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                    position: 'relative'
-                  }}
-                >
-                  <div style={{ fontWeight: 'bold' }}>{sub.mahasiswa?.name || 'Mahasiswa'}</div>
-                  <div style={{ fontSize: '0.85rem', opacity: 0.8 }}>NIM: {sub.mahasiswa?.nim || '-'}</div>
-                  
-                  <div style={{ marginTop: '8px' }}>
-                    {sub.status === 'pending' && <span style={{ padding: '2px 6px', background: '#f59e0b', color: 'white', fontSize: '0.7rem', borderRadius: '4px' }}>Menunggu</span>}
-                    {sub.status === 'approved' && <span style={{ padding: '2px 6px', background: '#10b981', color: 'white', fontSize: '0.7rem', borderRadius: '4px' }}>Disetujui</span>}
-                    {sub.status === 'rejected' && <span style={{ padding: '2px 6px', background: '#ef4444', color: 'white', fontSize: '0.7rem', borderRadius: '4px' }}>Ditolak</span>}
+      <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '24px', alignItems: 'start' }}>
+        {/* Left List */}
+        <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
+          <div style={{ background: 'linear-gradient(to right, #4c0519, #7f1d1d)', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <h3 style={{ margin: 0, color: 'white', fontWeight: '700', fontSize: '0.95rem' }}>Daftar Mahasiswa Bimbingan</h3>
+            {pendingCount > 0 && (
+              <span style={{ padding: '3px 10px', background: '#f59e0b', color: 'white', borderRadius: '999px', fontSize: '0.75rem', fontWeight: '800' }}>{pendingCount}</span>
+            )}
+          </div>
+          <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '60vh', overflowY: 'auto' }}>
+            {submissions.length === 0 ? (
+              <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--color-muted)' }}>
+                <i className="ph ph-users" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '8px', opacity: 0.3 }}></i>
+                Tidak ada mahasiswa bimbingan.
+              </div>
+            ) : submissions.map((sub, i) => {
+              const st = STATUS_STYLES[sub.status] || STATUS_STYLES.pending;
+              const isActive = selectedSub?.id === sub.id;
+              return (
+                <button key={sub.id} onClick={() => { setSelectedSub(sub); setNotes(sub.notes || ''); }}
+                  style={{ padding: '14px 16px', textAlign: 'left', background: isActive ? 'linear-gradient(135deg, rgba(196,30,58,0.2), rgba(99,102,241,0.2))' : 'var(--glass-bg)', border: `1px solid ${isActive ? 'rgba(196,30,58,0.4)' : 'var(--color-border)'}`, borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: `hsl(${i * 50 % 360}, 65%, 55%)`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: '800', flexShrink: 0 }}>
+                      {(sub.mahasiswa?.name || '?').charAt(0)}
+                    </div>
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                      <p style={{ margin: '0 0 2px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{sub.mahasiswa?.name || 'Mahasiswa'}</p>
+                      <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)' }}>NIM: {sub.mahasiswa?.nim || '—'}</p>
+                    </div>
+                    <span style={{ padding: '3px 8px', background: st.bg, color: st.color, border: `1px solid ${st.border}`, borderRadius: '6px', fontSize: '0.7rem', fontWeight: '700', whiteSpace: 'nowrap' }}>{st.label}</span>
                   </div>
                 </button>
-              ))}
-            </div>
-          )}
+              );
+            })}
+          </div>
         </div>
 
-        <div className="md:col-span-2">
+        {/* Right Detail */}
+        <div>
           {selectedSub ? (
-            <div className="siakad-card p-6">
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px', marginBottom: '16px' }}>
+            <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
+              {/* Header */}
+              <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 28px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
-                  <h2 style={{ margin: 0, fontWeight: 'bold' }}>{selectedSub.mahasiswa?.name}</h2>
-                  <p style={{ margin: 0, color: 'var(--color-muted)' }}>NIM: {selectedSub.mahasiswa?.nim} | Semester: {selectedSub.semester}</p>
+                  <h2 style={{ margin: '0 0 4px 0', color: 'white', fontWeight: '800', fontSize: '1.2rem' }}>{selectedSub.mahasiswa?.name}</h2>
+                  <p style={{ margin: 0, color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem' }}>NIM: {selectedSub.mahasiswa?.nim} · Semester {selectedSub.semester}</p>
                 </div>
-                <div>
-                  {selectedSub.status === 'pending' && <span style={{ padding: '6px 12px', background: '#fef3c7', color: '#d97706', borderRadius: '20px', fontWeight: 'bold' }}>Menunggu Persetujuan</span>}
-                  {selectedSub.status === 'approved' && <span style={{ padding: '6px 12px', background: '#d1fae5', color: '#059669', borderRadius: '20px', fontWeight: 'bold' }}>Telah Disetujui</span>}
-                  {selectedSub.status === 'rejected' && <span style={{ padding: '6px 12px', background: '#fee2e2', color: '#dc2626', borderRadius: '20px', fontWeight: 'bold' }}>Telah Ditolak</span>}
-                </div>
+                {(() => {
+                  const st = STATUS_STYLES[selectedSub.status] || STATUS_STYLES.pending;
+                  return <span style={{ padding: '8px 16px', background: st.bg, color: st.color, border: `1px solid ${st.border}`, borderRadius: '999px', fontWeight: '800', fontSize: '0.85rem' }}>{st.label}</span>;
+                })()}
               </div>
 
-              <h3 style={{ fontWeight: 'bold', marginBottom: '12px' }}>Mata Kuliah yang Diambil</h3>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', marginBottom: '24px' }}>
-                <thead>
-                  <tr style={{ background: 'rgba(0,0,0,0.05)', borderBottom: '1px solid var(--color-border)' }}>
-                    <th style={{ padding: '12px', fontWeight: '600' }}>Kode</th>
-                    <th style={{ padding: '12px', fontWeight: '600' }}>Mata Kuliah</th>
-                    <th style={{ padding: '12px', fontWeight: '600' }}>SKS</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(selectedSub.courses || []).map(c => (
-                    <tr key={c.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                      <td style={{ padding: '12px' }}>{c.code}</td>
-                      <td style={{ padding: '12px' }}>{c.name}</td>
-                      <td style={{ padding: '12px' }}>{c.sks}</td>
-                    </tr>
-                  ))}
-                  <tr style={{ background: 'rgba(0,0,0,0.02)', fontWeight: 'bold' }}>
-                    <td colSpan="2" style={{ padding: '12px', textAlign: 'right' }}>Total SKS:</td>
-                    <td style={{ padding: '12px' }}>
-                      {(selectedSub.courses || []).reduce((acc, curr) => acc + (parseInt(curr.sks) || 0), 0)}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <div style={{ marginBottom: '24px' }}>
-                <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '8px' }}>Catatan Dosen Wali (Opsional / Wajib jika Ditolak)</label>
-                <textarea 
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Berikan catatan revisi untuk mahasiswa jika KRS ditolak..."
-                  rows="3"
-                  className="form-control"
-                  style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }}
-                  disabled={selectedSub.status !== 'pending' && processing}
-                ></textarea>
-              </div>
-
-              {selectedSub.status === 'pending' && (
-                <div style={{ display: 'flex', gap: '12px' }}>
-                  <button 
-                    onClick={() => handleAction('approved')}
-                    disabled={processing}
-                    style={{ flex: 1, padding: '12px', background: '#10b981', color: 'white', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: 'bold', fontSize: '1rem' }}
-                  >
-                    <i className="ph ph-check-circle" style={{ marginRight: '8px' }}></i> Setujui KRS
-                  </button>
-                  <button 
-                    onClick={() => handleAction('rejected')}
-                    disabled={processing || !notes.trim()}
-                    style={{ flex: 1, padding: '12px', background: '#ef4444', color: 'white', borderRadius: '8px', border: 'none', cursor: (processing || !notes.trim()) ? 'not-allowed' : 'pointer', fontWeight: 'bold', fontSize: '1rem', opacity: (processing || !notes.trim()) ? 0.6 : 1 }}
-                    title={!notes.trim() ? "Isi catatan terlebih dahulu untuk menolak KRS" : ""}
-                  >
-                    <i className="ph ph-x-circle" style={{ marginRight: '8px' }}></i> Tolak & Minta Revisi
-                  </button>
+              <div style={{ padding: '28px' }}>
+                {/* Course Table */}
+                <h3 style={{ margin: '0 0 16px 0', fontWeight: '700', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <i className="ph ph-books" style={{ color: '#6366f1' }}></i> Mata Kuliah yang Diambil
+                </h3>
+                <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--color-border)', marginBottom: '24px' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                    <thead>
+                      <tr style={{ background: 'rgba(0,0,0,0.04)', borderBottom: '1px solid var(--color-border)' }}>
+                        {['Kode', 'Mata Kuliah', 'SKS'].map(h => (
+                          <th key={h} style={{ padding: '12px 16px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-muted)' }}>{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {(selectedSub.courses || []).map((c, i) => (
+                        <tr key={c.id || i} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                          <td style={{ padding: '12px 16px' }}><span style={{ padding: '4px 10px', background: 'rgba(99,102,241,0.1)', color: '#6366f1', borderRadius: '6px', fontSize: '0.8rem', fontWeight: '700' }}>{c.code}</span></td>
+                          <td style={{ padding: '12px 16px', fontWeight: '600', color: 'var(--color-text)' }}>{c.name}</td>
+                          <td style={{ padding: '12px 16px' }}><span style={{ padding: '4px 10px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '6px', fontSize: '0.8rem', fontWeight: '700' }}>{c.sks} SKS</span></td>
+                        </tr>
+                      ))}
+                      <tr style={{ background: 'rgba(0,0,0,0.02)' }}>
+                        <td colSpan="2" style={{ padding: '12px 16px', fontWeight: '700', color: 'var(--color-text)', textAlign: 'right' }}>Total SKS:</td>
+                        <td style={{ padding: '12px 16px' }}>
+                          <span style={{ padding: '6px 14px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', borderRadius: '8px', fontWeight: '800', fontSize: '1rem' }}>
+                            {(selectedSub.courses || []).reduce((acc, c) => acc + (parseInt(c.sks) || 0), 0)} SKS
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-              )}
+
+                {/* Notes */}
+                <div style={{ marginBottom: '24px' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
+                    <i className="ph ph-note-pencil" style={{ color: '#f59e0b' }}></i> Catatan Dosen Wali
+                    {selectedSub.status === 'rejected' && <span style={{ fontWeight: '400', color: '#ef4444', fontSize: '0.8rem' }}>* Wajib diisi saat menolak</span>}
+                  </label>
+                  <textarea value={notes} onChange={e => setNotes(e.target.value)}
+                    placeholder={selectedSub.status === 'pending' ? 'Berikan catatan revisi jika KRS akan ditolak...' : (notes || 'Tidak ada catatan.')}
+                    rows="3" disabled={selectedSub.status !== 'pending'}
+                    style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: selectedSub.status !== 'pending' ? 'var(--glass-bg)' : 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }}></textarea>
+                </div>
+
+                {/* Action Buttons */}
+                {selectedSub.status === 'pending' && (
+                  <div style={{ display: 'flex', gap: '12px' }}>
+                    <button onClick={() => handleAction('approved')} disabled={processing}
+                      style={{ flex: 1, padding: '14px', background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', borderRadius: '12px', border: 'none', cursor: processing ? 'not-allowed' : 'pointer', fontWeight: '800', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 8px 20px rgba(16,185,129,0.3)', transition: 'all 0.2s' }}>
+                      <i className="ph ph-check-circle" style={{ fontSize: '1.2rem' }}></i> Setujui KRS
+                    </button>
+                    <button onClick={() => handleAction('rejected')} disabled={processing || !notes.trim()}
+                      style={{ flex: 1, padding: '14px', background: (!notes.trim() || processing) ? 'var(--color-border)' : 'linear-gradient(135deg, #ef4444, #dc2626)', color: (!notes.trim() || processing) ? 'var(--color-muted)' : 'white', borderRadius: '12px', border: 'none', cursor: (!notes.trim() || processing) ? 'not-allowed' : 'pointer', fontWeight: '800', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: (!notes.trim() || processing) ? 'none' : '0 8px 20px rgba(239,68,68,0.3)', transition: 'all 0.2s' }}
+                      title={!notes.trim() ? 'Isi catatan terlebih dahulu untuk menolak KRS' : ''}>
+                      <i className="ph ph-x-circle" style={{ fontSize: '1.2rem' }}></i>
+                      {!notes.trim() ? 'Isi Catatan Dulu' : 'Tolak & Minta Revisi'}
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           ) : (
-            <div className="siakad-card p-10" style={{ textAlign: 'center', color: 'var(--color-muted)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
-              <i className="ph ph-check-square-offset" style={{ fontSize: '4rem', opacity: 0.5 }}></i>
-              <p>Pilih mahasiswa dari daftar di samping untuk melihat dan memvalidasi KRS mereka.</p>
+            <div className="siakad-card stagger-2" style={{ padding: '80px 40px', textAlign: 'center', color: 'var(--color-muted)' }}>
+              <i className="ph ph-check-square-offset" style={{ fontSize: '5rem', display: 'block', marginBottom: '16px', opacity: 0.25 }}></i>
+              <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)' }}>Pilih Mahasiswa</h3>
+              <p style={{ margin: 0 }}>Pilih mahasiswa dari daftar di samping untuk melihat detail KRS dan melakukan validasi.</p>
             </div>
           )}
         </div>
