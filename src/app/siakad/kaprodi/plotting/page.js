@@ -67,13 +67,13 @@ export default function KaprodiPlotting() {
         body: JSON.stringify({ dosen_id: dosenId })
       });
       if (res.ok) {
-        alert('Dosen berhasil di-assign ke mata kuliah ini!');
+        window.toast('Dosen berhasil di-assign ke mata kuliah ini!');
         fetchData();
       } else {
-        alert('Gagal assign dosen');
+        window.toast('Gagal assign dosen');
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     } finally {
       setAssigningId(null);
     }
@@ -98,14 +98,14 @@ export default function KaprodiPlotting() {
         })
       });
       if (res.ok) {
-        alert('Jadwal dan Ruangan berhasil disimpan permanen ke database!');
+        window.toast('Jadwal dan Ruangan berhasil disimpan permanen ke database!');
         fetchData();
       } else {
         const errData = await res.json();
-        alert('Gagal simpan jadwal: ' + JSON.stringify(errData));
+        window.toast('Gagal simpan jadwal: ' + JSON.stringify(errData));
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     } finally {
       setShowScheduleModal(false);
     }

@@ -42,7 +42,7 @@ export default function ProfilePage() {
     const current_password = form.get('current_password');
 
     if (password !== confirm) {
-      return alert('Password tidak sama!');
+      return window.toast('Password tidak sama!');
     }
 
     try {
@@ -56,14 +56,14 @@ export default function ProfilePage() {
       });
 
       if (res.ok) {
-        alert('Password berhasil diperbarui!');
+        window.toast('Password berhasil diperbarui!');
         e.target.reset();
       } else {
         const err = await res.json();
-        alert('Gagal: ' + (err.message || 'Server Error'));
+        window.toast('Gagal: ' + (err.message || 'Server Error'));
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     }
   };
 
@@ -86,13 +86,13 @@ export default function ProfilePage() {
       if (res.ok) {
         const result = await res.json();
         setUser(result.user);
-        alert('Profil berhasil diperbarui!');
+        window.toast('Profil berhasil diperbarui!');
       } else {
         const err = await res.json();
-        alert('Gagal: ' + (err.message || 'Server Error'));
+        window.toast('Gagal: ' + (err.message || 'Server Error'));
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     }
   };
 
@@ -117,12 +117,12 @@ export default function ProfilePage() {
       if (res.ok) {
         const result = await res.json();
         setUser({ ...user, avatar_url: result.avatar_url });
-        alert('Foto profil berhasil diperbarui!');
+        window.toast('Foto profil berhasil diperbarui!');
       } else {
-        alert('Gagal mengunggah foto profil.');
+        window.toast('Gagal mengunggah foto profil.');
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     }
   };
 

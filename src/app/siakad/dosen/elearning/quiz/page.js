@@ -50,13 +50,13 @@ export default function DosenQuizCreate() {
       });
 
       if (res.ok) {
-        alert('Kuis berhasil dibuat dan diterbitkan ke mahasiswa!');
+        window.toast('Kuis berhasil dibuat dan diterbitkan ke mahasiswa!');
         router.push('/siakad/dosen/elearning');
       } else {
-        alert('Gagal membuat kuis.');
+        window.toast('Gagal membuat kuis.');
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     } finally {
       setLoading(false);
     }

@@ -21,7 +21,7 @@ export default function AdminPengaturan() {
   const handleSave = () => {
     localStorage.setItem('siakad_krs_open', krsOpen);
     localStorage.setItem('siakad_semester', semester);
-    alert('Pengaturan sistem berhasil disimpan permanen!');
+    window.toast('Pengaturan sistem berhasil disimpan permanen!');
   };
 
   const semesterOptions = [

@@ -54,16 +54,16 @@ export default function AdminUsersPage() {
         body: JSON.stringify(body)
       });
       if (res.ok) {
-        alert('User created successfully');
+        window.toast('User created successfully');
         e.target.reset();
         setSelectedRole("mahasiswa");
         setSelectedProdi("");
         fetchUsers();
       } else {
-        alert('Failed to create user');
+        window.toast('Failed to create user');
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     }
   };
 
@@ -80,10 +80,10 @@ export default function AdminUsersPage() {
       if (res.ok) {
         fetchUsers();
       } else {
-        alert('Failed to delete user');
+        window.toast('Failed to delete user');
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     }
   };
 
@@ -125,10 +125,10 @@ export default function AdminUsersPage() {
         fetchUsers();
       } else {
         const errorData = await res.json();
-        alert('Gagal mengupdate user: ' + (errorData.message || 'Error'));
+        window.toast('Gagal mengupdate user: ' + (errorData.message || 'Error'));
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     }
   };
 

@@ -124,10 +124,10 @@ export default function DosenGradebookPage() {
 
       await Promise.all(promises);
       await fetchDashboard();
-      alert('Berhasil menyimpan nilai untuk mata kuliah ini!');
+      window.toast('Berhasil menyimpan nilai untuk mata kuliah ini!');
     } catch (err) {
       console.error(err);
-      alert('Gagal menyimpan nilai.');
+      window.toast('Gagal menyimpan nilai.');
     } finally {
       setSavingGrades(false);
     }

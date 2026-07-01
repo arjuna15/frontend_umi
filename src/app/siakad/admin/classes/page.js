@@ -72,14 +72,14 @@ export default function AdminClassesPage() {
         body: JSON.stringify(body)
       });
       if (res.ok) {
-        alert('Course created successfully');
+        window.toast('Course created successfully');
         e.target.reset();
         fetchCourses();
       } else {
-        alert('Failed to create course');
+        window.toast('Failed to create course');
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     }
   };
 
@@ -96,10 +96,10 @@ export default function AdminClassesPage() {
       if (res.ok) {
         fetchCourses();
       } else {
-        alert('Failed to delete course');
+        window.toast('Failed to delete course');
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     }
   };
 
@@ -140,10 +140,10 @@ export default function AdminClassesPage() {
         fetchCourses();
       } else {
         const errorData = await res.json();
-        alert('Gagal mengupdate mata kuliah: ' + (errorData.message || 'Error'));
+        window.toast('Gagal mengupdate mata kuliah: ' + (errorData.message || 'Error'));
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     }
   };
 

@@ -42,7 +42,7 @@ export default function MahasiswaPresensi() {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
-        alert('Kehadiran berhasil dicatat!');
+        window.toast('Kehadiran berhasil dicatat!');
         fetchPresensi();
       }
     } catch (err) {

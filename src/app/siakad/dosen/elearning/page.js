@@ -122,10 +122,10 @@ export default function DosenElearningPage() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                    <button onClick={() => alert('Simulasi: Berhasil membuka dialog upload materi!')} style={{ background: 'var(--color-border)', border: '1px solid #d1d5db', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <button onClick={() => window.toast('Simulasi: Berhasil membuka dialog upload materi!')} style={{ background: 'var(--color-border)', border: '1px solid #d1d5db', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <i className="ph ph-upload-simple"></i> Upload
                     </button>
-                    <button onClick={() => alert('Simulasi: Berhasil membuka pengaturan Link Meet!')} style={{ background: 'var(--color-border)', border: '1px solid #d1d5db', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <button onClick={() => window.toast('Simulasi: Berhasil membuka pengaturan Link Meet!')} style={{ background: 'var(--color-border)', border: '1px solid #d1d5db', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <i className="ph ph-video-camera"></i> Link Meet
                     </button>
                   </div>

@@ -121,13 +121,13 @@ export default function ElearningPage() {
                                   body: formData,
                                 });
                                 if (res.ok) {
-                                  alert('Tugas berhasil dikumpulkan!');
+                                  window.toast('Tugas berhasil dikumpulkan!');
                                   window.location.reload();
                                 } else {
-                                  alert('Gagal mengumpulkan tugas');
+                                  window.toast('Gagal mengumpulkan tugas');
                                 }
                               } catch (err) {
-                                alert('Error: ' + err.message);
+                                window.toast('Error: ' + err.message);
                               }
                             }}
                             style={{ display: 'flex', gap: '8px', alignItems: 'center' }}

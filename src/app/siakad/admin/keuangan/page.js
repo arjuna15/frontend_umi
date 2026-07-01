@@ -108,7 +108,7 @@ export default function AdminKeuangan() {
       closeModal();
       fetchData();
     } catch (error) {
-      alert('Terjadi kesalahan: ' + error.message);
+      window.toast('Terjadi kesalahan: ' + error.message);
     }
   };
 
@@ -127,7 +127,7 @@ export default function AdminKeuangan() {
         
         fetchData();
       } catch (error) {
-        alert('Gagal menghapus tagihan');
+        window.toast('Gagal menghapus tagihan');
       }
     }
   };

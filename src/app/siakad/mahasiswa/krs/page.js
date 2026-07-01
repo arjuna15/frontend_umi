@@ -67,7 +67,7 @@ export default function KRSPage() {
 
   const handleSubmit = async () => {
     if (selectedCourses.length === 0) {
-      alert('Pilih minimal satu mata kuliah!');
+      window.toast('Pilih minimal satu mata kuliah!');
       return;
     }
     
@@ -91,13 +91,13 @@ export default function KRSPage() {
       });
 
       if (res.ok) {
-        alert('KRS berhasil diajukan! Menunggu persetujuan Kaprodi.');
+        window.toast('KRS berhasil diajukan! Menunggu persetujuan Kaprodi.');
         fetchDashboard();
       } else {
-        alert('Gagal mengajukan KRS');
+        window.toast('Gagal mengajukan KRS');
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     } finally {
       setIsSubmitting(false);
     }

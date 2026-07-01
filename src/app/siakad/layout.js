@@ -4,6 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
+import { ToastContainer } from './components/Toast';
 import './siakad.css';
 
 export default function SiakadLayout({ children }) {
@@ -62,6 +63,7 @@ export default function SiakadLayout({ children }) {
 
   return (
     <div className="siakad-container">
+      <ToastContainer />
       {/* Animated Background Blobs */}
       <div className="siakad-bg-shapes">
         <div className="siakad-blob siakad-blob-1"></div>

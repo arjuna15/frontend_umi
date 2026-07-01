@@ -74,8 +74,8 @@ export default function MahasiswaForumPage() {
                       body: JSON.stringify({ title, content })
                     });
                     if (res.ok) window.location.reload();
-                    else alert('Gagal membuat topik');
-                  } catch (err) { alert('Error: ' + err.message); }
+                    else window.toast('Gagal membuat topik');
+                  } catch (err) { window.toast('Error: ' + err.message); }
                 }} style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)' }}>
                   <i className="ph ph-plus"></i> Buat Topik Baru
                 </button>
@@ -123,8 +123,8 @@ export default function MahasiswaForumPage() {
                                 body: JSON.stringify({ content })
                               });
                               if (res.ok) window.location.reload();
-                              else alert('Gagal mengirim balasan');
-                            } catch (err) { alert('Error: ' + err.message); }
+                              else window.toast('Gagal mengirim balasan');
+                            } catch (err) { window.toast('Error: ' + err.message); }
                           }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
                             <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, padding: '8px 12px', borderRadius: '6px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }} />
                             <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Kirim</button>

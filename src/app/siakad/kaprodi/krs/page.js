@@ -62,13 +62,13 @@ export default function KaprodiKrs() {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
-        alert('KRS berhasil disetujui!');
+        window.toast('KRS berhasil disetujui!');
         fetchData(); // reload
       } else {
-        alert('Gagal menyetujui KRS');
+        window.toast('Gagal menyetujui KRS');
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     }
   };
 
@@ -82,13 +82,13 @@ export default function KaprodiKrs() {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
-        alert('KRS berhasil ditolak!');
+        window.toast('KRS berhasil ditolak!');
         fetchData(); // reload
       } else {
-        alert('Gagal menolak KRS');
+        window.toast('Gagal menolak KRS');
       }
     } catch (err) {
-      alert('Error: ' + err.message);
+      window.toast('Error: ' + err.message);
     }
   };
 

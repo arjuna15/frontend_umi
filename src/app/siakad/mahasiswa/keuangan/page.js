@@ -40,10 +40,10 @@ export default function KeuanganPage() {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
-        alert('Pembayaran berhasil dikonfirmasi (Simulasi).');
+        window.toast('Pembayaran berhasil dikonfirmasi (Simulasi).');
         fetchDashboard();
       } else {
-        alert('Gagal memproses pembayaran');
+        window.toast('Gagal memproses pembayaran');
       }
     } catch (err) {
       console.error(err);
