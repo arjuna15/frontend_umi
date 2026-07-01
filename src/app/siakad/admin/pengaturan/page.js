@@ -74,7 +74,7 @@ export default function AdminPengaturan() {
         </div>
       </div>
 
-      <div className="siakad-card stagger-1" style={{ width: '90%', maxWidth: '650px', maxHeight: '90vh', overflowY: 'auto', padding: '32px' }}>
+      <div className="siakad-card stagger-1" style={{ padding: '32px' }}>
         
         {/* Section 1: Periode Akademik */}
         <div style={{ marginBottom: '32px' }}>
@@ -121,7 +121,7 @@ export default function AdminPengaturan() {
                 <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Buka akses bagi mahasiswa untuk mulai memilih <br/>mata kuliah semester ini.</div>
               </div>
               
-              <div onClick={() => setKrsOpen(!krsOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: krsOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
+              <div onClick={() => setKrsOpen(!krsOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: krsOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease', flexShrink: 0 }}>
                 <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: krsOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' , flexShrink: 0 }} />
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function AdminPengaturan() {
                 <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Izinkan mahasiswa melihat dan mencetak Kartu<br/>Hasil Studi (KHS).</div>
               </div>
               
-              <div onClick={() => setKhsOpen(!khsOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: khsOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
+              <div onClick={() => setKhsOpen(!khsOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: khsOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease', flexShrink: 0 }}>
                 <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: khsOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' , flexShrink: 0 }} />
               </div>
             </div>
@@ -151,7 +151,7 @@ export default function AdminPengaturan() {
                 <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Buka portal bagi dosen untuk memasukkan dan<br/>mengubah nilai mahasiswa.</div>
               </div>
               
-              <div onClick={() => setNilaiOpen(!nilaiOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: nilaiOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
+              <div onClick={() => setNilaiOpen(!nilaiOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: nilaiOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease', flexShrink: 0 }}>
                 <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: nilaiOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' , flexShrink: 0 }} />
               </div>
             </div>
