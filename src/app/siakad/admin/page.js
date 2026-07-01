@@ -53,7 +53,7 @@ export default function AdminDashboard() {
     <div>
       <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Panel Administrator 🛡️</h1>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Panel Administrator</h1>
           <p style={{ color: 'var(--color-muted)', margin: 0 }}>Kelola pengguna, kelas, dan pantau aktivitas akademik.</p>
         </div>
       </div>

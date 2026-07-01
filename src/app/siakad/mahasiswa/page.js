@@ -55,7 +55,7 @@ export default function MahasiswaDashboard() {
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Halo, {data.user.name.split(' ')[0]}! 👋</h1>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Halo, {data.user.name.split(' ')[0]}!</h1>
         <p style={{ color: 'var(--color-muted)', margin: 0 }}>Selamat datang kembali di Portal Akademik Anda.</p>
       </div>
 

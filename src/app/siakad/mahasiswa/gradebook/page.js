@@ -51,13 +51,13 @@ export default function MahasiswaGradebook() {
   return (
     <div>
       <div style={{ marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '2.2rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Rapor & Transkrip 🎓</h1>
+        <h1 style={{ fontSize: '2.2rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Rapor & Transkrip</h1>
         <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '1.05rem' }}>Detail evaluasi akademik semester ini, dari tugas harian hingga UAS.</p>
       </div>
 
       <div style={{ display: 'flex', gap: '20px', marginBottom: '32px', flexWrap: 'wrap' }}>
         <div className="siakad-card" style={{ flex: '1 1 200px', padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', background: 'var(--glass-bg)', color: 'var(--color-text)' }}>
-          <div style={{ width: '60px', height: '60px', background: 'rgba(79, 70, 229, 0.15)', color: '#4f46e5', border: '1px solid rgba(79, 70, 229, 0.2)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
+          <div style={{ width: '60px', height: '60px', background: 'var(--glass-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
             <i className="ph ph-medal"></i>
           </div>
           <div>

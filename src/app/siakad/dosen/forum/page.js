@@ -40,7 +40,7 @@ export default function DosenForumPage() {
     <div>
       <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Forum Diskusi Kelas 💬</h1>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Forum Diskusi Kelas</h1>
           <p style={{ color: 'var(--color-muted)', margin: 0 }}>Berinteraksi dan jawab pertanyaan mahasiswa secara real-time.</p>
         </div>
       </div>

@@ -118,7 +118,7 @@ export default function KRSPage() {
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>KRS Online 📝</h1>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>KRS Online</h1>
         <p style={{ color: 'var(--color-muted)', margin: 0 }}>Pilih dan ajukan mata kuliah untuk semester ini.</p>
       </div>
 

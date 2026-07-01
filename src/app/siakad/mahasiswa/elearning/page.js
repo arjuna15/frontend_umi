@@ -46,7 +46,7 @@ export default function ElearningPage() {
   return (
     <div>
       <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>E-Learning & Ruang Kelas 📚</h1>
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>E-Learning & Ruang Kelas</h1>
         <p style={{ color: 'var(--color-muted)', margin: 0 }}>Akses materi kuliah dan kumpulkan tugas Anda dari dosen.</p>
       </div>
 
