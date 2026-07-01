@@ -63,8 +63,8 @@ export default function AdminPengaturan() {
         background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
         borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
       }}>
-        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
-        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' , flexShrink: 0 }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' , flexShrink: 0 }}></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
           <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -122,7 +122,7 @@ export default function AdminPengaturan() {
               </div>
               
               <div onClick={() => setKrsOpen(!krsOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: krsOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
-                <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: krsOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }} />
+                <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: krsOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' , flexShrink: 0 }} />
               </div>
             </div>
 
@@ -137,7 +137,7 @@ export default function AdminPengaturan() {
               </div>
               
               <div onClick={() => setKhsOpen(!khsOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: khsOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
-                <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: khsOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }} />
+                <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: khsOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' , flexShrink: 0 }} />
               </div>
             </div>
 
@@ -152,7 +152,7 @@ export default function AdminPengaturan() {
               </div>
               
               <div onClick={() => setNilaiOpen(!nilaiOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: nilaiOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
-                <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: nilaiOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }} />
+                <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: nilaiOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' , flexShrink: 0 }} />
               </div>
             </div>
           </div>

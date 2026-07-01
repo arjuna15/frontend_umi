@@ -66,21 +66,21 @@ export default function KrsApprovalPage() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       {/* Hero Header */}
       <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)', borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '220px', height: '220px', borderRadius: '50%', background: 'rgba(196,30,58,0.25)', filter: 'blur(50px)', pointerEvents: 'none' }}></div>
-        <div style={{ position: 'absolute', bottom: '-20px', left: '20%', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(99,102,241,0.2)', filter: 'blur(40px)', pointerEvents: 'none' }}></div>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '220px', height: '220px', borderRadius: '50%', background: 'rgba(196,30,58,0.25)', filter: 'blur(50px)', pointerEvents: 'none' , flexShrink: 0 }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '20%', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(99,102,241,0.2)', filter: 'blur(40px)', pointerEvents: 'none' , flexShrink: 0 }}></div>
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
-          <div>
+          <div style={{ flex: '1 1 300px' }}>
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', margin: '0 0 8px 0', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: '600' }}>SIAKAD — DOSEN WALI</p>
             <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Persetujuan KRS Mahasiswa</h1>
             <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Validasi rencana studi mahasiswa bimbingan Anda untuk semester ini.</p>
           </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', flex: '1 1 300px', justifyContent: 'center' }}>
             {[
               { label: 'Total Mahasiswa', value: submissions.length, icon: 'ph-users', color: '#6366f1' },
               { label: 'Menunggu', value: pendingCount, icon: 'ph-clock', color: '#f59e0b' },
               { label: 'Disetujui', value: submissions.filter(s=>s.status==='approved').length, icon: 'ph-check-circle', color: '#10b981' },
             ].map((s, i) => (
-              <div key={i} style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: `1px solid ${pendingCount > 0 && s.icon === 'ph-clock' ? 'rgba(245,158,11,0.5)' : 'rgba(255,255,255,0.15)'}` }}>
+              <div key={i} style={{ flex: '1 1 90px', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: `1px solid ${pendingCount > 0 && s.icon === 'ph-clock' ? 'rgba(245,158,11,0.5)' : 'rgba(255,255,255,0.15)'}` }}>
                 <i className={`ph ${s.icon}`} style={{ fontSize: '1.3rem', color: s.color, display: 'block', marginBottom: '4px' }}></i>
                 <p style={{ color: 'white', fontWeight: '800', fontSize: '1.5rem', margin: '0 0 2px 0' }}>{s.value}</p>
                 <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.65rem', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.label}</p>

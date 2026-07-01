@@ -48,8 +48,8 @@ export default function DosenDashboard() {
         background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
         borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
       }}>
-        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '250px', height: '250px', borderRadius: '50%', background: 'rgba(196,30,58,0.2)', filter: 'blur(50px)', pointerEvents: 'none' }}></div>
-        <div style={{ position: 'absolute', bottom: '-30px', left: '20%', width: '180px', height: '180px', borderRadius: '50%', background: 'rgba(99,102,241,0.2)', filter: 'blur(40px)', pointerEvents: 'none' }}></div>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '250px', height: '250px', borderRadius: '50%', background: 'rgba(196,30,58,0.2)', filter: 'blur(50px)', pointerEvents: 'none' , flexShrink: 0 }}></div>
+        <div style={{ position: 'absolute', bottom: '-30px', left: '20%', width: '180px', height: '180px', borderRadius: '50%', background: 'rgba(99,102,241,0.2)', filter: 'blur(40px)', pointerEvents: 'none' , flexShrink: 0 }}></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', margin: '0 0 8px 0', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: '600' }}>SIAKAD — PORTAL DOSEN</p>
           <h1 style={{ color: 'white', fontSize: '2.4rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>

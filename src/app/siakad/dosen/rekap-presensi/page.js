@@ -51,8 +51,8 @@ export default function RekapPresensiPage() {
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       {/* Hero Header */}
       <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)', borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '220px', height: '220px', borderRadius: '50%', background: 'rgba(16,185,129,0.25)', filter: 'blur(50px)', pointerEvents: 'none' }}></div>
-        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.2)', filter: 'blur(40px)', pointerEvents: 'none' }}></div>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '220px', height: '220px', borderRadius: '50%', background: 'rgba(16,185,129,0.25)', filter: 'blur(50px)', pointerEvents: 'none' , flexShrink: 0 }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.2)', filter: 'blur(40px)', pointerEvents: 'none' , flexShrink: 0 }}></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', margin: '0 0 8px 0', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: '600' }}>SIAKAD — DOSEN</p>
           <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Rekap Kehadiran Mahasiswa</h1>
@@ -65,7 +65,7 @@ export default function RekapPresensiPage() {
                 { label: 'Berisiko (<75%)', value: atRisk, icon: 'ph-warning-circle', color: '#ef4444' },
                 { label: 'Total Pertemuan', value: selectedCourse.total_meetings || 0, icon: 'ph-calendar', color: '#f59e0b' },
               ].map((s, i) => (
-                <div key={i} style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '14px', padding: '14px 18px', display: 'flex', alignItems: 'center', gap: '10px', border: '1px solid rgba(255,255,255,0.15)' }}>
+                <div key={i} style={{ flex: '1 1 90px', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '14px', padding: '14px 18px', display: 'flex', alignItems: 'center', gap: '10px', border: '1px solid rgba(255,255,255,0.15)' }}>
                   <i className={`ph ${s.icon}`} style={{ fontSize: '1.2rem', color: s.color }}></i>
                   <div>
                     <p style={{ color: 'white', fontWeight: '800', fontSize: '1.3rem', margin: 0, lineHeight: 1 }}>{s.value}</p>

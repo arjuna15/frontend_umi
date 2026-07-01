@@ -147,7 +147,7 @@ export default function SiakadLayout({ children }) {
               , flexShrink: 0 }}
             >
               <i className="ph ph-bell" style={{ fontSize: '1.2rem' }}></i>
-              <span style={{ position: 'absolute', top: 0, right: '2px', background: '#ef4444', border: '2px solid var(--color-bg)', borderRadius: '50%', width: '12px', height: '12px' }}></span>
+              <span style={{ position: 'absolute', top: 0, right: '2px', background: '#ef4444', border: '2px solid var(--color-bg)', borderRadius: '50%', width: '12px', height: '12px' , flexShrink: 0 }}></span>
             </button>
             
             <AnimatePresence>
