@@ -120,7 +120,7 @@ export default function DosenPresensiPage() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
         {data.jadwal.map((course, i) => (
           <div key={i} className={`siakad-card stagger-${(i % 5) + 1}`}>
-            <div style={{ background: 'linear-gradient(90deg, rgba(236,253,245,0.8) 0%, rgba(255,255,255,0) 100%)', padding: '24px 32px', borderBottom: '1px solid rgba(209, 213, 219, 0.3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ background: 'var(--glass-bg)', padding: '24px 32px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', right: '-20px', top: '-20px', fontSize: '10rem', color: 'rgba(16, 185, 129, 0.03)', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
                 <i className="ph ph-calendar-check"></i>
               </div>

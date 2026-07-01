@@ -53,7 +53,7 @@ export default function ElearningPage() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
         {data.krs.map((item, i) => (
           <div key={i} className={`siakad-card stagger-${(i % 5) + 1}`}>
-            <div style={{ background: 'linear-gradient(90deg, rgba(238,242,255,0.7) 0%, rgba(255,255,255,0) 100%)', padding: '24px 32px', borderBottom: '1px solid rgba(199,210,254,0.3)', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ background: 'var(--glass-bg)', padding: '24px 32px', borderBottom: '1px solid var(--color-border)', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', right: '-20px', top: '-20px', fontSize: '10rem', color: 'rgba(99,102,241,0.03)', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
                 <i className="ph ph-laptop"></i>
               </div>

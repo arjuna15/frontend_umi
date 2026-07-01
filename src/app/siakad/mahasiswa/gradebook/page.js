@@ -56,7 +56,7 @@ export default function MahasiswaGradebook() {
       </div>
 
       <div style={{ display: 'flex', gap: '20px', marginBottom: '32px', flexWrap: 'wrap' }}>
-        <div className="siakad-card" style={{ flex: '1 1 200px', padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', background: 'linear-gradient(135deg, #1e293b, #0f172a)', color: 'white' }}>
+        <div className="siakad-card" style={{ flex: '1 1 200px', padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', background: 'var(--glass-bg)', color: 'var(--color-text)' }}>
           <div style={{ width: '60px', height: '60px', background: 'rgba(255, 255, 255, 0.15)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
             <i className="ph ph-medal"></i>
           </div>
@@ -107,12 +107,15 @@ export default function MahasiswaGradebook() {
                   <td style={{ padding: '16px 24px', textAlign: 'center', fontWeight: 'bold' }}>{item.akhir}</td>
                   <td style={{ padding: '16px 24px', textAlign: 'center' }}>
                     <span className="siakad-badge" style={{
-                      background: item.huruf === 'A' ? '#ecfdf5' : 
-                                 item.huruf === 'B' ? '#eff6ff' : 
-                                 item.huruf === 'C' ? '#fef9c3' : '#fef2f2',
-                      color: item.huruf === 'A' ? '#059669' : 
-                             item.huruf === 'B' ? '#2563eb' : 
-                             item.huruf === 'C' ? '#ca8a04' : '#dc2626',
+                      background: item.huruf === 'A' ? 'rgba(16, 185, 129, 0.15)' : 
+                                 item.huruf === 'B' ? 'rgba(59, 130, 246, 0.15)' : 
+                                 item.huruf === 'C' ? 'rgba(234, 179, 8, 0.15)' : 
+                                 item.huruf === 'D' ? 'rgba(249, 115, 22, 0.15)' : 'rgba(239, 68, 68, 0.15)',
+                      color: item.huruf === 'A' ? '#10b981' : 
+                             item.huruf === 'B' ? '#3b82f6' : 
+                             item.huruf === 'C' ? '#eab308' : 
+                             item.huruf === 'D' ? '#f97316' : '#ef4444',
+                      fontWeight: 'bold',
                       fontSize: '1rem',
                       padding: '4px 16px'
                     }}>
