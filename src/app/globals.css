@@ -357,6 +357,7 @@ p { margin-bottom: var(--space-3); color: var(--color-muted); font-size: 1.05rem
   font-weight: 600; font-size: 1rem;
   transition: all var(--duration) var(--ease);
   cursor: pointer; text-decoration: none; border: none;
+  white-space: nowrap;
 }
 .btn-primary {
   background: var(--umiba-red);
