@@ -172,15 +172,15 @@ export default function AdminClassesPage() {
         <form onSubmit={handleCreateCourse} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Kode Mata Kuliah</label>
-            <input name="code" required placeholder="Contoh: CS101..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input name="code" required placeholder="Contoh: CS101..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' , minWidth: 0, flex: '1 1 120px'}} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Mata Kuliah</label>
-            <input name="name" required placeholder="Algoritma & Pemrograman..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input name="name" required placeholder="Algoritma & Pemrograman..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' , minWidth: 0, flex: '1 1 120px'}} />
           </div>
           <div style={{ flex: '1 1 120px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jumlah SKS</label>
-            <input type="number" name="sks" required min="1" max="6" placeholder="SKS..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input type="number" name="sks" required min="1" max="6" placeholder="SKS..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' , minWidth: 0, flex: '1 1 120px'}} />
           </div>
           <div style={{ flex: '1 1 200px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Dosen Pengampu</label>
@@ -202,7 +202,7 @@ export default function AdminClassesPage() {
           </div>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Prasyarat</label>
-            <input name="prasyarat" placeholder="Kode MK (Opsional)..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input name="prasyarat" placeholder="Kode MK (Opsional)..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' , minWidth: 0, flex: '1 1 120px'}} />
           </div>
           <div>
             <button type="submit" style={{ background: '#10b981', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.2)' }}>

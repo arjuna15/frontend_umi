@@ -96,11 +96,11 @@ export default function MahasiswaGradebook() {
       <div className="siakad-card" style={{ overflow: 'hidden' }}>
         <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--color-border)', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Rincian Nilai Mata Kuliah</h3>
-          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', flex: '1 1 100%' }}>
             <select 
               value={semesterFilter} 
               onChange={e => setSemesterFilter(e.target.value)}
-              style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
+              style={{ flex: '1 1 150px', minWidth: 0, padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
             >
               <option value="Semua">Semua Semester</option>
               <option value="Ganjil 2026/2027">Ganjil 2026/2027</option>
@@ -111,7 +111,7 @@ export default function MahasiswaGradebook() {
               placeholder="Cari mata kuliah..." 
               value={search}
               onChange={e => setSearch(e.target.value)}
-              style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
+              style={{ flex: '1 1 150px', minWidth: 0, padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
             />
             <button onClick={() => window.print()} style={{ background: '#0f172a', border: 'none', padding: '8px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(15, 23, 42, 0.2)' }}>
               <i className="ph ph-printer"></i> Cetak Transkrip

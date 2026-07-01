@@ -138,7 +138,7 @@ export default function KaprodiMonitoring() {
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {selectedCourse.attendances.map((att, idx) => (
-                    <div key={idx} style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: '12px', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div key={idx} style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: '12px', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
                       <div>
                         <div style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '4px' }}>Pertemuan ke-{idx + 1}</div>
                         <div style={{ color: 'var(--color-muted)', fontSize: '0.85rem' }}>Tanggal: {new Date(att.created_at || Date.now()).toLocaleDateString('id-ID')}</div>

@@ -179,7 +179,7 @@ export default function AdminPengaturan() {
                 defaultValue={coordBintaro}
                 key={`bintaro-${coordBintaro}`}
                 id="coordBintaro"
-                style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem' }}
+                style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem' , minWidth: 0, flex: '1 1 120px'}}
               />
             </div>
             <div>
@@ -189,7 +189,7 @@ export default function AdminPengaturan() {
                 defaultValue={coordPasarMinggu}
                 key={`pm-${coordPasarMinggu}`}
                 id="coordPasarMinggu"
-                style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem' }}
+                style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem' , minWidth: 0, flex: '1 1 120px'}}
               />
             </div>
           </div>

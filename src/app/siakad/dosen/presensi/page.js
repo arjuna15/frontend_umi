@@ -189,7 +189,7 @@ export default function DosenPresensiPage() {
               </div>
               <div>
                 <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Mode Kelas</label>
-                <select id="meetingMode" defaultValue="Online" style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none', fontSize: '1rem', background: 'var(--color-bg)', color: 'var(--color-text)' }}>
+                <select id="meetingMode" defaultValue="Online" style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none', fontSize: '1rem', background: 'var(--color-bg)', color: 'var(--color-text)' , minWidth: 0, flex: '1 1 120px'}}>
                   <option value="Online">Online</option>
                   <option value="Bintaro">Offline - Kampus Bintaro</option>
                   <option value="Pasar Minggu">Offline - Kampus Ps. Minggu</option>
@@ -213,7 +213,7 @@ export default function DosenPresensiPage() {
                 <h3 style={{ margin: '0 0 4px 0', fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)' }}>Input Presensi</h3>
                 <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>Pertemuan ke-{selectedAttendance.meeting_number} • {selectedAttendance.date}</p>
               </div>
-              <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+              <div style={{ display: 'flex', gap: '12px', alignItems: 'center' , flexWrap: 'wrap' }}>
                 <div style={{ position: 'relative' }}>
                   <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
                   <input 

@@ -127,7 +127,7 @@ export default function MahasiswaDashboard() {
             {dashboardExt.schedule_today?.length > 0 ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {dashboardExt.schedule_today.map((schedule, idx) => (
-                  <div key={idx} style={{ padding: '16px', background: 'var(--glass-bg)', borderLeft: '4px solid #1e1b4b', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div key={idx} style={{ padding: '16px', background: 'var(--glass-bg)', borderLeft: '4px solid #1e1b4b', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
                     <div>
                       <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', color: 'var(--color-text)' }}>{schedule.course}</h4>
                       <div style={{ display: 'flex', gap: '12px', fontSize: '0.85rem', color: 'var(--color-text)' }}>

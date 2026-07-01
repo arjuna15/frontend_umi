@@ -159,15 +159,15 @@ export default function AdminUsersPage() {
         <form onSubmit={handleCreateUser} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Lengkap</label>
-            <input name="name" required placeholder="Masukkan nama..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input name="name" required placeholder="Masukkan nama..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' , minWidth: 0, flex: '1 1 120px'}} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>NIM / NIP</label>
-            <input name="nim_nip" required placeholder="Masukkan NIM/NIP..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input name="nim_nip" required placeholder="Masukkan NIM/NIP..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' , minWidth: 0, flex: '1 1 120px'}} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Password</label>
-            <input type="password" name="password" required placeholder="Min. 6 karakter..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input type="password" name="password" required placeholder="Min. 6 karakter..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' , minWidth: 0, flex: '1 1 120px'}} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Role</label>

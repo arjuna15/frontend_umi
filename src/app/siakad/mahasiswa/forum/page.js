@@ -92,7 +92,7 @@ export default function MahasiswaForumPage() {
             const course = item.course;
             return (
               <div key={i} className="siakad-card" style={{ overflow: 'hidden' }}>
-                <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
                   <div>
                     <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
                   <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>{course.code}</span>
@@ -144,7 +144,7 @@ export default function MahasiswaForumPage() {
                           <h4 style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Balasan ({forum.replies?.length || 0})</h4>
                           {forum.replies && forum.replies.map((reply, k) => (
                             <div key={k} style={{ marginBottom: k === forum.replies.length - 1 ? 0 : '12px', paddingBottom: k === forum.replies.length - 1 ? 0 : '12px', borderBottom: k === forum.replies.length - 1 ? 'none' : '1px solid var(--color-border)' }}>
-                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
                                 <strong style={{ fontSize: '0.85rem', color: 'var(--color-text)', display: 'block' }}>
                                   {reply.user_id === data.user.id ? 'Anda' : (reply.user_id === course.dosen_id ? 'Dosen' : 'Mahasiswa Lain')}
                                 </strong>

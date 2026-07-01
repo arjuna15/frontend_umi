@@ -141,7 +141,7 @@ export default function JadwalPage() {
                           </select>
                         </td>
                         <td style={{ padding: '12px 16px' }}>
-                          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' , flexWrap: 'wrap' }}>
                             <input type="time" value={formData.start_time} onChange={e => setFormData({...formData, start_time: e.target.value})}
                               style={{ padding: '8px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
                             <span style={{ color: 'var(--color-muted)' }}>—</span>

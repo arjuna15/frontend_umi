@@ -50,7 +50,7 @@ export default function AdminLogsPage() {
       </div>
 
       <div className="siakad-card" style={{ padding: '24px' }}>
-        <div style={{ marginBottom: '20px', display: 'flex', gap: '16px', alignItems: 'center' }}>
+        <div style={{ marginBottom: '20px', display: 'flex', gap: '16px', alignItems: 'center' , flexWrap: 'wrap' }}>
           <div style={{ flex: 1, position: 'relative' }}>
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
             <input 

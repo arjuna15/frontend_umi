@@ -140,7 +140,7 @@ export default function BapPage() {
                 <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
                   <i className="ph ph-books" style={{ color: '#6366f1' }}></i> Mata Kuliah
                 </label>
-                <select name="course_id" required style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', transition: 'border 0.2s' }}>
+                <select name="course_id" required style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', transition: 'border 0.2s' , minWidth: 0, flex: '1 1 120px'}}>
                   <option value="">Pilih Mata Kuliah...</option>
                   {courses.map(c => (
                     <option key={c.id} value={c.id}>{c.code} — {c.name}</option>
@@ -155,14 +155,14 @@ export default function BapPage() {
                     <i className="ph ph-hash" style={{ color: '#10b981' }}></i> Pertemuan Ke-
                   </label>
                   <input type="number" name="meeting_number" required min="1" max="16" placeholder="Contoh: 7"
-                    style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' }} />
+                    style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' , minWidth: 0, flex: '1 1 120px'}} />
                 </div>
                 <div>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
                     <i className="ph ph-calendar-blank" style={{ color: '#f59e0b' }}></i> Tanggal Perkuliahan
                   </label>
                   <input type="date" name="date" required
-                    style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' }} />
+                    style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' , minWidth: 0, flex: '1 1 120px'}} />
                 </div>
               </div>
 

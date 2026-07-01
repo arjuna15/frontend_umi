@@ -91,7 +91,7 @@ export default function DosenDashboard() {
           </div>
           <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {todaySchedules.length > 0 ? todaySchedules.map((sch, i) => (
-              <div key={i} style={{ padding: '16px', background: 'var(--glass-bg)', borderRadius: '16px', borderLeft: `4px solid ${dayColors[sch.day] || '#8b5cf6'}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div key={i} style={{ padding: '16px', background: 'var(--glass-bg)', borderRadius: '16px', borderLeft: `4px solid ${dayColors[sch.day] || '#8b5cf6'}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
                 <div>
                   <p style={{ margin: '0 0 6px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '1rem' }}>{sch.course}</p>
                   <div style={{ display: 'flex', gap: '12px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>
