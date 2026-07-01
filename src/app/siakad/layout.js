@@ -44,10 +44,16 @@ export default function SiakadLayout({ children }) {
   } else if (role === 'dosen') {
     menuItems = [
       { label: 'Dashboard Dosen', icon: 'ph ph-chalkboard-teacher', path: '/siakad/dosen' },
+      { label: 'Roster Kelas', icon: 'ph ph-users-three', path: '/siakad/dosen/roster' },
+      { label: 'Jadwal Mengajar', icon: 'ph ph-calendar-plus', path: '/siakad/dosen/jadwal' },
+      { label: 'Isi BAP', icon: 'ph ph-file-text', path: '/siakad/dosen/bap' },
+      { label: 'Persetujuan KRS', icon: 'ph ph-check-square', path: '/siakad/dosen/krs-approval' },
       { label: 'E-Learning', icon: 'ph ph-books', path: '/siakad/dosen/elearning' },
       { label: 'Presensi Mahasiswa', icon: 'ph ph-calendar-check', path: '/siakad/dosen/presensi' },
+      { label: 'Rekap Presensi', icon: 'ph ph-chart-bar', path: '/siakad/dosen/rekap-presensi' },
       { label: 'Gradebook & Nilai', icon: 'ph ph-exam', path: '/siakad/dosen/gradebook' },
       { label: 'Forum Diskusi', icon: 'ph ph-chats', path: '/siakad/dosen/forum' },
+      { label: 'Pengaturan Profil', icon: 'ph ph-user-gear', path: '/siakad/profile' },
     ];
   } else {
     // Default Mahasiswa

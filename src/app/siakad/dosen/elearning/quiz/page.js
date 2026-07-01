@@ -8,12 +8,12 @@ export default function DosenQuizCreate() {
   const [title, setTitle] = useState('');
   const [duration, setDuration] = useState(60);
   const [questions, setQuestions] = useState([
-    { question: '', option_a: '', option_b: '', option_c: '', option_d: '', correct_answer: 'A' }
+    { type: 'multiple_choice', question: '', option_a: '', option_b: '', option_c: '', option_d: '', correct_answer: 'A', correct_answer_text: '' }
   ]);
   const [loading, setLoading] = useState(false);
 
   const addQuestion = () => {
-    setQuestions([...questions, { question: '', option_a: '', option_b: '', option_c: '', option_d: '', correct_answer: 'A' }]);
+    setQuestions([...questions, { type: 'multiple_choice', question: '', option_a: '', option_b: '', option_c: '', option_d: '', correct_answer: 'A', correct_answer_text: '' }]);
   };
 
   const removeQuestion = (index) => {
@@ -65,12 +65,12 @@ export default function DosenQuizCreate() {
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div style={{ marginBottom: '30px', display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <button onClick={() => router.back()} style={{ background: 'var(--glass-bg)', border: 'none', padding: '8px 12px', borderRadius: '8px', cursor: 'pointer' }}>
+        <button onClick={() => router.back()} style={{ background: 'var(--glass-bg)', border: 'none', padding: '8px 12px', borderRadius: '8px', cursor: 'pointer', color: 'var(--color-text)' }}>
           <i className="ph ph-arrow-left"></i> Kembali
         </button>
         <div>
           <h2 style={{ margin: '0 0 4px 0', color: 'var(--color-text)' }}>CBT Engine: Kuis Pilihan Ganda</h2>
-          <p style={{ margin: 0, color: 'var(--color-muted)' }}>Buat kuis otomatis dengan durasi dan nilai instan.</p>
+          <p style={{ margin: 0, color: 'var(--color-muted)' }}>Buat kuis otomatis dengan berbagai tipe soal dan durasi.</p>
         </div>
       </div>
 
@@ -90,13 +90,25 @@ export default function DosenQuizCreate() {
         </div>
 
         {questions.map((q, idx) => (
-          <div key={idx} className={`stagger-${(idx % 5) + 2}`} style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '16px', marginBottom: '24px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)', border: '1px solid #e5e7eb', position: 'relative', zIndex: 50 - idx }}>
+          <div key={idx} className={`stagger-${(idx % 5) + 2}`} style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '16px', marginBottom: '24px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)', border: '1px solid var(--color-border)', position: 'relative', zIndex: 50 - idx }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <h3 style={{ margin: '0', color: 'var(--color-text)' }}>Soal {idx + 1}</h3>
+                <select
+                  value={q.type}
+                  onChange={(e) => handleChange(idx, 'type', e.target.value)}
+                  style={{ padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', outline: 'none' }}
+                >
+                  <option value="multiple_choice">Pilihan Ganda</option>
+                  <option value="true_false">Benar / Salah</option>
+                  <option value="essay">Esai</option>
+                </select>
+              </div>
               {questions.length > 1 && (
                 <button type="button" onClick={() => removeQuestion(idx)} style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}>Hapus Soal</button>
               )}
             </div>
-            <h3 style={{ margin: '0 0 16px 0', color: 'var(--color-text)' }}>Soal {idx + 1}</h3>
+            
             <textarea 
               required
               value={q.question} onChange={e=>handleChange(idx, 'question', e.target.value)}
@@ -105,45 +117,84 @@ export default function DosenQuizCreate() {
               placeholder="Tuliskan pertanyaan di sini..."
             ></textarea>
             
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              <div>
-                <label>Opsi A</label>
-                <input required type="text" value={q.option_a} onChange={e=>handleChange(idx, 'option_a', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
-              </div>
-              <div>
-                <label>Opsi B</label>
-                <input required type="text" value={q.option_b} onChange={e=>handleChange(idx, 'option_b', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
-              </div>
-              <div>
-                <label>Opsi C</label>
-                <input required type="text" value={q.option_c} onChange={e=>handleChange(idx, 'option_c', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
-              </div>
-              <div>
-                <label>Opsi D</label>
-                <input required type="text" value={q.option_d} onChange={e=>handleChange(idx, 'option_d', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
-              </div>
-            </div>
+            {q.type === 'multiple_choice' && (
+              <>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div>
+                    <label>Opsi A</label>
+                    <input required type="text" value={q.option_a} onChange={e=>handleChange(idx, 'option_a', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
+                  </div>
+                  <div>
+                    <label>Opsi B</label>
+                    <input required type="text" value={q.option_b} onChange={e=>handleChange(idx, 'option_b', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
+                  </div>
+                  <div>
+                    <label>Opsi C</label>
+                    <input required type="text" value={q.option_c} onChange={e=>handleChange(idx, 'option_c', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
+                  </div>
+                  <div>
+                    <label>Opsi D</label>
+                    <input required type="text" value={q.option_d} onChange={e=>handleChange(idx, 'option_d', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
+                  </div>
+                </div>
 
-            <div style={{ marginTop: '20px' }}>
-              <label style={{ fontWeight: 600, color: 'var(--color-text)' }}>Jawaban Benar (Kunci)</label>
-              <CustomSelect 
-                name="correct_answer"
-                value={q.correct_answer} 
-                onChange={(val) => handleChange(idx, 'correct_answer', val)}
-                options={[
-                  { value: 'A', label: 'Opsi A', icon: 'ph ph-check-circle' },
-                  { value: 'B', label: 'Opsi B', icon: 'ph ph-check-circle' },
-                  { value: 'C', label: 'Opsi C', icon: 'ph ph-check-circle' },
-                  { value: 'D', label: 'Opsi D', icon: 'ph ph-check-circle' }
-                ]}
-                style={{ marginTop: '8px' }}
-              />
-            </div>
+                <div style={{ marginTop: '20px' }}>
+                  <label style={{ fontWeight: 600, color: 'var(--color-text)' }}>Jawaban Benar (Kunci)</label>
+                  <CustomSelect 
+                    name="correct_answer"
+                    value={q.correct_answer} 
+                    onChange={(val) => handleChange(idx, 'correct_answer', val)}
+                    options={[
+                      { value: 'A', label: 'Opsi A', icon: 'ph ph-check-circle' },
+                      { value: 'B', label: 'Opsi B', icon: 'ph ph-check-circle' },
+                      { value: 'C', label: 'Opsi C', icon: 'ph ph-check-circle' },
+                      { value: 'D', label: 'Opsi D', icon: 'ph ph-check-circle' }
+                    ]}
+                    style={{ marginTop: '8px' }}
+                  />
+                </div>
+              </>
+            )}
+
+            {q.type === 'true_false' && (
+              <div style={{ marginTop: '16px' }}>
+                <label style={{ fontWeight: 600, color: 'var(--color-text)' }}>Jawaban Benar (Kunci)</label>
+                <div style={{ display: 'flex', gap: '16px', marginTop: '8px' }}>
+                  <button 
+                    type="button" 
+                    onClick={() => handleChange(idx, 'correct_answer', 'True')}
+                    style={{ flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: q.correct_answer === 'True' ? '#10b981' : 'var(--glass-bg)', color: q.correct_answer === 'True' ? 'white' : 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer' }}
+                  >
+                    Benar (True)
+                  </button>
+                  <button 
+                    type="button" 
+                    onClick={() => handleChange(idx, 'correct_answer', 'False')}
+                    style={{ flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: q.correct_answer === 'False' ? '#ef4444' : 'var(--glass-bg)', color: q.correct_answer === 'False' ? 'white' : 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer' }}
+                  >
+                    Salah (False)
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {q.type === 'essay' && (
+              <div style={{ marginTop: '16px' }}>
+                <label style={{ fontWeight: 600, color: 'var(--color-text)' }}>Kunci Jawaban / Panduan Penilaian</label>
+                <textarea 
+                  required
+                  value={q.correct_answer_text} onChange={e=>handleChange(idx, 'correct_answer_text', e.target.value)}
+                  className="siakad-input" 
+                  style={{ width: '100%', height: '80px', marginTop: '8px', resize: 'vertical' }} 
+                  placeholder="Tuliskan kunci jawaban esai atau poin-poin yang diharapkan..."
+                ></textarea>
+              </div>
+            )}
           </div>
         ))}
 
         <div style={{ display: 'flex', gap: '16px' }}>
-          <button type="button" onClick={addQuestion} style={{ flex: 1, background: 'var(--color-border)', color: 'var(--color-text)', border: '2px dashed #d1d5db', padding: '16px', borderRadius: '12px', cursor: 'pointer', fontWeight: 600 }}>
+          <button type="button" onClick={addQuestion} style={{ flex: 1, background: 'var(--color-border)', color: 'var(--color-text)', border: '2px dashed var(--color-muted)', padding: '16px', borderRadius: '12px', cursor: 'pointer', fontWeight: 600 }}>
             <i className="ph ph-plus"></i> Tambah Soal
           </button>
           <button type="submit" disabled={loading} style={{ flex: 1, background: '#3b82f6', color: 'white', border: 'none', padding: '16px', borderRadius: '12px', cursor: loading ? 'not-allowed' : 'pointer', fontWeight: 600, fontSize: '1.1rem' }}>

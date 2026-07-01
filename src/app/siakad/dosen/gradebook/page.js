@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function DosenGradebookPage() {
@@ -11,6 +11,8 @@ export default function DosenGradebookPage() {
   const [editedGrades, setEditedGrades] = useState({});
   const [savingGrades, setSavingGrades] = useState(false);
   const [activeCourseId, setActiveCourseId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const fileInputRef = useRef(null);
 
   const calculateScoreAndGrade = (components) => {
     const k = parseFloat(components.kehadiran) || 0;
@@ -50,8 +52,6 @@ export default function DosenGradebookPage() {
       result.jadwal.forEach(course => {
         if (course.grades) {
           course.grades.forEach(g => {
-            // Since we don't store raw components in DB for this demo, 
-            // we reverse engineer roughly from the final score if it exists, or just set to 0.
             const s = g.score || 0;
             initialEdits[g.id] = {
               kehadiran: s ? s : '',
@@ -65,7 +65,7 @@ export default function DosenGradebookPage() {
         }
       });
       setEditedGrades(initialEdits);
-      if (result.jadwal.length > 0) setActiveCourseId(result.jadwal[0].id);
+      if (result.jadwal.length > 0 && !activeCourseId) setActiveCourseId(result.jadwal[0].id);
     } catch (err) {
       router.push('/siakad/login');
     } finally {
@@ -79,7 +79,7 @@ export default function DosenGradebookPage() {
 
   const handleGradeChange = (gradeId, field, value) => {
     setEditedGrades(prev => {
-      const current = prev[gradeId];
+      const current = prev[gradeId] || {};
       const updated = { ...current, [field]: value };
       const { score, grade } = calculateScoreAndGrade(updated);
       return {
@@ -105,32 +105,124 @@ export default function DosenGradebookPage() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
 
     try {
-      const promises = course.grades.map(g => {
-        const edits = editedGrades[g.id];
-        if (!edits) return Promise.resolve();
-        
-        return fetch(`${apiUrl}/siakad/grade/${g.id}`, {
-          method: 'POST',
-          headers: { 
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            score: edits.score !== '' ? edits.score : null,
-            grade: edits.grade !== '' ? edits.grade : null
-          })
-        });
+      // First, try mass import API if it exists (Subagent added it)
+      const gradesToUpdate = course.grades.map(g => {
+        const edits = editedGrades[g.id] || {};
+        return {
+          id: g.id,
+          score: edits.score !== '' ? edits.score : null,
+          grade: edits.grade !== '' ? edits.grade : null
+        };
       });
 
-      await Promise.all(promises);
-      await fetchDashboard();
-      window.toast('Berhasil menyimpan nilai untuk mata kuliah ini!');
+      const res = await fetch(`${apiUrl}/siakad/dosen/gradebook/import`, {
+        method: 'POST',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ course_id: courseId, grades: gradesToUpdate })
+      });
+
+      if (res.ok) {
+        await fetchDashboard();
+        window.toast('Berhasil menyimpan nilai untuk mata kuliah ini!');
+      } else {
+        // Fallback to individual
+        const promises = course.grades.map(g => {
+          const edits = editedGrades[g.id];
+          if (!edits) return Promise.resolve();
+          return fetch(`${apiUrl}/siakad/grade/${g.id}`, {
+            method: 'POST',
+            headers: { 
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              score: edits.score !== '' ? edits.score : null,
+              grade: edits.grade !== '' ? edits.grade : null
+            })
+          });
+        });
+        await Promise.all(promises);
+        await fetchDashboard();
+        window.toast('Berhasil menyimpan nilai!');
+      }
     } catch (err) {
       console.error(err);
       window.toast('Gagal menyimpan nilai.');
     } finally {
       setSavingGrades(false);
     }
+  };
+
+  const handleExportCSV = (course) => {
+    if (!course || !course.grades) return;
+    const header = ["NIM", "Nama", "Kehadiran", "Tugas", "UTS", "UAS", "Nilai Akhir", "Grade"];
+    const rows = course.grades.map(g => {
+      const edits = editedGrades[g.id] || {};
+      return [
+        g.mahasiswa?.nim_nip || g.mahasiswa?.nim || '',
+        g.mahasiswa?.name || '',
+        edits.kehadiran || 0,
+        edits.tugas || 0,
+        edits.uts || 0,
+        edits.uas || 0,
+        edits.score || 0,
+        edits.grade || 'E'
+      ];
+    });
+
+    let csvContent = "data:text/csv;charset=utf-8," 
+      + header.join(",") + "\n" 
+      + rows.map(e => e.map(item => `"${item}"`).join(",")).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `Nilai_${course.code}_${course.name}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleImportCSV = (e, course) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const text = event.target.result;
+      const lines = text.split('\\n');
+      
+      const newEdits = { ...editedGrades };
+      let importedCount = 0;
+
+      for (let i = 1; i < lines.length; i++) {
+        if (!lines[i].trim()) continue;
+        const row = lines[i].split(',').map(item => item.replace(/"/g, '').trim());
+        const nim = row[0];
+        
+        // Find matching student
+        const gradeObj = course.grades.find(g => (g.mahasiswa?.nim_nip === nim || g.mahasiswa?.nim === nim));
+        if (gradeObj) {
+          const k = row[2] || 0;
+          const t = row[3] || 0;
+          const ut = row[4] || 0;
+          const ua = row[5] || 0;
+
+          const updated = { kehadiran: k, tugas: t, uts: ut, uas: ua };
+          const { score, grade } = calculateScoreAndGrade(updated);
+          newEdits[gradeObj.id] = { ...updated, score, grade };
+          importedCount++;
+        }
+      }
+      
+      setEditedGrades(newEdits);
+      window.toast(`Berhasil mengimpor nilai untuk ${importedCount} mahasiswa.`);
+    };
+    reader.readAsText(file);
+    e.target.value = null; // reset
   };
 
   if (loading || !data) return (
@@ -143,20 +235,19 @@ export default function DosenGradebookPage() {
     <div>
       <div style={{ marginBottom: '24px' }}>
         <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Sistem Penilaian (Gradebook)</h1>
-        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Input nilai komponen mahasiswa secara interaktif. Nilai akhir akan dihitung otomatis.</p>
+        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Input nilai komponen mahasiswa secara interaktif atau gunakan fitur Import CSV.</p>
       </div>
 
       <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', overflowX: 'auto', paddingBottom: '8px' }}>
         {data.jadwal.map(course => (
           <button 
             key={course.id}
-            onClick={() => setActiveCourseId(course.id)}
+            onClick={() => { setActiveCourseId(course.id); setSearchTerm(''); }}
             style={{
               padding: '10px 20px', borderRadius: '999px', fontWeight: 'bold', whiteSpace: 'nowrap',
-              background: activeCourseId === course.id ? '#4f46e5' : 'white',
-              color: activeCourseId === course.id ? 'white' : '#4b5563',
-              border: activeCourseId === course.id ? 'none' : '1px solid #d1d5db',
-              boxShadow: activeCourseId === course.id ? '0 4px 10px rgba(79, 70, 229, 0.3)' : 'none',
+              background: activeCourseId === course.id ? 'var(--umiba-red)' : 'var(--glass-bg)',
+              color: activeCourseId === course.id ? 'white' : 'var(--color-text)',
+              border: activeCourseId === course.id ? 'none' : '1px solid var(--color-border)',
               cursor: 'pointer', transition: 'all 0.2s'
             }}
           >
@@ -167,62 +258,95 @@ export default function DosenGradebookPage() {
 
       {data.jadwal.map(course => {
         if (course.id !== activeCourseId) return null;
+
+        const filteredGrades = (course.grades || []).filter(g => {
+          const query = searchTerm.toLowerCase();
+          const name = g.mahasiswa?.name?.toLowerCase() || '';
+          const nim = g.mahasiswa?.nim_nip?.toLowerCase() || g.mahasiswa?.nim?.toLowerCase() || '';
+          return name.includes(query) || nim.includes(query);
+        });
         
         return (
-          <div key={course.id} className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden', border: '1px solid #e5e7eb', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
-            <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div key={course.id} className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
+            <div style={{ background: 'var(--glass-bg)', borderBottom: '1px solid var(--color-border)', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               <div>
-                <h2 style={{ color: 'white', margin: '0 0 4px 0', fontSize: '1.25rem' }}>{course.name}</h2>
-                <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '0.9rem' }}>{course.semester} • {course.sks} SKS</p>
+                <h2 style={{ color: 'var(--color-text)', margin: '0 0 4px 0', fontSize: '1.25rem' }}>{course.name}</h2>
+                <p style={{ color: 'var(--color-muted)', margin: 0, fontSize: '0.9rem' }}>{course.semester} • {course.sks} SKS</p>
               </div>
-              <button 
-                onClick={() => handleSaveGrades(course.id)}
-                disabled={savingGrades}
-                style={{
-                  background: '#10b981', color: 'white', border: 'none', padding: '10px 20px', 
-                  borderRadius: '8px', cursor: savingGrades ? 'not-allowed' : 'pointer', fontWeight: 'bold',
-                  display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 10px rgba(16, 185, 129, 0.3)',
-                  transition: 'transform 0.1s'
-                }}
-                onMouseDown={e => e.currentTarget.style.transform = 'scale(0.95)'}
-                onMouseUp={e => e.currentTarget.style.transform = 'scale(1)'}
-              >
-                <i className={savingGrades ? "ph-spinner ph-spin" : "ph-floppy-disk"}></i> {savingGrades ? 'Menyimpan...' : 'Simpan Nilai'}
-              </button>
+              
+              <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+                <div style={{ position: 'relative' }}>
+                  <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
+                  <input 
+                    type="text" 
+                    placeholder="Cari mahasiswa..." 
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    style={{ padding: '10px 10px 10px 36px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '200px' }}
+                  />
+                </div>
+                
+                <input 
+                  type="file" 
+                  accept=".csv" 
+                  ref={fileInputRef} 
+                  style={{ display: 'none' }} 
+                  onChange={(e) => handleImportCSV(e, course)}
+                />
+                
+                <button onClick={() => fileInputRef.current?.click()} style={{ padding: '10px 16px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                  <i className="ph ph-upload-simple"></i> Import CSV
+                </button>
+                
+                <button onClick={() => handleExportCSV(course)} style={{ padding: '10px 16px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                  <i className="ph ph-download-simple"></i> Export CSV
+                </button>
+
+                <button 
+                  onClick={() => handleSaveGrades(course.id)}
+                  disabled={savingGrades}
+                  style={{
+                    background: '#10b981', color: 'white', border: 'none', padding: '10px 20px', 
+                    borderRadius: '8px', cursor: savingGrades ? 'not-allowed' : 'pointer', fontWeight: 'bold',
+                    display: 'flex', alignItems: 'center', gap: '8px',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  <i className={savingGrades ? "ph-spinner ph-spin" : "ph-floppy-disk"}></i> {savingGrades ? 'Menyimpan...' : 'Simpan Nilai'}
+                </button>
+              </div>
             </div>
             
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
                 <thead>
-                  <tr style={{ background: 'var(--color-bg)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '1px solid #e5e7eb' }}>
+                  <tr style={{ background: 'rgba(0,0,0,0.05)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '1px solid var(--color-border)' }}>
                     <th style={{ padding: '16px 24px', fontWeight: 'bold' }}>Mahasiswa</th>
                     <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Kehadiran (10%)</th>
                     <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Tugas (20%)</th>
                     <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UTS (30%)</th>
                     <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UAS (40%)</th>
-                    <th style={{ padding: '16px', fontWeight: 'bold', width: '100px', background: 'var(--glass-bg)', color: 'var(--color-text)' }}>Nilai Akhir</th>
-                    <th style={{ padding: '16px 24px', fontWeight: 'bold', width: '100px', background: 'var(--glass-bg)', color: 'var(--color-text)' }}>Grade</th>
+                    <th style={{ padding: '16px', fontWeight: 'bold', width: '100px' }}>Nilai Akhir</th>
+                    <th style={{ padding: '16px 24px', fontWeight: 'bold', width: '100px' }}>Grade</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {course.grades && course.grades.map((grade, idx) => {
+                  {filteredGrades.map((grade, idx) => {
                     const edits = editedGrades[grade.id] || {};
                     const isPassed = parseFloat(edits.score) >= 60;
                     
                     return (
-                      <tr key={grade.id} style={{ borderBottom: '1px solid #f3f4f6', background: idx % 2 === 0 ? 'white' : 'rgba(249, 250, 251, 0.5)' }}>
+                      <tr key={grade.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
                         <td style={{ padding: '16px 24px' }}>
                           <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--color-text)' }}>{grade.mahasiswa?.name}</p>
-                          <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{grade.mahasiswa?.nim_nip}</p>
+                          <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{grade.mahasiswa?.nim_nip || grade.mahasiswa?.nim}</p>
                         </td>
                         <td style={{ padding: '16px' }}>
                           <input 
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.kehadiran || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'kehadiran', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'var(--glass-bg)', transition: 'border 0.2s', fontWeight: '500' }}
-                            onFocus={e => e.target.style.borderColor = '#4f46e5'}
-                            onBlur={e => e.target.style.borderColor = '#d1d5db'}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500' }}
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
@@ -230,9 +354,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.tugas || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'tugas', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'var(--glass-bg)', transition: 'border 0.2s', fontWeight: '500' }}
-                            onFocus={e => e.target.style.borderColor = '#4f46e5'}
-                            onBlur={e => e.target.style.borderColor = '#d1d5db'}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500' }}
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
@@ -240,9 +362,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.uts || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'uts', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'var(--glass-bg)', transition: 'border 0.2s', fontWeight: '500' }}
-                            onFocus={e => e.target.style.borderColor = '#4f46e5'}
-                            onBlur={e => e.target.style.borderColor = '#d1d5db'}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500' }}
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
@@ -250,21 +370,19 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.uas || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'uas', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none', background: 'var(--glass-bg)', transition: 'border 0.2s', fontWeight: '500' }}
-                            onFocus={e => e.target.style.borderColor = '#4f46e5'}
-                            onBlur={e => e.target.style.borderColor = '#d1d5db'}
+                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500' }}
                           />
                         </td>
-                        <td style={{ padding: '16px', background: 'var(--glass-bg)', borderLeft: '1px solid #bfdbfe' }}>
+                        <td style={{ padding: '16px' }}>
                           <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{edits.score || '-'}</div>
                         </td>
-                        <td style={{ padding: '16px 24px', background: 'var(--glass-bg)' }}>
+                        <td style={{ padding: '16px 24px' }}>
                           <div style={{ 
                             display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                             width: '40px', height: '40px', borderRadius: '8px', fontWeight: 'bold', fontSize: '1.2rem',
-                            background: edits.grade ? (isPassed ? '#dcfce7' : '#fee2e2') : 'rgba(255,255,255,0.5)',
-                            color: edits.grade ? (isPassed ? '#166534' : '#991b1b') : '#9ca3af',
-                            border: `1px solid ${edits.grade ? (isPassed ? '#86efac' : '#f87171') : '#d1d5db'}`
+                            background: edits.grade ? (isPassed ? '#dcfce7' : '#fee2e2') : 'rgba(255,255,255,0.05)',
+                            color: edits.grade ? (isPassed ? '#166534' : '#991b1b') : 'var(--color-muted)',
+                            border: `1px solid ${edits.grade ? (isPassed ? '#86efac' : '#f87171') : 'var(--color-border)'}`
                           }}>
                             {edits.grade || '-'}
                           </div>
@@ -272,11 +390,11 @@ export default function DosenGradebookPage() {
                       </tr>
                     );
                   })}
-                  {(!course.grades || course.grades.length === 0) && (
+                  {filteredGrades.length === 0 && (
                     <tr>
-                      <td colSpan="7" style={{ padding: '30px', textAlign: 'center', color: 'var(--color-muted)' }}>
+                      <td colSpan="7" style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>
                         <i className="ph ph-users-slash" style={{ fontSize: '3rem', color: 'var(--color-muted)', margin: '0 auto 10px', display: 'block' }}></i>
-                        Belum ada mahasiswa yang terdaftar di kelas ini
+                        {searchTerm ? 'Mahasiswa tidak ditemukan.' : 'Belum ada mahasiswa yang terdaftar di kelas ini'}
                       </td>
                     </tr>
                   )}

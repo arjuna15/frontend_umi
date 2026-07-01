@@ -12,6 +12,7 @@ export default function DosenPresensiPage() {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [selectedAttendance, setSelectedAttendance] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Form States
   const [meetingNumber, setMeetingNumber] = useState('');
@@ -152,7 +153,7 @@ export default function DosenPresensiPage() {
                         <div className="siakad-badge" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
                           {att.records?.filter(r => r.status === 'absent').length || 0} Alpa
                         </div>
-                        <button onClick={() => { setSelectedAttendance(att); setSelectedCourseId(course.id); setShowDetailModal(true); }} style={{ background: 'var(--color-bg)', border: '1px solid #d1d5db', padding: '8px 16px', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>Input & Detail</button>
+                        <button onClick={() => { setSelectedAttendance(att); setSelectedCourseId(course.id); setSearchTerm(''); setShowDetailModal(true); }} style={{ background: 'var(--color-bg)', border: '1px solid #d1d5db', padding: '8px 16px', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>Input & Detail</button>
                       </div>
                     </div>
                   ))}
@@ -200,14 +201,26 @@ export default function DosenPresensiPage() {
       {showDetailModal && selectedAttendance && (
         <div style={{ position: 'fixed', inset: 0, background: 'var(--glass-bg)', backdropFilter: 'blur(8px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ background: 'var(--color-bg)', width: '100%', maxWidth: '600px', borderRadius: '24px', padding: '32px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', maxHeight: '90vh', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
               <div>
                 <h3 style={{ margin: '0 0 4px 0', fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)' }}>Input Presensi</h3>
                 <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>Pertemuan ke-{selectedAttendance.meeting_number} • {selectedAttendance.date}</p>
               </div>
-              <button onClick={() => setShowDetailModal(false)} style={{ background: 'var(--glass-bg)', border: 'none', width: '36px', height: '36px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text)' }}>
-                <i className="ph ph-x" style={{ fontSize: '1.2rem' }}></i>
-              </button>
+              <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                <div style={{ position: 'relative' }}>
+                  <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
+                  <input 
+                    type="text" 
+                    placeholder="Cari mahasiswa..." 
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    style={{ padding: '8px 10px 8px 36px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '200px' }}
+                  />
+                </div>
+                <button onClick={() => setShowDetailModal(false)} style={{ background: 'var(--glass-bg)', border: 'none', width: '36px', height: '36px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text)' }}>
+                  <i className="ph ph-x" style={{ fontSize: '1.2rem' }}></i>
+                </button>
+              </div>
             </div>
 
             <div style={{ overflowY: 'auto', flex: 1, paddingRight: '8px' }}>
@@ -224,7 +237,18 @@ export default function DosenPresensiPage() {
                     const course = data.jadwal.find(c => c.id === selectedCourseId);
                     if (!course || !course.grades) return <tr><td colSpan="3">Data tidak ditemukan.</td></tr>;
                     
-                    return course.grades.map(grade => {
+                    const filteredGrades = course.grades.filter(g => {
+                      const query = searchTerm.toLowerCase();
+                      const name = g.mahasiswa?.name?.toLowerCase() || '';
+                      const nim = g.mahasiswa?.nim_nip?.toLowerCase() || g.mahasiswa?.nim?.toLowerCase() || '';
+                      return name.includes(query) || nim.includes(query);
+                    });
+
+                    if (filteredGrades.length === 0) {
+                      return <tr><td colSpan="3" style={{ textAlign: 'center', padding: '20px', color: 'var(--color-muted)' }}>Mahasiswa tidak ditemukan.</td></tr>;
+                    }
+                    
+                    return filteredGrades.map(grade => {
                       const mhs = grade.mahasiswa;
                       const record = selectedAttendance.records?.find(r => r.mahasiswa_id === mhs.id);
                       const status = record ? record.status : 'absent';
