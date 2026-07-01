@@ -57,12 +57,12 @@ export default function MahasiswaGradebook() {
 
       <div style={{ display: 'flex', gap: '20px', marginBottom: '32px', flexWrap: 'wrap' }}>
         <div className="siakad-card" style={{ flex: '1 1 200px', padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', background: 'var(--glass-bg)', color: 'var(--color-text)' }}>
-          <div style={{ width: '60px', height: '60px', background: 'rgba(255, 255, 255, 0.15)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
+          <div style={{ width: '60px', height: '60px', background: 'rgba(79, 70, 229, 0.15)', color: '#4f46e5', border: '1px solid rgba(79, 70, 229, 0.2)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
             <i className="ph ph-medal"></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: '#94a3b8' }}>Indeks Prestasi Semester</p>
-            <h1 style={{ margin: 0, fontSize: '2.5rem', fontWeight: '900', color: '#ffffff' }}>{ipSemester}</h1>
+            <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-muted)' }}>Indeks Prestasi Semester</p>
+            <h1 style={{ margin: 0, fontSize: '2.5rem', fontWeight: '900', color: 'var(--color-text)' }}>{ipSemester}</h1>
           </div>
         </div>
         
