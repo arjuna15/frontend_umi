@@ -430,12 +430,13 @@
 
   /* Drawer Content */
   .siakad-drawer-content {
-    background: #ffffff;
+    background: var(--color-bg);
     width: 100%;
     border-radius: 24px 24px 0 0;
     padding: 24px;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
     animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-top: 1px solid var(--color-border);
   }
 
   .siakad-drawer-content .drawer-header {
@@ -444,7 +445,7 @@
     align-items: center;
     margin-bottom: 24px;
     padding-bottom: 16px;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--color-border);
   }
 
   .drawer-profile {
@@ -456,45 +457,47 @@
   .drawer-avatar {
     width: 48px;
     height: 48px;
-    background: #eff6ff;
-    color: #3b82f6;
+    background: var(--glass-bg);
+    color: var(--color-text);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
+    border: 1px solid var(--color-border);
   }
 
   .drawer-user-info h4 {
     margin: 0 0 4px 0;
     font-size: 1.1rem;
-    color: #1e293b;
+    color: var(--color-text);
     font-weight: 700;
   }
   .drawer-user-info p {
     margin: 0;
     font-size: 0.8rem;
-    color: #64748b;
+    color: var(--color-muted);
     text-transform: capitalize;
   }
 
   .drawer-close-btn {
-    background: #f1f5f9;
-    border: none;
+    background: var(--glass-bg);
+    border: 1px solid var(--color-border);
     width: 40px;
     height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #64748b;
+    color: var(--color-text);
     font-size: 1.2rem;
     cursor: pointer;
     transition: 0.2s;
   }
   .drawer-logout-btn {
-    background: #fef2f2;
-    border: none;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #ef4444;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -541,15 +544,16 @@
     display: flex;
     align-items: center;
     padding: 16px;
-    background: #f8fafc;
+    background: var(--glass-bg);
+    border: 1px solid var(--color-border);
     border-radius: 16px;
     text-decoration: none;
-    color: #334155;
+    color: var(--color-text);
     transition: 0.2s;
   }
 
   .siakad-drawer-content .drawer-item:active {
-    background: #e2e8f0;
+    background: var(--color-bg);
     transform: scale(0.98);
   }
 
@@ -557,14 +561,15 @@
     width: 40px;
     height: 40px;
     border-radius: 12px;
-    background: #ffffff;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #4f46e5;
+    color: var(--color-text);
     font-size: 1.2rem;
     margin-right: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
 
   .siakad-drawer-content .drawer-item .label {
@@ -574,7 +579,7 @@
   }
 
   .siakad-drawer-content .drawer-item .chevron {
-    color: #94a3b8;
+    color: var(--color-muted);
     font-size: 1.1rem;
   }
 

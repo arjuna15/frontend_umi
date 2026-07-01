@@ -223,6 +223,13 @@ export default function SiakadLayout({ children }) {
               </div>
               <div style={{ display: 'flex', gap: '8px' }}>
                 <button 
+                  className="drawer-close-btn" 
+                  title="Toggle Theme"
+                  onClick={toggleTheme}
+                >
+                  {theme === 'dark' ? <i className="ph ph-sun"></i> : <i className="ph ph-moon"></i>}
+                </button>
+                <button 
                   className="drawer-logout-btn" 
                   title="Logout"
                   onClick={() => {
