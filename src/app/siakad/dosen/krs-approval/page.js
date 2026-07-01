@@ -2,12 +2,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-const STATUS_STYLES = {
-  pending:  { label: 'Menunggu', bg: 'rgba(245,158,11,0.15)', color: '#f59e0b', border: 'rgba(245,158,11,0.3)' },
-  approved: { label: 'Disetujui', bg: 'rgba(16,185,129,0.15)', color: '#10b981', border: 'rgba(16,185,129,0.3)' },
-  rejected: { label: 'Ditolak', bg: 'rgba(239,68,68,0.15)', color: '#ef4444', border: 'rgba(239,68,68,0.3)' },
-};
-
 export default function KrsApprovalPage() {
   const router = useRouter();
   const [submissions, setSubmissions] = useState([]);
@@ -16,11 +10,14 @@ export default function KrsApprovalPage() {
   const [notes, setNotes] = useState('');
   const [processing, setProcessing] = useState(false);
 
-  useEffect(() => { fetchSubmissions(); }, []);
+  useEffect(() => {
+    fetchSubmissions();
+  }, []);
 
   const fetchSubmissions = async () => {
     const token = localStorage.getItem('siakad_token');
     if (!token) return router.push('/siakad/login');
+
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
       const res = await fetch(`${apiUrl}/siakad/dosen/krs`, { headers: { 'Authorization': `Bearer ${token}` } });
