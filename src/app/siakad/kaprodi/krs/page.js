@@ -111,8 +111,6 @@ export default function KaprodiKrs() {
         </div>
       </div>
 
-      </div>
-
       <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
         <div style={{ overflowX: 'auto' }}>
           <table className="siakad-table" style={{ minWidth: '800px' }}>
