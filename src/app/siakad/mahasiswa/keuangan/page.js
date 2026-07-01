@@ -106,16 +106,18 @@ export default function KeuanganPage() {
                         {bill.status}
                       </span>
                     </td>
-                    <td style={{ display: 'flex', gap: '8px' }}>
-                      {bill.status !== 'Lunas' ? (
-                        <button onClick={() => handlePay(bill.id)} style={{ padding: '6px 12px', background: '#0f172a', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <i className="ph ph-wallet"></i> Bayar
-                        </button>
-                      ) : (
-                        <button onClick={() => window.print()} style={{ padding: '6px 12px', background: '#10b981', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <i className="ph ph-download-simple"></i> Bukti Bayar
-                        </button>
-                      )}
+                    <td>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        {bill.status !== 'Lunas' ? (
+                          <button onClick={() => handlePay(bill.id)} style={{ padding: '6px 12px', background: '#0f172a', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <i className="ph ph-wallet"></i> Bayar
+                          </button>
+                        ) : (
+                          <button onClick={() => window.print()} style={{ padding: '6px 12px', background: '#10b981', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <i className="ph ph-download-simple"></i> Bukti Bayar
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
