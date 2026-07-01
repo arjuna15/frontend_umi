@@ -10,6 +10,12 @@ export default function KrsApprovalPage() {
   const [notes, setNotes] = useState('');
   const [processing, setProcessing] = useState(false);
 
+  const STATUS_STYLES = {
+    pending:  { label: 'Menunggu', bg: 'rgba(245,158,11,0.15)', color: '#f59e0b', border: 'rgba(245,158,11,0.3)' },
+    approved: { label: 'Disetujui', bg: 'rgba(16,185,129,0.15)', color: '#10b981', border: 'rgba(16,185,129,0.3)' },
+    rejected: { label: 'Ditolak', bg: 'rgba(239,68,68,0.15)', color: '#ef4444', border: 'rgba(239,68,68,0.3)' },
+  };
+
   useEffect(() => {
     fetchSubmissions();
   }, []);
@@ -106,7 +112,7 @@ export default function KrsApprovalPage() {
                 <button key={sub.id} onClick={() => { setSelectedSub(sub); setNotes(sub.notes || ''); }}
                   style={{ padding: '14px 16px', textAlign: 'left', background: isActive ? 'linear-gradient(135deg, rgba(196,30,58,0.2), rgba(99,102,241,0.2))' : 'var(--glass-bg)', border: `1px solid ${isActive ? 'rgba(196,30,58,0.4)' : 'var(--color-border)'}`, borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: `hsl(${i * 50 % 360}, 65%, 55%)`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: '800', flexShrink: 0 }}>
+                    <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366f1', fontWeight: '800', flexShrink: 0 }}>
                       {(sub.mahasiswa?.name || '?').charAt(0)}
                     </div>
                     <div style={{ minWidth: 0, flex: 1 }}>

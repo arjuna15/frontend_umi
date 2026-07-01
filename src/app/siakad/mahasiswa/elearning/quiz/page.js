@@ -99,16 +99,16 @@ export default function MahasiswaQuiz() {
   if (result) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
       <div className="siakad-card" style={{ padding: '40px', textAlign: 'center', maxWidth: '500px', width: '100%' }}>
-        <div style={{ width: '80px', height: '80px', background: 'var(--glass-bg)', color: 'var(--color-text)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', margin: '0 auto 20px auto' }}>
+        <div style={{ width: '80px', height: '80px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', margin: '0 auto 20px auto' }}>
           <i className="ph ph-check-circle"></i>
         </div>
         <h2 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '10px' }}>Selesai!</h2>
         <p style={{ color: 'var(--color-text)', marginBottom: '24px' }}>{result.message}</p>
-        <div style={{ background: 'var(--glass-bg)', padding: '24px', borderRadius: '16px', border: '1px solid #e2e8f0', marginBottom: '32px' }}>
+        <div style={{ background: 'var(--glass-bg)', padding: '24px', borderRadius: '16px', border: '1px solid var(--color-border)', marginBottom: '32px' }}>
           <p style={{ margin: '0 0 8px 0', fontSize: '1.1rem', color: 'var(--color-text)' }}>Nilai Kamu:</p>
           <h1 style={{ fontSize: '4rem', margin: 0, color: 'var(--color-text)', fontWeight: '900' }}>{result.score}</h1>
         </div>
-        <button onClick={() => router.push('/siakad/mahasiswa/elearning')} style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '14px 24px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%' }}>
+        <button onClick={() => router.push('/siakad/mahasiswa/elearning')} style={{ background: '#0f172a', color: 'white', border: 'none', padding: '14px 24px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%' }}>
           Kembali ke Kelas
         </button>
       </div>
@@ -127,13 +127,22 @@ export default function MahasiswaQuiz() {
 
   return (
     <div style={{ paddingBottom: '80px' }}>
-      {/* Sticky Header with Timer */}
-      <div style={{ position: 'sticky', top: 0, background: 'var(--color-bg)', padding: '20px 24px', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', zIndex: 10 }}>
-        <div>
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 4px 0' }}>{quizData.title}</h2>
-          <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '0.9rem' }}>Mata Kuliah: {quizData.course?.name} • Soal: {quizData.questions?.length || 0}</p>
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>{quizData.title}</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Mata Kuliah: {quizData.course?.name} • Soal: {quizData.questions?.length || 0}</p>
         </div>
-        <div style={{ background: isWarningTime ? '#fef2f2' : '#f0fdf4', border: `2px solid ${isWarningTime ? '#ef4444' : '#10b981'}`, padding: '12px 24px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+      </div>
+
+      {/* Sticky Header with Timer */}
+      <div style={{ position: 'sticky', top: '16px', background: 'var(--color-bg)', padding: '16px 24px', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '32px', zIndex: 10, border: '1px solid var(--color-border)' }}>
+        <div style={{ background: isWarningTime ? 'rgba(239,68,68,0.1)' : 'rgba(16,185,129,0.1)', border: `1px solid ${isWarningTime ? '#ef4444' : '#10b981'}`, padding: '10px 20px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <i className="ph ph-timer" style={{ fontSize: '1.5rem', color: isWarningTime ? '#ef4444' : '#10b981' }}></i>
           <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: isWarningTime ? '#ef4444' : '#166534', fontVariantNumeric: 'tabular-nums' }}>
             {formatTime(timeLeft)}
@@ -145,7 +154,7 @@ export default function MahasiswaQuiz() {
         {quizData.questions && quizData.questions.length > 0 ? quizData.questions.map((q, idx) => (
           <div key={q.id} className="siakad-card" style={{ padding: '32px' }}>
             <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
-              <div style={{ width: '36px', height: '36px', background: '#3b82f6', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0 }}>
+              <div style={{ width: '36px', height: '36px', background: '#0f172a', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0 }}>
                 {idx + 1}
               </div>
               <h3 style={{ fontSize: '1.2rem', color: 'var(--color-text)', margin: 0, lineHeight: 1.5 }}>
@@ -155,16 +164,16 @@ export default function MahasiswaQuiz() {
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingLeft: '52px' }}>
               {['a', 'b', 'c', 'd'].map(opt => (
-                <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', border: answers[q.id] === opt ? '2px solid #3b82f6' : '1px solid #e2e8f0', background: answers[q.id] === opt ? '#eff6ff' : 'white', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s' }}>
+                <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', border: answers[q.id] === opt ? '2px solid #0f172a' : '1px solid var(--color-border)', background: answers[q.id] === opt ? 'rgba(15,23,42,0.05)' : 'var(--glass-bg)', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s' }}>
                   <input 
                     type="radio" 
                     name={`q_${q.id}`} 
                     value={opt} 
                     checked={answers[q.id] === opt} 
                     onChange={() => handleAnswer(q.id, opt)}
-                    style={{ width: '20px', height: '20px', accentcolor: 'var(--color-text)' }}
+                    style={{ width: '20px', height: '20px', accentColor: '#0f172a' }}
                   />
-                  <span style={{ fontWeight: 'bold', textTransform: 'uppercase', color: answers[q.id] === opt ? '#2563eb' : '#64748b' }}>{opt}.</span>
+                  <span style={{ fontWeight: 'bold', textTransform: 'uppercase', color: answers[q.id] === opt ? '#0f172a' : 'var(--color-muted)' }}>{opt}.</span>
                   <span style={{ fontSize: '1rem', color: 'var(--color-text)' }}>{q[`option_${opt}`]}</span>
                 </label>
               ))}
@@ -179,7 +188,7 @@ export default function MahasiswaQuiz() {
             <button 
               type="submit" 
               disabled={submitting}
-              style={{ background: 'linear-gradient(135deg, #4f46e5, #3b82f6)', color: 'white', border: 'none', padding: '16px 40px', borderRadius: '16px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 10px 25px rgba(59, 130, 246, 0.4)', display: 'flex', alignItems: 'center', gap: '10px' }}
+              style={{ background: '#C41E3A', color: 'white', border: 'none', padding: '16px 40px', borderRadius: '16px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 10px 25px rgba(196, 30, 58, 0.3)', display: 'flex', alignItems: 'center', gap: '10px' }}
             >
               {submitting ? 'Mengirim...' : 'Kumpulkan Jawaban'} <i className="ph ph-paper-plane-right"></i>
             </button>

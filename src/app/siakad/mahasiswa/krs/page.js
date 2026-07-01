@@ -117,14 +117,22 @@ export default function KRSPage() {
 
   return (
     <div>
-      <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>KRS Online</h1>
-        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Pilih dan ajukan mata kuliah untuk semester ini.</p>
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>KRS Online</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Pilih dan ajukan mata kuliah untuk semester ini.</p>
+        </div>
       </div>
 
       {!krsOpen && (
-        <div style={{ background: 'var(--glass-bg)', border: '1px solid #fca5a5', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className="ph ph-warning-circle" style={{ color: '#dc2626', fontSize: '1.5rem' }}></i>
+        <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <i className="ph ph-warning-circle" style={{ color: '#ef4444', fontSize: '1.5rem' }}></i>
           <div>
             <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '1rem', fontWeight: 'bold' }}>Periode Pengisian KRS Ditutup</p>
             <p style={{ margin: '4px 0 0 0', color: 'var(--color-text)', fontSize: '0.9rem' }}>Saat ini Anda tidak dapat mengisi atau mengubah KRS. Silakan hubungi Admin atau Kaprodi jika ada pertanyaan.</p>
@@ -133,21 +141,21 @@ export default function KRSPage() {
       )}
 
       {submission?.status === 'approved' && (
-        <div style={{ background: 'var(--glass-bg)', border: '1px solid #86efac', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className="ph ph-check-circle" style={{ color: 'var(--color-text)', fontSize: '1.5rem' }}></i>
+        <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <i className="ph ph-check-circle" style={{ color: '#10b981', fontSize: '1.5rem' }}></i>
           <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>KRS Anda untuk Semester Ganjil 2026/2027 telah <strong>DISETUJUI</strong> oleh Kaprodi/Dosen Wali. Selamat belajar!</p>
         </div>
       )}
 
       {submission?.status === 'pending' && (
-        <div style={{ background: 'var(--glass-bg)', border: '1px solid #fde68a', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className="ph ph-clock-circle" style={{ color: 'var(--color-text)', fontSize: '1.5rem' }}></i>
+        <div style={{ background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <i className="ph ph-clock-circle" style={{ color: '#f59e0b', fontSize: '1.5rem' }}></i>
           <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>KRS Anda sedang <strong>MENUNGGU PERSETUJUAN</strong> Kaprodi/Dosen Wali.</p>
         </div>
       )}
       
       {submission?.status === 'rejected' && krsOpen && (
-        <div style={{ background: 'var(--glass-bg)', border: '1px solid #fca5a5', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <i className="ph ph-warning-octagon" style={{ color: '#ef4444', fontSize: '1.5rem' }}></i>
           <div>
             <p style={{ margin: 0, color: '#ef4444', fontSize: '1rem', fontWeight: 'bold' }}>KRS Anda DITOLAK</p>
@@ -159,7 +167,7 @@ export default function KRSPage() {
       )}
 
       {!submission?.status && krsOpen && (
-        <div style={{ background: 'var(--glass-bg)', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <i className="ph ph-info" style={{ color: '#3b82f6', fontSize: '1.5rem' }}></i>
           <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>
             Silakan pilih mata kuliah yang ingin diambil semester ini.
@@ -168,7 +176,7 @@ export default function KRSPage() {
       )}
 
       {krsOpen && (
-        <div style={{ background: 'var(--color-bg)', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
+        <div className="siakad-card" style={{ padding: '24px' }}>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }}>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Daftar Mata Kuliah Tersedia</h2>
@@ -181,11 +189,11 @@ export default function KRSPage() {
                 onClick={handleSubmit}
                 disabled={isSubmitting || selectedCourses.length === 0}
                 style={{
-                  background: (isSubmitting || selectedCourses.length === 0) ? '#9ca3af' : '#2563eb',
+                  background: (isSubmitting || selectedCourses.length === 0) ? 'var(--color-muted)' : '#0f172a',
                   color: 'white', border: 'none', padding: '10px 20px', borderRadius: '12px',
                   fontWeight: 'bold', cursor: (isSubmitting || selectedCourses.length === 0) ? 'not-allowed' : 'pointer',
                   display: 'flex', alignItems: 'center', gap: '8px',
-                  boxShadow: '0 4px 6px -1px rgba(37, 99, 235, 0.2)', transition: 'all 0.2s',
+                  boxShadow: '0 4px 6px -1px rgba(15, 23, 42, 0.2)', transition: 'all 0.2s',
                   fontSize: '1rem'
                 }}
               >
@@ -196,14 +204,14 @@ export default function KRSPage() {
         </div>
         
         <div style={{ overflowX: 'auto', maxWidth: '100%', paddingBottom: '10px' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
+          <table className="siakad-table">
             <thead>
-              <tr style={{ background: 'var(--color-bg)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                <th style={{ padding: '16px', borderRadius: '8px 0 0 8px', fontWeight: '600', width: '50px' }}>Pilih</th>
-                <th style={{ padding: '16px', fontWeight: '600' }}>Kode MK</th>
-                <th style={{ padding: '16px', fontWeight: '600' }}>Mata Kuliah</th>
-                <th style={{ padding: '16px', fontWeight: '600' }}>Dosen Pengampu</th>
-                <th style={{ padding: '16px', borderRadius: '0 8px 8px 0', fontWeight: '600' }}>SKS</th>
+              <tr>
+                <th style={{ width: '50px' }}>Pilih</th>
+                <th>Kode MK</th>
+                <th>Mata Kuliah</th>
+                <th>Dosen Pengampu</th>
+                <th>SKS</th>
               </tr>
             </thead>
             <tbody>
@@ -216,26 +224,24 @@ export default function KRSPage() {
                     key={course.id} 
                     onClick={() => toggleCourse(course.id)}
                     style={{ 
-                      borderBottom: '1px solid #f3f4f6', 
-                      background: isSelected ? '#eff6ff' : 'white',
+                      background: isSelected ? 'rgba(59,130,246,0.05)' : 'transparent',
                       cursor: isLocked ? 'default' : 'pointer',
-                      transition: 'all 0.2s'
                     }}
                   >
-                    <td style={{ padding: '16px' }}>
+                    <td>
                       <div style={{ 
-                        width: '20px', height: '20px', border: `2px solid ${isSelected ? '#3b82f6' : '#d1d5db'}`, 
-                        borderRadius: '4px', background: isSelected ? '#3b82f6' : 'white',
+                        width: '20px', height: '20px', border: `2px solid ${isSelected ? '#0f172a' : 'var(--color-border)'}`, 
+                        borderRadius: '4px', background: isSelected ? '#0f172a' : 'transparent',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         opacity: isLocked ? 0.6 : 1
                       }}>
                         {isSelected && <i className="ph ph-check" style={{ color: 'white', fontSize: '0.8rem', fontWeight: 'bold' }}></i>}
                       </div>
                     </td>
-                    <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{course.code}</td>
-                    <td style={{ padding: '16px', fontWeight: '600', color: 'var(--color-text)' }}>{course.name}</td>
-                    <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{course.dosen?.name || 'Belum Ditentukan'}</td>
-                    <td style={{ padding: '16px', color: 'var(--color-muted)', fontWeight: '600' }}>{course.sks}</td>
+                    <td style={{ fontWeight: 'bold' }}>{course.code}</td>
+                    <td style={{ fontWeight: '600' }}>{course.name}</td>
+                    <td style={{ color: 'var(--color-muted)' }}>{course.dosen?.name || 'Belum Ditentukan'}</td>
+                    <td style={{ color: 'var(--color-muted)', fontWeight: '600' }}>{course.sks}</td>
                   </tr>
                 );
               })}

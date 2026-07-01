@@ -33,10 +33,16 @@ export default function JadwalKalenderPage() {
 
   return (
     <div>
-      <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Jadwal & Kalender</h1>
-          <p style={{ color: 'var(--color-muted)', margin: 0 }}>Lihat jadwal mingguan dan kalender akademik Anda.</p>
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Jadwal & Kalender</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Lihat jadwal mingguan dan kalender akademik Anda.</p>
         </div>
       </div>
 
@@ -44,11 +50,11 @@ export default function JadwalKalenderPage() {
         <button 
           onClick={() => setActiveTab('jadwal')}
           style={{ 
-            background: activeTab === 'jadwal' ? '#4f46e5' : 'var(--glass-bg)', 
+            background: activeTab === 'jadwal' ? '#0f172a' : 'var(--glass-bg)', 
             color: activeTab === 'jadwal' ? 'white' : 'var(--color-text)', 
             border: activeTab === 'jadwal' ? 'none' : '1px solid var(--color-border)', 
             padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer',
-            boxShadow: activeTab === 'jadwal' ? '0 4px 10px rgba(79,70,229,0.3)' : 'none',
+            boxShadow: activeTab === 'jadwal' ? '0 4px 10px rgba(15,23,42,0.3)' : 'none',
             transition: 'all 0.2s'
           }}>
           <i className="ph ph-calendar-blank" style={{ marginRight: '8px' }}></i> Jadwal Kuliah Mingguan
@@ -56,11 +62,11 @@ export default function JadwalKalenderPage() {
         <button 
           onClick={() => setActiveTab('kalender')}
           style={{ 
-            background: activeTab === 'kalender' ? '#4f46e5' : 'var(--glass-bg)', 
+            background: activeTab === 'kalender' ? '#0f172a' : 'var(--glass-bg)', 
             color: activeTab === 'kalender' ? 'white' : 'var(--color-text)', 
             border: activeTab === 'kalender' ? 'none' : '1px solid var(--color-border)', 
             padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer',
-            boxShadow: activeTab === 'kalender' ? '0 4px 10px rgba(79,70,229,0.3)' : 'none',
+            boxShadow: activeTab === 'kalender' ? '0 4px 10px rgba(15,23,42,0.3)' : 'none',
             transition: 'all 0.2s'
           }}>
           <i className="ph ph-calendar-check" style={{ marginRight: '8px' }}></i> Kalender Akademik
@@ -68,26 +74,26 @@ export default function JadwalKalenderPage() {
       </div>
 
       {activeTab === 'jadwal' && (
-        <div style={{ background: 'var(--color-bg)', borderRadius: '16px', border: '1px solid var(--color-border)', overflow: 'hidden' }}>
-          <div className="overflow-x-auto">
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+        <div className="siakad-card" style={{ overflow: 'hidden' }}>
+          <div style={{ overflowX: 'auto' }}>
+            <table className="siakad-table">
               <thead>
-                <tr style={{ background: 'var(--glass-bg)' }}>
-                  <th style={{ padding: '16px', borderBottom: '2px solid var(--color-border)', color: 'var(--color-text)', fontWeight: 'bold' }}>Hari</th>
-                  <th style={{ padding: '16px', borderBottom: '2px solid var(--color-border)', color: 'var(--color-text)', fontWeight: 'bold' }}>Jam</th>
-                  <th style={{ padding: '16px', borderBottom: '2px solid var(--color-border)', color: 'var(--color-text)', fontWeight: 'bold' }}>Mata Kuliah</th>
-                  <th style={{ padding: '16px', borderBottom: '2px solid var(--color-border)', color: 'var(--color-text)', fontWeight: 'bold' }}>Dosen</th>
-                  <th style={{ padding: '16px', borderBottom: '2px solid var(--color-border)', color: 'var(--color-text)', fontWeight: 'bold' }}>Ruang</th>
+                <tr>
+                  <th>Hari</th>
+                  <th>Jam</th>
+                  <th>Mata Kuliah</th>
+                  <th>Dosen</th>
+                  <th>Ruang</th>
                 </tr>
               </thead>
               <tbody>
                 {schedule.map((item, i) => (
-                  <tr key={i} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                    <td style={{ padding: '16px', color: 'var(--color-text)', fontWeight: 'bold' }}>{item.day}</td>
-                    <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{item.time}</td>
-                    <td style={{ padding: '16px', color: 'var(--color-text)' }}>{item.course}</td>
-                    <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{item.dosen}</td>
-                    <td style={{ padding: '16px', color: 'var(--color-text)' }}>
+                  <tr key={i}>
+                    <td style={{ fontWeight: 'bold' }}>{item.day}</td>
+                    <td style={{ color: 'var(--color-muted)' }}>{item.time}</td>
+                    <td>{item.course}</td>
+                    <td style={{ color: 'var(--color-muted)' }}>{item.dosen}</td>
+                    <td>
                       <span style={{ background: 'var(--glass-bg)', padding: '4px 12px', borderRadius: '6px', fontSize: '0.85rem', border: '1px solid var(--color-border)' }}>
                         {item.room}
                       </span>
@@ -103,7 +109,7 @@ export default function JadwalKalenderPage() {
       {activeTab === 'kalender' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {calendarEvents.map((item, i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '16px', background: 'var(--color-bg)', padding: '20px', borderRadius: '16px', border: '1px solid var(--color-border)' }}>
+            <div key={i} className="siakad-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
               <div style={{ background: 'var(--glass-bg)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {getEventIcon(item.type)}
               </div>

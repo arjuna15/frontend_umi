@@ -41,7 +41,6 @@ export default function AdminDashboard() {
     </div>
   );
 
-  // Prepare chart data
   const chartData = [
     { name: 'Sistem Informasi', users: 120 },
     { name: 'Teknik Informatika', users: 180 },
@@ -50,21 +49,25 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div>
-      <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Panel Administrator</h1>
-          <p style={{ color: 'var(--color-muted)', margin: 0 }}>Kelola pengguna, kelas, dan pantau aktivitas akademik.</p>
+    <div className="fade-in">
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Panel Administrator</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola pengguna, kelas, dan pantau aktivitas akademik.</p>
         </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '32px' }}>
-        <div style={{ 
-          background: 'var(--glass-bg)', backdropFilter: 'blur(10px)',
-          padding: '24px', borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
-          border: 'var(--glass-border)', display: 'flex', alignItems: 'center', gap: '16px' 
+        <div className="siakad-card stagger-1" style={{ 
+          padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' 
         }}>
-          <div style={{ width: '50px', height: '50px', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
+          <div style={{ width: '50px', height: '50px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
             <i className="ph ph-users"></i>
           </div>
           <div>
@@ -73,12 +76,10 @@ export default function AdminDashboard() {
           </div>
         </div>
         
-        <div style={{ 
-          background: 'var(--glass-bg)', backdropFilter: 'blur(10px)',
-          padding: '24px', borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
-          border: 'var(--glass-border)', display: 'flex', alignItems: 'center', gap: '16px' 
+        <div className="siakad-card stagger-2" style={{ 
+          padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' 
         }}>
-          <div style={{ width: '50px', height: '50px', background: 'linear-gradient(135deg, #10b981 0%, #047857 100%)', color: 'white', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
+          <div style={{ width: '50px', height: '50px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
             <i className="ph ph-chalkboard"></i>
           </div>
           <div>
@@ -88,7 +89,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div style={{ marginBottom: '32px', background: 'var(--glass-bg)', padding: '24px', borderRadius: '16px', boxShadow: 'var(--glass-shadow)', border: 'var(--glass-border)' }}>
+      <div className="siakad-card stagger-3" style={{ marginBottom: '32px', padding: '24px' }}>
         <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Distribusi Mahasiswa per Prodi</h2>
         <div style={{ height: '300px', width: '100%' }}>
           <ResponsiveContainer width="100%" height="100%">
@@ -97,12 +98,12 @@ export default function AdminDashboard() {
               <XAxis dataKey="name" stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)' }} axisLine={false} tickLine={false} />
               <YAxis stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)' }} axisLine={false} tickLine={false} />
               <Tooltip 
-                contentStyle={{ background: 'var(--color-bg)', border: 'var(--glass-border)', borderRadius: '8px', color: 'var(--color-text)' }}
+                contentStyle={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }}
                 cursor={{ fill: 'var(--color-border)', opacity: 0.4 }}
               />
               <Bar dataKey="users" radius={[8, 8, 0, 0]}>
                 {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#3b82f6' : '#10b981'} />
+                  <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#3b82f6' : '#C41E3A'} />
                 ))}
               </Bar>
             </BarChart>
@@ -110,29 +111,26 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div style={{ 
-        background: 'var(--glass-bg)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '24px', 
-        boxShadow: 'var(--glass-shadow)', border: 'var(--glass-border)'
-      }}>
+      <div className="siakad-card stagger-4" style={{ padding: '24px', overflow: 'hidden' }}>
         <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Daftar Kelas (Overview)</h2>
         
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
+          <table className="siakad-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
             <thead>
-              <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                <th style={{ padding: '16px', borderRadius: '8px 0 0 8px', fontWeight: '600' }}>Kode MK</th>
+              <tr>
+                <th style={{ padding: '16px', fontWeight: '600' }}>Kode MK</th>
                 <th style={{ padding: '16px', fontWeight: '600' }}>Mata Kuliah</th>
                 <th style={{ padding: '16px', fontWeight: '600' }}>Dosen Pengampu</th>
-                <th style={{ padding: '16px', borderRadius: '0 8px 8px 0', fontWeight: '600' }}>SKS</th>
+                <th style={{ padding: '16px', fontWeight: '600' }}>SKS</th>
               </tr>
             </thead>
-            <tbody style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>
+            <tbody>
               {data.courses && data.courses.map((c, i) => (
-                <tr key={i} style={{ borderBottom: i === data.courses.length - 1 ? 'none' : '1px solid rgba(229, 231, 235, 0.5)' }}>
+                <tr key={i}>
                   <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{c.code}</td>
-                  <td style={{ padding: '16px' }}>{c.name}</td>
-                  <td style={{ padding: '16px' }}>{c.dosen?.name || '-'}</td>
-                  <td style={{ padding: '16px', fontWeight: 'bold' }}>{c.sks}</td>
+                  <td style={{ padding: '16px', color: 'var(--color-text)' }}>{c.name}</td>
+                  <td style={{ padding: '16px', color: 'var(--color-text)' }}>{c.dosen?.name || '-'}</td>
+                  <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{c.sks}</td>
                 </tr>
               ))}
             </tbody>

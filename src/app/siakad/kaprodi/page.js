@@ -57,20 +57,26 @@ export default function KaprodiDashboard() {
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-        <div>
-          <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            Dashboard Statistik <i className="ph ph-chart-pie-slice" style={{ color: 'var(--color-text)' }}></i>
-          </h2>
-          <p style={{ margin: 0, color: 'var(--color-muted)' }}>Overview dan metrik utama Program Studi Anda.</p>
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — KAPRODI</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            Dashboard Statistik <i className="ph ph-chart-pie-slice"></i>
+          </h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Overview dan metrik utama Program Studi Anda.</p>
         </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '30px' }}>
         
         <div className="siakad-card stagger-1" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '4px solid #3b82f6' }}>
-          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'var(--glass-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <i className="ph ph-books" style={{ fontSize: '2rem', color: 'var(--color-text)' }}></i>
+          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(59,130,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <i className="ph ph-books" style={{ fontSize: '2rem', color: '#3b82f6' }}></i>
           </div>
           <div>
             <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Kelas Aktif</p>
@@ -79,8 +85,8 @@ export default function KaprodiDashboard() {
         </div>
         
         <div className="siakad-card stagger-2" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '4px solid #10b981' }}>
-          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'var(--glass-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <i className="ph ph-student" style={{ fontSize: '2rem', color: 'var(--color-text)' }}></i>
+          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(16,185,129,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <i className="ph ph-student" style={{ fontSize: '2rem', color: '#10b981' }}></i>
           </div>
           <div>
             <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Mahasiswa</p>
@@ -89,8 +95,8 @@ export default function KaprodiDashboard() {
         </div>
 
         <div className="siakad-card stagger-3" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '4px solid #8b5cf6' }}>
-          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'var(--glass-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <i className="ph ph-chalkboard-teacher" style={{ fontSize: '2rem', color: 'var(--color-text)' }}></i>
+          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(139,92,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <i className="ph ph-chalkboard-teacher" style={{ fontSize: '2rem', color: '#8b5cf6' }}></i>
           </div>
           <div>
             <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Dosen</p>
@@ -119,7 +125,7 @@ export default function KaprodiDashboard() {
                 ))}
               </Pie>
               <Tooltip 
-                contentStyle={{ background: 'var(--color-bg)', border: 'var(--glass-border)', borderRadius: '8px', color: 'var(--color-text)' }}
+                contentStyle={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }}
                 itemStyle={{ color: 'var(--color-text)' }}
               />
               <Legend verticalAlign="bottom" height={36} />
@@ -132,10 +138,10 @@ export default function KaprodiDashboard() {
         <h3 style={{ margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-text)' }}>
           <i className="ph ph-bell-ringing" style={{ color: '#ef4444' }}></i> Peringatan Sistem
         </h3>
-        <div style={{ background: 'var(--glass-bg)', border: '1px solid #fecaca', borderRadius: '12px', padding: '16px', color: 'var(--color-text)', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-          <i className="ph ph-warning-circle" style={{ fontSize: '1.5rem', marginTop: '2px' }}></i>
+        <div style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid #fecaca', borderRadius: '12px', padding: '16px', color: 'var(--color-text)', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+          <i className="ph ph-warning-circle" style={{ fontSize: '1.5rem', marginTop: '2px', color: '#ef4444' }}></i>
           <div>
-            <strong style={{ display: 'block', marginBottom: '4px' }}>Tidak Ada Peringatan Kritis</strong>
+            <strong style={{ display: 'block', marginBottom: '4px', color: '#ef4444' }}>Tidak Ada Peringatan Kritis</strong>
             <span style={{ fontSize: '0.9rem', color: 'var(--color-text)' }}>Semua dosen telah aktif mengisi jurnal BAP minggu ini. Tidak ada kelas yang kosong lebih dari 3 kali berturut-turut.</span>
           </div>
         </div>

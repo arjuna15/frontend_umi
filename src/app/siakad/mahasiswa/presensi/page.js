@@ -126,9 +126,17 @@ export default function MahasiswaPresensi() {
 
   return (
     <div>
-      <div style={{ marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '2.2rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Presensi Mahasiswa</h1>
-        <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '1.05rem' }}>Catat kehadiran mandiri dan pantau persentase absensi Anda.</p>
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Presensi Mahasiswa</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Catat kehadiran mandiri dan pantau persentase absensi Anda.</p>
+        </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
@@ -157,7 +165,7 @@ export default function MahasiswaPresensi() {
               </div>
               
               {course.active_session ? (
-                <div style={{ background: 'var(--glass-bg)', border: '1px solid #bbf7d0', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
+                <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
                   <p style={{ margin: '0 0 12px 0', fontSize: '0.95rem', color: 'var(--color-text)', fontWeight: '600' }}>Sesi Absen Pertemuan ke-{course.active_session.meeting} Dibuka! ({course.active_session.mode})</p>
                   <button 
                     onClick={() => handleAttend(course.active_session)}
@@ -168,7 +176,7 @@ export default function MahasiswaPresensi() {
                   </button>
                 </div>
               ) : (
-                <div style={{ background: 'var(--glass-bg)', border: '1px dashed #cbd5e1', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
+                <div style={{ background: 'var(--glass-bg)', border: '1px dashed var(--color-border)', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
                   <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--color-text)' }}>Tidak ada sesi absen yang aktif saat ini.</p>
                 </div>
               )}

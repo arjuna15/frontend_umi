@@ -86,17 +86,17 @@ export default function SiakadLogin() {
         }
         .blob-1 {
           top: -20%; left: -10%; width: 70vw; height: 70vw;
-          background: radial-gradient(circle, rgba(225, 29, 72, 0.4) 0%, rgba(225, 29, 72, 0) 60%);
+          background: radial-gradient(circle, rgba(196, 30, 58, 0.4) 0%, rgba(196, 30, 58, 0) 60%);
           animation-delay: 0s;
         }
         .blob-2 {
           bottom: -30%; right: -20%; width: 80vw; height: 80vw;
-          background: radial-gradient(circle, rgba(124, 58, 237, 0.4) 0%, rgba(124, 58, 237, 0) 60%);
+          background: radial-gradient(circle, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0) 60%);
           animation-delay: -5s;
         }
         .blob-3 {
           top: 40%; left: 40%; width: 50vw; height: 50vw;
-          background: radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, rgba(37, 99, 235, 0) 60%);
+          background: radial-gradient(circle, rgba(76, 5, 25, 0.3) 0%, rgba(76, 5, 25, 0) 60%);
           animation-delay: -10s;
         }
 
@@ -112,7 +112,7 @@ export default function SiakadLogin() {
           position: absolute;
           background: #ffffff;
           border-radius: 50%;
-          box-shadow: 0 0 10px #ffffff, 0 0 20px #e11d48;
+          box-shadow: 0 0 10px #ffffff, 0 0 20px #c41e3a;
           opacity: 0.4;
           z-index: 2;
           animation: floatUp linear infinite;
@@ -212,14 +212,14 @@ export default function SiakadLogin() {
         }
         .aurora-input:focus {
           background: rgba(15, 23, 42, 0.9);
-          border-color: #e11d48;
-          box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.15), inset 0 2px 10px rgba(0,0,0,0.3);
+          border-color: #c41e3a;
+          box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.15), inset 0 2px 10px rgba(0,0,0,0.3);
         }
         .aurora-input:focus + .aurora-icon-box, 
         .aurora-input-group:focus-within .aurora-icon-box {
-          color: #e11d48;
+          color: #c41e3a;
           transform: translateY(-50%) scale(1.1);
-          text-shadow: 0 0 10px rgba(225, 29, 72, 0.5);
+          text-shadow: 0 0 10px rgba(196, 30, 58, 0.5);
         }
         .aurora-input::placeholder {
           color: #64748b;
@@ -237,8 +237,8 @@ export default function SiakadLogin() {
           transition: all 0.3s;
         }
         .aurora-eye:hover { 
-          color: #e11d48; 
-          text-shadow: 0 0 10px rgba(225, 29, 72, 0.5);
+          color: #c41e3a; 
+          text-shadow: 0 0 10px rgba(196, 30, 58, 0.5);
         }
 
         .aurora-options {
@@ -269,9 +269,9 @@ export default function SiakadLogin() {
           transition: all 0.2s;
         }
         input:checked + .aurora-checkbox {
-          background: #e11d48;
-          border-color: #e11d48;
-          box-shadow: 0 0 10px rgba(225, 29, 72, 0.5);
+          background: #c41e3a;
+          border-color: #c41e3a;
+          box-shadow: 0 0 10px rgba(196, 30, 58, 0.5);
         }
 
         .aurora-btn {
@@ -282,24 +282,24 @@ export default function SiakadLogin() {
           padding: 18px;
           border-radius: 16px;
           border: none;
-          background: linear-gradient(135deg, #f43f5e, #be123c);
+          background: linear-gradient(135deg, #c41e3a, #9f1239);
           color: white;
           font-size: 1.1rem;
           font-weight: 800;
           cursor: pointer;
-          box-shadow: 0 10px 30px -5px rgba(225, 29, 72, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          box-shadow: 0 10px 30px -5px rgba(196, 30, 58, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           letter-spacing: 0.1em;
           text-transform: uppercase;
         }
         .aurora-btn:hover {
           transform: translateY(-3px);
-          box-shadow: 0 15px 40px -5px rgba(225, 29, 72, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-          background: linear-gradient(135deg, #fb7185, #e11d48);
+          box-shadow: 0 15px 40px -5px rgba(196, 30, 58, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+          background: linear-gradient(135deg, #fb7185, #c41e3a);
         }
         .aurora-btn:active {
           transform: translateY(1px);
-          box-shadow: 0 5px 15px -5px rgba(225, 29, 72, 0.5);
+          box-shadow: 0 5px 15px -5px rgba(196, 30, 58, 0.5);
         }
         .aurora-btn:disabled {
           background: #475569;
@@ -318,7 +318,7 @@ export default function SiakadLogin() {
           align-items: center;
           text-align: center;
           padding: 40px;
-          background: linear-gradient(135deg, rgba(225, 29, 72, 0.1), rgba(124, 58, 237, 0.1));
+          background: linear-gradient(135deg, rgba(196, 30, 58, 0.1), rgba(15, 23, 42, 0.1));
           border-left: 1px solid rgba(255, 255, 255, 0.05);
           overflow: hidden;
         }
@@ -333,9 +333,9 @@ export default function SiakadLogin() {
           transform: translate(-50%, -50%);
           pointer-events: none;
         }
-        .neon-ring-1 { width: 300px; height: 300px; border-top-color: rgba(225, 29, 72, 0.4); animation: spin 10s linear infinite; }
-        .neon-ring-2 { width: 450px; height: 450px; border-right-color: rgba(124, 58, 237, 0.4); animation: spin 15s linear infinite reverse; }
-        .neon-ring-3 { width: 600px; height: 600px; border-bottom-color: rgba(37, 99, 235, 0.4); animation: spin 20s linear infinite; }
+        .neon-ring-1 { width: 300px; height: 300px; border-top-color: rgba(196, 30, 58, 0.4); animation: spin 10s linear infinite; }
+        .neon-ring-2 { width: 450px; height: 450px; border-right-color: rgba(15, 23, 42, 0.4); animation: spin 15s linear infinite reverse; }
+        .neon-ring-3 { width: 600px; height: 600px; border-bottom-color: rgba(76, 5, 25, 0.4); animation: spin 20s linear infinite; }
 
         @keyframes spin {
           100% { transform: translate(-50%, -50%) rotate(360deg); }
@@ -362,7 +362,7 @@ export default function SiakadLogin() {
           padding: 24px;
           border-radius: 50%;
           border: 1px solid rgba(255, 255, 255, 0.1);
-          box-shadow: 0 0 40px rgba(225, 29, 72, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
+          box-shadow: 0 0 40px rgba(196, 30, 58, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
           margin-bottom: 30px;
           position: relative;
         }
@@ -372,7 +372,7 @@ export default function SiakadLogin() {
           position: absolute;
           inset: -10px;
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(225, 29, 72, 0.4) 0%, transparent 70%);
+          background: radial-gradient(circle, rgba(196, 30, 58, 0.4) 0%, transparent 70%);
           z-index: -1;
           animation: pulseGlow 3s infinite alternate;
         }
@@ -397,8 +397,8 @@ export default function SiakadLogin() {
         }
 
         .error-alert {
-          background: rgba(225, 29, 72, 0.1);
-          border: 1px solid rgba(225, 29, 72, 0.5);
+          background: rgba(196, 30, 58, 0.1);
+          border: 1px solid rgba(196, 30, 58, 0.5);
           color: #fda4af;
           padding: 14px 20px;
           border-radius: 16px;
@@ -410,7 +410,7 @@ export default function SiakadLogin() {
           gap: 12px;
           font-weight: 600;
           animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 10px 30px rgba(225, 29, 72, 0.15);
+          box-shadow: 0 10px 30px rgba(196, 30, 58, 0.15);
         }
 
         @media (max-width: 900px) {
@@ -460,7 +460,7 @@ export default function SiakadLogin() {
 
           {error && (
             <div className="error-alert">
-              <i className="ph ph-warning-circle" style={{ fontSize: '1.4rem', color: '#f43f5e' }}></i> {error}
+              <i className="ph ph-warning-circle" style={{ fontSize: '1.4rem', color: '#c41e3a' }}></i> {error}
             </div>
           )}
 
@@ -501,7 +501,7 @@ export default function SiakadLogin() {
                 </div>
                 Ingat saya
               </label>
-              <a href="#" style={{ color: '#e11d48', fontWeight: '600', textDecoration: 'none', transition: 'color 0.2s', textShadow: '0 0 10px rgba(225,29,72,0.3)' }}>
+              <a href="#" style={{ color: '#c41e3a', fontWeight: '600', textDecoration: 'none', transition: 'color 0.2s', textShadow: '0 0 10px rgba(225,29,72,0.3)' }}>
                 Lupa password?
               </a>
             </div>

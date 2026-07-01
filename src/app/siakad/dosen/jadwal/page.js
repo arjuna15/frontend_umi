@@ -66,7 +66,7 @@ export default function JadwalPage() {
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       {/* Hero Header */}
-      <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1e3a5f 100%)', borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)', borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '220px', height: '220px', borderRadius: '50%', background: 'rgba(59,130,246,0.2)', filter: 'blur(50px)', pointerEvents: 'none' }}></div>
         <div style={{ position: 'absolute', bottom: '-20px', left: '25%', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(139,92,246,0.15)', filter: 'blur(40px)', pointerEvents: 'none' }}></div>
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
@@ -119,8 +119,8 @@ export default function JadwalPage() {
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                     <td style={{ padding: '16px 20px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: `hsl(${i * 55 % 360}, 65%, 55%)`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                          <span style={{ color: 'white', fontWeight: '800', fontSize: '0.85rem' }}>{c.code?.substring(0, 2) || '??'}</span>
+                        <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          <span style={{ color: '#6366f1', fontWeight: '800', fontSize: '0.85rem' }}>{c.code?.substring(0, 2) || '??'}</span>
                         </div>
                         <div>
                           <p style={{ margin: 0, fontWeight: '700', color: 'var(--color-text)' }}>{c.name}</p>

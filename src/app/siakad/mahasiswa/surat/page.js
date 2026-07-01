@@ -24,33 +24,43 @@ export default function SuratAdministrasiPage() {
 
   return (
     <div>
-      <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Surat & Administrasi</h1>
-          <p style={{ color: 'var(--color-muted)', margin: 0 }}>Ajukan surat keterangan dan layanan administrasi akademik.</p>
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+            <div>
+              <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Surat & Administrasi</h1>
+              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Ajukan surat keterangan dan layanan administrasi akademik.</p>
+            </div>
+            <button onClick={handleAjukan} style={{ background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)', padding: '10px 20px', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer', backdropFilter: 'blur(10px)' }}>
+              <i className="ph ph-plus" style={{ marginRight: '8px' }}></i> Ajukan Surat Baru
+            </button>
+          </div>
         </div>
-        <button onClick={handleAjukan} style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79,70,229,0.3)' }}>
-          <i className="ph ph-plus" style={{ marginRight: '8px' }}></i> Ajukan Surat Baru
-        </button>
       </div>
 
-      <div style={{ background: 'var(--color-bg)', borderRadius: '16px', border: '1px solid var(--color-border)', overflow: 'hidden' }}>
-        <div className="overflow-x-auto">
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+      <div className="siakad-card" style={{ overflow: 'hidden' }}>
+        <div style={{ overflowX: 'auto' }}>
+          <table className="siakad-table">
             <thead>
-              <tr style={{ background: 'var(--glass-bg)' }}>
-                <th style={{ padding: '16px', borderBottom: '2px solid var(--color-border)', color: 'var(--color-text)', fontWeight: 'bold' }}>Tanggal</th>
-                <th style={{ padding: '16px', borderBottom: '2px solid var(--color-border)', color: 'var(--color-text)', fontWeight: 'bold' }}>Jenis Pengajuan</th>
-                <th style={{ padding: '16px', borderBottom: '2px solid var(--color-border)', color: 'var(--color-text)', fontWeight: 'bold' }}>Status</th>
-                <th style={{ padding: '16px', borderBottom: '2px solid var(--color-border)', color: 'var(--color-text)', fontWeight: 'bold' }}>Catatan</th>
+              <tr>
+                <th>Tanggal</th>
+                <th>Jenis Pengajuan</th>
+                <th>Status</th>
+                <th>Catatan</th>
               </tr>
             </thead>
             <tbody>
               {requests.map(req => (
-                <tr key={req.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                  <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{req.date}</td>
-                  <td style={{ padding: '16px', color: 'var(--color-text)', fontWeight: 'bold' }}>{req.type}</td>
-                  <td style={{ padding: '16px' }}>
+                <tr key={req.id}>
+                  <td style={{ color: 'var(--color-muted)' }}>{req.date}</td>
+                  <td style={{ fontWeight: 'bold' }}>{req.type}</td>
+                  <td>
                     <span style={{ 
                       padding: '4px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold',
                       background: req.status === 'Selesai' ? 'rgba(16, 185, 129, 0.1)' : req.status === 'Diproses' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(245, 158, 11, 0.1)',
@@ -59,7 +69,7 @@ export default function SuratAdministrasiPage() {
                       {req.status}
                     </span>
                   </td>
-                  <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{req.note}</td>
+                  <td style={{ color: 'var(--color-muted)' }}>{req.note}</td>
                 </tr>
               ))}
               {requests.length === 0 && (

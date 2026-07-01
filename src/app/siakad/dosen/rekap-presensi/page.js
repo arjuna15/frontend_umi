@@ -50,7 +50,7 @@ export default function RekapPresensiPage() {
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       {/* Hero Header */}
-      <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #064e3b 50%, #1e1b4b 100%)', borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)', borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '220px', height: '220px', borderRadius: '50%', background: 'rgba(16,185,129,0.25)', filter: 'blur(50px)', pointerEvents: 'none' }}></div>
         <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.2)', filter: 'blur(40px)', pointerEvents: 'none' }}></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
@@ -137,7 +137,7 @@ export default function RekapPresensiPage() {
                         <td style={{ padding: '16px 20px', fontWeight: '600', color: 'var(--color-muted)', fontSize: '0.9rem' }}>{mhs.nim || '—'}</td>
                         <td style={{ padding: '16px 20px' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: `hsl(${idx * 40 % 360}, 65%, 55%)`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: '800', fontSize: '0.9rem', flexShrink: 0 }}>
+                            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366f1', fontWeight: '800', fontSize: '0.9rem', flexShrink: 0 }}>
                               {mhs.name.charAt(0)}
                             </div>
                             <span style={{ fontWeight: '600', color: 'var(--color-text)' }}>{mhs.name}</span>

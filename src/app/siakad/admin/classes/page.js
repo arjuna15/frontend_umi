@@ -148,10 +148,18 @@ export default function AdminClassesPage() {
   };
 
   return (
-    <div>
-      <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Manajemen Kelas & Mata Kuliah</h1>
-        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Kelola daftar mata kuliah dan dosen pengampunya.</p>
+    <div className="fade-in">
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Kelas & Mata Kuliah</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola daftar mata kuliah dan dosen pengampunya.</p>
+        </div>
       </div>
 
       <div className="siakad-card stagger-1" style={{ marginBottom: '24px', padding: '24px', position: 'relative', zIndex: 50 }}>
@@ -159,15 +167,15 @@ export default function AdminClassesPage() {
         <form onSubmit={handleCreateCourse} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Kode Mata Kuliah</label>
-            <input name="code" required placeholder="Contoh: CS101..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
+            <input name="code" required placeholder="Contoh: CS101..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Mata Kuliah</label>
-            <input name="name" required placeholder="Algoritma & Pemrograman..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
+            <input name="name" required placeholder="Algoritma & Pemrograman..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
           </div>
           <div style={{ flex: '1 1 120px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jumlah SKS</label>
-            <input type="number" name="sks" required min="1" max="6" placeholder="SKS..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', outline: 'none' }} />
+            <input type="number" name="sks" required min="1" max="6" placeholder="SKS..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
           </div>
           <div style={{ flex: '1 1 200px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Dosen Pengampu</label>
@@ -188,18 +196,18 @@ export default function AdminClassesPage() {
 
       <div className="siakad-card stagger-2" style={{ padding: '0', overflow: 'hidden' }}>
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-            <thead style={{ background: 'var(--glass-bg)', borderBottom: '1px solid #e5e7eb' }}>
+          <table className="siakad-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+            <thead>
               <tr>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem' }}>Kode</th>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem' }}>Nama Mata Kuliah</th>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem' }}>SKS</th>
-                <th style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.9rem', textAlign: 'right' }}>Aksi</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600' }}>Kode</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600' }}>Nama Mata Kuliah</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600' }}>SKS</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600', textAlign: 'right' }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
               {courses.map((course, idx) => (
-                <tr key={course.id} style={{ borderBottom: '1px solid #e5e7eb', background: idx % 2 === 0 ? 'white' : 'rgba(249, 250, 251, 0.3)' }}>
+                <tr key={course.id}>
                   <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: 'bold', fontSize: '0.95rem' }}>{course.code}</td>
                   <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: '500' }}>{course.name}</td>
                   <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.sks} SKS</td>
@@ -212,7 +220,7 @@ export default function AdminClassesPage() {
                       ><i className="ph ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
                       <button 
                         onClick={() => handleDeleteCourse(course.id)}
-                        style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                        style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
                         title="Hapus Mata Kuliah"
                       ><i className="ph ph-trash" style={{ fontSize: '1rem' }}></i></button>
                     </div>
@@ -230,25 +238,25 @@ export default function AdminClassesPage() {
       </div>
 
       {isEditModalOpen && (
-        <div style={{ position: 'fixed', inset: 0, background: 'var(--glass-bg)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
-          <div style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
-            <h2 style={{ margin: '0 0 20px 0', fontSize: '1.25rem', fontWeight: 'bold' }}>Edit Mata Kuliah</h2>
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, backdropFilter: 'blur(4px)' }}>
+          <div className="siakad-card fade-in" style={{ padding: '24px', width: '100%', maxWidth: '500px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
+            <h2 style={{ margin: '0 0 20px 0', fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)' }}>Edit Mata Kuliah</h2>
             <form onSubmit={handleUpdateCourse}>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Kode Mata Kuliah</label>
-                <input value={editFormData.code} onChange={(e) => setEditFormData({...editFormData, code: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Kode Mata Kuliah</label>
+                <input value={editFormData.code} onChange={(e) => setEditFormData({...editFormData, code: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
               </div>
               <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Nama Mata Kuliah</label>
-                <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Nama Mata Kuliah</label>
+                <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
               </div>
               <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
                 <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>SKS</label>
-                  <input type="number" min="1" max="6" value={editFormData.sks} onChange={(e) => setEditFormData({...editFormData, sks: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db' }} />
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>SKS</label>
+                  <input type="number" min="1" max="6" value={editFormData.sks} onChange={(e) => setEditFormData({...editFormData, sks: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
                 </div>
                 <div style={{ flex: 2 }}>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600' }}>Dosen Pengampu</label>
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Dosen Pengampu</label>
                   <CustomSelect
                     value={editFormData.dosen_id}
                     onChange={(val) => setEditFormData({...editFormData, dosen_id: val})}
@@ -257,7 +265,7 @@ export default function AdminClassesPage() {
                 </div>
               </div>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-                <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 16px', background: 'transparent', border: '1px solid #d1d5db', borderRadius: '8px', cursor: 'pointer' }}>Batal</button>
+                <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 16px', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', color: 'var(--color-text)' }}>Batal</button>
                 <button type="submit" style={{ padding: '10px 16px', background: '#10b981', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Simpan Perubahan</button>
               </div>
             </form>

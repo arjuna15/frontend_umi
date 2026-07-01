@@ -52,25 +52,26 @@ export default function AdminPengaturan() {
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
-      <div style={{ marginBottom: '30px' }}>
-        <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.8rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          Pengaturan Sistem & Akademik <i className="ph ph-gear-six" style={{ color: 'var(--color-text)' }}></i>
-        </h2>
-        <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '1.05rem' }}>Kelola periode akademik dan status operasional sistem SIAKAD dengan aman.</p>
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            Pengaturan Sistem <i className="ph ph-gear-six"></i>
+          </h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola periode akademik dan status operasional sistem SIAKAD dengan aman.</p>
+        </div>
       </div>
 
-      <div className="siakad-card stagger-1" style={{ 
-        maxWidth: '650px', 
-        background: 'var(--color-bg)', 
-        borderRadius: '24px', 
-        padding: '32px', 
-        boxShadow: '0 10px 40px -10px rgba(0,0,0,0.08)',
-        border: '1px solid rgba(255,255,255,0.6)'
-      }}>
+      <div className="siakad-card stagger-1" style={{ maxWidth: '650px', padding: '32px' }}>
         
         {/* Section 1: Periode Akademik */}
         <div style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px' }}>
             <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
               <i className="ph ph-calendar-blank" style={{ fontSize: '1.2rem' }}></i>
             </div>
@@ -93,7 +94,7 @@ export default function AdminPengaturan() {
 
         {/* Section 2: Kontrol Akses Mahasiswa */}
         <div style={{ marginBottom: '40px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px' }}>
             <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
               <i className="ph ph-shield-check" style={{ fontSize: '1.2rem' }}></i>
             </div>
@@ -104,9 +105,8 @@ export default function AdminPengaturan() {
 
           <div style={{ 
             display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
-            padding: '20px', background: 'var(--color-bg)', borderRadius: '16px', 
-            border: '1px solid #e5e7eb', transition: 'all 0.2s',
-            boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)'
+            padding: '20px', background: 'var(--glass-bg)', borderRadius: '16px', 
+            border: '1px solid var(--color-border)', transition: 'all 0.2s'
           }}>
             <div>
               <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Pengisian KRS Online</div>
@@ -119,8 +119,7 @@ export default function AdminPengaturan() {
               style={{
                 width: '64px', height: '36px', borderRadius: '20px', 
                 background: krsOpen ? '#10b981' : '#e5e7eb',
-                position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease',
-                boxShadow: krsOpen ? 'inset 0 2px 4px rgba(0,0,0,0.1)' : 'inset 0 2px 4px rgba(0,0,0,0.05)'
+                position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease'
               }}
             >
               <div style={{
@@ -135,7 +134,7 @@ export default function AdminPengaturan() {
 
         {/* Section 3: Geofencing Kampus */}
         <div style={{ marginBottom: '40px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px' }}>
             <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
               <i className="ph ph-map-pin" style={{ fontSize: '1.2rem' }}></i>
             </div>
@@ -148,7 +147,7 @@ export default function AdminPengaturan() {
 
           <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: '1fr 1fr' }}>
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-muted)', fontSize: '0.9rem' }}>Kampus Bintaro (Lat, Lng)</label>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Kampus Bintaro (Lat, Lng)</label>
               <input 
                 type="text" 
                 defaultValue={coordBintaro}
@@ -158,7 +157,7 @@ export default function AdminPengaturan() {
               />
             </div>
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-muted)', fontSize: '0.9rem' }}>Kampus Ps. Minggu (Lat, Lng)</label>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Kampus Ps. Minggu (Lat, Lng)</label>
               <input 
                 type="text" 
                 defaultValue={coordPasarMinggu}
@@ -176,10 +175,10 @@ export default function AdminPengaturan() {
           style={{ 
             background: 'linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)', 
             color: 'white', border: 'none', padding: '16px 24px', 
-            borderRadius: '16px', fontWeight: 700, cursor: 'pointer', width: '100%',
+            borderRadius: '12px', fontWeight: 700, cursor: 'pointer', width: '100%',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
-            fontSize: '1.05rem', boxShadow: '0 10px 20px -5px rgba(185, 28, 28, 0.4)',
-            transition: 'transform 0.2s, box-shadow 0.2s'
+            fontSize: '1.05rem', boxShadow: '0 4px 15px rgba(185, 28, 28, 0.3)',
+            transition: 'transform 0.2s'
           }}
           onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
           onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}

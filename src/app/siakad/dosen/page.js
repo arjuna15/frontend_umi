@@ -155,8 +155,8 @@ export default function DosenDashboard() {
             <div style={{ padding: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
               {courses.map((c, i) => (
                 <div key={i} style={{ padding: '20px', background: 'var(--glass-bg)', borderRadius: '16px', border: '1px solid var(--color-border)', display: 'flex', gap: '16px', alignItems: 'center', transition: 'all 0.2s' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: `hsl(${(i * 60) % 360}, 70%, 55%)`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <i className="ph ph-chalkboard-teacher" style={{ color: 'white', fontSize: '1.3rem' }}></i>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <i className="ph ph-chalkboard-teacher" style={{ color: '#6366f1', fontSize: '1.3rem' }}></i>
                   </div>
                   <div style={{ minWidth: 0 }}>
                     <p style={{ margin: '0 0 4px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.95rem' }}>{c.name}</p>

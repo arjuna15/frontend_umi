@@ -1,3 +1,7 @@
+import os
+
+files = {
+    "src/app/siakad/admin/users/page.js": """
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -309,3 +313,11 @@ export default function AdminUsersPage() {
     </div>
   );
 }
+"""
+}
+
+for path, content in files.items():
+    full_path = os.path.join('/home/junancok/Downloads/frontend_umi', path)
+    with open(full_path, 'w') as f:
+        f.write(content.strip() + '\n')
+print("Updated successfully")

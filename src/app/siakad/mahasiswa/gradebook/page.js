@@ -52,14 +52,22 @@ export default function MahasiswaGradebook() {
 
   return (
     <div>
-      <div style={{ marginBottom: '32px' }}>
-        <h1 style={{ fontSize: '2.2rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Rapor & Transkrip</h1>
-        <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '1.05rem' }}>Detail evaluasi akademik semester ini, dari tugas harian hingga UAS.</p>
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Rapor & Transkrip</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Detail evaluasi akademik semester ini, dari tugas harian hingga UAS.</p>
+        </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '32px' }}>
         <div className="siakad-card" style={{ padding: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '16px' }}>
-          <div style={{ width: '80px', height: '80px', background: 'rgba(234, 179, 8, 0.15)', color: '#eab308', border: '1px solid rgba(234, 179, 8, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(234, 179, 8, 0.1)' }}>
+          <div style={{ width: '80px', height: '80px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', border: '1px solid rgba(245, 158, 11, 0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(245, 158, 11, 0.1)' }}>
             <i className="ph ph-medal"></i>
           </div>
           <div>
@@ -69,7 +77,7 @@ export default function MahasiswaGradebook() {
         </div>
         
         <div className="siakad-card" style={{ padding: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '16px' }}>
-          <div style={{ width: '80px', height: '80px', background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(59, 130, 246, 0.1)' }}>
+          <div style={{ width: '80px', height: '80px', background: 'rgba(15, 23, 42, 0.1)', color: '#0f172a', border: '1px solid rgba(15, 23, 42, 0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(15, 23, 42, 0.1)' }}>
             <i className="ph ph-books"></i>
           </div>
           <div>
@@ -80,7 +88,7 @@ export default function MahasiswaGradebook() {
       </div>
 
       <div className="siakad-card" style={{ overflow: 'hidden' }}>
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid #e2e8f0', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+        <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--color-border)', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Rincian Nilai Mata Kuliah</h3>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
             <select 
@@ -99,23 +107,23 @@ export default function MahasiswaGradebook() {
               onChange={e => setSearch(e.target.value)}
               style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
             />
-            <button onClick={() => window.print()} style={{ background: '#4f46e5', border: 'none', padding: '8px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
+            <button onClick={() => window.print()} style={{ background: '#0f172a', border: 'none', padding: '8px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(15, 23, 42, 0.2)' }}>
               <i className="ph ph-printer"></i> Cetak Transkrip
             </button>
           </div>
         </div>
-        <div className="overflow-x-auto">
-          <table className="siakad-table" style={{ width: '100%', minWidth: '800px' }}>
+        <div style={{ overflowX: 'auto' }}>
+          <table className="siakad-table">
             <thead>
-              <tr style={{ background: 'var(--glass-bg)' }}>
-                <th style={{ padding: '16px 24px', textAlign: 'left' }}>Mata Kuliah</th>
-                <th style={{ padding: '16px 24px', textAlign: 'center' }}>SKS</th>
-                <th style={{ padding: '16px 24px', textAlign: 'center' }}>Tugas (20%)</th>
-                <th style={{ padding: '16px 24px', textAlign: 'center' }}>Kuis (20%)</th>
-                <th style={{ padding: '16px 24px', textAlign: 'center' }}>UTS (30%)</th>
-                <th style={{ padding: '16px 24px', textAlign: 'center' }}>UAS (30%)</th>
-                <th style={{ padding: '16px 24px', textAlign: 'center' }}>Angka</th>
-                <th style={{ padding: '16px 24px', textAlign: 'center' }}>Mutu</th>
+              <tr>
+                <th>Mata Kuliah</th>
+                <th style={{ textAlign: 'center' }}>SKS</th>
+                <th style={{ textAlign: 'center' }}>Tugas (20%)</th>
+                <th style={{ textAlign: 'center' }}>Kuis (20%)</th>
+                <th style={{ textAlign: 'center' }}>UTS (30%)</th>
+                <th style={{ textAlign: 'center' }}>UAS (30%)</th>
+                <th style={{ textAlign: 'center' }}>Angka</th>
+                <th style={{ textAlign: 'center' }}>Mutu</th>
               </tr>
             </thead>
             <tbody>
@@ -125,25 +133,25 @@ export default function MahasiswaGradebook() {
                   return <tr><td colSpan="8" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Mata kuliah tidak ditemukan.</td></tr>;
                 }
                 return filteredData.map((item, idx) => (
-                  <tr key={idx} style={{ borderBottom: '1px solid #e2e8f0' }} className="hover:bg-slate-50 transition-colors">
-                    <td style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)' }}>{item.course_name}</td>
-                    <td style={{ padding: '16px 24px', textAlign: 'center', color: 'var(--color-text)' }}>{item.sks}</td>
-                    <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.tugas}</td>
-                    <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.kuis}</td>
-                    <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.uts}</td>
-                    <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.uas}</td>
-                    <td style={{ padding: '16px 24px', textAlign: 'center', fontWeight: 'bold' }}>{item.akhir}</td>
-                    <td style={{ padding: '16px 24px', textAlign: 'center' }}>
+                  <tr key={idx}>
+                    <td style={{ fontWeight: '600' }}>{item.course_name}</td>
+                    <td style={{ textAlign: 'center' }}>{item.sks}</td>
+                    <td style={{ textAlign: 'center' }}>{item.tugas}</td>
+                    <td style={{ textAlign: 'center' }}>{item.kuis}</td>
+                    <td style={{ textAlign: 'center' }}>{item.uts}</td>
+                    <td style={{ textAlign: 'center' }}>{item.uas}</td>
+                    <td style={{ textAlign: 'center', fontWeight: 'bold' }}>{item.akhir}</td>
+                    <td style={{ textAlign: 'center' }}>
                     <span className="siakad-badge" style={{
                       background: item.huruf?.startsWith('A') ? 'rgba(16, 185, 129, 0.15)' : 
                                  item.huruf?.startsWith('B') ? 'rgba(59, 130, 246, 0.15)' : 
-                                 item.huruf?.startsWith('C') ? 'rgba(234, 179, 8, 0.15)' : 
-                                 item.huruf?.startsWith('D') ? 'rgba(249, 115, 22, 0.15)' : 
+                                 item.huruf?.startsWith('C') ? 'rgba(245, 158, 11, 0.15)' : 
+                                 item.huruf?.startsWith('D') ? 'rgba(239, 68, 68, 0.15)' : 
                                  item.huruf ? 'rgba(239, 68, 68, 0.15)' : 'var(--glass-bg)',
                       color: item.huruf?.startsWith('A') ? '#10b981' : 
                              item.huruf?.startsWith('B') ? '#3b82f6' : 
-                             item.huruf?.startsWith('C') ? '#eab308' : 
-                             item.huruf?.startsWith('D') ? '#f97316' : 
+                             item.huruf?.startsWith('C') ? '#f59e0b' : 
+                             item.huruf?.startsWith('D') ? '#ef4444' : 
                              item.huruf ? '#ef4444' : 'var(--color-muted)',
                       fontWeight: 'bold',
                       fontSize: '1rem',

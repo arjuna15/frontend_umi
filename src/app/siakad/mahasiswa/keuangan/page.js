@@ -59,48 +59,56 @@ export default function KeuanganPage() {
 
   return (
     <div>
-      <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Tagihan & Keuangan</h1>
-        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Cek status pembayaran SPP/UKT Anda di sini.</p>
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Tagihan & Keuangan</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Cek status pembayaran SPP/UKT Anda di sini.</p>
+        </div>
       </div>
 
-      <div style={{ background: 'var(--color-bg)', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
+      <div className="siakad-card" style={{ padding: '24px' }}>
         <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Daftar Tagihan Anda</h2>
         
         {data.billings && data.billings.length > 0 ? (
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
+            <table className="siakad-table">
               <thead>
-                <tr style={{ background: 'var(--color-bg)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  <th style={{ padding: '16px', borderRadius: '8px 0 0 8px', fontWeight: '600' }}>Deskripsi Tagihan</th>
-                  <th style={{ padding: '16px', fontWeight: '600' }}>Jatuh Tempo</th>
-                  <th style={{ padding: '16px', fontWeight: '600' }}>Nominal (Rp)</th>
-                  <th style={{ padding: '16px', fontWeight: '600' }}>Status</th>
-                  <th style={{ padding: '16px', borderRadius: '0 8px 8px 0', fontWeight: '600' }}>Aksi</th>
+                <tr>
+                  <th>Deskripsi Tagihan</th>
+                  <th>Jatuh Tempo</th>
+                  <th>Nominal (Rp)</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
-              <tbody style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>
+              <tbody>
                 {data.billings.map((bill, i) => (
-                  <tr key={i} style={{ borderBottom: i === data.billings.length - 1 ? 'none' : '1px solid #f3f4f6' }}>
-                    <td style={{ padding: '16px', fontWeight: '500' }}>{bill.description}</td>
-                    <td style={{ padding: '16px' }}>{bill.due_date}</td>
-                    <td style={{ padding: '16px', fontWeight: 'bold' }}>{new Intl.NumberFormat('id-ID').format(bill.amount)}</td>
-                    <td style={{ padding: '16px' }}>
+                  <tr key={i}>
+                    <td style={{ fontWeight: '500' }}>{bill.description}</td>
+                    <td>{bill.due_date}</td>
+                    <td style={{ fontWeight: 'bold' }}>{new Intl.NumberFormat('id-ID').format(bill.amount)}</td>
+                    <td>
                       <span style={{
                         display: 'inline-block',
                         padding: '4px 12px',
                         borderRadius: '999px',
                         fontSize: '0.85rem',
                         fontWeight: 'bold',
-                        background: bill.status === 'Lunas' ? '#ecfdf5' : '#fef2f2',
-                        color: bill.status === 'Lunas' ? '#059669' : '#dc2626'
+                        background: bill.status === 'Lunas' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)',
+                        color: bill.status === 'Lunas' ? '#10b981' : '#ef4444'
                       }}>
                         {bill.status}
                       </span>
                     </td>
-                    <td style={{ padding: '16px', display: 'flex', gap: '8px' }}>
+                    <td style={{ display: 'flex', gap: '8px' }}>
                       {bill.status !== 'Lunas' ? (
-                        <button onClick={() => handlePay(bill.id)} style={{ padding: '6px 12px', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <button onClick={() => handlePay(bill.id)} style={{ padding: '6px 12px', background: '#0f172a', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <i className="ph ph-wallet"></i> Bayar
                         </button>
                       ) : (

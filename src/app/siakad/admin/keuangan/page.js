@@ -137,47 +137,51 @@ export default function AdminKeuangan() {
   };
 
   return (
-    <div style={{ padding: '24px', maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <i className="ph ph-wallet" style={{ color: 'var(--color-text)' }}></i> Manajemen Keuangan
-          </h1>
-          <p style={{ color: 'var(--color-text)', marginTop: '4px' }}>Kelola seluruh tagihan dan pembayaran mahasiswa.</p>
+    <div className="fade-in" style={{ paddingBottom: '40px' }}>
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px' }}>
+          <div>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
+            <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '12px' }}>
+              Manajemen Keuangan <i className="ph ph-wallet"></i>
+            </h1>
+            <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola seluruh tagihan dan pembayaran mahasiswa.</p>
+          </div>
+          <button 
+            onClick={() => openModal()}
+            style={{
+              background: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(10px)',
+              color: 'white', border: '1px solid rgba(255,255,255,0.2)', padding: '12px 24px', borderRadius: '12px',
+              fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
+              transition: 'all 0.3s'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
+            onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
+          >
+            <i className="ph ph-plus-circle"></i> Tambah Tagihan
+          </button>
         </div>
-        <button 
-          onClick={() => openModal()}
-          style={{
-            background: 'linear-gradient(135deg, #0f172a 0%, #334155 100%)',
-            color: 'white', border: 'none', padding: '12px 24px', borderRadius: '12px',
-            fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
-            boxShadow: '0 4px 15px rgba(15,23,42,0.2)', transition: 'all 0.3s'
-          }}
-          onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-          onMouseOut={(e) => e.currentTarget.style.transform = 'none'}
-        >
-          <i className="ph ph-plus-circle"></i> Tambah Tagihan
-        </button>
       </div>
 
-      <div style={{
-        background: 'var(--glass-bg)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
-        border: '1px solid rgba(255,255,255,0.8)', borderRadius: '24px', padding: '24px',
-        boxShadow: '0 10px 40px rgba(0,0,0,0.03)'
-      }}>
+      <div className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden' }}>
         {loading ? (
           <div style={{ textAlign: 'center', padding: '40px', color: 'var(--color-text)' }}>Memuat data keuangan...</div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
+            <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
-                <tr style={{ borderBottom: '2px solid #e2e8f0' }}>
-                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>MAHASISWA</th>
-                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>DESKRIPSI TAGIHAN</th>
-                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>NOMINAL</th>
-                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>JATUH TEMPO</th>
-                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>STATUS</th>
-                  <th style={{ padding: '16px', color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: '700' }}>AKSI</th>
+                <tr>
+                  <th style={{ padding: '16px', fontWeight: '600' }}>MAHASISWA</th>
+                  <th style={{ padding: '16px', fontWeight: '600' }}>DESKRIPSI TAGIHAN</th>
+                  <th style={{ padding: '16px', fontWeight: '600' }}>NOMINAL</th>
+                  <th style={{ padding: '16px', fontWeight: '600' }}>JATUH TEMPO</th>
+                  <th style={{ padding: '16px', fontWeight: '600' }}>STATUS</th>
+                  <th style={{ padding: '16px', fontWeight: '600' }}>AKSI</th>
                 </tr>
               </thead>
               <tbody>
@@ -186,7 +190,7 @@ export default function AdminKeuangan() {
                     <td colSpan="6" style={{ textAlign: 'center', padding: '32px', color: 'var(--color-text)' }}>Belum ada tagihan.</td>
                   </tr>
                 ) : billings.map((billing) => (
-                  <tr key={billing.id} style={{ borderBottom: '1px solid #f1f5f9', transition: 'background 0.3s' }}>
+                  <tr key={billing.id}>
                     <td style={{ padding: '16px', fontWeight: '600', color: 'var(--color-text)' }}>{billing.user?.name || 'User Tidak Diketahui'}</td>
                     <td style={{ padding: '16px', color: 'var(--color-text)' }}>{billing.description}</td>
                     <td style={{ padding: '16px', color: 'var(--color-text)', fontWeight: '700' }}>{formatRupiah(billing.amount)}</td>
@@ -215,7 +219,7 @@ export default function AdminKeuangan() {
                         <button 
                           onClick={() => handleDelete(billing.id)}
                           style={{
-                            background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '8px', 
+                            background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '8px', 
                             borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s'
                           }}
                           title="Hapus Tagihan"
@@ -232,15 +236,13 @@ export default function AdminKeuangan() {
 
       {isModalOpen && (
         <div style={{
-          position: 'fixed', inset: 0, background: 'var(--glass-bg)', backdropFilter: 'blur(8px)',
+          position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)',
           display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, padding: '24px'
         }}>
-          <div style={{
-            background: 'var(--color-bg)', borderRadius: '24px', width: '100%', maxWidth: '500px',
-            boxShadow: '0 20px 40px rgba(0,0,0,0.2)', overflow: 'hidden',
-            animation: 'fadeSlideUp 0.3s ease-out'
+          <div className="siakad-card fade-in" style={{
+            padding: '0', width: '100%', maxWidth: '500px', overflow: 'hidden'
           }}>
-            <div style={{ padding: '24px', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <h2 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)' }}>
                 {isEdit ? 'Edit Tagihan' : 'Tambah Tagihan Baru'}
               </h2>
@@ -271,7 +273,7 @@ export default function AdminKeuangan() {
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                   required
                   placeholder="Contoh: UKT Semester Ganjil 2026/2027"
-                  style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none' }}
+                  style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
                 />
               </div>
 
@@ -283,7 +285,7 @@ export default function AdminKeuangan() {
                   onChange={(e) => setFormData({...formData, amount: e.target.value})}
                   required
                   placeholder="4500000"
-                  style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none' }}
+                  style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
                 />
               </div>
 
@@ -294,7 +296,7 @@ export default function AdminKeuangan() {
                   value={formData.due_date} 
                   onChange={(e) => setFormData({...formData, due_date: e.target.value})}
                   required
-                  style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none' }}
+                  style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
                 />
               </div>
 
@@ -314,9 +316,9 @@ export default function AdminKeuangan() {
               )}
 
               <button type="submit" style={{
-                width: '100%', background: '#0891b2', color: 'white', border: 'none', 
+                width: '100%', background: '#0f172a', color: 'white', border: 'none', 
                 padding: '14px', borderRadius: '12px', fontWeight: '800', fontSize: '1rem',
-                cursor: 'pointer', boxShadow: '0 4px 15px rgba(8,145,178,0.3)', transition: 'all 0.3s'
+                cursor: 'pointer', transition: 'all 0.3s'
               }}>
                 {isEdit ? 'Simpan Perubahan' : 'Buat Tagihan'}
               </button>

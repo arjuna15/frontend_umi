@@ -39,20 +39,30 @@ export default function MahasiswaForumPage() {
 
   return (
     <div>
-      <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-        <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Forum Diskusi Kelas</h1>
-          <p style={{ color: 'var(--color-muted)', margin: 0 }}>Berdiskusi dengan dosen dan teman sekelas Anda.</p>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', background: 'var(--color-bg)', padding: '8px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', width: '300px' }}>
-          <i className="ph ph-magnifying-glass" style={{ color: 'var(--color-muted)', marginRight: '8px' }}></i>
-          <input 
-            type="text" 
-            placeholder="Cari mata kuliah atau topik..." 
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            style={{ border: 'none', outline: 'none', background: 'transparent', width: '100%', color: 'var(--color-text)' }}
-          />
+      <div style={{ 
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)',
+        borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+            <div>
+              <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Forum Diskusi Kelas</h1>
+              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Berdiskusi dengan dosen dan teman sekelas Anda.</p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.1)', padding: '8px 16px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.2)', width: '300px', backdropFilter: 'blur(10px)' }}>
+              <i className="ph ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.7)', marginRight: '8px' }}></i>
+              <input 
+                type="text" 
+                placeholder="Cari mata kuliah atau topik..." 
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                style={{ border: 'none', outline: 'none', background: 'transparent', width: '100%', color: 'white' }}
+              />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -81,11 +91,7 @@ export default function MahasiswaForumPage() {
           return filteredCourses.map((item, i) => {
             const course = item.course;
             return (
-              <div key={i} style={{ 
-                background: 'var(--glass-bg)', backdropFilter: 'blur(10px)',
-                borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
-                border: 'var(--glass-border)', overflow: 'hidden' 
-              }}>
+              <div key={i} className="siakad-card" style={{ overflow: 'hidden' }}>
                 <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
                     <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
@@ -110,7 +116,7 @@ export default function MahasiswaForumPage() {
                     if (res.ok) window.location.reload();
                     else window.toast('Gagal membuat topik');
                   } catch (err) { window.toast('Error: ' + err.message); }
-                }} style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)' }}>
+                }} style={{ background: '#0f172a', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(15, 23, 42, 0.3)' }}>
                   <i className="ph ph-plus"></i> Buat Topik Baru
                 </button>
               </div>
@@ -121,8 +127,8 @@ export default function MahasiswaForumPage() {
                     {course.forums.map((forum, j) => (
                       <div key={j} style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '20px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                          <div style={{ width: '40px', height: '40px', background: 'rgba(99, 102, 241, 0.1)', color: '#4f46e5', border: '1px solid rgba(99, 102, 241, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
-                            D
+                          <div style={{ width: '40px', height: '40px', background: 'rgba(15,23,42,0.1)', color: '#0f172a', border: '1px solid rgba(15,23,42,0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
+                            <i className="ph ph-user"></i>
                           </div>
                           <div>
                             <strong style={{ display: 'block', color: 'var(--color-text)' }}>{forum.title}</strong>
@@ -134,10 +140,10 @@ export default function MahasiswaForumPage() {
                         </p>
                         
                         {/* Replies */}
-                        <div style={{ background: 'var(--color-bg)', borderRadius: '8px', padding: '16px', borderLeft: '4px solid #6366f1' }}>
+                        <div style={{ background: 'var(--color-bg)', borderRadius: '8px', padding: '16px', borderLeft: '4px solid #C41E3A' }}>
                           <h4 style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Balasan ({forum.replies?.length || 0})</h4>
                           {forum.replies && forum.replies.map((reply, k) => (
-                            <div key={k} style={{ marginBottom: k === forum.replies.length - 1 ? 0 : '12px', paddingBottom: k === forum.replies.length - 1 ? 0 : '12px', borderBottom: k === forum.replies.length - 1 ? 'none' : '1px solid #e5e7eb' }}>
+                            <div key={k} style={{ marginBottom: k === forum.replies.length - 1 ? 0 : '12px', paddingBottom: k === forum.replies.length - 1 ? 0 : '12px', borderBottom: k === forum.replies.length - 1 ? 'none' : '1px solid var(--color-border)' }}>
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <strong style={{ fontSize: '0.85rem', color: 'var(--color-text)', display: 'block' }}>
                                   {reply.user_id === data.user.id ? 'Anda' : (reply.user_id === course.dosen_id ? 'Dosen' : 'Mahasiswa Lain')}
@@ -163,8 +169,8 @@ export default function MahasiswaForumPage() {
                               else window.toast('Gagal mengirim balasan');
                             } catch (err) { window.toast('Error: ' + err.message); }
                           }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
-                            <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, padding: '8px 12px', borderRadius: '6px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }} />
-                            <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Kirim</button>
+                            <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, padding: '8px 12px', borderRadius: '6px', border: '1px solid var(--color-border)', outline: 'none', fontSize: '0.9rem', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+                            <button type="submit" style={{ background: '#0f172a', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Kirim</button>
                           </form>
                         </div>
                       </div>

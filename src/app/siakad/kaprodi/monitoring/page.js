@@ -43,12 +43,17 @@ export default function KaprodiMonitoring() {
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
-      <div style={{ marginBottom: '30px' }}>
-        <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          Monitoring Perkuliahan <i className="ph ph-chalkboard-teacher" style={{ color: 'var(--color-text)' }}></i>
-        </h2>
-        <p style={{ margin: 0, color: 'var(--color-muted)' }}>Pantau Berita Acara Perkuliahan (BAP) dan keaktifan kelas.</p>
+      
+      <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)', borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+        <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — KAPRODI</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Monitoring Perkuliahan</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Pantau Berita Acara Perkuliahan (BAP) dan keaktifan kelas.</p>
+        </div>
       </div>
+
 
       <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
         <div style={{ overflowX: 'auto' }}>
