@@ -66,32 +66,45 @@ export function ConfirmModal() {
       justifyContent: 'center'
     }}>
       <div style={{
+        position: 'relative',
         background: 'var(--color-bg)',
         border: '1px solid var(--color-border)',
-        borderRadius: '16px',
-        padding: '32px',
-        maxWidth: '400px',
+        borderRadius: '24px',
+        padding: '40px 32px',
+        maxWidth: '450px',
         width: '90%',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
         animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
-        textAlign: 'center'
+        textAlign: 'center',
+        overflow: 'hidden'
       }}>
-        <i className="ph ph-warning-circle" style={{ fontSize: '4rem', color: '#f59e0b', marginBottom: '16px' }}></i>
-        <h3 style={{ margin: '0 0 16px 0', color: 'var(--color-text)', fontSize: '1.2rem' }}>Konfirmasi</h3>
-        <p style={{ color: 'var(--color-muted)', marginBottom: '32px', fontSize: '0.95rem', lineHeight: '1.5' }}>{modal.message}</p>
-        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
-          <button 
-            onClick={() => { modal.resolve(false); setModal(null); }}
-            style={{ padding: '12px 24px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', flex: 1 }}
-          >
-            Batal
-          </button>
-          <button 
-            onClick={() => { modal.resolve(true); setModal(null); }}
-            style={{ padding: '12px 24px', borderRadius: '8px', border: 'none', background: '#4f46e5', color: 'white', fontWeight: 'bold', cursor: 'pointer', flex: 1, boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)' }}
-          >
-            Ya, Lanjutkan
-          </button>
+        {/* Decorative background blur inside modal */}
+        <div style={{ position: 'absolute', top: '-50px', left: '-50px', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0) 70%)', borderRadius: '50%', zIndex: 0 }}></div>
+        
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ width: '80px', height: '80px', background: 'rgba(245, 158, 11, 0.1)', border: '2px solid rgba(245, 158, 11, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
+            <i className="ph ph-warning-circle" style={{ fontSize: '3.5rem', color: '#f59e0b' }}></i>
+          </div>
+          <h3 style={{ margin: '0 0 12px 0', color: 'var(--color-text)', fontSize: '1.4rem', fontWeight: 'bold' }}>Perhatian!</h3>
+          <p style={{ color: 'var(--color-muted)', marginBottom: '32px', fontSize: '1rem', lineHeight: '1.6' }}>{modal.message}</p>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
+            <button 
+              onClick={() => { modal.resolve(false); setModal(null); }}
+              style={{ padding: '14px 24px', borderRadius: '12px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', flex: 1, transition: 'all 0.2s' }}
+              onMouseEnter={(e) => e.target.style.background = 'var(--glass-bg)'}
+              onMouseLeave={(e) => e.target.style.background = 'transparent'}
+            >
+              Batal
+            </button>
+            <button 
+              onClick={() => { modal.resolve(true); setModal(null); }}
+              style={{ padding: '14px 24px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', color: 'white', fontWeight: 'bold', cursor: 'pointer', flex: 1, boxShadow: '0 10px 15px -3px rgba(245, 158, 11, 0.3)', transition: 'all 0.2s' }}
+              onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
+              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+            >
+              Ya, Lanjutkan
+            </button>
+          </div>
         </div>
       </div>
       <style>{`
@@ -131,45 +144,62 @@ export function PromptModal() {
       justifyContent: 'center'
     }}>
       <div style={{
+        position: 'relative',
         background: 'var(--color-bg)',
         border: '1px solid var(--color-border)',
-        borderRadius: '16px',
-        padding: '32px',
-        maxWidth: '400px',
+        borderRadius: '24px',
+        padding: '0',
+        maxWidth: '500px',
         width: '90%',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
         animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
-        textAlign: 'left'
+        textAlign: 'left',
+        overflow: 'hidden'
       }}>
-        <h3 style={{ margin: '0 0 16px 0', color: 'var(--color-text)', fontSize: '1.2rem' }}>{modal.message}</h3>
-        <input 
-          autoFocus
-          type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              modal.resolve(inputValue);
-              setModal(null);
-            }
-          }}
-          style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '2px solid #d1d5db', outline: 'none', background: 'white', color: 'black', marginBottom: '24px', fontSize: '1rem', transition: 'border 0.3s' }}
-          onFocus={(e) => e.target.style.border = '2px solid #4f46e5'}
-          onBlur={(e) => e.target.style.border = '2px solid #d1d5db'}
-        />
-        <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-          <button 
-            onClick={() => { modal.resolve(null); setModal(null); }}
-            style={{ padding: '10px 20px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer' }}
-          >
-            Batal
-          </button>
-          <button 
-            onClick={() => { modal.resolve(inputValue); setModal(null); }}
-            style={{ padding: '10px 20px', borderRadius: '8px', border: 'none', background: '#4f46e5', color: 'white', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)' }}
-          >
-            OK
-          </button>
+        <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #c026d3 100%)', padding: '24px 32px', color: 'white', position: 'relative' }}>
+          <div style={{ position: 'absolute', top: '-10px', right: '-10px', width: '100px', height: '100px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%' }}></div>
+          <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <i className="ph ph-note-pencil" style={{ fontSize: '1.6rem' }}></i> {modal.message}
+          </h3>
+        </div>
+        
+        <div style={{ padding: '32px' }}>
+          <div style={{ marginBottom: '24px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Masukkan input Anda:</label>
+            <input 
+              autoFocus
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  modal.resolve(inputValue);
+                  setModal(null);
+                }
+              }}
+              style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)' }}
+              onFocus={(e) => { e.target.style.borderColor = '#4f46e5'; e.target.style.boxShadow = '0 0 0 4px rgba(79, 70, 229, 0.1)'; }}
+              onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.02)'; }}
+            />
+          </div>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end' }}>
+            <button 
+              onClick={() => { modal.resolve(null); setModal(null); }}
+              style={{ padding: '12px 24px', borderRadius: '10px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s' }}
+              onMouseEnter={(e) => e.target.style.background = 'var(--glass-bg)'}
+              onMouseLeave={(e) => e.target.style.background = 'transparent'}
+            >
+              Batal
+            </button>
+            <button 
+              onClick={() => { modal.resolve(inputValue); setModal(null); }}
+              style={{ padding: '12px 32px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)', color: 'white', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 10px 15px -3px rgba(79, 70, 229, 0.3)', transition: 'all 0.2s' }}
+              onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
+              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+            >
+              Kirim
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -205,58 +235,73 @@ export function FormModal() {
       justifyContent: 'center'
     }}>
       <div style={{
+        position: 'relative',
         background: 'var(--color-bg)',
         border: '1px solid var(--color-border)',
-        borderRadius: '16px',
-        padding: '32px',
-        maxWidth: '500px',
+        borderRadius: '24px',
+        padding: '0',
+        maxWidth: '550px',
         width: '90%',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
         animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
-        textAlign: 'left'
+        textAlign: 'left',
+        overflow: 'hidden'
       }}>
-        <h3 style={{ margin: '0 0 24px 0', color: 'var(--color-text)', fontSize: '1.4rem' }}>{modal.title}</h3>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
-          {modal.fields.map(f => (
-            <div key={f.name}>
-              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: 'bold' }}>{f.label}</label>
-              {f.type === 'textarea' ? (
-                <textarea
-                  autoFocus={f.autoFocus}
-                  rows="4"
-                  value={formData[f.name]}
-                  onChange={(e) => setFormData({...formData, [f.name]: e.target.value})}
-                  style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '2px solid #d1d5db', outline: 'none', background: 'white', color: 'black', fontSize: '1rem', transition: 'border 0.3s', resize: 'vertical' }}
-                  onFocus={(e) => e.target.style.border = '2px solid #4f46e5'}
-                  onBlur={(e) => e.target.style.border = '2px solid #d1d5db'}
-                />
-              ) : (
-                <input 
-                  autoFocus={f.autoFocus}
-                  type="text"
-                  value={formData[f.name]}
-                  onChange={(e) => setFormData({...formData, [f.name]: e.target.value})}
-                  style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '2px solid #d1d5db', outline: 'none', background: 'white', color: 'black', fontSize: '1rem', transition: 'border 0.3s' }}
-                  onFocus={(e) => e.target.style.border = '2px solid #4f46e5'}
-                  onBlur={(e) => e.target.style.border = '2px solid #d1d5db'}
-                />
-              )}
-            </div>
-          ))}
+        {/* Dynamic Header */}
+        <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #2563eb 100%)', padding: '24px 32px', color: 'white', position: 'relative' }}>
+          <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '120px', height: '120px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%' }}></div>
+          <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <i className="ph ph-pencil-simple-line" style={{ fontSize: '1.6rem' }}></i> {modal.title}
+          </h3>
         </div>
-        <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-          <button 
-            onClick={() => { modal.resolve(null); setModal(null); }}
-            style={{ padding: '12px 24px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer' }}
-          >
-            Batal
-          </button>
-          <button 
-            onClick={() => { modal.resolve(formData); setModal(null); }}
-            style={{ padding: '12px 24px', borderRadius: '8px', border: 'none', background: '#4f46e5', color: 'white', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)' }}
-          >
-            Simpan & Kirim
-          </button>
+
+        <div style={{ padding: '32px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '32px' }}>
+            {modal.fields.map(f => (
+              <div key={f.name}>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>{f.label}</label>
+                {f.type === 'textarea' ? (
+                  <textarea
+                    autoFocus={f.autoFocus}
+                    rows="4"
+                    value={formData[f.name]}
+                    onChange={(e) => setFormData({...formData, [f.name]: e.target.value})}
+                    style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', resize: 'vertical', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)' }}
+                    onFocus={(e) => { e.target.style.borderColor = '#4f46e5'; e.target.style.boxShadow = '0 0 0 4px rgba(79, 70, 229, 0.1)'; }}
+                    onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.02)'; }}
+                  />
+                ) : (
+                  <input 
+                    autoFocus={f.autoFocus}
+                    type="text"
+                    value={formData[f.name]}
+                    onChange={(e) => setFormData({...formData, [f.name]: e.target.value})}
+                    style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)' }}
+                    onFocus={(e) => { e.target.style.borderColor = '#4f46e5'; e.target.style.boxShadow = '0 0 0 4px rgba(79, 70, 229, 0.1)'; }}
+                    onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.02)'; }}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end', borderTop: '1px solid var(--color-border)', paddingTop: '24px' }}>
+            <button 
+              onClick={() => { modal.resolve(null); setModal(null); }}
+              style={{ padding: '12px 24px', borderRadius: '10px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s' }}
+              onMouseEnter={(e) => e.target.style.background = 'var(--glass-bg)'}
+              onMouseLeave={(e) => e.target.style.background = 'transparent'}
+            >
+              Batal
+            </button>
+            <button 
+              onClick={() => { modal.resolve(formData); setModal(null); }}
+              style={{ padding: '12px 32px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)', color: 'white', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 10px 15px -3px rgba(79, 70, 229, 0.3)', transition: 'all 0.2s' }}
+              onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
+              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+            >
+              Simpan & Kirim
+            </button>
+          </div>
         </div>
       </div>
     </div>
