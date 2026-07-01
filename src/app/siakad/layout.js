@@ -98,24 +98,44 @@ export default function SiakadLayout({ children }) {
             <img src="/icon.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
           </div>
           <div>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: '800', margin: 0, letterSpacing: '1px', color: 'var(--color-text)' }}>SIAKAD</h2>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: '800', margin: 0, letterSpacing: '1px', color: 'var(--color-text)', lineHeight: '1.2' }}>SIAKAD</h2>
+            <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)', fontWeight: '600' }}>Universitas Mikroskil</p>
           </div>
         </div>
 
         <nav className="siakad-nav">
-          <p style={{ padding: '0 20px', fontSize: '0.7rem', textTransform: 'uppercase', color: 'var(--color-text)', fontWeight: '800', marginBottom: '8px', letterSpacing: '1px' }}>Menu Utama</p>
+          <p style={{ padding: '0 20px', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-muted)', fontWeight: '800', marginBottom: '8px', letterSpacing: '1.5px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            Menu Utama
+            <span style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, var(--color-border) 0%, transparent 100%)' }}></span>
+          </p>
           {menuItems.map((item, i) => {
             const isActive = pathname === item.path;
+            const iconClass = isActive ? item.icon.replace('ph ', 'ph-fill ph ') : item.icon;
             return (
               <Link key={i} href={item.path} className={`siakad-nav-item ${isActive ? 'active' : ''}`}>
-                <i className={item.icon} style={{ fontSize: '1.3rem' }}></i>
+                <i className={iconClass} style={{ fontSize: '1.3rem' }}></i>
                 {item.label}
+                {i === 0 && <span style={{ marginLeft: 'auto', background: isActive ? 'rgba(255,255,255,0.2)' : '#e0e7ff', color: isActive ? 'white' : '#4f46e5', padding: '2px 8px', borderRadius: '10px', fontSize: '0.65rem', fontWeight: 'bold' }}>BARU</span>}
               </Link>
             );
           })}
         </nav>
 
-        <div style={{ padding: '24px' }}>
+        <div className="siakad-user-profile" onClick={() => router.push('/siakad/profile')}>
+          <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', flexShrink: 0 }}>
+            {role ? role.charAt(0).toUpperCase() : 'U'}
+          </div>
+          <div style={{ overflow: 'hidden' }}>
+            <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--color-text)', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+              Pengguna SIAKAD
+            </h4>
+            <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', textTransform: 'capitalize' }}>
+              Role: {role || 'Guest'}
+            </p>
+          </div>
+        </div>
+
+        <div style={{ padding: '0 24px 24px 24px' }}>
           <button onClick={() => {
             localStorage.removeItem('siakad_token');
             window.location.href = '/siakad/login';
