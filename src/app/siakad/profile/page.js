@@ -133,7 +133,7 @@ export default function ProfilePage() {
   );
 
   return (
-    <div style={{ maxWidth: '1000px', margin: '0 auto', paddingBottom: '40px' }}>
+    <div style={{ maxWidth: '1000px', margin: '0 auto', paddingBottom: '120px' }}>
       
       {/* Page Header */}
       <div style={{ marginBottom: '32px' }}>
@@ -190,7 +190,7 @@ export default function ProfilePage() {
               <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)' }}>Informasi Pribadi</h2>
               
               {/* Profile Overview (Horizontal) */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '32px', background: 'var(--glass-bg)', padding: '24px', borderRadius: '16px', border: '1px solid var(--color-border)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '32px', background: 'var(--glass-bg)', padding: '24px', borderRadius: '16px', border: '1px solid var(--color-border)', flexWrap: 'wrap' }}>
                 <div style={{ position: 'relative', width: '90px', height: '90px', flexShrink: 0 }}>
                   {user.avatar_url ? (
                     <img src={user.avatar_url} alt="Profile" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--color-bg)', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }} />
@@ -211,7 +211,7 @@ export default function ProfilePage() {
                 <div>
                   <h3 style={{ margin: '0 0 4px 0', fontSize: '1.3rem', color: 'var(--color-text)' }}>{user.name}</h3>
                   <p style={{ margin: '0 0 12px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>NIM/NIP: {user.nim_nip}</p>
-                  <div style={{ display: 'flex', gap: '8px' }}>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                     <span style={{ padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold', background: user.role === 'admin' ? '#fee2e2' : user.role === 'dosen' ? '#e0e7ff' : '#dcfce7', color: user.role === 'admin' ? '#991b1b' : user.role === 'dosen' ? '#3730a3' : '#166534', textTransform: 'uppercase' }}>
                       {user.role}
                     </span>
