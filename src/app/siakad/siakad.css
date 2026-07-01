@@ -89,6 +89,17 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  overflow-y: auto;
+}
+.siakad-nav::-webkit-scrollbar {
+  width: 4px;
+}
+.siakad-nav::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+.siakad-nav::-webkit-scrollbar-track {
+  background: transparent;
 }
 .siakad-nav-item {
   display: flex;
