@@ -19,6 +19,12 @@ export const metadata = {
   },
   description: "Universitas Mitra Bangsa (UMIBA) adalah kampus unggulan di Jakarta yang menawarkan pendidikan berkualitas dengan program S1 dan S2, serta jalur beasiswa.",
   keywords: ["UMIBA", "Universitas Mitra Bangsa", "Kampus Jakarta", "Kuliah S1", "Kuliah S2", "Beasiswa KIP-K"],
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'UMIBA',
+  },
   openGraph: {
     title: "Universitas Mitra Bangsa | Kampus Unggulan",
     description: "Universitas Mitra Bangsa (UMIBA) adalah kampus unggulan di Jakarta.",
@@ -56,6 +62,13 @@ export default function RootLayout({ children }) {
     >
       <head>
         <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+        <meta name="theme-color" content="#C41E3A" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="UMIBA" />
+        <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png" />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="min-h-full flex flex-col">
         <ThemeProvider>
