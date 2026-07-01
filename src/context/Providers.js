@@ -13,7 +13,7 @@ export function Providers({ children }) {
 
   useEffect(() => {
     // Initialization
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = localStorage.getItem('siakad_theme') || 'light';
     const savedLang = localStorage.getItem('lang') || 'id';
     
     setTheme(savedTheme);
@@ -21,19 +21,24 @@ export function Providers({ children }) {
 
     if (savedTheme === 'dark') {
       document.body.classList.add('dark-mode');
+      document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.body.classList.remove('dark-mode');
+      document.documentElement.setAttribute('data-theme', 'light');
     }
   }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    localStorage.setItem('siakad_theme', newTheme);
+    localStorage.setItem('theme', newTheme); // keep old one in sync just in case
     if (newTheme === 'dark') {
       document.body.classList.add('dark-mode');
+      document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.body.classList.remove('dark-mode');
+      document.documentElement.setAttribute('data-theme', 'light');
     }
   };
 
