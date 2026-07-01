@@ -158,10 +158,10 @@ export default function KRSPage() {
       {krsOpen && (
         <div style={{ background: 'var(--color-bg)', borderRadius: '16px', padding: '24px', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', border: '1px solid #f3f4f6' }}>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }}>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Daftar Mata Kuliah Tersedia</h2>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{ background: 'var(--color-border)', padding: '10px 16px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-muted)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+            <div style={{ background: 'var(--color-border)', padding: '10px 16px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-muted)', whiteSpace: 'nowrap' }}>
               Total: {totalSKS} SKS
             </div>
             {(!submission?.status || submission?.status === 'rejected') && (
@@ -183,7 +183,7 @@ export default function KRSPage() {
           </div>
         </div>
         
-        <div style={{ overflowX: 'auto' }}>
+        <div style={{ overflowX: 'auto', maxWidth: '100%', paddingBottom: '10px' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '600px' }}>
             <thead>
               <tr style={{ background: 'var(--color-bg)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
