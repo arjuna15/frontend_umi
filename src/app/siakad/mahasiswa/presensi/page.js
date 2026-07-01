@@ -97,9 +97,9 @@ export default function MahasiswaPresensi() {
         }
         
         const dist = calculateDistance(latitude, longitude, target.lat, target.lng);
-        // We will allow up to 20km for testing purposes, but log the distance
-        if (dist > 20000) {
-          window.toast(`Gagal: Anda berada ${Math.round(dist/1000)}km dari kampus ${session.mode}. Harus di bawah 20km.`);
+        // We will allow up to 500m for realistic geofencing
+        if (dist > 500) {
+          window.toast(`Gagal: Anda berada ${Math.round(dist)}m dari kampus ${session.mode}. Jarak maksimal adalah 500m.`);
           setSubmitting(false);
           return;
         }
