@@ -134,16 +134,18 @@ export default function AdminBackupPage() {
                       <i className="ph ph-check-circle"></i> {b.status}
                     </span>
                   </td>
-                  <td style={{ padding: '16px', textAlign: 'right' }}>
-                    <button onClick={() => window.toast?.('Mendownload file...')} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', marginRight: '8px' }} title="Download">
-                      <i className="ph ph-download-simple"></i>
-                    </button>
-                    <button onClick={() => handleRestore(b.id)} disabled={isRestoring} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#f59e0b', padding: '6px 12px', borderRadius: '6px', cursor: isRestoring ? 'not-allowed' : 'pointer', marginRight: '8px', opacity: isRestoring ? 0.5 : 1 }} title="Restore">
-                      <i className="ph ph-arrow-counter-clockwise"></i>
-                    </button>
-                    <button onClick={() => handleDelete(b.id)} disabled={isRestoring} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: isRestoring ? 'not-allowed' : 'pointer', opacity: isRestoring ? 0.5 : 1 }} title="Hapus">
-                      <i className="ph ph-trash"></i>
-                    </button>
+                  <td style={{ padding: '16px' }}>
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
+                      <button onClick={() => window.toast?.('Mendownload file...')} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0 }} title="Download">
+                        <i className="ph ph-download-simple"></i>
+                      </button>
+                      <button onClick={() => handleRestore(b.id)} disabled={isRestoring} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#f59e0b', padding: '6px 12px', borderRadius: '6px', cursor: isRestoring ? 'not-allowed' : 'pointer', opacity: isRestoring ? 0.5 : 1, flexShrink: 0 }} title="Restore">
+                        <i className="ph ph-arrow-counter-clockwise"></i>
+                      </button>
+                      <button onClick={() => handleDelete(b.id)} disabled={isRestoring} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: isRestoring ? 'not-allowed' : 'pointer', opacity: isRestoring ? 0.5 : 1, flexShrink: 0 }} title="Hapus">
+                        <i className="ph ph-trash"></i>
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
