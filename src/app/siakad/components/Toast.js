@@ -156,10 +156,10 @@ export function PromptModal() {
         textAlign: 'left',
         overflow: 'hidden'
       }}>
-        <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #c026d3 100%)', padding: '24px 32px', color: 'white', position: 'relative' }}>
+        <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #c026d3 100%)', padding: '24px 32px', position: 'relative' }}>
           <div style={{ position: 'absolute', top: '-10px', right: '-10px', width: '100px', height: '100px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%' }}></div>
-          <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <i className="ph ph-note-pencil" style={{ fontSize: '1.6rem' }}></i> {modal.message}
+          <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px', color: 'white' }}>
+            <i className="ph ph-note-pencil" style={{ fontSize: '1.6rem', color: 'white' }}></i> {modal.message}
           </h3>
         </div>
         
@@ -177,7 +177,7 @@ export function PromptModal() {
                   setModal(null);
                 }
               }}
-              style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)' }}
+              style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.05)' }}
               onFocus={(e) => { e.target.style.borderColor = '#4f46e5'; e.target.style.boxShadow = '0 0 0 4px rgba(79, 70, 229, 0.1)'; }}
               onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.02)'; }}
             />
@@ -248,10 +248,10 @@ export function FormModal() {
         overflow: 'hidden'
       }}>
         {/* Dynamic Header */}
-        <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #2563eb 100%)', padding: '24px 32px', color: 'white', position: 'relative' }}>
+        <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #2563eb 100%)', padding: '24px 32px', position: 'relative' }}>
           <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '120px', height: '120px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%' }}></div>
-          <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <i className="ph ph-pencil-simple-line" style={{ fontSize: '1.6rem' }}></i> {modal.title}
+          <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px', color: 'white' }}>
+            <i className="ph ph-pencil-simple-line" style={{ fontSize: '1.6rem', color: 'white' }}></i> {modal.title}
           </h3>
         </div>
 
@@ -266,9 +266,9 @@ export function FormModal() {
                     rows="4"
                     value={formData[f.name]}
                     onChange={(e) => setFormData({...formData, [f.name]: e.target.value})}
-                    style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', resize: 'vertical', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)' }}
+                    style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', resize: 'vertical', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.05)' }}
                     onFocus={(e) => { e.target.style.borderColor = '#4f46e5'; e.target.style.boxShadow = '0 0 0 4px rgba(79, 70, 229, 0.1)'; }}
-                    onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.02)'; }}
+                    onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.05)'; }}
                   />
                 ) : (
                   <input 
@@ -276,9 +276,9 @@ export function FormModal() {
                     type="text"
                     value={formData[f.name]}
                     onChange={(e) => setFormData({...formData, [f.name]: e.target.value})}
-                    style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02)' }}
+                    style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.05)' }}
                     onFocus={(e) => { e.target.style.borderColor = '#4f46e5'; e.target.style.boxShadow = '0 0 0 4px rgba(79, 70, 229, 0.1)'; }}
-                    onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.02)'; }}
+                    onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.05)'; }}
                   />
                 )}
               </div>
