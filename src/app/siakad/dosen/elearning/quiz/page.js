@@ -64,13 +64,20 @@ export default function DosenQuizCreate() {
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
-      <div style={{ marginBottom: '30px', display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <button onClick={() => router.back()} style={{ background: 'var(--glass-bg)', border: 'none', padding: '8px 12px', borderRadius: '8px', cursor: 'pointer', color: 'var(--color-text)' }}>
-          <i className="ph ph-arrow-left"></i> Kembali
-        </button>
-        <div>
-          <h2 style={{ margin: '0 0 4px 0', color: 'var(--color-text)' }}>CBT Engine: Kuis Pilihan Ganda</h2>
-          <p style={{ margin: 0, color: 'var(--color-muted)' }}>Buat kuis otomatis dengan berbagai tipe soal dan durasi.</p>
+            <div style={{ marginBottom: '32px' }}>
+        <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)', borderRadius: '24px', padding: '40px', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+          <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+          <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <button onClick={() => router.back()} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '12px 16px', borderRadius: '12px', cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.3s' }}>
+              <i className="ph ph-arrow-left"></i> Kembali
+            </button>
+            <div>
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — DOSEN</p>
+              <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>CBT Engine: Kuis Pilihan Ganda</h1>
+              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Buat kuis otomatis dengan berbagai tipe soal dan durasi.</p>
+            </div>
+          </div>
         </div>
       </div>
 

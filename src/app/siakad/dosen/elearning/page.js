@@ -59,19 +59,26 @@ export default function DosenElearningPage() {
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
-      <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-        <div style={{ flex: '1 1 300px' }}>
-          <h2 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            Manajemen Sesi E-Learning <i className="ph ph-books" style={{ color: 'var(--color-text)' }}></i>
-          </h2>
-          <p style={{ margin: 0, color: 'var(--color-muted)' }}>Kelola materi pembelajaran, absensi, dan kuis untuk 14 sesi pertemuan.</p>
+      <div style={{ marginBottom: '32px' }}>
+        <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)', borderRadius: '24px', padding: '40px', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
+          <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
+          <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+            <div style={{ flex: '1 1 300px' }}>
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — DOSEN</p>
+              <h1 style={{ margin: '0 0 8px 0', color: 'white', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '2.2rem', fontWeight: '800', letterSpacing: '-0.03em' }}>
+                Manajemen Sesi E-Learning <i className="ph ph-books" style={{ color: 'white' }}></i>
+              </h1>
+              <p style={{ margin: 0, color: 'rgba(255,255,255,0.6)' }}>Kelola materi pembelajaran, absensi, dan kuis untuk 14 sesi pertemuan.</p>
+            </div>
+            <button 
+              onClick={() => router.push('/siakad/dosen/elearning/quiz')}
+              style={{ background: '#3b82f6', color: 'white', padding: '10px 20px', borderRadius: '8px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', flexShrink: 0 }}
+            >
+              <i className="ph ph-plus-circle"></i> Buat Kuis / Ujian (CBT)
+            </button>
+          </div>
         </div>
-        <button 
-          onClick={() => router.push('/siakad/dosen/elearning/quiz')}
-          style={{ background: '#3b82f6', color: 'white', padding: '10px 20px', borderRadius: '8px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', flexShrink: 0 }}
-        >
-          <i className="ph ph-plus-circle"></i> Buat Kuis / Ujian (CBT)
-        </button>
       </div>
 
       <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
