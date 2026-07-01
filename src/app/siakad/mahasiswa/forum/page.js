@@ -176,6 +176,7 @@ export default function MahasiswaForumPage() {
               </div>
             </div>
           );
+          });
         })()}
       </div>
     </div>
