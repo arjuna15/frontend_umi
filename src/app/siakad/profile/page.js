@@ -133,184 +133,198 @@ export default function ProfilePage() {
   );
 
   return (
-    <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Pengaturan Akun ⚙️</h1>
-        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Kelola profil, informasi akademik, dan preferensi Anda.</p>
+    <div style={{ maxWidth: '1000px', margin: '0 auto', paddingBottom: '40px' }}>
+      
+      {/* Page Header */}
+      <div style={{ marginBottom: '32px' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <i className="ph ph-user-gear" style={{ color: '#4f46e5' }}></i> Pengaturan Akun
+        </h1>
+        <p style={{ color: 'var(--color-muted)', margin: 0, fontSize: '1rem' }}>Kelola profil pribadi, keamanan akun, dan preferensi sistem Anda.</p>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'flex-start' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', '@media(minWidth: 768px)': { flexDirection: 'row' } }}>
         
-        {/* Left Sidebar: Profile Card */}
-        <div className="siakad-card" style={{ flex: '1 1 250px', padding: '32px 24px', textAlign: 'center' }}>
-          <div style={{ position: 'relative', width: '120px', height: '120px', margin: '0 auto 16px' }}>
-            {user.avatar_url ? (
-              <img src={user.avatar_url} alt="Profile" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', border: '4px solid var(--glass-bg)', boxShadow: '0 8px 16px rgba(0,0,0,0.1)' }} />
-            ) : (
-              <div style={{ width: '100%', height: '100%', borderRadius: '50%', background: 'linear-gradient(135deg, #4f46e5 0%, #ec4899 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3.5rem', boxShadow: '0 8px 16px rgba(0,0,0,0.1)' }}>
-                <i className="ph ph-user-circle"></i>
-              </div>
-            )}
-            
-            <button 
-              onClick={() => fileInputRef.current.click()}
-              style={{ position: 'absolute', bottom: 0, right: 0, width: '36px', height: '36px', borderRadius: '50%', background: '#4f46e5', color: 'white', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
-              title="Ganti Foto Profil"
-            >
-              <i className="ph ph-camera" style={{ fontSize: '1.2rem' }}></i>
-            </button>
-            <input type="file" ref={fileInputRef} onChange={handleAvatarUpload} accept="image/*" style={{ display: 'none' }} />
-          </div>
+        {/* Left Sidebar: Vertical Tabs */}
+        <div style={{ flex: '0 0 250px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <button 
+            onClick={() => setActiveTab('pribadi')}
+            style={{ 
+              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
+              background: activeTab === 'pribadi' ? '#4f46e5' : 'transparent',
+              color: activeTab === 'pribadi' ? 'white' : 'var(--color-muted)'
+            }}
+          >
+            <i className="ph ph-identification-card" style={{ fontSize: '1.2rem' }}></i> Informasi Pribadi
+          </button>
           
-          <h2 style={{ margin: '0 0 4px', color: 'var(--color-text)', fontSize: '1.2rem' }}>{user.name}</h2>
-          <p style={{ margin: '0 0 12px', color: 'var(--color-muted)', fontSize: '0.9rem' }}>{user.nim_nip}</p>
-          <span style={{ padding: '4px 12px', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 'bold', background: user.role === 'admin' ? '#fee2e2' : user.role === 'dosen' ? '#e0e7ff' : '#dcfce7', color: user.role === 'admin' ? '#991b1b' : user.role === 'dosen' ? '#3730a3' : '#166534', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            {user.role}
-          </span>
-
-          {user.prodi && (
-            <div style={{ marginTop: '24px', paddingTop: '24px', borderTop: '1px solid var(--color-border)', textAlign: 'left' }}>
-              <p style={{ margin: '0 0 8px', fontSize: '0.8rem', color: 'var(--color-muted)', fontWeight: 'bold', textTransform: 'uppercase' }}>Program Studi</p>
-              <p style={{ margin: 0, color: 'var(--color-text)', fontWeight: '500' }}>{user.prodi}</p>
-            </div>
-          )}
+          <button 
+            onClick={() => setActiveTab('keamanan')}
+            style={{ 
+              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
+              background: activeTab === 'keamanan' ? '#4f46e5' : 'transparent',
+              color: activeTab === 'keamanan' ? 'white' : 'var(--color-muted)'
+            }}
+          >
+            <i className="ph ph-shield-check" style={{ fontSize: '1.2rem' }}></i> Keamanan
+          </button>
+          
+          <button 
+            onClick={() => setActiveTab('preferensi')}
+            style={{ 
+              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
+              background: activeTab === 'preferensi' ? '#4f46e5' : 'transparent',
+              color: activeTab === 'preferensi' ? 'white' : 'var(--color-muted)'
+            }}
+          >
+            <i className="ph ph-sliders" style={{ fontSize: '1.2rem' }}></i> Preferensi Sistem
+          </button>
         </div>
 
-        {/* Right Content: Tabs & Forms */}
-        <div className="siakad-card" style={{ flex: '2 1 450px', padding: 0, overflow: 'hidden' }}>
+        {/* Right Content */}
+        <div className="siakad-card" style={{ flex: 1, padding: '40px', minHeight: '500px' }}>
           
-          {/* Tab Navigation */}
-          <div style={{ display: 'flex', borderBottom: '1px solid var(--color-border)', background: 'var(--glass-bg)' }}>
-            <button 
-              onClick={() => setActiveTab('pribadi')}
-              style={{ flex: 1, padding: '16px', background: 'none', border: 'none', borderBottom: activeTab === 'pribadi' ? '3px solid #4f46e5' : '3px solid transparent', color: activeTab === 'pribadi' ? '#4f46e5' : 'var(--color-muted)', fontWeight: activeTab === 'pribadi' ? 'bold' : '500', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              <i className="ph ph-identification-card"></i> Informasi Pribadi
-            </button>
-            <button 
-              onClick={() => setActiveTab('keamanan')}
-              style={{ flex: 1, padding: '16px', background: 'none', border: 'none', borderBottom: activeTab === 'keamanan' ? '3px solid #4f46e5' : '3px solid transparent', color: activeTab === 'keamanan' ? '#4f46e5' : 'var(--color-muted)', fontWeight: activeTab === 'keamanan' ? 'bold' : '500', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              <i className="ph ph-shield-check"></i> Keamanan
-            </button>
-            <button 
-              onClick={() => setActiveTab('preferensi')}
-              style={{ flex: 1, padding: '16px', background: 'none', border: 'none', borderBottom: activeTab === 'preferensi' ? '3px solid #4f46e5' : '3px solid transparent', color: activeTab === 'preferensi' ? '#4f46e5' : 'var(--color-muted)', fontWeight: activeTab === 'preferensi' ? 'bold' : '500', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              <i className="ph ph-sliders"></i> Preferensi
-            </button>
-          </div>
-
-          <div style={{ padding: '32px' }}>
-            
-            {/* Tab 1: Informasi Pribadi */}
-            {activeTab === 'pribadi' && (
-              <div className="fade-in">
-                <h3 style={{ margin: '0 0 24px', color: 'var(--color-text)' }}>Informasi Pribadi</h3>
-                <form onSubmit={handleUpdateProfile} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                  <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-                    <div style={{ flex: '1 1 200px' }}>
-                      <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Email</label>
-                      <input type="email" name="email" defaultValue={user.email} placeholder="contoh@kampus.ac.id" style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)' }} />
+          {/* Tab 1: Informasi Pribadi */}
+          {activeTab === 'pribadi' && (
+            <div className="fade-in">
+              <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)' }}>Informasi Pribadi</h2>
+              
+              {/* Profile Overview (Horizontal) */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '32px', background: 'var(--glass-bg)', padding: '24px', borderRadius: '16px', border: '1px solid var(--color-border)' }}>
+                <div style={{ position: 'relative', width: '90px', height: '90px', flexShrink: 0 }}>
+                  {user.avatar_url ? (
+                    <img src={user.avatar_url} alt="Profile" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--color-bg)', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }} />
+                  ) : (
+                    <div style={{ width: '100%', height: '100%', borderRadius: '50%', background: 'linear-gradient(135deg, #4f46e5 0%, #ec4899 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
+                      <i className="ph ph-user-circle"></i>
                     </div>
-                    <div style={{ flex: '1 1 200px' }}>
-                      <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nomor HP</label>
-                      <input type="tel" name="phone" defaultValue={user.phone} placeholder="08123456789" style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)' }} />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Alamat Lengkap</label>
-                    <textarea name="address" defaultValue={user.address} rows="3" placeholder="Jl. Raya Kampus No. 1..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', resize: 'vertical' }}></textarea>
-                  </div>
-                  
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Bio Singkat</label>
-                    <textarea name="bio" defaultValue={user.bio} rows="2" placeholder="Tuliskan sedikit tentang diri Anda..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', resize: 'vertical' }}></textarea>
-                  </div>
-
-                  <div style={{ marginTop: '8px' }}>
-                    <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                      <i className="ph ph-floppy-disk"></i> Simpan Profil
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
-
-            {/* Tab 2: Keamanan */}
-            {activeTab === 'keamanan' && (
-              <div className="fade-in">
-                <h3 style={{ margin: '0 0 24px', color: 'var(--color-text)' }}>Ubah Kata Sandi</h3>
-                <form onSubmit={handleUpdatePassword} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Password Saat Ini</label>
-                    <input type="password" name="current_password" required placeholder="Masukkan password lama..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)' }} />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Password Baru</label>
-                    <input type="password" name="password" required minLength="6" placeholder="Masukkan password baru..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)' }} />
-                  </div>
-                  <div>
-                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Konfirmasi Password Baru</label>
-                    <input type="password" name="confirm" required minLength="6" placeholder="Ulangi password baru..." style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)' }} />
-                  </div>
-                  <div style={{ marginTop: '8px' }}>
-                    <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                      <i className="ph ph-lock-key"></i> Perbarui Password
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
-
-            {/* Tab 3: Preferensi */}
-            {activeTab === 'preferensi' && (
-              <div className="fade-in">
-                <h3 style={{ margin: '0 0 24px', color: 'var(--color-text)' }}>Preferensi Sistem</h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                  
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '20px', borderBottom: '1px solid var(--color-border)' }}>
-                    <div>
-                      <h4 style={{ margin: '0 0 4px', fontSize: '1rem', color: 'var(--color-text)' }}>Notifikasi Email</h4>
-                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Terima email saat ada tugas atau jadwal baru.</p>
-                    </div>
-                    <label style={{ position: 'relative', display: 'inline-block', width: '44px', height: '24px' }}>
-                      <input type="checkbox" defaultChecked style={{ opacity: 0, width: 0, height: 0 }} />
-                      <span style={{ position: 'absolute', cursor: 'pointer', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: '#4f46e5', transition: '.4s', borderRadius: '34px' }}>
-                        <span style={{ position: 'absolute', content: '""', height: '18px', width: '18px', left: '3px', bottom: '3px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', transform: 'translateX(20px)' }}></span>
+                  )}
+                  <button 
+                    onClick={() => fileInputRef.current.click()}
+                    style={{ position: 'absolute', bottom: -5, right: -5, width: '32px', height: '32px', borderRadius: '50%', background: '#4f46e5', color: 'white', border: '3px solid var(--color-bg)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}
+                    title="Ganti Foto Profil"
+                  >
+                    <i className="ph ph-camera" style={{ fontSize: '1rem' }}></i>
+                  </button>
+                  <input type="file" ref={fileInputRef} onChange={handleAvatarUpload} accept="image/*" style={{ display: 'none' }} />
+                </div>
+                <div>
+                  <h3 style={{ margin: '0 0 4px 0', fontSize: '1.3rem', color: 'var(--color-text)' }}>{user.name}</h3>
+                  <p style={{ margin: '0 0 12px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>NIM/NIP: {user.nim_nip}</p>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <span style={{ padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold', background: user.role === 'admin' ? '#fee2e2' : user.role === 'dosen' ? '#e0e7ff' : '#dcfce7', color: user.role === 'admin' ? '#991b1b' : user.role === 'dosen' ? '#3730a3' : '#166534', textTransform: 'uppercase' }}>
+                      {user.role}
+                    </span>
+                    {user.prodi && (
+                      <span style={{ padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold', background: 'var(--glass-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', textTransform: 'uppercase' }}>
+                        {user.prodi}
                       </span>
-                    </label>
+                    )}
                   </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '20px', borderBottom: '1px solid var(--color-border)' }}>
-                    <div>
-                      <h4 style={{ margin: '0 0 4px', fontSize: '1rem', color: 'var(--color-text)' }}>Autentikasi 2 Langkah (2FA)</h4>
-                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Tingkatkan keamanan akun Anda dengan OTP.</p>
-                    </div>
-                    <button style={{ background: 'var(--glass-bg)', color: '#4f46e5', border: '1px solid #4f46e5', padding: '6px 12px', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer' }}>
-                      Aktifkan
-                    </button>
-                  </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <div>
-                      <h4 style={{ margin: '0 0 4px', fontSize: '1rem', color: 'var(--color-text)' }}>Sembunyikan Bio dari Publik</h4>
-                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Bio hanya bisa dilihat oleh admin atau dosen wali.</p>
-                    </div>
-                    <label style={{ position: 'relative', display: 'inline-block', width: '44px', height: '24px' }}>
-                      <input type="checkbox" style={{ opacity: 0, width: 0, height: 0 }} />
-                      <span style={{ position: 'absolute', cursor: 'pointer', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: '#ccc', transition: '.4s', borderRadius: '34px' }}>
-                        <span style={{ position: 'absolute', content: '""', height: '18px', width: '18px', left: '3px', bottom: '3px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%' }}></span>
-                      </span>
-                    </label>
-                  </div>
-
                 </div>
               </div>
-            )}
 
-          </div>
+              {/* Form Data Diri */}
+              <form onSubmit={handleUpdateProfile} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+                  <div style={{ flex: '1 1 200px' }}>
+                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Email Address</label>
+                    <input type="email" name="email" defaultValue={user.email} placeholder="contoh@kampus.ac.id" style={{ width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#4f46e5'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                  </div>
+                  <div style={{ flex: '1 1 200px' }}>
+                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Nomor HP</label>
+                    <input type="tel" name="phone" defaultValue={user.phone} placeholder="08123456789" style={{ width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#4f46e5'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                  </div>
+                </div>
+                
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Alamat Domisili</label>
+                  <textarea name="address" defaultValue={user.address} rows="3" placeholder="Masukkan alamat lengkap..." style={{ width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', resize: 'vertical', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#4f46e5'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'}></textarea>
+                </div>
+                
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Bio Singkat</label>
+                  <textarea name="bio" defaultValue={user.bio} rows="2" placeholder="Tuliskan sedikit tentang diri Anda..." style={{ width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', resize: 'vertical', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#4f46e5'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'}></textarea>
+                </div>
+
+                <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'flex-end' }}>
+                  <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '14px 28px', borderRadius: '10px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(79, 70, 229, 0.3)', display: 'inline-flex', alignItems: 'center', gap: '8px', transition: 'all 0.3s' }} onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.target.style.transform = 'none'}>
+                    Simpan Perubahan
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+
+          {/* Tab 2: Keamanan */}
+          {activeTab === 'keamanan' && (
+            <div className="fade-in">
+              <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)' }}>Keamanan Akun</h2>
+              
+              <div style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '20px', borderRadius: '12px', marginBottom: '32px', display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                <i className="ph ph-info" style={{ fontSize: '1.5rem', color: '#4f46e5' }}></i>
+                <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.9rem', lineHeight: '1.5' }}>Pastikan Anda menggunakan kata sandi yang kuat dan tidak digunakan di situs lain. Kombinasikan huruf besar, huruf kecil, angka, dan simbol.</p>
+              </div>
+
+              <form onSubmit={handleUpdatePassword} style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '500px' }}>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Password Saat Ini</label>
+                  <input type="password" name="current_password" required placeholder="••••••••" style={{ width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#4f46e5'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Password Baru</label>
+                  <input type="password" name="password" required minLength="6" placeholder="••••••••" style={{ width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#4f46e5'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Konfirmasi Password Baru</label>
+                  <input type="password" name="confirm" required minLength="6" placeholder="••••••••" style={{ width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#4f46e5'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                </div>
+                <div style={{ marginTop: '16px' }}>
+                  <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '14px 28px', borderRadius: '10px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(79, 70, 229, 0.3)', display: 'inline-flex', alignItems: 'center', gap: '8px', transition: 'all 0.3s' }} onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.target.style.transform = 'none'}>
+                    Perbarui Password
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+
+          {/* Tab 3: Preferensi */}
+          {activeTab === 'preferensi' && (
+            <div className="fade-in">
+              <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)' }}>Preferensi Sistem</h2>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '20px', borderBottom: '1px dashed var(--color-border)' }}>
+                  <div>
+                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', color: 'var(--color-text)' }}>Notifikasi Email</h4>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Terima pembaruan penting dan jadwal di email Anda.</p>
+                  </div>
+                  <label style={{ position: 'relative', display: 'inline-block', width: '50px', height: '26px' }}>
+                    <input type="checkbox" defaultChecked style={{ opacity: 0, width: 0, height: 0 }} />
+                    <span style={{ position: 'absolute', cursor: 'pointer', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: '#4f46e5', transition: '.4s', borderRadius: '34px' }}>
+                      <span style={{ position: 'absolute', content: '""', height: '20px', width: '20px', left: '3px', bottom: '3px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', transform: 'translateX(24px)', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}></span>
+                    </span>
+                  </label>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '20px', borderBottom: '1px dashed var(--color-border)' }}>
+                  <div>
+                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', color: 'var(--color-text)' }}>Visibilitas Publik</h4>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Izinkan pengguna lain melihat nomor HP dan email Anda.</p>
+                  </div>
+                  <label style={{ position: 'relative', display: 'inline-block', width: '50px', height: '26px' }}>
+                    <input type="checkbox" style={{ opacity: 0, width: 0, height: 0 }} />
+                    <span style={{ position: 'absolute', cursor: 'pointer', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'var(--color-border)', transition: '.4s', borderRadius: '34px' }}>
+                      <span style={{ position: 'absolute', content: '""', height: '20px', width: '20px', left: '3px', bottom: '3px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}></span>
+                    </span>
+                  </label>
+                </div>
+
+              </div>
+            </div>
+          )}
+
         </div>
       </div>
     </div>
