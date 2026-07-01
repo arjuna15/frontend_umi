@@ -182,11 +182,15 @@ export default function MahasiswaDashboard() {
                   <td>{item.course?.sks}</td>
                   <td>
                     <span className="siakad-badge" style={{
-                      background: item.grade === 'A' || item.grade === 'A-' ? 'rgba(16, 185, 129, 0.15)' : 
-                                 item.grade === 'B+' || item.grade === 'B' ? 'rgba(59, 130, 246, 0.15)' : 
+                      background: item.grade?.startsWith('A') ? 'rgba(16, 185, 129, 0.15)' : 
+                                 item.grade?.startsWith('B') ? 'rgba(59, 130, 246, 0.15)' : 
+                                 item.grade?.startsWith('C') ? 'rgba(234, 179, 8, 0.15)' : 
+                                 item.grade?.startsWith('D') ? 'rgba(249, 115, 22, 0.15)' : 
                                  item.grade ? 'rgba(239, 68, 68, 0.15)' : 'var(--glass-bg)',
-                      color: item.grade === 'A' || item.grade === 'A-' ? '#10b981' : 
-                             item.grade === 'B+' || item.grade === 'B' ? '#3b82f6' : 
+                      color: item.grade?.startsWith('A') ? '#10b981' : 
+                             item.grade?.startsWith('B') ? '#3b82f6' : 
+                             item.grade?.startsWith('C') ? '#eab308' : 
+                             item.grade?.startsWith('D') ? '#f97316' : 
                              item.grade ? '#ef4444' : 'var(--color-muted)',
                       fontWeight: 'bold',
                     }}>

@@ -107,14 +107,16 @@ export default function MahasiswaGradebook() {
                   <td style={{ padding: '16px 24px', textAlign: 'center', fontWeight: 'bold' }}>{item.akhir}</td>
                   <td style={{ padding: '16px 24px', textAlign: 'center' }}>
                     <span className="siakad-badge" style={{
-                      background: item.huruf === 'A' ? 'rgba(16, 185, 129, 0.15)' : 
-                                 item.huruf === 'B' ? 'rgba(59, 130, 246, 0.15)' : 
-                                 item.huruf === 'C' ? 'rgba(234, 179, 8, 0.15)' : 
-                                 item.huruf === 'D' ? 'rgba(249, 115, 22, 0.15)' : 'rgba(239, 68, 68, 0.15)',
-                      color: item.huruf === 'A' ? '#10b981' : 
-                             item.huruf === 'B' ? '#3b82f6' : 
-                             item.huruf === 'C' ? '#eab308' : 
-                             item.huruf === 'D' ? '#f97316' : '#ef4444',
+                      background: item.huruf?.startsWith('A') ? 'rgba(16, 185, 129, 0.15)' : 
+                                 item.huruf?.startsWith('B') ? 'rgba(59, 130, 246, 0.15)' : 
+                                 item.huruf?.startsWith('C') ? 'rgba(234, 179, 8, 0.15)' : 
+                                 item.huruf?.startsWith('D') ? 'rgba(249, 115, 22, 0.15)' : 
+                                 item.huruf ? 'rgba(239, 68, 68, 0.15)' : 'var(--glass-bg)',
+                      color: item.huruf?.startsWith('A') ? '#10b981' : 
+                             item.huruf?.startsWith('B') ? '#3b82f6' : 
+                             item.huruf?.startsWith('C') ? '#eab308' : 
+                             item.huruf?.startsWith('D') ? '#f97316' : 
+                             item.huruf ? '#ef4444' : 'var(--color-muted)',
                       fontWeight: 'bold',
                       fontSize: '1rem',
                       padding: '4px 16px'
