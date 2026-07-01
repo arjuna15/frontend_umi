@@ -153,7 +153,7 @@ export default function DosenPresensiPage() {
                           <i className="ph ph-calendar-blank"></i> {att.date}
                         </span>
                       </div>
-                      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' , flexWrap: 'wrap' }}>
                         <div className="siakad-badge" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
                           {att.records?.filter(r => r.status === 'present').length || 0} Hadir
                         </div>

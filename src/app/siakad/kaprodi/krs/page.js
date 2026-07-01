@@ -145,7 +145,7 @@ export default function KaprodiKrs() {
         </div>
       </div>
       
-      <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' }}>
+      <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' , flexWrap: 'wrap' }}>
         <button onClick={() => setActiveTab('pending')} style={{ background: activeTab === 'pending' ? 'rgba(59, 130, 246, 0.1)' : 'transparent', color: activeTab === 'pending' ? '#3b82f6' : 'var(--color-muted)', border: 'none', padding: '12px 24px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
           <i className="ph ph-clock"></i> Menunggu Persetujuan ({submissions.length})
         </button>
@@ -250,8 +250,8 @@ export default function KaprodiKrs() {
 
       {isRejectModalOpen && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, padding: '24px' }}>
-          <div className="siakad-card fade-in" style={{ padding: '0', width: '100%', maxWidth: '500px', overflow: 'hidden' }}>
-            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div className="siakad-card fade-in" style={{ padding: '0', width: '100%', width: '90%', maxWidth: '500px', maxHeight: '90vh', overflowY: 'auto', overflow: 'hidden' }}>
+            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' , flexWrap: 'wrap' }}>
               <h2 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)' }}>
                 Penolakan KRS Mahasiswa
               </h2>

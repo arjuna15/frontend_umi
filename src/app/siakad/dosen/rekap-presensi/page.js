@@ -84,7 +84,7 @@ export default function RekapPresensiPage() {
           <p style={{ margin: 0, fontSize: '1.1rem' }}>Belum ada data presensi untuk ditampilkan.</p>
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '24px', alignItems: 'start' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start' }}>
           {/* Course Selector */}
           <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
             <div style={{ background: 'linear-gradient(to right, #064e3b, #065f46)', padding: '16px 20px' }}>

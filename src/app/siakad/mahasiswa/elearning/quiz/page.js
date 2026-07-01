@@ -98,7 +98,7 @@ export default function MahasiswaQuiz() {
 
   if (result) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
-      <div className="siakad-card" style={{ padding: '40px', textAlign: 'center', maxWidth: '500px', width: '100%' }}>
+      <div className="siakad-card" style={{ padding: '40px', textAlign: 'center', width: '90%', maxWidth: '500px', maxHeight: '90vh', overflowY: 'auto', width: '100%' }}>
         <div style={{ width: '80px', height: '80px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', margin: '0 auto 20px auto' }}>
           <i className="ph ph-check-circle"></i>
         </div>
@@ -153,7 +153,7 @@ export default function MahasiswaQuiz() {
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
         {quizData.questions && quizData.questions.length > 0 ? quizData.questions.map((q, idx) => (
           <div key={q.id} className="siakad-card" style={{ padding: '32px' }}>
-            <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' , flexWrap: 'wrap' }}>
               <div style={{ width: '36px', height: '36px', background: '#0f172a', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0 }}>
                 {idx + 1}
               </div>

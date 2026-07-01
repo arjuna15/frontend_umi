@@ -90,7 +90,7 @@ export default function KrsApprovalPage() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '24px', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', alignItems: 'start' }}>
         {/* Left List */}
         <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
           <div style={{ background: 'linear-gradient(to right, #4c0519, #7f1d1d)', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

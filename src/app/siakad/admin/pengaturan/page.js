@@ -74,7 +74,7 @@ export default function AdminPengaturan() {
         </div>
       </div>
 
-      <div className="siakad-card stagger-1" style={{ maxWidth: '650px', padding: '32px' }}>
+      <div className="siakad-card stagger-1" style={{ width: '90%', maxWidth: '650px', maxHeight: '90vh', overflowY: 'auto', padding: '32px' }}>
         
         {/* Section 1: Periode Akademik */}
         <div style={{ marginBottom: '32px' }}>
@@ -171,7 +171,7 @@ export default function AdminPengaturan() {
           
           <p style={{ fontSize: '0.9rem', color: 'var(--color-muted)', marginBottom: '16px' }}>Atur titik koordinat pusat kampus untuk validasi kehadiran offline (radius jarak aman: 20km untuk uji coba).</p>
 
-          <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: '1fr 1fr' }}>
+          <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Kampus Bintaro (Lat, Lng)</label>
               <input 
@@ -215,7 +215,7 @@ export default function AdminPengaturan() {
 
       {isConfirmModalOpen && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
-          <div className="siakad-card fade-in" style={{ padding: '32px', maxWidth: '400px', textAlign: 'center' }}>
+          <div className="siakad-card fade-in" style={{ padding: '32px', width: '90%', maxWidth: '400px', maxHeight: '90vh', overflowY: 'auto', textAlign: 'center' }}>
             <div style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', margin: '0 auto 20px auto' }}>
               <i className="ph ph-warning-circle"></i>
             </div>

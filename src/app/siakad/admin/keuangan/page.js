@@ -276,9 +276,9 @@ export default function AdminKeuangan() {
           display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, padding: '24px'
         }}>
           <div className="siakad-card fade-in" style={{
-            padding: '0', width: '100%', maxWidth: '500px', overflow: 'hidden'
+            padding: '0', width: '100%', width: '90%', maxWidth: '500px', maxHeight: '90vh', overflowY: 'auto', overflow: 'hidden'
           }}>
-            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' , flexWrap: 'wrap' }}>
               <h2 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)' }}>
                 {isEdit ? 'Edit Tagihan' : 'Tambah Tagihan Baru'}
               </h2>

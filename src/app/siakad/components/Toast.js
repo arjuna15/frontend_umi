@@ -87,7 +87,7 @@ export function ConfirmModal() {
           </div>
           <h3 style={{ margin: '0 0 12px 0', color: 'var(--color-text)', fontSize: '1.4rem', fontWeight: 'bold' }}>Perhatian!</h3>
           <p style={{ color: 'var(--color-muted)', marginBottom: '32px', fontSize: '1rem', lineHeight: '1.6' }}>{modal.message}</p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' , flexWrap: 'wrap' }}>
             <button 
               onClick={() => { modal.resolve(false); setModal(null); }}
               style={{ padding: '14px 24px', borderRadius: '12px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', flex: 1, transition: 'all 0.2s' }}
@@ -182,7 +182,7 @@ export function PromptModal() {
               onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.02)'; }}
             />
           </div>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end' }}>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end' , flexWrap: 'wrap' }}>
             <button 
               onClick={() => { modal.resolve(null); setModal(null); }}
               style={{ padding: '12px 24px', borderRadius: '10px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s' }}
@@ -284,7 +284,7 @@ export function FormModal() {
               </div>
             ))}
           </div>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end', borderTop: '1px solid var(--color-border)', paddingTop: '24px' }}>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end', borderTop: '1px solid var(--color-border)', paddingTop: '24px' , flexWrap: 'wrap' }}>
             <button 
               onClick={() => { modal.resolve(null); setModal(null); }}
               style={{ padding: '12px 24px', borderRadius: '10px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s' }}

@@ -84,7 +84,7 @@ export default function DosenQuizCreate() {
       <form onSubmit={handleSubmit}>
         <div className="siakad-card stagger-1" style={{ padding: '24px', marginBottom: '24px' }}>
           <h3 style={{ margin: '0 0 16px 0' }}>Pengaturan Kuis</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Judul Kuis / Ujian</label>
               <input type="text" required value={title} onChange={e=>setTitle(e.target.value)} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Ujian Tengah Semester (UTS)" />
@@ -126,7 +126,7 @@ export default function DosenQuizCreate() {
             
             {q.type === 'multiple_choice' && (
               <>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
                   <div>
                     <label>Opsi A</label>
                     <input required type="text" value={q.option_a} onChange={e=>handleChange(idx, 'option_a', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
@@ -166,7 +166,7 @@ export default function DosenQuizCreate() {
             {q.type === 'true_false' && (
               <div style={{ marginTop: '16px' }}>
                 <label style={{ fontWeight: 600, color: 'var(--color-text)' }}>Jawaban Benar (Kunci)</label>
-                <div style={{ display: 'flex', gap: '16px', marginTop: '8px' }}>
+                <div style={{ display: 'flex', gap: '16px', marginTop: '8px' , flexWrap: 'wrap' }}>
                   <button 
                     type="button" 
                     onClick={() => handleChange(idx, 'correct_answer', 'True')}
@@ -200,7 +200,7 @@ export default function DosenQuizCreate() {
           </div>
         ))}
 
-        <div style={{ display: 'flex', gap: '16px' }}>
+        <div style={{ display: 'flex', gap: '16px' , flexWrap: 'wrap' }}>
           <button type="button" onClick={addQuestion} style={{ flex: 1, background: 'var(--color-border)', color: 'var(--color-text)', border: '2px dashed var(--color-muted)', padding: '16px', borderRadius: '12px', cursor: 'pointer', fontWeight: 600 }}>
             <i className="ph ph-plus"></i> Tambah Soal
           </button>

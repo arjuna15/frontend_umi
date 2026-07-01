@@ -80,7 +80,7 @@ export default function DosenDashboard() {
       </div>
 
       {/* Main Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
         {/* Jadwal Hari Ini */}
         <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
           <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 24px', display: 'flex', alignItems: 'center', gap: '12px' }}>

@@ -101,7 +101,7 @@ export default function RosterPage() {
           <p style={{ color: 'var(--color-muted)', fontSize: '1rem', margin: 0 }}>Anda belum memiliki jadwal mengajar semester ini.</p>
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: '24px', alignItems: 'start' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start' }}>
           {/* ── Left Sidebar: Course Selector ── */}
           <div className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden' }}>
             <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '16px 20px' }}>

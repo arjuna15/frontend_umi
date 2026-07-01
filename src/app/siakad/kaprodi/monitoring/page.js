@@ -118,8 +118,8 @@ export default function KaprodiMonitoring() {
 
       {selectedCourse && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, padding: '24px' }}>
-          <div className="siakad-card fade-in" style={{ padding: '0', width: '100%', maxWidth: '700px', overflow: 'hidden', display: 'flex', flexDirection: 'column', maxHeight: '90vh' }}>
-            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--color-bg)' }}>
+          <div className="siakad-card fade-in" style={{ padding: '0', width: '100%', width: '90%', maxWidth: '700px', maxHeight: '90vh', overflowY: 'auto', overflow: 'hidden', display: 'flex', flexDirection: 'column', maxHeight: '90vh' }}>
+            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--color-bg)' , flexWrap: 'wrap' }}>
               <div>
                 <h2 style={{ margin: 0, fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)' }}>Detail BAP: {selectedCourse.name}</h2>
                 <p style={{ margin: '4px 0 0 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Dosen: {selectedCourse.dosen?.name || '-'}</p>
