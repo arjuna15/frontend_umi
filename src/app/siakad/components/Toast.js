@@ -30,6 +30,12 @@ toast.prompt = (msg, defaultValue = '') => {
     window.dispatchEvent(event);
   });
 };
+toast.form = (title, fields) => {
+  return new Promise((resolve) => {
+    const event = new CustomEvent('siakad_form', { detail: { title, fields, resolve } });
+    window.dispatchEvent(event);
+  });
+};
 
 if (typeof window !== 'undefined') {
   window.toast = toast;
@@ -147,7 +153,9 @@ export function PromptModal() {
               setModal(null);
             }
           }}
-          style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', marginBottom: '24px' }}
+          style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '2px solid #d1d5db', outline: 'none', background: 'white', color: 'black', marginBottom: '24px', fontSize: '1rem', transition: 'border 0.3s' }}
+          onFocus={(e) => e.target.style.border = '2px solid #4f46e5'}
+          onBlur={(e) => e.target.style.border = '2px solid #d1d5db'}
         />
         <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
           <button 
@@ -161,6 +169,93 @@ export function PromptModal() {
             style={{ padding: '10px 20px', borderRadius: '8px', border: 'none', background: '#4f46e5', color: 'white', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)' }}
           >
             OK
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function FormModal() {
+  const [modal, setModal] = useState(null);
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    const handleForm = (e) => {
+      setModal(e.detail);
+      const initialData = {};
+      e.detail.fields.forEach(f => { initialData[f.name] = ''; });
+      setFormData(initialData);
+    };
+    window.addEventListener('siakad_form', handleForm);
+    return () => window.removeEventListener('siakad_form', handleForm);
+  }, []);
+
+  if (!modal) return null;
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0, left: 0, right: 0, bottom: 0,
+      background: 'rgba(0,0,0,0.5)',
+      backdropFilter: 'blur(4px)',
+      zIndex: 10002,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <div style={{
+        background: 'var(--color-bg)',
+        border: '1px solid var(--color-border)',
+        borderRadius: '16px',
+        padding: '32px',
+        maxWidth: '500px',
+        width: '90%',
+        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+        animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+        textAlign: 'left'
+      }}>
+        <h3 style={{ margin: '0 0 24px 0', color: 'var(--color-text)', fontSize: '1.4rem' }}>{modal.title}</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
+          {modal.fields.map(f => (
+            <div key={f.name}>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: 'bold' }}>{f.label}</label>
+              {f.type === 'textarea' ? (
+                <textarea
+                  autoFocus={f.autoFocus}
+                  rows="4"
+                  value={formData[f.name]}
+                  onChange={(e) => setFormData({...formData, [f.name]: e.target.value})}
+                  style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '2px solid #d1d5db', outline: 'none', background: 'white', color: 'black', fontSize: '1rem', transition: 'border 0.3s', resize: 'vertical' }}
+                  onFocus={(e) => e.target.style.border = '2px solid #4f46e5'}
+                  onBlur={(e) => e.target.style.border = '2px solid #d1d5db'}
+                />
+              ) : (
+                <input 
+                  autoFocus={f.autoFocus}
+                  type="text"
+                  value={formData[f.name]}
+                  onChange={(e) => setFormData({...formData, [f.name]: e.target.value})}
+                  style={{ width: '100%', padding: '14px 16px', borderRadius: '10px', border: '2px solid #d1d5db', outline: 'none', background: 'white', color: 'black', fontSize: '1rem', transition: 'border 0.3s' }}
+                  onFocus={(e) => e.target.style.border = '2px solid #4f46e5'}
+                  onBlur={(e) => e.target.style.border = '2px solid #d1d5db'}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+        <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+          <button 
+            onClick={() => { modal.resolve(null); setModal(null); }}
+            style={{ padding: '12px 24px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer' }}
+          >
+            Batal
+          </button>
+          <button 
+            onClick={() => { modal.resolve(formData); setModal(null); }}
+            style={{ padding: '12px 24px', borderRadius: '8px', border: 'none', background: '#4f46e5', color: 'white', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)' }}
+          >
+            Simpan & Kirim
           </button>
         </div>
       </div>
