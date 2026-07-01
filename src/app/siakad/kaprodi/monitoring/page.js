@@ -6,6 +6,7 @@ export default function KaprodiMonitoring() {
   const router = useRouter();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -65,6 +66,7 @@ export default function KaprodiMonitoring() {
               <th>Total Pertemuan</th>
               <th>Materi Uploaded</th>
               <th>Status BAP</th>
+              <th style={{ textAlign: 'center' }}>Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -98,6 +100,14 @@ export default function KaprodiMonitoring() {
                       <span className="siakad-badge" style={{ background: '#fee2e2', color: '#b91c1c' }}>Kosong</span>
                     )}
                   </td>
+                  <td style={{ textAlign: 'center' }}>
+                    <button 
+                      onClick={() => setSelectedCourse(course)}
+                      style={{ background: 'transparent', border: '1px solid #3b82f6', color: '#3b82f6', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem' }}
+                    >
+                      Lihat BAP
+                    </button>
+                  </td>
                 </tr>
               ))
             )}
@@ -105,6 +115,47 @@ export default function KaprodiMonitoring() {
           </table>
         </div>
       </div>
+
+      {selectedCourse && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, padding: '24px' }}>
+          <div className="siakad-card fade-in" style={{ padding: '0', width: '100%', maxWidth: '700px', overflow: 'hidden', display: 'flex', flexDirection: 'column', maxHeight: '90vh' }}>
+            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--color-bg)' }}>
+              <div>
+                <h2 style={{ margin: 0, fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)' }}>Detail BAP: {selectedCourse.name}</h2>
+                <p style={{ margin: '4px 0 0 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Dosen: {selectedCourse.dosen?.name || '-'}</p>
+              </div>
+              <button onClick={() => setSelectedCourse(null)} style={{ background: 'transparent', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontSize: '1.5rem' }}>
+                <i className="ph ph-x"></i>
+              </button>
+            </div>
+            
+            <div style={{ padding: '24px', overflowY: 'auto', background: 'var(--glass-bg)', flex: 1 }}>
+              <h3 style={{ margin: '0 0 16px 0', fontSize: '1.1rem' }}>Riwayat Pertemuan</h3>
+              {(!selectedCourse.attendances || selectedCourse.attendances.length === 0) ? (
+                <div style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)', border: '1px dashed var(--color-border)', borderRadius: '12px' }}>
+                  Belum ada sesi perkuliahan / presensi yang dicatat.
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {selectedCourse.attendances.map((att, idx) => (
+                    <div key={idx} style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: '12px', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div>
+                        <div style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '4px' }}>Pertemuan ke-{idx + 1}</div>
+                        <div style={{ color: 'var(--color-muted)', fontSize: '0.85rem' }}>Tanggal: {new Date(att.created_at || Date.now()).toLocaleDateString('id-ID')}</div>
+                      </div>
+                      <div style={{ textAlign: 'right' }}>
+                        <span style={{ display: 'inline-block', padding: '4px 10px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', borderRadius: '99px', fontSize: '0.8rem', fontWeight: 600 }}>
+                          Materi Dibagikan
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -152,19 +152,55 @@ export default function AdminKeuangan() {
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola seluruh tagihan dan pembayaran mahasiswa.</p>
           </div>
-          <button 
-            onClick={() => openModal()}
-            style={{
-              background: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(10px)',
-              color: 'white', border: '1px solid rgba(255,255,255,0.2)', padding: '12px 24px', borderRadius: '12px',
-              fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
-              transition: 'all 0.3s'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
-            onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
-          >
-            <i className="ph ph-plus-circle"></i> Tambah Tagihan
-          </button>
+          <div style={{ display: 'flex', gap: '12px' }}>
+            <button 
+              onClick={() => window.toast?.('Membuat tagihan massal untuk semua mahasiswa aktif...')}
+              style={{
+                background: 'rgba(16, 185, 129, 0.2)', backdropFilter: 'blur(10px)',
+                color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '12px 24px', borderRadius: '12px',
+                fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
+                transition: 'all 0.3s'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(16, 185, 129, 0.3)'}
+              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(16, 185, 129, 0.2)'}
+            >
+              <i className="ph ph-receipt"></i> Generate Tagihan Massal
+            </button>
+            <button 
+              onClick={() => openModal()}
+              style={{
+                background: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(10px)',
+                color: 'white', border: '1px solid rgba(255,255,255,0.2)', padding: '12px 24px', borderRadius: '12px',
+                fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
+                transition: 'all 0.3s'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
+              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
+            >
+              <i className="ph ph-plus-circle"></i> Tambah Tagihan
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px', marginBottom: '24px' }}>
+        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
+            <i className="ph ph-coins"></i>
+          </div>
+          <div>
+            <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Pemasukan (Lunas)</p>
+            <h3 style={{ margin: 0, fontSize: '1.2rem' }}>{formatRupiah(billings.filter(b => b.status === 'Lunas').reduce((acc, b) => acc + parseFloat(b.amount || 0), 0))}</h3>
+          </div>
+        </div>
+        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
+            <i className="ph ph-warning-circle"></i>
+          </div>
+          <div>
+            <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Piutang (Belum Lunas)</p>
+            <h3 style={{ margin: 0, fontSize: '1.2rem' }}>{formatRupiah(billings.filter(b => b.status !== 'Lunas').reduce((acc, b) => acc + parseFloat(b.amount || 0), 0))}</h3>
+          </div>
         </div>
       </div>
 

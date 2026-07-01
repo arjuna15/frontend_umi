@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 export default function KaprodiReports() {
   const [downloading, setDownloading] = useState(false);
+  const [selectedStandard, setSelectedStandard] = useState('all');
 
   const handleDownload = () => {
     setDownloading(true);
@@ -13,11 +14,12 @@ export default function KaprodiReports() {
       const encodedUri = encodeURI(csvContent);
       const link = document.createElement("a");
       link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "Laporan_Akreditasi_BANPT.csv");
+      link.setAttribute("download", `Laporan_Akreditasi_BANPT_${selectedStandard}.csv`);
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       setDownloading(false);
+      window.toast?.(`Laporan ${selectedStandard} berhasil diunduh`);
     }, 1500);
   };
 
@@ -35,15 +37,38 @@ export default function KaprodiReports() {
       </div>
 
 
-      <div className="siakad-card stagger-1" style={{ padding: '40px', textAlign: 'center', maxWidth: '600px', margin: '0 auto' }}>
+      <div className="siakad-card stagger-1" style={{ padding: '40px', textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
         <div style={{ width: '80px', height: '80px', background: 'var(--glass-bg)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto' }}>
           <i className="ph ph-file-xls" style={{ fontSize: '3rem', color: '#ef4444' }}></i>
         </div>
         
         <h3 style={{ margin: '0 0 10px 0', color: 'var(--color-text)' }}>Generate Laporan Komprehensif</h3>
         <p style={{ color: 'var(--color-muted)', marginBottom: '30px' }}>
-          Laporan ini mencakup seluruh data nilai, aktivitas dosen, kehadiran mahasiswa, dan EDOM untuk semester berjalan. Laporan dikemas dalam format CSV/Excel.
+          Laporan ini mencakup seluruh data yang dibutuhkan untuk instrumen akreditasi BAN-PT. Pilih standar yang ingin Anda unduh.
         </p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '32px', textAlign: 'left' }}>
+          {[
+            { id: 'all', title: 'Semua Standar (Lengkap)', desc: 'Ekspor seluruh data akademik' },
+            { id: 'std2', title: 'Standar 2: Tata Pamong', desc: 'Sistem tata pamong, kepemimpinan' },
+            { id: 'std3', title: 'Standar 3: Mahasiswa', desc: 'Profil mahasiswa dan lulusan' },
+            { id: 'std4', title: 'Standar 4: SDM', desc: 'Profil dosen dan tenaga kependidikan' },
+            { id: 'std5', title: 'Standar 5: Kurikulum', desc: 'Kurikulum, pembelajaran, dan suasana' }
+          ].map(std => (
+            <div 
+              key={std.id}
+              onClick={() => setSelectedStandard(std.id)}
+              style={{
+                padding: '16px', borderRadius: '12px', border: `2px solid ${selectedStandard === std.id ? '#3b82f6' : 'var(--color-border)'}`,
+                background: selectedStandard === std.id ? 'rgba(59, 130, 246, 0.05)' : 'var(--color-bg)',
+                cursor: 'pointer', transition: 'all 0.2s'
+              }}
+            >
+              <h4 style={{ margin: '0 0 4px 0', color: selectedStandard === std.id ? '#3b82f6' : 'var(--color-text)' }}>{std.title}</h4>
+              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{std.desc}</p>
+            </div>
+          ))}
+        </div>
 
         <button 
           onClick={handleDownload}

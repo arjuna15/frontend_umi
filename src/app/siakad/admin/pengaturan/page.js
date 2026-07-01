@@ -4,10 +4,14 @@ import CustomSelect from '../../components/CustomSelect';
 
 export default function AdminPengaturan() {
   const [krsOpen, setKrsOpen] = useState(true);
+  const [khsOpen, setKhsOpen] = useState(true);
+  const [nilaiOpen, setNilaiOpen] = useState(true);
   const [semester, setSemester] = useState('Ganjil 2026/2027');
 
   const [coordBintaro, setCoordBintaro] = useState('-6.2758, 106.7405');
   const [coordPasarMinggu, setCoordPasarMinggu] = useState('-6.2842, 106.8442');
+  
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   useEffect(() => {
     const savedKrs = localStorage.getItem('siakad_krs_open');
@@ -31,6 +35,8 @@ export default function AdminPengaturan() {
 
   const handleSave = () => {
     localStorage.setItem('siakad_krs_open', krsOpen);
+    localStorage.setItem('siakad_khs_open', khsOpen);
+    localStorage.setItem('siakad_nilai_open', nilaiOpen);
     localStorage.setItem('siakad_semester', semester);
     
     const bintaroVal = document.getElementById('coordBintaro').value;
@@ -41,6 +47,7 @@ export default function AdminPengaturan() {
     setCoordBintaro(bintaroVal);
     setCoordPasarMinggu(pmVal);
 
+    setIsConfirmModalOpen(false);
     window.toast('Pengaturan sistem berhasil disimpan permanen!');
   };
 
@@ -92,42 +99,61 @@ export default function AdminPengaturan() {
           </div>
         </div>
 
-        {/* Section 2: Kontrol Akses Mahasiswa */}
+        {/* Section 2: Kontrol Sistem Akademik */}
         <div style={{ marginBottom: '40px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px' }}>
             <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
-              <i className="ph ph-shield-check" style={{ fontSize: '1.2rem' }}></i>
+              <i className="ph ph-sliders-horizontal" style={{ fontSize: '1.2rem' }}></i>
             </div>
             <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>
-              Kontrol Akses Mahasiswa
+              Kontrol Sistem Akademik
             </h3>
           </div>
 
-          <div style={{ 
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
-            padding: '20px', background: 'var(--glass-bg)', borderRadius: '16px', 
-            border: '1px solid var(--color-border)', transition: 'all 0.2s'
-          }}>
-            <div>
-              <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Pengisian KRS Online</div>
-              <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Buka akses bagi mahasiswa untuk mulai memilih <br/>mata kuliah semester ini.</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ 
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
+              padding: '20px', background: 'var(--glass-bg)', borderRadius: '16px', 
+              border: '1px solid var(--color-border)', transition: 'all 0.2s'
+            }}>
+              <div>
+                <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Pengisian KRS Online</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Buka akses bagi mahasiswa untuk mulai memilih <br/>mata kuliah semester ini.</div>
+              </div>
+              
+              <div onClick={() => setKrsOpen(!krsOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: krsOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
+                <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: krsOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }} />
+              </div>
             </div>
-            
-            {/* Premium Toggle Switch */}
-            <div 
-              onClick={() => setKrsOpen(!krsOpen)}
-              style={{
-                width: '64px', height: '36px', borderRadius: '20px', 
-                background: krsOpen ? '#10b981' : '#e5e7eb',
-                position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease'
-              }}
-            >
-              <div style={{
-                width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%',
-                position: 'absolute', top: '4px', left: krsOpen ? '32px' : '4px',
-                transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', 
-                boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
-              }} />
+
+            <div style={{ 
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
+              padding: '20px', background: 'var(--glass-bg)', borderRadius: '16px', 
+              border: '1px solid var(--color-border)', transition: 'all 0.2s'
+            }}>
+              <div>
+                <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Akses Cetak KHS</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Izinkan mahasiswa melihat dan mencetak Kartu<br/>Hasil Studi (KHS).</div>
+              </div>
+              
+              <div onClick={() => setKhsOpen(!khsOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: khsOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
+                <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: khsOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }} />
+              </div>
+            </div>
+
+            <div style={{ 
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
+              padding: '20px', background: 'var(--glass-bg)', borderRadius: '16px', 
+              border: '1px solid var(--color-border)', transition: 'all 0.2s'
+            }}>
+              <div>
+                <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Input Nilai Dosen</div>
+                <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Buka portal bagi dosen untuk memasukkan dan<br/>mengubah nilai mahasiswa.</div>
+              </div>
+              
+              <div onClick={() => setNilaiOpen(!nilaiOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: nilaiOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
+                <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: nilaiOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }} />
+              </div>
             </div>
           </div>
         </div>
@@ -171,7 +197,7 @@ export default function AdminPengaturan() {
 
         {/* Save Button */}
         <button 
-          onClick={handleSave}
+          onClick={() => setIsConfirmModalOpen(true)}
           style={{ 
             background: 'linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)', 
             color: 'white', border: 'none', padding: '16px 24px', 
@@ -186,6 +212,22 @@ export default function AdminPengaturan() {
           <i className="ph ph-floppy-disk" style={{ fontSize: '1.3rem' }}></i> Simpan Konfigurasi Sistem
         </button>
       </div>
+
+      {isConfirmModalOpen && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
+          <div className="siakad-card fade-in" style={{ padding: '32px', maxWidth: '400px', textAlign: 'center' }}>
+            <div style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', margin: '0 auto 20px auto' }}>
+              <i className="ph ph-warning-circle"></i>
+            </div>
+            <h2 style={{ fontSize: '1.25rem', margin: '0 0 12px 0' }}>Konfirmasi Perubahan</h2>
+            <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', marginBottom: '24px' }}>Apakah Anda yakin ingin menyimpan perubahan konfigurasi sistem ini? Perubahan akan langsung berdampak pada seluruh pengguna.</p>
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <button onClick={() => setIsConfirmModalOpen(false)} style={{ flex: 1, padding: '12px', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '12px', cursor: 'pointer', fontWeight: 600, color: 'var(--color-text)' }}>Batal</button>
+              <button onClick={handleSave} style={{ flex: 1, padding: '12px', background: '#3b82f6', border: 'none', borderRadius: '12px', cursor: 'pointer', fontWeight: 600, color: 'white' }}>Ya, Simpan</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

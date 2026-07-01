@@ -27,13 +27,20 @@ export default function SiakadLayout({ children }) {
     menuItems = [
       { label: 'Admin Dashboard', icon: 'ph ph-chart-pie-slice', path: '/siakad/admin' },
       { label: 'Manajemen Pengguna', icon: 'ph ph-users-three', path: '/siakad/admin/users' },
+      { label: 'Manajemen Prodi', icon: 'ph ph-buildings', path: '/siakad/admin/prodi' },
       { label: 'Manajemen Kelas', icon: 'ph ph-chalkboard', path: '/siakad/admin/classes' },
+      { label: 'Manajemen Ruangan', icon: 'ph ph-door', path: '/siakad/admin/ruangan' },
       { label: 'Manajemen Keuangan', icon: 'ph ph-wallet', path: '/siakad/admin/keuangan' },
+      { label: 'Log Aktivitas (Audit)', icon: 'ph ph-list-magnifying-glass', path: '/siakad/admin/logs' },
+      { label: 'Backup & Restore', icon: 'ph ph-database', path: '/siakad/admin/backup' },
       { label: 'Pengaturan Sistem', icon: 'ph ph-gear', path: '/siakad/admin/pengaturan' },
     ];
   } else if (role === 'kaprodi') {
     menuItems = [
       { label: 'Dashboard Statistik', icon: 'ph ph-chart-line-up', path: '/siakad/kaprodi' },
+      { label: 'Manajemen Kurikulum', icon: 'ph ph-books', path: '/siakad/kaprodi/kurikulum' },
+      { label: 'Manajemen Dosen', icon: 'ph ph-users', path: '/siakad/kaprodi/dosen' },
+      { label: 'Kalender Akademik', icon: 'ph ph-calendar', path: '/siakad/kaprodi/kalender' },
       { label: 'Persetujuan KRS', icon: 'ph ph-check-square-offset', path: '/siakad/kaprodi/krs' },
       { label: 'Monitoring Perkuliahan', icon: 'ph ph-chalkboard-teacher', path: '/siakad/kaprodi/monitoring' },
       { label: 'Plotting Dosen', icon: 'ph ph-users-three', path: '/siakad/kaprodi/plotting' },

@@ -11,8 +11,9 @@ export default function AdminClassesPage() {
   const [selectedDosen, setSelectedDosen] = useState("");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({
-    id: '', code: '', name: '', sks: '', dosen_id: ''
+    id: '', code: '', name: '', sks: '', dosen_id: '', prasyarat: '', semester: 'Ganjil'
   });
+  const [selectedSemester, setSelectedSemester] = useState("Ganjil");
 
   useEffect(() => {
     fetchCourses();
@@ -74,6 +75,8 @@ export default function AdminClassesPage() {
       if (res.ok) {
         window.toast('Course created successfully');
         e.target.reset();
+        setSelectedDosen("");
+        setSelectedSemester("Ganjil");
         fetchCourses();
       } else {
         window.toast('Failed to create course');
@@ -116,7 +119,9 @@ export default function AdminClassesPage() {
       code: course.code,
       name: course.name,
       sks: course.sks,
-      dosen_id: course.dosen_id || ''
+      dosen_id: course.dosen_id || '',
+      prasyarat: course.prasyarat || '',
+      semester: course.semester || 'Ganjil'
     });
     setIsEditModalOpen(true);
   };
@@ -186,6 +191,19 @@ export default function AdminClassesPage() {
               options={[{value: '', label: 'Pilih Dosen...'}, ...users.map(u => ({ value: u.id, label: u.name, icon: 'ph ph-user' }))]}
             />
           </div>
+          <div style={{ flex: '1 1 150px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Semester</label>
+            <CustomSelect
+              name="semester"
+              value={selectedSemester}
+              onChange={setSelectedSemester}
+              options={[{value: 'Ganjil', label: 'Ganjil'}, {value: 'Genap', label: 'Genap'}]}
+            />
+          </div>
+          <div style={{ flex: '1 1 150px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Prasyarat</label>
+            <input name="prasyarat" placeholder="Kode MK (Opsional)..." style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+          </div>
           <div>
             <button type="submit" style={{ background: '#10b981', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.2)' }}>
               <i className="ph ph-plus-circle"></i> Tambah
@@ -202,6 +220,8 @@ export default function AdminClassesPage() {
                 <th style={{ padding: '16px 24px', fontWeight: '600' }}>Kode</th>
                 <th style={{ padding: '16px 24px', fontWeight: '600' }}>Nama Mata Kuliah</th>
                 <th style={{ padding: '16px 24px', fontWeight: '600' }}>SKS</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600' }}>Semester</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600' }}>Prasyarat</th>
                 <th style={{ padding: '16px 24px', fontWeight: '600', textAlign: 'right' }}>Aksi</th>
               </tr>
             </thead>
@@ -211,6 +231,8 @@ export default function AdminClassesPage() {
                   <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: 'bold', fontSize: '0.95rem' }}>{course.code}</td>
                   <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: '500' }}>{course.name}</td>
                   <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.sks} SKS</td>
+                  <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.semester || 'Ganjil'}</td>
+                  <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.prasyarat || '-'}</td>
                   <td style={{ padding: '16px 24px', textAlign: 'right' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                       <button 
@@ -229,7 +251,7 @@ export default function AdminClassesPage() {
               ))}
               {courses.length === 0 && (
                 <tr>
-                  <td colSpan="4" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data kelas/mata kuliah</td>
+                  <td colSpan="6" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data kelas/mata kuliah</td>
                 </tr>
               )}
             </tbody>
@@ -262,6 +284,19 @@ export default function AdminClassesPage() {
                     onChange={(val) => setEditFormData({...editFormData, dosen_id: val})}
                     options={[{value: '', label: 'Pilih Dosen...'}, ...users.map(u => ({ value: u.id, label: u.name, icon: 'ph ph-user' }))]}
                   />
+                </div>
+              <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
+                <div style={{ flex: 1 }}>
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Semester</label>
+                  <CustomSelect
+                    value={editFormData.semester}
+                    onChange={(val) => setEditFormData({...editFormData, semester: val})}
+                    options={[{value: 'Ganjil', label: 'Ganjil'}, {value: 'Genap', label: 'Genap'}]}
+                  />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Prasyarat</label>
+                  <input value={editFormData.prasyarat} onChange={(e) => setEditFormData({...editFormData, prasyarat: e.target.value})} placeholder="Opsional..." style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
                 </div>
               </div>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>

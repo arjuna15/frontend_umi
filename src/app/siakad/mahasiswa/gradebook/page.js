@@ -41,11 +41,17 @@ export default function MahasiswaGradebook() {
   let totalBobot = 0;
   data.forEach(item => {
     totalSks += item.sks;
-    let bobot = 4;
-    if (item.huruf === 'B') bobot = 3;
-    if (item.huruf === 'C') bobot = 2;
-    if (item.huruf === 'D') bobot = 1;
-    if (item.huruf === 'E') bobot = 0;
+    let bobot = 0;
+    if (item.huruf === 'A') bobot = 4.0;
+    else if (item.huruf === 'A-') bobot = 3.7;
+    else if (item.huruf === 'B+') bobot = 3.3;
+    else if (item.huruf === 'B') bobot = 3.0;
+    else if (item.huruf === 'B-') bobot = 2.7;
+    else if (item.huruf === 'C+') bobot = 2.3;
+    else if (item.huruf === 'C') bobot = 2.0;
+    else if (item.huruf === 'D') bobot = 1.0;
+    else if (item.huruf === 'E') bobot = 0;
+    
     totalBobot += (bobot * item.sks);
   });
   const ipSemester = totalSks > 0 ? (totalBobot / totalSks).toFixed(2) : 0;

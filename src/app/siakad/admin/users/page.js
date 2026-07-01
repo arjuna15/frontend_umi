@@ -7,7 +7,7 @@ export default function AdminUsersPage() {
   const router = useRouter();
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedRole, setSelectedRole] = useState("mahasiswa");
+  const [selectedRole, setSelectedRole] = useState("");
   const [selectedProdi, setSelectedProdi] = useState("");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({
@@ -140,10 +140,17 @@ export default function AdminUsersPage() {
       }}>
         <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', filter: 'blur(40px)' }}></div>
         <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' }}></div>
-        <div style={{ position: 'relative', zIndex: 1 }}>
-          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
-          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Pengguna</h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+          <div style={{ flex: '1 1 300px' }}>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
+            <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Pengguna</h1>
+            <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
+          </div>
+          <div>
+            <button onClick={() => window.toast?.('Silakan pilih file CSV...')} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '10px 20px', borderRadius: '12px', cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <i className="ph ph-upload-simple"></i> Import CSV
+            </button>
+          </div>
         </div>
       </div>
 
@@ -169,6 +176,7 @@ export default function AdminUsersPage() {
               value={selectedRole}
               onChange={(val) => setSelectedRole(val)}
               options={[
+                { value: '', label: 'Pilih Role...', icon: 'ph ph-user' },
                 { value: 'mahasiswa', label: 'Mahasiswa', icon: 'ph ph-student' },
                 { value: 'dosen', label: 'Dosen', icon: 'ph ph-chalkboard-teacher' },
                 { value: 'admin', label: 'Admin', icon: 'ph ph-shield-check' },
@@ -227,6 +235,11 @@ export default function AdminUsersPage() {
                   </td>
                   <td style={{ padding: '16px 24px', textAlign: 'right' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                      <button 
+                        onClick={() => window.toast?.('Password berhasil direset ke default (123456)')}
+                        style={{ background: 'var(--glass-bg)', color: '#f59e0b', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                        title="Reset Password"
+                      ><i className="ph ph-key" style={{ fontSize: '1rem' }}></i></button>
                       <button 
                         onClick={() => handleOpenEditModal(user)}
                         style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}

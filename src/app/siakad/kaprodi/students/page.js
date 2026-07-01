@@ -41,6 +41,23 @@ export default function KaprodiStudents() {
     </div>
   );
 
+  const calculateGradeDistribution = () => {
+    const dist = { A: 0, B: 0, C: 0, D: 0, E: 0, Belum: 0 };
+    let total = 0;
+    grades.forEach(g => {
+      total++;
+      if (['A', 'A-'].includes(g.grade)) dist.A++;
+      else if (['B+', 'B', 'B-'].includes(g.grade)) dist.B++;
+      else if (['C+', 'C'].includes(g.grade)) dist.C++;
+      else if (['D'].includes(g.grade)) dist.D++;
+      else if (['E'].includes(g.grade)) dist.E++;
+      else dist.Belum++;
+    });
+    return { dist, total };
+  };
+
+  const { dist, total } = calculateGradeDistribution();
+
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       
@@ -54,8 +71,25 @@ export default function KaprodiStudents() {
         </div>
       </div>
 
+      <div className="siakad-card stagger-1" style={{ padding: '24px', marginBottom: '24px' }}>
+        <h2 style={{ margin: '0 0 20px 0', fontSize: '1.2rem', color: 'var(--color-text)' }}>Distribusi Nilai (Keseluruhan Prodi)</h2>
+        <div style={{ display: 'flex', alignItems: 'flex-end', height: '150px', gap: '16px', paddingBottom: '10px', borderBottom: '1px solid var(--color-border)' }}>
+          {Object.keys(dist).map(key => {
+            const count = dist[key];
+            const heightPercentage = total > 0 ? (count / total) * 100 : 0;
+            const color = key === 'A' ? '#10b981' : key === 'B' ? '#3b82f6' : key === 'C' ? '#f59e0b' : key === 'Belum' ? 'var(--color-muted)' : '#ef4444';
+            return (
+              <div key={key} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: '8px' }}>
+                <div style={{ color: 'var(--color-text)', fontWeight: 600, fontSize: '0.9rem' }}>{count}</div>
+                <div style={{ width: '40px', background: color, height: `${heightPercentage}%`, minHeight: '4px', borderRadius: '4px 4px 0 0', transition: 'height 0.5s ease' }}></div>
+                <div style={{ color: 'var(--color-muted)', fontSize: '0.8rem', fontWeight: 600 }}>{key}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
-      <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
+      <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
         <div style={{ overflowX: 'auto' }}>
           <table className="siakad-table" style={{ minWidth: '800px' }}>
           <thead>
