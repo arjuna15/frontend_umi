@@ -113,35 +113,37 @@ export default function SiakadLayout({ children }) {
             const iconClass = isActive ? item.icon.replace('ph ', 'ph-fill ph ') : item.icon;
             return (
               <Link key={i} href={item.path} className={`siakad-nav-item ${isActive ? 'active' : ''}`}>
-                <i className={iconClass} style={{ fontSize: '1.3rem' }}></i>
-                {item.label}
-                {i === 0 && <span style={{ marginLeft: 'auto', background: isActive ? 'rgba(255,255,255,0.2)' : '#e0e7ff', color: isActive ? 'white' : '#4f46e5', padding: '2px 8px', borderRadius: '10px', fontSize: '0.65rem', fontWeight: 'bold' }}>BARU</span>}
+                <i className={iconClass} style={{ fontSize: '1.3rem', flexShrink: 0 }}></i>
+                <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.label}</span>
+                {i === 0 && <span style={{ background: isActive ? 'rgba(255,255,255,0.2)' : '#e0e7ff', color: isActive ? 'white' : '#4f46e5', padding: '2px 8px', borderRadius: '10px', fontSize: '0.65rem', fontWeight: 'bold', flexShrink: 0 }}>BARU</span>}
               </Link>
             );
           })}
         </nav>
 
-        <div className="siakad-user-profile" onClick={() => router.push('/siakad/profile')}>
-          <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', flexShrink: 0 }}>
-            {role ? role.charAt(0).toUpperCase() : 'U'}
+        <div className="siakad-user-profile">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, cursor: 'pointer', overflow: 'hidden' }} onClick={() => router.push('/siakad/profile')}>
+            <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', flexShrink: 0 }}>
+              {role ? role.charAt(0).toUpperCase() : 'U'}
+            </div>
+            <div style={{ overflow: 'hidden', flex: 1 }}>
+              <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--color-text)', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                Pengguna SIAKAD
+              </h4>
+              <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', textTransform: 'capitalize', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                Role: {role || 'Guest'}
+              </p>
+            </div>
           </div>
-          <div style={{ overflow: 'hidden' }}>
-            <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--color-text)', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
-              Pengguna SIAKAD
-            </h4>
-            <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', textTransform: 'capitalize' }}>
-              Role: {role || 'Guest'}
-            </p>
-          </div>
-        </div>
-
-        <div style={{ padding: '0 24px 24px 24px' }}>
-          <button onClick={() => {
-            localStorage.removeItem('siakad_token');
-            window.location.href = '/siakad/login';
-          }} className="btn-logout"
+          <button 
+            onClick={() => {
+              localStorage.removeItem('siakad_token');
+              window.location.href = '/siakad/login';
+            }} 
+            className="btn-logout-icon" 
+            title="Keluar"
           >
-            <i className="ph ph-sign-out" style={{ fontSize: '1.2rem' }}></i> Keluar
+            <i className="ph ph-sign-out" style={{ fontSize: '1.2rem' }}></i>
           </button>
         </div>
       </aside>
