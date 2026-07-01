@@ -285,6 +285,7 @@ export default function AdminClassesPage() {
                     options={[{value: '', label: 'Pilih Dosen...'}, ...users.map(u => ({ value: u.id, label: u.name, icon: 'ph ph-user' }))]}
                   />
                 </div>
+              </div>
               <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
                 <div style={{ flex: 1 }}>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Semester</label>
