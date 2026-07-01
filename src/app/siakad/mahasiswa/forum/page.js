@@ -55,10 +55,10 @@ export default function MahasiswaForumPage() {
               borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
               border: 'var(--glass-border)', overflow: 'hidden' 
             }}>
-              <div style={{ background: 'linear-gradient(90deg, rgba(238,242,255,0.8) 0%, rgba(255,255,255,0) 100%)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#3730a3', fontWeight: 'bold' }}>{course.name}</h3>
-                  <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-text)' }}>{course.code}</span>
+                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
+                  <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>{course.code}</span>
                 </div>
                 <button onClick={async () => {
                   const formData = await window.toast.form('Buat Topik Diskusi Baru', [
