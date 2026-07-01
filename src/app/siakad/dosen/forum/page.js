@@ -83,7 +83,7 @@ export default function DosenForumPage() {
                   if (res.ok) window.location.reload();
                   else window.toast('Gagal membuat topik');
                 } catch (err) { window.toast('Error: ' + err.message); }
-              }} style={{ background: 'var(--glass-bg)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(249, 115, 22, 0.3)' }}>
+              }} style={{ background: '#f97316', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(249, 115, 22, 0.3)' }}>
                 <i className="ph ph-plus"></i> Buat Topik Baru
               </button>
             </div>
@@ -131,7 +131,7 @@ export default function DosenForumPage() {
                               else window.toast('Gagal mengirim balasan');
                             } catch (err) { window.toast('Error: ' + err.message); }
                           }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
-                            <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, padding: '8px 12px', borderRadius: '6px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }} />
+                            <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, minWidth: 0, padding: '8px 12px', borderRadius: '6px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }} />
                             <button type="submit" style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Kirim</button>
                           </form>
                       </div>

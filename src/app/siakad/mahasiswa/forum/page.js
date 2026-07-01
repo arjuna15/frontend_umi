@@ -169,7 +169,7 @@ export default function MahasiswaForumPage() {
                               else window.toast('Gagal mengirim balasan');
                             } catch (err) { window.toast('Error: ' + err.message); }
                           }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
-                            <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, padding: '8px 12px', borderRadius: '6px', border: '1px solid var(--color-border)', outline: 'none', fontSize: '0.9rem', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+                            <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, minWidth: 0, padding: '8px 12px', borderRadius: '6px', border: '1px solid var(--color-border)', outline: 'none', fontSize: '0.9rem', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
                             <button type="submit" style={{ background: '#0f172a', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Kirim</button>
                           </form>
                         </div>
