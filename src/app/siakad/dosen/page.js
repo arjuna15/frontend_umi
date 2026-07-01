@@ -162,7 +162,7 @@ export default function DosenDashboard() {
                     <p style={{ margin: '0 0 4px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.95rem' }}>{c.name}</p>
                     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                       <span style={{ padding: '2px 8px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600' }}>{c.code}</span>
-                      <span style={{ padding: '2px 8px', background: 'rgba(16,185,129,0.15)', color: '#10b981', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600' }}>{c.sks} SKS</span>
+                      <span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '2px 8px', background: 'rgba(16,185,129,0.15)', color: '#10b981', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600' }}>{c.sks} SKS</span>
                     </div>
                   </div>
                 </div>

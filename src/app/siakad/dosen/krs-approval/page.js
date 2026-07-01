@@ -162,7 +162,7 @@ export default function KrsApprovalPage() {
                         <tr key={c.id || i} style={{ borderBottom: '1px solid var(--color-border)' }}>
                           <td style={{ padding: '12px 16px' }}><span style={{ padding: '4px 10px', background: 'rgba(99,102,241,0.1)', color: '#6366f1', borderRadius: '6px', fontSize: '0.8rem', fontWeight: '700' }}>{c.code}</span></td>
                           <td style={{ padding: '12px 16px', fontWeight: '600', color: 'var(--color-text)' }}>{c.name}</td>
-                          <td style={{ padding: '12px 16px' }}><span style={{ padding: '4px 10px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '6px', fontSize: '0.8rem', fontWeight: '700' }}>{c.sks} SKS</span></td>
+                          <td style={{ padding: '12px 16px' }}><span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '4px 10px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '6px', fontSize: '0.8rem', fontWeight: '700' }}>{c.sks} SKS</span></td>
                         </tr>
                       ))}
                       <tr style={{ background: 'rgba(0,0,0,0.02)' }}>

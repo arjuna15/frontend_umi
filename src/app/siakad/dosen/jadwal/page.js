@@ -70,18 +70,18 @@ export default function JadwalPage() {
         <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '220px', height: '220px', borderRadius: '50%', background: 'rgba(59,130,246,0.2)', filter: 'blur(50px)', pointerEvents: 'none' }}></div>
         <div style={{ position: 'absolute', bottom: '-20px', left: '25%', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(139,92,246,0.15)', filter: 'blur(40px)', pointerEvents: 'none' }}></div>
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
-          <div>
+          <div style={{ flex: '1 1 300px' }}>
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', margin: '0 0 8px 0', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: '600' }}>SIAKAD — DOSEN</p>
             <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Pengaturan Jadwal Mengajar</h1>
             <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Atur hari, jam, dan ruang kelas untuk mata kuliah Anda semester ini.</p>
           </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', flex: '1 1 300px', justifyContent: 'center' }}>
             {[
               { label: 'Total MK', value: courses.length, icon: 'ph-books', color: '#6366f1' },
               { label: 'Terkonfigurasi', value: configuredCount, icon: 'ph-check-circle', color: '#10b981' },
               { label: 'Belum Diatur', value: courses.length - configuredCount, icon: 'ph-warning', color: '#f59e0b' },
             ].map((s, i) => (
-              <div key={i} style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.15)' }}>
+              <div key={i} style={{ flex: '1 1 90px', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.15)' }}>
                 <i className={`ph ${s.icon}`} style={{ fontSize: '1.3rem', color: s.color, display: 'block', marginBottom: '4px' }}></i>
                 <p style={{ color: 'white', fontWeight: '800', fontSize: '1.4rem', margin: '0 0 2px 0' }}>{s.value}</p>
                 <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.65rem', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.label}</p>
@@ -129,7 +129,7 @@ export default function JadwalPage() {
                       </div>
                     </td>
                     <td style={{ padding: '16px 20px' }}>
-                      <span style={{ padding: '4px 10px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem' }}>{c.sks} SKS</span>
+                      <span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '4px 10px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem' }}>{c.sks} SKS</span>
                     </td>
                     {isEditing ? (
                       <>
