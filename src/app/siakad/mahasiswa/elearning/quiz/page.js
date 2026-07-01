@@ -99,7 +99,7 @@ export default function MahasiswaQuiz() {
   if (result) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
       <div className="siakad-card" style={{ padding: '40px', textAlign: 'center', width: '90%', maxWidth: '500px', maxHeight: '90vh', overflowY: 'auto', width: '100%' }}>
-        <div style={{ width: '80px', height: '80px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', margin: '0 auto 20px auto' }}>
+        <div style={{ width: '80px', height: '80px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', margin: '0 auto 20px auto' , flexShrink: 0 }}>
           <i className="ph ph-check-circle"></i>
         </div>
         <h2 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '10px' }}>Selesai!</h2>

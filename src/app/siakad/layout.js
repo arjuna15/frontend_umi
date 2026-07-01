@@ -144,7 +144,7 @@ export default function SiakadLayout({ children }) {
                 cursor: 'pointer',
                 color: 'var(--color-text)',
                 transition: 'all 0.3s'
-              }}
+              , flexShrink: 0 }}
             >
               <i className="ph ph-bell" style={{ fontSize: '1.2rem' }}></i>
               <span style={{ position: 'absolute', top: 0, right: '2px', background: '#ef4444', border: '2px solid var(--color-bg)', borderRadius: '50%', width: '12px', height: '12px' }}></span>
@@ -217,7 +217,7 @@ export default function SiakadLayout({ children }) {
               cursor: 'pointer',
               color: 'var(--color-text)',
               transition: 'all 0.3s'
-            }}
+            , flexShrink: 0 }}
           >
             {theme === 'dark' ? <i className="ph ph-sun" style={{ fontSize: '1.2rem' }}></i> : <i className="ph ph-moon" style={{ fontSize: '1.2rem' }}></i>}
           </button>

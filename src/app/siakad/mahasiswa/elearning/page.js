@@ -93,7 +93,7 @@ export default function ElearningPage() {
               {/* Materials Section */}
               <div>
                 <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: 'var(--color-text)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'var(--glass-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--color-border)' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'var(--glass-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--color-border)' , flexShrink: 0 }}>
                     <i className="ph ph-folder-open"></i>
                   </div>
                   Materi Perkuliahan

@@ -73,7 +73,7 @@ export default function MahasiswaGradebook() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '32px' }}>
         <div className="siakad-card" style={{ padding: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '16px' }}>
-          <div style={{ width: '80px', height: '80px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', border: '1px solid rgba(245, 158, 11, 0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(245, 158, 11, 0.1)' }}>
+          <div style={{ width: '80px', height: '80px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', border: '1px solid rgba(245, 158, 11, 0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(245, 158, 11, 0.1)' , flexShrink: 0 }}>
             <i className="ph ph-medal"></i>
           </div>
           <div>
@@ -83,7 +83,7 @@ export default function MahasiswaGradebook() {
         </div>
         
         <div className="siakad-card" style={{ padding: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '16px' }}>
-          <div style={{ width: '80px', height: '80px', background: 'rgba(15, 23, 42, 0.1)', color: '#0f172a', border: '1px solid rgba(15, 23, 42, 0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(15, 23, 42, 0.1)' }}>
+          <div style={{ width: '80px', height: '80px', background: 'rgba(15, 23, 42, 0.1)', color: '#0f172a', border: '1px solid rgba(15, 23, 42, 0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(15, 23, 42, 0.1)' , flexShrink: 0 }}>
             <i className="ph ph-books"></i>
           </div>
           <div>

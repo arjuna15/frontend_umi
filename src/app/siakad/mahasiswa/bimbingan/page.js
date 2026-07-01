@@ -31,7 +31,7 @@ export default function BimbinganAkademikPage() {
           <h3 style={{ margin: '0 0 16px 0', color: 'var(--color-text)', fontSize: '1.2rem', fontWeight: 'bold' }}>Profil Dosen Wali</h3>
           
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-            <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: '#4f46e5', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold' }}>
+            <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: '#4f46e5', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold' , flexShrink: 0 }}>
               SA
             </div>
             <div>

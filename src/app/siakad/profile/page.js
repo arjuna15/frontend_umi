@@ -206,7 +206,7 @@ export default function ProfilePage() {
                   )}
                   <button 
                     onClick={() => fileInputRef.current.click()}
-                    style={{ position: 'absolute', bottom: -5, right: -5, width: '32px', height: '32px', borderRadius: '50%', background: '#C41E3A', color: 'white', border: '3px solid var(--color-bg)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' }}
+                    style={{ position: 'absolute', bottom: -5, right: -5, width: '32px', height: '32px', borderRadius: '50%', background: '#C41E3A', color: 'white', border: '3px solid var(--color-bg)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' , flexShrink: 0 }}
                     title="Ganti Foto Profil"
                   >
                     <i className="ph ph-camera" style={{ fontSize: '1rem' }}></i>

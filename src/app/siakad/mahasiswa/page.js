@@ -68,7 +68,7 @@ export default function MahasiswaDashboard() {
               <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Selamat datang kembali di Portal Akademik Anda.</p>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '10px 20px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px', backdropFilter: 'blur(10px)' }}>
-              <div style={{ width: '40px', height: '40px', background: 'rgba(255,255,255,0.2)', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
+              <div style={{ width: '40px', height: '40px', background: 'rgba(255,255,255,0.2)', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' , flexShrink: 0 }}>
                 <i className="ph ph-identification-card"></i>
               </div>
               <div>
@@ -83,7 +83,7 @@ export default function MahasiswaDashboard() {
       {/* Statistik Atas */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ width: '50px', height: '50px', background: '#0f172a', color: 'white', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
+          <div style={{ width: '50px', height: '50px', background: '#0f172a', color: 'white', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
             <i className="ph ph-student"></i>
           </div>
           <div>
@@ -92,7 +92,7 @@ export default function MahasiswaDashboard() {
           </div>
         </div>
         <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ width: '50px', height: '50px', background: 'rgba(196,30,58,0.1)', color: '#C41E3A', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
+          <div style={{ width: '50px', height: '50px', background: 'rgba(196,30,58,0.1)', color: '#C41E3A', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
             <i className="ph ph-books"></i>
           </div>
           <div>
@@ -101,7 +101,7 @@ export default function MahasiswaDashboard() {
           </div>
         </div>
         <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ width: '50px', height: '50px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
+          <div style={{ width: '50px', height: '50px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
             <i className="ph ph-chart-line-up"></i>
           </div>
           <div>

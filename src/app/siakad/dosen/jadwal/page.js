@@ -94,11 +94,11 @@ export default function JadwalPage() {
       {/* Table Card */}
       <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
         <div style={{ background: 'linear-gradient(to right, #1e3a5f, #1e1b4b)', padding: '20px 28px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
             <i className="ph ph-calendar-plus" style={{ color: 'white', fontSize: '1.1rem' }}></i>
           </div>
           <h3 style={{ margin: 0, color: 'white', fontWeight: '700' }}>Daftar Mata Kuliah & Jadwal</h3>
-          <span style={{ marginLeft: 'auto', padding: '4px 12px', background: 'rgba(255,255,255,0.15)', color: 'white', borderRadius: '999px', fontSize: '0.8rem', fontWeight: '700' }}>{courses.length} MK</span>
+          <span style={{ marginLeft: 'auto', padding: '4px 12px', background: 'rgba(255,255,255,0.15)', color: 'white', borderRadius: '999px', fontSize: '0.8rem', fontWeight: '700' , flexShrink: 0 }}>{courses.length} MK</span>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>

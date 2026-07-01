@@ -75,7 +75,7 @@ export default function KaprodiDashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '30px' }}>
         
         <div className="siakad-card stagger-1" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '4px solid #3b82f6' }}>
-          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(59,130,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(59,130,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
             <i className="ph ph-books" style={{ fontSize: '2rem', color: '#3b82f6' }}></i>
           </div>
           <div>
@@ -85,7 +85,7 @@ export default function KaprodiDashboard() {
         </div>
         
         <div className="siakad-card stagger-2" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '4px solid #10b981' }}>
-          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(16,185,129,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(16,185,129,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
             <i className="ph ph-student" style={{ fontSize: '2rem', color: '#10b981' }}></i>
           </div>
           <div>
@@ -95,7 +95,7 @@ export default function KaprodiDashboard() {
         </div>
 
         <div className="siakad-card stagger-3" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '4px solid #8b5cf6' }}>
-          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(139,92,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(139,92,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
             <i className="ph ph-chalkboard-teacher" style={{ fontSize: '2rem', color: '#8b5cf6' }}></i>
           </div>
           <div>

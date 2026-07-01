@@ -224,7 +224,7 @@ export default function DosenPresensiPage() {
                     style={{ padding: '8px 10px 8px 36px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '200px' }}
                   />
                 </div>
-                <button onClick={() => setShowDetailModal(false)} style={{ background: 'var(--glass-bg)', border: 'none', width: '36px', height: '36px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text)' }}>
+                <button onClick={() => setShowDetailModal(false)} style={{ background: 'var(--glass-bg)', border: 'none', width: '36px', height: '36px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text)' , flexShrink: 0 }}>
                   <i className="ph ph-x" style={{ fontSize: '1.2rem' }}></i>
                 </button>
               </div>

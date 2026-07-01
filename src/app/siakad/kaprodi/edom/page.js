@@ -76,7 +76,7 @@ export default function KaprodiEdom() {
         <h2 style={{ margin: '0 0 20px 0', fontSize: '1.2rem', color: 'var(--color-text)' }}>Ringkasan Evaluasi Prodi</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px' }}>
           <div style={{ flex: '1 1 200px', display: 'flex', alignItems: 'center', gap: '16px', background: 'var(--glass-bg)', padding: '20px', borderRadius: '16px', border: '1px solid var(--color-border)' }}>
-            <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem' }}>
+            <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem' , flexShrink: 0 }}>
               <i className="ph ph-star-fill"></i>
             </div>
             <div>

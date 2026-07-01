@@ -67,7 +67,7 @@ export default function AdminDashboard() {
         <div className="siakad-card stagger-1" style={{ 
           padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' 
         }}>
-          <div style={{ width: '50px', height: '50px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
+          <div style={{ width: '50px', height: '50px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
             <i className="ph ph-users"></i>
           </div>
           <div>
@@ -79,7 +79,7 @@ export default function AdminDashboard() {
         <div className="siakad-card stagger-2" style={{ 
           padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' 
         }}>
-          <div style={{ width: '50px', height: '50px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
+          <div style={{ width: '50px', height: '50px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
             <i className="ph ph-chalkboard"></i>
           </div>
           <div>

@@ -82,7 +82,7 @@ export function ConfirmModal() {
         <div style={{ position: 'absolute', top: '-50px', left: '-50px', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0) 70%)', borderRadius: '50%', zIndex: 0 }}></div>
         
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ width: '80px', height: '80px', background: 'rgba(245, 158, 11, 0.1)', border: '2px solid rgba(245, 158, 11, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
+          <div style={{ width: '80px', height: '80px', background: 'rgba(245, 158, 11, 0.1)', border: '2px solid rgba(245, 158, 11, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' , flexShrink: 0 }}>
             <i className="ph ph-warning-circle" style={{ fontSize: '3.5rem', color: '#f59e0b' }}></i>
           </div>
           <h3 style={{ margin: '0 0 12px 0', color: 'var(--color-text)', fontSize: '1.4rem', fontWeight: 'bold' }}>Perhatian!</h3>

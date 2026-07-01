@@ -216,7 +216,7 @@ export default function AdminPengaturan() {
       {isConfirmModalOpen && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 }}>
           <div className="siakad-card fade-in" style={{ padding: '32px', width: '90%', maxWidth: '400px', maxHeight: '90vh', overflowY: 'auto', textAlign: 'center' }}>
-            <div style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', margin: '0 auto 20px auto' }}>
+            <div style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', margin: '0 auto 20px auto' , flexShrink: 0 }}>
               <i className="ph ph-warning-circle"></i>
             </div>
             <h2 style={{ fontSize: '1.25rem', margin: '0 0 12px 0' }}>Konfirmasi Perubahan</h2>

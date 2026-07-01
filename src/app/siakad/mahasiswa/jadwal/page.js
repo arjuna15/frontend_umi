@@ -110,7 +110,7 @@ export default function JadwalKalenderPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {calendarEvents.map((item, i) => (
             <div key={i} className="siakad-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
-              <div style={{ background: 'var(--glass-bg)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ background: 'var(--glass-bg)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
                 {getEventIcon(item.type)}
               </div>
               <div style={{ flex: 1 }}>

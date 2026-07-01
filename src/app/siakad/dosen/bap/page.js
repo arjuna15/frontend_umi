@@ -97,7 +97,7 @@ export default function BapPage() {
         {/* Info Panel */}
         <div className="siakad-card stagger-1" style={{ padding: '24px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, #10b981, #059669)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, #10b981, #059669)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
               <i className="ph ph-info" style={{ color: 'white', fontSize: '1.2rem' }}></i>
             </div>
             <h3 style={{ margin: 0, fontWeight: '700', color: 'var(--color-text)' }}>Panduan Pengisian</h3>
@@ -120,7 +120,7 @@ export default function BapPage() {
         {/* Form Card */}
         <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
           <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 28px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
               <i className="ph ph-file-text" style={{ color: 'white', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, color: 'white', fontWeight: '700' }}>Form Pengisian BAP</h3>

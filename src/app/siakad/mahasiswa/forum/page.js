@@ -127,7 +127,7 @@ export default function MahasiswaForumPage() {
                     {course.forums.map((forum, j) => (
                       <div key={j} style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '20px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                          <div style={{ width: '40px', height: '40px', background: 'rgba(15,23,42,0.1)', color: '#0f172a', border: '1px solid rgba(15,23,42,0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>
+                          <div style={{ width: '40px', height: '40px', background: 'rgba(15,23,42,0.1)', color: '#0f172a', border: '1px solid rgba(15,23,42,0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' , flexShrink: 0 }}>
                             <i className="ph ph-user"></i>
                           </div>
                           <div>
