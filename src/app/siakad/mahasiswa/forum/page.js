@@ -6,6 +6,7 @@ export default function MahasiswaForumPage() {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchDashboard = async () => {
@@ -38,26 +39,56 @@ export default function MahasiswaForumPage() {
 
   return (
     <div>
-      <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
         <div>
           <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Forum Diskusi Kelas</h1>
           <p style={{ color: 'var(--color-muted)', margin: 0 }}>Berdiskusi dengan dosen dan teman sekelas Anda.</p>
         </div>
+        <div style={{ display: 'flex', alignItems: 'center', background: 'var(--color-bg)', padding: '8px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', width: '300px' }}>
+          <i className="ph ph-magnifying-glass" style={{ color: 'var(--color-muted)', marginRight: '8px' }}></i>
+          <input 
+            type="text" 
+            placeholder="Cari mata kuliah atau topik..." 
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            style={{ border: 'none', outline: 'none', background: 'transparent', width: '100%', color: 'var(--color-text)' }}
+          />
+        </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
-        {data.krs.map((item, i) => {
-          const course = item.course;
-          if (!course) return null;
-          return (
-            <div key={i} style={{ 
-              background: 'var(--glass-bg)', backdropFilter: 'blur(10px)',
-              borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
-              border: 'var(--glass-border)', overflow: 'hidden' 
-            }}>
-              <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
+        {(() => {
+          const filteredCourses = data.krs.filter(item => {
+            const course = item.course;
+            if (!course) return false;
+            // Search by course name or forum title
+            const term = search.toLowerCase();
+            const matchName = course.name.toLowerCase().includes(term);
+            const matchForum = course.forums?.some(f => f.title.toLowerCase().includes(term));
+            return matchName || matchForum;
+          });
+          
+          if (filteredCourses.length === 0) {
+            return (
+              <div style={{ textAlign: 'center', padding: '64px 0', background: 'var(--glass-bg)', borderRadius: '16px', border: '1px dashed var(--color-border)' }}>
+                <i className="ph ph-magnifying-glass" style={{ fontSize: '3rem', color: 'var(--color-muted)', marginBottom: '16px' }}></i>
+                <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)' }}>Tidak ada forum yang cocok</h3>
+                <p style={{ margin: 0, color: 'var(--color-muted)' }}>Coba kata kunci pencarian yang lain.</p>
+              </div>
+            );
+          }
+
+          return filteredCourses.map((item, i) => {
+            const course = item.course;
+            return (
+              <div key={i} style={{ 
+                background: 'var(--glass-bg)', backdropFilter: 'blur(10px)',
+                borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
+                border: 'var(--glass-border)', overflow: 'hidden' 
+              }}>
+                <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div>
+                    <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
                   <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>{course.code}</span>
                 </div>
                 <button onClick={async () => {
@@ -145,7 +176,7 @@ export default function MahasiswaForumPage() {
               </div>
             </div>
           );
-        })}
+        })()}
       </div>
     </div>
   );

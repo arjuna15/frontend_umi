@@ -13,6 +13,7 @@ export default function SiakadLayout({ children }) {
   const { theme, toggleTheme } = useTheme();
   const [role, setRole] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [showNotif, setShowNotif] = useState(false);
 
   useEffect(() => {
     setRole(localStorage.getItem('siakad_role'));
@@ -52,11 +53,14 @@ export default function SiakadLayout({ children }) {
     // Default Mahasiswa
     menuItems = [
       { label: 'Dashboard & Info', icon: 'ph ph-squares-four', path: '/siakad/mahasiswa' },
+      { label: 'Jadwal & Kalender', icon: 'ph ph-calendar-blank', path: '/siakad/mahasiswa/jadwal' },
       { label: 'KRS Online', icon: 'ph ph-list-checks', path: '/siakad/mahasiswa/krs' },
       { label: 'Ruang Kelas & Kuis', icon: 'ph ph-laptop', path: '/siakad/mahasiswa/elearning' },
       { label: 'Presensi Mandiri', icon: 'ph ph-calendar-check', path: '/siakad/mahasiswa/presensi' },
       { label: 'Rapor & Transkrip', icon: 'ph ph-exam', path: '/siakad/mahasiswa/gradebook' },
+      { label: 'Bimbingan Akademik', icon: 'ph ph-users', path: '/siakad/mahasiswa/bimbingan' },
       { label: 'Forum Diskusi', icon: 'ph ph-chats', path: '/siakad/mahasiswa/forum' },
+      { label: 'Surat & Administrasi', icon: 'ph ph-envelope-simple', path: '/siakad/mahasiswa/surat' },
       { label: 'Keuangan', icon: 'ph ph-wallet', path: '/siakad/mahasiswa/keuangan' },
     ];
   }
@@ -114,6 +118,80 @@ export default function SiakadLayout({ children }) {
         {/* Sleek Glass Header */}
         <header className="siakad-header" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '16px' }}>
           
+          <div style={{ position: 'relative' }}>
+            <button 
+              onClick={() => setShowNotif(!showNotif)} 
+              title="Notifikasi"
+              style={{
+                background: 'var(--glass-bg)',
+                border: '1px solid rgba(255,255,255,0.4)',
+                borderRadius: '50%',
+                width: '40px', height: '40px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer',
+                color: 'var(--color-text)',
+                transition: 'all 0.3s'
+              }}
+            >
+              <i className="ph ph-bell" style={{ fontSize: '1.2rem' }}></i>
+              <span style={{ position: 'absolute', top: 0, right: '2px', background: '#ef4444', border: '2px solid var(--color-bg)', borderRadius: '50%', width: '12px', height: '12px' }}></span>
+            </button>
+            
+            <AnimatePresence>
+              {showNotif && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  style={{
+                    position: 'absolute', top: '50px', right: 0,
+                    width: '320px', background: 'var(--color-bg)',
+                    borderRadius: '16px', boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
+                    border: '1px solid var(--color-border)',
+                    zIndex: 1000, overflow: 'hidden'
+                  }}
+                >
+                  <div style={{ padding: '16px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--glass-bg)' }}>
+                    <h4 style={{ margin: 0, fontWeight: 'bold', color: 'var(--color-text)' }}>Notifikasi</h4>
+                    <span style={{ fontSize: '0.75rem', color: '#3b82f6', cursor: 'pointer', fontWeight: 'bold' }}>Tandai sudah dibaca</span>
+                  </div>
+                  <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
+                    <div style={{ padding: '16px', borderBottom: '1px solid var(--color-border)', background: 'rgba(239, 68, 68, 0.05)', display: 'flex', gap: '12px', cursor: 'pointer' }}>
+                      <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <i className="ph ph-warning-octagon"></i>
+                      </div>
+                      <div>
+                        <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: 'bold' }}>KRS Anda Ditolak</p>
+                        <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)' }}>Silakan revisi mata kuliah Anda sesuai catatan dosen wali.</p>
+                        <p style={{ margin: '4px 0 0 0', fontSize: '0.7rem', color: '#ef4444', fontWeight: 'bold' }}>1 jam yang lalu</p>
+                      </div>
+                    </div>
+                    <div style={{ padding: '16px', borderBottom: '1px solid var(--color-border)', display: 'flex', gap: '12px', cursor: 'pointer' }}>
+                      <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <i className="ph ph-wallet"></i>
+                      </div>
+                      <div>
+                        <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Tagihan UKT Tersedia</p>
+                        <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)' }}>Tagihan semester ganjil sudah terbit, mohon lunasi sebelum 30 Agustus.</p>
+                        <p style={{ margin: '4px 0 0 0', fontSize: '0.7rem', color: 'var(--color-muted)' }}>1 hari yang lalu</p>
+                      </div>
+                    </div>
+                    <div style={{ padding: '16px', display: 'flex', gap: '12px', cursor: 'pointer' }}>
+                      <div style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <i className="ph ph-calendar-check"></i>
+                      </div>
+                      <div>
+                        <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Presensi Berhasil</p>
+                        <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)' }}>Kehadiran Anda pada mata kuliah COMP101 telah dicatat.</p>
+                        <p style={{ margin: '4px 0 0 0', fontSize: '0.7rem', color: 'var(--color-muted)' }}>2 hari yang lalu</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           <button 
             onClick={toggleTheme} 
             title="Toggle Dark Mode"

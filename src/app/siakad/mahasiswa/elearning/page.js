@@ -162,7 +162,11 @@ export default function ElearningPage() {
                     )})}
                   </ul>
                 ) : (
-                  <p style={{ color: 'var(--color-text)', fontSize: '0.9rem', margin: 0, fontStyle: 'italic' }}>Belum ada tugas.</p>
+                  <div style={{ background: 'var(--glass-bg)', padding: '24px', borderRadius: '12px', textAlign: 'center', border: '1px dashed var(--color-border)' }}>
+                    <i className="ph ph-confetti" style={{ fontSize: '2.5rem', color: '#10b981', marginBottom: '8px' }}></i>
+                    <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--color-text)' }}>Wah, aman!</p>
+                    <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}>Belum ada tugas atau kuis untuk saat ini.</p>
+                  </div>
                 )}
               </div>
 

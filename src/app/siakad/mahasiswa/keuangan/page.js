@@ -115,7 +115,11 @@ export default function KeuanganPage() {
             </table>
           </div>
         ) : (
-          <p style={{ color: 'var(--color-muted)', fontStyle: 'italic' }}>Tidak ada tagihan yang harus dibayar saat ini.</p>
+          <div style={{ textAlign: 'center', padding: '64px 0' }}>
+            <i className="ph ph-check-circle" style={{ fontSize: '4rem', color: '#10b981', marginBottom: '16px' }}></i>
+            <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.2rem', fontWeight: 'bold' }}>Semua Lunas!</h3>
+            <p style={{ margin: 0, color: 'var(--color-muted)' }}>Tidak ada tagihan yang harus dibayar saat ini. Terima kasih telah tepat waktu.</p>
+          </div>
         )}
       </div>
     </div>

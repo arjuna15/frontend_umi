@@ -6,6 +6,8 @@ export default function MahasiswaGradebook() {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [semesterFilter, setSemesterFilter] = useState('Ganjil 2026/2027');
 
   useEffect(() => {
     const fetchGrades = async () => {
@@ -78,13 +80,31 @@ export default function MahasiswaGradebook() {
       </div>
 
       <div className="siakad-card" style={{ overflow: 'hidden' }}>
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid #e2e8f0', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ padding: '20px 24px', borderBottom: '1px solid #e2e8f0', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Rincian Nilai Mata Kuliah</h3>
-          <button onClick={() => window.print()} style={{ background: '#4f46e5', border: 'none', padding: '8px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
-            <i className="ph ph-printer"></i> Cetak Transkrip Resmi
-          </button>
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+            <select 
+              value={semesterFilter} 
+              onChange={e => setSemesterFilter(e.target.value)}
+              style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
+            >
+              <option value="Semua">Semua Semester</option>
+              <option value="Ganjil 2026/2027">Ganjil 2026/2027</option>
+              <option value="Genap 2025/2026">Genap 2025/2026</option>
+            </select>
+            <input 
+              type="text" 
+              placeholder="Cari mata kuliah..." 
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
+            />
+            <button onClick={() => window.print()} style={{ background: '#4f46e5', border: 'none', padding: '8px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
+              <i className="ph ph-printer"></i> Cetak Transkrip
+            </button>
+          </div>
         </div>
-        <div style={{ overflowX: 'auto' }}>
+        <div className="overflow-x-auto">
           <table className="siakad-table" style={{ width: '100%', minWidth: '800px' }}>
             <thead>
               <tr style={{ background: 'var(--glass-bg)' }}>
@@ -99,16 +119,21 @@ export default function MahasiswaGradebook() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, idx) => (
-                <tr key={idx} style={{ borderBottom: '1px solid #e2e8f0' }}>
-                  <td style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)' }}>{item.course_name}</td>
-                  <td style={{ padding: '16px 24px', textAlign: 'center', color: 'var(--color-text)' }}>{item.sks}</td>
-                  <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.tugas}</td>
-                  <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.kuis}</td>
-                  <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.uts}</td>
-                  <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.uas}</td>
-                  <td style={{ padding: '16px 24px', textAlign: 'center', fontWeight: 'bold' }}>{item.akhir}</td>
-                  <td style={{ padding: '16px 24px', textAlign: 'center' }}>
+              {(() => {
+                const filteredData = data.filter(item => item.course_name.toLowerCase().includes(search.toLowerCase()));
+                if (filteredData.length === 0) {
+                  return <tr><td colSpan="8" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Mata kuliah tidak ditemukan.</td></tr>;
+                }
+                return filteredData.map((item, idx) => (
+                  <tr key={idx} style={{ borderBottom: '1px solid #e2e8f0' }} className="hover:bg-slate-50 transition-colors">
+                    <td style={{ padding: '16px 24px', fontWeight: '600', color: 'var(--color-text)' }}>{item.course_name}</td>
+                    <td style={{ padding: '16px 24px', textAlign: 'center', color: 'var(--color-text)' }}>{item.sks}</td>
+                    <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.tugas}</td>
+                    <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.kuis}</td>
+                    <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.uts}</td>
+                    <td style={{ padding: '16px 24px', textAlign: 'center' }}>{item.uas}</td>
+                    <td style={{ padding: '16px 24px', textAlign: 'center', fontWeight: 'bold' }}>{item.akhir}</td>
+                    <td style={{ padding: '16px 24px', textAlign: 'center' }}>
                     <span className="siakad-badge" style={{
                       background: item.huruf?.startsWith('A') ? 'rgba(16, 185, 129, 0.15)' : 
                                  item.huruf?.startsWith('B') ? 'rgba(59, 130, 246, 0.15)' : 
@@ -128,7 +153,8 @@ export default function MahasiswaGradebook() {
                     </span>
                   </td>
                 </tr>
-              ))}
+                ));
+              })()}
             </tbody>
           </table>
         </div>
