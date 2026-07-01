@@ -55,31 +55,34 @@ export default function MahasiswaGradebook() {
         <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '1.05rem' }}>Detail evaluasi akademik semester ini, dari tugas harian hingga UAS.</p>
       </div>
 
-      <div style={{ display: 'flex', gap: '20px', marginBottom: '32px', flexWrap: 'wrap' }}>
-        <div className="siakad-card" style={{ flex: '1 1 200px', padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', background: 'var(--glass-bg)', color: 'var(--color-text)' }}>
-          <div style={{ width: '60px', height: '60px', background: 'var(--glass-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '32px' }}>
+        <div className="siakad-card" style={{ padding: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '16px' }}>
+          <div style={{ width: '80px', height: '80px', background: 'rgba(234, 179, 8, 0.15)', color: '#eab308', border: '1px solid rgba(234, 179, 8, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(234, 179, 8, 0.1)' }}>
             <i className="ph ph-medal"></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-muted)' }}>Indeks Prestasi Semester</p>
-            <h1 style={{ margin: 0, fontSize: '2.5rem', fontWeight: '900', color: 'var(--color-text)' }}>{ipSemester}</h1>
+            <p style={{ margin: '0 0 8px 0', fontSize: '0.95rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Indeks Prestasi Semester</p>
+            <h1 style={{ margin: 0, fontSize: '3.5rem', fontWeight: '900', color: 'var(--color-text)', lineHeight: '1' }}>{ipSemester}</h1>
           </div>
         </div>
         
-        <div className="siakad-card" style={{ flex: '1 1 200px', padding: '24px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <div style={{ width: '60px', height: '60px', background: 'var(--glass-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '30px' }}>
+        <div className="siakad-card" style={{ padding: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '16px' }}>
+          <div style={{ width: '80px', height: '80px', background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(59, 130, 246, 0.1)' }}>
             <i className="ph ph-books"></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)' }}>Total SKS Lulus</p>
-            <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: '800', color: 'var(--color-text)' }}>{totalSks}</h1>
+            <p style={{ margin: '0 0 8px 0', fontSize: '0.95rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Total SKS Lulus</p>
+            <h1 style={{ margin: 0, fontSize: '3.5rem', fontWeight: '900', color: 'var(--color-text)', lineHeight: '1' }}>{totalSks}</h1>
           </div>
         </div>
       </div>
 
       <div className="siakad-card" style={{ overflow: 'hidden' }}>
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid #e2e8f0', background: 'var(--glass-bg)' }}>
+        <div style={{ padding: '20px 24px', borderBottom: '1px solid #e2e8f0', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Rincian Nilai Mata Kuliah</h3>
+          <button onClick={() => window.print()} style={{ background: '#4f46e5', border: 'none', padding: '8px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
+            <i className="ph ph-printer"></i> Cetak Transkrip Resmi
+          </button>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table className="siakad-table" style={{ width: '100%', minWidth: '800px' }}>

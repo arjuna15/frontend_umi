@@ -36,11 +36,33 @@ export default function ElearningPage() {
     </div>
   );
 
-  const getFileUrl = (path) => {
-    if (!path) return '#';
-    if (path.startsWith('http')) return path;
-    const backendUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api').replace('/api', '');
-    return backendUrl + (path.startsWith('/') ? path : '/' + path);
+  const handleDownload = async (e, id, title) => {
+    e.preventDefault();
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    
+    try {
+      const res = await fetch(`${apiUrl}/siakad/materials/download/${id}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      
+      // If the backend redirected (e.g. for external URLs), fetch might just follow it and get the content,
+      // or we handle redirect manually. Since the backend sends a redirect for http links,
+      // fetch will follow it and download the file.
+      if (!res.ok) throw new Error('Gagal mendownload materi');
+      
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = title.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      alert('Gagal mendownload materi.');
+    }
   };
 
   return (
@@ -75,7 +97,7 @@ export default function ElearningPage() {
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {item.course.materials.map((mat, j) => (
                       <li key={j}>
-                        <a href={getFileUrl(mat.content_link)} target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 16px', background: 'var(--glass-bg)', border: '1px solid #bae6fd', borderRadius: '8px', textDecoration: 'none', color: 'var(--color-text)', fontSize: '0.9rem', transition: 'background 0.2s' }}>
+                        <a href="#" onClick={(e) => handleDownload(e, mat.id, mat.title)} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 16px', background: 'var(--glass-bg)', border: '1px solid #bae6fd', borderRadius: '8px', textDecoration: 'none', color: 'var(--color-text)', fontSize: '0.9rem', transition: 'background 0.2s' }}>
                           <i className="ph ph-file-pdf" style={{ fontSize: '1.2rem' }}></i> {mat.title}
                         </a>
                       </li>

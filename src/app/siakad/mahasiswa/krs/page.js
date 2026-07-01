@@ -146,11 +146,23 @@ export default function KRSPage() {
         </div>
       )}
       
-      {(!submission?.status || submission?.status === 'rejected') && krsOpen && (
+      {submission?.status === 'rejected' && krsOpen && (
+        <div style={{ background: 'var(--glass-bg)', border: '1px solid #fca5a5', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <i className="ph ph-warning-octagon" style={{ color: '#ef4444', fontSize: '1.5rem' }}></i>
+          <div>
+            <p style={{ margin: 0, color: '#ef4444', fontSize: '1rem', fontWeight: 'bold' }}>KRS Anda DITOLAK</p>
+            <p style={{ margin: '4px 0 0 0', color: 'var(--color-text)', fontSize: '0.9rem' }}>
+              Alasan: {submission?.rejection_reason || 'Silakan konsultasi dengan Dosen Wali dan susun ulang KRS Anda.'}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {!submission?.status && krsOpen && (
         <div style={{ background: 'var(--glass-bg)', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className="ph ph-info" style={{ color: 'var(--color-text)', fontSize: '1.5rem' }}></i>
+          <i className="ph ph-info" style={{ color: '#3b82f6', fontSize: '1.5rem' }}></i>
           <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>
-            {submission?.status === 'rejected' ? 'KRS Anda ditolak. Silakan susun ulang.' : 'Silakan pilih mata kuliah yang ingin diambil semester ini.'}
+            Silakan pilih mata kuliah yang ingin diambil semester ini.
           </p>
         </div>
       )}

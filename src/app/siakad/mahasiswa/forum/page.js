@@ -95,7 +95,7 @@ export default function MahasiswaForumPage() {
                           </div>
                           <div>
                             <strong style={{ display: 'block', color: 'var(--color-text)' }}>{forum.title}</strong>
-                            <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Diposting oleh Dosen</span>
+                            <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Diposting oleh Dosen • {new Date(forum.created_at).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })}</span>
                           </div>
                         </div>
                         <p style={{ margin: '0 0 16px 0', color: 'var(--color-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>
@@ -107,9 +107,12 @@ export default function MahasiswaForumPage() {
                           <h4 style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Balasan ({forum.replies?.length || 0})</h4>
                           {forum.replies && forum.replies.map((reply, k) => (
                             <div key={k} style={{ marginBottom: k === forum.replies.length - 1 ? 0 : '12px', paddingBottom: k === forum.replies.length - 1 ? 0 : '12px', borderBottom: k === forum.replies.length - 1 ? 'none' : '1px solid #e5e7eb' }}>
-                              <strong style={{ fontSize: '0.85rem', color: 'var(--color-text)', display: 'block' }}>
-                                {reply.user_id === data.user.id ? 'Anda' : (reply.user_id === course.dosen_id ? 'Dosen' : 'Mahasiswa Lain')}
-                              </strong>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <strong style={{ fontSize: '0.85rem', color: 'var(--color-text)', display: 'block' }}>
+                                  {reply.user_id === data.user.id ? 'Anda' : (reply.user_id === course.dosen_id ? 'Dosen' : 'Mahasiswa Lain')}
+                                </strong>
+                                <span style={{ fontSize: '0.7rem', color: 'var(--color-muted)' }}>{new Date(reply.created_at).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })}</span>
+                              </div>
                               <p style={{ margin: '4px 0 0 0', fontSize: '0.9rem', color: 'var(--color-muted)' }}>{reply.content}</p>
                             </div>
                           ))}

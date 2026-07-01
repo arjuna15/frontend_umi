@@ -31,9 +31,22 @@ export default function MahasiswaPresensi() {
     fetchPresensi();
   }, [router]);
 
-  const handleAttend = async (attendanceId) => {
-    if (!await window.toast.confirm('Tandai kehadiran untuk sesi ini?')) return;
-    setSubmitting(true);
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371e3; // metres
+    const φ1 = lat1 * Math.PI/180;
+    const φ2 = lat2 * Math.PI/180;
+    const Δφ = (lat2-lat1) * Math.PI/180;
+    const Δλ = (lon2-lon1) * Math.PI/180;
+
+    const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+              Math.cos(φ1) * Math.cos(φ2) *
+              Math.sin(Δλ/2) * Math.sin(Δλ/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    return R * c;
+  };
+
+  const submitAttendance = async (attendanceId) => {
     const token = localStorage.getItem('siakad_token');
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
@@ -49,6 +62,59 @@ export default function MahasiswaPresensi() {
       console.error(err);
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const handleAttend = async (session) => {
+    if (!await window.toast.confirm(`Tandai kehadiran untuk sesi ini? Mode kelas: ${session.mode}`)) return;
+    
+    if (session.mode !== 'Online') {
+      if (!navigator.geolocation) {
+        window.toast('Geolocation tidak didukung oleh browser Anda.');
+        return;
+      }
+      
+      setSubmitting(true);
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        const bintaroStr = localStorage.getItem('siakad_coord_bintaro') || '-6.2758, 106.7405';
+        const pmStr = localStorage.getItem('siakad_coord_pasar_minggu') || '-6.2842, 106.8442';
+        
+        const parseCoord = (str) => {
+          const parts = str.split(',');
+          return { lat: parseFloat(parts[0]), lng: parseFloat(parts[1]) };
+        };
+
+        const campuses = {
+          'Bintaro': parseCoord(bintaroStr),
+          'Pasar Minggu': parseCoord(pmStr)
+        };
+        const target = campuses[session.mode];
+        if (!target) {
+           window.toast('Lokasi kampus tidak valid.');
+           setSubmitting(false);
+           return;
+        }
+        
+        const dist = calculateDistance(latitude, longitude, target.lat, target.lng);
+        // We will allow up to 20km for testing purposes, but log the distance
+        if (dist > 20000) {
+          window.toast(`Gagal: Anda berada ${Math.round(dist/1000)}km dari kampus ${session.mode}. Harus di bawah 20km.`);
+          setSubmitting(false);
+          return;
+        }
+        
+        window.toast(`Lokasi terverifikasi (${Math.round(dist)}m dari kampus).`);
+        submitAttendance(session.id);
+      }, (error) => {
+        window.toast('Gagal mendapatkan lokasi. Pastikan GPS aktif dan diizinkan.');
+        setSubmitting(false);
+      }, {
+        enableHighAccuracy: true
+      });
+    } else {
+      setSubmitting(true);
+      submitAttendance(session.id);
     }
   };
 
@@ -92,9 +158,9 @@ export default function MahasiswaPresensi() {
               
               {course.active_session ? (
                 <div style={{ background: 'var(--glass-bg)', border: '1px solid #bbf7d0', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
-                  <p style={{ margin: '0 0 12px 0', fontSize: '0.95rem', color: 'var(--color-text)', fontWeight: '600' }}>Sesi Absen Pertemuan ke-{course.active_session.meeting} Dibuka!</p>
+                  <p style={{ margin: '0 0 12px 0', fontSize: '0.95rem', color: 'var(--color-text)', fontWeight: '600' }}>Sesi Absen Pertemuan ke-{course.active_session.meeting} Dibuka! ({course.active_session.mode})</p>
                   <button 
-                    onClick={() => handleAttend(course.active_session.id)}
+                    onClick={() => handleAttend(course.active_session)}
                     disabled={submitting}
                     style={{ background: '#10b981', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '8px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%', boxShadow: '0 4px 10px rgba(16,185,129,0.3)' }}
                   >

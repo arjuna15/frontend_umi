@@ -6,9 +6,14 @@ export default function AdminPengaturan() {
   const [krsOpen, setKrsOpen] = useState(true);
   const [semester, setSemester] = useState('Ganjil 2026/2027');
 
+  const [coordBintaro, setCoordBintaro] = useState('-6.2758, 106.7405');
+  const [coordPasarMinggu, setCoordPasarMinggu] = useState('-6.2842, 106.8442');
+
   useEffect(() => {
     const savedKrs = localStorage.getItem('siakad_krs_open');
     const savedSemester = localStorage.getItem('siakad_semester');
+    const savedBintaro = localStorage.getItem('siakad_coord_bintaro');
+    const savedPasarMinggu = localStorage.getItem('siakad_coord_pasar_minggu');
     
     if (savedKrs !== null) {
       setKrsOpen(savedKrs === 'true');
@@ -16,11 +21,26 @@ export default function AdminPengaturan() {
     if (savedSemester) {
       setSemester(savedSemester);
     }
+    if (savedBintaro) {
+      setCoordBintaro(savedBintaro);
+    }
+    if (savedPasarMinggu) {
+      setCoordPasarMinggu(savedPasarMinggu);
+    }
   }, []);
 
   const handleSave = () => {
     localStorage.setItem('siakad_krs_open', krsOpen);
     localStorage.setItem('siakad_semester', semester);
+    
+    const bintaroVal = document.getElementById('coordBintaro').value;
+    const pmVal = document.getElementById('coordPasarMinggu').value;
+    
+    localStorage.setItem('siakad_coord_bintaro', bintaroVal);
+    localStorage.setItem('siakad_coord_pasar_minggu', pmVal);
+    setCoordBintaro(bintaroVal);
+    setCoordPasarMinggu(pmVal);
+
     window.toast('Pengaturan sistem berhasil disimpan permanen!');
   };
 
@@ -109,6 +129,43 @@ export default function AdminPengaturan() {
                 transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)', 
                 boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
               }} />
+            </div>
+          </div>
+        </div>
+
+        {/* Section 3: Geofencing Kampus */}
+        <div style={{ marginBottom: '40px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid #f3f4f6', paddingBottom: '12px' }}>
+            <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
+              <i className="ph ph-map-pin" style={{ fontSize: '1.2rem' }}></i>
+            </div>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>
+              Lokasi Geofencing Kampus
+            </h3>
+          </div>
+          
+          <p style={{ fontSize: '0.9rem', color: 'var(--color-muted)', marginBottom: '16px' }}>Atur titik koordinat pusat kampus untuk validasi kehadiran offline (radius jarak aman: 20km untuk uji coba).</p>
+
+          <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: '1fr 1fr' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-muted)', fontSize: '0.9rem' }}>Kampus Bintaro (Lat, Lng)</label>
+              <input 
+                type="text" 
+                defaultValue={coordBintaro}
+                key={`bintaro-${coordBintaro}`}
+                id="coordBintaro"
+                style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem' }}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-muted)', fontSize: '0.9rem' }}>Kampus Ps. Minggu (Lat, Lng)</label>
+              <input 
+                type="text" 
+                defaultValue={coordPasarMinggu}
+                key={`pm-${coordPasarMinggu}`}
+                id="coordPasarMinggu"
+                style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem' }}
+              />
             </div>
           </div>
         </div>

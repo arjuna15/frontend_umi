@@ -56,7 +56,8 @@ export default function DosenPresensiPage() {
         },
         body: JSON.stringify({
           meeting_number: meetingNumber,
-          date: meetingDate
+          date: meetingDate,
+          mode: document.getElementById('meetingMode') ? document.getElementById('meetingMode').value : 'Online'
         })
       });
       if (res.ok) {
@@ -177,6 +178,14 @@ export default function DosenPresensiPage() {
               <div>
                 <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Tanggal Pertemuan</label>
                 <input type="date" required value={meetingDate} onChange={e => setMeetingDate(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none', fontSize: '1rem' }} />
+              </div>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Mode Kelas</label>
+                <select id="meetingMode" defaultValue="Online" style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none', fontSize: '1rem', background: 'var(--color-bg)', color: 'var(--color-text)' }}>
+                  <option value="Online">Online</option>
+                  <option value="Bintaro">Offline - Kampus Bintaro</option>
+                  <option value="Pasar Minggu">Offline - Kampus Ps. Minggu</option>
+                </select>
               </div>
               <div style={{ display: 'flex', gap: '12px', marginTop: '12px' }}>
                 <button type="button" onClick={() => setShowSessionModal(false)} style={{ flex: 1, padding: '14px', borderRadius: '12px', background: 'var(--glass-bg)', color: 'var(--color-text)', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>Batal</button>

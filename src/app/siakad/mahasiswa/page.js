@@ -54,9 +54,20 @@ export default function MahasiswaDashboard() {
 
   return (
     <div>
-      <div style={{ marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Halo, {data.user.name.split(' ')[0]}!</h1>
-        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Selamat datang kembali di Portal Akademik Anda.</p>
+      <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+        <div>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Halo, {data.user.name.split(' ')[0]}!</h1>
+          <p style={{ color: 'var(--color-muted)', margin: 0 }}>Selamat datang kembali di Portal Akademik Anda.</p>
+        </div>
+        <div style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 20px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px', boxShadow: 'var(--glass-shadow)' }}>
+          <div style={{ width: '40px', height: '40px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
+            <i className="ph ph-identification-card"></i>
+          </div>
+          <div>
+            <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)', textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '1px' }}>NIM Mahasiswa</p>
+            <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: '800' }}>{data.user.username || '2026101001'}</h3>
+          </div>
+        </div>
       </div>
 
       {/* Statistik Atas */}
@@ -118,7 +129,7 @@ export default function MahasiswaDashboard() {
                 ))}
               </div>
             ) : (
-              <p style={{ color: 'var(--color-text)', fontSize: '0.95rem', margin: 0, fontStyle: 'italic' }}>Tidak ada jadwal kuliah hari ini. Waktunya bersantai!</p>
+              <p style={{ color: 'var(--color-muted)', fontSize: '0.95rem', margin: 0, fontStyle: 'italic' }}>Tidak ada jadwal kuliah hari ini.</p>
             )}
           </div>
 
@@ -146,7 +157,7 @@ export default function MahasiswaDashboard() {
                 ))}
               </div>
             ) : (
-              <p style={{ color: 'var(--color-text)', fontSize: '0.95rem', margin: 0, fontStyle: 'italic' }}>Wah, aman! Tidak ada tugas atau kuis dalam waktu dekat.</p>
+              <p style={{ color: 'var(--color-muted)', fontSize: '0.95rem', margin: 0, fontStyle: 'italic' }}>Tidak ada tenggat waktu dalam waktu dekat.</p>
             )}
           </div>
 
