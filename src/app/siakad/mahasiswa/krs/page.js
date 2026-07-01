@@ -71,7 +71,7 @@ export default function KRSPage() {
       return;
     }
     
-    if (!confirm('Yakin ingin mengajukan KRS ini? Anda tidak dapat mengubahnya setelah disubmit hingga ditolak.')) return;
+    if (!await window.toast.confirm('Yakin ingin mengajukan KRS ini? Anda tidak dapat mengubahnya setelah disubmit hingga ditolak.')) return;
     
     setIsSubmitting(true);
     const token = localStorage.getItem('siakad_token');

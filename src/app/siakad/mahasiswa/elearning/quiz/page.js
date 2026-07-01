@@ -62,7 +62,7 @@ export default function MahasiswaQuiz() {
 
   const handleSubmit = async (e) => {
     if(e) e.preventDefault();
-    if (!confirm('Yakin ingin menyelesaikan kuis ini?')) return;
+    if (!await window.toast.confirm('Yakin ingin menyelesaikan kuis ini?')) return;
     
     setSubmitting(true);
     const token = localStorage.getItem('siakad_token');

@@ -32,7 +32,7 @@ export default function MahasiswaPresensi() {
   }, [router]);
 
   const handleAttend = async (attendanceId) => {
-    if (!confirm('Tandai kehadiran untuk sesi ini?')) return;
+    if (!await window.toast.confirm('Tandai kehadiran untuk sesi ini?')) return;
     setSubmitting(true);
     const token = localStorage.getItem('siakad_token');
     try {

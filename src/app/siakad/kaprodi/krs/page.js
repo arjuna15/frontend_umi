@@ -53,7 +53,7 @@ export default function KaprodiKrs() {
   };
 
   const approveKrs = async (id) => {
-    if (!confirm('Setujui KRS ini?')) return;
+    if (!await window.toast.confirm('Setujui KRS ini?')) return;
     try {
       const token = localStorage.getItem('siakad_token');
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
@@ -73,7 +73,7 @@ export default function KaprodiKrs() {
   };
 
   const rejectKrs = async (id) => {
-    if (!confirm('Tolak pengajuan KRS ini?')) return;
+    if (!await window.toast.confirm('Tolak pengajuan KRS ini?')) return;
     try {
       const token = localStorage.getItem('siakad_token');
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';

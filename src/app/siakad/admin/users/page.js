@@ -68,7 +68,7 @@ export default function AdminUsersPage() {
   };
 
   const handleDeleteUser = async (id) => {
-    if (!confirm('Are you sure you want to delete this user?')) return;
+    if (!await window.toast.confirm('Are you sure you want to delete this user?')) return;
     const token = localStorage.getItem('siakad_token');
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     

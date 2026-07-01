@@ -18,9 +18,78 @@ export const toast = (message, type = 'success') => {
 toast.success = (msg) => toast(msg, 'success');
 toast.error = (msg) => toast(msg, 'error');
 toast.info = (msg) => toast(msg, 'info');
+toast.confirm = (msg) => {
+  return new Promise((resolve) => {
+    const event = new CustomEvent('siakad_confirm', { detail: { message: msg, resolve } });
+    window.dispatchEvent(event);
+  });
+};
 
 if (typeof window !== 'undefined') {
   window.toast = toast;
+}
+
+export function ConfirmModal() {
+  const [modal, setModal] = useState(null);
+
+  useEffect(() => {
+    const handleConfirm = (e) => {
+      setModal(e.detail);
+    };
+    window.addEventListener('siakad_confirm', handleConfirm);
+    return () => window.removeEventListener('siakad_confirm', handleConfirm);
+  }, []);
+
+  if (!modal) return null;
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0, left: 0, right: 0, bottom: 0,
+      background: 'rgba(0,0,0,0.5)',
+      backdropFilter: 'blur(4px)',
+      zIndex: 10000,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <div style={{
+        background: 'var(--color-bg)',
+        border: '1px solid var(--color-border)',
+        borderRadius: '16px',
+        padding: '32px',
+        maxWidth: '400px',
+        width: '90%',
+        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+        animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
+        textAlign: 'center'
+      }}>
+        <i className="ph ph-warning-circle" style={{ fontSize: '4rem', color: '#f59e0b', marginBottom: '16px' }}></i>
+        <h3 style={{ margin: '0 0 16px 0', color: 'var(--color-text)', fontSize: '1.2rem' }}>Konfirmasi</h3>
+        <p style={{ color: 'var(--color-muted)', marginBottom: '32px', fontSize: '0.95rem', lineHeight: '1.5' }}>{modal.message}</p>
+        <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+          <button 
+            onClick={() => { modal.resolve(false); setModal(null); }}
+            style={{ padding: '12px 24px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', flex: 1 }}
+          >
+            Batal
+          </button>
+          <button 
+            onClick={() => { modal.resolve(true); setModal(null); }}
+            style={{ padding: '12px 24px', borderRadius: '8px', border: 'none', background: '#4f46e5', color: 'white', fontWeight: 'bold', cursor: 'pointer', flex: 1, boxShadow: '0 4px 10px rgba(79, 70, 229, 0.3)' }}
+          >
+            Ya, Lanjutkan
+          </button>
+        </div>
+      </div>
+      <style>{`
+        @keyframes zoomIn {
+          from { transform: scale(0.9); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
+      `}</style>
+    </div>
+  );
 }
 
 export function ToastContainer() {
