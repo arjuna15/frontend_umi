@@ -371,7 +371,7 @@
 
 /* Badges */
 .siakad-badge {
-  padding: 6px 16px;
+  padding: 6px 16px !important;
   border-radius: 999px;
   font-size: 0.82rem;
   font-weight: 700;
@@ -380,8 +380,9 @@
   align-items: center;
   text-align: center;
   /* 120px fits the longest badge text (e.g. 'Belum Dinilai') */
-  min-width: 120px;
+  min-width: 120px !important;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 /* Inputs & Selects */
@@ -1031,8 +1032,8 @@
   -webkit-backdrop-filter: blur(12px) saturate(150%);
   display: flex;
   justify-content: center;
-  align-items: center;
-  /* must be above sidebar (z:10), bottom-nav (z:100), drawer (z:200) */
+  /* flex-start prevents top clipping on tall modals; margin:auto on child centers it */
+  align-items: flex-start;
   z-index: 99998;
   overflow-y: auto;
   padding: 24px;
@@ -1053,23 +1054,23 @@
   animation: modalScaleIn 0.3s ease-out forwards;
   position: relative;
   overflow: hidden;
-  /* z-index sits above overlay */
   z-index: 99999;
+  /* auto margin centers the modal vertically when overlay has space */
+  margin: auto;
 }
 
 /* ---- Responsive: tablet & mobile ---- */
 @media (max-width: 640px) {
   .siakad-modal-overlay {
     padding: 12px;
-    /* on mobile push content above the fixed bottom nav (70px) */
     padding-bottom: 90px;
-    align-items: flex-start;
     padding-top: 20px;
   }
   .siakad-modal-content {
     padding: 20px;
     border-radius: 16px;
     width: 100%;
+    margin: 0 auto;
   }
 }
 
