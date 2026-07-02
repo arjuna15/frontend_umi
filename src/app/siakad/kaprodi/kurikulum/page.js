@@ -1,5 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function KaprodiKurikulumPage() {
   const [courses, setCourses] = useState([]);
@@ -137,16 +139,22 @@ export default function KaprodiKurikulumPage() {
                 <div style={{ display: 'flex', gap: '16px' , flexWrap: 'wrap' }}>
                   <div style={{ flex: 1 }}>
                     <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Semester Sebaran</label>
-                    <select required value={editFormData.semester} onChange={e=>setEditFormData({...editFormData, semester: e.target.value})} className="siakad-input" style={{ width: '100%' }}>
-                      {[1,2,3,4,5,6,7,8].map(s => <option key={s} value={s}>Semester {s}</option>)}
-                    </select>
+                    <CustomSelect 
+                      value={editFormData.semester} 
+                      onChange={val => setEditFormData({...editFormData, semester: val})} 
+                      options={[1,2,3,4,5,6,7,8].map(s => ({ value: s.toString(), label: `Semester ${s}` }))}
+                    />
                   </div>
                   <div style={{ flex: 1 }}>
                     <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Sifat</label>
-                    <select required value={editFormData.type} onChange={e=>setEditFormData({...editFormData, type: e.target.value})} className="siakad-input" style={{ width: '100%' }}>
-                      <option value="Wajib">Wajib</option>
-                      <option value="Pilihan">Pilihan</option>
-                    </select>
+                    <CustomSelect 
+                      value={editFormData.type} 
+                      onChange={val => setEditFormData({...editFormData, type: val})} 
+                      options={[
+                        { value: "Wajib", label: "Wajib" },
+                        { value: "Pilihan", label: "Pilihan" }
+                      ]}
+                    />
                   </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' }}>

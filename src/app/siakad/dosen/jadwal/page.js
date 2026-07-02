@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
+import CustomSelect from '../../components/CustomSelect';
 const DAY_COLORS = {
   Senin: { bg: 'rgba(59,130,246,0.15)', color: '#3b82f6', border: 'rgba(59,130,246,0.3)' },
   Selasa: { bg: 'rgba(16,185,129,0.15)', color: '#10b981', border: 'rgba(16,185,129,0.3)' },
@@ -134,11 +134,12 @@ export default function JadwalPage() {
                     {isEditing ? (
                       <>
                         <td style={{ padding: '12px 16px' }}>
-                          <select value={formData.day} onChange={e => setFormData({...formData, day: e.target.value})}
-                            className="siakad-input">
-                            <option value="">Pilih Hari</option>
-                            {['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'].map(d => <option key={d}>{d}</option>)}
-                          </select>
+                          <CustomSelect 
+                            value={formData.day} 
+                            onChange={val => setFormData({...formData, day: val})}
+                            placeholder="Pilih Hari"
+                            options={['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'].map(d => ({label: d, value: d}))}
+                          />
                         </td>
                         <td style={{ padding: '12px 16px' }}>
                           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' , flexWrap: 'wrap' }}>

@@ -101,15 +101,16 @@ export default function DosenQuizCreate() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                 <h3 style={{ margin: '0', color: 'var(--color-text)' }}>Soal {idx + 1}</h3>
-                <select
-                  className="siakad-input"
+                <CustomSelect
                   value={q.type}
-                  onChange={(e) => handleChange(idx, 'type', e.target.value)}
-                >
-                  <option value="multiple_choice">Pilihan Ganda</option>
-                  <option value="true_false">Benar / Salah</option>
-                  <option value="essay">Esai</option>
-                </select>
+                  onChange={(val) => handleChange(idx, 'type', val)}
+                  options={[
+                    { value: "multiple_choice", label: "Pilihan Ganda" },
+                    { value: "true_false", label: "Benar / Salah" },
+                    { value: "essay", label: "Esai" }
+                  ]}
+                  style={{ width: '150px' }}
+                />
               </div>
               {questions.length > 1 && (
                 <button type="button" onClick={() => removeQuestion(idx)} style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}>Hapus Soal</button>

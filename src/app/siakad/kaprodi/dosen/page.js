@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
+import CustomSelect from '../../components/CustomSelect';
 export default function KaprodiDosenPage() {
   const router = useRouter();
   const [dosen, setDosen] = useState([]);
@@ -154,22 +154,30 @@ export default function KaprodiDosenPage() {
                 <div style={{ display: 'flex', gap: '16px' , flexWrap: 'wrap' }}>
                   <div style={{ flex: 1 }}>
                     <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Jabatan Fungsional (JFA)</label>
-                    <select required value={editFormData.jfa} onChange={e=>setEditFormData({...editFormData, jfa: e.target.value})} className="siakad-input" style={{ width: '100%' }}>
-                      <option value="Tenaga Pengajar">Tenaga Pengajar</option>
-                      <option value="Asisten Ahli">Asisten Ahli</option>
-                      <option value="Lektor">Lektor</option>
-                      <option value="Lektor Kepala">Lektor Kepala</option>
-                      <option value="Guru Besar">Guru Besar</option>
-                    </select>
+                    <CustomSelect 
+                      value={editFormData.jfa} 
+                      onChange={val => setEditFormData({...editFormData, jfa: val})} 
+                      options={[
+                        { value: "Tenaga Pengajar", label: "Tenaga Pengajar" },
+                        { value: "Asisten Ahli", label: "Asisten Ahli" },
+                        { value: "Lektor", label: "Lektor" },
+                        { value: "Lektor Kepala", label: "Lektor Kepala" },
+                        { value: "Guru Besar", label: "Guru Besar" }
+                      ]}
+                    />
                   </div>
                   <div style={{ flex: 1 }}>
                     <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Status Keaktifan</label>
-                    <select required value={editFormData.status} onChange={e=>setEditFormData({...editFormData, status: e.target.value})} className="siakad-input" style={{ width: '100%' }}>
-                      <option value="Aktif">Aktif</option>
-                      <option value="Cuti">Cuti</option>
-                      <option value="Studi Lanjut">Studi Lanjut</option>
-                      <option value="Nonaktif">Nonaktif</option>
-                    </select>
+                    <CustomSelect 
+                      value={editFormData.status} 
+                      onChange={val => setEditFormData({...editFormData, status: val})} 
+                      options={[
+                        { value: "Aktif", label: "Aktif" },
+                        { value: "Cuti", label: "Cuti" },
+                        { value: "Studi Lanjut", label: "Studi Lanjut" },
+                        { value: "Nonaktif", label: "Nonaktif" }
+                      ]}
+                    />
                   </div>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' }}>

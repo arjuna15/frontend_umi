@@ -66,12 +66,12 @@ export default function CustomSelect({ name, options, value, onChange, placehold
                   setIsOpen(false);
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#f1f5f9';
-                  e.currentTarget.style.color = '#0f172a';
+                  e.currentTarget.style.background = opt.value === value ? 'rgba(59, 130, 246, 0.15)' : 'var(--glass-bg)';
+                  e.currentTarget.style.color = opt.value === value ? '#3b82f6' : 'var(--color-text)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = opt.value === value ? '#eff6ff' : 'transparent';
-                  e.currentTarget.style.color = opt.value === value ? '#2563eb' : '#334155';
+                  e.currentTarget.style.background = opt.value === value ? 'rgba(59, 130, 246, 0.1)' : 'transparent';
+                  e.currentTarget.style.color = opt.value === value ? '#3b82f6' : 'var(--color-text)';
                 }}
                 style={{
                   padding: '10px 14px',
@@ -80,8 +80,8 @@ export default function CustomSelect({ name, options, value, onChange, placehold
                   display: 'flex',
                   alignItems: 'center',
                   gap: '10px',
-                  background: opt.value === value ? '#eff6ff' : 'transparent',
-                  color: opt.value === value ? '#2563eb' : '#334155',
+                  background: opt.value === value ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
+                  color: opt.value === value ? '#3b82f6' : 'var(--color-text)',
                   fontWeight: opt.value === value ? '600' : '500',
                   transition: 'all 0.15s ease'
                 }}

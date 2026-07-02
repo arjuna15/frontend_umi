@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
+import CustomSelect from '../../components/CustomSelect';
 export default function AdminProdiPage() {
   const router = useRouter();
   const [prodis, setProdis] = useState([]);
@@ -122,14 +122,19 @@ export default function AdminProdiPage() {
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Akreditasi</label>
-                  <select value={editFormData.akreditasi} onChange={e=>setEditFormData({...editFormData, akreditasi: e.target.value})} className="siakad-input" style={{ width: '100%' }}>
-                    <option value="Unggul">Unggul</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="Baik Sekali">Baik Sekali</option>
-                    <option value="Baik">Baik</option>
-                  </select>
+                  <CustomSelect 
+                    value={editFormData.akreditasi} 
+                    onChange={val => setEditFormData({...editFormData, akreditasi: val})} 
+                    options={[
+                      { value: "Unggul", label: "Unggul" },
+                      { value: "A", label: "A" },
+                      { value: "B", label: "B" },
+                      { value: "C", label: "C" },
+                      { value: "Baik Sekali", label: "Baik Sekali" },
+                      { value: "Baik", label: "Baik" },
+                      { value: "-", label: "Belum Terakreditasi" }
+                    ]}
+                  />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' }}>
                   <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 600 }}>Batal</button>

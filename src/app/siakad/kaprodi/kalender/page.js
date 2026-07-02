@@ -1,5 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function KaprodiKalenderPage() {
   const [events, setEvents] = useState([]);
@@ -135,11 +137,15 @@ export default function KaprodiKalenderPage() {
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kategori</label>
-                  <select required value={editFormData.type} onChange={e=>setEditFormData({...editFormData, type: e.target.value})} className="siakad-input" style={{ width: '100%' }}>
-                    <option value="Akademik">Akademik Mahasiswa (KRS, dll)</option>
-                    <option value="Ujian">Ujian (UTS/UAS)</option>
-                    <option value="Dosen">Tenggat Waktu Dosen</option>
-                  </select>
+                  <CustomSelect 
+                    value={editFormData.type} 
+                    onChange={val => setEditFormData({...editFormData, type: val})} 
+                    options={[
+                      { value: "Akademik", label: "Akademik Mahasiswa (KRS, dll)" },
+                      { value: "Ujian", label: "Ujian (UTS/UAS)" },
+                      { value: "Dosen", label: "Tenggat Waktu Dosen" }
+                    ]}
+                  />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' }}>
                   <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 600 }}>Batal</button>

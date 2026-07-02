@@ -1,13 +1,14 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
+import CustomSelect from '../../components/CustomSelect';
 export default function BapPage() {
   const router = useRouter();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [courseId, setCourseId] = useState('');
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -47,6 +48,7 @@ export default function BapPage() {
       if (res.ok) {
         setSubmitted(true);
         e.target.reset();
+        setCourseId('');
         setTimeout(() => setSubmitted(false), 3000);
         window.toast && window.toast('BAP Berhasil Disimpan!');
       } else {
@@ -140,12 +142,13 @@ export default function BapPage() {
                 <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
                   <i className="ph ph-books" style={{ color: '#6366f1' }}></i> Mata Kuliah
                 </label>
-                <select name="course_id" required className="siakad-input" style={{ width: '100%', minWidth: 0, flex: '1 1 120px' }}>
-                  <option value="">Pilih Mata Kuliah...</option>
-                  {courses.map(c => (
-                    <option key={c.id} value={c.id}>{c.code} — {c.name}</option>
-                  ))}
-                </select>
+                <CustomSelect 
+                  name="course_id" 
+                  value={courseId} 
+                  onChange={setCourseId} 
+                  placeholder="Pilih Mata Kuliah..." 
+                  options={courses.map(c => ({ value: c.id, label: `${c.code} — ${c.name}` }))} 
+                />
               </div>
 
               {/* Pertemuan & Tanggal */}

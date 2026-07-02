@@ -232,19 +232,12 @@ export default function KaprodiPlotting() {
             <form onSubmit={handleSaveSchedule} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
                 <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Hari</label>
-                <select 
-                  className="siakad-input" 
+                <CustomSelect 
                   value={scheduleForm.hari}
-                  onChange={e => setScheduleForm({...scheduleForm, hari: e.target.value})}
+                  onChange={val => setScheduleForm({...scheduleForm, hari: val})}
+                  options={['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'].map(d => ({ value: d, label: d }))}
                   style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
-                >
-                  <option value="Senin">Senin</option>
-                  <option value="Selasa">Selasa</option>
-                  <option value="Rabu">Rabu</option>
-                  <option value="Kamis">Kamis</option>
-                  <option value="Jumat">Jumat</option>
-                  <option value="Sabtu">Sabtu</option>
-                </select>
+                />
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
@@ -274,19 +267,12 @@ export default function KaprodiPlotting() {
 
               <div>
                 <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Ruangan</label>
-                <select 
-                  className="siakad-input" 
+                <CustomSelect 
                   value={scheduleForm.ruang}
-                  onChange={e => setScheduleForm({...scheduleForm, ruang: e.target.value})}
+                  onChange={val => setScheduleForm({...scheduleForm, ruang: val})}
+                  options={['Lab Komputer A', 'Lab Komputer B', 'Ruang 401', 'Ruang 402', 'Ruang 405 (Aula)', 'Ruang Seminar 1'].map(r => ({ value: r, label: r }))}
                   style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
-                >
-                  <option value="Lab Komputer A">Lab Komputer A</option>
-                  <option value="Lab Komputer B">Lab Komputer B</option>
-                  <option value="Ruang 401">Ruang 401</option>
-                  <option value="Ruang 402">Ruang 402</option>
-                  <option value="Ruang 405 (Aula)">Ruang 405 (Aula)</option>
-                  <option value="Ruang Seminar 1">Ruang Seminar 1</option>
-                </select>
+                />
               </div>
 
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '16px' }}>

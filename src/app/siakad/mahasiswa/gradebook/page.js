@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-
+import CustomSelect from '../../components/CustomSelect';
 export default function MahasiswaGradebook() {
   const router = useRouter();
   const [data, setData] = useState(null);
@@ -97,16 +97,16 @@ export default function MahasiswaGradebook() {
         <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--color-border)', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Rincian Nilai Mata Kuliah</h3>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', flex: '1 1 100%' }}>
-            <select 
-              className="siakad-input"
+            <CustomSelect 
               value={semesterFilter} 
-              onChange={e => setSemesterFilter(e.target.value)}
+              onChange={val => setSemesterFilter(val)}
+              options={[
+                { value: "Semua", label: "Semua Semester" },
+                { value: "Ganjil 2026/2027", label: "Ganjil 2026/2027" },
+                { value: "Genap 2025/2026", label: "Genap 2025/2026" }
+              ]}
               style={{ flex: '1 1 150px', minWidth: 0 }}
-            >
-              <option value="Semua">Semua Semester</option>
-              <option value="Ganjil 2026/2027">Ganjil 2026/2027</option>
-              <option value="Genap 2025/2026">Genap 2025/2026</option>
-            </select>
+            />
             <input 
               type="text" 
               placeholder="Cari mata kuliah..." 

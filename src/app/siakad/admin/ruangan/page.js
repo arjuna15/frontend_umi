@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
+import CustomSelect from '../../components/CustomSelect';
 export default function AdminRuanganPage() {
   const router = useRouter();
   const [ruangan, setRuangan] = useState([]);
@@ -122,11 +122,15 @@ export default function AdminRuanganPage() {
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Tipe Ruangan</label>
-                  <select value={editFormData.type} onChange={e=>setEditFormData({...editFormData, type: e.target.value})} className="siakad-input" style={{ width: '100%' }}>
-                    <option value="Teori">Kelas Teori</option>
-                    <option value="Praktikum">Laboratorium / Praktikum</option>
-                    <option value="Studio">Studio</option>
-                  </select>
+                  <CustomSelect 
+                    value={editFormData.type} 
+                    onChange={val => setEditFormData({...editFormData, type: val})} 
+                    options={[
+                      { value: "Teori", label: "Kelas Teori" },
+                      { value: "Praktikum", label: "Laboratorium / Praktikum" },
+                      { value: "Studio", label: "Studio" }
+                    ]}
+                  />
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' }}>
                   <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 600 }}>Batal</button>

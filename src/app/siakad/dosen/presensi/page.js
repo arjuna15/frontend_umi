@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-
+import CustomSelect from '../../components/CustomSelect';
 export default function DosenPresensiPage() {
   const router = useRouter();
   const [data, setData] = useState(null);
@@ -17,6 +17,7 @@ export default function DosenPresensiPage() {
   // Form States
   const [meetingNumber, setMeetingNumber] = useState('');
   const [meetingDate, setMeetingDate] = useState('');
+  const [meetingMode, setMeetingMode] = useState('Online');
 
   const fetchDashboard = async () => {
     const token = localStorage.getItem('siakad_token');
@@ -58,7 +59,7 @@ export default function DosenPresensiPage() {
         body: JSON.stringify({
           meeting_number: meetingNumber,
           date: meetingDate,
-          mode: document.getElementById('meetingMode') ? document.getElementById('meetingMode').value : 'Online'
+          mode: meetingMode
         })
       });
       if (res.ok) {
@@ -189,11 +190,16 @@ export default function DosenPresensiPage() {
               </div>
               <div>
                 <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Mode Kelas</label>
-                <select id="meetingMode" defaultValue="Online" className="siakad-input" style={{ width: '100%', minWidth: 0, flex: '1 1 120px'}}>
-                  <option value="Online">Online</option>
-                  <option value="Bintaro">Offline - Kampus Bintaro</option>
-                  <option value="Pasar Minggu">Offline - Kampus Ps. Minggu</option>
-                </select>
+                <CustomSelect 
+                  value={meetingMode} 
+                  onChange={setMeetingMode}
+                  options={[
+                    { value: "Online", label: "Online" },
+                    { value: "Bintaro", label: "Offline - Kampus Bintaro" },
+                    { value: "Pasar Minggu", label: "Offline - Kampus Ps. Minggu" }
+                  ]}
+                  style={{ width: '100%', minWidth: 0, flex: '1 1 120px'}}
+                />
               </div>
               <div style={{ display: 'flex', gap: '12px', marginTop: '12px' }}>
                 <button type="button" onClick={() => setShowSessionModal(false)} style={{ flex: 1, padding: '14px', borderRadius: '12px', background: 'var(--glass-bg)', color: 'var(--color-text)', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>Batal</button>
