@@ -71,7 +71,7 @@ export default function CustomSelect({ name, options, value, onChange, placehold
           to   { opacity: 1; transform: translateY(0); }
         }
       `}</style>
-      <div style={{ maxHeight: '250px', overflowY: 'auto', padding: '8px', animation: 'csDropIn 0.15s ease-out' }}>
+      <div style={{ maxHeight: '132px', overflowY: 'auto', padding: '8px', animation: 'csDropIn 0.15s ease-out' }}>
         {options.map((opt, idx) => (
           <div
             key={idx}
