@@ -1205,7 +1205,7 @@ header.top-transparent .glass {
   .mega-menu > div {
     margin-bottom: 0 !important;
     background: transparent !important;
-    padding: 0 !important;
+    padding: 8px 12px !important;
   }
   .mega-menu h4 {
     margin-top: 12px !important;
