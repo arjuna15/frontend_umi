@@ -4,6 +4,7 @@
 .siakad-container {
   display: flex;
   height: 100vh;
+  height: 100dvh;
   background: #f8fafc;
   font-family: 'Outfit', 'Inter', sans-serif;
   overflow: hidden; /* Prevent body scroll, let main scroll */
@@ -212,6 +213,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh;
   position: relative;
   z-index: 5;
   min-width: 0;
@@ -439,8 +441,17 @@
 }
 
   .siakad-content {
-    padding: 20px 20px 100px 20px; /* Extra padding at bottom so content doesn't hide behind nav */
+    padding: 20px 20px 20px 20px; 
     height: calc(100vh - 70px);
+    height: calc(100dvh - 70px);
+  }
+  
+  /* Guarantee scroll space below content for the fixed bottom nav */
+  .siakad-content::after {
+    content: "";
+    display: block;
+    height: 100px;
+    flex-shrink: 0;
   }
 
   /* Bottom Navigation Styles */
