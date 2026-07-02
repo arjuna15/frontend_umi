@@ -1027,17 +1027,20 @@
 /* 
  * Modal: scrollable overlay (no flex!) so tall modals are never clipped.
  * The overlay scrolls, modal sits inside with margin:auto for centering.
+ * top: 88px accounts for the sticky .siakad-header navbar.
  */
 .siakad-modal-overlay {
   position: fixed;
-  inset: 0;
+  top: 88px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(12px) saturate(150%);
   -webkit-backdrop-filter: blur(12px) saturate(150%);
   z-index: 99998;
   overflow-y: auto;
-  /* Padding creates breathing room; vertical padding ensures modal never touches edges */
-  padding: 40px 24px;
+  padding: 32px 24px;
   animation: fadeInOnly 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -1060,8 +1063,10 @@
 }
 
 /* ---- Responsive: tablet & mobile ---- */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .siakad-modal-overlay {
+    /* header is hidden on mobile, overlay starts from top */
+    top: 0;
     padding: 20px 12px 90px 12px;
   }
   .siakad-modal-content {
