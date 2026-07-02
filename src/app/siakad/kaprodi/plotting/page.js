@@ -214,7 +214,7 @@ export default function KaprodiPlotting() {
       {/* Modal Atur Jadwal */}
       {showScheduleModal && selectedCourse && (
         <div className="siakad-modal-overlay">
-          <div className="fade-in" style={{ background: 'var(--color-bg)', padding: '32px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 20px 40px rgba(0,0,0,0.2)', border: '1px solid var(--color-border)' }}>
+          <div className="siakad-modal-content">
             <div className="siakad-modal-header">
               <h3 style={{ margin: 0, color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <i className="ph ph-calendar-plus" style={{ color: '#8b5cf6' }}></i> Atur Jadwal Kelas

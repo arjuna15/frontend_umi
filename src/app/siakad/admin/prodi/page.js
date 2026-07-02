@@ -101,7 +101,7 @@ export default function AdminProdiPage() {
 
       {isEditModalOpen && (
         <div className="siakad-modal-overlay">
-          <div className="fade-in" style={{ background: 'var(--color-bg)', borderRadius: '24px', width: '100%', maxWidth: '500px', border: '1px solid var(--color-border)', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)', overflow: 'hidden' }}>
+          <div className="siakad-modal-content">
             <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' , flexWrap: 'wrap' }}>
               <h3 style={{ margin: 0, fontSize: '1.25rem' }}>{editFormData.id ? 'Edit Prodi' : 'Tambah Prodi'}</h3>
               <button onClick={() => setIsEditModalOpen(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--color-muted)', fontSize: '1.5rem' }}><i className="ph ph-x"></i></button>

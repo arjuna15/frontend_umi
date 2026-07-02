@@ -215,7 +215,7 @@ export default function AdminPengaturan() {
 
       {isConfirmModalOpen && (
         <div className="siakad-modal-overlay">
-          <div className="siakad-card fade-in" style={{ padding: '32px', width: '90%', maxWidth: '400px', maxHeight: '90vh', overflowY: 'auto', textAlign: 'center' }}>
+          <div className="siakad-modal-content">
             <div style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', margin: '0 auto 20px auto' , flexShrink: 0 }}>
               <i className="ph ph-warning-circle"></i>
             </div>
