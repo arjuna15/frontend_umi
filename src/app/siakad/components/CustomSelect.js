@@ -53,7 +53,7 @@ export default function CustomSelect({ name, options, value, onChange, placehold
           border: '1px solid var(--color-border)',
           borderRadius: '12px',
           boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
-          zIndex: 50,
+          zIndex: 99999,
           overflow: 'hidden',
           animation: 'dropdownFadeIn 0.2s ease-out'
         }}>
