@@ -5,7 +5,7 @@
   display: flex;
   height: 100vh;
   background: #f8fafc;
-  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  font-family: 'Outfit', 'Inter', sans-serif;
   overflow: hidden; /* Prevent body scroll, let main scroll */
   position: relative;
 }

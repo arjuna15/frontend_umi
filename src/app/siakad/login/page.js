@@ -68,7 +68,7 @@ export default function SiakadLogin() {
           align-items: center;
           justify-content: center;
           background: #060c18; /* Deep dark slate/navy */
-          font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+          font-family: 'Outfit', 'Inter', sans-serif;
           position: relative;
           overflow: hidden;
           padding: 20px;
