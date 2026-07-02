@@ -1152,6 +1152,7 @@ header.top-transparent .glass {
     border: var(--glass-border);
     box-shadow: var(--glass-shadow);
     overflow-y: auto;
+    overflow-x: hidden;
     transform: translateY(-20px);
     opacity: 0;
     pointer-events: none;
@@ -1197,6 +1198,8 @@ header.top-transparent .glass {
   .mega-menu.grid-1, .mega-menu.grid-2, .mega-menu.grid-3 {
     flex-direction: column;
     gap: 16px;
+    width: 100% !important;
+    max-width: 100% !important;
   }
   .mega-menu > div {
     margin-bottom: 0 !important;
