@@ -232,9 +232,7 @@ export default function AdminKeuangan() {
                     <td style={{ padding: '16px', color: 'var(--color-text)', fontWeight: '700' }}>{formatRupiah(billing.amount)}</td>
                     <td style={{ padding: '16px', color: 'var(--color-text)' }}>{billing.due_date}</td>
                     <td style={{ padding: '16px' }}>
-                      <span style={{
-                        display: 'inline-flex', alignItems: 'center', gap: '6px',
-                        padding: '6px 12px', borderRadius: '99px', fontSize: '0.8rem', fontWeight: '700',
+                      <span className="siakad-badge" style={{
                         background: billing.status === 'Lunas' ? '#dcfce7' : '#fee2e2',
                         color: billing.status === 'Lunas' ? '#166534' : '#991b1b'
                       }}>

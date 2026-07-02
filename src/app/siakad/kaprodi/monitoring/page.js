@@ -144,7 +144,7 @@ export default function KaprodiMonitoring() {
                         <div style={{ color: 'var(--color-muted)', fontSize: '0.85rem' }}>Tanggal: {new Date(att.created_at || Date.now()).toLocaleDateString('id-ID')}</div>
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <span style={{ display: 'inline-block', padding: '4px 10px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', borderRadius: '99px', fontSize: '0.8rem', fontWeight: 600 }}>
+                        <span className="siakad-badge" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
                           Materi Dibagikan
                         </span>
                       </div>

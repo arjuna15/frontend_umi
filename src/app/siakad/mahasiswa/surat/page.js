@@ -61,10 +61,9 @@ export default function SuratAdministrasiPage() {
                   <td style={{ color: 'var(--color-muted)' }}>{req.date}</td>
                   <td style={{ fontWeight: 'bold' }}>{req.type}</td>
                   <td>
-                    <span style={{ 
-                      padding: '4px 12px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold',
+                    <span className="siakad-badge" style={{ 
                       background: req.status === 'Selesai' ? 'rgba(16, 185, 129, 0.1)' : req.status === 'Diproses' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(245, 158, 11, 0.1)',
-                      color: req.status === 'Selesai' ? '#10b981' : req.status === 'Diproses' ? '#3b82f6' : '#f59e0b',
+                      color: req.status === 'Selesai' ? '#10b981' : req.status === 'Diproses' ? '#3b82f6' : '#f59e0b'
                     }}>
                       {req.status}
                     </span>

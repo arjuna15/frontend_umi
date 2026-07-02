@@ -98,7 +98,7 @@ export default function KaprodiKurikulumPage() {
                   <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{c.name}</td>
                   <td style={{ padding: '16px' }}>{c.sks} SKS</td>
                   <td style={{ padding: '16px' }}>
-                    <span style={{ background: c.type === 'Wajib' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(245, 158, 11, 0.1)', color: c.type === 'Wajib' ? '#3b82f6' : '#f59e0b', padding: '4px 10px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold' }}>{c.type}</span>
+                    <span className="siakad-badge" style={{ background: c.type === 'Wajib' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(245, 158, 11, 0.1)', color: c.type === 'Wajib' ? '#3b82f6' : '#f59e0b' }}>{c.type}</span>
                   </td>
                   <td style={{ padding: '16px' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>

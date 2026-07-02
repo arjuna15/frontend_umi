@@ -113,10 +113,9 @@ export default function KaprodiDosenPage() {
                   <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{d.nip}</td>
                   <td style={{ padding: '16px' }}>{d.jfa}</td>
                   <td style={{ padding: '16px' }}>
-                    <span style={{ 
+                    <span className="siakad-badge" style={{ 
                       background: d.status === 'Aktif' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)', 
-                      color: d.status === 'Aktif' ? '#10b981' : '#f59e0b', 
-                      padding: '4px 10px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold' 
+                      color: d.status === 'Aktif' ? '#10b981' : '#f59e0b' 
                     }}>
                       {d.status}
                     </span>

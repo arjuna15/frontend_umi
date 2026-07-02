@@ -91,10 +91,9 @@ export default function KaprodiKalenderPage() {
                   <td style={{ padding: '16px', color: 'var(--color-text)' }}>{formatDate(ev.startDate)}</td>
                   <td style={{ padding: '16px', color: 'var(--color-text)' }}>{formatDate(ev.endDate)}</td>
                   <td style={{ padding: '16px' }}>
-                    <span style={{ 
+                    <span className="siakad-badge" style={{ 
                       background: ev.type === 'Ujian' ? 'rgba(239, 68, 68, 0.1)' : ev.type === 'Dosen' ? 'rgba(139, 92, 246, 0.1)' : 'rgba(59, 130, 246, 0.1)', 
-                      color: ev.type === 'Ujian' ? '#ef4444' : ev.type === 'Dosen' ? '#8b5cf6' : '#3b82f6', 
-                      padding: '4px 10px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold' 
+                      color: ev.type === 'Ujian' ? '#ef4444' : ev.type === 'Dosen' ? '#8b5cf6' : '#3b82f6' 
                     }}>
                       {ev.type}
                     </span>

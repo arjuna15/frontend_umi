@@ -94,12 +94,7 @@ export default function KeuanganPage() {
                     <td>{bill.due_date}</td>
                     <td style={{ fontWeight: 'bold' }}>{new Intl.NumberFormat('id-ID').format(bill.amount)}</td>
                     <td>
-                      <span style={{
-                        display: 'inline-block',
-                        padding: '4px 12px',
-                        borderRadius: '999px',
-                        fontSize: '0.85rem',
-                        fontWeight: 'bold',
+                      <span className="siakad-badge" style={{
                         background: bill.status === 'Lunas' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)',
                         color: bill.status === 'Lunas' ? '#10b981' : '#ef4444'
                       }}>
