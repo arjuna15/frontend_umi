@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react';
 
 export default function CustomSelect({ name, options, value, onChange, placeholder = "Pilih...", disabled = false, style = {} }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownStyle, setDropdownStyle] = useState({});
   const triggerRef = useRef(null);
   const dropdownRef = useRef(null);
 
@@ -11,7 +10,7 @@ export default function CustomSelect({ name, options, value, onChange, placehold
     function handleClickOutside(event) {
       if (
         triggerRef.current && !triggerRef.current.contains(event.target) &&
-        dropdownRef.current && !dropdownRef.current.contains(event.target)
+        (!dropdownRef.current || !dropdownRef.current.contains(event.target))
       ) {
         setIsOpen(false);
       }
@@ -20,29 +19,27 @@ export default function CustomSelect({ name, options, value, onChange, placehold
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Recalculate dropdown position whenever it opens
-  useEffect(() => {
-    if (isOpen && triggerRef.current) {
-      const rect = triggerRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const dropdownHeight = 260; // approximate max height
-      const spaceBelow = viewportHeight - rect.bottom;
-      const openUpward = spaceBelow < dropdownHeight && rect.top > dropdownHeight;
-
-      setDropdownStyle({
-        position: 'fixed',
-        left: rect.left,
-        width: rect.width,
-        zIndex: 99999,
-        ...(openUpward
-          ? { bottom: viewportHeight - rect.top + 4 }
-          : { top: rect.bottom + 4 }
-        ),
-      });
-    }
-  }, [isOpen]);
-
   const selectedOption = options.find(opt => opt.value === value);
+
+  // Compute position synchronously from the trigger element
+  const getDropdownPosition = () => {
+    if (!triggerRef.current) return { position: 'fixed', top: 0, left: 0, width: 200, zIndex: 99999 };
+    const rect = triggerRef.current.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const spaceBelow = viewportHeight - rect.bottom;
+    const openUpward = spaceBelow < 260 && rect.top > 260;
+
+    return {
+      position: 'fixed',
+      left: rect.left,
+      width: rect.width,
+      zIndex: 99999,
+      ...(openUpward
+        ? { bottom: viewportHeight - rect.top + 4 }
+        : { top: rect.bottom + 4 }
+      ),
+    };
+  };
 
   return (
     <div style={{ position: 'relative', width: '100%', ...style }}>
@@ -51,7 +48,7 @@ export default function CustomSelect({ name, options, value, onChange, placehold
       {/* Trigger Button */}
       <div
         ref={triggerRef}
-        onClick={() => !disabled && setIsOpen(!isOpen)}
+        onClick={() => !disabled && setIsOpen(prev => !prev)}
         style={{
           padding: '12px 16px',
           background: disabled ? 'var(--glass-bg)' : 'var(--color-bg)',
@@ -70,21 +67,28 @@ export default function CustomSelect({ name, options, value, onChange, placehold
         }}
       >
         <span>{selectedOption ? selectedOption.label : placeholder}</span>
-        <i className={`ph ph-caret-${isOpen ? 'up' : 'down'}`} style={{ color: 'var(--color-text)', transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}></i>
+        <i
+          className="ph ph-caret-down"
+          style={{
+            color: 'var(--color-text)',
+            transition: 'transform 0.2s',
+            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+            display: 'inline-block',
+          }}
+        />
       </div>
 
-      {/* Dropdown — rendered with position:fixed so it escapes any overflow clipping */}
+      {/* Dropdown — position:fixed so it escapes ALL parent overflow clipping */}
       {isOpen && (
         <div
           ref={dropdownRef}
           style={{
-            ...dropdownStyle,
+            ...getDropdownPosition(),
             background: 'var(--color-bg)',
             border: '1px solid var(--color-border)',
             borderRadius: '12px',
-            boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 10px 25px -5px rgba(0,0,0,0.15), 0 8px 10px -6px rgba(0,0,0,0.1)',
             overflow: 'hidden',
-            animation: 'dropdownFadeIn 0.15s ease-out',
           }}
         >
           <div style={{ maxHeight: '250px', overflowY: 'auto', padding: '8px' }}>
@@ -96,12 +100,10 @@ export default function CustomSelect({ name, options, value, onChange, placehold
                   setIsOpen(false);
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = opt.value === value ? 'rgba(59, 130, 246, 0.15)' : 'var(--glass-bg)';
-                  e.currentTarget.style.color = opt.value === value ? '#3b82f6' : 'var(--color-text)';
+                  e.currentTarget.style.background = opt.value === value ? 'rgba(59,130,246,0.15)' : 'var(--glass-bg)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = opt.value === value ? 'rgba(59, 130, 246, 0.1)' : 'transparent';
-                  e.currentTarget.style.color = opt.value === value ? '#3b82f6' : 'var(--color-text)';
+                  e.currentTarget.style.background = opt.value === value ? 'rgba(59,130,246,0.1)' : 'transparent';
                 }}
                 style={{
                   padding: '10px 14px',
@@ -110,27 +112,23 @@ export default function CustomSelect({ name, options, value, onChange, placehold
                   display: 'flex',
                   alignItems: 'center',
                   gap: '10px',
-                  background: opt.value === value ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
+                  background: opt.value === value ? 'rgba(59,130,246,0.1)' : 'transparent',
                   color: opt.value === value ? '#3b82f6' : 'var(--color-text)',
                   fontWeight: opt.value === value ? '600' : '500',
                   transition: 'all 0.15s ease',
+                  userSelect: 'none',
                 }}
               >
-                {opt.icon && <i className={opt.icon} style={{ fontSize: '1.1rem' }}></i>}
+                {opt.icon && <i className={opt.icon} style={{ fontSize: '1.1rem' }} />}
                 {opt.label}
-                {opt.value === value && <i className="ph ph-check" style={{ marginLeft: 'auto', color: '#3b82f6', fontWeight: 'bold' }}></i>}
+                {opt.value === value && (
+                  <i className="ph ph-check" style={{ marginLeft: 'auto', color: '#3b82f6' }} />
+                )}
               </div>
             ))}
           </div>
         </div>
       )}
-
-      <style>{`
-        @keyframes dropdownFadeIn {
-          from { opacity: 0; transform: translateY(-6px) scale(0.98); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-      `}</style>
     </div>
   );
 }
