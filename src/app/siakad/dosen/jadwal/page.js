@@ -178,7 +178,7 @@ export default function JadwalPage() {
                         </td>
                         <td style={{ padding: '16px 20px' }}>
                           {(c.ruang || c.ruangan) ? (
-                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 12px', background: 'var(--glass-bg)', borderRadius: '8px', fontWeight: '600', fontSize: '0.85rem', color: 'var(--color-text)', border: '1px solid var(--color-border)' }}>
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 12px', background: 'var(--glass-bg)', borderRadius: '8px', fontWeight: '600', fontSize: '0.85rem', color: 'var(--color-text)', border: '1px solid var(--color-border)', whiteSpace: 'nowrap' }}>
                               <i className="ph ph-map-pin" style={{ color: '#C41E3A' }}></i>{c.ruang || c.ruangan}
                             </span>
                           ) : <span style={{ color: 'var(--color-muted)', fontStyle: 'italic', fontSize: '0.85rem' }}>—</span>}
