@@ -300,7 +300,7 @@ export default function ProfilePage() {
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '20px', borderBottom: '1px dashed var(--color-border)' }}>
+                <div className="siakad-modal-header">
                   <div>
                     <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', color: 'var(--color-text)' }}>Notifikasi Email</h4>
                     <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Terima pembaruan penting dan jadwal di email Anda.</p>
@@ -313,7 +313,7 @@ export default function ProfilePage() {
                   </label>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '20px', borderBottom: '1px dashed var(--color-border)' }}>
+                <div className="siakad-modal-header">
                   <div>
                     <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', color: 'var(--color-text)' }}>Visibilitas Publik</h4>
                     <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Izinkan pengguna lain melihat nomor HP dan email Anda.</p>

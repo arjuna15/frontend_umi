@@ -98,7 +98,7 @@ export default function DosenQuizCreate() {
 
         {questions.map((q, idx) => (
           <div key={idx} className={`stagger-${(idx % 5) + 2}`} style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '16px', marginBottom: '24px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)', border: '1px solid var(--color-border)', position: 'relative', zIndex: 50 - idx }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+            <div className="siakad-modal-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                 <h3 style={{ margin: '0', color: 'var(--color-text)' }}>Soal {idx + 1}</h3>
                 <CustomSelect

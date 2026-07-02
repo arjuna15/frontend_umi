@@ -271,10 +271,7 @@ export default function AdminKeuangan() {
       </div>
 
       {isModalOpen && (
-        <div style={{
-          position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)',
-          display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, padding: '24px'
-        }}>
+        <div className="siakad-modal-overlay">
           <div className="siakad-card fade-in" style={{
             padding: '0', width: '100%', width: '90%', maxWidth: '500px', maxHeight: '90vh', overflowY: 'auto', overflow: 'hidden'
           }}>

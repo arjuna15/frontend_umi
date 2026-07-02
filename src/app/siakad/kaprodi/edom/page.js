@@ -107,7 +107,7 @@ export default function KaprodiEdom() {
         ) : (
           edoms.map((edom, index) => (
             <div key={edom.id} className={`siakad-card stagger-${(index % 5) + 1}`} style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
+              <div className="siakad-modal-header">
                 <div>
                   <h3 style={{ margin: '0 0 4px 0', fontSize: '1.2rem', color: 'var(--color-text)' }}>{edom.dosen?.name}</h3>
                   <span style={{ fontSize: '0.9rem', color: 'var(--color-muted)' }}>{edom.course?.name}</span>

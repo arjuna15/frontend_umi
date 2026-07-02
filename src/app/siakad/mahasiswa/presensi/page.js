@@ -152,7 +152,7 @@ export default function MahasiswaPresensi() {
               </div>
               
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '0.9rem' }}>
+                <div className="siakad-modal-header">
                   <span style={{ color: 'var(--color-text)', fontWeight: '600' }}>Kehadiran: {course.attended}/{course.total_meetings}</span>
                   <span style={{ fontWeight: 'bold', color: isSafe ? '#10b981' : '#ef4444' }}>{percentage}%</span>
                 </div>

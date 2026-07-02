@@ -176,8 +176,8 @@ export default function DosenPresensiPage() {
 
       {/* Buat Sesi Modal */}
       {showSessionModal && (
-        <div style={{ position: 'fixed', inset: 0, background: 'var(--glass-bg)', backdropFilter: 'blur(8px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ background: 'var(--color-bg)', width: '100%', maxWidth: '400px', borderRadius: '24px', padding: '32px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)' }}>
+        <div className="siakad-modal-overlay">
+          <div className="siakad-modal-content">
             <h3 style={{ margin: '0 0 24px 0', fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)' }}>Buka Sesi Presensi</h3>
             <form onSubmit={handleCreateSession} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               <div>
@@ -212,9 +212,9 @@ export default function DosenPresensiPage() {
 
       {/* Input Detail Modal */}
       {showDetailModal && selectedAttendance && (
-        <div style={{ position: 'fixed', inset: 0, background: 'var(--glass-bg)', backdropFilter: 'blur(8px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ background: 'var(--color-bg)', width: '100%', maxWidth: '600px', borderRadius: '24px', padding: '32px', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', maxHeight: '90vh', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
+        <div className="siakad-modal-overlay">
+          <div className="siakad-modal-content">
+            <div className="siakad-modal-header">
               <div>
                 <h3 style={{ margin: '0 0 4px 0', fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)' }}>Input Presensi</h3>
                 <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>Pertemuan ke-{selectedAttendance.meeting_number} • {selectedAttendance.date}</p>

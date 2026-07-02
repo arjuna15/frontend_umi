@@ -41,11 +41,11 @@ export default function BimbinganAkademikPage() {
           </div>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '12px', borderBottom: '1px solid var(--color-border)' }}>
+            <div className="siakad-modal-header">
               <span style={{ color: 'var(--color-muted)' }}>Status KRS</span>
               <span style={{ color: '#ef4444', fontWeight: 'bold' }}>Ditolak (Butuh Revisi)</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '12px', borderBottom: '1px solid var(--color-border)' }}>
+            <div className="siakad-modal-header">
               <span style={{ color: 'var(--color-muted)' }}>Batas Persetujuan</span>
               <span style={{ color: 'var(--color-text)', fontWeight: 'bold' }}>25 Agustus 2026</span>
             </div>

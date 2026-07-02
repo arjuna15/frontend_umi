@@ -260,7 +260,7 @@ export default function AdminClassesPage() {
       </div>
 
       {isEditModalOpen && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999, backdropFilter: 'blur(4px)' }}>
+        <div className="siakad-modal-overlay">
           <div className="siakad-card fade-in" style={{ padding: '24px', width: '100%', width: '90%', maxWidth: '500px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)' }}>
             <h2 style={{ margin: '0 0 20px 0', fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)' }}>Edit Mata Kuliah</h2>
             <form onSubmit={handleUpdateCourse}>

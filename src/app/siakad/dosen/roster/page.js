@@ -128,7 +128,7 @@ export default function RosterPage() {
                       boxShadow: isActive ? '0 4px 14px rgba(196,30,58,0.3)' : 'none',
                     }}
                   >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+                    <div className="siakad-modal-header">
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ fontSize: '0.75rem', opacity: isActive ? 0.8 : 0.6, marginBottom: '3px', fontWeight: '600', letterSpacing: '0.05em' }}>{c.code}</div>
                         <div style={{ fontWeight: '700', fontSize: '0.9rem', lineHeight: 1.3 }}>{c.name}</div>

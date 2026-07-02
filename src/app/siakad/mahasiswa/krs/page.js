@@ -178,7 +178,7 @@ export default function KRSPage() {
       {krsOpen && (
         <div className="siakad-card" style={{ padding: '24px' }}>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }}>
+        <div className="siakad-modal-header">
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Daftar Mata Kuliah Tersedia</h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
             <div style={{ background: 'var(--color-border)', padding: '10px 16px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-muted)', whiteSpace: 'nowrap' }}>
