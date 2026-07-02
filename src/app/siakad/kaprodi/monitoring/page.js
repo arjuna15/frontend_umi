@@ -80,13 +80,13 @@ export default function KaprodiMonitoring() {
                   <td style={{ fontWeight: 600 }}>{course.name} <br/><small style={{ color: 'var(--color-muted)', fontWeight: 'normal' }}>{course.code}</small></td>
                   <td>{course.dosen ? course.dosen.name : <span style={{ color: '#ef4444' }}>Belum di-assign</span>}</td>
                   <td>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' , flexWrap: 'wrap'}}>
                       <i className="ph ph-users" style={{ color: 'var(--color-text)' }}></i>
                       {course.attendances?.length || 0} / 14 Sesi
                     </div>
                   </td>
                   <td>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' , flexWrap: 'wrap'}}>
                       <i className="ph ph-file-pdf" style={{ color: '#ef4444' }}></i>
                       {course.materials?.length || 0} Dokumen
                     </div>
@@ -136,7 +136,7 @@ export default function KaprodiMonitoring() {
                   Belum ada sesi perkuliahan / presensi yang dicatat.
                 </div>
               ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' , flexWrap: 'wrap'}}>
                   {selectedCourse.attendances.map((att, idx) => (
                     <div key={idx} style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: '12px', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
                       <div>

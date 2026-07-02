@@ -138,19 +138,19 @@ export default function DosenPresensiPage() {
                 <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#10b981', fontWeight: '800' }}>{course.name}</h3>
                 <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: 'var(--color-text)', fontWeight: '600', padding: '4px 12px', background: 'var(--glass-bg)', borderRadius: '999px' }}>{course.code} • {course.sks} SKS</span>
               </div>
-              <button onClick={() => { setSelectedCourseId(course.id); setShowSessionModal(true); }} style={{ zIndex: 1, flexShrink: 0, background: '#10b981', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button onClick={() => { setSelectedCourseId(course.id); setShowSessionModal(true); }} style={{ zIndex: 1, flexShrink: 0, background: '#10b981', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' , flexWrap: 'wrap'}}>
                 <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Buka Sesi Baru
               </button>
             </div>
 
             <div style={{ padding: '32px' }}>
               {course.attendances && course.attendances.length > 0 ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
                   {course.attendances.map((att, j) => (
                     <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', padding: '20px', background: 'var(--glass-bg)', border: '1px solid rgba(229, 231, 235, 0.8)', borderRadius: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
                       <div style={{ flex: '1 1 150px' }}>
                         <strong style={{ color: 'var(--color-text)', display: 'block', marginBottom: '8px', fontSize: '1.1rem', fontWeight: '800' }}>Pertemuan ke-{att.meeting_number}</strong>
-                        <span style={{ fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <span style={{ fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' , flexWrap: 'wrap'}}>
                           <i className="ph ph-calendar-blank"></i> {att.date}
                         </span>
                       </div>
@@ -179,7 +179,7 @@ export default function DosenPresensiPage() {
         <div className="siakad-modal-overlay">
           <div className="siakad-modal-content">
             <h3 style={{ margin: '0 0 24px 0', fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)' }}>Buka Sesi Presensi</h3>
-            <form onSubmit={handleCreateSession} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <form onSubmit={handleCreateSession} style={{ display: 'flex', flexDirection: 'column', gap: '20px' , flexWrap: 'wrap'}}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Pertemuan Ke-</label>
                 <input type="number" required min="1" max="16" value={meetingNumber} onChange={e => setMeetingNumber(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none', fontSize: '1rem' }} placeholder="Contoh: 1" />
@@ -201,7 +201,7 @@ export default function DosenPresensiPage() {
                   style={{ width: '100%', minWidth: 0, flex: '1 1 120px'}}
                 />
               </div>
-              <div style={{ display: 'flex', gap: '12px', marginTop: '12px' }}>
+              <div style={{ display: 'flex', gap: '12px', marginTop: '12px' , flexWrap: 'wrap'}}>
                 <button type="button" onClick={() => setShowSessionModal(false)} style={{ flex: 1, padding: '14px', borderRadius: '12px', background: 'var(--glass-bg)', color: 'var(--color-text)', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>Batal</button>
                 <button type="submit" style={{ flex: 1, padding: '14px', borderRadius: '12px', background: '#10b981', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16,185,129,0.3)' }}>Buat Sesi</button>
               </div>
@@ -279,7 +279,7 @@ export default function DosenPresensiPage() {
                             )}
                           </td>
                           <td style={{ padding: '12px 16px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '4px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '4px' , flexWrap: 'wrap'}}>
                               <div style={{ display: 'inline-flex', background: 'var(--glass-bg)', borderRadius: '8px', padding: '4px', gap: '4px' }}>
                                 <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} style={{ background: status === 'present' ? 'white' : 'transparent', color: status === 'present' ? '#059669' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'present' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>H</button>
                                 <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'absent')} style={{ background: status === 'absent' ? 'white' : 'transparent', color: status === 'absent' ? '#dc2626' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'absent' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>A</button>

@@ -147,7 +147,7 @@ export default function AdminUsersPage() {
             <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
           </div>
           <div>
-            <button onClick={() => window.toast?.('Silakan pilih file CSV...')} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '10px 20px', borderRadius: '12px', cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button onClick={() => window.toast?.('Silakan pilih file CSV...')} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '10px 20px', borderRadius: '12px', cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', gap: '8px' , flexWrap: 'wrap'}}>
               <i className="ph ph-upload-simple"></i> Import CSV
             </button>
           </div>
@@ -201,7 +201,7 @@ export default function AdminUsersPage() {
             />
           </div>
           <div style={{ flex: '0 0 auto' }}>
-            <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
+            <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' , flexWrap: 'wrap'}}>
               <i className="ph ph-plus-circle"></i> Tambah
             </button>
           </div>
@@ -234,7 +234,7 @@ export default function AdminUsersPage() {
                     </span>
                   </td>
                   <td style={{ padding: '16px 24px', textAlign: 'right' }}>
-                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
                       <button 
                         onClick={() => window.toast?.('Password berhasil direset ke default (123456)')}
                         style={{ background: 'var(--glass-bg)', color: '#f59e0b', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
@@ -311,7 +311,7 @@ export default function AdminUsersPage() {
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Password Baru (Opsional)</label>
                 <input type="password" value={editFormData.password} onChange={(e) => setEditFormData({...editFormData, password: e.target.value})} placeholder="Biarkan kosong jika tidak ingin mengubah..." style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
               </div>
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
                 <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 16px', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', color: 'var(--color-text)' }}>Batal</button>
                 <button type="submit" style={{ padding: '10px 16px', background: '#4f46e5', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Simpan Perubahan</button>
               </div>

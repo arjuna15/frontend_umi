@@ -146,10 +146,10 @@ export default function KaprodiKrs() {
       </div>
       
       <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' , flexWrap: 'wrap' }}>
-        <button onClick={() => setActiveTab('pending')} style={{ background: activeTab === 'pending' ? 'rgba(59, 130, 246, 0.1)' : 'transparent', color: activeTab === 'pending' ? '#3b82f6' : 'var(--color-muted)', border: 'none', padding: '12px 24px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
+        <button onClick={() => setActiveTab('pending')} style={{ background: activeTab === 'pending' ? 'rgba(59, 130, 246, 0.1)' : 'transparent', color: activeTab === 'pending' ? '#3b82f6' : 'var(--color-muted)', border: 'none', padding: '12px 24px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' , flexWrap: 'wrap'}}>
           <i className="ph ph-clock"></i> Menunggu Persetujuan ({submissions.length})
         </button>
-        <button onClick={() => setActiveTab('history')} style={{ background: activeTab === 'history' ? 'rgba(16, 185, 129, 0.1)' : 'transparent', color: activeTab === 'history' ? '#10b981' : 'var(--color-muted)', border: 'none', padding: '12px 24px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
+        <button onClick={() => setActiveTab('history')} style={{ background: activeTab === 'history' ? 'rgba(16, 185, 129, 0.1)' : 'transparent', color: activeTab === 'history' ? '#10b981' : 'var(--color-muted)', border: 'none', padding: '12px 24px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' , flexWrap: 'wrap'}}>
           <i className="ph ph-clock-counter-clockwise"></i> Riwayat KRS Mahasiswa ({history.length})
         </button>
       </div>
@@ -214,14 +214,14 @@ export default function KaprodiKrs() {
                   </td>
                   <td style={{ textAlign: 'center' }}>
                     {sub.status === 'Pending' ? (
-                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' , flexWrap: 'wrap'}}>
                         <button 
                           onClick={() => approveKrs(sub.id)}
                           style={{ 
                             background: '#10b981', color: 'white', border: 'none', 
                             padding: '8px 16px', borderRadius: '8px', cursor: 'pointer',
                             fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px'
-                          }}
+                          , flexWrap: 'wrap'}}
                         >
                           <i className="ph ph-check-circle"></i> Setujui
                         </button>
@@ -231,7 +231,7 @@ export default function KaprodiKrs() {
                             background: '#ef4444', color: 'white', border: 'none', 
                             padding: '8px 16px', borderRadius: '8px', cursor: 'pointer',
                             fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px'
-                          }}
+                          , flexWrap: 'wrap'}}
                         >
                           <i className="ph ph-x-circle"></i> Tolak
                         </button>
@@ -272,7 +272,7 @@ export default function KaprodiKrs() {
                 />
               </div>
               
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' , flexWrap: 'wrap'}}>
                 <button type="button" onClick={() => setIsRejectModalOpen(false)} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: 'var(--color-text)', padding: '12px 24px', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
                   Batal
                 </button>

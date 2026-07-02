@@ -67,7 +67,7 @@ export default function AdminPengaturan() {
         <div style={{ position: 'absolute', bottom: '-20px', left: '30%', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(99,102,241,0.1)', filter: 'blur(30px)' , flexShrink: 0 }}></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
-          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '12px' , flexWrap: 'wrap'}}>
             Pengaturan Sistem <i className="ph ph-gear-six"></i>
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola periode akademik dan status operasional sistem SIAKAD dengan aman.</p>
@@ -78,7 +78,7 @@ export default function AdminPengaturan() {
         
         {/* Section 1: Periode Akademik */}
         <div style={{ marginBottom: '32px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px' , flexWrap: 'wrap'}}>
             <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
               <i className="ph ph-calendar-blank" style={{ fontSize: '1.2rem' }}></i>
             </div>
@@ -101,7 +101,7 @@ export default function AdminPengaturan() {
 
         {/* Section 2: Kontrol Sistem Akademik */}
         <div style={{ marginBottom: '40px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px' , flexWrap: 'wrap'}}>
             <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
               <i className="ph ph-sliders-horizontal" style={{ fontSize: '1.2rem' }}></i>
             </div>
@@ -110,7 +110,7 @@ export default function AdminPengaturan() {
             </h3>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
             <div style={{ 
               display: 'flex', alignItems: 'center', justifyContent: 'space-between', 
               padding: '20px', background: 'var(--glass-bg)', borderRadius: '16px', 
@@ -160,7 +160,7 @@ export default function AdminPengaturan() {
 
         {/* Section 3: Geofencing Kampus */}
         <div style={{ marginBottom: '40px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px' , flexWrap: 'wrap'}}>
             <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
               <i className="ph ph-map-pin" style={{ fontSize: '1.2rem' }}></i>
             </div>
@@ -205,7 +205,7 @@ export default function AdminPengaturan() {
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px',
             fontSize: '1.05rem', boxShadow: '0 4px 15px rgba(185, 28, 28, 0.3)',
             transition: 'transform 0.2s'
-          }}
+          , flexWrap: 'wrap'}}
           onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
           onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
         >
@@ -221,7 +221,7 @@ export default function AdminPengaturan() {
             </div>
             <h2 style={{ fontSize: '1.25rem', margin: '0 0 12px 0' }}>Konfirmasi Perubahan</h2>
             <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', marginBottom: '24px' }}>Apakah Anda yakin ingin menyimpan perubahan konfigurasi sistem ini? Perubahan akan langsung berdampak pada seluruh pengguna.</p>
-            <div style={{ display: 'flex', gap: '12px' }}>
+            <div style={{ display: 'flex', gap: '12px' , flexWrap: 'wrap'}}>
               <button onClick={() => setIsConfirmModalOpen(false)} style={{ flex: 1, padding: '12px', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '12px', cursor: 'pointer', fontWeight: 600, color: 'var(--color-text)' }}>Batal</button>
               <button onClick={handleSave} style={{ flex: 1, padding: '12px', background: '#3b82f6', border: 'none', borderRadius: '12px', cursor: 'pointer', fontWeight: 600, color: 'white' }}>Ya, Simpan</button>
             </div>

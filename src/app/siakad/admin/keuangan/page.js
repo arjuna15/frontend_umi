@@ -147,12 +147,12 @@ export default function AdminKeuangan() {
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px' }}>
           <div style={{ flex: '1 1 300px' }}>
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
-            <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em', display: 'flex', alignItems: 'center', gap: '12px' , flexWrap: 'wrap'}}>
               Manajemen Keuangan <i className="ph ph-wallet"></i>
             </h1>
             <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola seluruh tagihan dan pembayaran mahasiswa.</p>
           </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
+          <div style={{ display: 'flex', gap: '12px' , flexWrap: 'wrap'}}>
             <button 
               onClick={() => window.toast?.('Membuat tagihan massal untuk semua mahasiswa aktif...')}
               style={{
@@ -160,7 +160,7 @@ export default function AdminKeuangan() {
                 color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '12px 24px', borderRadius: '12px',
                 fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
                 transition: 'all 0.3s'
-              }}
+              , flexWrap: 'wrap'}}
               onMouseOver={(e) => e.currentTarget.style.background = 'rgba(16, 185, 129, 0.3)'}
               onMouseOut={(e) => e.currentTarget.style.background = 'rgba(16, 185, 129, 0.2)'}
             >
@@ -173,7 +173,7 @@ export default function AdminKeuangan() {
                 color: 'white', border: '1px solid rgba(255,255,255,0.2)', padding: '12px 24px', borderRadius: '12px',
                 fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
                 transition: 'all 0.3s'
-              }}
+              , flexWrap: 'wrap'}}
               onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
               onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
             >
@@ -184,7 +184,7 @@ export default function AdminKeuangan() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px', marginBottom: '24px' }}>
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' , flexWrap: 'wrap'}}>
           <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
             <i className="ph ph-coins"></i>
           </div>
@@ -193,7 +193,7 @@ export default function AdminKeuangan() {
             <h3 style={{ margin: 0, fontSize: '1.2rem' }}>{formatRupiah(billings.filter(b => b.status === 'Lunas').reduce((acc, b) => acc + parseFloat(b.amount || 0), 0))}</h3>
           </div>
         </div>
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' , flexWrap: 'wrap'}}>
           <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
             <i className="ph ph-warning-circle"></i>
           </div>
@@ -243,7 +243,7 @@ export default function AdminKeuangan() {
                       </span>
                     </td>
                     <td style={{ padding: '16px' }}>
-                      <div style={{ display: 'flex', gap: '8px' }}>
+                      <div style={{ display: 'flex', gap: '8px' , flexWrap: 'wrap'}}>
                         <button 
                           onClick={() => openModal(billing)}
                           style={{

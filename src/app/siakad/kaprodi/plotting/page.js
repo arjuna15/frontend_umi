@@ -179,12 +179,12 @@ export default function KaprodiPlotting() {
                         <div style={{ fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>
                           {course.hari}, {course.jamMulai} - {course.jamSelesai}
                         </div>
-                        <div style={{ color: 'var(--color-muted)', fontSize: '0.85rem', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <div style={{ color: 'var(--color-muted)', fontSize: '0.85rem', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' , flexWrap: 'wrap'}}>
                           <i className="ph ph-map-pin" style={{ color: '#8b5cf6' }}></i> {course.ruang}
                         </div>
                       </div>
                     ) : (
-                      <span style={{ color: '#d97706', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <span style={{ color: '#d97706', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '4px' , flexWrap: 'wrap'}}>
                         <i className="ph ph-warning-circle"></i> Belum Dijadwalkan
                       </span>
                     )}
@@ -199,7 +199,7 @@ export default function KaprodiPlotting() {
                     />
                   </td>
                   <td style={{ textAlign: 'center' }}>
-                    <button onClick={() => openScheduleModal(course)} style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', margin: '0 auto' }}>
+                    <button onClick={() => openScheduleModal(course)} style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', margin: '0 auto' , flexWrap: 'wrap'}}>
                       <i className="ph ph-calendar-edit"></i> Atur Jadwal
                     </button>
                   </td>
@@ -216,7 +216,7 @@ export default function KaprodiPlotting() {
         <div className="siakad-modal-overlay">
           <div className="siakad-modal-content">
             <div className="siakad-modal-header">
-              <h3 style={{ margin: 0, color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <h3 style={{ margin: 0, color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' , flexWrap: 'wrap'}}>
                 <i className="ph ph-calendar-plus" style={{ color: '#8b5cf6' }}></i> Atur Jadwal Kelas
               </h3>
               <button onClick={() => setShowScheduleModal(false)} style={{ background: 'transparent', border: 'none', color: 'var(--color-muted)', cursor: 'pointer', fontSize: '1.5rem' }}>
@@ -229,7 +229,7 @@ export default function KaprodiPlotting() {
               <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{selectedCourse.code} • {selectedCourse.sks} SKS</p>
             </div>
 
-            <form onSubmit={handleSaveSchedule} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <form onSubmit={handleSaveSchedule} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
               <div>
                 <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Hari</label>
                 <CustomSelect 
@@ -275,7 +275,7 @@ export default function KaprodiPlotting() {
                 />
               </div>
 
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '16px' }}>
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '16px' , flexWrap: 'wrap'}}>
                 <button type="button" onClick={() => setShowScheduleModal(false)} style={{ background: 'transparent', border: '1px solid var(--color-muted)', padding: '10px 20px', borderRadius: '8px', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold' }}>
                   Batal
                 </button>
