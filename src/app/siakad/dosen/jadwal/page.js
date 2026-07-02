@@ -170,7 +170,7 @@ export default function JadwalPage() {
                       <>
                         <td style={{ padding: '16px 20px' }}>
                           {c.hari && dayStyle ? (
-                            <span style={{ padding: '6px 14px', background: dayStyle.bg, color: dayStyle.color, border: `1px solid ${dayStyle.border}`, borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem' }}>{c.hari}</span>
+                            <span style={{ display: 'inline-block', minWidth: '90px', textAlign: 'center', padding: '6px 14px', background: dayStyle.bg, color: dayStyle.color, border: `1px solid ${dayStyle.border}`, borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem' }}>{c.hari}</span>
                           ) : <span style={{ color: 'var(--color-muted)', fontStyle: 'italic', fontSize: '0.85rem' }}>Belum diatur</span>}
                         </td>
                         <td style={{ padding: '16px 20px', color: 'var(--color-text)', fontSize: '0.9rem', fontWeight: '500' }}>
@@ -178,7 +178,7 @@ export default function JadwalPage() {
                         </td>
                         <td style={{ padding: '16px 20px' }}>
                           {(c.ruang || c.ruangan) ? (
-                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '6px 12px', background: 'var(--glass-bg)', borderRadius: '8px', fontWeight: '600', fontSize: '0.85rem', color: 'var(--color-text)', border: '1px solid var(--color-border)', whiteSpace: 'nowrap' }}>
+                            <span style={{ display: 'inline-flex', minWidth: '130px', justifyContent: 'center', alignItems: 'center', gap: '6px', padding: '6px 12px', background: 'var(--glass-bg)', borderRadius: '8px', fontWeight: '600', fontSize: '0.85rem', color: 'var(--color-text)', border: '1px solid var(--color-border)', whiteSpace: 'nowrap' }}>
                               <i className="ph ph-map-pin" style={{ color: '#C41E3A' }}></i>{c.ruang || c.ruangan}
                             </span>
                           ) : <span style={{ color: 'var(--color-muted)', fontStyle: 'italic', fontSize: '0.85rem' }}>—</span>}
