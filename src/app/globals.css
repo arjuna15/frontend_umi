@@ -632,6 +632,7 @@ header.top-transparent .glass {
   border-radius: var(--radius-md);
 }
 .dropdown-item:last-child .dropdown-link { margin-bottom: 0; }
+.mega-menu .dropdown-link { justify-content: flex-start; }
 .dropdown-link:hover {
   background: rgba(185, 28, 28, 0.08);
   color: var(--umiba-red);
@@ -1216,6 +1217,7 @@ header.top-transparent .glass {
     font-size: 0.95rem !important;
     display: flex !important;
     align-items: center;
+    justify-content: flex-start !important;
     border-bottom: 1px solid rgba(0,0,0,0.05) !important;
   }
   body.dark-mode .mega-menu .dropdown-link {
