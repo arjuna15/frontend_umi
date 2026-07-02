@@ -135,7 +135,7 @@ export default function JadwalPage() {
                       <>
                         <td style={{ padding: '12px 16px' }}>
                           <select value={formData.day} onChange={e => setFormData({...formData, day: e.target.value})}
-                            style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none', fontSize: '0.9rem' }}>
+                            className="siakad-input">
                             <option value="">Pilih Hari</option>
                             {['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'].map(d => <option key={d}>{d}</option>)}
                           </select>
@@ -143,15 +143,15 @@ export default function JadwalPage() {
                         <td style={{ padding: '12px 16px' }}>
                           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' , flexWrap: 'wrap' }}>
                             <input type="time" value={formData.start_time} onChange={e => setFormData({...formData, start_time: e.target.value})}
-                              style={{ padding: '8px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
+                              className="siakad-input" />
                             <span style={{ color: 'var(--color-muted)' }}>—</span>
                             <input type="time" value={formData.end_time} onChange={e => setFormData({...formData, end_time: e.target.value})}
-                              style={{ padding: '8px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
+                              className="siakad-input" />
                           </div>
                         </td>
                         <td style={{ padding: '12px 16px' }}>
-                          <input type="text" placeholder="Contoh: R.301" value={formData.room} onChange={e => setFormData({...formData, room: e.target.value})}
-                            style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '100px', outline: 'none' }} />
+                          <input type="text" value={formData.room} onChange={e => setFormData({...formData, room: e.target.value})} placeholder="Contoh: Lab Komputer 1"
+                            className="siakad-input" style={{ width: '100%' }} />
                         </td>
                         <td style={{ padding: '12px 16px', textAlign: 'center' }}>
                           <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>

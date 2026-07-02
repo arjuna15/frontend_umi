@@ -140,7 +140,7 @@ export default function BapPage() {
                 <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
                   <i className="ph ph-books" style={{ color: '#6366f1' }}></i> Mata Kuliah
                 </label>
-                <select name="course_id" required style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', transition: 'border 0.2s' , minWidth: 0, flex: '1 1 120px'}}>
+                <select name="course_id" required className="siakad-input" style={{ width: '100%', minWidth: 0, flex: '1 1 120px' }}>
                   <option value="">Pilih Mata Kuliah...</option>
                   {courses.map(c => (
                     <option key={c.id} value={c.id}>{c.code} — {c.name}</option>
@@ -155,14 +155,14 @@ export default function BapPage() {
                     <i className="ph ph-hash" style={{ color: '#10b981' }}></i> Pertemuan Ke-
                   </label>
                   <input type="number" name="meeting_number" required min="1" max="16" placeholder="Contoh: 7"
-                    style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' , minWidth: 0, flex: '1 1 120px'}} />
+                    className="siakad-input" style={{ width: '100%', minWidth: 0, flex: '1 1 120px' }} />
                 </div>
                 <div>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
                     <i className="ph ph-calendar-blank" style={{ color: '#f59e0b' }}></i> Tanggal Perkuliahan
                   </label>
                   <input type="date" name="date" required
-                    style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', boxSizing: 'border-box' , minWidth: 0, flex: '1 1 120px'}} />
+                    className="siakad-input" style={{ width: '100%', minWidth: 0, flex: '1 1 120px' }} />
                 </div>
               </div>
 
@@ -172,7 +172,7 @@ export default function BapPage() {
                   <i className="ph ph-chalkboard" style={{ color: '#C41E3A' }}></i> Topik / Materi yang Diajarkan
                 </label>
                 <textarea name="topic" required rows="3" placeholder="Deskripsikan materi sesuai RPS, contoh: Pengenalan algoritma sorting — Bubble Sort & Quick Sort"
-                  style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }}></textarea>
+                  className="siakad-input" style={{ width: '100%', resize: 'vertical' }}></textarea>
               </div>
 
               {/* Catatan */}
@@ -181,7 +181,7 @@ export default function BapPage() {
                   <i className="ph ph-note-pencil" style={{ color: '#8b5cf6' }}></i> Catatan / Kendala <span style={{ fontWeight: '400', color: 'var(--color-muted)', fontSize: '0.8rem' }}>(opsional)</span>
                 </label>
                 <textarea name="notes" rows="2" placeholder="Kendala teknis, mahasiswa yang absen banyak, atau catatan lainnya..."
-                  style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }}></textarea>
+                  className="siakad-input" style={{ width: '100%', resize: 'vertical' }}></textarea>
               </div>
 
               <button type="submit" disabled={submitting}

@@ -102,9 +102,9 @@ export default function DosenQuizCreate() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                 <h3 style={{ margin: '0', color: 'var(--color-text)' }}>Soal {idx + 1}</h3>
                 <select
+                  className="siakad-input"
                   value={q.type}
                   onChange={(e) => handleChange(idx, 'type', e.target.value)}
-                  style={{ padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', outline: 'none' }}
                 >
                   <option value="multiple_choice">Pilihan Ganda</option>
                   <option value="true_false">Benar / Salah</option>

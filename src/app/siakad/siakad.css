@@ -381,8 +381,12 @@
   font-size: 0.95rem;
   outline: none;
   transition: all 0.3s ease;
-  background: white;
-  color: #1f2937;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+[data-theme='dark'] .siakad-input {
+  background: rgba(30, 41, 59, 0.5); /* or var(--glass-bg) equivalent */
+  border-color: var(--color-border);
 }
 .siakad-input:focus {
   border-color: #3b82f6;
