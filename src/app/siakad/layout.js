@@ -25,38 +25,38 @@ export default function SiakadLayout({ children }) {
   let menuItems = [];
   if (role === 'admin' || role === 'superadmin') {
     menuItems = [
-      { label: 'Admin Dashboard', icon: 'ph ph-chart-pie-slice', path: '/siakad/admin' },
-      { label: 'Manajemen Pengguna', icon: 'ph ph-users-three', path: '/siakad/admin/users' },
+      { label: 'Admin Dashboard', icon: 'ph ph-chart-pie-slice', path: '/siakad/admin', isMobilePrimary: true },
+      { label: 'Manajemen Pengguna', icon: 'ph ph-users-three', path: '/siakad/admin/users', isMobilePrimary: true },
       { label: 'Manajemen Prodi', icon: 'ph ph-buildings', path: '/siakad/admin/prodi' },
-      { label: 'Manajemen Kelas', icon: 'ph ph-chalkboard', path: '/siakad/admin/classes' },
+      { label: 'Manajemen Kelas', icon: 'ph ph-chalkboard', path: '/siakad/admin/classes', isMobilePrimary: true },
       { label: 'Manajemen Ruangan', icon: 'ph ph-door', path: '/siakad/admin/ruangan' },
-      { label: 'Manajemen Keuangan', icon: 'ph ph-wallet', path: '/siakad/admin/keuangan' },
+      { label: 'Manajemen Keuangan', icon: 'ph ph-wallet', path: '/siakad/admin/keuangan', isMobilePrimary: true },
       { label: 'Log Aktivitas (Audit)', icon: 'ph ph-list-magnifying-glass', path: '/siakad/admin/logs' },
       { label: 'Backup & Restore', icon: 'ph ph-database', path: '/siakad/admin/backup' },
       { label: 'Pengaturan Sistem', icon: 'ph ph-gear', path: '/siakad/admin/pengaturan' },
     ];
   } else if (role === 'kaprodi') {
     menuItems = [
-      { label: 'Dashboard Statistik', icon: 'ph ph-chart-line-up', path: '/siakad/kaprodi' },
+      { label: 'Dashboard Statistik', icon: 'ph ph-chart-line-up', path: '/siakad/kaprodi', isMobilePrimary: true },
       { label: 'Manajemen Kurikulum', icon: 'ph ph-books', path: '/siakad/kaprodi/kurikulum' },
-      { label: 'Manajemen Dosen', icon: 'ph ph-users', path: '/siakad/kaprodi/dosen' },
+      { label: 'Manajemen Dosen', icon: 'ph ph-users', path: '/siakad/kaprodi/dosen', isMobilePrimary: true },
       { label: 'Kalender Akademik', icon: 'ph ph-calendar', path: '/siakad/kaprodi/kalender' },
-      { label: 'Persetujuan KRS', icon: 'ph ph-check-square-offset', path: '/siakad/kaprodi/krs' },
+      { label: 'Persetujuan KRS', icon: 'ph ph-check-square-offset', path: '/siakad/kaprodi/krs', isMobilePrimary: true },
       { label: 'Monitoring Perkuliahan', icon: 'ph ph-chalkboard-teacher', path: '/siakad/kaprodi/monitoring' },
       { label: 'Plotting Dosen', icon: 'ph ph-users-three', path: '/siakad/kaprodi/plotting' },
       { label: 'Distribusi Nilai', icon: 'ph ph-student', path: '/siakad/kaprodi/students' },
-      { label: 'Hasil EDOM', icon: 'ph ph-star-half', path: '/siakad/kaprodi/edom' },
+      { label: 'Hasil EDOM', icon: 'ph ph-star-half', path: '/siakad/kaprodi/edom', isMobilePrimary: true },
       { label: 'Laporan Akreditasi', icon: 'ph ph-file-pdf', path: '/siakad/kaprodi/reports' },
     ];
   } else if (role === 'dosen') {
     menuItems = [
-      { label: 'Dashboard Dosen', icon: 'ph ph-chalkboard-teacher', path: '/siakad/dosen' },
+      { label: 'Dashboard Dosen', icon: 'ph ph-chalkboard-teacher', path: '/siakad/dosen', isMobilePrimary: true },
       { label: 'Roster Kelas', icon: 'ph ph-users-three', path: '/siakad/dosen/roster' },
-      { label: 'Jadwal Mengajar', icon: 'ph ph-calendar-plus', path: '/siakad/dosen/jadwal' },
+      { label: 'Jadwal Mengajar', icon: 'ph ph-calendar-plus', path: '/siakad/dosen/jadwal', isMobilePrimary: true },
       { label: 'Isi BAP', icon: 'ph ph-file-text', path: '/siakad/dosen/bap' },
-      { label: 'Persetujuan KRS', icon: 'ph ph-check-square', path: '/siakad/dosen/krs-approval' },
+      { label: 'Persetujuan KRS', icon: 'ph ph-check-square', path: '/siakad/dosen/krs-approval', isMobilePrimary: true },
       { label: 'E-Learning', icon: 'ph ph-books', path: '/siakad/dosen/elearning' },
-      { label: 'Presensi Mahasiswa', icon: 'ph ph-calendar-check', path: '/siakad/dosen/presensi' },
+      { label: 'Presensi Mahasiswa', icon: 'ph ph-calendar-check', path: '/siakad/dosen/presensi', isMobilePrimary: true },
       { label: 'Rekap Presensi', icon: 'ph ph-chart-bar', path: '/siakad/dosen/rekap-presensi' },
       { label: 'Gradebook & Nilai', icon: 'ph ph-exam', path: '/siakad/dosen/gradebook' },
       { label: 'Forum Diskusi', icon: 'ph ph-chats', path: '/siakad/dosen/forum' },
@@ -65,10 +65,10 @@ export default function SiakadLayout({ children }) {
   } else {
     // Default Mahasiswa
     menuItems = [
-      { label: 'Dashboard & Info', icon: 'ph ph-squares-four', path: '/siakad/mahasiswa' },
-      { label: 'Jadwal & Kalender', icon: 'ph ph-calendar-blank', path: '/siakad/mahasiswa/jadwal' },
-      { label: 'KRS Online', icon: 'ph ph-list-checks', path: '/siakad/mahasiswa/krs' },
-      { label: 'Ruang Kelas & Kuis', icon: 'ph ph-laptop', path: '/siakad/mahasiswa/elearning' },
+      { label: 'Dashboard & Info', icon: 'ph ph-squares-four', path: '/siakad/mahasiswa', isMobilePrimary: true },
+      { label: 'Jadwal & Kalender', icon: 'ph ph-calendar-blank', path: '/siakad/mahasiswa/jadwal', isMobilePrimary: true },
+      { label: 'KRS Online', icon: 'ph ph-list-checks', path: '/siakad/mahasiswa/krs', isMobilePrimary: true },
+      { label: 'Ruang Kelas & Kuis', icon: 'ph ph-laptop', path: '/siakad/mahasiswa/elearning', isMobilePrimary: true },
       { label: 'Presensi Mandiri', icon: 'ph ph-calendar-check', path: '/siakad/mahasiswa/presensi' },
       { label: 'Rapor & Transkrip', icon: 'ph ph-exam', path: '/siakad/mahasiswa/gradebook' },
       { label: 'Bimbingan Akademik', icon: 'ph ph-users', path: '/siakad/mahasiswa/bimbingan' },
@@ -277,10 +277,8 @@ export default function SiakadLayout({ children }) {
       {/* MOBILE BOTTOM NAVIGATION */}
       <nav className="siakad-bottom-nav">
         {(() => {
-          const maxVisible = 5;
-          const displayItems = menuItems.length > maxVisible 
-            ? [...menuItems.slice(0, 4), { label: 'Lainnya', icon: 'ph ph-dots-three-circle', path: '#' }] 
-            : [...menuItems.slice(0, maxVisible - 1), { label: 'Lainnya', icon: 'ph ph-dots-three-circle', path: '#' }];
+          const primaryItems = menuItems.filter(item => item.isMobilePrimary).slice(0, 4);
+          const displayItems = [...primaryItems, { label: 'Lainnya', icon: 'ph ph-dots-three-circle', path: '#' }];
           
           let activeIndex = displayItems.findIndex(item => pathname === item.path);
           if (activeIndex === -1) {
@@ -359,7 +357,7 @@ export default function SiakadLayout({ children }) {
             
             <div className="drawer-body">
               <h4 style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: 'var(--color-text)', textTransform: 'uppercase', letterSpacing: '1px' }}>Menu Lainnya</h4>
-              {menuItems.slice(4).map((item, i) => (
+              {menuItems.filter(item => !item.isMobilePrimary).map((item, i) => (
                 <Link key={i} href={item.path} className="drawer-item" onClick={() => setIsDrawerOpen(false)}>
                   <div className="icon"><i className={item.icon}></i></div>
                   <div className="label">{item.label}</div>
