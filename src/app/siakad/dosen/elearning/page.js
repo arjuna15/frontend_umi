@@ -116,7 +116,7 @@ export default function DosenElearningPage() {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {sessions.map((sess, idx) => (
-                <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
+                <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
                   <div style={{ flex: '1 1 300px' }}>
                     <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.1rem' }}>Sesi {sess.session}: {sess.title}</h3>
                     <div style={{ display: 'flex', gap: '16px', color: 'var(--color-muted)', fontSize: '0.9rem', flexWrap: 'wrap' }}>

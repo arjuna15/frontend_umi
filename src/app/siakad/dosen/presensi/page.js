@@ -241,7 +241,7 @@ export default function DosenPresensiPage() {
                 <thead>
                   <tr style={{ background: 'var(--glass-bg)' }}>
                     <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem' }}>Mahasiswa</th>
-                    <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem' }}>Status</th>
+                    <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem', textAlign: 'center' }}>Status</th>
                     <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem', textAlign: 'right' }}>Aksi</th>
                   </tr>
                 </thead>
@@ -271,16 +271,17 @@ export default function DosenPresensiPage() {
                             <div style={{ fontWeight: '700', color: 'var(--color-text)' }}>{mhs.name}</div>
                             <div style={{ fontSize: '0.8rem', color: 'var(--color-text)' }}>{mhs.nim_nip}</div>
                           </td>
-                          <td style={{ padding: '12px 16px' }}>
+                          <td style={{ padding: '12px 16px', textAlign: 'center' }}>
                             {status === 'present' ? (
                               <span style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold' }}>Hadir</span>
                             ) : (
                               <span style={{ background: 'var(--glass-bg)', color: '#dc2626', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold' }}>Alpa</span>
                             )}
                           </td>
-                          <td style={{ padding: '12px 16px', textAlign: 'right' }}>
-                            <div style={{ display: 'inline-flex', background: 'var(--glass-bg)', borderRadius: '8px', padding: '4px' }}>
-                              <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} style={{ background: status === 'present' ? 'white' : 'transparent', color: status === 'present' ? '#059669' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'present' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>H</button>
+                          <td style={{ padding: '12px 16px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '4px' }}>
+                              <div style={{ display: 'inline-flex', background: 'var(--glass-bg)', borderRadius: '8px', padding: '4px', gap: '4px' }}>
+                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} style={{ background: status === 'present' ? 'white' : 'transparent', color: status === 'present' ? '#059669' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'present' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>H</button>
                               <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'absent')} style={{ background: status === 'absent' ? 'white' : 'transparent', color: status === 'absent' ? '#dc2626' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'absent' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>A</button>
                             </div>
                           </td>
