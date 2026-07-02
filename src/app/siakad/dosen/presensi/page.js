@@ -282,7 +282,8 @@ export default function DosenPresensiPage() {
                             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '4px' }}>
                               <div style={{ display: 'inline-flex', background: 'var(--glass-bg)', borderRadius: '8px', padding: '4px', gap: '4px' }}>
                                 <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} style={{ background: status === 'present' ? 'white' : 'transparent', color: status === 'present' ? '#059669' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'present' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>H</button>
-                              <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'absent')} style={{ background: status === 'absent' ? 'white' : 'transparent', color: status === 'absent' ? '#dc2626' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'absent' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>A</button>
+                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'absent')} style={{ background: status === 'absent' ? 'white' : 'transparent', color: status === 'absent' ? '#dc2626' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'absent' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>A</button>
+                              </div>
                             </div>
                           </td>
                         </tr>
