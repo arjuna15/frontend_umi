@@ -8,6 +8,12 @@ export default function AdminKeuangan() {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [isBulkModalOpen, setIsBulkModalOpen] = useState(false);
+  const [bulkForm, setBulkForm] = useState({
+    description: '',
+    amount: '',
+    due_date: ''
+  });
 
   const [formData, setFormData] = useState({
     id: null,
@@ -73,6 +79,17 @@ export default function AdminKeuangan() {
 
   const closeModal = () => setIsModalOpen(false);
 
+  const openBulkModal = () => {
+    setBulkForm({
+      description: '',
+      amount: '',
+      due_date: ''
+    });
+    setIsBulkModalOpen(true);
+  };
+
+  const closeBulkModal = () => setIsBulkModalOpen(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -133,13 +150,7 @@ export default function AdminKeuangan() {
   };
 
   const handleBulkGenerate = async () => {
-    const result = await window.toast.form('Generate Tagihan Massal', [
-      { name: 'description', label: 'Deskripsi Tagihan', type: 'text', autoFocus: true },
-      { name: 'amount', label: 'Nominal (Rupiah)', type: 'text' },
-      { name: 'due_date', label: 'Jatuh Tempo (YYYY-MM-DD)', type: 'text' }
-    ]);
-    if (!result) return;
-    if (!result.description || !result.amount || !result.due_date) {
+    if (!bulkForm.description || !bulkForm.amount || !bulkForm.due_date) {
       window.toast('Semua field harus diisi.');
       return;
     }
@@ -153,14 +164,15 @@ export default function AdminKeuangan() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          description: result.description,
-          amount: parseFloat(result.amount),
-          due_date: result.due_date
+          description: bulkForm.description,
+          amount: parseFloat(bulkForm.amount),
+          due_date: bulkForm.due_date
         })
       });
       const data = await res.json();
       if (res.ok) {
         window.toast(data.message);
+        closeBulkModal();
         fetchData();
       } else {
         window.toast('Gagal: ' + (data.message || 'Error'));
@@ -192,7 +204,7 @@ export default function AdminKeuangan() {
           </div>
           <div style={{ display: 'flex', gap: '12px' , flexWrap: 'wrap'}}>
             <button 
-              onClick={handleBulkGenerate}
+              onClick={openBulkModal}
               style={{
                 background: 'rgba(16, 185, 129, 0.2)', backdropFilter: 'blur(10px)',
                 color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '12px 24px', borderRadius: '12px',
@@ -309,86 +321,308 @@ export default function AdminKeuangan() {
       {isModalOpen && (
         <div className="siakad-modal-overlay">
           <div className="siakad-modal-content">
-            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' , flexWrap: 'wrap' }}>
-              <h2 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)' }}>
-                {isEdit ? 'Edit Tagihan' : 'Tambah Tagihan Baru'}
-              </h2>
-              <button onClick={closeModal} style={{ background: 'transparent', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontSize: '1.2rem' }}>
-                <i className="ph ph-x"></i>
+            <div style={{
+              padding: '24px 28px',
+              borderBottom: '1px solid var(--color-border)',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'flex-start',
+              gap: '16px',
+              flexWrap: 'wrap'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                <div style={{
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '12px',
+                  background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 10px 20px rgba(99, 102, 241, 0.25)',
+                  flexShrink: 0
+                }}>
+                  <i className={`ph ${isEdit ? 'ph-pencil-simple-line' : 'ph-receipt'}`} style={{ fontSize: '1.2rem' }}></i>
+                </div>
+                <div>
+                  <p style={{ margin: 0, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-muted)', fontWeight: 700 }}>
+                    Manajemen Keuangan
+                  </p>
+                  <h2 style={{ margin: '4px 0 0 0', fontSize: '1.25rem', fontWeight: '800', color: 'var(--color-text)' }}>
+                    {isEdit ? 'Edit Tagihan' : 'Tambah Tagihan Baru'}
+                  </h2>
+                </div>
+              </div>
+              <button
+                onClick={closeModal}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: '12px',
+                  color: 'var(--color-text)',
+                  cursor: 'pointer',
+                  width: '40px',
+                  height: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}
+                aria-label="Tutup modal"
+              >
+                <i className="ph ph-x" style={{ fontSize: '1.1rem' }}></i>
               </button>
             </div>
             
-            <form onSubmit={handleSubmit} style={{ padding: '24px' }}>
-              {!isEdit && (
-                <div style={{ marginBottom: '16px' }}>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Pilih Mahasiswa</label>
-                  <CustomSelect 
-                    name="user_id"
-                    value={formData.user_id} 
-                    onChange={(val) => setFormData({...formData, user_id: val})}
-                    placeholder="-- Pilih Mahasiswa --"
-                    options={users.map(u => ({ value: u.id, label: `${u.name} (${u.npm || u.email})`, icon: 'ph ph-user' }))}
+            <form onSubmit={handleSubmit} style={{ padding: '28px' }}>
+              <div style={{ display: 'grid', gap: '18px' }}>
+                {!isEdit && (
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Pilih Mahasiswa</label>
+                    <CustomSelect 
+                      name="user_id"
+                      value={formData.user_id} 
+                      onChange={(val) => setFormData({...formData, user_id: val})}
+                      placeholder="-- Pilih Mahasiswa --"
+                      options={users.map(u => ({ value: u.id, label: `${u.name} (${u.npm || u.email})`, icon: 'ph ph-user' }))}
+                    />
+                  </div>
+                )}
+                
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Deskripsi Tagihan</label>
+                  <input 
+                    type="text" 
+                    value={formData.description} 
+                    onChange={(e) => setFormData({...formData, description: e.target.value})}
+                    required
+                    placeholder="Contoh: UKT Semester Ganjil 2026/2027"
+                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
                   />
                 </div>
-              )}
-              
-              <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Deskripsi Tagihan</label>
-                <input 
-                  type="text" 
-                  value={formData.description} 
-                  onChange={(e) => setFormData({...formData, description: e.target.value})}
-                  required
-                  placeholder="Contoh: UKT Semester Ganjil 2026/2027"
-                  style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
-                />
-              </div>
 
-              <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Nominal (Rp)</label>
-                <input 
-                  type="number" 
-                  value={formData.amount} 
-                  onChange={(e) => setFormData({...formData, amount: e.target.value})}
-                  required
-                  placeholder="4500000"
-                  style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
-                />
-              </div>
-
-              <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Jatuh Tempo</label>
-                <input 
-                  type="date" 
-                  value={formData.due_date} 
-                  onChange={(e) => setFormData({...formData, due_date: e.target.value})}
-                  required
-                  style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
-                />
-              </div>
-
-              {isEdit && (
-                <div style={{ marginBottom: '24px' }}>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Status Pembayaran</label>
-                  <CustomSelect 
-                    name="status"
-                    value={formData.status} 
-                    onChange={(val) => setFormData({...formData, status: val})}
-                    options={[
-                      { value: 'Belum Lunas', label: 'Belum Lunas', icon: 'ph ph-x-circle' },
-                      { value: 'Lunas', label: 'Lunas', icon: 'ph ph-check-circle' }
-                    ]}
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Nominal (Rp)</label>
+                  <input 
+                    type="number" 
+                    value={formData.amount} 
+                    onChange={(e) => setFormData({...formData, amount: e.target.value})}
+                    required
+                    placeholder="4500000"
+                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
                   />
                 </div>
-              )}
 
-              <button type="submit" style={{
-                width: '100%', background: '#0f172a', color: 'white', border: 'none', 
-                padding: '14px', borderRadius: '12px', fontWeight: '800', fontSize: '1rem',
-                cursor: 'pointer', transition: 'all 0.3s'
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Jatuh Tempo</label>
+                  <input 
+                    type="date" 
+                    value={formData.due_date} 
+                    onChange={(e) => setFormData({...formData, due_date: e.target.value})}
+                    required
+                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
+                  />
+                </div>
+
+                {isEdit && (
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Status Pembayaran</label>
+                    <CustomSelect 
+                      name="status"
+                      value={formData.status} 
+                      onChange={(val) => setFormData({...formData, status: val})}
+                      options={[
+                        { value: 'Belum Lunas', label: 'Belum Lunas', icon: 'ph ph-x-circle' },
+                        { value: 'Lunas', label: 'Lunas', icon: 'ph ph-check-circle' }
+                      ]}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                gap: '12px',
+                marginTop: '28px',
+                paddingTop: '20px',
+                borderTop: '1px solid var(--color-border)',
+                flexWrap: 'wrap'
               }}>
-                {isEdit ? 'Simpan Perubahan' : 'Buat Tagihan'}
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  style={{
+                    padding: '12px 20px',
+                    borderRadius: '12px',
+                    border: '1px solid var(--color-border)',
+                    background: 'transparent',
+                    color: 'var(--color-text)',
+                    cursor: 'pointer',
+                    fontWeight: 700
+                  }}
+                >
+                  Batal
+                </button>
+                <button type="submit" style={{
+                  minWidth: '180px',
+                  background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)',
+                  color: 'white',
+                  border: 'none',
+                  padding: '14px 20px',
+                  borderRadius: '12px',
+                  fontWeight: '800',
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                  boxShadow: '0 12px 24px rgba(99, 102, 241, 0.28)'
+                }}>
+                  {isEdit ? 'Simpan Perubahan' : 'Buat Tagihan'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {isBulkModalOpen && (
+        <div className="siakad-modal-overlay">
+          <div className="siakad-modal-content" style={{ maxWidth: '560px' }}>
+            <div style={{
+              padding: '24px 28px',
+              borderBottom: '1px solid var(--color-border)',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'flex-start',
+              gap: '16px',
+              flexWrap: 'wrap'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                <div style={{
+                  width: '44px',
+                  height: '44px',
+                  borderRadius: '12px',
+                  background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 10px 20px rgba(99, 102, 241, 0.25)',
+                  flexShrink: 0
+                }}>
+                  <i className="ph ph-receipt" style={{ fontSize: '1.2rem' }}></i>
+                </div>
+                <div>
+                  <p style={{ margin: 0, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-muted)', fontWeight: 700 }}>
+                    Manajemen Keuangan
+                  </p>
+                  <h2 style={{ margin: '4px 0 0 0', fontSize: '1.25rem', fontWeight: '800', color: 'var(--color-text)' }}>
+                    Generate Tagihan Massal
+                  </h2>
+                </div>
+              </div>
+              <button
+                onClick={closeBulkModal}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: '12px',
+                  color: 'var(--color-text)',
+                  cursor: 'pointer',
+                  width: '40px',
+                  height: '40px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}
+                aria-label="Tutup modal"
+              >
+                <i className="ph ph-x" style={{ fontSize: '1.1rem' }}></i>
               </button>
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleBulkGenerate();
+              }}
+              style={{ padding: '28px' }}
+            >
+              <div style={{ display: 'grid', gap: '18px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Deskripsi Tagihan</label>
+                  <input
+                    type="text"
+                    autoFocus
+                    value={bulkForm.description}
+                    onChange={(e) => setBulkForm({ ...bulkForm, description: e.target.value })}
+                    placeholder="Contoh: UKT Semester Ganjil 2026/2027"
+                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Nominal (Rp)</label>
+                  <input
+                    type="number"
+                    value={bulkForm.amount}
+                    onChange={(e) => setBulkForm({ ...bulkForm, amount: e.target.value })}
+                    placeholder="4500000"
+                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Jatuh Tempo</label>
+                  <input
+                    type="date"
+                    value={bulkForm.due_date}
+                    onChange={(e) => setBulkForm({ ...bulkForm, due_date: e.target.value })}
+                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
+                  />
+                </div>
+              </div>
+
+              <div style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                gap: '12px',
+                marginTop: '28px',
+                paddingTop: '20px',
+                borderTop: '1px solid var(--color-border)',
+                flexWrap: 'wrap'
+              }}>
+                <button
+                  type="button"
+                  onClick={closeBulkModal}
+                  style={{
+                    padding: '12px 20px',
+                    borderRadius: '12px',
+                    border: '1px solid var(--color-border)',
+                    background: 'transparent',
+                    color: 'var(--color-text)',
+                    cursor: 'pointer',
+                    fontWeight: 700
+                  }}
+                >
+                  Batal
+                </button>
+                <button type="submit" style={{
+                  minWidth: '180px',
+                  background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)',
+                  color: 'white',
+                  border: 'none',
+                  padding: '14px 20px',
+                  borderRadius: '12px',
+                  fontWeight: '800',
+                  fontSize: '1rem',
+                  cursor: 'pointer',
+                  boxShadow: '0 12px 24px rgba(99, 102, 241, 0.28)'
+                }}>
+                  Simpan & Kirim
+                </button>
+              </div>
             </form>
           </div>
         </div>
