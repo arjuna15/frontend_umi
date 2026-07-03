@@ -132,6 +132,44 @@ export default function AdminKeuangan() {
     }
   };
 
+  const handleBulkGenerate = async () => {
+    const result = await window.toast.form('Generate Tagihan Massal', [
+      { name: 'description', label: 'Deskripsi Tagihan', type: 'text', autoFocus: true },
+      { name: 'amount', label: 'Nominal (Rupiah)', type: 'text' },
+      { name: 'due_date', label: 'Jatuh Tempo (YYYY-MM-DD)', type: 'text' }
+    ]);
+    if (!result) return;
+    if (!result.description || !result.amount || !result.due_date) {
+      window.toast('Semua field harus diisi.');
+      return;
+    }
+    try {
+      const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      const res = await fetch(`${apiUrl}/siakad/admin/billings/bulk-generate`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          description: result.description,
+          amount: parseFloat(result.amount),
+          due_date: result.due_date
+        })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        window.toast(data.message);
+        fetchData();
+      } else {
+        window.toast('Gagal: ' + (data.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast('Terjadi kesalahan: ' + err.message);
+    }
+  };
+
   const formatRupiah = (amount) => {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
   };
@@ -154,7 +192,7 @@ export default function AdminKeuangan() {
           </div>
           <div style={{ display: 'flex', gap: '12px' , flexWrap: 'wrap'}}>
             <button 
-              onClick={() => window.toast?.('Membuat tagihan massal untuk semua mahasiswa aktif...')}
+              onClick={handleBulkGenerate}
               style={{
                 background: 'rgba(16, 185, 129, 0.2)', backdropFilter: 'blur(10px)',
                 color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '12px 24px', borderRadius: '12px',
