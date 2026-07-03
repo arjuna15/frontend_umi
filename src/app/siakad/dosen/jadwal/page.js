@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+
 const DAY_COLORS = {
   Senin: { bg: 'rgba(59,130,246,0.15)', color: '#3b82f6', border: 'rgba(59,130,246,0.3)' },
   Selasa: { bg: 'rgba(16,185,129,0.15)', color: '#10b981', border: 'rgba(16,185,129,0.3)' },
@@ -14,12 +15,16 @@ const DAY_COLORS = {
 export default function JadwalPage() {
   const router = useRouter();
   const [courses, setCourses] = useState([]);
+  const [classrooms, setClassrooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState({ day: '', start_time: '', end_time: '', room: '' });
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => { fetchCourses(); }, []);
+  useEffect(() => {
+    fetchCourses();
+    fetchClassrooms();
+  }, []);
 
   const fetchCourses = async () => {
     const token = localStorage.getItem('siakad_token');
@@ -27,17 +32,48 @@ export default function JadwalPage() {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
       const res = await fetch(`${apiUrl}/siakad/dosen/roster`, { headers: { 'Authorization': `Bearer ${token}` } });
-      if (res.ok) { const result = await res.json(); setCourses(result.courses || []); }
-    } catch (err) { console.error(err); }
-    finally { setLoading(false); }
+      if (res.ok) {
+        const result = await res.json();
+        setCourses(result.courses || []);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchClassrooms = async () => {
+    const token = localStorage.getItem('siakad_token');
+    if (!token) return;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/admin/classrooms`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setClassrooms(data || []);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleEdit = (course) => {
     setEditingId(course.id);
-    setFormData({ day: course.hari || '', start_time: course.jam_mulai || '', end_time: course.jam_selesai || '', room: course.ruangan || course.ruang || '' });
+    setFormData({
+      day: course.hari || '',
+      start_time: course.jam_mulai || '',
+      end_time: course.jam_selesai || '',
+      room: course.ruangan || course.ruang || ''
+    });
   };
 
-  const handleCancel = () => { setEditingId(null); setFormData({ day: '', start_time: '', end_time: '', room: '' }); };
+  const handleCancel = () => {
+    setEditingId(null);
+    setFormData({ day: '', start_time: '', end_time: '', room: '' });
+  };
 
   const handleSave = async (courseId) => {
     setSaving(true);
@@ -49,10 +85,19 @@ export default function JadwalPage() {
         headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ course_id: courseId, ...formData })
       });
-      if (res.ok) { window.toast && window.toast('Jadwal berhasil diperbarui!'); setEditingId(null); fetchCourses(); }
-      else { const err = await res.json(); window.toast && window.toast('Gagal: ' + (err.message || 'Error')); }
-    } catch (err) { window.toast && window.toast('Error: ' + err.message); }
-    finally { setSaving(false); }
+      if (res.ok) {
+        window.toast && window.toast('Jadwal berhasil diperbarui!');
+        setEditingId(null);
+        fetchCourses();
+      } else {
+        const err = await res.json();
+        window.toast && window.toast('Gagal: ' + (err.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast && window.toast('Error: ' + err.message);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const configuredCount = courses.filter(c => c.hari).length;
@@ -63,13 +108,24 @@ export default function JadwalPage() {
     </div>
   );
 
+  const roomOptions = classrooms.length > 0
+    ? classrooms.map(r => ({ label: r.name, value: r.name }))
+    : [
+        { label: 'Lab Komputer A', value: 'Lab Komputer A' },
+        { label: 'Lab Komputer B', value: 'Lab Komputer B' },
+        { label: 'Ruang 401', value: 'Ruang 401' },
+        { label: 'Ruang 402', value: 'Ruang 402' },
+        { label: 'Ruang 405 (Aula)', value: 'Ruang 405 (Aula)' },
+        { label: 'Ruang Seminar 1', value: 'Ruang Seminar 1' }
+      ];
+
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       {/* Hero Header */}
       <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #4c0519 100%)', borderRadius: '24px', padding: '40px', marginBottom: '32px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '220px', height: '220px', borderRadius: '50%', background: 'rgba(59,130,246,0.2)', filter: 'blur(50px)', pointerEvents: 'none' , flexShrink: 0 }}></div>
         <div style={{ position: 'absolute', bottom: '-20px', left: '25%', width: '160px', height: '160px', borderRadius: '50%', background: 'rgba(139,92,246,0.15)', filter: 'blur(40px)', pointerEvents: 'none' , flexShrink: 0 }}></div>
-        <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
+        <div style={{ relative: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
           <div style={{ flex: '1 1 300px' }}>
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', margin: '0 0 8px 0', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: '600' }}>SIAKAD — DOSEN</p>
             <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Pengaturan Jadwal Mengajar</h1>
@@ -151,8 +207,12 @@ export default function JadwalPage() {
                           </div>
                         </td>
                         <td style={{ padding: '12px 16px' }}>
-                          <input type="text" value={formData.room} onChange={e => setFormData({...formData, room: e.target.value})} placeholder="Contoh: Lab Komputer 1"
-                            className="siakad-input" style={{ width: '100%' }} />
+                          <CustomSelect 
+                            value={formData.room}
+                            onChange={val => setFormData({...formData, room: val})}
+                            placeholder="Pilih Ruangan"
+                            options={roomOptions}
+                          />
                         </td>
                         <td style={{ padding: '12px 16px', textAlign: 'center' }}>
                           <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
@@ -162,7 +222,7 @@ export default function JadwalPage() {
                             </button>
                             <button onClick={handleCancel}
                               style={{ padding: '8px 16px', background: 'var(--glass-bg)', color: 'var(--color-muted)', borderRadius: '8px', border: '1px solid var(--color-border)', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem' }}>
-                              Batal
+                                Batal
                             </button>
                           </div>
                         </td>
