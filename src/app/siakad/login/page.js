@@ -36,6 +36,7 @@ export default function SiakadLogin() {
 
       localStorage.setItem('siakad_token', data.token);
       localStorage.setItem('siakad_role', data.user.role);
+      localStorage.setItem('siakad_user', JSON.stringify(data.user));
 
       if (data.user.role === 'mahasiswa') router.push('/siakad/mahasiswa');
       else if (data.user.role === 'dosen') router.push('/siakad/dosen');

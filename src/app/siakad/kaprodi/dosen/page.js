@@ -2,41 +2,133 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+
 export default function KaprodiDosenPage() {
   const router = useRouter();
   const [dosen, setDosen] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [userProdi, setUserProdi] = useState('');
   const [editFormData, setEditFormData] = useState({ id: '', name: '', nip: '', status: 'Aktif', jfa: 'Lektor' });
 
   useEffect(() => {
-    // Simulated fetch
-    setTimeout(() => {
-      setDosen([
-        { id: 1, name: 'Dr. Budi Santoso, S.Kom., M.Kom.', nip: '198001012005011001', status: 'Aktif', jfa: 'Lektor Kepala' },
-        { id: 2, name: 'Ir. Siti Aminah, M.T.', nip: '198202022006022002', status: 'Aktif', jfa: 'Lektor' },
-        { id: 3, name: 'Agus Wijaya, S.T., M.Cs.', nip: '198503032008031003', status: 'Studi Lanjut', jfa: 'Asisten Ahli' },
-      ]);
-      setLoading(false);
-    }, 500);
+    fetchData();
   }, []);
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    if (editFormData.id) {
-      setDosen(dosen.map(d => d.id === editFormData.id ? editFormData : d));
-      window.toast?.('Data dosen berhasil diperbarui');
-    } else {
-      setDosen([...dosen, { ...editFormData, id: Date.now() }]);
-      window.toast?.('Dosen baru berhasil ditambahkan');
+  const fetchData = async () => {
+    const token = localStorage.getItem('siakad_token');
+    const userStr = localStorage.getItem('siakad_user');
+    if (!token) return router.push('/siakad/login');
+
+    let prodi = '';
+    if (userStr) {
+      const user = JSON.parse(userStr);
+      prodi = user.prodi;
+      setUserProdi(prodi);
     }
-    setIsEditModalOpen(false);
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/admin/users`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        
+        // Filter by role === 'dosen' and prodi matching Kaprodi
+        const filtered = data.filter(u => 
+          u.role === 'dosen' && 
+          (!prodi || prodi === 'Semua' || u.prodi === prodi)
+        );
+
+        const mapped = filtered.map(d => ({
+          id: d.id,
+          name: d.name,
+          nip: d.nim_nip,
+          status: d.status || 'Aktif',
+          jfa: d.jfa || 'Asisten Ahli'
+        }));
+
+        setDosen(mapped);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleDelete = (id) => {
-    if(confirm('Yakin ingin menghapus dosen ini dari program studi?')) {
-      setDosen(dosen.filter(d => d.id !== id));
-      window.toast?.('Dosen berhasil dihapus');
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+
+    const payload = {
+      name: editFormData.name,
+      nim_nip: editFormData.nip,
+      role: 'dosen',
+      prodi: userProdi || 'Teknik Komputer',
+      jfa: editFormData.jfa,
+      status: editFormData.status
+    };
+
+    if (!editFormData.id) {
+      payload.password = 'password123'; // Default password for new lecturer accounts
+    }
+
+    try {
+      let res;
+      if (editFormData.id) {
+        res = await fetch(`${apiUrl}/siakad/admin/users/${editFormData.id}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      } else {
+        res = await fetch(`${apiUrl}/siakad/admin/users`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      }
+
+      if (res.ok) {
+        window.toast?.(editFormData.id ? 'Data dosen berhasil diperbarui' : 'Dosen baru berhasil ditambahkan');
+        setIsEditModalOpen(false);
+        fetchData();
+      } else {
+        const errorData = await res.json();
+        window.toast?.('Gagal menyimpan: ' + (errorData.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast?.('Terjadi kesalahan: ' + err.message);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (confirm('Yakin ingin menghapus dosen ini dari program studi?')) {
+      const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      try {
+        const res = await fetch(`${apiUrl}/siakad/admin/users/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          window.toast?.('Dosen berhasil dihapus');
+          fetchData();
+        } else {
+          window.toast?.('Gagal menghapus');
+        }
+      } catch (err) {
+        window.toast?.('Terjadi kesalahan: ' + err.message);
+      }
     }
   };
 
@@ -57,7 +149,7 @@ export default function KaprodiDosenPage() {
             <div style={{ flex: '1 1 300px' }}>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — KAPRODI</p>
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Dosen</h1>
-              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola profil, jabatan, dan status keaktifan dosen di program studi Anda.</p>
+              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola profil, jabatan, dan status keaktifan dosen di program studi {userProdi}.</p>
             </div>
             <button onClick={openAddModal} style={{ background: '#3b82f6', color: 'white', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)' , flexWrap: 'wrap'}}>
               <i className="ph ph-user-plus" style={{ fontSize: '1.2rem' }}></i> Tambah Dosen
@@ -102,23 +194,18 @@ export default function KaprodiDosenPage() {
             <tbody>
               {dosen.map((d) => (
                 <tr key={d.id} style={{ borderBottom: '1px solid var(--color-border)', transition: 'all 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.background='var(--glass-bg)'} onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
-                  <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' , flexWrap: 'wrap'}}>
-                      <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' , flexShrink: 0 }}>
-                        <i className="ph ph-user"></i>
-                      </div>
-                      {d.name}
-                    </div>
-                  </td>
+                  <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{d.name}</td>
                   <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{d.nip}</td>
                   <td style={{ padding: '16px' }}>{d.jfa}</td>
                   <td style={{ padding: '16px' }}>
-                    <span className="siakad-badge" style={{ 
-                      background: d.status === 'Aktif' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)', 
-                      color: d.status === 'Aktif' ? '#10b981' : '#f59e0b' 
-                    }}>
-                      {d.status}
-                    </span>
+                    <span className="siakad-badge" style={{
+                      background: d.status === 'Aktif' ? 'rgba(16, 185, 129, 0.1)' : 
+                                  d.status === 'Studi Lanjut' ? 'rgba(59, 130, 246, 0.1)' : 
+                                  d.status === 'Cuti' ? 'rgba(245, 158, 11, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                      color: d.status === 'Aktif' ? '#10b981' : 
+                             d.status === 'Studi Lanjut' ? '#3b82f6' : 
+                             d.status === 'Cuti' ? '#f59e0b' : '#ef4444'
+                    }}>{d.status}</span>
                   </td>
                   <td style={{ padding: '16px' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
@@ -137,7 +224,7 @@ export default function KaprodiDosenPage() {
         <div className="siakad-modal-overlay">
           <div className="siakad-modal-content">
             <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' , flexWrap: 'wrap' }}>
-              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>{editFormData.id ? 'Edit Dosen' : 'Tambah Dosen'}</h3>
+              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>{editFormData.id ? 'Edit Data Dosen' : 'Tambah Dosen Baru'}</h3>
               <button onClick={() => setIsEditModalOpen(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--color-muted)', fontSize: '1.5rem' }}><i className="ph ph-x"></i></button>
             </div>
             <div style={{ padding: '24px' }}>
@@ -157,7 +244,6 @@ export default function KaprodiDosenPage() {
                       value={editFormData.jfa} 
                       onChange={val => setEditFormData({...editFormData, jfa: val})} 
                       options={[
-                        { value: "Tenaga Pengajar", label: "Tenaga Pengajar" },
                         { value: "Asisten Ahli", label: "Asisten Ahli" },
                         { value: "Lektor", label: "Lektor" },
                         { value: "Lektor Kepala", label: "Lektor Kepala" },
@@ -179,7 +265,7 @@ export default function KaprodiDosenPage() {
                     />
                   </div>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' , flexWrap: 'wrap'}}>
+                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' , flexWrap: 'wrap' }}>
                   <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 600 }}>Batal</button>
                   <button type="submit" style={{ padding: '10px 20px', borderRadius: '8px', border: 'none', background: '#3b82f6', color: 'white', cursor: 'pointer', fontWeight: 600 }}>Simpan</button>
                 </div>

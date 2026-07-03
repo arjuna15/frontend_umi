@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+
 export default function AdminRuanganPage() {
   const router = useRouter();
   const [ruangan, setRuangan] = useState([]);
@@ -10,34 +11,101 @@ export default function AdminRuanganPage() {
   const [editFormData, setEditFormData] = useState({ id: '', name: '', capacity: '', building: '', type: 'Teori' });
 
   useEffect(() => {
-    // Simulated fetch
-    setTimeout(() => {
-      setRuangan([
-        { id: 1, name: 'Ruang A.101', capacity: 40, building: 'Gedung A', type: 'Teori' },
-        { id: 2, name: 'Ruang A.102', capacity: 45, building: 'Gedung A', type: 'Teori' },
-        { id: 3, name: 'Lab Komputer 1', capacity: 30, building: 'Gedung B', type: 'Praktikum' },
-        { id: 4, name: 'Lab Komputer 2', capacity: 30, building: 'Gedung B', type: 'Praktikum' },
-      ]);
-      setLoading(false);
-    }, 500);
+    fetchData();
   }, []);
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    if (editFormData.id) {
-      setRuangan(ruangan.map(r => r.id === editFormData.id ? editFormData : r));
-      window.toast?.('Ruangan berhasil diperbarui');
-    } else {
-      setRuangan([...ruangan, { ...editFormData, id: Date.now() }]);
-      window.toast?.('Ruangan berhasil ditambahkan');
+  const fetchData = async () => {
+    const token = localStorage.getItem('siakad_token');
+    if (!token) return router.push('/siakad/login');
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/admin/classrooms`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const mapped = data.map(r => ({
+          id: r.id,
+          name: r.name,
+          capacity: r.capacity,
+          building: r.code,
+          type: r.type || 'Teori'
+        }));
+        setRuangan(mapped);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
-    setIsEditModalOpen(false);
   };
 
-  const handleDelete = (id) => {
-    if(confirm('Yakin ingin menghapus ruangan ini?')) {
-      setRuangan(ruangan.filter(r => r.id !== id));
-      window.toast?.('Ruangan berhasil dihapus');
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+
+    const payload = {
+      code: editFormData.building,
+      name: editFormData.name,
+      capacity: parseInt(editFormData.capacity),
+      type: editFormData.type
+    };
+
+    try {
+      let res;
+      if (editFormData.id) {
+        res = await fetch(`${apiUrl}/siakad/admin/classrooms/${editFormData.id}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      } else {
+        res = await fetch(`${apiUrl}/siakad/admin/classrooms`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      }
+
+      if (res.ok) {
+        window.toast?.(editFormData.id ? 'Ruangan berhasil diperbarui' : 'Ruangan berhasil ditambahkan');
+        setIsEditModalOpen(false);
+        fetchData();
+      } else {
+        const errorData = await res.json();
+        window.toast?.('Gagal menyimpan: ' + (errorData.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast?.('Terjadi kesalahan: ' + err.message);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (confirm('Yakin ingin menghapus ruangan ini?')) {
+      const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      try {
+        const res = await fetch(`${apiUrl}/siakad/admin/classrooms/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          window.toast?.('Ruangan berhasil dihapus');
+          fetchData();
+        } else {
+          window.toast?.('Gagal menghapus');
+        }
+      } catch (err) {
+        window.toast?.('Terjadi kesalahan: ' + err.message);
+      }
     }
   };
 
@@ -73,7 +141,7 @@ export default function AdminRuanganPage() {
             <thead>
               <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
                 <th style={{ padding: '16px' }}>Nama Ruangan</th>
-                <th style={{ padding: '16px' }}>Gedung</th>
+                <th style={{ padding: '16px' }}>Kode / Gedung</th>
                 <th style={{ padding: '16px' }}>Kapasitas</th>
                 <th style={{ padding: '16px' }}>Tipe</th>
                 <th style={{ padding: '16px', textAlign: 'right' }}>Aksi</th>
@@ -86,7 +154,7 @@ export default function AdminRuanganPage() {
                   <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{r.building}</td>
                   <td style={{ padding: '16px' }}>{r.capacity} Kursi</td>
                   <td style={{ padding: '16px' }}>
-                    <span style={{ background: r.type === 'Teori' ? '#3b82f6' : '#8b5cf6', color: 'white', padding: '4px 10px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold' }}>{r.type}</span>
+                    <span style={{ background: r.type === 'Teori' ? '#3b82f6' : r.type === 'Laboratorium' ? '#10b981' : '#8b5cf6', color: 'white', padding: '4px 10px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold' }}>{r.type}</span>
                   </td>
                   <td style={{ padding: '16px', textAlign: 'right' }}>
                     <button onClick={() => { setEditFormData(r); setIsEditModalOpen(true); }} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', marginRight: '8px' }}><i className="ph ph-pencil-simple"></i></button>
@@ -94,6 +162,11 @@ export default function AdminRuanganPage() {
                   </td>
                 </tr>
               ))}
+              {ruangan.length === 0 && (
+                <tr>
+                  <td colSpan="5" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada daftar ruangan.</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
@@ -110,11 +183,11 @@ export default function AdminRuanganPage() {
               <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Nama Ruangan</label>
-                  <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Ruang A.101" />
+                  <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Ruang Kuliah 401" />
                 </div>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Gedung</label>
-                  <input type="text" required value={editFormData.building} onChange={e=>setEditFormData({...editFormData, building: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kode / Gedung</label>
+                  <input type="text" required value={editFormData.building} onChange={e=>setEditFormData({...editFormData, building: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: R-401" />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kapasitas (Kursi)</label>
@@ -126,9 +199,10 @@ export default function AdminRuanganPage() {
                     value={editFormData.type} 
                     onChange={val => setEditFormData({...editFormData, type: val})} 
                     options={[
-                      { value: "Teori", label: "Kelas Teori" },
-                      { value: "Praktikum", label: "Laboratorium / Praktikum" },
-                      { value: "Studio", label: "Studio" }
+                      { value: "Kelas Teori", label: "Kelas Teori" },
+                      { value: "Laboratorium", label: "Laboratorium" },
+                      { value: "Aula", label: "Aula" },
+                      { value: "Seminar", label: "Seminar" }
                     ]}
                   />
                 </div>

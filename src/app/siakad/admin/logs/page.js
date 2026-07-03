@@ -1,30 +1,54 @@
 "use client";
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function AdminLogsPage() {
+  const router = useRouter();
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    // Simulated fetch
-    setTimeout(() => {
-      setLogs([
-        { id: 1, action: 'User Login', user: 'admin1', details: 'Logged in from 192.168.1.1', time: 'Hari ini, 08:30' },
-        { id: 2, action: 'Tambah Pengguna', user: 'admin1', details: 'Menambahkan dosen Dr. Budi', time: 'Hari ini, 09:15' },
-        { id: 3, action: 'Ubah Tagihan', user: 'keuangan', details: 'Ubah status tagihan UKT Andi menjadi Lunas', time: 'Hari ini, 11:20' },
-        { id: 4, action: 'Hapus Mata Kuliah', user: 'kaprodi_ti', details: 'Menghapus MK Kecerdasan Buatan (Lama)', time: 'Kemarin, 14:00' },
-        { id: 5, action: 'Update Sistem', user: 'admin1', details: 'Mengubah status Pengisian KRS menjadi NONAKTIF', time: 'Kemarin, 16:45' },
-      ]);
-      setLoading(false);
-    }, 500);
+    fetchLogs();
   }, []);
+
+  const fetchLogs = async () => {
+    const token = localStorage.getItem('siakad_token');
+    if (!token) return router.push('/siakad/login');
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/admin/logs`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const mapped = data.map(log => ({
+          id: log.id,
+          action: log.action,
+          user: log.user_name,
+          details: log.details,
+          time: log.created_at
+        }));
+        setLogs(mapped);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredLogs = logs.filter(log => 
     log.action.toLowerCase().includes(searchTerm.toLowerCase()) || 
     log.user.toLowerCase().includes(searchTerm.toLowerCase()) ||
     log.details.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const formatDate = (dateStr) => {
+    const options = { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Date(dateStr).toLocaleDateString('id-ID', options);
+  };
 
   if (loading) return <div style={{ padding: '20px' }}>Loading...</div>;
 
@@ -41,7 +65,7 @@ export default function AdminLogsPage() {
               <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Pantau seluruh aktivitas krusial pengguna di dalam sistem untuk keperluan keamanan.</p>
             </div>
             <div>
-              <button style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '10px 20px', borderRadius: '12px', cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button onClick={() => window.toast?.('Export CSV sedang diproses...')} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '10px 20px', borderRadius: '12px', cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <i className="ph ph-export"></i> Export CSV
               </button>
             </div>
@@ -62,9 +86,6 @@ export default function AdminLogsPage() {
               style={{ width: '100%', paddingLeft: '44px' }}
             />
           </div>
-          <button style={{ padding: '12px 20px', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <i className="ph ph-funnel"></i> Filter
-          </button>
         </div>
 
         <div style={{ overflowX: 'auto' }}>
@@ -80,7 +101,7 @@ export default function AdminLogsPage() {
             <tbody>
               {filteredLogs.length > 0 ? filteredLogs.map((log) => (
                 <tr key={log.id} style={{ borderBottom: '1px solid var(--color-border)', transition: 'all 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.background='var(--glass-bg)'} onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
-                  <td style={{ padding: '16px', color: 'var(--color-muted)', fontSize: '0.9rem', whiteSpace: 'nowrap' }}>{log.time}</td>
+                  <td style={{ padding: '16px', color: 'var(--color-muted)', fontSize: '0.9rem', whiteSpace: 'nowrap' }}>{formatDate(log.time)}</td>
                   <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{log.user}</td>
                   <td style={{ padding: '16px' }}>
                     <span style={{ display: 'inline-block', background: 'var(--glass-bg)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 600, border: '1px solid var(--color-border)' }}>

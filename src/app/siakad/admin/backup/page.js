@@ -1,33 +1,68 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function AdminBackupPage() {
-  const [backups, setBackups] = useState([
-    { id: 1, name: 'SIAKAD_DB_2026-06-01.sql', size: '45.2 MB', date: '01 Jun 2026, 02:00', status: 'Success' },
-    { id: 2, name: 'SIAKAD_DB_2026-06-15.sql', size: '46.8 MB', date: '15 Jun 2026, 02:00', status: 'Success' },
-    { id: 3, name: 'SIAKAD_DB_2026-06-30.sql', size: '48.1 MB', date: '30 Jun 2026, 02:00', status: 'Success' },
-  ]);
+  const router = useRouter();
+  const [backups, setBackups] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
 
-  const handleGenerateBackup = () => {
+  useEffect(() => {
+    fetchBackups();
+  }, []);
+
+  const fetchBackups = async () => {
+    const token = localStorage.getItem('siakad_token');
+    if (!token) return router.push('/siakad/login');
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/admin/backups`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const mapped = data.map(b => ({
+          id: b.id,
+          name: b.filename,
+          size: b.size,
+          date: b.created_at,
+          status: 'Success',
+          download_url: b.download_url
+        }));
+        setBackups(mapped);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGenerateBackup = async () => {
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+
     setIsGenerating(true);
-    setTimeout(() => {
-      const now = new Date();
-      const dateString = now.toISOString().split('T')[0];
-      setBackups([
-        { 
-          id: Date.now(), 
-          name: `SIAKAD_DB_${dateString}_MANUAL.sql`, 
-          size: '48.5 MB', 
-          date: 'Hari ini, ' + now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0'), 
-          status: 'Success' 
-        },
-        ...backups
-      ]);
+    try {
+      const res = await fetch(`${apiUrl}/siakad/admin/backups`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (res.ok) {
+        window.toast?.('Backup berhasil dibuat!');
+        fetchBackups();
+      } else {
+        window.toast?.('Gagal membuat backup.');
+      }
+    } catch (err) {
+      window.toast?.('Terjadi kesalahan: ' + err.message);
+    } finally {
       setIsGenerating(false);
-      window.toast?.('Backup berhasil dibuat!');
-    }, 2000);
+    }
   };
 
   const handleRestore = (id) => {
@@ -39,12 +74,33 @@ export default function AdminBackupPage() {
     }, 3000);
   };
 
-  const handleDelete = (id) => {
-    if(confirm('Yakin ingin menghapus file backup ini?')) {
-      setBackups(backups.filter(b => b.id !== id));
-      window.toast?.('File backup dihapus.');
+  const handleDelete = async (filename) => {
+    if (confirm('Yakin ingin menghapus file backup ini?')) {
+      const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      try {
+        const res = await fetch(`${apiUrl}/siakad/admin/backups/${filename}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          window.toast?.('File backup dihapus.');
+          fetchBackups();
+        } else {
+          window.toast?.('Gagal menghapus file.');
+        }
+      } catch (err) {
+        window.toast?.('Terjadi kesalahan: ' + err.message);
+      }
     }
   };
+
+  const formatDate = (dateStr) => {
+    const options = { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+    return new Date(dateStr).toLocaleDateString('id-ID', options);
+  };
+
+  if (loading) return <div style={{ padding: '20px' }}>Loading...</div>;
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
@@ -122,12 +178,12 @@ export default function AdminBackupPage() {
             </thead>
             <tbody>
               {backups.map((b) => (
-                <tr key={b.id} style={{ borderBottom: '1px solid var(--color-border)', transition: 'all 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.background='var(--glass-bg)'} onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
+                <tr key={b.name} style={{ borderBottom: '1px solid var(--color-border)', transition: 'all 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.background='var(--glass-bg)'} onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
                   <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>
                     <i className="ph ph-file-sql" style={{ color: '#3b82f6', marginRight: '8px' }}></i>
                     {b.name}
                   </td>
-                  <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{b.date}</td>
+                  <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{formatDate(b.date)}</td>
                   <td style={{ padding: '16px' }}>{b.size}</td>
                   <td style={{ padding: '16px' }}>
                     <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', padding: '4px 10px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold' }}>
@@ -136,19 +192,24 @@ export default function AdminBackupPage() {
                   </td>
                   <td style={{ padding: '16px' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
-                      <button onClick={() => window.toast?.('Mendownload file...')} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0 }} title="Download">
+                      <a href={b.download_url} download style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} title="Download">
                         <i className="ph ph-download-simple"></i>
-                      </button>
-                      <button onClick={() => handleRestore(b.id)} disabled={isRestoring} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#f59e0b', padding: '6px 12px', borderRadius: '6px', cursor: isRestoring ? 'not-allowed' : 'pointer', opacity: isRestoring ? 0.5 : 1, flexShrink: 0 }} title="Restore">
+                      </a>
+                      <button onClick={() => handleRestore(b.name)} disabled={isRestoring} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#f59e0b', padding: '6px 12px', borderRadius: '6px', cursor: isRestoring ? 'not-allowed' : 'pointer', opacity: isRestoring ? 0.5 : 1, flexShrink: 0 }} title="Restore">
                         <i className="ph ph-arrow-counter-clockwise"></i>
                       </button>
-                      <button onClick={() => handleDelete(b.id)} disabled={isRestoring} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: isRestoring ? 'not-allowed' : 'pointer', opacity: isRestoring ? 0.5 : 1, flexShrink: 0 }} title="Hapus">
+                      <button onClick={() => handleDelete(b.name)} disabled={isRestoring} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: isRestoring ? 'not-allowed' : 'pointer', opacity: isRestoring ? 0.5 : 1, flexShrink: 0 }} title="Hapus">
                         <i className="ph ph-trash"></i>
                       </button>
                     </div>
                   </td>
                 </tr>
               ))}
+              {backups.length === 0 && (
+                <tr>
+                  <td colSpan="5" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada file backup database.</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

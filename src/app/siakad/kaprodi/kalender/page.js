@@ -4,40 +4,101 @@ import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
 
 export default function KaprodiKalenderPage() {
+  const router = useRouter();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({ id: '', name: '', startDate: '', endDate: '', type: 'Akademik' });
 
   useEffect(() => {
-    setTimeout(() => {
-      setEvents([
-        { id: 1, name: 'Masa Pengisian KRS', startDate: '2026-08-01', endDate: '2026-08-14', type: 'Akademik' },
-        { id: 2, name: 'Batas Akhir Batal Tambah KRS', startDate: '2026-08-15', endDate: '2026-08-20', type: 'Akademik' },
-        { id: 3, name: 'Ujian Tengah Semester (UTS)', startDate: '2026-10-10', endDate: '2026-10-24', type: 'Ujian' },
-        { id: 4, name: 'Ujian Akhir Semester (UAS)', startDate: '2026-12-15', endDate: '2026-12-30', type: 'Ujian' },
-        { id: 5, name: 'Batas Input Nilai Dosen', startDate: '2027-01-02', endDate: '2027-01-10', type: 'Dosen' },
-      ]);
-      setLoading(false);
-    }, 500);
+    fetchData();
   }, []);
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    if (editFormData.id) {
-      setEvents(events.map(ev => ev.id === editFormData.id ? editFormData : ev));
-      window.toast?.('Jadwal berhasil diperbarui');
-    } else {
-      setEvents([...events, { ...editFormData, id: Date.now() }]);
-      window.toast?.('Jadwal baru berhasil ditambahkan');
+  const fetchData = async () => {
+    const token = localStorage.getItem('siakad_token');
+    if (!token) return router.push('/siakad/login');
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/calendar`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setEvents(data);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
-    setIsEditModalOpen(false);
   };
 
-  const handleDelete = (id) => {
-    if(confirm('Yakin ingin menghapus jadwal ini?')) {
-      setEvents(events.filter(ev => ev.id !== id));
-      window.toast?.('Jadwal dihapus');
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+
+    const payload = {
+      name: editFormData.name,
+      startDate: editFormData.startDate,
+      endDate: editFormData.endDate,
+      type: editFormData.type
+    };
+
+    try {
+      let res;
+      if (editFormData.id) {
+        res = await fetch(`${apiUrl}/siakad/calendar/${editFormData.id}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      } else {
+        res = await fetch(`${apiUrl}/siakad/calendar`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      }
+
+      if (res.ok) {
+        window.toast?.(editFormData.id ? 'Jadwal berhasil diperbarui' : 'Jadwal baru berhasil ditambahkan');
+        setIsEditModalOpen(false);
+        fetchData();
+      } else {
+        const errorData = await res.json();
+        window.toast?.('Gagal menyimpan: ' + (errorData.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast?.('Terjadi kesalahan: ' + err.message);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (confirm('Yakin ingin menghapus jadwal ini?')) {
+      const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      try {
+        const res = await fetch(`${apiUrl}/siakad/calendar/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          window.toast?.('Jadwal dihapus');
+          fetchData();
+        } else {
+          window.toast?.('Gagal menghapus');
+        }
+      } catch (err) {
+        window.toast?.('Terjadi kesalahan: ' + err.message);
+      }
     }
   };
 

@@ -4,44 +4,139 @@ import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
 
 export default function KaprodiKurikulumPage() {
+  const router = useRouter();
   const [courses, setCourses] = useState([]);
+  const [dosens, setDosens] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editFormData, setEditFormData] = useState({ id: '', code: '', name: '', sks: '', semester: '1', type: 'Wajib' });
+  const [userProdi, setUserProdi] = useState('');
+  const [editFormData, setEditFormData] = useState({ id: '', code: '', name: '', sks: '', semester: '1', type: 'Wajib', dosen_id: '' });
 
   useEffect(() => {
-    setTimeout(() => {
-      setCourses([
-        { id: 1, code: 'COMP101', name: 'Algoritma & Pemrograman', sks: 3, semester: '1', type: 'Wajib' },
-        { id: 2, code: 'COMP102', name: 'Struktur Data', sks: 3, semester: '2', type: 'Wajib' },
-        { id: 3, code: 'COMP201', name: 'Basis Data', sks: 3, semester: '3', type: 'Wajib' },
-        { id: 4, code: 'ELEC301', name: 'Kecerdasan Buatan', sks: 3, semester: '5', type: 'Pilihan' },
-      ]);
-      setLoading(false);
-    }, 500);
+    fetchData();
   }, []);
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    if (editFormData.id) {
-      setCourses(courses.map(c => c.id === editFormData.id ? editFormData : c));
-      window.toast?.('Mata kuliah berhasil diperbarui');
-    } else {
-      setCourses([...courses, { ...editFormData, id: Date.now() }]);
-      window.toast?.('Mata kuliah berhasil ditambahkan ke kurikulum');
+  const fetchData = async () => {
+    const token = localStorage.getItem('siakad_token');
+    const userStr = localStorage.getItem('siakad_user');
+    if (!token) return router.push('/siakad/login');
+
+    let prodi = '';
+    if (userStr) {
+      const user = JSON.parse(userStr);
+      prodi = user.prodi;
+      setUserProdi(prodi);
     }
-    setIsEditModalOpen(false);
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/kaprodi/courses`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setDosens(data.dosens || []);
+        
+        // Filter courses by Kaprodi's program study
+        const allCourses = data.courses || [];
+        const filtered = prodi && prodi !== 'Semua' 
+          ? allCourses.filter(c => c.prodi === prodi)
+          : allCourses;
+
+        // Map backend semester_num back to frontend semester string
+        const mapped = filtered.map(c => ({
+          id: c.id,
+          code: c.code,
+          name: c.name,
+          sks: c.sks,
+          semester: (c.semester_num || 1).toString(),
+          type: c.type || 'Wajib',
+          dosen_id: c.dosen_id || '',
+          dosen: c.dosen
+        }));
+        setCourses(mapped);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleDelete = (id) => {
-    if(confirm('Yakin ingin menghapus mata kuliah dari kurikulum?')) {
-      setCourses(courses.filter(c => c.id !== id));
-      window.toast?.('Mata kuliah dihapus');
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+
+    const payload = {
+      code: editFormData.code,
+      name: editFormData.name,
+      sks: parseInt(editFormData.sks),
+      dosen_id: editFormData.dosen_id || (dosens[0]?.id || ''),
+      semester_num: parseInt(editFormData.semester),
+      type: editFormData.type,
+      prodi: userProdi || 'Teknik Komputer',
+      semester: 'Ganjil 2026/2027'
+    };
+
+    try {
+      let res;
+      if (editFormData.id) {
+        res = await fetch(`${apiUrl}/siakad/admin/courses/${editFormData.id}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      } else {
+        res = await fetch(`${apiUrl}/siakad/admin/courses`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      }
+
+      if (res.ok) {
+        window.toast?.(editFormData.id ? 'Mata kuliah berhasil diperbarui' : 'Mata kuliah berhasil ditambahkan ke kurikulum');
+        setIsEditModalOpen(false);
+        fetchData();
+      } else {
+        const errorData = await res.json();
+        window.toast?.('Gagal menyimpan: ' + (errorData.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast?.('Terjadi kesalahan: ' + err.message);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (confirm('Yakin ingin menghapus mata kuliah dari kurikulum?')) {
+      const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      try {
+        const res = await fetch(`${apiUrl}/siakad/admin/courses/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          window.toast?.('Mata kuliah dihapus');
+          fetchData();
+        } else {
+          window.toast?.('Gagal menghapus');
+        }
+      } catch (err) {
+        window.toast?.('Terjadi kesalahan: ' + err.message);
+      }
     }
   };
 
   const openAddModal = () => {
-    setEditFormData({ id: '', code: '', name: '', sks: '', semester: '1', type: 'Wajib' });
+    setEditFormData({ id: '', code: '', name: '', sks: '', semester: '1', type: 'Wajib', dosen_id: dosens[0]?.id || '' });
     setIsEditModalOpen(true);
   };
 
@@ -57,7 +152,7 @@ export default function KaprodiKurikulumPage() {
             <div style={{ flex: '1 1 300px' }}>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — KAPRODI</p>
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Kurikulum</h1>
-              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola struktur mata kuliah dan sebaran SKS per semester.</p>
+              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola struktur mata kuliah dan sebaran SKS per semester ({userProdi}).</p>
             </div>
             <button onClick={openAddModal} style={{ background: '#3b82f6', color: 'white', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)' , flexWrap: 'wrap'}}>
               <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Tambah MK
@@ -86,17 +181,19 @@ export default function KaprodiKurikulumPage() {
                 <th style={{ padding: '16px' }}>Kode</th>
                 <th style={{ padding: '16px' }}>Mata Kuliah</th>
                 <th style={{ padding: '16px' }}>SKS</th>
+                <th style={{ padding: '16px' }}>Dosen Pengampu</th>
                 <th style={{ padding: '16px' }}>Sifat</th>
                 <th style={{ padding: '16px', textAlign: 'right' }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              {courses.sort((a,b) => a.semester - b.semester).map((c) => (
+              {courses.sort((a,b) => parseInt(a.semester) - parseInt(b.semester)).map((c) => (
                 <tr key={c.id} style={{ borderBottom: '1px solid var(--color-border)', transition: 'all 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.background='var(--glass-bg)'} onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
                   <td style={{ padding: '16px', fontWeight: 'bold' }}>Semester {c.semester}</td>
                   <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{c.code}</td>
                   <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{c.name}</td>
                   <td style={{ padding: '16px' }}>{c.sks} SKS</td>
+                  <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{c.dosen?.name || 'Belum diplot'}</td>
                   <td style={{ padding: '16px' }}>
                     <span className="siakad-badge" style={{ background: c.type === 'Wajib' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(245, 158, 11, 0.1)', color: c.type === 'Wajib' ? '#3b82f6' : '#f59e0b' }}>{c.type}</span>
                   </td>
@@ -135,6 +232,14 @@ export default function KaprodiKurikulumPage() {
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Nama Mata Kuliah</label>
                   <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Dosen Pengampu</label>
+                  <CustomSelect 
+                    value={editFormData.dosen_id} 
+                    onChange={val => setEditFormData({...editFormData, dosen_id: val})} 
+                    options={dosens.map(d => ({ value: d.id.toString(), label: d.name }))}
+                  />
                 </div>
                 <div style={{ display: 'flex', gap: '16px' , flexWrap: 'wrap' }}>
                   <div style={{ flex: 1 }}>

@@ -1,11 +1,35 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function SuratAdministrasiPage() {
-  const [requests, setRequests] = useState([
-    { id: 1, type: 'Surat Keterangan Aktif Kuliah', date: '10 Mei 2026', status: 'Selesai', note: 'Sudah dapat diambil di BAAK' },
-    { id: 2, type: 'Pengajuan Cuti Akademik', date: '28 Juni 2026', status: 'Diproses', note: 'Menunggu persetujuan Dekan' }
-  ]);
+  const router = useRouter();
+  const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchRequests();
+  }, []);
+
+  const fetchRequests = async () => {
+    const token = localStorage.getItem('siakad_token');
+    if (!token) return router.push('/siakad/login');
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/mahasiswa/letters`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setRequests(data);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleAjukan = async () => {
     const formData = await window.toast.form('Ajukan Surat Baru', [
@@ -13,14 +37,41 @@ export default function SuratAdministrasiPage() {
       { name: 'alasan', label: 'Keperluan / Alasan', type: 'textarea' }
     ]);
 
-    if(formData && formData.jenis) {
-      setRequests([
-        { id: Date.now(), type: formData.jenis, date: new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year:'numeric'}), status: 'Pending', note: 'Menunggu verifikasi admin' },
-        ...requests
-      ]);
-      window.toast('Pengajuan berhasil dikirim!');
+    if (formData && formData.jenis) {
+      const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+
+      try {
+        const res = await fetch(`${apiUrl}/siakad/mahasiswa/letters`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            type: formData.jenis,
+            note: formData.alasan
+          })
+        });
+
+        if (res.ok) {
+          window.toast('Pengajuan berhasil dikirim!');
+          fetchRequests();
+        } else {
+          window.toast('Gagal mengirim pengajuan.');
+        }
+      } catch (err) {
+        window.toast('Terjadi kesalahan: ' + err.message);
+      }
     }
   };
+
+  const formatDate = (dateStr) => {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    return new Date(dateStr).toLocaleDateString('id-ID', options);
+  };
+
+  if (loading) return <div style={{ padding: '20px' }}>Loading...</div>;
 
   return (
     <div>
@@ -58,7 +109,7 @@ export default function SuratAdministrasiPage() {
             <tbody>
               {requests.map(req => (
                 <tr key={req.id}>
-                  <td style={{ color: 'var(--color-muted)' }}>{req.date}</td>
+                  <td style={{ color: 'var(--color-muted)' }}>{formatDate(req.date)}</td>
                   <td style={{ fontWeight: 'bold' }}>{req.type}</td>
                   <td>
                     <span className="siakad-badge" style={{ 
