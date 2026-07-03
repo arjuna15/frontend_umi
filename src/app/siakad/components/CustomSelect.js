@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { getPortalRoot } from './portalRoot';
 
 export default function CustomSelect({ name, options, value, onChange, placeholder = "Pilih...", disabled = false, style = {} }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -141,7 +142,10 @@ export default function CustomSelect({ name, options, value, onChange, placehold
       </div>
 
       {/* Portal: renders dropdown directly on document.body */}
-      {mounted && createPortal(dropdown, document.body)}
+      {mounted && (() => {
+        const portalRoot = getPortalRoot();
+        return portalRoot && createPortal(dropdown, portalRoot);
+      })()}
     </div>
   );
 }

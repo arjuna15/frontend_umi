@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { getPortalRoot } from './portalRoot';
 
 export default function CustomTimePicker({ name, value, onChange, placeholder = "Pilih jam...", disabled = false, style = {} }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -258,7 +259,10 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
         <i className="ph ph-clock" style={{ fontSize: '1.2rem', color: isOpen ? '#ef4444' : 'var(--color-muted)' }} />
       </button>
 
-      {mounted && createPortal(dropdown, document.body)}
+      {mounted && (() => {
+        const portalRoot = getPortalRoot();
+        return portalRoot && createPortal(dropdown, portalRoot);
+      })()}
     </div>
   );
 }
