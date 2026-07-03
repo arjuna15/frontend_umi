@@ -1,11 +1,14 @@
 "use client";
 import { useState, useEffect } from 'react';
+import ModalShell from '../../components/ModalShell';
 import { useRouter } from 'next/navigation';
 
 export default function SuratAdministrasiPage() {
   const router = useRouter();
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showRequestModal, setShowRequestModal] = useState(false);
+  const [requestForm, setRequestForm] = useState({ jenis: '', alasan: '' });
 
   useEffect(() => {
     fetchRequests();
@@ -31,38 +34,35 @@ export default function SuratAdministrasiPage() {
     }
   };
 
-  const handleAjukan = async () => {
-    const formData = await window.toast.form('Ajukan Surat Baru', [
-      { name: 'jenis', label: 'Jenis Surat / Layanan', type: 'text', placeholder: 'Contoh: Surat Keterangan Aktif Kuliah' },
-      { name: 'alasan', label: 'Keperluan / Alasan', type: 'textarea' }
-    ]);
+  const handleAjukan = async (e) => {
+    e.preventDefault();
+    if (!requestForm.jenis.trim()) return;
 
-    if (formData && formData.jenis) {
-      const token = localStorage.getItem('siakad_token');
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
 
-      try {
-        const res = await fetch(`${apiUrl}/siakad/mahasiswa/letters`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            type: formData.jenis,
-            note: formData.alasan
-          })
-        });
+    try {
+      const res = await fetch(`${apiUrl}/siakad/mahasiswa/letters`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          type: requestForm.jenis,
+          note: requestForm.alasan
+        })
+      });
 
-        if (res.ok) {
-          window.toast('Pengajuan berhasil dikirim!');
-          fetchRequests();
-        } else {
-          window.toast('Gagal mengirim pengajuan.');
-        }
-      } catch (err) {
-        window.toast('Terjadi kesalahan: ' + err.message);
+      if (res.ok) {
+        window.toast('Pengajuan berhasil dikirim!');
+        setShowRequestModal(false);
+        fetchRequests();
+      } else {
+        window.toast('Gagal mengirim pengajuan.');
       }
+    } catch (err) {
+      window.toast('Terjadi kesalahan: ' + err.message);
     }
   };
 
@@ -88,7 +88,7 @@ export default function SuratAdministrasiPage() {
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Surat & Administrasi</h1>
               <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Ajukan surat keterangan dan layanan administrasi akademik.</p>
             </div>
-            <button onClick={handleAjukan} style={{ background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)', padding: '10px 20px', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer', backdropFilter: 'blur(10px)' }}>
+            <button onClick={() => { setRequestForm({ jenis: '', alasan: '' }); setShowRequestModal(true); }} style={{ background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)', padding: '10px 20px', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer', backdropFilter: 'blur(10px)' }}>
               <i className="ph ph-plus" style={{ marginRight: '8px' }}></i> Ajukan Surat Baru
             </button>
           </div>
@@ -131,6 +131,46 @@ export default function SuratAdministrasiPage() {
           </table>
         </div>
       </div>
+
+      {showRequestModal && (
+        <ModalShell
+          title="Ajukan Surat Baru"
+          icon="ph-file-plus"
+          onClose={() => setShowRequestModal(false)}
+          footer={(
+            <>
+              <button type="button" onClick={() => setShowRequestModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="request-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan & Kirim</button>
+            </>
+          )}
+        >
+          <form id="request-form" onSubmit={handleAjukan} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Jenis Surat / Layanan</label>
+              <input
+                type="text"
+                className="siakad-input"
+                value={requestForm.jenis}
+                onChange={(e) => setRequestForm({ ...requestForm, jenis: e.target.value })}
+                placeholder="Contoh: Surat Keterangan Aktif Kuliah"
+                style={{ width: '100%' }}
+                required
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Keperluan / Alasan</label>
+              <textarea
+                className="siakad-input"
+                rows={5}
+                value={requestForm.alasan}
+                onChange={(e) => setRequestForm({ ...requestForm, alasan: e.target.value })}
+                placeholder="Tulis keperluan pengajuan surat"
+                style={{ width: '100%', resize: 'vertical' }}
+              />
+            </div>
+          </form>
+        </ModalShell>
+      )}
     </div>
   );
 }

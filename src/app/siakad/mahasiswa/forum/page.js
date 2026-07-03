@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
+import ModalShell from '../../components/ModalShell';
 import { useRouter } from 'next/navigation';
 
 export default function MahasiswaForumPage() {
@@ -7,6 +8,9 @@ export default function MahasiswaForumPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [showTopicModal, setShowTopicModal] = useState(false);
+  const [activeCourseId, setActiveCourseId] = useState(null);
+  const [topicForm, setTopicForm] = useState({ title: '', content: '' });
 
   useEffect(() => {
     const fetchDashboard = async () => {
@@ -97,26 +101,7 @@ export default function MahasiswaForumPage() {
                     <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
                   <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>{course.code}</span>
                 </div>
-                <button onClick={async () => {
-                  const formData = await window.toast.form('Buat Topik Diskusi Baru', [
-                    { name: 'title', label: 'Judul Topik', type: 'text', autoFocus: true },
-                    { name: 'content', label: 'Isi Diskusi', type: 'textarea' }
-                  ]);
-                  if (!formData || !formData.title || !formData.content) return;
-                  
-                  const { title, content } = formData;
-                  const token = localStorage.getItem('siakad_token');
-                  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-                  try {
-                    const res = await fetch(`${apiUrl}/siakad/forum/${course.id}`, {
-                      method: 'POST',
-                      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ title, content })
-                    });
-                    if (res.ok) window.location.reload();
-                    else window.toast('Gagal membuat topik');
-                  } catch (err) { window.toast('Error: ' + err.message); }
-                }} style={{ background: '#0f172a', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(15, 23, 42, 0.3)' }}>
+                <button onClick={() => { setActiveCourseId(course.id); setTopicForm({ title: '', content: '' }); setShowTopicModal(true); }} style={{ background: '#0f172a', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(15, 23, 42, 0.3)' }}>
                   <i className="ph ph-plus"></i> Buat Topik Baru
                 </button>
               </div>
@@ -185,6 +170,66 @@ export default function MahasiswaForumPage() {
           });
         })()}
       </div>
+
+      {showTopicModal && (
+        <ModalShell
+          title="Buat Topik Diskusi Baru"
+          icon="ph-pencil-simple-line"
+          onClose={() => setShowTopicModal(false)}
+          footer={(
+            <>
+              <button type="button" onClick={() => setShowTopicModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="topic-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan & Kirim</button>
+            </>
+          )}
+        >
+          <form id="topic-form" onSubmit={async (e) => {
+            e.preventDefault();
+            if (!topicForm.title.trim() || !topicForm.content.trim()) return;
+            const token = localStorage.getItem('siakad_token');
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+            try {
+              const res = await fetch(`${apiUrl}/siakad/forum/${activeCourseId}`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ title: topicForm.title, content: topicForm.content })
+              });
+              if (res.ok) {
+                setShowTopicModal(false);
+                window.location.reload();
+              } else {
+                window.toast('Gagal membuat topik');
+              }
+            } catch (err) { window.toast('Error: ' + err.message); }
+          }} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Judul Topik</label>
+              <input
+                type="text"
+                autoFocus
+                className="siakad-input"
+                value={topicForm.title}
+                onChange={(e) => setTopicForm({ ...topicForm, title: e.target.value })}
+                placeholder="Judul topik diskusi"
+                style={{ width: '100%' }}
+                required
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Isi Diskusi</label>
+              <textarea
+                className="siakad-input"
+                rows={5}
+                value={topicForm.content}
+                onChange={(e) => setTopicForm({ ...topicForm, content: e.target.value })}
+                placeholder="Tulis pertanyaan atau topik diskusi"
+                style={{ width: '100%', resize: 'vertical' }}
+                required
+              />
+            </div>
+          </form>
+        </ModalShell>
+      )}
     </div>
   );
 }
