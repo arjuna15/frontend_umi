@@ -4,6 +4,14 @@ import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
 import ModalShell from '../../components/ModalShell';
 
+const prodiOptions = [
+  { value: '', label: 'Tidak Ada / Global' },
+  { value: 'Teknik Informatika', label: 'Teknik Informatika' },
+  { value: 'Sistem Informasi', label: 'Sistem Informasi' },
+  { value: 'Teknik Komputer', label: 'Teknik Komputer' },
+  { value: 'Manajemen Bisnis', label: 'Manajemen Bisnis' }
+];
+
 export default function KaprodiDosenPage() {
   const router = useRouter();
   const [dosen, setDosen] = useState([]);
