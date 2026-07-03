@@ -9,6 +9,19 @@ export default function DosenElearningPage() {
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Upload Modal States
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [uploadSession, setUploadSession] = useState(null);
+  const [uploadTitle, setUploadTitle] = useState('');
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+
+  // Meet Modal States
+  const [showMeetModal, setShowMeetModal] = useState(false);
+  const [meetSession, setMeetSession] = useState(null);
+  const [meetUrl, setMeetUrl] = useState('');
+  const [savingMeet, setSavingMeet] = useState(false);
+
   const fetchDashboard = async () => {
     const token = localStorage.getItem('siakad_token');
     if (!token) return router.push('/siakad/login');
@@ -20,8 +33,11 @@ export default function DosenElearningPage() {
       if (!res.ok) throw new Error('Failed to fetch');
       const result = await res.json();
       
-      const courseList = result.schedule ? result.schedule.map(s => ({ id: s.course, name: s.course })) : [];
+      const courseList = result.schedule ? result.schedule.map(s => ({ id: s.course_id, name: s.course })) : [];
       setCourses(courseList);
+      if (courseList.length > 0) {
+        loadSessions(courseList[0].id);
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -34,9 +50,7 @@ export default function DosenElearningPage() {
     try {
       const token = localStorage.getItem('siakad_token');
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-      // Assume courseId is actually a name here due to mock, but in real app it's ID
-      // We use 1 as a dummy ID for the mock API call
-      const res = await fetch(`${apiUrl}/siakad/dosen/courses/1/sessions`, {
+      const res = await fetch(`${apiUrl}/siakad/dosen/courses/${courseId}/sessions`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -44,6 +58,74 @@ export default function DosenElearningPage() {
       }
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const handleUploadSubmit = async (e) => {
+    e.preventDefault();
+    if (!selectedFile || !uploadTitle || !uploadSession) return;
+    setUploading(true);
+
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    const formData = new FormData();
+    formData.append('title', uploadTitle);
+    formData.append('file', selectedFile);
+    formData.append('session_num', uploadSession);
+
+    try {
+      const res = await fetch(`${apiUrl}/siakad/dosen/course/${selectedCourse}/materials`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` },
+        body: formData
+      });
+      if (res.ok) {
+        window.toast && window.toast('File materi berhasil diupload!');
+        setShowUploadModal(false);
+        setUploadTitle('');
+        setSelectedFile(null);
+        loadSessions(selectedCourse);
+      } else {
+        const err = await res.json();
+        window.toast && window.toast('Gagal: ' + (err.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast && window.toast('Error: ' + err.message);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleMeetSubmit = async (e) => {
+    e.preventDefault();
+    if (!meetUrl || !meetSession) return;
+    setSavingMeet(true);
+
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+
+    try {
+      const res = await fetch(`${apiUrl}/siakad/dosen/course/${selectedCourse}/meet-link`, {
+        method: 'POST',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ session_num: meetSession, meet_url: meetUrl })
+      });
+      if (res.ok) {
+        window.toast && window.toast('Link virtual meet berhasil diperbarui!');
+        setShowMeetModal(false);
+        setMeetUrl('');
+        loadSessions(selectedCourse);
+      } else {
+        const err = await res.json();
+        window.toast && window.toast('Gagal: ' + (err.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast && window.toast('Error: ' + err.message);
+    } finally {
+      setSavingMeet(false);
     }
   };
 
@@ -91,11 +173,12 @@ export default function DosenElearningPage() {
                 key={course.id} 
                 onClick={() => loadSessions(course.id)}
                 style={{ 
-                  padding: '12px', borderRadius: '8px', cursor: 'pointer',
-                  background: selectedCourse === course.id ? '#eff6ff' : 'transparent',
-                  border: selectedCourse === course.id ? '1px solid #bfdbfe' : '1px solid transparent',
-                  color: selectedCourse === course.id ? '#1d4ed8' : '#4b5563',
-                  fontWeight: selectedCourse === course.id ? '600' : '400',
+                  padding: '14px', borderRadius: '12px', cursor: 'pointer',
+                  background: selectedCourse === course.id ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--glass-bg)',
+                  border: selectedCourse === course.id ? '1px solid rgba(196,30,58,0.5)' : '1px solid var(--color-border)',
+                  color: selectedCourse === course.id ? 'white' : 'var(--color-text)',
+                  fontWeight: '600',
+                  boxShadow: selectedCourse === course.id ? '0 4px 14px rgba(196,30,58,0.3)' : 'none',
                   transition: 'all 0.2s'
                 }}
               >
@@ -107,7 +190,7 @@ export default function DosenElearningPage() {
         </div>
 
         {/* Sessions Content */}
-        <div style={{ flex: '1 1 300px', minWidth: 0 }}>
+        <div style={{ flex: '2 1 500px', minWidth: 0 }}>
           {!selectedCourse ? (
             <div className="siakad-card" style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>
               <i className="ph ph-arrow-circle-left" style={{ fontSize: '3rem', color: 'var(--color-text)', marginBottom: '16px' }}></i>
@@ -116,23 +199,35 @@ export default function DosenElearningPage() {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {sessions.map((sess, idx) => (
-                <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+                <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
                   <div style={{ flex: '1 1 300px' }}>
-                    <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.1rem' }}>Sesi {sess.session}: {sess.title}</h3>
-                    <div style={{ display: 'flex', gap: '16px', color: 'var(--color-muted)', fontSize: '0.9rem', flexWrap: 'wrap' }}>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.1rem', fontWeight: '700' }}>Sesi {sess.session}: {sess.title}</h3>
+                    <div style={{ display: 'flex', gap: '16px', color: 'var(--color-muted)', fontSize: '0.85rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(99,102,241,0.1)', color: '#6366f1', padding: '4px 10px', borderRadius: '20px', fontWeight: '600' }}>
                         <i className="ph ph-file-pdf"></i> {sess.material_count} Materi Terupload
                       </span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <i className="ph ph-files"></i> 0 Tugas Terlampir
-                      </span>
+                      {sess.meet_link ? (
+                        <a href={sess.meet_link} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '4px 10px', borderRadius: '20px', fontWeight: '600', textDecoration: 'none' }}>
+                          <i className="ph ph-video-camera"></i> Link Active Meet
+                        </a>
+                      ) : (
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-muted)' }}>
+                          <i className="ph ph-video-camera-slash"></i> Belum ada link meet
+                        </span>
+                      )}
                     </div>
                   </div>
-                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                    <button onClick={() => window.toast('Simulasi: Berhasil membuka dialog upload materi!')} style={{ background: 'var(--color-border)', border: '1px solid #d1d5db', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                    <button 
+                      onClick={() => { setUploadSession(sess.session); setShowUploadModal(true); }} 
+                      style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
+                    >
                       <i className="ph ph-upload-simple"></i> Upload
                     </button>
-                    <button onClick={() => window.toast('Simulasi: Berhasil membuka pengaturan Link Meet!')} style={{ background: 'var(--color-border)', border: '1px solid #d1d5db', padding: '8px 12px', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <button 
+                      onClick={() => { setMeetSession(sess.session); setMeetUrl(sess.meet_link || ''); setShowMeetModal(true); }} 
+                      style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
+                    >
                       <i className="ph ph-video-camera"></i> Link Meet
                     </button>
                   </div>
@@ -142,6 +237,97 @@ export default function DosenElearningPage() {
           )}
         </div>
       </div>
+
+      {/* Modal Upload Materi */}
+      {showUploadModal && (
+        <div className="siakad-modal-overlay">
+          <div className="siakad-modal-content">
+            <div className="siakad-modal-header">
+              <h3 style={{ margin: 0, color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <i className="ph ph-upload-simple" style={{ color: '#C41E3A' }}></i> Upload Materi Sesi {uploadSession}
+              </h3>
+              <button onClick={() => setShowUploadModal(false)} style={{ background: 'transparent', border: 'none', color: 'var(--color-muted)', cursor: 'pointer', fontSize: '1.5rem' }}>
+                <i className="ph ph-x"></i>
+              </button>
+            </div>
+
+            <form onSubmit={handleUploadSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '16px' }}>
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Judul Materi</label>
+                <input 
+                  type="text" 
+                  className="siakad-input" 
+                  value={uploadTitle}
+                  onChange={e => setUploadTitle(e.target.value)}
+                  placeholder="Contoh: Pengenalan Sintaks Dasar Python"
+                  style={{ width: '100%' }}
+                  required
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Pilih File</label>
+                <input 
+                  type="file" 
+                  className="siakad-input"
+                  onChange={e => setSelectedFile(e.target.files[0])}
+                  style={{ width: '100%', background: 'transparent', border: '1px dashed var(--color-border)', padding: '20px', textAlign: 'center' }}
+                  required
+                />
+              </div>
+
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '16px' }}>
+                <button type="button" onClick={() => setShowUploadModal(false)} style={{ background: 'transparent', border: '1px solid var(--color-border)', padding: '10px 20px', borderRadius: '8px', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold' }}>
+                  Batal
+                </button>
+                <button type="submit" disabled={uploading} style={{ background: '#C41E3A', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(196, 30, 58, 0.3)' }}>
+                  {uploading ? 'Mengupload...' : 'Upload Materi'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Meet Link */}
+      {showMeetModal && (
+        <div className="siakad-modal-overlay">
+          <div className="siakad-modal-content">
+            <div className="siakad-modal-header">
+              <h3 style={{ margin: 0, color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <i className="ph ph-video-camera" style={{ color: '#10b981' }}></i> Link Virtual Meet Sesi {meetSession}
+              </h3>
+              <button onClick={() => setShowMeetModal(false)} style={{ background: 'transparent', border: 'none', color: 'var(--color-muted)', cursor: 'pointer', fontSize: '1.5rem' }}>
+                <i className="ph ph-x"></i>
+              </button>
+            </div>
+
+            <form onSubmit={handleMeetSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '16px' }}>
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Google Meet / Zoom URL</label>
+                <input 
+                  type="url" 
+                  className="siakad-input" 
+                  value={meetUrl}
+                  onChange={e => setMeetUrl(e.target.value)}
+                  placeholder="https://meet.google.com/abc-defg-hij"
+                  style={{ width: '100%' }}
+                  required
+                />
+              </div>
+
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '16px' }}>
+                <button type="button" onClick={() => setShowMeetModal(false)} style={{ background: 'transparent', border: '1px solid var(--color-border)', padding: '10px 20px', borderRadius: '8px', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold' }}>
+                  Batal
+                </button>
+                <button type="submit" disabled={savingMeet} style={{ background: '#10b981', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)' }}>
+                  {savingMeet ? 'Menyimpan...' : 'Simpan Link Meet'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
