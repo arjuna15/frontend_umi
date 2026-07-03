@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
 import ModalShell from '../../components/ModalShell';
+import CustomDatePicker from '../../components/CustomDatePicker';
 
 export default function KaprodiKalenderPage() {
   const router = useRouter();
@@ -193,11 +194,11 @@ export default function KaprodiKalenderPage() {
             <div style={{ display: 'flex', gap: '16px' , flexWrap: 'wrap' }}>
               <div style={{ flex: 1 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Mulai</label>
-                <input type="date" required value={editFormData.startDate} onChange={e=>setEditFormData({...editFormData, startDate: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
+                <CustomDatePicker value={editFormData.startDate} onChange={val=>setEditFormData({...editFormData, startDate: val})} />
               </div>
               <div style={{ flex: 1 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Berakhir</label>
-                <input type="date" required value={editFormData.endDate} onChange={e=>setEditFormData({...editFormData, endDate: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
+                <CustomDatePicker value={editFormData.endDate} onChange={val=>setEditFormData({...editFormData, endDate: val})} />
               </div>
             </div>
             <div>

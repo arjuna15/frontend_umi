@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+import CustomDatePicker from '../../components/CustomDatePicker';
 export default function BapPage() {
   const router = useRouter();
   const [courses, setCourses] = useState([]);
@@ -9,6 +10,7 @@ export default function BapPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [courseId, setCourseId] = useState('');
+  const [date, setDate] = useState('');
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -49,6 +51,7 @@ export default function BapPage() {
         setSubmitted(true);
         e.target.reset();
         setCourseId('');
+        setDate('');
         setTimeout(() => setSubmitted(false), 3000);
         window.toast && window.toast('BAP Berhasil Disimpan!');
       } else {
@@ -164,8 +167,7 @@ export default function BapPage() {
                   <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
                     <i className="ph ph-calendar-blank" style={{ color: '#f59e0b' }}></i> Tanggal Perkuliahan
                   </label>
-                  <input type="date" name="date" required
-                    className="siakad-input" style={{ width: '100%', minWidth: 0, flex: '1 1 120px' }} />
+                  <CustomDatePicker name="date" value={date} onChange={setDate} />
                 </div>
               </div>
 

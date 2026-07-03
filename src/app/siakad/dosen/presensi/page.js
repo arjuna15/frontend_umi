@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+import CustomDatePicker from '../../components/CustomDatePicker';
 export default function DosenPresensiPage() {
   const router = useRouter();
   const [data, setData] = useState(null);
@@ -186,7 +187,7 @@ export default function DosenPresensiPage() {
               </div>
               <div>
                 <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Tanggal Pertemuan</label>
-                <input type="date" required value={meetingDate} onChange={e => setMeetingDate(e.target.value)} className="siakad-input" style={{ width: '100%' }} />
+                <CustomDatePicker value={meetingDate} onChange={val => setMeetingDate(val)} />
               </div>
               <div>
                 <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Mode Kelas</label>

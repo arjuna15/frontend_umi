@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import CustomSelect from '../../components/CustomSelect';
+import CustomDatePicker from '../../components/CustomDatePicker';
 
 export default function AdminKeuangan() {
   const [billings, setBillings] = useState([]);
@@ -413,12 +414,9 @@ export default function AdminKeuangan() {
 
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Jatuh Tempo</label>
-                  <input 
-                    type="date" 
+                  <CustomDatePicker 
                     value={formData.due_date} 
-                    onChange={(e) => setFormData({...formData, due_date: e.target.value})}
-                    required
-                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
+                    onChange={(val) => setFormData({...formData, due_date: val})} 
                   />
                 </div>
 
@@ -572,11 +570,9 @@ export default function AdminKeuangan() {
 
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Jatuh Tempo</label>
-                  <input
-                    type="date"
+                  <CustomDatePicker
                     value={bulkForm.due_date}
-                    onChange={(e) => setBulkForm({ ...bulkForm, due_date: e.target.value })}
-                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
+                    onChange={(val) => setBulkForm({ ...bulkForm, due_date: val })}
                   />
                 </div>
               </div>
