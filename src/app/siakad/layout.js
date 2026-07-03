@@ -357,16 +357,19 @@ export default function SiakadLayout({ children }) {
             
             <div className="drawer-body">
               <h4 style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: 'var(--color-text)', textTransform: 'uppercase', letterSpacing: '1px' }}>Menu Lainnya</h4>
-              {menuItems.filter(item => !item.isMobilePrimary).map((item, i) => (
-                <Link key={i} href={item.path} className="drawer-item" onClick={() => setIsDrawerOpen(false)}>
-                  <div className="icon"><i className={item.icon}></i></div>
-                  <div className="label">{item.label}</div>
-                  <i className="ph ph-caret-right chevron"></i>
-                </Link>
-              ))}
+              {menuItems.filter(item => !item.isMobilePrimary).map((item, i) => {
+                const isActive = pathname === item.path;
+                return (
+                  <Link key={i} href={item.path} className={`drawer-item ${isActive ? 'active' : ''}`} onClick={() => setIsDrawerOpen(false)}>
+                    <div className="icon"><i className={item.icon}></i></div>
+                    <div className="label">{item.label}</div>
+                    <i className="ph ph-caret-right chevron"></i>
+                  </Link>
+                );
+              })}
 
-              <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid #e2e8f0' }}>
-                <Link href="/siakad/profile" className="drawer-item" onClick={() => setIsDrawerOpen(false)}>
+              <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--color-border)' }}>
+                <Link href="/siakad/profile" className={`drawer-item ${pathname === '/siakad/profile' ? 'active' : ''}`} onClick={() => setIsDrawerOpen(false)}>
                   <div className="icon"><i className="ph ph-user-gear"></i></div>
                   <div className="label">Pengaturan Profil</div>
                   <i className="ph ph-caret-right chevron"></i>
