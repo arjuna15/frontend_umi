@@ -468,77 +468,100 @@
   .siakad-bottom-nav {
     display: flex;
     position: fixed;
-    bottom: -1px;
-    padding-bottom: 1px;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background: #1f2937; /* Dark mode style nav */
-    border-radius: 20px 20px 0 0;
-    box-shadow: 0 -5px 25px rgba(0,0,0,0.1);
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    height: 68px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
     z-index: 100;
     align-items: center;
+    justify-content: space-around;
+    padding: 0 8px;
     box-sizing: border-box;
+    transition: all 0.3s ease;
   }
 
   /* The actual clickable items */
   .siakad-bottom-nav-item {
     display: flex;
-    flex: 1;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: #9ca3af;
-    position: relative;
-    z-index: 2;
+    padding: 4px 0;
+    color: var(--color-muted);
     text-decoration: none;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    flex: 1;
   }
   
   .siakad-bottom-nav-item .icon-wrapper {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     position: relative;
     z-index: 3;
-    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--color-muted);
   }
 
   .siakad-bottom-nav-item .label {
     font-size: 0.65rem;
-    font-weight: 700;
-    position: absolute;
-    bottom: 10px;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    white-space: nowrap;
+    font-weight: 600;
+    margin-top: 2px;
+    transition: all 0.3s ease;
+    color: var(--color-muted);
+    opacity: 0.8;
   }
 
-  /* Active State Animation */
+  /* Active State Styling */
   .siakad-bottom-nav-item.active {
     color: #ffffff;
   }
   
+  /* Make the active item have a beautiful glass pill background or red brand glow */
   .siakad-bottom-nav-item.active .icon-wrapper {
-    transform: translateY(-30px);
-    background: #1f2937;
-    color: #ffffff;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
+    color: #ffffff !important;
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 8px 20px rgba(185, 28, 28, 0.35);
   }
 
   .siakad-bottom-nav-item.active .label {
+    color: var(--color-text) !important;
+    font-weight: 800;
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1.05);
   }
 
-  /* Remove old indicator cutout to satisfy user request for transparency and no white sticking out */
+  /* Active indicator dot under the label */
+  .siakad-bottom-nav-item::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #ef4444;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .siakad-bottom-nav-item.active::after {
+    transform: scale(1);
+  }
+
 
   /* Drawer Overlay */
   .siakad-drawer-overlay {
@@ -761,10 +784,14 @@
   color: var(--color-muted);
 }
 
-[data-theme='dark'] .siakad-nav-item:hover,
-[data-theme='dark'] .siakad-bottom-nav-item.active {
+[data-theme='dark'] .siakad-nav-item:hover {
   background: rgba(255, 255, 255, 0.1);
   color: var(--color-text);
+}
+
+[data-theme='dark'] .siakad-bottom-nav-item.active {
+  background: transparent !important;
+  color: var(--color-text) !important;
 }
 
 [data-theme='dark'] .siakad-nav-item.active {
