@@ -92,11 +92,11 @@ export default function DosenGradebookPage() {
         if (course.grades) {
           course.grades.forEach(g => {
             initialEdits[g.id] = {
-              kehadiran: '',
-              tugas: '',
-              uts: '',
-              uas: '',
-              score: g.score || '',
+              kehadiran: g.attendance_score !== null && g.attendance_score !== undefined ? String(g.attendance_score) : '',
+              tugas: g.assignment_score !== null && g.assignment_score !== undefined ? String(g.assignment_score) : '',
+              uts: g.uts_score !== null && g.uts_score !== undefined ? String(g.uts_score) : '',
+              uas: g.uas_score !== null && g.uas_score !== undefined ? String(g.uas_score) : '',
+              score: g.score !== null && g.score !== undefined ? String(g.score) : '',
               grade: g.grade || ''
             };
           });
@@ -165,7 +165,11 @@ export default function DosenGradebookPage() {
         const edits = editedGrades[g.id] || {};
         return {
           id: g.id,
-          score: edits.score !== '' ? edits.score : null,
+          attendance_score: edits.kehadiran !== '' && edits.kehadiran !== undefined ? parseFloat(edits.kehadiran) : null,
+          assignment_score: edits.tugas !== '' && edits.tugas !== undefined ? parseFloat(edits.tugas) : null,
+          uts_score: edits.uts !== '' && edits.uts !== undefined ? parseFloat(edits.uts) : null,
+          uas_score: edits.uas !== '' && edits.uas !== undefined ? parseFloat(edits.uas) : null,
+          score: edits.score !== '' && edits.score !== undefined ? parseFloat(edits.score) : null,
           grade: edits.grade !== '' ? edits.grade : null
         };
       });
@@ -194,7 +198,11 @@ export default function DosenGradebookPage() {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              score: edits.score !== '' ? edits.score : null,
+              attendance_score: edits.kehadiran !== '' && edits.kehadiran !== undefined ? parseFloat(edits.kehadiran) : null,
+              assignment_score: edits.tugas !== '' && edits.tugas !== undefined ? parseFloat(edits.tugas) : null,
+              uts_score: edits.uts !== '' && edits.uts !== undefined ? parseFloat(edits.uts) : null,
+              uas_score: edits.uas !== '' && edits.uas !== undefined ? parseFloat(edits.uas) : null,
+              score: edits.score !== '' && edits.score !== undefined ? parseFloat(edits.score) : null,
               grade: edits.grade !== '' ? edits.grade : null
             })
           });
