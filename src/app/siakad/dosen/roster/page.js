@@ -213,7 +213,7 @@ export default function RosterPage() {
                           </div>
                         </td>
                         <td style={{ padding: '16px 20px' }}>
-                          <span style={{ background: 'rgba(99,102,241,0.1)', color: '#6366f1', padding: '4px 10px', borderRadius: '20px', fontSize: '0.8rem', fontWeight: '600' }}>
+                          <span style={{ background: 'rgba(99,102,241,0.1)', color: '#6366f1', padding: '4px 10px', borderRadius: '20px', fontSize: '0.8rem', fontWeight: '600', whiteSpace: 'nowrap' }}>
                             {mhs.prodi || 'Teknik Informatika'}
                           </span>
                         </td>
