@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 // Singleton event emitter for toasts
 export const toast = (message, type = 'success') => {
@@ -52,9 +53,9 @@ export function ConfirmModal() {
     return () => window.removeEventListener('siakad_confirm', handleConfirm);
   }, []);
 
-  if (!modal) return null;
+  if (!modal || typeof document === 'undefined') return null;
 
-  return (
+  return createPortal(
     <div className="siakad-modal-overlay">
       <div style={{
         position: 'relative',
@@ -121,9 +122,9 @@ export function PromptModal() {
     return () => window.removeEventListener('siakad_prompt', handlePrompt);
   }, []);
 
-  if (!modal) return null;
+  if (!modal || typeof document === 'undefined') return null;
 
-  return (
+  return createPortal(
     <div className="siakad-modal-overlay">
       <div style={{
         position: 'relative',
@@ -184,7 +185,8 @@ export function PromptModal() {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
@@ -203,9 +205,9 @@ export function FormModal() {
     return () => window.removeEventListener('siakad_form', handleForm);
   }, []);
 
-  if (!modal) return null;
+  if (!modal || typeof document === 'undefined') return null;
 
-  return (
+  return createPortal(
     <div className="siakad-modal-overlay">
       <div style={{
         position: 'relative',
@@ -277,7 +279,8 @@ export function FormModal() {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
 import CustomDatePicker from '../../components/CustomDatePicker';
+import ModalShell from '../../components/ModalShell';
 export default function DosenPresensiPage() {
   const router = useRouter();
   const [data, setData] = useState(null);
@@ -177,86 +178,90 @@ export default function DosenPresensiPage() {
 
       {/* Buat Sesi Modal */}
       {showSessionModal && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <h3 style={{ margin: '0 0 24px 0', fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)' }}>Buka Sesi Presensi</h3>
-            <form onSubmit={handleCreateSession} style={{ display: 'flex', flexDirection: 'column', gap: '20px' , flexWrap: 'wrap'}}>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Pertemuan Ke-</label>
-                <input type="number" required min="1" max="16" value={meetingNumber} onChange={e => setMeetingNumber(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none', fontSize: '1rem' }} placeholder="Contoh: 1" />
-              </div>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Tanggal Pertemuan</label>
-                <CustomDatePicker value={meetingDate} onChange={val => setMeetingDate(val)} />
-              </div>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Mode Kelas</label>
-                <CustomSelect 
-                  value={meetingMode} 
-                  onChange={setMeetingMode}
-                  options={[
-                    { value: "Online", label: "Online" },
-                    { value: "Bintaro", label: "Offline - Kampus Bintaro" },
-                    { value: "Pasar Minggu", label: "Offline - Kampus Ps. Minggu" }
-                  ]}
-                  style={{ width: '100%', minWidth: 0, flex: '1 1 120px'}}
-                />
-              </div>
-              <div style={{ display: 'flex', gap: '12px', marginTop: '12px' , flexWrap: 'wrap'}}>
-                <button type="button" onClick={() => setShowSessionModal(false)} style={{ flex: 1, padding: '14px', borderRadius: '12px', background: 'var(--glass-bg)', color: 'var(--color-text)', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>Batal</button>
-                <button type="submit" style={{ flex: 1, padding: '14px', borderRadius: '12px', background: '#10b981', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16,185,129,0.3)' }}>Buat Sesi</button>
-              </div>
-            </form>
-          </div>
-        </div>
+        <ModalShell
+          title="Buka Sesi Presensi"
+          subtitle="Manajemen Presensi"
+          icon="ph-calendar-check"
+          iconBg="linear-gradient(135deg, #10b981 0%, #0f766e 100%)"
+          onClose={() => setShowSessionModal(false)}
+          maxWidth="560px"
+        >
+          <form onSubmit={handleCreateSession} style={{ display: 'flex', flexDirection: 'column', gap: '20px', flexWrap: 'wrap' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Pertemuan Ke-</label>
+              <input type="number" required min="1" max="16" value={meetingNumber} onChange={e => setMeetingNumber(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none', fontSize: '1rem' }} placeholder="Contoh: 1" />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Tanggal Pertemuan</label>
+              <CustomDatePicker value={meetingDate} onChange={val => setMeetingDate(val)} />
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Mode Kelas</label>
+              <CustomSelect 
+                value={meetingMode} 
+                onChange={setMeetingMode}
+                options={[
+                  { value: "Online", label: "Online" },
+                  { value: "Bintaro", label: "Offline - Kampus Bintaro" },
+                  { value: "Pasar Minggu", label: "Offline - Kampus Ps. Minggu" }
+                ]}
+                style={{ width: '100%', minWidth: 0, flex: '1 1 120px'}}
+              />
+            </div>
+            <div style={{ display: 'flex', gap: '12px', marginTop: '12px', flexWrap: 'wrap' }}>
+              <button type="button" onClick={() => setShowSessionModal(false)} style={{ flex: 1, padding: '14px', borderRadius: '12px', background: 'var(--glass-bg)', color: 'var(--color-text)', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>Batal</button>
+              <button type="submit" style={{ flex: 1, padding: '14px', borderRadius: '12px', background: '#10b981', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16,185,129,0.3)' }}>Buat Sesi</button>
+            </div>
+          </form>
+        </ModalShell>
       )}
 
       {/* Input Detail Modal */}
       {showDetailModal && selectedAttendance && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <div className="siakad-modal-header">
-              <div>
-                <h3 style={{ margin: '0 0 4px 0', fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)' }}>Input Presensi</h3>
-                <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>Pertemuan ke-{selectedAttendance.meeting_number} • {selectedAttendance.date}</p>
-              </div>
-              <div style={{ display: 'flex', gap: '12px', alignItems: 'center' , flexWrap: 'wrap' }}>
-                <div style={{ position: 'relative' }}>
-                  <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
-                  <input 
-                    type="text" 
-                    placeholder="Cari mahasiswa..." 
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ padding: '8px 10px 8px 36px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '200px' }}
-                  />
-                </div>
-                <button onClick={() => setShowDetailModal(false)} style={{ background: 'var(--glass-bg)', border: 'none', width: '36px', height: '36px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-text)' , flexShrink: 0 }}>
-                  <i className="ph ph-x" style={{ fontSize: '1.2rem' }}></i>
-                </button>
-              </div>
+        <ModalShell
+          title="Input Presensi"
+          subtitle={`Pertemuan ke-${selectedAttendance.meeting_number} • ${selectedAttendance.date}`}
+          icon="ph-calendar-check"
+          iconBg="linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%)"
+          onClose={() => setShowDetailModal(false)}
+          maxWidth="1100px"
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap', marginBottom: '20px' }}>
+            <div style={{ fontSize: '0.95rem', color: 'var(--color-muted)', fontWeight: '600' }}>
+              Pilih status kehadiran untuk tiap mahasiswa.
             </div>
+            <div style={{ position: 'relative' }}>
+              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
+              <input 
+                type="text" 
+                placeholder="Cari mahasiswa..." 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                style={{ padding: '8px 10px 8px 36px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '220px', maxWidth: '100%' }}
+              />
+            </div>
+          </div>
 
-            <div style={{ overflowY: 'auto', flex: 1, paddingRight: '8px' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                <thead>
-                  <tr style={{ background: 'var(--glass-bg)' }}>
-                    <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem' }}>Mahasiswa</th>
-                    <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem', textAlign: 'center' }}>Status</th>
-                    <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem', textAlign: 'right' }}>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(() => {
-                    const course = data.jadwal.find(c => c.id === selectedCourseId);
-                    if (!course || !course.grades) return <tr><td colSpan="3">Data tidak ditemukan.</td></tr>;
-                    
-                    const filteredGrades = course.grades.filter(g => {
-                      const query = searchTerm.toLowerCase();
-                      const name = g.mahasiswa?.name?.toLowerCase() || '';
-                      const nim = g.mahasiswa?.nim_nip?.toLowerCase() || g.mahasiswa?.nim?.toLowerCase() || '';
-                      return name.includes(query) || nim.includes(query);
-                    });
+          <div style={{ overflowX: 'auto', maxHeight: '65vh', overflowY: 'auto', border: '1px solid var(--color-border)', borderRadius: '16px' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+              <thead>
+                <tr style={{ background: 'var(--glass-bg)' }}>
+                  <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem' }}>Mahasiswa</th>
+                  <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem', textAlign: 'center' }}>Status</th>
+                  <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem', textAlign: 'right' }}>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(() => {
+                  const course = data.jadwal.find(c => c.id === selectedCourseId);
+                  if (!course || !course.grades) return <tr><td colSpan="3">Data tidak ditemukan.</td></tr>;
+                  
+                  const filteredGrades = course.grades.filter(g => {
+                    const query = searchTerm.toLowerCase();
+                    const name = g.mahasiswa?.name?.toLowerCase() || '';
+                    const nim = g.mahasiswa?.nim_nip?.toLowerCase() || g.mahasiswa?.nim?.toLowerCase() || '';
+                    return name.includes(query) || nim.includes(query);
+                  });
 
                     if (filteredGrades.length === 0) {
                       return <tr><td colSpan="3" style={{ textAlign: 'center', padding: '20px', color: 'var(--color-muted)' }}>Mahasiswa tidak ditemukan.</td></tr>;
@@ -294,8 +299,7 @@ export default function DosenPresensiPage() {
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
+        </ModalShell>
       )}
 
     </div>

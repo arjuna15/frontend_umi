@@ -1,4 +1,5 @@
 'use client';
+import { createPortal } from 'react-dom';
 
 export default function ModalShell({
   title,
@@ -10,7 +11,9 @@ export default function ModalShell({
   footer,
   iconBg = 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)'
 }) {
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <div className="siakad-modal-overlay">
       <div className="siakad-modal-content" style={{ maxWidth }}>
         <div style={{
@@ -87,6 +90,7 @@ export default function ModalShell({
           </div>
         ) : null}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
