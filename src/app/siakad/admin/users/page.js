@@ -88,7 +88,7 @@ export default function AdminUsersPage() {
   };
 
   const handleResetPassword = async (user) => {
-    if (!confirm(`Yakin ingin mereset password untuk ${user.name} ke default (123456)?`)) return;
+    if (!await window.toast.confirm(`Yakin ingin mereset password untuk ${user.name} ke default (123456)?`)) return;
     const token = localStorage.getItem('siakad_token');
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     try {
@@ -257,9 +257,12 @@ export default function AdminUsersPage() {
                   <td style={{ padding: '16px 24px', color: 'var(--color-muted)', fontSize: '0.95rem' }}>{user.nim_nip}</td>
                   <td style={{ padding: '16px 24px' }}>
                     <span style={{ 
-                      padding: '4px 12px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold',
-                      background: user.role === 'admin' ? '#fee2e2' : user.role === 'dosen' ? '#e0e7ff' : '#dcfce7',
-                      color: user.role === 'admin' ? '#991b1b' : user.role === 'dosen' ? '#3730a3' : '#166534'
+                      padding: '6px 12px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold',
+                      background: user.role === 'admin' ? '#fee2e2' : user.role === 'dosen' ? '#e0e7ff' : user.role === 'kaprodi' ? '#ccfbf1' : '#dcfce7',
+                      color: user.role === 'admin' ? '#991b1b' : user.role === 'dosen' ? '#3730a3' : user.role === 'kaprodi' ? '#115e59' : '#166534',
+                      display: 'inline-block',
+                      width: '110px',
+                      textAlign: 'center'
                     }}>
                       {user.role.toUpperCase()}
                     </span>
