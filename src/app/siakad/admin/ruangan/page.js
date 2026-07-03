@@ -154,7 +154,17 @@ export default function AdminRuanganPage() {
                   <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{r.building}</td>
                   <td style={{ padding: '16px' }}>{r.capacity} Kursi</td>
                   <td style={{ padding: '16px' }}>
-                    <span style={{ background: r.type === 'Teori' ? '#3b82f6' : r.type === 'Laboratorium' ? '#10b981' : '#8b5cf6', color: 'white', padding: '4px 10px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold' }}>{r.type}</span>
+                    <span style={{ 
+                      background: r.type === 'Laboratorium' ? '#10b981' : '#8b5cf6', 
+                      color: 'white', 
+                      padding: '6px 12px', 
+                      borderRadius: '999px', 
+                      fontSize: '0.8rem', 
+                      fontWeight: 'bold',
+                      display: 'inline-block',
+                      width: '130px',
+                      textAlign: 'center'
+                    }}>{r.type}</span>
                   </td>
                   <td style={{ padding: '16px', textAlign: 'right' }}>
                     <button onClick={() => { setEditFormData(r); setIsEditModalOpen(true); }} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', marginRight: '8px' }}><i className="ph ph-pencil-simple"></i></button>

@@ -87,6 +87,37 @@ export default function AdminUsersPage() {
     }
   };
 
+  const handleResetPassword = async (user) => {
+    if (!confirm(`Yakin ingin mereset password untuk ${user.name} ke default (123456)?`)) return;
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/admin/users/${user.id}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: user.name,
+          nim_nip: user.nim_nip,
+          role: user.role,
+          prodi: user.prodi || '',
+          password: '123456'
+        })
+      });
+      if (res.ok) {
+        window.toast && window.toast('Password berhasil direset ke default (123456)');
+        fetchUsers();
+      } else {
+        const errorData = await res.json();
+        window.toast && window.toast('Gagal mereset password: ' + (errorData.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast && window.toast('Error: ' + err.message);
+    }
+  };
+
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat data pengguna...
@@ -236,7 +267,7 @@ export default function AdminUsersPage() {
                   <td style={{ padding: '16px 24px', textAlign: 'right' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
                       <button 
-                        onClick={() => window.toast?.('Password berhasil direset ke default (123456)')}
+                        onClick={() => handleResetPassword(user)}
                         style={{ background: 'var(--glass-bg)', color: '#f59e0b', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
                         title="Reset Password"
                       ><i className="ph ph-key" style={{ fontSize: '1rem' }}></i></button>
