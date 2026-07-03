@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+import ModalShell from '../../components/ModalShell';
 
 export default function KaprodiPlotting() {
   const router = useRouter();
@@ -211,81 +212,70 @@ export default function KaprodiPlotting() {
         </div>
       </div>
 
-      {/* Modal Atur Jadwal */}
       {showScheduleModal && selectedCourse && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <div className="siakad-modal-header">
-              <h3 style={{ margin: 0, color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' , flexWrap: 'wrap'}}>
-                <i className="ph ph-calendar-plus" style={{ color: '#8b5cf6' }}></i> Atur Jadwal Kelas
-              </h3>
-              <button onClick={() => setShowScheduleModal(false)} style={{ background: 'transparent', border: 'none', color: 'var(--color-muted)', cursor: 'pointer', fontSize: '1.5rem' }}>
-                <i className="ph ph-x"></i>
-              </button>
-            </div>
-
-            <div style={{ marginBottom: '24px', padding: '16px', background: 'var(--glass-bg)', borderRadius: '12px', borderLeft: '4px solid #10b981' }}>
-              <h4 style={{ margin: '0 0 4px 0', color: 'var(--color-text)' }}>{selectedCourse.name}</h4>
-              <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{selectedCourse.code} • {selectedCourse.sks} SKS</p>
-            </div>
-
-            <form onSubmit={handleSaveSchedule} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
-              <div>
-                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Hari</label>
-                <CustomSelect 
-                  value={scheduleForm.hari}
-                  onChange={val => setScheduleForm({...scheduleForm, hari: val})}
-                  options={['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'].map(d => ({ value: d, label: d }))}
-                  style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
-                />
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Jam Mulai</label>
-                  <input 
-                    type="time" 
-                    className="siakad-input" 
-                    value={scheduleForm.jamMulai}
-                    onChange={e => setScheduleForm({...scheduleForm, jamMulai: e.target.value})}
-                    style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
-                    required
-                  />
-                </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Jam Selesai</label>
-                  <input 
-                    type="time" 
-                    className="siakad-input" 
-                    value={scheduleForm.jamSelesai}
-                    onChange={e => setScheduleForm({...scheduleForm, jamSelesai: e.target.value})}
-                    style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Ruangan</label>
-                <CustomSelect 
-                  value={scheduleForm.ruang}
-                  onChange={val => setScheduleForm({...scheduleForm, ruang: val})}
-                  options={['Lab Komputer A', 'Lab Komputer B', 'Ruang 401', 'Ruang 402', 'Ruang 405 (Aula)', 'Ruang Seminar 1'].map(r => ({ value: r, label: r }))}
-                  style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
-                />
-              </div>
-
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '16px' , flexWrap: 'wrap'}}>
-                <button type="button" onClick={() => setShowScheduleModal(false)} style={{ background: 'transparent', border: '1px solid var(--color-muted)', padding: '10px 20px', borderRadius: '8px', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold' }}>
-                  Batal
-                </button>
-                <button type="submit" style={{ background: '#8b5cf6', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(139, 92, 246, 0.3)' }}>
-                  Simpan Jadwal
-                </button>
-              </div>
-            </form>
+        <ModalShell
+          title={`Atur Jadwal Kelas`}
+          icon="ph-calendar-plus"
+          onClose={() => setShowScheduleModal(false)}
+          footer={(
+            <>
+              <button type="button" onClick={() => setShowScheduleModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="plotting-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan Jadwal</button>
+            </>
+          )}
+        >
+          <div style={{ marginBottom: '24px', padding: '16px', background: 'var(--glass-bg)', borderRadius: '12px', borderLeft: '4px solid #10b981' }}>
+            <h4 style={{ margin: '0 0 4px 0', color: 'var(--color-text)' }}>{selectedCourse.name}</h4>
+            <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{selectedCourse.code} • {selectedCourse.sks} SKS</p>
           </div>
-        </div>
+
+          <form id="plotting-form" onSubmit={handleSaveSchedule} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Hari</label>
+              <CustomSelect 
+                value={scheduleForm.hari}
+                onChange={val => setScheduleForm({...scheduleForm, hari: val})}
+                options={['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'].map(d => ({ value: d, label: d }))}
+                style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
+              />
+            </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Jam Mulai</label>
+                <input 
+                  type="time" 
+                  className="siakad-input" 
+                  value={scheduleForm.jamMulai}
+                  onChange={e => setScheduleForm({...scheduleForm, jamMulai: e.target.value})}
+                  style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
+                  required
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Jam Selesai</label>
+                <input 
+                  type="time" 
+                  className="siakad-input" 
+                  value={scheduleForm.jamSelesai}
+                  onChange={e => setScheduleForm({...scheduleForm, jamSelesai: e.target.value})}
+                  style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Ruangan</label>
+              <CustomSelect 
+                value={scheduleForm.ruang}
+                onChange={val => setScheduleForm({...scheduleForm, ruang: val})}
+                options={['Lab Komputer A', 'Lab Komputer B', 'Ruang 401', 'Ruang 402', 'Ruang 405 (Aula)', 'Ruang Seminar 1'].map(r => ({ value: r, label: r }))}
+                style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
+              />
+            </div>
+          </form>
+        </ModalShell>
       )}
     </div>
   );

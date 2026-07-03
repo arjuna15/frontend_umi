@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import ModalShell from '../../components/ModalShell';
 import { useRouter } from 'next/navigation';
 
 export default function KaprodiKrs() {
@@ -249,40 +250,31 @@ export default function KaprodiKrs() {
       </div>
 
       {isRejectModalOpen && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' , flexWrap: 'wrap' }}>
-              <h2 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)' }}>
-                Penolakan KRS Mahasiswa
-              </h2>
-              <button onClick={() => setIsRejectModalOpen(false)} style={{ background: 'transparent', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontSize: '1.2rem' }}>
-                <i className="ph ph-x"></i>
-              </button>
+        <ModalShell
+          title="Penolakan KRS Mahasiswa"
+          icon="ph-x-circle"
+          onClose={() => setIsRejectModalOpen(false)}
+          footer={(
+            <>
+              <button type="button" onClick={() => setIsRejectModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="krs-reject-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Konfirmasi Tolak KRS</button>
+            </>
+          )}
+        >
+          <form id="krs-reject-form" onSubmit={submitReject} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Alasan Penolakan <span style={{ color: '#ef4444' }}>*</span></label>
+              <textarea 
+                value={rejectReason} 
+                onChange={(e) => setRejectReason(e.target.value)}
+                placeholder="Berikan alasan spesifik agar mahasiswa bisa memperbaikinya (misal: SKS melebihi batas IPS, Prasyarat belum lulus, dll)..."
+                required
+                rows={4}
+                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', resize: 'vertical' }}
+              />
             </div>
-            <form onSubmit={submitReject} style={{ padding: '24px' }}>
-              <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Alasan Penolakan <span style={{ color: '#ef4444' }}>*</span></label>
-                <textarea 
-                  value={rejectReason} 
-                  onChange={(e) => setRejectReason(e.target.value)}
-                  placeholder="Berikan alasan spesifik agar mahasiswa bisa memperbaikinya (misal: SKS melebihi batas IPS, Prasyarat belum lulus, dll)..."
-                  required
-                  rows={4}
-                  style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', resize: 'vertical' }}
-                />
-              </div>
-              
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' , flexWrap: 'wrap'}}>
-                <button type="button" onClick={() => setIsRejectModalOpen(false)} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: 'var(--color-text)', padding: '12px 24px', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
-                  Batal
-                </button>
-                <button type="submit" style={{ background: '#ef4444', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
-                  Konfirmasi Tolak KRS
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+          </form>
+        </ModalShell>
       )}
     </div>
   );

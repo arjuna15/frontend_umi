@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+import ModalShell from '../../components/ModalShell';
 
 export default function KaprodiKurikulumPage() {
   const router = useRouter();
@@ -211,65 +212,32 @@ export default function KaprodiKurikulumPage() {
       </div>
 
       {isEditModalOpen && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' , flexWrap: 'wrap' }}>
-              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>{editFormData.id ? 'Edit Mata Kuliah' : 'Tambah Mata Kuliah'}</h3>
-              <button onClick={() => setIsEditModalOpen(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--color-muted)', fontSize: '1.5rem' }}><i className="ph ph-x"></i></button>
+        <ModalShell
+          title={editFormData.id ? 'Edit Mata Kuliah' : 'Tambah Mata Kuliah'}
+          icon="ph-book-open"
+          onClose={() => setIsEditModalOpen(false)}
+          footer={(
+            <>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="kurikulum-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan</button>
+            </>
+          )}
+        >
+          <form id="kurikulum-form" onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kode MK</label>
+              <input type="text" required value={editFormData.code} onChange={e=>setEditFormData({...editFormData, code: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: IF101" />
             </div>
-            <div style={{ padding: '24px' }}>
-              <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
-                <div style={{ display: 'flex', gap: '16px' , flexWrap: 'wrap' }}>
-                  <div style={{ flex: 1 }}>
-                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kode MK</label>
-                    <input type="text" required value={editFormData.code} onChange={e=>setEditFormData({...editFormData, code: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>SKS</label>
-                    <input type="number" required min="1" max="6" value={editFormData.sks} onChange={e=>setEditFormData({...editFormData, sks: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
-                  </div>
-                </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Nama Mata Kuliah</label>
-                  <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
-                </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Dosen Pengampu</label>
-                  <CustomSelect 
-                    value={editFormData.dosen_id} 
-                    onChange={val => setEditFormData({...editFormData, dosen_id: val})} 
-                    options={dosens.map(d => ({ value: d.id.toString(), label: d.name }))}
-                  />
-                </div>
-                <div style={{ display: 'flex', gap: '16px' , flexWrap: 'wrap' }}>
-                  <div style={{ flex: 1 }}>
-                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Semester Sebaran</label>
-                    <CustomSelect 
-                      value={editFormData.semester} 
-                      onChange={val => setEditFormData({...editFormData, semester: val})} 
-                      options={[1,2,3,4,5,6,7,8].map(s => ({ value: s.toString(), label: `Semester ${s}` }))}
-                    />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Sifat</label>
-                    <CustomSelect 
-                      value={editFormData.type} 
-                      onChange={val => setEditFormData({...editFormData, type: val})} 
-                      options={[
-                        { value: "Wajib", label: "Wajib" },
-                        { value: "Pilihan", label: "Pilihan" }
-                      ]}
-                    />
-                  </div>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' , flexWrap: 'wrap'}}>
-                  <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 600 }}>Batal</button>
-                  <button type="submit" style={{ padding: '10px 20px', borderRadius: '8px', border: 'none', background: '#3b82f6', color: 'white', cursor: 'pointer', fontWeight: 600 }}>Simpan</button>
-                </div>
-              </form>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Nama Mata Kuliah</label>
+              <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Pemrograman Dasar" />
             </div>
-          </div>
-        </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>SKS</label>
+              <input type="number" required value={editFormData.sks} onChange={e=>setEditFormData({...editFormData, sks: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
+            </div>
+          </form>
+        </ModalShell>
       )}
     </div>
   );

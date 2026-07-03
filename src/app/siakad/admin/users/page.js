@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+import ModalShell from '../../components/ModalShell';
 
 export default function AdminUsersPage() {
   const router = useRouter();
@@ -300,59 +301,62 @@ export default function AdminUsersPage() {
       </div>
 
       {isEditModalOpen && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <h2 style={{ margin: '0 0 20px 0', fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)' }}>Edit Pengguna</h2>
-            <form onSubmit={handleUpdateUser}>
-              <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Nama Lengkap</label>
-                <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+        <ModalShell
+          title="Edit Pengguna"
+          icon="ph-user-circle"
+          onClose={() => setIsEditModalOpen(false)}
+          footer={(
+            <>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', background: 'transparent', border: '1px solid var(--color-border)', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="user-edit-form" style={{ padding: '12px 20px', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', border: 'none', borderRadius: '12px', cursor: 'pointer', fontWeight: 700 }}>Simpan Perubahan</button>
+            </>
+          )}
+        >
+          <form id="user-edit-form" onSubmit={handleUpdateUser}>
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Nama Lengkap</label>
+              <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            </div>
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>NIM / NIP</label>
+              <input value={editFormData.nim_nip} onChange={(e) => setEditFormData({...editFormData, nim_nip: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            </div>
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' , flexWrap: 'wrap' }}>
+              <div style={{ flex: 1 }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Role</label>
+                <CustomSelect
+                  value={editFormData.role}
+                  onChange={(val) => setEditFormData({...editFormData, role: val})}
+                  options={[
+                    { value: 'mahasiswa', label: 'Mahasiswa', icon: 'ph ph-student' },
+                    { value: 'dosen', label: 'Dosen', icon: 'ph ph-chalkboard-teacher' },
+                    { value: 'admin', label: 'Admin', icon: 'ph ph-shield-check' },
+                    { value: 'kaprodi', label: 'Kaprodi', icon: 'ph ph-briefcase' }
+                  ]}
+                />
               </div>
-              <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>NIM / NIP</label>
-                <input value={editFormData.nim_nip} onChange={(e) => setEditFormData({...editFormData, nim_nip: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+              <div style={{ flex: 1 }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Prodi</label>
+                <CustomSelect
+                  value={editFormData.prodi}
+                  onChange={(val) => setEditFormData({...editFormData, prodi: val})}
+                  placeholder="Pilih Prodi..."
+                  options={[
+                    { value: '', label: 'Tidak Ada / Global' },
+                    { value: 'Teknik Informatika', label: 'Teknik Informatika' },
+                    { value: 'Sistem Informasi', label: 'Sistem Informasi' },
+                    { value: 'Teknik Komputer', label: 'Teknik Komputer' },
+                    { value: 'Manajemen Bisnis', label: 'Manajemen Bisnis' }
+                  ]}
+                />
               </div>
-              <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' , flexWrap: 'wrap' }}>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Role</label>
-                  <CustomSelect
-                    value={editFormData.role}
-                    onChange={(val) => setEditFormData({...editFormData, role: val})}
-                    options={[
-                      { value: 'mahasiswa', label: 'Mahasiswa', icon: 'ph ph-student' },
-                      { value: 'dosen', label: 'Dosen', icon: 'ph ph-chalkboard-teacher' },
-                      { value: 'admin', label: 'Admin', icon: 'ph ph-shield-check' },
-                      { value: 'kaprodi', label: 'Kaprodi', icon: 'ph ph-briefcase' }
-                    ]}
-                  />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Prodi</label>
-                  <CustomSelect
-                    value={editFormData.prodi}
-                    onChange={(val) => setEditFormData({...editFormData, prodi: val})}
-                    placeholder="Pilih Prodi..."
-                    options={[
-                      { value: '', label: 'Tidak Ada / Global' },
-                      { value: 'Teknik Informatika', label: 'Teknik Informatika' },
-                      { value: 'Sistem Informasi', label: 'Sistem Informasi' },
-                      { value: 'Teknik Komputer', label: 'Teknik Komputer' },
-                      { value: 'Manajemen Bisnis', label: 'Manajemen Bisnis' }
-                    ]}
-                  />
-                </div>
-              </div>
-              <div style={{ marginBottom: '24px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Password Baru (Opsional)</label>
-                <input type="password" value={editFormData.password} onChange={(e) => setEditFormData({...editFormData, password: e.target.value})} placeholder="Biarkan kosong jika tidak ingin mengubah..." style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
-              </div>
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
-                <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 16px', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', color: 'var(--color-text)' }}>Batal</button>
-                <button type="submit" style={{ padding: '10px 16px', background: '#4f46e5', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Simpan Perubahan</button>
-              </div>
-            </form>
-          </div>
-        </div>
+            </div>
+            <div style={{ marginBottom: '24px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Password Baru (Opsional)</label>
+              <input type="password" value={editFormData.password} onChange={(e) => setEditFormData({...editFormData, password: e.target.value})} placeholder="Biarkan kosong jika tidak ingin mengubah..." style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            </div>
+          </form>
+        </ModalShell>
       )}
     </div>
   );

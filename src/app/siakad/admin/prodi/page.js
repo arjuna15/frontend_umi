@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+import ModalShell from '../../components/ModalShell';
 
 export default function AdminProdiPage() {
   const router = useRouter();
@@ -166,48 +167,46 @@ export default function AdminProdiPage() {
       </div>
 
       {isEditModalOpen && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' , flexWrap: 'wrap' }}>
-              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>{editFormData.id ? 'Edit Prodi' : 'Tambah Prodi'}</h3>
-              <button onClick={() => setIsEditModalOpen(false)} style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--color-muted)', fontSize: '1.5rem' }}><i className="ph ph-x"></i></button>
+        <ModalShell
+          title={editFormData.id ? 'Edit Prodi' : 'Tambah Prodi'}
+          icon="ph-buildings"
+          onClose={() => setIsEditModalOpen(false)}
+          footer={(
+            <>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="prodi-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan</button>
+            </>
+          )}
+        >
+          <form id="prodi-form" onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kode Prodi</label>
+              <input type="text" required value={editFormData.code} onChange={e=>setEditFormData({...editFormData, code: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: TK" />
             </div>
-            <div style={{ padding: '24px' }}>
-              <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kode Prodi</label>
-                  <input type="text" required value={editFormData.code} onChange={e=>setEditFormData({...editFormData, code: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: TK" />
-                </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Nama Prodi</label>
-                  <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Teknik Komputer" />
-                </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Ketua Program Studi (Kaprodi)</label>
-                  <input type="text" required value={editFormData.kaprodi} onChange={e=>setEditFormData({...editFormData, kaprodi: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Budi Santoso, M.T." />
-                </div>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Jenjang</label>
-                  <CustomSelect 
-                    value={editFormData.jenjang} 
-                    onChange={val => setEditFormData({...editFormData, jenjang: val})} 
-                    options={[
-                      { value: "D3", label: "Diploma 3 (D3)" },
-                      { value: "D4", label: "Diploma 4 (D4)" },
-                      { value: "S1", label: "Sarjana (S1)" },
-                      { value: "S2", label: "Magister (S2)" },
-                      { value: "S3", label: "Doktor (S3)" }
-                    ]}
-                  />
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '16px' , flexWrap: 'wrap'}}>
-                  <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 600 }}>Batal</button>
-                  <button type="submit" style={{ padding: '10px 20px', borderRadius: '8px', border: 'none', background: '#3b82f6', color: 'white', cursor: 'pointer', fontWeight: 600 }}>Simpan</button>
-                </div>
-              </form>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Nama Prodi</label>
+              <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Teknik Komputer" />
             </div>
-          </div>
-        </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Ketua Program Studi (Kaprodi)</label>
+              <input type="text" required value={editFormData.kaprodi} onChange={e=>setEditFormData({...editFormData, kaprodi: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Budi Santoso, M.T." />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Jenjang</label>
+              <CustomSelect 
+                value={editFormData.jenjang} 
+                onChange={val => setEditFormData({...editFormData, jenjang: val})} 
+                options={[
+                  { value: "D3", label: "Diploma 3 (D3)" },
+                  { value: "D4", label: "Diploma 4 (D4)" },
+                  { value: "S1", label: "Sarjana (S1)" },
+                  { value: "S2", label: "Magister (S2)" },
+                  { value: "S3", label: "Doktor (S3)" }
+                ]}
+              />
+            </div>
+          </form>
+        </ModalShell>
       )}
     </div>
   );

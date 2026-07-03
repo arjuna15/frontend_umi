@@ -238,95 +238,73 @@ export default function DosenElearningPage() {
         </div>
       </div>
 
-      {/* Modal Upload Materi */}
       {showUploadModal && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <div className="siakad-modal-header">
-              <h3 style={{ margin: 0, color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <i className="ph ph-upload-simple" style={{ color: '#C41E3A' }}></i> Upload Materi Sesi {uploadSession}
-              </h3>
-              <button onClick={() => setShowUploadModal(false)} style={{ background: 'transparent', border: 'none', color: 'var(--color-muted)', cursor: 'pointer', fontSize: '1.5rem' }}>
-                <i className="ph ph-x"></i>
-              </button>
+        <ModalShell
+          title={`Upload Materi Sesi ${uploadSession}`}
+          icon="ph-upload-simple"
+          onClose={() => setShowUploadModal(false)}
+          footer={(
+            <>
+              <button type="button" onClick={() => setShowUploadModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="upload-form" disabled={uploading} style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(99, 102, 241, 0.28)' }}>{uploading ? 'Mengupload...' : 'Upload Materi'}</button>
+            </>
+          )}
+        >
+          <form id="upload-form" onSubmit={handleUploadSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Judul Materi</label>
+              <input 
+                type="text" 
+                className="siakad-input" 
+                value={uploadTitle}
+                onChange={e => setUploadTitle(e.target.value)}
+                placeholder="Contoh: Pengenalan Sintaks Dasar Python"
+                style={{ width: '100%' }}
+                required
+              />
             </div>
 
-            <form onSubmit={handleUploadSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '16px' }}>
-              <div>
-                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Judul Materi</label>
-                <input 
-                  type="text" 
-                  className="siakad-input" 
-                  value={uploadTitle}
-                  onChange={e => setUploadTitle(e.target.value)}
-                  placeholder="Contoh: Pengenalan Sintaks Dasar Python"
-                  style={{ width: '100%' }}
-                  required
-                />
-              </div>
-
-              <div>
-                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Pilih File</label>
-                <input 
-                  type="file" 
-                  className="siakad-input"
-                  onChange={e => setSelectedFile(e.target.files[0])}
-                  style={{ width: '100%', background: 'transparent', border: '1px dashed var(--color-border)', padding: '20px', textAlign: 'center' }}
-                  required
-                />
-              </div>
-
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '16px' }}>
-                <button type="button" onClick={() => setShowUploadModal(false)} style={{ background: 'transparent', border: '1px solid var(--color-border)', padding: '10px 20px', borderRadius: '8px', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold' }}>
-                  Batal
-                </button>
-                <button type="submit" disabled={uploading} style={{ background: '#C41E3A', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(196, 30, 58, 0.3)' }}>
-                  {uploading ? 'Mengupload...' : 'Upload Materi'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Pilih File</label>
+              <input 
+                type="file" 
+                className="siakad-input"
+                onChange={e => setSelectedFile(e.target.files[0])}
+                style={{ width: '100%', background: 'transparent', border: '1px dashed var(--color-border)', padding: '20px', textAlign: 'center' }}
+                required
+              />
+            </div>
+          </form>
+        </ModalShell>
       )}
 
-      {/* Modal Meet Link */}
       {showMeetModal && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <div className="siakad-modal-header">
-              <h3 style={{ margin: 0, color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <i className="ph ph-video-camera" style={{ color: '#10b981' }}></i> Link Virtual Meet Sesi {meetSession}
-              </h3>
-              <button onClick={() => setShowMeetModal(false)} style={{ background: 'transparent', border: 'none', color: 'var(--color-muted)', cursor: 'pointer', fontSize: '1.5rem' }}>
-                <i className="ph ph-x"></i>
-              </button>
+        <ModalShell
+          title={`Link Virtual Meet Sesi ${meetSession}`}
+          icon="ph-video-camera"
+          onClose={() => setShowMeetModal(false)}
+          footer={(
+            <>
+              <button type="button" onClick={() => setShowMeetModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="meet-form" disabled={savingMeet} style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(16, 185, 129, 0.28)' }}>{savingMeet ? 'Menyimpan...' : 'Simpan Link Meet'}</button>
+            </>
+          )}
+        >
+          <form id="meet-form" onSubmit={handleMeetSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Google Meet / Zoom URL</label>
+              <input 
+                type="url" 
+                className="siakad-input" 
+                value={meetUrl}
+                onChange={e => setMeetUrl(e.target.value)}
+                placeholder="https://meet.google.com/abc-defg-hij"
+                style={{ width: '100%' }}
+                required
+              />
             </div>
-
-            <form onSubmit={handleMeetSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginTop: '16px' }}>
-              <div>
-                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Google Meet / Zoom URL</label>
-                <input 
-                  type="url" 
-                  className="siakad-input" 
-                  value={meetUrl}
-                  onChange={e => setMeetUrl(e.target.value)}
-                  placeholder="https://meet.google.com/abc-defg-hij"
-                  style={{ width: '100%' }}
-                  required
-                />
-              </div>
-
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '16px' }}>
-                <button type="button" onClick={() => setShowMeetModal(false)} style={{ background: 'transparent', border: '1px solid var(--color-border)', padding: '10px 20px', borderRadius: '8px', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold' }}>
-                  Batal
-                </button>
-                <button type="submit" disabled={savingMeet} style={{ background: '#10b981', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)' }}>
-                  {savingMeet ? 'Menyimpan...' : 'Simpan Link Meet'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+          </form>
+        </ModalShell>
       )}
     </div>
   );
