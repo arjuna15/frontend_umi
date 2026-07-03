@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+import CustomTimePicker from '../../components/CustomTimePicker';
 
 const DAY_COLORS = {
   Senin: { bg: 'rgba(59,130,246,0.15)', color: '#3b82f6', border: 'rgba(59,130,246,0.3)' },
@@ -199,11 +200,17 @@ export default function JadwalPage() {
                         </td>
                         <td style={{ padding: '12px 16px' }}>
                           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' , flexWrap: 'wrap' }}>
-                            <input type="time" value={formData.start_time} onChange={e => setFormData({...formData, start_time: e.target.value})}
-                              className="siakad-input" />
+                            <CustomTimePicker 
+                              value={formData.start_time} 
+                              onChange={val => setFormData({...formData, start_time: val})}
+                              style={{ width: '110px' }}
+                            />
                             <span style={{ color: 'var(--color-muted)' }}>—</span>
-                            <input type="time" value={formData.end_time} onChange={e => setFormData({...formData, end_time: e.target.value})}
-                              className="siakad-input" />
+                            <CustomTimePicker 
+                              value={formData.end_time} 
+                              onChange={val => setFormData({...formData, end_time: val})}
+                              style={{ width: '110px' }}
+                            />
                           </div>
                         </td>
                         <td style={{ padding: '12px 16px' }}>

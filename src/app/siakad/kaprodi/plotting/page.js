@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
 import ModalShell from '../../components/ModalShell';
+import CustomTimePicker from '../../components/CustomTimePicker';
 
 export default function KaprodiPlotting() {
   const router = useRouter();
@@ -243,24 +244,16 @@ export default function KaprodiPlotting() {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div>
                 <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Jam Mulai</label>
-                <input 
-                  type="time" 
-                  className="siakad-input" 
+                <CustomTimePicker 
                   value={scheduleForm.jamMulai}
-                  onChange={e => setScheduleForm({...scheduleForm, jamMulai: e.target.value})}
-                  style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
-                  required
+                  onChange={val => setScheduleForm({...scheduleForm, jamMulai: val})}
                 />
               </div>
               <div>
                 <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Jam Selesai</label>
-                <input 
-                  type="time" 
-                  className="siakad-input" 
+                <CustomTimePicker 
                   value={scheduleForm.jamSelesai}
-                  onChange={e => setScheduleForm({...scheduleForm, jamSelesai: e.target.value})}
-                  style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
-                  required
+                  onChange={val => setScheduleForm({...scheduleForm, jamSelesai: val})}
                 />
               </div>
             </div>
