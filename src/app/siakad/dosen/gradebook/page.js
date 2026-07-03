@@ -1,26 +1,65 @@
 "use client";
 import { useEffect, useState, useRef } from 'react';
+import ModalShell from '../../components/ModalShell';
 import { useRouter } from 'next/navigation';
+
+const defaultWeights = {
+  attendance_weight: 10,
+  assignment_weight: 20,
+  uts_weight: 30,
+  uas_weight: 40
+};
 
 export default function DosenGradebookPage() {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // We will track raw components: kehadiran (10%), tugas (20%), uts (30%), uas (40%)
+  // Track editable grade components per student and course-specific weights.
   const [editedGrades, setEditedGrades] = useState({});
   const [savingGrades, setSavingGrades] = useState(false);
   const [activeCourseId, setActiveCourseId] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showWeightModal, setShowWeightModal] = useState(false);
+  const [weightForm, setWeightForm] = useState({
+    attendance_weight: '10',
+    assignment_weight: '20',
+    uts_weight: '30',
+    uas_weight: '40'
+  });
+  const [weightSaving, setWeightSaving] = useState(false);
   const fileInputRef = useRef(null);
 
-  const calculateScoreAndGrade = (components) => {
+  const getCourseWeights = (course = {}) => ({
+    attendance_weight: course.attendance_weight ?? defaultWeights.attendance_weight,
+    assignment_weight: course.assignment_weight ?? defaultWeights.assignment_weight,
+    uts_weight: course.uts_weight ?? defaultWeights.uts_weight,
+    uas_weight: course.uas_weight ?? defaultWeights.uas_weight
+  });
+
+  const formatScoreValue = (value) => {
+    if (value === null || value === undefined || value === '') return '-';
+    const num = Number(value);
+    if (!Number.isFinite(num)) return '-';
+    return Number(num.toFixed(2)).toString();
+  };
+
+  const calculateScoreAndGrade = (components, weights = defaultWeights) => {
     const k = parseFloat(components.kehadiran) || 0;
     const t = parseFloat(components.tugas) || 0;
     const ut = parseFloat(components.uts) || 0;
     const ua = parseFloat(components.uas) || 0;
-    
-    const finalScore = (k * 0.1) + (t * 0.2) + (ut * 0.3) + (ua * 0.4);
+    const courseWeights = { ...defaultWeights, ...weights };
+    const totalWeight = ['attendance_weight', 'assignment_weight', 'uts_weight', 'uas_weight']
+      .map(key => parseFloat(courseWeights[key]) || 0)
+      .reduce((sum, value) => sum + value, 0);
+
+    const finalScore = totalWeight > 0
+      ? ((k * (parseFloat(courseWeights.attendance_weight) || 0)) +
+         (t * (parseFloat(courseWeights.assignment_weight) || 0)) +
+         (ut * (parseFloat(courseWeights.uts_weight) || 0)) +
+         (ua * (parseFloat(courseWeights.uas_weight) || 0))) / totalWeight
+      : 0;
     
     let grade = 'E';
     if (finalScore >= 85) grade = 'A';
@@ -32,7 +71,7 @@ export default function DosenGradebookPage() {
     else if (finalScore >= 55) grade = 'C';
     else if (finalScore >= 40) grade = 'D';
 
-    return { score: finalScore.toFixed(1), grade };
+    return { score: finalScore, grade };
   };
 
   const fetchDashboard = async () => {
@@ -52,12 +91,11 @@ export default function DosenGradebookPage() {
       result.jadwal.forEach(course => {
         if (course.grades) {
           course.grades.forEach(g => {
-            const s = g.score || 0;
             initialEdits[g.id] = {
-              kehadiran: s ? s : '',
-              tugas: s ? s : '',
-              uts: s ? s : '',
-              uas: s ? s : '',
+              kehadiran: '',
+              tugas: '',
+              uts: '',
+              uas: '',
               score: g.score || '',
               grade: g.grade || ''
             };
@@ -77,11 +115,28 @@ export default function DosenGradebookPage() {
     fetchDashboard();
   }, [router]);
 
+  useEffect(() => {
+    if (!data || !activeCourseId) return;
+    const course = data.jadwal.find(item => item.id === activeCourseId);
+    if (!course) return;
+    setWeightForm({
+      attendance_weight: String(course.attendance_weight ?? defaultWeights.attendance_weight),
+      assignment_weight: String(course.assignment_weight ?? defaultWeights.assignment_weight),
+      uts_weight: String(course.uts_weight ?? defaultWeights.uts_weight),
+      uas_weight: String(course.uas_weight ?? defaultWeights.uas_weight)
+    });
+  }, [data, activeCourseId]);
+
+  const getCourseByGradeId = (gradeId) => {
+    return data?.jadwal?.find(course => course.grades?.some(g => g.id === gradeId));
+  };
+
   const handleGradeChange = (gradeId, field, value) => {
     setEditedGrades(prev => {
       const current = prev[gradeId] || {};
       const updated = { ...current, [field]: value };
-      const { score, grade } = calculateScoreAndGrade(updated);
+      const course = getCourseByGradeId(gradeId);
+      const { score, grade } = calculateScoreAndGrade(updated, getCourseWeights(course));
       return {
         ...prev,
         [gradeId]: {
@@ -212,7 +267,7 @@ export default function DosenGradebookPage() {
           const ua = row[5] || 0;
 
           const updated = { kehadiran: k, tugas: t, uts: ut, uas: ua };
-          const { score, grade } = calculateScoreAndGrade(updated);
+          const { score, grade } = calculateScoreAndGrade(updated, getCourseWeights(course));
           newEdits[gradeObj.id] = { ...updated, score, grade };
           importedCount++;
         }
@@ -303,6 +358,10 @@ export default function DosenGradebookPage() {
                   onChange={(e) => handleImportCSV(e, course)}
                 />
                 
+                <button onClick={() => setShowWeightModal(true)} style={{ padding: '10px 16px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                  <i className="ph ph-sliders"></i> Atur Bobot
+                </button>
+
                 <button onClick={() => fileInputRef.current?.click()} style={{ padding: '10px 16px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
                   <i className="ph ph-upload-simple"></i> Import CSV
                 </button>
@@ -331,10 +390,10 @@ export default function DosenGradebookPage() {
                 <thead>
                   <tr style={{ background: 'rgba(0,0,0,0.05)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '1px solid var(--color-border)' }}>
                     <th style={{ padding: '16px 24px', fontWeight: 'bold' }}>Mahasiswa</th>
-                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Kehadiran (10%)</th>
-                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Tugas (20%)</th>
-                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UTS (30%)</th>
-                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UAS (40%)</th>
+                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Kehadiran ({formatScoreValue(getCourseWeights(course).attendance_weight)}%)</th>
+                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Tugas ({formatScoreValue(getCourseWeights(course).assignment_weight)}%)</th>
+                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UTS ({formatScoreValue(getCourseWeights(course).uts_weight)}%)</th>
+                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UAS ({formatScoreValue(getCourseWeights(course).uas_weight)}%)</th>
                     <th style={{ padding: '16px', fontWeight: 'bold', width: '100px' }}>Nilai Akhir</th>
                     <th style={{ padding: '16px 24px', fontWeight: 'bold', width: '100px' }}>Grade</th>
                   </tr>
@@ -383,7 +442,7 @@ export default function DosenGradebookPage() {
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
-                          <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{edits.score || '-'}</div>
+                          <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{formatScoreValue(edits.score)}</div>
                         </td>
                         <td style={{ padding: '16px 24px' }}>
                           <div style={{ 
@@ -413,6 +472,93 @@ export default function DosenGradebookPage() {
           </div>
         );
       })}
+    {showWeightModal && activeCourseId && (() => {
+      const course = data.jadwal.find(item => item.id === activeCourseId);
+      if (!course) return null;
+      return (
+        <ModalShell
+          title="Atur Bobot Nilai"
+          subtitle={`${course.code} • ${course.name}`}
+          icon="ph-sliders"
+          onClose={() => setShowWeightModal(false)}
+          maxWidth="520px"
+          footer={(
+            <>
+              <button
+                type="button"
+                onClick={() => setShowWeightModal(false)}
+                style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                onClick={async () => {
+                  setWeightSaving(true);
+                  const token = localStorage.getItem('siakad_token');
+                  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+                  try {
+                    const res = await fetch(`${apiUrl}/siakad/dosen/courses/${course.id}/grading-weights`, {
+                      method: 'PUT',
+                      headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        attendance_weight: weightForm.attendance_weight,
+                        assignment_weight: weightForm.assignment_weight,
+                        uts_weight: weightForm.uts_weight,
+                        uas_weight: weightForm.uas_weight
+                      })
+                    });
+                    if (!res.ok) {
+                      throw new Error('Gagal menyimpan bobot');
+                    }
+                    setShowWeightModal(false);
+                    await fetchDashboard();
+                    window.toast('Bobot nilai berhasil disimpan.');
+                  } catch (err) {
+                    window.toast('Error: ' + err.message);
+                  } finally {
+                    setWeightSaving(false);
+                  }
+                }}
+                style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, opacity: weightSaving ? 0.7 : 1 }}
+                disabled={weightSaving}
+              >
+                {weightSaving ? 'Menyimpan...' : 'Simpan Bobot'}
+              </button>
+            </>
+          )}
+        >
+          <div style={{ display: 'grid', gap: '16px' }}>
+            {[
+              ['attendance_weight', 'Kehadiran'],
+              ['assignment_weight', 'Tugas'],
+              ['uts_weight', 'UTS'],
+              ['uas_weight', 'UAS']
+            ].map(([key, label]) => (
+              <div key={key}>
+                <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>{label} (%)</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="1"
+                  value={weightForm[key]}
+                  onChange={(e) => setWeightForm(prev => ({ ...prev, [key]: e.target.value }))}
+                  className="siakad-input"
+                  style={{ width: '100%' }}
+                />
+              </div>
+            ))}
+            <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>
+              Total bobot dihitung otomatis saat nilai akhir dihitung.
+            </p>
+          </div>
+        </ModalShell>
+      );
+    })()}
     </div>
   );
 }
