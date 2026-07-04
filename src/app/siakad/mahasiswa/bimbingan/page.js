@@ -177,8 +177,8 @@ export default function BimbinganAkademikPage() {
             )) : (
               <div style={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: 'var(--color-muted)', gap: '8px' }}>
                 <i className="ph ph-chats" style={{ fontSize: '2.5rem', opacity: 0.5 }}></i>
-                <p style={{ margin: 0, fontWeight: '600' }}>Belum ada riwayat konsultasi dari backend.</p>
-                <p style={{ margin: 0, fontSize: '0.9rem' }}>Begitu endpoint konsultasi aktif, pesan akan tampil di sini.</p>
+                <p style={{ margin: 0, fontWeight: '600' }}>Belum ada riwayat konsultasi.</p>
+                <p style={{ margin: 0, fontSize: '0.9rem' }}>Kirim pesan pertama ke dosen wali untuk memulai konsultasi.</p>
               </div>
             )}
           </div>
