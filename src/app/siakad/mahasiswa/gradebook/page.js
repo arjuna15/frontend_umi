@@ -31,6 +31,19 @@ export default function MahasiswaGradebook() {
     fetchGrades();
   }, [router]);
 
+  const formatNumber = (value) => {
+    if (value === null || value === undefined || value === '') return '-';
+    const num = Number(value);
+    if (!Number.isFinite(num)) return '-';
+    return Number.isInteger(num) ? String(num) : num.toFixed(1).replace(/\.0$/, '');
+  };
+
+  const formatValueWithWeight = (value, weight) => {
+    const formattedValue = formatNumber(value);
+    const formattedWeight = formatNumber(weight);
+    return `${formattedValue} (${formattedWeight}%)`;
+  };
+
   if (loading || !data) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat rapor akademik...
@@ -120,10 +133,10 @@ export default function MahasiswaGradebook() {
               <tr>
                 <th>Mata Kuliah</th>
                 <th style={{ textAlign: 'center' }}>SKS</th>
-                <th style={{ textAlign: 'center' }}>Tugas (20%)</th>
-                <th style={{ textAlign: 'center' }}>Kuis (20%)</th>
-                <th style={{ textAlign: 'center' }}>UTS (30%)</th>
-                <th style={{ textAlign: 'center' }}>UAS (30%)</th>
+                <th style={{ textAlign: 'center' }}>Tugas</th>
+                <th style={{ textAlign: 'center' }}>Kuis</th>
+                <th style={{ textAlign: 'center' }}>UTS</th>
+                <th style={{ textAlign: 'center' }}>UAS</th>
                 <th style={{ textAlign: 'center' }}>Angka</th>
                 <th style={{ textAlign: 'center' }}>Mutu</th>
               </tr>
@@ -138,10 +151,10 @@ export default function MahasiswaGradebook() {
                   <tr key={idx}>
                     <td style={{ fontWeight: '600' }}>{item.course_name}</td>
                     <td style={{ textAlign: 'center' }}>{item.sks}</td>
-                    <td style={{ textAlign: 'center' }}>{item.tugas}</td>
-                    <td style={{ textAlign: 'center' }}>{item.kuis}</td>
-                    <td style={{ textAlign: 'center' }}>{item.uts}</td>
-                    <td style={{ textAlign: 'center' }}>{item.uas}</td>
+                    <td style={{ textAlign: 'center' }}>{formatValueWithWeight(item.tugas, item.assignment_weight)}</td>
+                    <td style={{ textAlign: 'center' }}>{formatValueWithWeight(item.kuis, item.attendance_weight)}</td>
+                    <td style={{ textAlign: 'center' }}>{formatValueWithWeight(item.uts, item.uts_weight)}</td>
+                    <td style={{ textAlign: 'center' }}>{formatValueWithWeight(item.uas, item.uas_weight)}</td>
                     <td style={{ textAlign: 'center', fontWeight: 'bold' }}>{item.akhir}</td>
                     <td style={{ textAlign: 'center' }}>
                     <span className="siakad-badge" style={{
