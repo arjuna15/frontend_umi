@@ -6,7 +6,8 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed:pddikti": "node scripts/pddikti-seed.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.0",
