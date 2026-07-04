@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function MahasiswaQuiz() {
+function QuizContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [quizData, setQuizData] = useState(null);
@@ -45,7 +45,7 @@ export default function MahasiswaQuiz() {
 
   useEffect(() => {
     if (loading || result) return;
-    
+
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
@@ -67,15 +67,15 @@ export default function MahasiswaQuiz() {
   const handleSubmit = async (e) => {
     if(e) e.preventDefault();
     if (!await window.toast.confirm('Yakin ingin menyelesaikan kuis ini?')) return;
-    
+
     setSubmitting(true);
     const token = localStorage.getItem('siakad_token');
-    
+
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
       const res = await fetch(`${apiUrl}/siakad/mahasiswa/quizzes/${quizId}/submit`, {
         method: 'POST',
-        headers: { 
+        headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
@@ -164,7 +164,7 @@ export default function MahasiswaQuiz() {
                 {q.question}
               </h3>
             </div>
-            
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingLeft: '52px' }}>
               {['a', 'b', 'c', 'd'].map(opt => (
                 <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', border: answers[q.id] === opt ? '2px solid #0f172a' : '1px solid var(--color-border)', background: answers[q.id] === opt ? 'rgba(15,23,42,0.05)' : 'var(--glass-bg)', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s' }}>
@@ -199,5 +199,17 @@ export default function MahasiswaQuiz() {
         )}
       </form>
     </div>
+  );
+}
+
+export default function MahasiswaQuizPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-muted)' }}>
+        <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Kuis...
+      </div>
+    }>
+      <QuizContent />
+    </Suspense>
   );
 }

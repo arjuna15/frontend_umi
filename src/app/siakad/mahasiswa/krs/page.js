@@ -12,7 +12,8 @@ export default function KRSPage() {
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [krsOpen, setKrsOpen] = useState(true);
-  const currentSemester = data?.semester || localStorage.getItem('siakad_semester') || 'Semester aktif';
+  const [semesterSetting, setSemesterSetting] = useState('Semester aktif');
+  const currentSemester = data?.semester || semesterSetting || 'Semester aktif';
 
   const fetchDashboard = async () => {
     const token = localStorage.getItem('siakad_token');
@@ -53,6 +54,7 @@ export default function KRSPage() {
     if (savedKrsStatus === 'false') {
       setKrsOpen(false);
     }
+    setSemesterSetting(localStorage.getItem('siakad_semester') || 'Semester aktif');
     fetchDashboard();
   }, [router]);
 
