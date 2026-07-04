@@ -2,5 +2,5 @@
 
 export function getPortalRoot() {
   if (typeof document === 'undefined') return null;
-  return document.getElementById('siakad-portal-root');
+  return document.body instanceof HTMLElement ? document.body : null;
 }

@@ -58,7 +58,6 @@ export function ConfirmModal() {
 
   const portalRoot = getPortalRoot();
   if (!mounted || !modal || !portalRoot) return null;
-
   return createPortal(
     <div className="siakad-modal-overlay">
       <div style={{
