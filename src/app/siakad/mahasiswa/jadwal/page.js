@@ -7,6 +7,7 @@ export default function JadwalKalenderPage() {
   const [activeTab, setActiveTab] = useState('jadwal');
   const [data, setData] = useState(null);
   const [dashboardExt, setDashboardExt] = useState(null);
+  const [calendarEvents, setCalendarEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,9 +17,10 @@ export default function JadwalKalenderPage() {
 
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-        const [dashRes, extRes] = await Promise.all([
+        const [dashRes, extRes, calRes] = await Promise.all([
           fetch(`${apiUrl}/siakad/dashboard`, { headers: { 'Authorization': `Bearer ${token}` } }),
-          fetch(`${apiUrl}/siakad/mahasiswa/dashboard`, { headers: { 'Authorization': `Bearer ${token}` } })
+          fetch(`${apiUrl}/siakad/mahasiswa/dashboard`, { headers: { 'Authorization': `Bearer ${token}` } }),
+          fetch(`${apiUrl}/siakad/calendar`, { headers: { 'Authorization': `Bearer ${token}` } })
         ]);
 
         if (!dashRes.ok) throw new Error('Failed to fetch');
@@ -29,6 +31,11 @@ export default function JadwalKalenderPage() {
         if (extRes.ok) {
           const extResult = await extRes.json();
           setDashboardExt(extResult);
+        }
+
+        if (calRes.ok) {
+          const calendarResult = await calRes.json();
+          setCalendarEvents(Array.isArray(calendarResult) ? calendarResult : []);
         }
       } catch (err) {
         console.error(err);
@@ -57,11 +64,12 @@ export default function JadwalKalenderPage() {
   })) || [];
   const schedule = Array.isArray(rawSchedule) ? rawSchedule.map(normalizeScheduleItem).filter((item) => item.course && item.course !== '-') : [];
 
-  const rawEvents = dashboardExt?.upcoming_deadlines || dashboardExt?.deadlines || [];
-  const calendarEvents = Array.isArray(rawEvents) ? rawEvents.map((item) => ({
-    date: item.date || item.due_date || item.deadline || '-',
-    event: item.event || item.title || item.name || '-',
-    type: item.type || (item.due_in_days <= 1 ? 'exam' : 'academic')
+  const mappedCalendarEvents = Array.isArray(calendarEvents) ? calendarEvents.map((item) => ({
+    date: item.startDate && item.endDate
+      ? `${item.startDate} - ${item.endDate}`
+      : item.startDate || item.endDate || '-',
+    event: item.name || '-',
+    type: item.type || 'academic'
   })) : [];
 
   const getEventIcon = (type) => {
@@ -218,7 +226,7 @@ export default function JadwalKalenderPage() {
 
       {activeTab === 'kalender' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {calendarEvents.length > 0 ? calendarEvents.map((item, i) => (
+          {mappedCalendarEvents.length > 0 ? mappedCalendarEvents.map((item, i) => (
             <div key={i} className="siakad-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
               <div style={{ background: 'var(--glass-bg)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 {getEventIcon(item.type)}
@@ -230,7 +238,7 @@ export default function JadwalKalenderPage() {
             </div>
           )) : (
             <div className="siakad-card" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>
-              Belum ada agenda akademik dari backend.
+              Belum ada agenda kalender akademik dari backend.
             </div>
           )}
         </div>
