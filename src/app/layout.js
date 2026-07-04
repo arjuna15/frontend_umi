@@ -38,6 +38,7 @@ export const metadata = {
   },
 };
 
+import Script from "next/script";
 import HeaderWrapper from "../components/HeaderWrapper";
 import FooterWrapper from "../components/FooterWrapper";
 import ScrollAnimations from "../components/ScrollAnimations";
@@ -50,7 +51,7 @@ export default function RootLayout({ children }) {
       className="h-full antialiased"
     >
       <head>
-        <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+        <Script src="https://unpkg.com/@phosphor-icons/web" strategy="beforeInteractive" />
         <meta name="theme-color" content="#C41E3A" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

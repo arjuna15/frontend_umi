@@ -11,7 +11,8 @@ export default function SiakadLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
-  const [session, setSession] = useState(() => ({
+  const [hydrated, setHydrated] = useState(false);
+  const [session] = useState(() => ({
     role: typeof window === 'undefined' ? null : localStorage.getItem('siakad_role'),
     portalRole: typeof window === 'undefined' ? null : localStorage.getItem('siakad_portal'),
   }));
@@ -22,6 +23,10 @@ export default function SiakadLayout({ children }) {
   const role = session.role;
   const portalRole = session.portalRole;
   const effectiveRole = role === 'kaprodi' ? (portalRole || 'kaprodi') : role;
+
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
     const loadNotifications = async () => {
@@ -100,6 +105,8 @@ export default function SiakadLayout({ children }) {
 
     loadNotifications();
   }, [role, portalRole, effectiveRole]);
+
+  if (!hydrated) return null;
 
   const isLoginPage = pathname === '/siakad/login';
   if (isLoginPage) return <>{children}</>;
