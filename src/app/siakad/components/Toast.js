@@ -60,9 +60,9 @@ export function ConfirmModal() {
         background: 'var(--color-bg)',
         border: '1px solid var(--color-border)',
         borderRadius: '24px',
-        padding: '40px 32px',
+        padding: '32px 28px',
         maxWidth: '450px',
-        width: '90%',
+        width: 'min(100%, 450px)',
         maxHeight: 'calc(100dvh - 48px)',
         overflowY: 'auto',
         boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
@@ -70,17 +70,17 @@ export function ConfirmModal() {
         textAlign: 'center',
         overflowX: 'hidden'
       }}>
-        <div style={{ position: 'absolute', top: '-50px', left: '-50px', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0) 70%)', borderRadius: '50%', zIndex: 0, flexShrink: 0 }}></div>
+        <div style={{ position: 'absolute', top: '-42px', left: '-42px', width: '132px', height: '132px', background: 'radial-gradient(circle, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0) 70%)', borderRadius: '50%', zIndex: 0, flexShrink: 0 }}></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ width: '80px', height: '80px', background: 'rgba(245, 158, 11, 0.1)', border: '2px solid rgba(245, 158, 11, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', flexShrink: 0 }}>
-            <i className="ph ph-warning-circle" style={{ fontSize: '3.5rem', color: '#f59e0b' }}></i>
+          <div style={{ width: '72px', height: '72px', background: 'rgba(245, 158, 11, 0.1)', border: '2px solid rgba(245, 158, 11, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px', flexShrink: 0 }}>
+            <i className="ph ph-warning-circle" style={{ fontSize: '3rem', color: '#f59e0b' }}></i>
           </div>
-          <h3 style={{ margin: '0 0 12px 0', color: 'var(--color-text)', fontSize: '1.4rem', fontWeight: 'bold' }}>Perhatian!</h3>
-          <p style={{ color: 'var(--color-muted)', marginBottom: '32px', fontSize: '1rem', lineHeight: '1.6' }}>{modal.message}</p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <h3 style={{ margin: '0 0 10px 0', color: 'var(--color-text)', fontSize: '1.35rem', fontWeight: 'bold' }}>Perhatian!</h3>
+          <p style={{ color: 'var(--color-muted)', marginBottom: '24px', fontSize: '1rem', lineHeight: '1.6' }}>{modal.message}</p>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <button 
               onClick={() => { modal.resolve(false); setModal(null); }}
-              style={{ padding: '14px 24px', borderRadius: '12px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', flex: 1, transition: 'all 0.2s' }}
+              style={{ padding: '14px 20px', borderRadius: '12px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', flex: '1 1 160px', transition: 'all 0.2s' }}
               onMouseEnter={(e) => e.target.style.background = 'var(--glass-bg)'}
               onMouseLeave={(e) => e.target.style.background = 'transparent'}
             >
@@ -88,7 +88,7 @@ export function ConfirmModal() {
             </button>
             <button 
               onClick={() => { modal.resolve(true); setModal(null); }}
-              style={{ padding: '14px 24px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', color: 'white', fontWeight: 'bold', cursor: 'pointer', flex: 1, boxShadow: '0 10px 15px -3px rgba(245, 158, 11, 0.3)', transition: 'all 0.2s' }}
+              style={{ padding: '14px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', color: 'white', fontWeight: 'bold', cursor: 'pointer', flex: '1 1 160px', boxShadow: '0 10px 15px -3px rgba(245, 158, 11, 0.3)', transition: 'all 0.2s' }}
               onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
               onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
             >
@@ -130,7 +130,7 @@ export function PromptModal() {
         borderRadius: '24px',
         padding: '0',
         maxWidth: '500px',
-        width: '90%',
+        width: 'min(100%, 500px)',
         maxHeight: 'calc(100dvh - 48px)',
         overflowY: 'auto',
         boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
@@ -212,7 +212,7 @@ export function FormModal() {
         borderRadius: '24px',
         padding: '0',
         maxWidth: '550px',
-        width: '90%',
+        width: 'min(100%, 550px)',
         maxHeight: 'calc(100dvh - 48px)',
         overflowY: 'auto',
         boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',

@@ -12,10 +12,7 @@ export default function SiakadLayout({ children }) {
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
   const [hydrated, setHydrated] = useState(false);
-  const [session] = useState(() => ({
-    role: typeof window === 'undefined' ? null : localStorage.getItem('siakad_role'),
-    portalRole: typeof window === 'undefined' ? null : localStorage.getItem('siakad_portal'),
-  }));
+  const [session, setSession] = useState({ role: null, portalRole: null });
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
   const [notifications, setNotifications] = useState([]);
@@ -26,6 +23,10 @@ export default function SiakadLayout({ children }) {
 
   useEffect(() => {
     setHydrated(true);
+    setSession({
+      role: localStorage.getItem('siakad_role'),
+      portalRole: localStorage.getItem('siakad_portal'),
+    });
   }, []);
 
   useEffect(() => {
