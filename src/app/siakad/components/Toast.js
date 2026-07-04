@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import { getPortalRoot } from './portalRoot';
 
 // Singleton event emitter for toasts
 export const toast = (message, type = 'success') => {
@@ -56,9 +54,8 @@ export function ConfirmModal() {
     return () => window.removeEventListener('siakad_confirm', handleConfirm);
   }, []);
 
-  const portalRoot = getPortalRoot();
-  if (!mounted || !modal || !portalRoot) return null;
-  return createPortal(
+  if (!mounted || !modal) return null;
+  return (
     <div className="siakad-modal-overlay">
       <div style={{
         position: 'relative',
@@ -73,16 +70,14 @@ export function ConfirmModal() {
         textAlign: 'center',
         overflow: 'hidden'
       }}>
-        {/* Decorative background blur inside modal */}
-        <div style={{ position: 'absolute', top: '-50px', left: '-50px', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0) 70%)', borderRadius: '50%', zIndex: 0 , flexShrink: 0 }}></div>
-        
+        <div style={{ position: 'absolute', top: '-50px', left: '-50px', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0) 70%)', borderRadius: '50%', zIndex: 0, flexShrink: 0 }}></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ width: '80px', height: '80px', background: 'rgba(245, 158, 11, 0.1)', border: '2px solid rgba(245, 158, 11, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' , flexShrink: 0 }}>
+          <div style={{ width: '80px', height: '80px', background: 'rgba(245, 158, 11, 0.1)', border: '2px solid rgba(245, 158, 11, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', flexShrink: 0 }}>
             <i className="ph ph-warning-circle" style={{ fontSize: '3.5rem', color: '#f59e0b' }}></i>
           </div>
           <h3 style={{ margin: '0 0 12px 0', color: 'var(--color-text)', fontSize: '1.4rem', fontWeight: 'bold' }}>Perhatian!</h3>
           <p style={{ color: 'var(--color-muted)', marginBottom: '32px', fontSize: '1rem', lineHeight: '1.6' }}>{modal.message}</p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' , flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <button 
               onClick={() => { modal.resolve(false); setModal(null); }}
               style={{ padding: '14px 24px', borderRadius: '12px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', flex: 1, transition: 'all 0.2s' }}
@@ -127,10 +122,8 @@ export function PromptModal() {
     return () => window.removeEventListener('siakad_prompt', handlePrompt);
   }, []);
 
-  const portalRoot = getPortalRoot();
-  if (!mounted || !modal || !portalRoot) return null;
-
-  return createPortal(
+  if (!mounted || !modal) return null;
+  return (
     <div className="siakad-modal-overlay">
       <div style={{
         position: 'relative',
@@ -146,12 +139,11 @@ export function PromptModal() {
         overflow: 'hidden'
       }}>
         <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #c026d3 100%)', padding: '24px 32px', position: 'relative' }}>
-          <div style={{ position: 'absolute', top: '-10px', right: '-10px', width: '100px', height: '100px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%' , flexShrink: 0 }}></div>
+          <div style={{ position: 'absolute', top: '-10px', right: '-10px', width: '100px', height: '100px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%', flexShrink: 0 }}></div>
           <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px', color: 'white' }}>
             <i className="ph ph-note-pencil" style={{ fontSize: '1.6rem', color: 'white' }}></i> {modal.message}
           </h3>
         </div>
-        
         <div style={{ padding: '32px' }}>
           <div style={{ marginBottom: '24px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Masukkan input Anda:</label>
@@ -171,7 +163,7 @@ export function PromptModal() {
               onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.02)'; }}
             />
           </div>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end' , flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
             <button 
               onClick={() => { modal.resolve(null); setModal(null); }}
               style={{ padding: '12px 24px', borderRadius: '10px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s' }}
@@ -191,8 +183,7 @@ export function PromptModal() {
           </div>
         </div>
       </div>
-    </div>,
-    portalRoot
+    </div>
   );
 }
 
@@ -213,10 +204,8 @@ export function FormModal() {
     return () => window.removeEventListener('siakad_form', handleForm);
   }, []);
 
-  const portalRoot = getPortalRoot();
-  if (!mounted || !modal || !portalRoot) return null;
-
-  return createPortal(
+  if (!mounted || !modal) return null;
+  return (
     <div className="siakad-modal-overlay">
       <div style={{
         position: 'relative',
@@ -231,14 +220,12 @@ export function FormModal() {
         textAlign: 'left',
         overflow: 'hidden'
       }}>
-        {/* Dynamic Header */}
         <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #2563eb 100%)', padding: '24px 32px', position: 'relative' }}>
-          <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '120px', height: '120px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%' , flexShrink: 0 }}></div>
+          <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '120px', height: '120px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%', flexShrink: 0 }}></div>
           <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px', color: 'white' }}>
             <i className="ph ph-pencil-simple-line" style={{ fontSize: '1.6rem', color: 'white' }}></i> {modal.title}
           </h3>
         </div>
-
         <div style={{ padding: '32px' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '32px' }}>
             {modal.fields.map(f => (
@@ -268,7 +255,7 @@ export function FormModal() {
               </div>
             ))}
           </div>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end', borderTop: '1px solid var(--color-border)', paddingTop: '24px' , flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end', borderTop: '1px solid var(--color-border)', paddingTop: '24px', flexWrap: 'wrap' }}>
             <button 
               onClick={() => { modal.resolve(null); setModal(null); }}
               style={{ padding: '12px 24px', borderRadius: '10px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s' }}
@@ -288,8 +275,7 @@ export function FormModal() {
           </div>
         </div>
       </div>
-    </div>,
-    portalRoot
+    </div>
   );
 }
 
