@@ -43,7 +43,6 @@ export default function DosenDashboard() {
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
-      {/* Hero Header */}
       <div className="siakad-page-header">
         <div className="siakad-page-header-glow"></div>
         <div className="siakad-page-header-grid"></div>
@@ -56,13 +55,12 @@ export default function DosenDashboard() {
         </div>
       </div>
 
-      {/* Stats Row */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         {[
           { label: 'Total Mata Kuliah', value: courses.length || 0, icon: 'ph-books', color: ['#6366f1', '#8b5cf6'], shadow: 'rgba(99,102,241,0.3)' },
           { label: 'Jadwal Hari Ini', value: todaySchedules.length, icon: 'ph-calendar-check', color: ['#10b981', '#059669'], shadow: 'rgba(16,185,129,0.3)' },
           { label: 'Notifikasi Aktif', value: todos.length, icon: 'ph-bell-ringing', color: ['#f59e0b', '#d97706'], shadow: 'rgba(245,158,11,0.3)' },
-          { label: 'Semester', value: data.semester || 'Ganjil 24/25', icon: 'ph-graduation-cap', color: ['#C41E3A', '#ef4444'], shadow: 'rgba(196,30,58,0.3)', small: true },
+          { label: 'Semester', value: data.semester || '-', icon: 'ph-graduation-cap', color: ['#C41E3A', '#ef4444'], shadow: 'rgba(196,30,58,0.3)', small: true },
         ].map((stat, i) => (
           <div key={i} className={`siakad-card stagger-${i + 1}`} style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px' }}>
             <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: `linear-gradient(135deg, ${stat.color[0]}, ${stat.color[1]})`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 8px 20px ${stat.shadow}`, flexShrink: 0 }}>
@@ -76,12 +74,10 @@ export default function DosenDashboard() {
         ))}
       </div>
 
-      {/* Main Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-        {/* Jadwal Hari Ini */}
         <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
           <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className="ph ph-clock" style={{ color: 'white', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, color: 'white', fontWeight: '700' }}>Jadwal Mengajar Hari Ini</h3>
@@ -109,10 +105,9 @@ export default function DosenDashboard() {
           </div>
         </div>
 
-        {/* Notifikasi & To-Do */}
         <div className="siakad-card stagger-3" style={{ overflow: 'hidden' }}>
           <div style={{ background: 'linear-gradient(to right, #064e3b, #065f46)', padding: '20px 24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className="ph ph-bell-ringing" style={{ color: 'white', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, color: 'white', fontWeight: '700' }}>Notifikasi & To-Do</h3>
@@ -137,11 +132,10 @@ export default function DosenDashboard() {
           </div>
         </div>
 
-        {/* Mata Kuliah Diampu */}
         {courses.length > 0 && (
           <div className="siakad-card stagger-4" style={{ overflow: 'hidden', gridColumn: '1 / -1' }}>
             <div style={{ background: 'linear-gradient(to right, #7c2d12, #9a3412)', padding: '20px 24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <i className="ph ph-books" style={{ color: 'white', fontSize: '1.1rem' }}></i>
               </div>
               <h3 style={{ margin: 0, color: 'white', fontWeight: '700' }}>Mata Kuliah yang Diampu</h3>

@@ -6,6 +6,7 @@ export default function MahasiswaDashboard() {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [dashboardExt, setDashboardExt] = useState(null);
+  const [gradebook, setGradebook] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,13 +27,23 @@ export default function MahasiswaDashboard() {
         
         setData(result);
 
-        // Fetch extended dashboard (Schedules & Deadlines)
-        const extRes = await fetch(`${apiUrl}/siakad/mahasiswa/dashboard`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
+        const [extRes, gradeRes] = await Promise.all([
+          fetch(`${apiUrl}/siakad/mahasiswa/dashboard`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          }),
+          fetch(`${apiUrl}/siakad/mahasiswa/gradebook`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          })
+        ]);
+
         if (extRes.ok) {
           const extResult = await extRes.json();
           setDashboardExt(extResult);
+        }
+
+        if (gradeRes.ok) {
+          const gradeResult = await gradeRes.json();
+          setGradebook(Array.isArray(gradeResult) ? gradeResult : []);
         }
 
       } catch (err) {
@@ -50,7 +61,21 @@ export default function MahasiswaDashboard() {
     </div>
   );
 
-  const totalSKS = data.krs.reduce((sum, item) => sum + (item.course?.sks || 0), 0);
+  const totalSKS = Array.isArray(data.krs) ? data.krs.reduce((sum, item) => sum + (item.course?.sks || 0), 0) : 0;
+  const totalBobot = gradebook.reduce((sum, item) => {
+    let bobot = 0;
+    if (item.huruf === 'A') bobot = 4.0;
+    else if (item.huruf === 'A-') bobot = 3.7;
+    else if (item.huruf === 'B+') bobot = 3.3;
+    else if (item.huruf === 'B') bobot = 3.0;
+    else if (item.huruf === 'B-') bobot = 2.7;
+    else if (item.huruf === 'C+') bobot = 2.3;
+    else if (item.huruf === 'C') bobot = 2.0;
+    else if (item.huruf === 'D') bobot = 1.0;
+    return sum + (bobot * (item.sks || 0));
+  }, 0);
+  const totalGradeSks = gradebook.reduce((sum, item) => sum + (item.sks || 0), 0);
+  const currentIpk = totalGradeSks > 0 ? (totalBobot / totalGradeSks).toFixed(2) : '-';
 
   return (
     <div>
@@ -61,7 +86,7 @@ export default function MahasiswaDashboard() {
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
           <div className="siakad-modal-header">
             <div>
-              <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Halo, {data.user.name.split(' ')[0]}!</h1>
+              <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Halo, {data.user.name?.split(' ')[0] || 'Mahasiswa'}!</h1>
               <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Selamat datang kembali di Portal Akademik Anda.</p>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '10px 20px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px', backdropFilter: 'blur(10px)' }}>
@@ -85,7 +110,7 @@ export default function MahasiswaDashboard() {
           </div>
           <div>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>Program Studi</p>
-            <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{data.user.prodi}</h3>
+            <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{data.user.prodi || '-'}</h3>
           </div>
         </div>
         <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -103,7 +128,7 @@ export default function MahasiswaDashboard() {
           </div>
           <div>
             <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>IPK Sementara</p>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>3.75</h3>
+            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{currentIpk}</h3>
           </div>
         </div>
       </div>
@@ -192,7 +217,7 @@ export default function MahasiswaDashboard() {
               </tr>
             </thead>
             <tbody>
-              {data.krs.map((item, i) => (
+              {Array.isArray(data.krs) && data.krs.map((item, i) => (
                 <tr key={i}>
                   <td>{item.course?.code}</td>
                   <td>{item.course?.name}</td>

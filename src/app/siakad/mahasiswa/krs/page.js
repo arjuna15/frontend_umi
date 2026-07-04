@@ -12,6 +12,7 @@ export default function KRSPage() {
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [krsOpen, setKrsOpen] = useState(true);
+  const currentSemester = data?.semester || localStorage.getItem('siakad_semester') || 'Semester aktif';
 
   const fetchDashboard = async () => {
     const token = localStorage.getItem('siakad_token');
@@ -86,7 +87,7 @@ export default function KRSPage() {
         },
         body: JSON.stringify({
           course_ids: selectedCourses,
-          semester: 'Ganjil 2026/2027' // Currently hardcoded for demo
+          semester: currentSemester
         })
       });
 
@@ -123,7 +124,7 @@ export default function KRSPage() {
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
           <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>KRS Online</h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Pilih dan ajukan mata kuliah untuk semester ini.</p>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Pilih dan ajukan mata kuliah untuk {currentSemester}.</p>
         </div>
       </div>
 
@@ -140,7 +141,7 @@ export default function KRSPage() {
       {submission?.status === 'approved' && (
         <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <i className="ph ph-check-circle" style={{ color: '#10b981', fontSize: '1.5rem' }}></i>
-          <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>KRS Anda untuk Semester Ganjil 2026/2027 telah <strong>DISETUJUI</strong> oleh Kaprodi/Dosen Wali. Selamat belajar!</p>
+          <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>KRS Anda untuk Semester {currentSemester} telah <strong>DISETUJUI</strong> oleh Kaprodi/Dosen Wali. Selamat belajar!</p>
         </div>
       )}
 

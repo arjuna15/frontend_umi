@@ -6,7 +6,7 @@ export default function AdminPengaturan() {
   const [krsOpen, setKrsOpen] = useState(true);
   const [khsOpen, setKhsOpen] = useState(true);
   const [nilaiOpen, setNilaiOpen] = useState(true);
-  const [semester, setSemester] = useState('Ganjil 2026/2027');
+  const [semester, setSemester] = useState('');
 
   const [coordBintaro, setCoordBintaro] = useState('-6.2758, 106.7405');
   const [coordPasarMinggu, setCoordPasarMinggu] = useState('-6.2842, 106.8442');

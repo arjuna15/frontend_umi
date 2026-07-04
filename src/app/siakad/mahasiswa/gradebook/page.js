@@ -7,7 +7,7 @@ export default function MahasiswaGradebook() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [semesterFilter, setSemesterFilter] = useState('Ganjil 2026/2027');
+  const [semesterFilter, setSemesterFilter] = useState('Semua');
 
   useEffect(() => {
     const fetchGrades = async () => {

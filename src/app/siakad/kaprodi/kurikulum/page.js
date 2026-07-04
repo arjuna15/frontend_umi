@@ -76,8 +76,8 @@ export default function KaprodiKurikulumPage() {
       dosen_id: editFormData.dosen_id || (dosens[0]?.id || ''),
       semester_num: parseInt(editFormData.semester),
       type: editFormData.type,
-      prodi: userProdi || 'Teknik Komputer',
-      semester: 'Ganjil 2026/2027'
+      prodi: userProdi || '',
+      semester: localStorage.getItem('siakad_semester') || ''
     };
 
     try {
@@ -153,7 +153,7 @@ export default function KaprodiKurikulumPage() {
             <div style={{ flex: '1 1 300px' }}>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — KAPRODI</p>
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Kurikulum</h1>
-              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola struktur mata kuliah dan sebaran SKS per semester ({userProdi}).</p>
+              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola struktur mata kuliah dan sebaran SKS per semester ({userProdi || 'Belum tersedia'}).</p>
             </div>
             <button onClick={openAddModal} style={{ background: '#3b82f6', color: 'white', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)' , flexWrap: 'wrap'}}>
               <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Tambah MK

@@ -76,7 +76,7 @@ export default function KaprodiDosenPage() {
       name: editFormData.name,
       nim_nip: editFormData.nip,
       role: 'dosen',
-      prodi: userProdi || 'Teknik Komputer',
+      prodi: userProdi || '',
       jfa: editFormData.jfa,
       status: editFormData.status
     };
