@@ -11,28 +11,34 @@ export default function SiakadLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
-  const [role, setRole] = useState(null);
+  const [session, setSession] = useState(() => ({
+    role: typeof window === 'undefined' ? null : localStorage.getItem('siakad_role'),
+    portalRole: typeof window === 'undefined' ? null : localStorage.getItem('siakad_portal'),
+  }));
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
   const [notifications, setNotifications] = useState([]);
 
-  useEffect(() => {
-    setRole(localStorage.getItem('siakad_role'));
-  }, [pathname]);
+  const role = session.role;
+  const portalRole = session.portalRole;
+  const effectiveRole = role === 'kaprodi' ? (portalRole || 'kaprodi') : role;
 
   useEffect(() => {
     const loadNotifications = async () => {
       const token = localStorage.getItem('siakad_token');
-      if (!token || !role) {
+      if (!token || !effectiveRole) {
         setNotifications([]);
         return;
       }
 
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-      const headers = { Authorization: `Bearer ${token}` };
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        ...(portalRole || role ? { 'X-SIAKAD-PORTAL': portalRole || role } : {})
+      };
 
       try {
-        if (role === 'mahasiswa') {
+        if (effectiveRole === 'mahasiswa') {
           const [dashRes, extRes] = await Promise.all([
             fetch(`${apiUrl}/siakad/dashboard`, { headers }),
             fetch(`${apiUrl}/siakad/mahasiswa/dashboard`, { headers }),
@@ -60,7 +66,7 @@ export default function SiakadLayout({ children }) {
               time: 'Hari ini',
             })) || []),
           ].filter((item) => item.title));
-        } else if (role === 'dosen') {
+        } else if (effectiveRole === 'dosen') {
           const res = await fetch(`${apiUrl}/siakad/dosen/dashboard`, { headers });
           if (!res.ok) throw new Error('Failed to load dosen dashboard');
           const dash = await res.json();
@@ -76,7 +82,7 @@ export default function SiakadLayout({ children }) {
               time: 'Hari ini',
             })) : []),
           ]);
-        } else if (role === 'kaprodi' || role === 'admin' || role === 'superadmin') {
+        } else if (effectiveRole === 'kaprodi' || effectiveRole === 'admin' || effectiveRole === 'superadmin') {
           const res = await fetch(`${apiUrl}/siakad/dashboard`, { headers });
           if (!res.ok) throw new Error('Failed to load admin dashboard');
           const dash = await res.json();
@@ -93,13 +99,13 @@ export default function SiakadLayout({ children }) {
     };
 
     loadNotifications();
-  }, [role, pathname]);
+  }, [role, portalRole, effectiveRole]);
 
   const isLoginPage = pathname === '/siakad/login';
   if (isLoginPage) return <>{children}</>;
 
   let menuItems = [];
-  if (role === 'admin' || role === 'superadmin') {
+  if (effectiveRole === 'admin' || effectiveRole === 'superadmin') {
     menuItems = [
       { label: 'Admin Dashboard', icon: 'ph ph-chart-pie-slice', path: '/siakad/admin', isMobilePrimary: true },
       { label: 'Manajemen Pengguna', icon: 'ph ph-users-three', path: '/siakad/admin/users', isMobilePrimary: true },
@@ -111,7 +117,7 @@ export default function SiakadLayout({ children }) {
       { label: 'Backup & Restore', icon: 'ph ph-database', path: '/siakad/admin/backup' },
       { label: 'Pengaturan Sistem', icon: 'ph ph-gear', path: '/siakad/admin/pengaturan' },
     ];
-  } else if (role === 'kaprodi') {
+  } else if (effectiveRole === 'kaprodi') {
     menuItems = [
       { label: 'Dashboard Statistik', icon: 'ph ph-chart-line-up', path: '/siakad/kaprodi', isMobilePrimary: true },
       { label: 'Manajemen Kurikulum', icon: 'ph ph-books', path: '/siakad/kaprodi/kurikulum' },
@@ -124,7 +130,7 @@ export default function SiakadLayout({ children }) {
       { label: 'Hasil EDOM', icon: 'ph ph-star-half', path: '/siakad/kaprodi/edom', isMobilePrimary: true },
       { label: 'Laporan Akreditasi', icon: 'ph ph-file-pdf', path: '/siakad/kaprodi/reports' },
     ];
-  } else if (role === 'dosen') {
+  } else if (effectiveRole === 'dosen') {
     menuItems = [
       { label: 'Dashboard Dosen', icon: 'ph ph-chalkboard-teacher', path: '/siakad/dosen', isMobilePrimary: true },
       { label: 'Roster Kelas', icon: 'ph ph-users-three', path: '/siakad/dosen/roster' },
@@ -200,20 +206,23 @@ export default function SiakadLayout({ children }) {
         <div className="siakad-user-profile">
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, cursor: 'pointer', overflow: 'hidden' }} onClick={() => router.push('/siakad/profile')}>
             <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', flexShrink: 0 }}>
-              {role ? role.charAt(0).toUpperCase() : 'U'}
+              {effectiveRole ? effectiveRole.charAt(0).toUpperCase() : 'U'}
             </div>
             <div style={{ overflow: 'hidden', flex: 1 }}>
               <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--color-text)', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
                 Pengguna SIAKAD
               </h4>
               <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', textTransform: 'capitalize', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                Role: {role || 'Guest'}
+                Role: {role || 'Guest'}{role === 'kaprodi' && portalRole ? ` • Portal: ${portalRole}` : ''}
               </p>
             </div>
           </div>
           <button 
             onClick={() => {
               localStorage.removeItem('siakad_token');
+              localStorage.removeItem('siakad_role');
+              localStorage.removeItem('siakad_user');
+              localStorage.removeItem('siakad_portal');
               window.location.href = '/siakad/login';
             }} 
             className="btn-logout-icon" 

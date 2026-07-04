@@ -43,10 +43,8 @@ if (typeof window !== 'undefined') {
 
 export function ConfirmModal() {
   const [modal, setModal] = useState(null);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const handleConfirm = (e) => {
       setModal(e.detail);
     };
@@ -54,7 +52,7 @@ export function ConfirmModal() {
     return () => window.removeEventListener('siakad_confirm', handleConfirm);
   }, []);
 
-  if (!mounted || !modal) return null;
+  if (!modal) return null;
   return (
     <div className="siakad-modal-overlay">
       <div style={{
@@ -65,10 +63,12 @@ export function ConfirmModal() {
         padding: '40px 32px',
         maxWidth: '450px',
         width: '90%',
+        maxHeight: 'calc(100dvh - 48px)',
+        overflowY: 'auto',
         boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
         animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
         textAlign: 'center',
-        overflow: 'hidden'
+        overflowX: 'hidden'
       }}>
         <div style={{ position: 'absolute', top: '-50px', left: '-50px', width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0) 70%)', borderRadius: '50%', zIndex: 0, flexShrink: 0 }}></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
@@ -110,10 +110,8 @@ export function ConfirmModal() {
 export function PromptModal() {
   const [modal, setModal] = useState(null);
   const [inputValue, setInputValue] = useState('');
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const handlePrompt = (e) => {
       setModal(e.detail);
       setInputValue(e.detail.defaultValue || '');
@@ -122,7 +120,7 @@ export function PromptModal() {
     return () => window.removeEventListener('siakad_prompt', handlePrompt);
   }, []);
 
-  if (!mounted || !modal) return null;
+  if (!modal) return null;
   return (
     <div className="siakad-modal-overlay">
       <div style={{
@@ -133,10 +131,12 @@ export function PromptModal() {
         padding: '0',
         maxWidth: '500px',
         width: '90%',
+        maxHeight: 'calc(100dvh - 48px)',
+        overflowY: 'auto',
         boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
         animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
         textAlign: 'left',
-        overflow: 'hidden'
+        overflowX: 'hidden'
       }}>
         <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #c026d3 100%)', padding: '24px 32px', position: 'relative' }}>
           <div style={{ position: 'absolute', top: '-10px', right: '-10px', width: '100px', height: '100px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%', flexShrink: 0 }}></div>
@@ -190,10 +190,8 @@ export function PromptModal() {
 export function FormModal() {
   const [modal, setModal] = useState(null);
   const [formData, setFormData] = useState({});
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const handleForm = (e) => {
       setModal(e.detail);
       const initialData = {};
@@ -204,7 +202,7 @@ export function FormModal() {
     return () => window.removeEventListener('siakad_form', handleForm);
   }, []);
 
-  if (!mounted || !modal) return null;
+  if (!modal) return null;
   return (
     <div className="siakad-modal-overlay">
       <div style={{
@@ -215,10 +213,12 @@ export function FormModal() {
         padding: '0',
         maxWidth: '550px',
         width: '90%',
+        maxHeight: 'calc(100dvh - 48px)',
+        overflowY: 'auto',
         boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
         animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
         textAlign: 'left',
-        overflow: 'hidden'
+        overflowX: 'hidden'
       }}>
         <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #2563eb 100%)', padding: '24px 32px', position: 'relative' }}>
           <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '120px', height: '120px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%', flexShrink: 0 }}></div>

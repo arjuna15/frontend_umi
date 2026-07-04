@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
@@ -10,11 +10,8 @@ export default function SiakadLogin() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const [showPortalModal, setShowPortalModal] = useState(false);
+  const [pendingUser, setPendingUser] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -38,10 +35,23 @@ export default function SiakadLogin() {
       localStorage.setItem('siakad_role', data.user.role);
       localStorage.setItem('siakad_user', JSON.stringify(data.user));
 
-      if (data.user.role === 'mahasiswa') router.push('/siakad/mahasiswa');
-      else if (data.user.role === 'dosen') router.push('/siakad/dosen');
-      else if (data.user.role === 'kaprodi') router.push('/siakad/kaprodi');
-      else router.push('/siakad/admin');
+      const goToPortal = (portal) => {
+        localStorage.setItem('siakad_portal', portal);
+        setShowPortalModal(false);
+        setPendingUser(null);
+        if (portal === 'mahasiswa') router.push('/siakad/mahasiswa');
+        else if (portal === 'dosen') router.push('/siakad/dosen');
+        else if (portal === 'kaprodi') router.push('/siakad/kaprodi');
+        else router.push('/siakad/admin');
+      };
+
+      if (data.user.role === 'kaprodi') {
+        setPendingUser(data.user);
+        setShowPortalModal(true);
+        return;
+      }
+
+      goToPortal(data.user.role);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -49,14 +59,22 @@ export default function SiakadLogin() {
     }
   };
 
+  const choosePortal = (portal) => {
+    localStorage.setItem('siakad_portal', portal);
+    setShowPortalModal(false);
+    setPendingUser(null);
+    if (portal === 'dosen') router.push('/siakad/dosen');
+    else router.push('/siakad/kaprodi');
+  };
+
   // Generate random particles for background
   const particles = Array.from({ length: 30 }).map((_, i) => ({
     id: i,
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    animationDuration: `${Math.random() * 20 + 10}s`,
-    animationDelay: `${Math.random() * 5}s`,
-    size: `${Math.random() * 4 + 2}px`
+    left: `${(i * 17) % 100}%`,
+    top: `${(i * 29) % 100}%`,
+    animationDuration: `${10 + (i % 12)}s`,
+    animationDelay: `${(i % 5) * 0.6}s`,
+    size: `${2 + (i % 4)}px`
   }));
 
   return (
@@ -427,6 +445,86 @@ export default function SiakadLogin() {
           .aurora-visual-content h2 { font-size: 1.8rem; }
           .aurora-visual-content { padding: 40px 20px; }
         }
+
+        .siakad-login-modal-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 60;
+          background: rgba(2, 6, 23, 0.55);
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+        }
+        .siakad-login-modal {
+          width: min(100%, 460px);
+          background: rgba(15, 23, 42, 0.92);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+          border-radius: 24px;
+          padding: 28px;
+          color: white;
+          text-align: center;
+        }
+        .siakad-login-modal-icon {
+          width: 68px;
+          height: 68px;
+          border-radius: 20px;
+          margin: 0 auto 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(124, 58, 237, 0.12);
+          border: 1px solid rgba(124, 58, 237, 0.25);
+        }
+        .siakad-login-modal h3 {
+          margin: 0 0 10px 0;
+          font-size: 1.4rem;
+          font-weight: 800;
+          letter-spacing: -0.02em;
+        }
+        .siakad-login-modal p {
+          margin: 0 0 22px 0;
+          color: rgba(255,255,255,0.72);
+          line-height: 1.6;
+          font-size: 0.98rem;
+        }
+        .siakad-login-modal-actions {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+        }
+        .siakad-login-modal-btn {
+          border: none;
+          border-radius: 14px;
+          padding: 14px 16px;
+          font-weight: 800;
+          cursor: pointer;
+          transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        }
+        .siakad-login-modal-btn:hover {
+          transform: translateY(-1px);
+        }
+        .siakad-login-modal-btn.secondary {
+          background: rgba(255,255,255,0.1);
+          color: white;
+          border: 1px solid rgba(255,255,255,0.12);
+        }
+        .siakad-login-modal-btn.primary {
+          background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+          color: white;
+          box-shadow: 0 18px 30px rgba(79, 70, 229, 0.3);
+        }
+        @media (max-width: 480px) {
+          .siakad-login-modal {
+            padding: 22px 18px;
+          }
+          .siakad-login-modal-actions {
+            grid-template-columns: 1fr;
+          }
+        }
       `}</style>
 
       {/* Ambient Background Blobs */}
@@ -435,7 +533,7 @@ export default function SiakadLogin() {
       <div className="aurora-blob blob-3"></div>
 
       {/* Floating Particles */}
-      {mounted && particles.map(p => (
+      {particles.map(p => (
         <div 
           key={p.id} 
           className="particle" 
@@ -530,6 +628,29 @@ export default function SiakadLogin() {
         </section>
 
       </div>
+
+      {showPortalModal && (
+        <div className="siakad-login-modal-overlay" onClick={() => choosePortal('kaprodi')}>
+          <div className="siakad-login-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="siakad-login-modal-icon">
+              <i className="ph ph-shuffle" style={{ fontSize: '2rem', color: '#7c3aed' }}></i>
+            </div>
+            <h3>Pilih Portal</h3>
+            <p>
+              Akun {pendingUser?.name || 'Anda'} terdeteksi sebagai kaprodi yang juga punya akses dosen.
+              Pilih portal yang ingin dibuka sekarang.
+            </p>
+            <div className="siakad-login-modal-actions">
+              <button type="button" className="siakad-login-modal-btn secondary" onClick={() => choosePortal('kaprodi')}>
+                Masuk sebagai Kaprodi
+              </button>
+              <button type="button" className="siakad-login-modal-btn primary" onClick={() => choosePortal('dosen')}>
+                Masuk sebagai Dosen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

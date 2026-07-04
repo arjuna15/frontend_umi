@@ -1104,10 +1104,10 @@
   overflow-y: auto;
   box-sizing: border-box;
   min-height: 100dvh;
-  padding: 96px 24px 48px;
+  padding: 24px;
   animation: fadeInOnly 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 }
 
@@ -1124,23 +1124,23 @@
   animation: modalScaleIn 0.3s ease-out forwards;
   position: relative;
   overflow: hidden;
+  overflow-y: auto;
+  max-height: calc(100dvh - 48px);
   z-index: 99999;
-  /* margin:auto centers horizontally; vertical centering happens naturally via overlay padding */
   margin: 0 auto;
 }
 
 /* ---- Responsive: tablet & mobile ---- */
 @media (max-width: 768px) {
   .siakad-modal-overlay {
-    /* header is hidden on mobile, overlay starts from top */
-    top: 0;
-    padding: 20px 12px 90px 12px;
+    padding: 12px;
     min-height: 100dvh;
   }
   .siakad-modal-content {
     padding: 0;
     border-radius: 16px;
     width: 100%;
+    max-height: calc(100dvh - 24px);
   }
 }
 

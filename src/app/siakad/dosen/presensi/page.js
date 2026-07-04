@@ -26,12 +26,16 @@ export default function DosenPresensiPage() {
     if (!token) return router.push('/siakad/login');
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      const activePortal = localStorage.getItem('siakad_portal') || localStorage.getItem('siakad_role');
       const res = await fetch(`${apiUrl}/siakad/dashboard`, {
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          ...(activePortal ? { 'X-SIAKAD-PORTAL': activePortal } : {})
+        }
       });
       if (!res.ok) throw new Error('Failed to fetch');
       const result = await res.json();
-      if (result.user.role !== 'dosen') return router.push('/siakad/login');
+      if (result.user.role !== 'dosen' && !(result.user.role === 'kaprodi' && activePortal === 'dosen')) return router.push('/siakad/login');
       setData(result);
     } catch (err) {
       router.push('/siakad/login');
