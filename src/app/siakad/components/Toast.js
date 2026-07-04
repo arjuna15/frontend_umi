@@ -45,8 +45,10 @@ if (typeof window !== 'undefined') {
 
 export function ConfirmModal() {
   const [modal, setModal] = useState(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleConfirm = (e) => {
       setModal(e.detail);
     };
@@ -55,7 +57,7 @@ export function ConfirmModal() {
   }, []);
 
   const portalRoot = getPortalRoot();
-  if (!modal || !portalRoot) return null;
+  if (!mounted || !modal || !portalRoot) return null;
 
   return createPortal(
     <div className="siakad-modal-overlay">
@@ -114,8 +116,10 @@ export function ConfirmModal() {
 export function PromptModal() {
   const [modal, setModal] = useState(null);
   const [inputValue, setInputValue] = useState('');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handlePrompt = (e) => {
       setModal(e.detail);
       setInputValue(e.detail.defaultValue || '');
@@ -125,7 +129,7 @@ export function PromptModal() {
   }, []);
 
   const portalRoot = getPortalRoot();
-  if (!modal || !portalRoot) return null;
+  if (!mounted || !modal || !portalRoot) return null;
 
   return createPortal(
     <div className="siakad-modal-overlay">
@@ -196,8 +200,10 @@ export function PromptModal() {
 export function FormModal() {
   const [modal, setModal] = useState(null);
   const [formData, setFormData] = useState({});
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleForm = (e) => {
       setModal(e.detail);
       const initialData = {};
@@ -209,7 +215,7 @@ export function FormModal() {
   }, []);
 
   const portalRoot = getPortalRoot();
-  if (!modal || !portalRoot) return null;
+  if (!mounted || !modal || !portalRoot) return null;
 
   return createPortal(
     <div className="siakad-modal-overlay">

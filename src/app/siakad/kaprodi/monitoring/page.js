@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import ModalShell from '../../components/ModalShell';
 
 export default function KaprodiMonitoring() {
   const router = useRouter();
@@ -117,44 +118,39 @@ export default function KaprodiMonitoring() {
       </div>
 
       {selectedCourse && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <div style={{ padding: '24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--color-bg)' , flexWrap: 'wrap' }}>
-              <div>
-                <h2 style={{ margin: 0, fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)' }}>Detail BAP: {selectedCourse.name}</h2>
-                <p style={{ margin: '4px 0 0 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Dosen: {selectedCourse.dosen?.name || '-'}</p>
+        <ModalShell
+          title={`Detail BAP: ${selectedCourse.name}`}
+          subtitle={`Dosen: ${selectedCourse.dosen?.name || '-'}`}
+          icon="ph-chalkboard-teacher"
+          iconBg="linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)"
+          onClose={() => setSelectedCourse(null)}
+          maxWidth="600px"
+        >
+          <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
+            <h3 style={{ margin: '0 0 16px 0', fontSize: '1.1rem', color: 'var(--color-text)' }}>Riwayat Pertemuan</h3>
+            {(!selectedCourse.attendances || selectedCourse.attendances.length === 0) ? (
+              <div style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)', border: '1px dashed var(--color-border)', borderRadius: '12px' }}>
+                Belum ada sesi perkuliahan / presensi yang dicatat.
               </div>
-              <button onClick={() => setSelectedCourse(null)} style={{ background: 'transparent', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontSize: '1.5rem' }}>
-                <i className="ph ph-x"></i>
-              </button>
-            </div>
-            
-            <div style={{ padding: '24px', overflowY: 'auto', background: 'var(--glass-bg)', flex: 1 }}>
-              <h3 style={{ margin: '0 0 16px 0', fontSize: '1.1rem' }}>Riwayat Pertemuan</h3>
-              {(!selectedCourse.attendances || selectedCourse.attendances.length === 0) ? (
-                <div style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)', border: '1px dashed var(--color-border)', borderRadius: '12px' }}>
-                  Belum ada sesi perkuliahan / presensi yang dicatat.
-                </div>
-              ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' , flexWrap: 'wrap'}}>
-                  {selectedCourse.attendances.map((att, idx) => (
-                    <div key={idx} style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: '12px', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
-                      <div>
-                        <div style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '4px' }}>Pertemuan ke-{idx + 1}</div>
-                        <div style={{ color: 'var(--color-muted)', fontSize: '0.85rem' }}>Tanggal: {new Date(att.created_at || Date.now()).toLocaleDateString('id-ID')}</div>
-                      </div>
-                      <div style={{ textAlign: 'right' }}>
-                        <span className="siakad-badge" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
-                          Materi Dibagikan
-                        </span>
-                      </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {selectedCourse.attendances.map((att, idx) => (
+                  <div key={idx} style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: '12px', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <div style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '4px' }}>Pertemuan ke-{idx + 1}</div>
+                      <div style={{ color: 'var(--color-muted)', fontSize: '0.85rem' }}>Tanggal: {new Date(att.created_at || Date.now()).toLocaleDateString('id-ID')}</div>
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <span className="siakad-badge" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
+                        Materi Dibagikan
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        </div>
+        </ModalShell>
       )}
     </div>
   );

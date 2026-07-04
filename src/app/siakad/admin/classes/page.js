@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+import ModalShell from '../../components/ModalShell';
 
 export default function AdminClassesPage() {
   const router = useRouter();
@@ -255,56 +256,58 @@ export default function AdminClassesPage() {
             </tbody>
           </table>
         </div>
-      </div>
-
-      {isEditModalOpen && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <h2 style={{ margin: '0 0 20px 0', fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)' }}>Edit Mata Kuliah</h2>
-            <form onSubmit={handleUpdateCourse}>
-              <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Kode Mata Kuliah</label>
-                <input value={editFormData.code} onChange={(e) => setEditFormData({...editFormData, code: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+      </div>      {isEditModalOpen && (
+        <ModalShell
+          title="Edit Mata Kuliah"
+          subtitle="Manajemen Kelas & Kurikulum"
+          icon="ph-chalkboard"
+          iconBg="linear-gradient(135deg, #10b981 0%, #059669 100%)"
+          onClose={() => setIsEditModalOpen(false)}
+          maxWidth="600px"
+        >
+          <form onSubmit={handleUpdateCourse}>
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Kode Mata Kuliah</label>
+              <input value={editFormData.code} onChange={(e) => setEditFormData({...editFormData, code: e.target.value})} required style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
+            </div>
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Nama Mata Kuliah</label>
+              <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
+            </div>
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' , flexWrap: 'wrap' }}>
+              <div style={{ flex: 1 }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>SKS</label>
+                <input type="number" min="1" max="6" value={editFormData.sks} onChange={(e) => setEditFormData({...editFormData, sks: e.target.value})} required style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
               </div>
-              <div style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Nama Mata Kuliah</label>
-                <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+              <div style={{ flex: 2 }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Dosen Pengampu</label>
+                <CustomSelect
+                  value={editFormData.dosen_id}
+                  onChange={(val) => setEditFormData({...editFormData, dosen_id: val})}
+                  options={[{value: '', label: 'Pilih Dosen...'}, ...users.map(u => ({ value: u.id, label: u.name, icon: 'ph ph-user' }))]}
+                />
               </div>
-              <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' , flexWrap: 'wrap' }}>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>SKS</label>
-                  <input type="number" min="1" max="6" value={editFormData.sks} onChange={(e) => setEditFormData({...editFormData, sks: e.target.value})} required style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
-                </div>
-                <div style={{ flex: 2 }}>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Dosen Pengampu</label>
-                  <CustomSelect
-                    value={editFormData.dosen_id}
-                    onChange={(val) => setEditFormData({...editFormData, dosen_id: val})}
-                    options={[{value: '', label: 'Pilih Dosen...'}, ...users.map(u => ({ value: u.id, label: u.name, icon: 'ph ph-user' }))]}
-                  />
-                </div>
+            </div>
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' , flexWrap: 'wrap' }}>
+              <div style={{ flex: 1 }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Semester</label>
+                <CustomSelect
+                  value={editFormData.semester}
+                  onChange={(val) => setEditFormData({...editFormData, semester: val})}
+                  options={[{value: 'Ganjil', label: 'Ganjil'}, {value: 'Genap', label: 'Genap'}]}
+                />
               </div>
-              <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' , flexWrap: 'wrap' }}>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Semester</label>
-                  <CustomSelect
-                    value={editFormData.semester}
-                    onChange={(val) => setEditFormData({...editFormData, semester: val})}
-                    options={[{value: 'Ganjil', label: 'Ganjil'}, {value: 'Genap', label: 'Genap'}]}
-                  />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Prasyarat</label>
-                  <input value={editFormData.prasyarat} onChange={(e) => setEditFormData({...editFormData, prasyarat: e.target.value})} placeholder="Opsional..." style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
-                </div>
+              <div style={{ flex: 1 }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Prasyarat</label>
+                <input value={editFormData.prasyarat} onChange={(e) => setEditFormData({...editFormData, prasyarat: e.target.value})} placeholder="Opsional..." style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
               </div>
-              <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
-                <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 16px', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', color: 'var(--color-text)' }}>Batal</button>
-                <button type="submit" style={{ padding: '10px 16px', background: '#10b981', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Simpan Perubahan</button>
-              </div>
-            </form>
-          </div>
-        </div>
+            </div>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', borderTop: '1px solid var(--color-border)', paddingTop: '20px', marginTop: '20px' , flexWrap: 'wrap'}}>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 24px', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '12px', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold' }}>Batal</button>
+              <button type="submit" style={{ padding: '12px 24px', background: '#10b981', color: 'white', border: 'none', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(16, 185, 129, 0.2)' }}>Simpan Perubahan</button>
+            </div>
+          </form>
+        </ModalShell>
       )}
     </div>
   );

@@ -1,4 +1,5 @@
 'use client';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { getPortalRoot } from './portalRoot';
 
@@ -12,8 +13,13 @@ export default function ModalShell({
   footer,
   iconBg = 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)'
 }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const portalRoot = getPortalRoot();
-  if (!portalRoot) return null;
+  if (!mounted || !portalRoot) return null;
 
   return createPortal(
     <div className="siakad-modal-overlay">
