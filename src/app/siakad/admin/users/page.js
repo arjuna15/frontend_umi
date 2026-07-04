@@ -24,27 +24,42 @@ export default function AdminUsersPage() {
     const token = localStorage.getItem('siakad_token');
     if (!token) return router.push('/siakad/login');
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-    
+
     try {
       const [usersRes, prodiRes] = await Promise.all([
         fetch(`${apiUrl}/siakad/admin/users`, { headers: { 'Authorization': `Bearer ${token}` } }),
         fetch(`${apiUrl}/siakad/admin/prodis`, { headers: { 'Authorization': `Bearer ${token}` } })
       ]);
-      if (!usersRes.ok) throw new Error('Failed to fetch users');
+
+      if (usersRes.status === 401 || usersRes.status === 403 || prodiRes.status === 401 || prodiRes.status === 403) {
+        localStorage.removeItem('siakad_token');
+        localStorage.removeItem('siakad_role');
+        localStorage.removeItem('siakad_user');
+        router.push('/siakad/login');
+        return;
+      }
+
+      if (!usersRes.ok) {
+        const errorText = await usersRes.text().catch(() => '');
+        throw new Error(`Failed to fetch users (${usersRes.status}) ${errorText}`.trim());
+      }
+
       const data = await usersRes.json();
-      setUsers(data);
+      const normalizedUsers = Array.isArray(data) ? data : [];
+      setUsers(normalizedUsers);
 
       if (prodiRes.ok) {
         const prodis = await prodiRes.json();
         const mapped = Array.isArray(prodis)
           ? prodis.map((p) => ({ value: p.name, label: p.name }))
           : [];
-        setProdiOptions(mapped.length > 0 ? mapped : Array.from(new Set((data || []).map((u) => u.prodi).filter(Boolean))).map((p) => ({ value: p, label: p })));
+        setProdiOptions(mapped.length > 0 ? mapped : Array.from(new Set((normalizedUsers || []).map((u) => u.prodi).filter(Boolean))).map((p) => ({ value: p, label: p })));
       } else {
-        setProdiOptions(Array.from(new Set((data || []).map((u) => u.prodi).filter(Boolean))).map((p) => ({ value: p, label: p })));
+        setProdiOptions(Array.from(new Set((normalizedUsers || []).map((u) => u.prodi).filter(Boolean))).map((p) => ({ value: p, label: p })));
       }
     } catch (err) {
       console.error(err);
+      window.toast?.(err.message || 'Failed to fetch users');
     } finally {
       setLoading(false);
     }

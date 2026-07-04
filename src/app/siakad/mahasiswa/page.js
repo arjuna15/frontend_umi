@@ -95,7 +95,7 @@ export default function MahasiswaDashboard() {
               </div>
               <div>
                 <p style={{ margin: 0, fontSize: '0.75rem', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', fontWeight: 'bold', letterSpacing: '1px' }}>NIM Mahasiswa</p>
-                <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'white', fontWeight: '800' }}>{data.user.username || '2026101001'}</h3>
+                <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'white', fontWeight: '800' }}>{data.user.nim_nip || '-'}</h3>
               </div>
             </div>
           </div>

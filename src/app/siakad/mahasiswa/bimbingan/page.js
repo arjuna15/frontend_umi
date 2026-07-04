@@ -8,6 +8,7 @@ export default function BimbinganAkademikPage() {
   const [dashboardExt, setDashboardExt] = useState(null);
   const [submission, setSubmission] = useState(null);
   const [availableCourses, setAvailableCourses] = useState([]);
+  const [consultations, setConsultations] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(true);
 
@@ -18,11 +19,12 @@ export default function BimbinganAkademikPage() {
 
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-        const [dashRes, extRes, subRes, availRes] = await Promise.all([
+        const [dashRes, extRes, subRes, availRes, consultRes] = await Promise.all([
           fetch(`${apiUrl}/siakad/dashboard`, { headers: { 'Authorization': `Bearer ${token}` } }),
           fetch(`${apiUrl}/siakad/mahasiswa/dashboard`, { headers: { 'Authorization': `Bearer ${token}` } }),
           fetch(`${apiUrl}/siakad/krs/submission`, { headers: { 'Authorization': `Bearer ${token}` } }),
-          fetch(`${apiUrl}/siakad/krs/available`, { headers: { 'Authorization': `Bearer ${token}` } })
+          fetch(`${apiUrl}/siakad/krs/available`, { headers: { 'Authorization': `Bearer ${token}` } }),
+          fetch(`${apiUrl}/siakad/mahasiswa/consultations`, { headers: { 'Authorization': `Bearer ${token}` } })
         ]);
 
         if (!dashRes.ok) throw new Error('Failed to fetch');
@@ -43,6 +45,11 @@ export default function BimbinganAkademikPage() {
         if (availRes.ok) {
           const availResult = await availRes.json();
           setAvailableCourses(Array.isArray(availResult) ? availResult : []);
+        }
+
+        if (consultRes.ok) {
+          const consultResult = await consultRes.json();
+          setConsultations(Array.isArray(consultResult.messages) ? consultResult.messages : []);
         }
       } catch (err) {
         console.error(err);
@@ -84,11 +91,13 @@ export default function BimbinganAkademikPage() {
     const course = availableCourses.find((item) => String(item.id) === String(id));
     return sum + (course?.sks || 0);
   }, 0);
-  const chatHistory = Array.isArray(dashboardExt?.consultations)
-    ? dashboardExt.consultations
-    : Array.isArray(dashboardExt?.messages)
-      ? dashboardExt.messages
-      : [];
+  const chatHistory = consultations.length > 0
+    ? consultations
+    : Array.isArray(dashboardExt?.consultations)
+      ? dashboardExt.consultations
+      : Array.isArray(dashboardExt?.messages)
+        ? dashboardExt.messages
+        : [];
 
   const normalizeMessage = (item, index) => {
     const createdAt = item.created_at || item.sent_at || item.time || item.timestamp || null;
@@ -175,11 +184,30 @@ export default function BimbinganAkademikPage() {
           </div>
 
           <form
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
               if (!message.trim()) return;
-              window.toast?.('Fitur konsultasi belum tersambung ke backend.');
-              setMessage('');
+              const token = localStorage.getItem('siakad_token');
+              try {
+                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+                const res = await fetch(`${apiUrl}/siakad/mahasiswa/consultations`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                  },
+                  body: JSON.stringify({ message: message.trim() })
+                });
+                if (!res.ok) throw new Error('Gagal mengirim pesan konsultasi');
+                const result = await res.json();
+                if (result?.data) {
+                  setConsultations((prev) => [...prev, result.data]);
+                }
+                window.toast?.('Pesan konsultasi terkirim');
+                setMessage('');
+              } catch (err) {
+                window.toast?.(err.message || 'Gagal mengirim pesan');
+              }
             }}
             style={{ padding: '16px', borderTop: '1px solid var(--color-border)', background: 'var(--glass-bg)', display: 'flex', gap: '12px' }}
           >

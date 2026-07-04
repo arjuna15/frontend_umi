@@ -14,10 +14,86 @@ export default function SiakadLayout({ children }) {
   const [role, setRole] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
+  const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     setRole(localStorage.getItem('siakad_role'));
   }, [pathname]);
+
+  useEffect(() => {
+    const loadNotifications = async () => {
+      const token = localStorage.getItem('siakad_token');
+      if (!token || !role) {
+        setNotifications([]);
+        return;
+      }
+
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      const headers = { Authorization: `Bearer ${token}` };
+
+      try {
+        if (role === 'mahasiswa') {
+          const [dashRes, extRes] = await Promise.all([
+            fetch(`${apiUrl}/siakad/dashboard`, { headers }),
+            fetch(`${apiUrl}/siakad/mahasiswa/dashboard`, { headers }),
+          ]);
+          if (!dashRes.ok) throw new Error('Failed to load mahasiswa dashboard');
+          const dash = await dashRes.json();
+          const ext = extRes.ok ? await extRes.json() : {};
+          const krsItems = Array.isArray(dash.krs) ? dash.krs : [];
+          const scheduleItems = Array.isArray(ext.schedule_today) ? ext.schedule_today : [];
+          const deadlineItems = Array.isArray(ext.upcoming_deadlines) ? ext.upcoming_deadlines : [];
+          setNotifications([
+            ...(krsItems.filter((item) => item.status === 'pending').slice(0, 1).map((item) => ({
+              title: 'KRS menunggu persetujuan',
+              body: `${krsItems.length} mata kuliah sudah masuk daftar KHS/KRS kamu.`,
+              time: 'Baru',
+            })) || []),
+            ...(deadlineItems.slice(0, 1).map((item) => ({
+              title: item.title || 'Tenggat akademik',
+              body: `${item.course || 'Mata kuliah'} H-${item.due_in_days}`,
+              time: 'Jadwal akademik',
+            })) || []),
+            ...(scheduleItems.slice(0, 1).map((item) => ({
+              title: 'Jadwal kuliah aktif',
+              body: `${item.course || '-'} ${item.time || ''} ${item.room ? `di ${item.room}` : ''}`.trim(),
+              time: 'Hari ini',
+            })) || []),
+          ].filter((item) => item.title));
+        } else if (role === 'dosen') {
+          const res = await fetch(`${apiUrl}/siakad/dosen/dashboard`, { headers });
+          if (!res.ok) throw new Error('Failed to load dosen dashboard');
+          const dash = await res.json();
+          setNotifications([
+            ...(Array.isArray(dash.todos) ? dash.todos.slice(0, 3).map((todo) => ({
+              title: 'Tugas dosen',
+              body: todo,
+              time: 'Dashboard dosen',
+            })) : []),
+            ...(Array.isArray(dash.schedule) ? dash.schedule.slice(0, 1).map((item) => ({
+              title: 'Jadwal mengajar aktif',
+              body: `${item.course || '-'} ${item.time || ''} ${item.room ? `di ${item.room}` : ''}`.trim(),
+              time: 'Hari ini',
+            })) : []),
+          ]);
+        } else if (role === 'kaprodi' || role === 'admin' || role === 'superadmin') {
+          const res = await fetch(`${apiUrl}/siakad/dashboard`, { headers });
+          if (!res.ok) throw new Error('Failed to load admin dashboard');
+          const dash = await res.json();
+          setNotifications([
+            { title: 'Ringkasan pengguna', body: `${dash.users_count || 0} akun aktif terdata di sistem.`, time: 'Dashboard admin' },
+            { title: 'Data perkuliahan', body: `${Array.isArray(dash.courses) ? dash.courses.length : 0} mata kuliah tersedia.`, time: 'Dashboard admin' },
+          ]);
+        } else {
+          setNotifications([]);
+        }
+      } catch (error) {
+        setNotifications([]);
+      }
+    };
+
+    loadNotifications();
+  }, [role, pathname]);
 
   const isLoginPage = pathname === '/siakad/login';
   if (isLoginPage) return <>{children}</>;
@@ -191,36 +267,22 @@ export default function SiakadLayout({ children }) {
                     <span style={{ fontSize: '0.75rem', color: '#3b82f6', cursor: 'pointer', fontWeight: 'bold' }}>Tandai sudah dibaca</span>
                   </div>
                   <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
-                    <div style={{ padding: '16px', borderBottom: '1px solid var(--color-border)', background: 'rgba(239, 68, 68, 0.05)', display: 'flex', gap: '12px', cursor: 'pointer' }}>
-                      <div style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <i className="ph ph-warning-octagon"></i>
+                    {notifications.length > 0 ? notifications.map((item, idx) => (
+                      <div key={idx} style={{ padding: '16px', borderBottom: idx < notifications.length - 1 ? '1px solid var(--color-border)' : 'none', display: 'flex', gap: '12px', cursor: 'pointer' }}>
+                        <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          <i className="ph ph-bell"></i>
+                        </div>
+                        <div>
+                          <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{item.title}</p>
+                          <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)' }}>{item.body}</p>
+                          <p style={{ margin: '4px 0 0 0', fontSize: '0.7rem', color: 'var(--color-muted)' }}>{item.time}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: 'bold' }}>KRS Anda Ditolak</p>
-                        <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)' }}>Silakan revisi mata kuliah Anda sesuai catatan dosen wali.</p>
-                        <p style={{ margin: '4px 0 0 0', fontSize: '0.7rem', color: '#ef4444', fontWeight: 'bold' }}>1 jam yang lalu</p>
+                    )) : (
+                      <div style={{ padding: '20px', textAlign: 'center', color: 'var(--color-muted)' }}>
+                        Tidak ada notifikasi baru dari backend.
                       </div>
-                    </div>
-                    <div style={{ padding: '16px', borderBottom: '1px solid var(--color-border)', display: 'flex', gap: '12px', cursor: 'pointer' }}>
-                      <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <i className="ph ph-wallet"></i>
-                      </div>
-                      <div>
-                        <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Tagihan UKT Tersedia</p>
-                        <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)' }}>Tagihan semester ganjil sudah terbit, mohon lunasi sebelum 30 Agustus.</p>
-                        <p style={{ margin: '4px 0 0 0', fontSize: '0.7rem', color: 'var(--color-muted)' }}>1 hari yang lalu</p>
-                      </div>
-                    </div>
-                    <div style={{ padding: '16px', display: 'flex', gap: '12px', cursor: 'pointer' }}>
-                      <div style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                        <i className="ph ph-calendar-check"></i>
-                      </div>
-                      <div>
-                        <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Presensi Berhasil</p>
-                        <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)' }}>Kehadiran Anda pada mata kuliah COMP101 telah dicatat.</p>
-                        <p style={{ margin: '4px 0 0 0', fontSize: '0.7rem', color: 'var(--color-muted)' }}>2 hari yang lalu</p>
-                      </div>
-                    </div>
+                    )}
                   </div>
                 </motion.div>
               )}

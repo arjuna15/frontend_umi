@@ -3,6 +3,21 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const DEFAULT_UNIVERSITY = 'Universitas Mitra Bangsa';
+const TARGET_PRODI = [
+  'ILMU KOMPUTER',
+  'ILMU AKTUARIA',
+  'SISTEM DAN TEKNOLOGI INFORMASI',
+];
+const TARGET_SEARCH_TERMS = [
+  'Ilmu Komputer',
+  'Ilmu Komputer UMIBA',
+  'Ilmu Aktuaria',
+  'Ilmu Aktuaria UMIBA',
+  'Sistem Teknologi Informasi',
+  'Sistem dan Teknologi Informasi',
+  'Sistem Teknologi Informasi UMIBA',
+  'Sistem dan Teknologi Informasi UMIBA',
+];
 const BASE_URLS = [
   process.env.PDDIKTI_BASE_URL,
   'https://pddikti.fastapicloud.dev',
@@ -29,6 +44,8 @@ const isUMBAffiliated = (item = {}) => {
   const short = normalizeText(item.sinkatan_pt || item.pt_singkat || '');
   return pt.includes('MITRA BANGSA') || short === 'UMIBA';
 };
+
+const isTargetProdi = (item = {}) => TARGET_PRODI.includes(normalizeText(item.nama_prodi || item.nama || item.prodi || ''));
 
 const uniqById = (items) => {
   const seen = new Set();
@@ -128,7 +145,11 @@ async function getProdiList() {
 }
 
 async function collectCandidates(prodiList, ptSearchAll) {
-  const searchTerms = [UNIVERSITY_NAME, ...new Set(prodiList.map((item) => item.nama).filter(Boolean))];
+  const searchTerms = [
+    UNIVERSITY_NAME,
+    ...TARGET_SEARCH_TERMS,
+    ...new Set(prodiList.map((item) => item.nama).filter(Boolean)),
+  ];
   const dosenCandidates = [];
   const mahasiswaCandidates = [];
 
@@ -156,8 +177,8 @@ async function collectCandidates(prodiList, ptSearchAll) {
   }
 
   return {
-    dosen: uniqById(dosenCandidates).filter(isUMBAffiliated),
-    mahasiswa: uniqById(mahasiswaCandidates).filter(isUMBAffiliated),
+    dosen: uniqById(dosenCandidates).filter((item) => isUMBAffiliated(item) && isTargetProdi(item)),
+    mahasiswa: uniqById(mahasiswaCandidates).filter((item) => isUMBAffiliated(item) && isTargetProdi(item)),
   };
 }
 

@@ -110,6 +110,34 @@ export default function ElearningPage() {
                 )}
               </div>
 
+              {/* Quizzes Section */}
+              <div>
+                <h4 style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <i className="ph ph-puzzle-piece" style={{ color: '#3b82f6' }}></i> Kuis & Ujian
+                </h4>
+                {item.course?.quizzes && item.course.quizzes.length > 0 ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {item.course.quizzes.map((quiz, j) => (
+                      <div key={j} style={{ padding: '16px', border: '1px solid rgba(59,130,246,0.2)', background: 'var(--glass-bg)', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                        <div>
+                          <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem', display: 'block' }}>{quiz.title}</strong>
+                          <span style={{ fontSize: '0.85rem', color: 'var(--color-muted)' }}>{quiz.duration_minutes} menit • {quiz.questions?.length || 0} soal</span>
+                        </div>
+                        <button type="button" onClick={() => router.push(`/siakad/mahasiswa/elearning/quiz?quizId=${quiz.id}`)} style={{ background: '#0f172a', color: 'white', border: 'none', padding: '8px 14px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer' }}>
+                          Kerjakan
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div style={{ background: 'var(--glass-bg)', padding: '24px', borderRadius: '12px', textAlign: 'center', border: '1px dashed var(--color-border)' }}>
+                    <i className="ph ph-confetti" style={{ fontSize: '2.5rem', color: '#3b82f6', marginBottom: '8px' }}></i>
+                    <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--color-text)' }}>Belum ada kuis aktif.</p>
+                    <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}>Dosen belum menerbitkan kuis untuk kelas ini.</p>
+                  </div>
+                )}
+              </div>
+
               {/* Assignments Section */}
               <div>
                 <h4 style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>

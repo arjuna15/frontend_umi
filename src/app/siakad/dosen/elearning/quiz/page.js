@@ -1,16 +1,41 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../../components/CustomSelect';
 
 export default function DosenQuizCreate() {
   const router = useRouter();
+  const [courses, setCourses] = useState([]);
+  const [selectedCourseId, setSelectedCourseId] = useState('');
   const [title, setTitle] = useState('');
   const [duration, setDuration] = useState(60);
   const [questions, setQuestions] = useState([
     { type: 'multiple_choice', question: '', option_a: '', option_b: '', option_c: '', option_d: '', correct_answer: 'A', correct_answer_text: '' }
   ]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      const token = localStorage.getItem('siakad_token');
+      if (!token) return router.push('/siakad/login');
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+        const res = await fetch(`${apiUrl}/siakad/dosen/dashboard`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (!res.ok) throw new Error('Failed to fetch');
+        const result = await res.json();
+        const courseList = Array.isArray(result.courses) ? result.courses.map((c) => ({ id: c.id, name: c.name, code: c.code })) : [];
+        setCourses(courseList);
+        if (courseList.length > 0) {
+          setSelectedCourseId(String(courseList[0].id));
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchDashboard();
+  }, [router]);
 
   const addQuestion = () => {
     setQuestions([...questions, { type: 'multiple_choice', question: '', option_a: '', option_b: '', option_c: '', option_d: '', correct_answer: 'A', correct_answer_text: '' }]);
@@ -33,11 +58,26 @@ export default function DosenQuizCreate() {
       const token = localStorage.getItem('siakad_token');
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
       
+      if (!selectedCourseId) {
+        window.toast('Pilih mata kuliah terlebih dahulu.');
+        setLoading(false);
+        return;
+      }
+
+      const normalizedQuestions = questions.map((q) => ({
+        question: q.question,
+        option_a: q.option_a,
+        option_b: q.option_b,
+        option_c: q.option_c,
+        option_d: q.option_d,
+        correct_answer: q.correct_answer,
+      }));
+
       const payload = {
-        course_id: 1, // Mock
+        course_id: selectedCourseId,
         title,
         duration_minutes: duration,
-        questions
+        questions: normalizedQuestions
       };
 
       const res = await fetch(`${apiUrl}/siakad/dosen/quiz`, {
@@ -84,6 +124,24 @@ export default function DosenQuizCreate() {
       <form onSubmit={handleSubmit}>
         <div className="siakad-card stagger-1" style={{ padding: '24px', marginBottom: '24px' }}>
           <h3 style={{ margin: '0 0 16px 0' }}>Pengaturan Kuis</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginBottom: '20px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Mata Kuliah</label>
+              <select
+                value={selectedCourseId}
+                onChange={(e) => setSelectedCourseId(e.target.value)}
+                className="siakad-input"
+                style={{ width: '100%' }}
+              >
+                <option value="">Pilih mata kuliah...</option>
+                {courses.map((course) => (
+                  <option key={course.id} value={course.id}>
+                    {course.code ? `${course.code} - ` : ''}{course.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Judul Kuis / Ujian</label>
