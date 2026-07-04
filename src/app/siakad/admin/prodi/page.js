@@ -189,7 +189,7 @@ export default function AdminProdiPage() {
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Ketua Program Studi (Kaprodi)</label>
-              <input type="text" required value={editFormData.kaprodi} onChange={e=>setEditFormData({...editFormData, kaprodi: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Budi Santoso, M.T." />
+              <input type="text" required value={editFormData.kaprodi} onChange={e=>setEditFormData({...editFormData, kaprodi: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Nama kaprodi" />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Jenjang</label>

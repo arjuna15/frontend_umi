@@ -395,7 +395,7 @@ export default function AdminKeuangan() {
                     value={formData.description} 
                     onChange={(e) => setFormData({...formData, description: e.target.value})}
                     required
-                    placeholder="Contoh: UKT Semester Ganjil 2026/2027"
+                    placeholder="Contoh: UKT semester berjalan"
                     style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
                   />
                 </div>
@@ -552,7 +552,7 @@ export default function AdminKeuangan() {
                     autoFocus
                     value={bulkForm.description}
                     onChange={(e) => setBulkForm({ ...bulkForm, description: e.target.value })}
-                    placeholder="Contoh: UKT Semester Ganjil 2026/2027"
+                    placeholder="Contoh: UKT semester berjalan"
                     style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
                   />
                 </div>

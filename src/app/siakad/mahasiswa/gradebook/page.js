@@ -98,9 +98,7 @@ export default function MahasiswaGradebook() {
               value={semesterFilter} 
               onChange={val => setSemesterFilter(val)}
               options={[
-                { value: "Semua", label: "Semua Semester" },
-                { value: "Ganjil 2026/2027", label: "Ganjil 2026/2027" },
-                { value: "Genap 2025/2026", label: "Genap 2025/2026" }
+                { value: "Semua", label: "Semua Semester" }
               ]}
               style={{ flex: '1 1 150px', minWidth: 0 }}
             />

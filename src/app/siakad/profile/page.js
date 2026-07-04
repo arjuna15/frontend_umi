@@ -235,7 +235,7 @@ export default function ProfilePage() {
                   </div>
                   <div style={{ flex: '1 1 200px' }}>
                     <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Nomor HP</label>
-                    <input type="tel" name="phone" defaultValue={user.phone} placeholder="08123456789" style={{ width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                    <input type="tel" name="phone" defaultValue={user.phone} placeholder="08xxxxxxxxxx" style={{ width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
                   </div>
                 </div>
                 

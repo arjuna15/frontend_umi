@@ -10,6 +10,7 @@ export default function AdminUsersPage() {
   const [loading, setLoading] = useState(true);
   const [selectedRole, setSelectedRole] = useState("");
   const [selectedProdi, setSelectedProdi] = useState("");
+  const [prodiOptions, setProdiOptions] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({
     id: '', name: '', nim_nip: '', role: '', prodi: '', password: ''
@@ -25,12 +26,23 @@ export default function AdminUsersPage() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     
     try {
-      const res = await fetch(`${apiUrl}/siakad/admin/users`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (!res.ok) throw new Error('Failed to fetch users');
-      const data = await res.json();
+      const [usersRes, prodiRes] = await Promise.all([
+        fetch(`${apiUrl}/siakad/admin/users`, { headers: { 'Authorization': `Bearer ${token}` } }),
+        fetch(`${apiUrl}/siakad/admin/prodis`, { headers: { 'Authorization': `Bearer ${token}` } })
+      ]);
+      if (!usersRes.ok) throw new Error('Failed to fetch users');
+      const data = await usersRes.json();
       setUsers(data);
+
+      if (prodiRes.ok) {
+        const prodis = await prodiRes.json();
+        const mapped = Array.isArray(prodis)
+          ? prodis.map((p) => ({ value: p.name, label: p.name }))
+          : [];
+        setProdiOptions(mapped.length > 0 ? mapped : Array.from(new Set((data || []).map((u) => u.prodi).filter(Boolean))).map((p) => ({ value: p, label: p })));
+      } else {
+        setProdiOptions(Array.from(new Set((data || []).map((u) => u.prodi).filter(Boolean))).map((p) => ({ value: p, label: p })));
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -89,7 +101,8 @@ export default function AdminUsersPage() {
   };
 
   const handleResetPassword = async (user) => {
-    if (!await window.toast.confirm(`Yakin ingin mereset password untuk ${user.name} ke default (123456)?`)) return;
+    const nextPassword = window.prompt(`Masukkan password baru untuk ${user.name}:`);
+    if (!nextPassword) return;
     const token = localStorage.getItem('siakad_token');
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     try {
@@ -104,11 +117,11 @@ export default function AdminUsersPage() {
           nim_nip: user.nim_nip,
           role: user.role,
           prodi: user.prodi || '',
-          password: '123456'
+          password: nextPassword
         })
       });
       if (res.ok) {
-        window.toast && window.toast('Password berhasil direset ke default (123456)');
+        window.toast && window.toast('Password berhasil diperbarui');
         fetchUsers();
       } else {
         const errorData = await res.json();
@@ -220,13 +233,7 @@ export default function AdminUsersPage() {
               value={selectedProdi}
               onChange={(val) => setSelectedProdi(val)}
               placeholder="Pilih Prodi..."
-              options={[
-                { value: '', label: 'Tidak Ada / Global' },
-                { value: 'Teknik Informatika', label: 'Teknik Informatika' },
-                { value: 'Sistem Informasi', label: 'Sistem Informasi' },
-                { value: 'Teknik Komputer', label: 'Teknik Komputer' },
-                { value: 'Manajemen Bisnis', label: 'Manajemen Bisnis' }
-              ]}
+              options={prodiOptions}
             />
           </div>
           <div style={{ flex: '0 0 auto' }}>
@@ -338,13 +345,7 @@ export default function AdminUsersPage() {
                   value={editFormData.prodi}
                   onChange={(val) => setEditFormData({...editFormData, prodi: val})}
                   placeholder="Pilih Prodi..."
-                  options={[
-                    { value: '', label: 'Tidak Ada / Global' },
-                    { value: 'Teknik Informatika', label: 'Teknik Informatika' },
-                    { value: 'Sistem Informasi', label: 'Sistem Informasi' },
-                    { value: 'Teknik Komputer', label: 'Teknik Komputer' },
-                    { value: 'Manajemen Bisnis', label: 'Manajemen Bisnis' }
-                  ]}
+                  options={prodiOptions}
                 />
               </div>
             </div>

@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import CustomSelect from '../../components/CustomSelect';
 
 export default function AdminPengaturan() {
   const [krsOpen, setKrsOpen] = useState(true);
@@ -51,12 +50,6 @@ export default function AdminPengaturan() {
     window.toast('Pengaturan sistem berhasil disimpan permanen!');
   };
 
-  const semesterOptions = [
-    { value: 'Ganjil 2026/2027', label: 'Ganjil 2026/2027', icon: 'ph ph-calendar' },
-    { value: 'Genap 2026/2027', label: 'Genap 2026/2027', icon: 'ph ph-calendar' },
-    { value: 'Ganjil 2027/2028', label: 'Ganjil 2027/2028', icon: 'ph ph-calendar' }
-  ];
-
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div className="siakad-page-header">
@@ -86,11 +79,12 @@ export default function AdminPengaturan() {
           
           <div style={{ marginBottom: '16px', padding: '0 4px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-muted)', fontSize: '0.95rem' }}>Tahun Ajaran Aktif</label>
-            <CustomSelect 
+            <input
+              type="text"
               value={semester}
-              onChange={(val) => setSemester(val)}
-              options={semesterOptions}
-              placeholder="Pilih Semester Aktif"
+              onChange={(e) => setSemester(e.target.value)}
+              placeholder="Contoh: Semester berjalan"
+              style={{ width: '100%', padding: '12px 14px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
             />
             <p style={{ margin: '8px 0 0 0', fontSize: '0.8rem', color: 'var(--color-muted)' }}>Perubahan semester aktif akan berdampak pada seluruh modul sistem.</p>
           </div>

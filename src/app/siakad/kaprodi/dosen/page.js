@@ -4,13 +4,6 @@ import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
 import ModalShell from '../../components/ModalShell';
 
-const prodiOptions = [
-  { value: '', label: 'Tidak Ada / Global' },
-  { value: 'Teknik Informatika', label: 'Teknik Informatika' },
-  { value: 'Sistem Informasi', label: 'Sistem Informasi' },
-  { value: 'Teknik Komputer', label: 'Teknik Komputer' },
-  { value: 'Manajemen Bisnis', label: 'Manajemen Bisnis' }
-];
 
 export default function KaprodiDosenPage() {
   const router = useRouter();
@@ -18,7 +11,8 @@ export default function KaprodiDosenPage() {
   const [loading, setLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [userProdi, setUserProdi] = useState('');
-  const [editFormData, setEditFormData] = useState({ id: '', name: '', nip: '', status: 'Aktif', jfa: 'Lektor' });
+  const [prodiOptions, setProdiOptions] = useState([]);
+  const [editFormData, setEditFormData] = useState({ id: '', name: '', nip: '', status: 'Aktif', jfa: 'Lektor', password: '' });
 
   useEffect(() => {
     fetchData();
@@ -38,11 +32,12 @@ export default function KaprodiDosenPage() {
 
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     try {
-      const res = await fetch(`${apiUrl}/siakad/admin/users`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) {
-        const data = await res.json();
+      const [usersRes, prodiRes] = await Promise.all([
+        fetch(`${apiUrl}/siakad/admin/users`, { headers: { 'Authorization': `Bearer ${token}` } }),
+        fetch(`${apiUrl}/siakad/admin/prodis`, { headers: { 'Authorization': `Bearer ${token}` } })
+      ]);
+      if (usersRes.ok) {
+        const data = await usersRes.json();
         
         // Filter by role === 'dosen' and prodi matching Kaprodi
         const filtered = data.filter(u => 
@@ -59,6 +54,13 @@ export default function KaprodiDosenPage() {
         }));
 
         setDosen(mapped);
+        if (prodiRes.ok) {
+          const prodis = await prodiRes.json();
+          const mappedProdi = Array.isArray(prodis) ? prodis.map((p) => ({ value: p.name, label: p.name })) : [];
+          setProdiOptions(mappedProdi.length > 0 ? mappedProdi : Array.from(new Set((data || []).map((u) => u.prodi).filter(Boolean))).map((p) => ({ value: p, label: p })));
+        } else {
+          setProdiOptions(Array.from(new Set((data || []).map((u) => u.prodi).filter(Boolean))).map((p) => ({ value: p, label: p })) );
+        }
       }
     } catch (err) {
       console.error(err);
@@ -82,7 +84,13 @@ export default function KaprodiDosenPage() {
     };
 
     if (!editFormData.id) {
-      payload.password = 'password123'; // Default password for new lecturer accounts
+      if (!editFormData.password.trim()) {
+        window.toast?.('Password wajib diisi untuk dosen baru');
+        return;
+      }
+      payload.password = editFormData.password.trim();
+    } else if (editFormData.password.trim()) {
+      payload.password = editFormData.password.trim();
     }
 
     try {
@@ -142,7 +150,7 @@ export default function KaprodiDosenPage() {
   };
 
   const openAddModal = () => {
-    setEditFormData({ id: '', name: '', nip: '', status: 'Aktif', jfa: 'Asisten Ahli' });
+    setEditFormData({ id: '', name: '', nip: '', status: 'Aktif', jfa: 'Asisten Ahli', password: '' });
     setIsEditModalOpen(true);
   };
 
@@ -158,7 +166,7 @@ export default function KaprodiDosenPage() {
             <div style={{ flex: '1 1 300px' }}>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — KAPRODI</p>
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Dosen</h1>
-              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola profil, jabatan, dan status keaktifan dosen di program studi {userProdi}.</p>
+              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola profil, jabatan, dan status keaktifan dosen di program studi {userProdi || 'Belum tersedia'}.</p>
             </div>
             <button onClick={openAddModal} style={{ background: '#3b82f6', color: 'white', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)' , flexWrap: 'wrap'}}>
               <i className="ph ph-user-plus" style={{ fontSize: '1.2rem' }}></i> Tambah Dosen
@@ -244,11 +252,11 @@ export default function KaprodiDosenPage() {
           <form id="dosen-form" onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>NIP</label>
-              <input type="text" required value={editFormData.nip} onChange={e=>setEditFormData({...editFormData, nip: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: 12345678" />
+              <input type="text" required value={editFormData.nip} onChange={e=>setEditFormData({...editFormData, nip: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: NIP dosen" />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Nama Dosen</label>
-              <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Budi Santoso" />
+              <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Nama dosen" />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Program Studi</label>
@@ -256,6 +264,17 @@ export default function KaprodiDosenPage() {
                 value={editFormData.prodi}
                 onChange={val => setEditFormData({...editFormData, prodi: val})}
                 options={prodiOptions}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Password Awal / Baru</label>
+              <input
+                type="password"
+                value={editFormData.password}
+                onChange={e=>setEditFormData({...editFormData, password: e.target.value})}
+                className="siakad-input"
+                style={{ width: '100%' }}
+                placeholder="Isi untuk akun baru atau perubahan password"
               />
             </div>
           </form>

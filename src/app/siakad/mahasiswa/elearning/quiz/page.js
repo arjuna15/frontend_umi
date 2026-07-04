@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function MahasiswaQuiz() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [quizData, setQuizData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [answers, setAnswers] = useState({});
@@ -11,13 +12,16 @@ export default function MahasiswaQuiz() {
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState(null);
 
-  // Hardcode ID untuk demo
-  const quizId = 1;
+  const quizId = searchParams.get('quizId') || searchParams.get('id') || searchParams.get('quiz');
 
   useEffect(() => {
     const fetchQuiz = async () => {
       const token = localStorage.getItem('siakad_token');
       if (!token) return router.push('/siakad/login');
+      if (!quizId) {
+        setLoading(false);
+        return;
+      }
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
         const res = await fetch(`${apiUrl}/siakad/mahasiswa/quizzes/${quizId}`, {
@@ -37,7 +41,7 @@ export default function MahasiswaQuiz() {
       }
     };
     fetchQuiz();
-  }, [router]);
+  }, [router, quizId]);
 
   useEffect(() => {
     if (loading || result) return;
@@ -93,6 +97,8 @@ export default function MahasiswaQuiz() {
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Kuis...
     </div>
   );
+
+  if (!quizId) return <div style={{ padding: '24px', color: 'var(--color-text)' }}>Pilih kuis dari halaman E-Learning terlebih dahulu.</div>;
 
   if (!quizData) return <div>Kuis tidak ditemukan.</div>;
 
