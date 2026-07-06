@@ -206,7 +206,7 @@ export default function MahasiswaDashboard() {
             </button>
             <button 
               onClick={() => window.open('/api/siakad/export/khs', '_blank')} 
-              style={{ background: '#0f172a', border: 'none', padding: '10px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(15, 23, 42, 0.2)' }}
+              style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', border: 'none', padding: '10px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}
             >
               <i className="ph ph-file-pdf"></i> Unduh PDF Resmi
             </button>

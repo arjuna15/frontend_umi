@@ -329,7 +329,7 @@ export default function DosenElearningPage() {
                     </div>
                     <button 
                       onClick={() => setShowAssignmentModal(true)}
-                      style={{ background: '#0f172a', color: 'white', border: 'none', padding: '10px 16px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
+                      style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '10px 16px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}
                     >
                       <i className="ph ph-plus-circle"></i> Buat Tugas Baru
                     </button>
@@ -588,7 +588,7 @@ export default function DosenElearningPage() {
                               <button
                                 onClick={() => handleGradeSubmission(submission.id, gradeVal)}
                                 disabled={isSaving}
-                                style={{ background: '#0f172a', color: 'white', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 'bold' }}
+                                style={{ background: '#C41E3A', color: 'white', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 'bold', boxShadow: '0 2px 6px rgba(196, 30, 58, 0.3)' }}
                               >
                                 {isSaving ? <i className="ph ph-spinner ph-spin"></i> : 'Simpan'}
                               </button>
