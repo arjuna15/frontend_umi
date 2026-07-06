@@ -21,13 +21,57 @@ export default function SiakadLayout({ children }) {
   const portalRole = session.portalRole;
   const effectiveRole = role === 'kaprodi' ? (portalRole || 'kaprodi') : role;
 
+  const redirectToDashboard = (userRole) => {
+    if (userRole === 'mahasiswa') router.push('/siakad/mahasiswa');
+    else if (userRole === 'dosen') router.push('/siakad/dosen');
+    else if (userRole === 'kaprodi') router.push('/siakad/kaprodi');
+    else if (userRole === 'admin' || userRole === 'superadmin') router.push('/siakad/admin');
+  };
+
   useEffect(() => {
     setHydrated(true);
     setSession({
       role: localStorage.getItem('siakad_role'),
       portalRole: localStorage.getItem('siakad_portal'),
     });
-  }, []);
+  }, [pathname]);
+
+  // Central Routing Guard & Authorization Protection
+  useEffect(() => {
+    if (!hydrated) return;
+
+    const token = localStorage.getItem('siakad_token');
+    const isLoginPage = pathname === '/siakad/login';
+
+    if (!token) {
+      if (!isLoginPage) {
+        router.push('/siakad/login');
+      }
+      return;
+    }
+
+    if (isLoginPage && effectiveRole) {
+      redirectToDashboard(effectiveRole);
+      return;
+    }
+
+    if (pathname === '/siakad' && effectiveRole) {
+      redirectToDashboard(effectiveRole);
+      return;
+    }
+
+    if (effectiveRole) {
+      if (pathname.startsWith('/siakad/mahasiswa') && effectiveRole !== 'mahasiswa') {
+        redirectToDashboard(effectiveRole);
+      } else if (pathname.startsWith('/siakad/dosen') && effectiveRole !== 'dosen') {
+        redirectToDashboard(effectiveRole);
+      } else if (pathname.startsWith('/siakad/kaprodi') && effectiveRole !== 'kaprodi') {
+        redirectToDashboard(effectiveRole);
+      } else if (pathname.startsWith('/siakad/admin') && !['admin', 'superadmin'].includes(effectiveRole)) {
+        redirectToDashboard(effectiveRole);
+      }
+    }
+  }, [pathname, hydrated, effectiveRole, router]);
 
   useEffect(() => {
     const loadNotifications = async () => {
@@ -425,7 +469,9 @@ export default function SiakadLayout({ children }) {
                   onClick={() => {
                     localStorage.removeItem('siakad_token');
                     localStorage.removeItem('siakad_role');
-                    router.push('/siakad/login');
+                    localStorage.removeItem('siakad_user');
+                    localStorage.removeItem('siakad_portal');
+                    window.location.href = '/siakad/login';
                   }}
                 >
                   <i className="ph ph-sign-out"></i>
