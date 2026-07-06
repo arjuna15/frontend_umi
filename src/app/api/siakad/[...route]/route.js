@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
 
-async function handleProxy(req, { params }, method) {
+async function handleProxy(req, context, method) {
   try {
-    const route = params.route.join('/');
+    const resolvedParams = await context.params;
+    const route = resolvedParams?.route?.join('/') || '';
     const token = req.cookies.get('siakad_token')?.value;
     const urlObj = new URL(req.url);
     const searchParams = urlObj.searchParams.toString();
