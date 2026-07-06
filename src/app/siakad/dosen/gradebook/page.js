@@ -96,10 +96,10 @@ export default function DosenGradebookPage() {
         if (course.grades) {
           course.grades.forEach(g => {
             initialEdits[g.id] = {
-              kehadiran: g.attendance_score !== null && g.attendance_score !== undefined ? String(g.attendance_score) : '',
-              tugas: g.assignment_score !== null && g.assignment_score !== undefined ? String(g.assignment_score) : '',
-              uts: g.uts_score !== null && g.uts_score !== undefined ? String(g.uts_score) : '',
-              uas: g.uas_score !== null && g.uas_score !== undefined ? String(g.uas_score) : '',
+              kehadiran: g.attendance_score !== null && g.attendance_score !== undefined ? String(parseFloat(g.attendance_score)) : '',
+              tugas: g.assignment_score !== null && g.assignment_score !== undefined ? String(parseFloat(g.assignment_score)) : '',
+              uts: g.uts_score !== null && g.uts_score !== undefined ? String(parseFloat(g.uts_score)) : '',
+              uas: g.uas_score !== null && g.uas_score !== undefined ? String(parseFloat(g.uas_score)) : '',
               score: g.score !== null && g.score !== undefined ? String(g.score) : '',
               grade: g.grade || ''
             };

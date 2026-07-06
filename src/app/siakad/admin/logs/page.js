@@ -104,7 +104,17 @@ export default function AdminLogsPage() {
                   <td style={{ padding: '16px', color: 'var(--color-muted)', fontSize: '0.9rem', whiteSpace: 'nowrap' }}>{formatDate(log.time)}</td>
                   <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{log.user}</td>
                   <td style={{ padding: '16px' }}>
-                    <span style={{ display: 'inline-block', background: 'var(--glass-bg)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 600, border: '1px solid var(--color-border)' }}>
+                    <span style={{ 
+                      display: 'inline-block', 
+                      background: 'var(--glass-bg)', 
+                      padding: '6px 12px', 
+                      borderRadius: '8px', 
+                      fontSize: '0.85rem', 
+                      fontWeight: 600, 
+                      border: '1px solid var(--color-border)',
+                      minWidth: '150px',
+                      textAlign: 'center'
+                    }}>
                       {log.action}
                     </span>
                   </td>
