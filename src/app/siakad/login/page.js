@@ -19,8 +19,7 @@ export default function SiakadLogin() {
     setError('');
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-      const res = await fetch(`${apiUrl}/siakad/login`, {
+      const res = await fetch(`/api/siakad/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nim_nip: nim, password })
@@ -31,7 +30,7 @@ export default function SiakadLogin() {
         throw new Error(data.message || 'Kredensial tidak valid.');
       }
 
-      localStorage.setItem('siakad_token', data.token);
+      localStorage.setItem('siakad_token', 'cookie_authenticated');
       localStorage.setItem('siakad_role', data.user.role);
       localStorage.setItem('siakad_user', JSON.stringify(data.user));
 

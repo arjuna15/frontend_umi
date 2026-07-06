@@ -6,6 +6,7 @@ import ModalShell from '../../components/ModalShell';
 export default function DosenElearningPage() {
   const router = useRouter();
   const [courses, setCourses] = useState([]);
+  const [fullCourses, setFullCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,20 +24,32 @@ export default function DosenElearningPage() {
   const [meetUrl, setMeetUrl] = useState('');
   const [savingMeet, setSavingMeet] = useState(false);
 
+  // Assignment Modal States
+  const [showAssignmentModal, setShowAssignmentModal] = useState(false);
+  const [newAssTitle, setNewAssTitle] = useState('');
+  const [newAssDesc, setNewAssDesc] = useState('');
+  const [newAssDeadline, setNewAssDeadline] = useState('');
+  const [isCreatingAss, setIsCreatingAss] = useState(false);
+
+  // Submissions Modal States
+  const [showSubmissionsModal, setShowSubmissionsModal] = useState(false);
+  const [selectedAssignment, setSelectedAssignment] = useState(null);
+  const [gradingValues, setGradingValues] = useState({});
+  const [isSavingGrade, setIsSavingGrade] = useState({});
+
   const fetchDashboard = async () => {
     const token = localStorage.getItem('siakad_token');
     if (!token) return router.push('/siakad/login');
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-      const res = await fetch(`${apiUrl}/siakad/dosen/dashboard`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const res = await fetch(`/api/siakad/dosen/dashboard`);
       if (!res.ok) throw new Error('Failed to fetch');
       const result = await res.json();
       
-      const courseList = result.schedule ? result.schedule.map(s => ({ id: s.course_id, name: s.course })) : [];
+      setFullCourses(result.courses || []);
+      const courseList = result.courses ? result.courses.map(s => ({ id: s.id, name: s.name })) : [];
       setCourses(courseList);
       if (courseList.length > 0) {
+        setSelectedCourse(courseList[0].id);
         loadSessions(courseList[0].id);
       }
     } catch (err) {
@@ -49,11 +62,7 @@ export default function DosenElearningPage() {
   const loadSessions = async (courseId) => {
     setSelectedCourse(courseId);
     try {
-      const token = localStorage.getItem('siakad_token');
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-      const res = await fetch(`${apiUrl}/siakad/dosen/courses/${courseId}/sessions`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const res = await fetch(`/api/siakad/dosen/courses/${courseId}/sessions`);
       if (res.ok) {
         setSessions(await res.json());
       }
@@ -67,17 +76,14 @@ export default function DosenElearningPage() {
     if (!selectedFile || !uploadTitle || !uploadSession) return;
     setUploading(true);
 
-    const token = localStorage.getItem('siakad_token');
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     const formData = new FormData();
     formData.append('title', uploadTitle);
     formData.append('file', selectedFile);
     formData.append('session_num', uploadSession);
 
     try {
-      const res = await fetch(`${apiUrl}/siakad/dosen/course/${selectedCourse}/materials`, {
+      const res = await fetch(`/api/siakad/dosen/course/${selectedCourse}/materials`, {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` },
         body: formData
       });
       if (res.ok) {
@@ -102,14 +108,10 @@ export default function DosenElearningPage() {
     if (!meetUrl || !meetSession) return;
     setSavingMeet(true);
 
-    const token = localStorage.getItem('siakad_token');
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-
     try {
-      const res = await fetch(`${apiUrl}/siakad/dosen/course/${selectedCourse}/meet-link`, {
+      const res = await fetch(`/api/siakad/dosen/course/${selectedCourse}/meet-link`, {
         method: 'POST',
         headers: { 
-          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ session_num: meetSession, meet_url: meetUrl })
@@ -127,6 +129,81 @@ export default function DosenElearningPage() {
       window.toast && window.toast('Error: ' + err.message);
     } finally {
       setSavingMeet(false);
+    }
+  };
+
+  const handleCreateAssignment = async (e) => {
+    e.preventDefault();
+    if (!newAssTitle || !newAssDesc || !newAssDeadline) return;
+    setIsCreatingAss(true);
+
+    try {
+      const res = await fetch(`/api/siakad/course/${selectedCourse}/assignment`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: newAssTitle,
+          description: newAssDesc,
+          deadline: newAssDeadline
+        })
+      });
+      if (res.ok) {
+        window.toast && window.toast('Tugas baru berhasil diterbitkan!');
+        setShowAssignmentModal(false);
+        setNewAssTitle('');
+        setNewAssDesc('');
+        setNewAssDeadline('');
+        fetchDashboard();
+      } else {
+        const err = await res.json();
+        window.toast && window.toast('Gagal: ' + (err.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast && window.toast('Error: ' + err.message);
+    } finally {
+      setIsCreatingAss(false);
+    }
+  };
+
+  const handleGradeSubmission = async (submissionId, gradeValue) => {
+    if (gradeValue === '' || isNaN(gradeValue)) {
+      window.toast && window.toast('Masukkan nilai angka yang valid!');
+      return;
+    }
+    
+    setIsSavingGrade(prev => ({ ...prev, [submissionId]: true }));
+
+    try {
+      const res = await fetch(`/api/siakad/submission/${submissionId}/grade`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ grade: parseFloat(gradeValue) })
+      });
+      if (res.ok) {
+        window.toast && window.toast('Nilai tugas berhasil disimpan!');
+        
+        // Dynamic refresh
+        const refreshedData = await res.json();
+        
+        // Refresh selected assignment submissions directly in local state
+        if (selectedAssignment) {
+          const updatedSubs = selectedAssignment.submissions.map(s => 
+            s.id === submissionId ? { ...s, grade: parseFloat(gradeValue) } : s
+          );
+          setSelectedAssignment({
+            ...selectedAssignment,
+            submissions: updatedSubs
+          });
+        }
+        fetchDashboard();
+      } else {
+        const err = await res.json();
+        window.toast && window.toast('Gagal: ' + (err.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast && window.toast('Error: ' + err.message);
+    } finally {
+      setIsSavingGrade(prev => ({ ...prev, [submissionId]: false }));
     }
   };
 
@@ -236,6 +313,73 @@ export default function DosenElearningPage() {
               ))}
             </div>
           )}
+
+          {/* Assignments Card Section */}
+          {selectedCourse && (
+            (() => {
+              const selectedCourseData = fullCourses.find(c => c.id === selectedCourse);
+              return (
+                <div className="siakad-card" style={{ padding: '24px', marginTop: '24px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
+                    <div>
+                      <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <i className="ph ph-clipboard-text" style={{ color: '#C41E3A' }}></i> Tugas & Kuis E-Learning
+                      </h3>
+                      <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}>Buat tugas baru dan periksa berkas pengumpulan mahasiswa.</p>
+                    </div>
+                    <button 
+                      onClick={() => setShowAssignmentModal(true)}
+                      style={{ background: '#0f172a', color: 'white', border: 'none', padding: '10px 16px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
+                    >
+                      <i className="ph ph-plus-circle"></i> Buat Tugas Baru
+                    </button>
+                  </div>
+
+                  {selectedCourseData?.assignments && selectedCourseData.assignments.length > 0 ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      {selectedCourseData.assignments.map((ass, i) => (
+                        <div key={i} style={{ border: '1px solid var(--color-border)', borderRadius: '12px', padding: '16px', background: 'rgba(255,255,255,0.02)' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
+                            <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>{ass.title}</strong>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'white', background: '#C41E3A', padding: '4px 10px', borderRadius: '999px' }}>
+                              Deadline: {ass.deadline}
+                            </span>
+                          </div>
+                          <p style={{ margin: '0 0 16px 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}>{ass.description}</p>
+                          
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--color-text)', fontWeight: '600' }}>
+                              <i className="ph ph-users" style={{ marginRight: '6px' }}></i>
+                              {ass.submissions?.length || 0} Pengumpulan
+                            </span>
+                            <button 
+                              onClick={() => { 
+                                setSelectedAssignment(ass); 
+                                const initialGrades = {};
+                                ass.submissions?.forEach(sub => {
+                                  initialGrades[sub.mahasiswa_id] = sub.grade !== null ? String(sub.grade) : '';
+                                });
+                                setGradingValues(initialGrades);
+                                setShowSubmissionsModal(true); 
+                              }}
+                              style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '8px 14px', borderRadius: '8px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem' }}
+                            >
+                              <i className="ph ph-eye"></i> Periksa & Nilai
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div style={{ textAlign: 'center', padding: '32px', color: 'var(--color-muted)', border: '1px dashed var(--color-border)', borderRadius: '12px' }}>
+                      <i className="ph ph-folder-open" style={{ fontSize: '2.5rem', marginBottom: '8px', display: 'block', color: 'var(--color-muted)' }}></i>
+                      <p style={{ margin: 0 }}>Belum ada tugas e-learning dibuat untuk kelas ini.</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })()
+          )}
         </div>
       </div>
 
@@ -305,6 +449,159 @@ export default function DosenElearningPage() {
               />
             </div>
           </form>
+        </ModalShell>
+      )}
+
+      {showAssignmentModal && (
+        <ModalShell
+          title="Buat Tugas Baru"
+          icon="ph-plus-circle"
+          onClose={() => setShowAssignmentModal(false)}
+          footer={(
+            <>
+              <button type="button" onClick={() => setShowAssignmentModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="assignment-form" disabled={isCreatingAss} style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(196, 30, 58, 0.28)' }}>{isCreatingAss ? 'Menerbitkan...' : 'Terbitkan Tugas'}</button>
+            </>
+          )}
+        >
+          <form id="assignment-form" onSubmit={handleCreateAssignment} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Judul Tugas</label>
+              <input 
+                type="text" 
+                className="siakad-input" 
+                value={newAssTitle}
+                onChange={e => setNewAssTitle(e.target.value)}
+                placeholder="Contoh: Tugas Mandiri 1 - Analisis Algoritma"
+                style={{ width: '100%' }}
+                required
+              />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Petunjuk / Deskripsi Tugas</label>
+              <textarea 
+                className="siakad-input" 
+                value={newAssDesc}
+                onChange={e => setNewAssDesc(e.target.value)}
+                placeholder="Ketik deskripsi tugas di sini..."
+                style={{ width: '100%', height: '100px', resize: 'vertical' }}
+                required
+              />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Batas Waktu (Deadline)</label>
+              <input 
+                type="datetime-local" 
+                className="siakad-input" 
+                value={newAssDeadline}
+                onChange={e => setNewAssDeadline(e.target.value)}
+                style={{ width: '100%' }}
+                required
+              />
+            </div>
+          </form>
+        </ModalShell>
+      )}
+
+      {showSubmissionsModal && selectedAssignment && (
+        <ModalShell
+          title={`Pengumpulan Tugas: ${selectedAssignment.title}`}
+          icon="ph-users"
+          onClose={() => setShowSubmissionsModal(false)}
+          footer={(
+            <button type="button" onClick={() => setShowSubmissionsModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Tutup</button>
+          )}
+        >
+          <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
+              <thead>
+                <tr style={{ borderBottom: '2px solid var(--color-border)', textAlign: 'left' }}>
+                  <th style={{ padding: '10px 8px', color: 'var(--color-text)' }}>Mahasiswa</th>
+                  <th style={{ padding: '10px 8px', color: 'var(--color-text)' }}>Status</th>
+                  <th style={{ padding: '10px 8px', color: 'var(--color-text)' }}>Berkas</th>
+                  <th style={{ padding: '10px 8px', color: 'var(--color-text)', width: '150px' }}>Input Nilai</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(() => {
+                  const selectedCourseData = fullCourses.find(c => c.id === selectedCourse);
+                  const enrolledStudents = selectedCourseData?.grades || [];
+                  
+                  if (enrolledStudents.length === 0) {
+                    return (
+                      <tr>
+                        <td colSpan="4" style={{ padding: '20px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada mahasiswa terdaftar di kelas ini.</td>
+                      </tr>
+                    );
+                  }
+
+                  return enrolledStudents.map((gradeObj, idx) => {
+                    const student = gradeObj.mahasiswa;
+                    if (!student) return null;
+
+                    const submission = selectedAssignment.submissions?.find(s => s.mahasiswa_id === student.id);
+                    const gradeVal = gradingValues[student.id] || '';
+                    const isSaving = isSavingGrade[submission?.id] || false;
+
+                    return (
+                      <tr key={idx} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                        <td style={{ padding: '12px 8px' }}>
+                          <div style={{ fontWeight: 'bold', color: 'var(--color-text)' }}>{student.name}</div>
+                          <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>NIM: {student.nim_nip}</div>
+                        </td>
+                        <td style={{ padding: '12px 8px' }}>
+                          {submission ? (
+                            submission.grade !== null ? (
+                              <span style={{ display: 'inline-block', background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>Sudah Dinilai ({submission.grade})</span>
+                            ) : (
+                              <span style={{ display: 'inline-block', background: 'rgba(245,158,11,0.1)', color: '#f59e0b', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>Perlu Dinilai</span>
+                            )
+                          ) : (
+                            <span style={{ display: 'inline-block', background: 'rgba(100,116,139,0.1)', color: '#64748b', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>Belum Mengumpulkan</span>
+                          )}
+                        </td>
+                        <td style={{ padding: '12px 8px' }}>
+                          {submission ? (
+                            <button 
+                              onClick={() => window.open(`/api/siakad/submission/${submission.id}/download`, '_blank')}
+                              style={{ background: 'transparent', border: 'none', color: '#3b82f6', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', padding: 0 }}
+                            >
+                              <i className="ph ph-download-simple"></i> Unduh Berkas
+                            </button>
+                          ) : '-'}
+                        </td>
+                        <td style={{ padding: '12px 8px' }}>
+                          {submission ? (
+                            <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                              <input 
+                                type="number" 
+                                className="siakad-input"
+                                value={gradeVal}
+                                onChange={e => setGradingValues({ ...gradingValues, [student.id]: e.target.value })}
+                                placeholder="0-100"
+                                style={{ width: '60px', padding: '6px', fontSize: '0.8rem', textAlign: 'center' }}
+                                min="0"
+                                max="100"
+                              />
+                              <button
+                                onClick={() => handleGradeSubmission(submission.id, gradeVal)}
+                                disabled={isSaving}
+                                style={{ background: '#0f172a', color: 'white', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 'bold' }}
+                              >
+                                {isSaving ? <i className="ph ph-spinner ph-spin"></i> : 'Simpan'}
+                              </button>
+                            </div>
+                          ) : '-'}
+                        </td>
+                      </tr>
+                    );
+                  });
+                })()}
+              </tbody>
+            </table>
+          </div>
         </ModalShell>
       )}
     </div>

@@ -271,11 +271,13 @@ export default function SiakadLayout({ children }) {
           </div>
           <button 
             onClick={() => {
-              localStorage.removeItem('siakad_token');
-              localStorage.removeItem('siakad_role');
-              localStorage.removeItem('siakad_user');
-              localStorage.removeItem('siakad_portal');
-              window.location.href = '/siakad/login';
+              fetch('/api/siakad/logout', { method: 'POST' }).finally(() => {
+                localStorage.removeItem('siakad_token');
+                localStorage.removeItem('siakad_role');
+                localStorage.removeItem('siakad_user');
+                localStorage.removeItem('siakad_portal');
+                window.location.href = '/siakad/login';
+              });
             }} 
             className="btn-logout-icon" 
             title="Keluar"
@@ -467,11 +469,13 @@ export default function SiakadLayout({ children }) {
                   className="drawer-logout-btn" 
                   title="Logout"
                   onClick={() => {
-                    localStorage.removeItem('siakad_token');
-                    localStorage.removeItem('siakad_role');
-                    localStorage.removeItem('siakad_user');
-                    localStorage.removeItem('siakad_portal');
-                    window.location.href = '/siakad/login';
+                    fetch('/api/siakad/logout', { method: 'POST' }).finally(() => {
+                      localStorage.removeItem('siakad_token');
+                      localStorage.removeItem('siakad_role');
+                      localStorage.removeItem('siakad_user');
+                      localStorage.removeItem('siakad_portal');
+                      window.location.href = '/siakad/login';
+                    });
                   }}
                 >
                   <i className="ph ph-sign-out"></i>

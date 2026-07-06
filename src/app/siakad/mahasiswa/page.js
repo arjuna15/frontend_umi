@@ -200,9 +200,17 @@ export default function MahasiswaDashboard() {
       <div id="khs-print-section" className="siakad-card" style={{ padding: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }} className="no-print">
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Kartu Hasil Studi (KHS)</h2>
-          <button onClick={() => window.print()} style={{ background: '#0f172a', border: 'none', padding: '10px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(15, 23, 42, 0.2)' }}>
-            <i className="ph ph-printer"></i> Cetak KHS Resmi
-          </button>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button onClick={() => window.print()} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 16px', borderRadius: '8px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
+              <i className="ph ph-printer"></i> Print View
+            </button>
+            <button 
+              onClick={() => window.open('/api/siakad/export/khs', '_blank')} 
+              style={{ background: '#0f172a', border: 'none', padding: '10px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(15, 23, 42, 0.2)' }}
+            >
+              <i className="ph ph-file-pdf"></i> Unduh PDF Resmi
+            </button>
+          </div>
         </div>
         
         <div style={{ overflowX: 'auto' }}>
