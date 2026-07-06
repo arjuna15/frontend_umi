@@ -122,7 +122,7 @@ export default function MahasiswaGradebook() {
               onChange={e => setSearch(e.target.value)}
               style={{ flex: '1 1 150px', minWidth: 0, padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
             />
-            <button onClick={() => window.print()} style={{ background: '#0f172a', border: 'none', padding: '8px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(15, 23, 42, 0.2)' }}>
+            <button onClick={() => window.print()} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '8px 16px', borderRadius: '8px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
               <i className="ph ph-printer"></i> Cetak Transkrip
             </button>
           </div>

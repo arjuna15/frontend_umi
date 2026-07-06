@@ -98,7 +98,7 @@ export default function MahasiswaForumPage() {
                     <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
                   <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>{course.code}</span>
                 </div>
-                <button onClick={() => { setActiveCourseId(course.id); setTopicForm({ title: '', content: '' }); setShowTopicModal(true); }} style={{ background: '#0f172a', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(15, 23, 42, 0.3)' }}>
+                <button onClick={() => { setActiveCourseId(course.id); setTopicForm({ title: '', content: '' }); setShowTopicModal(true); }} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}>
                   <i className="ph ph-plus"></i> Buat Topik Baru
                 </button>
               </div>
@@ -152,7 +152,7 @@ export default function MahasiswaForumPage() {
                             } catch (err) { window.toast('Error: ' + err.message); }
                           }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
                             <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, minWidth: 0, padding: '8px 12px', borderRadius: '6px', border: '1px solid var(--color-border)', outline: 'none', fontSize: '0.9rem', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
-                            <button type="submit" style={{ background: '#0f172a', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Kirim</button>
+                            <button type="submit" style={{ background: '#C41E3A', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 2px 6px rgba(196, 30, 58, 0.3)' }}>Kirim</button>
                           </form>
                         </div>
                       </div>

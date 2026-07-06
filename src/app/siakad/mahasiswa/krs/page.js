@@ -197,11 +197,11 @@ export default function KRSPage() {
                 onClick={handleSubmit}
                 disabled={isSubmitting || selectedCourses.length === 0}
                 style={{
-                  background: (isSubmitting || selectedCourses.length === 0) ? 'var(--color-muted)' : '#0f172a',
+                  background: (isSubmitting || selectedCourses.length === 0) ? 'var(--color-muted)' : 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)',
                   color: 'white', border: 'none', padding: '10px 20px', borderRadius: '12px',
                   fontWeight: 'bold', cursor: (isSubmitting || selectedCourses.length === 0) ? 'not-allowed' : 'pointer',
                   display: 'flex', alignItems: 'center', gap: '8px',
-                  boxShadow: '0 4px 6px -1px rgba(15, 23, 42, 0.2)', transition: 'all 0.2s',
+                  boxShadow: (isSubmitting || selectedCourses.length === 0) ? 'none' : '0 4px 12px rgba(196, 30, 58, 0.3)', transition: 'all 0.2s',
                   fontSize: '1rem'
                 }}
               >
