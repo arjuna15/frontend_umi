@@ -15,6 +15,7 @@ export default function AdminUsersPage() {
   const [editFormData, setEditFormData] = useState({
     id: '', name: '', nim_nip: '', role: '', prodi: '', password: ''
   });
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchUsers();
@@ -260,7 +261,29 @@ export default function AdminUsersPage() {
         </form>
       </div>
 
-      <div className="siakad-card stagger-2" style={{ padding: '0', overflow: 'hidden' }}>
+      <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
+        <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Pengguna</h3>
+          <div style={{ position: 'relative', width: '300px' }}>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <input 
+              type="text" 
+              placeholder="Cari nama, NIM/NIP, prodi..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ 
+                width: '100%', 
+                padding: '10px 14px 10px 38px', 
+                borderRadius: '8px', 
+                border: '1px solid var(--color-border)', 
+                outline: 'none', 
+                background: 'var(--color-bg)', 
+                color: 'var(--color-text)',
+                fontSize: '0.9rem'
+              }} 
+            />
+          </div>
+        </div>
         <div style={{ overflowX: 'auto' }}>
           <table className="siakad-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
@@ -272,48 +295,64 @@ export default function AdminUsersPage() {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, idx) => (
-                <tr key={user.id}>
-                  <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: '500' }}>{user.name}</td>
-                  <td style={{ padding: '16px 24px', color: 'var(--color-muted)', fontSize: '0.95rem' }}>{user.nim_nip}</td>
-                  <td style={{ padding: '16px 24px' }}>
-                    <span style={{ 
-                      padding: '6px 12px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold',
-                      background: user.role === 'admin' ? '#fee2e2' : user.role === 'dosen' ? '#e0e7ff' : user.role === 'kaprodi' ? '#ccfbf1' : '#dcfce7',
-                      color: user.role === 'admin' ? '#991b1b' : user.role === 'dosen' ? '#3730a3' : user.role === 'kaprodi' ? '#115e59' : '#166534',
-                      display: 'inline-block',
-                      width: '110px',
-                      textAlign: 'center'
-                    }}>
-                      {user.role.toUpperCase()}
-                    </span>
-                  </td>
-                  <td style={{ padding: '16px 24px', textAlign: 'right' }}>
-                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
-                      <button 
-                        onClick={() => handleResetPassword(user)}
-                        style={{ background: 'var(--glass-bg)', color: '#f59e0b', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
-                        title="Reset Password"
-                      ><i className="ph ph-key" style={{ fontSize: '1rem' }}></i></button>
-                      <button 
-                        onClick={() => handleOpenEditModal(user)}
-                        style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
-                        title="Edit Pengguna"
-                      ><i className="ph ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
-                      <button 
-                        onClick={() => handleDeleteUser(user.id)}
-                        style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
-                        title="Hapus Pengguna"
-                      ><i className="ph ph-trash" style={{ fontSize: '1rem' }}></i></button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-              {users.length === 0 && (
-                <tr>
-                  <td colSpan="4" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data pengguna</td>
-                </tr>
-              )}
+              {(() => {
+                const filteredUsers = users.filter(user => {
+                  const query = searchQuery.toLowerCase().trim();
+                  if (!query) return true;
+                  return (
+                    user.name?.toLowerCase().includes(query) ||
+                    user.nim_nip?.toLowerCase().includes(query) ||
+                    user.role?.toLowerCase().includes(query) ||
+                    user.prodi?.toLowerCase().includes(query)
+                  );
+                });
+
+                if (filteredUsers.length === 0) {
+                  return (
+                    <tr>
+                      <td colSpan="4" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data pengguna</td>
+                    </tr>
+                  );
+                }
+
+                return filteredUsers.map((user) => (
+                  <tr key={user.id}>
+                    <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: '500' }}>{user.name}</td>
+                    <td style={{ padding: '16px 24px', color: 'var(--color-muted)', fontSize: '0.95rem' }}>{user.nim_nip}</td>
+                    <td style={{ padding: '16px 24px' }}>
+                      <span style={{ 
+                        padding: '6px 12px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold',
+                        background: user.role === 'admin' ? '#fee2e2' : user.role === 'dosen' ? '#e0e7ff' : user.role === 'kaprodi' ? '#ccfbf1' : '#dcfce7',
+                        color: user.role === 'admin' ? '#991b1b' : user.role === 'dosen' ? '#3730a3' : user.role === 'kaprodi' ? '#115e59' : '#166534',
+                        display: 'inline-block',
+                        width: '110px',
+                        textAlign: 'center'
+                      }}>
+                        {user.role.toUpperCase()}
+                      </span>
+                    </td>
+                    <td style={{ padding: '16px 24px', textAlign: 'right' }}>
+                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
+                        <button 
+                          onClick={() => handleResetPassword(user)}
+                          style={{ background: 'var(--glass-bg)', color: '#f59e0b', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                          title="Reset Password"
+                        ><i className="ph ph-key" style={{ fontSize: '1rem' }}></i></button>
+                        <button 
+                          onClick={() => handleOpenEditModal(user)}
+                          style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                          title="Edit Pengguna"
+                        ><i className="ph ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
+                        <button 
+                          onClick={() => handleDeleteUser(user.id)}
+                          style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                          title="Hapus Pengguna"
+                        ><i className="ph ph-trash" style={{ fontSize: '1rem' }}></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                ));
+              })()}
             </tbody>
           </table>
         </div>

@@ -36,6 +36,7 @@ export default function DosenElearningPage() {
   const [selectedAssignment, setSelectedAssignment] = useState(null);
   const [gradingValues, setGradingValues] = useState({});
   const [isSavingGrade, setIsSavingGrade] = useState({});
+  const [submissionSearch, setSubmissionSearch] = useState('');
 
   const fetchDashboard = async () => {
     const token = localStorage.getItem('siakad_token');
@@ -514,6 +515,17 @@ export default function DosenElearningPage() {
             <button type="button" onClick={() => setShowSubmissionsModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Tutup</button>
           )}
         >
+          <div style={{ marginBottom: '16px' }}>
+            <input 
+              type="text" 
+              className="siakad-input" 
+              placeholder="Cari mahasiswa berdasarkan nama atau NIM..." 
+              value={submissionSearch} 
+              onChange={e => setSubmissionSearch(e.target.value)} 
+              style={{ width: '100%' }}
+            />
+          </div>
+
           <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
               <thead>
@@ -529,15 +541,22 @@ export default function DosenElearningPage() {
                   const selectedCourseData = fullCourses.find(c => c.id === selectedCourse);
                   const enrolledStudents = selectedCourseData?.grades || [];
                   
-                  if (enrolledStudents.length === 0) {
+                  const filteredStudents = enrolledStudents.filter(gradeObj => {
+                    const student = gradeObj.mahasiswa;
+                    if (!student) return false;
+                    const query = submissionSearch.toLowerCase();
+                    return student.name.toLowerCase().includes(query) || student.nim_nip.toLowerCase().includes(query);
+                  });
+
+                  if (filteredStudents.length === 0) {
                     return (
                       <tr>
-                        <td colSpan="4" style={{ padding: '20px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada mahasiswa terdaftar di kelas ini.</td>
+                        <td colSpan="4" style={{ padding: '20px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada mahasiswa yang cocok dengan pencarian.</td>
                       </tr>
                     );
                   }
 
-                  return enrolledStudents.map((gradeObj, idx) => {
+                  return filteredStudents.map((gradeObj, idx) => {
                     const student = gradeObj.mahasiswa;
                     if (!student) return null;
 

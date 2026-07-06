@@ -15,6 +15,7 @@ export default function KaprodiKrs() {
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
   const [selectedRejectId, setSelectedRejectId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchData();
@@ -153,9 +154,31 @@ export default function KaprodiKrs() {
         <button onClick={() => setActiveTab('history')} style={{ background: activeTab === 'history' ? 'rgba(16, 185, 129, 0.1)' : 'transparent', color: activeTab === 'history' ? '#10b981' : 'var(--color-muted)', border: 'none', padding: '12px 24px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' , flexWrap: 'wrap'}}>
           <i className="ph ph-clock-counter-clockwise"></i> Riwayat KRS Mahasiswa ({history.length})
         </button>
-      </div>
-
-      <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
+      </div>      <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
+        <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>
+            {activeTab === 'pending' ? 'Daftar Pengajuan Pending' : 'Riwayat Pengajuan'}
+          </h3>
+          <div style={{ position: 'relative', width: '300px' }}>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <input 
+              type="text" 
+              placeholder="Cari nama mahasiswa atau NIM..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ 
+                width: '100%', 
+                padding: '10px 14px 10px 38px', 
+                borderRadius: '8px', 
+                border: '1px solid var(--color-border)', 
+                outline: 'none', 
+                background: 'var(--color-bg)', 
+                color: 'var(--color-text)',
+                fontSize: '0.9rem'
+              }} 
+            />
+          </div>
+        </div>
         <div style={{ overflowX: 'auto' }}>
           <table className="siakad-table" style={{ minWidth: '800px' }}>
           <thead>
@@ -168,20 +191,46 @@ export default function KaprodiKrs() {
             </tr>
           </thead>
           <tbody>
-            {activeTab === 'pending' && submissions.length === 0 ? (
-              <tr>
-                <td colSpan="5" style={{ textAlign: 'center', color: 'var(--color-muted)', padding: '40px 20px' }}>
-                  Belum ada pengajuan KRS yang pending.
-                </td>
-              </tr>
-            ) : activeTab === 'history' && history.length === 0 ? (
-              <tr>
-                <td colSpan="5" style={{ textAlign: 'center', color: 'var(--color-muted)', padding: '40px 20px' }}>
-                  Belum ada riwayat KRS.
-                </td>
-              </tr>
-            ) : (
-              (activeTab === 'pending' ? submissions : history).map(sub => (
+            {(() => {
+              const filteredSubmissions = submissions.filter(sub => {
+                const query = searchQuery.toLowerCase().trim();
+                if (!query) return true;
+                return (
+                  sub.mahasiswa?.name?.toLowerCase().includes(query) ||
+                  sub.mahasiswa?.nim_nip?.toLowerCase().includes(query)
+                );
+              });
+
+              const filteredHistory = history.filter(sub => {
+                const query = searchQuery.toLowerCase().trim();
+                if (!query) return true;
+                return (
+                  sub.mahasiswa?.name?.toLowerCase().includes(query) ||
+                  sub.mahasiswa?.nim_nip?.toLowerCase().includes(query)
+                );
+              });
+
+              if (activeTab === 'pending' && filteredSubmissions.length === 0) {
+                return (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: 'center', color: 'var(--color-muted)', padding: '40px 20px' }}>
+                      Tidak ada pengajuan KRS pending yang cocok dengan pencarian.
+                    </td>
+                  </tr>
+                );
+              }
+
+              if (activeTab === 'history' && filteredHistory.length === 0) {
+                return (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: 'center', color: 'var(--color-muted)', padding: '40px 20px' }}>
+                      Tidak ada riwayat KRS yang cocok dengan pencarian.
+                    </td>
+                  </tr>
+                );
+              }
+
+              return (activeTab === 'pending' ? filteredSubmissions : filteredHistory).map(sub => (
                 <tr key={sub.id}>
                   <td style={{ fontWeight: 500, color: 'var(--color-text)' }}>
                     {sub.mahasiswa?.name} <br/>
@@ -242,9 +291,9 @@ export default function KaprodiKrs() {
                     )}
                   </td>
                 </tr>
-              ))
-            )}
-            </tbody>
+              ));
+            })()}
+          </tbody>
           </table>
         </div>
       </div>

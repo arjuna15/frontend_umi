@@ -13,6 +13,7 @@ export default function KRSPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [krsOpen, setKrsOpen] = useState(true);
   const [semesterSetting, setSemesterSetting] = useState('Semester aktif');
+  const [searchQuery, setSearchQuery] = useState('');
   const currentSemester = data?.semester || semesterSetting || 'Semester aktif';
 
   const fetchDashboard = async () => {
@@ -189,6 +190,25 @@ export default function KRSPage() {
         <div className="siakad-modal-header">
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Daftar Mata Kuliah Tersedia</h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+            <div style={{ position: 'relative', width: '250px' }}>
+              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1rem' }}></i>
+              <input 
+                type="text" 
+                placeholder="Cari matkul, kode, dosen..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{ 
+                  width: '100%', 
+                  padding: '8px 12px 8px 32px', 
+                  borderRadius: '8px', 
+                  border: '1px solid var(--color-border)', 
+                  outline: 'none', 
+                  background: 'var(--color-bg)', 
+                  color: 'var(--color-text)',
+                  fontSize: '0.85rem'
+                }} 
+              />
+            </div>
             <div style={{ background: 'var(--color-border)', padding: '10px 16px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-muted)', whiteSpace: 'nowrap' }}>
               Total: {totalSKS} SKS
             </div>
@@ -223,36 +243,56 @@ export default function KRSPage() {
               </tr>
             </thead>
             <tbody>
-              {availableCourses.map((course, idx) => {
-                const isSelected = selectedCourses.includes(course.id);
-                const isLocked = submission && (submission.status === 'pending' || submission.status === 'approved');
-                
-                return (
-                  <tr 
-                    key={course.id} 
-                    onClick={() => toggleCourse(course.id)}
-                    style={{ 
-                      background: isSelected ? 'rgba(59,130,246,0.05)' : 'transparent',
-                      cursor: isLocked ? 'default' : 'pointer',
-                    }}
-                  >
-                    <td>
-                      <div style={{ 
-                        width: '20px', height: '20px', border: `2px solid ${isSelected ? '#0f172a' : 'var(--color-border)'}`, 
-                        borderRadius: '4px', background: isSelected ? '#0f172a' : 'transparent',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        opacity: isLocked ? 0.6 : 1
-                      }}>
-                        {isSelected && <i className="ph ph-check" style={{ color: 'white', fontSize: '0.8rem', fontWeight: 'bold' }}></i>}
-                      </div>
-                    </td>
-                    <td style={{ fontWeight: 'bold' }}>{course.code}</td>
-                    <td style={{ fontWeight: '600' }}>{course.name}</td>
-                    <td style={{ color: 'var(--color-muted)' }}>{course.dosen?.name || 'Belum Ditentukan'}</td>
-                    <td style={{ color: 'var(--color-muted)', fontWeight: '600' }}>{course.sks}</td>
-                  </tr>
-                );
-              })}
+              {(() => {
+                const filteredCourses = availableCourses.filter(course => {
+                  const query = searchQuery.toLowerCase().trim();
+                  if (!query) return true;
+                  return (
+                    course.name?.toLowerCase().includes(query) ||
+                    course.code?.toLowerCase().includes(query) ||
+                    course.dosen?.name?.toLowerCase().includes(query)
+                  );
+                });
+
+                if (filteredCourses.length === 0) {
+                  return (
+                    <tr>
+                      <td colSpan="5" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Mata kuliah tidak ditemukan</td>
+                    </tr>
+                  );
+                }
+
+                return filteredCourses.map((course, idx) => {
+                  const isSelected = selectedCourses.includes(course.id);
+                  const isLocked = submission && (submission.status === 'pending' || submission.status === 'approved');
+                  
+                  return (
+                    <tr 
+                      key={course.id} 
+                      onClick={() => toggleCourse(course.id)}
+                      style={{ 
+                        background: isSelected ? 'rgba(59,130,246,0.05)' : 'transparent',
+                        cursor: isLocked ? 'default' : 'pointer',
+                      }}
+                    >
+                      <td>
+                        <div style={{ 
+                          width: '20px', height: '20px', border: `2px solid ${isSelected ? '#0f172a' : 'var(--color-border)'}`, 
+                          borderRadius: '4px', background: isSelected ? '#0f172a' : 'transparent',
+                          display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          opacity: isLocked ? 0.6 : 1
+                        }}>
+                          {isSelected && <i className="ph ph-check" style={{ color: 'white', fontSize: '0.8rem', fontWeight: 'bold' }}></i>}
+                        </div>
+                      </td>
+                      <td style={{ fontWeight: 'bold' }}>{course.code}</td>
+                      <td style={{ fontWeight: '600' }}>{course.name}</td>
+                      <td style={{ color: 'var(--color-muted)' }}>{course.dosen?.name || 'Belum Ditentukan'}</td>
+                      <td style={{ color: 'var(--color-muted)', fontWeight: '600' }}>{course.sks}</td>
+                    </tr>
+                  );
+                });
+              })()}
             </tbody>
           </table>
         </div>
