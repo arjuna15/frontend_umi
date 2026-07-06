@@ -15,6 +15,7 @@ export default function AdminClassesPage() {
     id: '', code: '', name: '', sks: '', dosen_id: '', prasyarat: '', semester: 'Ganjil'
   });
   const [selectedSemester, setSelectedSemester] = useState("Ganjil");
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchCourses();
@@ -211,7 +212,29 @@ export default function AdminClassesPage() {
         </form>
       </div>
 
-      <div className="siakad-card stagger-2" style={{ padding: '0', overflow: 'hidden' }}>
+      <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
+        <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Mata Kuliah</h3>
+          <div style={{ position: 'relative', width: '300px' }}>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <input 
+              type="text" 
+              placeholder="Cari kode, nama, semester..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ 
+                width: '100%', 
+                padding: '10px 14px 10px 38px', 
+                borderRadius: '8px', 
+                border: '1px solid var(--color-border)', 
+                outline: 'none', 
+                background: 'var(--color-bg)', 
+                color: 'var(--color-text)',
+                fontSize: '0.9rem'
+              }} 
+            />
+          </div>
+        </div>
         <div style={{ overflowX: 'auto' }}>
           <table className="siakad-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
@@ -225,34 +248,50 @@ export default function AdminClassesPage() {
               </tr>
             </thead>
             <tbody>
-              {courses.map((course, idx) => (
-                <tr key={course.id}>
-                  <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: 'bold', fontSize: '0.95rem' }}>{course.code}</td>
-                  <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: '500' }}>{course.name}</td>
-                  <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.sks} SKS</td>
-                  <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.semester || 'Ganjil'}</td>
-                  <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.prasyarat || '-'}</td>
-                  <td style={{ padding: '16px 24px', textAlign: 'right' }}>
-                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
-                      <button 
-                        onClick={() => handleOpenEditModal(course)}
-                        style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
-                        title="Edit Mata Kuliah"
-                      ><i className="ph ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
-                      <button 
-                        onClick={() => handleDeleteCourse(course.id)}
-                        style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
-                        title="Hapus Mata Kuliah"
-                      ><i className="ph ph-trash" style={{ fontSize: '1rem' }}></i></button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-              {courses.length === 0 && (
-                <tr>
-                  <td colSpan="6" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data kelas/mata kuliah</td>
-                </tr>
-              )}
+              {(() => {
+                const filteredCourses = courses.filter(course => {
+                  const query = searchQuery.toLowerCase().trim();
+                  if (!query) return true;
+                  return (
+                    course.code?.toLowerCase().includes(query) ||
+                    course.name?.toLowerCase().includes(query) ||
+                    course.semester?.toLowerCase().includes(query) ||
+                    course.prasyarat?.toLowerCase().includes(query)
+                  );
+                });
+
+                if (filteredCourses.length === 0) {
+                  return (
+                    <tr>
+                      <td colSpan="6" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data kelas/mata kuliah</td>
+                    </tr>
+                  );
+                }
+
+                return filteredCourses.map((course, idx) => (
+                  <tr key={course.id}>
+                    <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: 'bold', fontSize: '0.95rem' }}>{course.code}</td>
+                    <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: '500' }}>{course.name}</td>
+                    <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.sks} SKS</td>
+                    <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.semester || 'Ganjil'}</td>
+                    <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.prasyarat || '-'}</td>
+                    <td style={{ padding: '16px 24px', textAlign: 'right' }}>
+                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
+                        <button 
+                          onClick={() => handleOpenEditModal(course)}
+                          style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                          title="Edit Mata Kuliah"
+                        ><i className="ph ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
+                        <button 
+                          onClick={() => handleDeleteCourse(course.id)}
+                          style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                          title="Hapus Mata Kuliah"
+                        ><i className="ph ph-trash" style={{ fontSize: '1rem' }}></i></button>
+                      </div>
+                    </td>
+                  </tr>
+                ));
+              })()}
             </tbody>
           </table>
         </div>

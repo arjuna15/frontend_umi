@@ -6,6 +6,7 @@ export default function KaprodiStudents() {
   const router = useRouter();
   const [grades, setGrades] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchData();
@@ -89,33 +90,70 @@ export default function KaprodiStudents() {
         </div>
       </div>
 
-      <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
+      <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
+        <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Rekapitulasi Nilai Mahasiswa</h3>
+          <div style={{ position: 'relative', width: '300px' }}>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <input 
+              type="text" 
+              placeholder="Cari nama, NIM, mata kuliah, grade..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ 
+                width: '100%', 
+                padding: '10px 14px 10px 38px', 
+                borderRadius: '8px', 
+                border: '1px solid var(--color-border)', 
+                outline: 'none', 
+                background: 'var(--color-bg)', 
+                color: 'var(--color-text)',
+                fontSize: '0.9rem'
+              }} 
+            />
+          </div>
+        </div>
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ minWidth: '800px' }}>
+          <table className="siakad-table" style={{ minWidth: '800px', width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
           <thead>
-            <tr>
-              <th>Mahasiswa</th>
-              <th>Mata Kuliah</th>
-              <th>Skor Akhir</th>
-              <th>Grade</th>
-              <th>Status Kelulusan</th>
+            <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
+              <th style={{ padding: '16px 24px' }}>Mahasiswa</th>
+              <th style={{ padding: '16px 24px' }}>Mata Kuliah</th>
+              <th style={{ padding: '16px 24px' }}>Skor Akhir</th>
+              <th style={{ padding: '16px 24px' }}>Grade</th>
+              <th style={{ padding: '16px 24px' }}>Status Kelulusan</th>
             </tr>
           </thead>
           <tbody>
-            {grades.length === 0 ? (
-              <tr>
-                <td colSpan="5" style={{ textAlign: 'center', padding: '40px' }}>Belum ada data nilai yang masuk.</td>
-              </tr>
-            ) : (
-              grades.map(grade => (
-                <tr key={grade.id}>
-                  <td style={{ fontWeight: 600 }}>{grade.mahasiswa?.name} <br/><small style={{ color: 'var(--color-muted)', fontWeight: 'normal' }}>{grade.mahasiswa?.nim_nip}</small></td>
-                  <td>{grade.course?.name}</td>
-                  <td>{grade.score !== null ? grade.score : '-'}</td>
-                  <td style={{ fontWeight: 800, color: ['A', 'A-'].includes(grade.grade) ? '#10b981' : ['E', 'D'].includes(grade.grade) ? '#ef4444' : '#1f2937' }}>
+            {(() => {
+              const filteredGrades = grades.filter(grade => {
+                const query = searchQuery.toLowerCase().trim();
+                if (!query) return true;
+                return (
+                  grade.mahasiswa?.name?.toLowerCase().includes(query) ||
+                  grade.mahasiswa?.nim_nip?.toLowerCase().includes(query) ||
+                  grade.course?.name?.toLowerCase().includes(query) ||
+                  grade.grade?.toLowerCase().includes(query)
+                );
+              });
+
+              if (filteredGrades.length === 0) {
+                return (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: 'center', padding: '40px', color: 'var(--color-muted)' }}>Tidak ada data nilai yang cocok.</td>
+                  </tr>
+                );
+              }
+
+              return filteredGrades.map(grade => (
+                <tr key={grade.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                  <td style={{ padding: '16px 24px', fontWeight: 600 }}>{grade.mahasiswa?.name} <br/><small style={{ color: 'var(--color-muted)', fontWeight: 'normal' }}>{grade.mahasiswa?.nim_nip}</small></td>
+                  <td style={{ padding: '16px 24px' }}>{grade.course?.name}</td>
+                  <td style={{ padding: '16px 24px' }}>{grade.score !== null ? grade.score : '-'}</td>
+                  <td style={{ padding: '16px 24px', fontWeight: 800, color: ['A', 'A-'].includes(grade.grade) ? '#10b981' : ['E', 'D'].includes(grade.grade) ? '#ef4444' : '#1f2937' }}>
                     {grade.grade || '-'}
                   </td>
-                  <td>
+                  <td style={{ padding: '16px 24px' }}>
                     {grade.grade === null ? (
                       <span className="siakad-badge" style={{ background: 'var(--color-border)', color: 'var(--color-muted)' }}>Belum Dinilai</span>
                     ) : ['E', 'D'].includes(grade.grade) ? (
@@ -125,8 +163,8 @@ export default function KaprodiStudents() {
                     )}
                   </td>
                 </tr>
-              ))
-            )}
+              ));
+            })()}
             </tbody>
           </table>
         </div>

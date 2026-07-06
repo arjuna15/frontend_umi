@@ -9,6 +9,7 @@ export default function KrsApprovalPage() {
   const [selectedSub, setSelectedSub] = useState(null);
   const [notes, setNotes] = useState('');
   const [processing, setProcessing] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const STATUS_STYLES = {
     pending:  { label: 'Menunggu', bg: 'rgba(245,158,11,0.15)', color: '#f59e0b', border: 'rgba(245,158,11,0.3)' },
@@ -99,31 +100,68 @@ export default function KrsApprovalPage() {
               <span style={{ padding: '3px 10px', background: '#f59e0b', color: 'white', borderRadius: '999px', fontSize: '0.75rem', fontWeight: '800' }}>{pendingCount}</span>
             )}
           </div>
+          <div style={{ padding: '12px 12px 6px 12px', borderBottom: '1px solid var(--color-border)' }}>
+            <div style={{ position: 'relative', width: '100%' }}>
+              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.05rem' }}></i>
+              <input 
+                type="text" 
+                placeholder="Cari nama atau NIM..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                style={{ 
+                  width: '100%', 
+                  padding: '8px 12px 8px 36px', 
+                  borderRadius: '8px', 
+                  border: '1px solid var(--color-border)', 
+                  outline: 'none', 
+                  background: 'var(--color-bg)', 
+                  color: 'var(--color-text)',
+                  fontSize: '0.85rem'
+                }} 
+              />
+            </div>
+          </div>
           <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '60vh', overflowY: 'auto' }}>
-            {submissions.length === 0 ? (
-              <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--color-muted)' }}>
-                <i className="ph ph-users" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '8px', opacity: 0.3 }}></i>
-                Tidak ada mahasiswa bimbingan.
-              </div>
-            ) : submissions.map((sub, i) => {
-              const st = STATUS_STYLES[sub.status] || STATUS_STYLES.pending;
-              const isActive = selectedSub?.id === sub.id;
-              return (
-                <button key={sub.id} onClick={() => { setSelectedSub(sub); setNotes(sub.notes || ''); }}
-                  style={{ padding: '14px 16px', textAlign: 'left', background: isActive ? 'linear-gradient(135deg, rgba(196,30,58,0.2), rgba(99,102,241,0.2))' : 'var(--glass-bg)', border: `1px solid ${isActive ? 'rgba(196,30,58,0.4)' : 'var(--color-border)'}`, borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366f1', fontWeight: '800', flexShrink: 0 }}>
-                      {(sub.mahasiswa?.name || '?').charAt(0)}
-                    </div>
-                    <div style={{ minWidth: 0, flex: 1 }}>
-                      <p style={{ margin: '0 0 2px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{sub.mahasiswa?.name || 'Mahasiswa'}</p>
-                      <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)' }}>NIM: {sub.mahasiswa?.nim || '—'}</p>
-                    </div>
-                    <span style={{ padding: '3px 8px', background: st.bg, color: st.color, border: `1px solid ${st.border}`, borderRadius: '6px', fontSize: '0.7rem', fontWeight: '700', whiteSpace: 'nowrap' }}>{st.label}</span>
+            {(() => {
+              const filteredSubmissions = submissions.filter(sub => {
+                const query = searchQuery.toLowerCase().trim();
+                if (!query) return true;
+                return (
+                  sub.mahasiswa?.name?.toLowerCase().includes(query) ||
+                  sub.mahasiswa?.nim?.toLowerCase().includes(query) ||
+                  sub.status?.toLowerCase().includes(query)
+                );
+              });
+
+              if (filteredSubmissions.length === 0) {
+                return (
+                  <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--color-muted)' }}>
+                    <i className="ph ph-magnifying-glass" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '8px', opacity: 0.3 }}></i>
+                    Mahasiswa tidak ditemukan.
                   </div>
-                </button>
-              );
-            })}
+                );
+              }
+
+              return filteredSubmissions.map((sub, i) => {
+                const st = STATUS_STYLES[sub.status] || STATUS_STYLES.pending;
+                const isActive = selectedSub?.id === sub.id;
+                return (
+                  <button key={sub.id} onClick={() => { setSelectedSub(sub); setNotes(sub.notes || ''); }}
+                    style={{ padding: '14px 16px', textAlign: 'left', background: isActive ? 'linear-gradient(135deg, rgba(196,30,58,0.2), rgba(99,102,241,0.2))' : 'var(--glass-bg)', border: `1px solid ${isActive ? 'rgba(196,30,58,0.4)' : 'var(--color-border)'}`, borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s', width: '100%' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366f1', fontWeight: '800', flexShrink: 0 }}>
+                        {(sub.mahasiswa?.name || '?').charAt(0)}
+                      </div>
+                      <div style={{ minWidth: 0, flex: 1 }}>
+                        <p style={{ margin: '0 0 2px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{sub.mahasiswa?.name || 'Mahasiswa'}</p>
+                        <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)' }}>NIM: {sub.mahasiswa?.nim || '—'}</p>
+                      </div>
+                      <span style={{ padding: '3px 8px', background: st.bg, color: st.color, border: `1px solid ${st.border}`, borderRadius: '6px', fontSize: '0.7rem', fontWeight: '700', whiteSpace: 'nowrap' }}>{st.label}</span>
+                    </div>
+                  </button>
+                );
+              });
+            })()}
           </div>
         </div>
 

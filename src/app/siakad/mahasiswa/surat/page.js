@@ -9,6 +9,7 @@ export default function SuratAdministrasiPage() {
   const [loading, setLoading] = useState(true);
   const [showRequestModal, setShowRequestModal] = useState(false);
   const [requestForm, setRequestForm] = useState({ jenis: '', alasan: '' });
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchRequests();
@@ -92,38 +93,75 @@ export default function SuratAdministrasiPage() {
         </div>
       </div>
 
-      <div className="siakad-card" style={{ overflow: 'hidden' }}>
+      <div className="siakad-card" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
+        <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Pengajuan Surat</h3>
+          <div style={{ position: 'relative', width: '300px' }}>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <input 
+              type="text" 
+              placeholder="Cari jenis surat, status, catatan..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ 
+                width: '100%', 
+                padding: '10px 14px 10px 38px', 
+                borderRadius: '8px', 
+                border: '1px solid var(--color-border)', 
+                outline: 'none', 
+                background: 'var(--color-bg)', 
+                color: 'var(--color-text)',
+                fontSize: '0.9rem'
+              }} 
+            />
+          </div>
+        </div>
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table">
+          <table className="siakad-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
-              <tr>
-                <th>Tanggal</th>
-                <th>Jenis Pengajuan</th>
-                <th>Status</th>
-                <th>Catatan</th>
+              <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
+                <th style={{ padding: '16px 24px' }}>Tanggal</th>
+                <th style={{ padding: '16px 24px' }}>Jenis Pengajuan</th>
+                <th style={{ padding: '16px 24px' }}>Status</th>
+                <th style={{ padding: '16px 24px' }}>Catatan</th>
               </tr>
             </thead>
             <tbody>
-              {requests.map(req => (
-                <tr key={req.id}>
-                  <td style={{ color: 'var(--color-muted)' }}>{formatDate(req.date)}</td>
-                  <td style={{ fontWeight: 'bold' }}>{req.type}</td>
-                  <td>
-                    <span className="siakad-badge" style={{ 
-                      background: req.status === 'Selesai' ? 'rgba(16, 185, 129, 0.1)' : req.status === 'Diproses' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(245, 158, 11, 0.1)',
-                      color: req.status === 'Selesai' ? '#10b981' : req.status === 'Diproses' ? '#3b82f6' : '#f59e0b'
-                    }}>
-                      {req.status}
-                    </span>
-                  </td>
-                  <td style={{ color: 'var(--color-muted)' }}>{req.note}</td>
-                </tr>
-              ))}
-              {requests.length === 0 && (
-                <tr>
-                  <td colSpan="4" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada riwayat pengajuan.</td>
-                </tr>
-              )}
+              {(() => {
+                const filteredRequests = requests.filter(req => {
+                  const query = searchQuery.toLowerCase().trim();
+                  if (!query) return true;
+                  return (
+                    req.type?.toLowerCase().includes(query) ||
+                    req.status?.toLowerCase().includes(query) ||
+                    req.note?.toLowerCase().includes(query)
+                  );
+                });
+
+                if (filteredRequests.length === 0) {
+                  return (
+                    <tr>
+                      <td colSpan="4" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data pengajuan surat yang cocok.</td>
+                    </tr>
+                  );
+                }
+
+                return filteredRequests.map(req => (
+                  <tr key={req.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                    <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{formatDate(req.date)}</td>
+                    <td style={{ padding: '16px 24px', fontWeight: 'bold' }}>{req.type}</td>
+                    <td style={{ padding: '16px 24px' }}>
+                      <span className="siakad-badge" style={{ 
+                        background: req.status === 'Selesai' ? 'rgba(16, 185, 129, 0.1)' : req.status === 'Diproses' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(245, 158, 11, 0.1)',
+                        color: req.status === 'Selesai' ? '#10b981' : req.status === 'Diproses' ? '#3b82f6' : '#f59e0b'
+                      }}>
+                        {req.status}
+                      </span>
+                    </td>
+                    <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{req.note}</td>
+                  </tr>
+                ));
+              })()}
             </tbody>
           </table>
         </div>
