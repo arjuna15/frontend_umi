@@ -8,6 +8,7 @@ export default function KaprodiMonitoring() {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchData();
@@ -57,7 +58,29 @@ export default function KaprodiMonitoring() {
       </div>
 
 
-      <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
+      <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
+        <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Kelas & BAP</h3>
+          <div style={{ position: 'relative', width: '300px' }}>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <input 
+              type="text" 
+              placeholder="Cari matkul, kode, atau dosen..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ 
+                width: '100%', 
+                padding: '10px 14px 10px 38px', 
+                borderRadius: '8px', 
+                border: '1px solid var(--color-border)', 
+                outline: 'none', 
+                background: 'var(--color-bg)', 
+                color: 'var(--color-text)',
+                fontSize: '0.9rem'
+              }} 
+            />
+          </div>
+        </div>
         <div style={{ overflowX: 'auto' }}>
           <table className="siakad-table" style={{ minWidth: '800px' }}>
           <thead>
@@ -71,12 +94,26 @@ export default function KaprodiMonitoring() {
             </tr>
           </thead>
           <tbody>
-            {courses.length === 0 ? (
-              <tr>
-                <td colSpan="5" style={{ textAlign: 'center', padding: '40px' }}>Belum ada kelas aktif.</td>
-              </tr>
-            ) : (
-              courses.map(course => (
+            {(() => {
+              const filteredCourses = courses.filter(course => {
+                const query = searchQuery.toLowerCase().trim();
+                if (!query) return true;
+                return (
+                  course.name?.toLowerCase().includes(query) ||
+                  course.code?.toLowerCase().includes(query) ||
+                  course.dosen?.name?.toLowerCase().includes(query)
+                );
+              });
+
+              if (filteredCourses.length === 0) {
+                return (
+                  <tr>
+                    <td colSpan="6" style={{ textAlign: 'center', padding: '40px', color: 'var(--color-muted)' }}>Tidak ada kelas aktif yang cocok dengan pencarian.</td>
+                  </tr>
+                );
+              }
+
+              return filteredCourses.map(course => (
                 <tr key={course.id}>
                   <td style={{ fontWeight: 600 }}>{course.name} <br/><small style={{ color: 'var(--color-muted)', fontWeight: 'normal' }}>{course.code}</small></td>
                   <td>{course.dosen ? course.dosen.name : <span style={{ color: '#ef4444' }}>Belum di-assign</span>}</td>
@@ -110,8 +147,8 @@ export default function KaprodiMonitoring() {
                     </button>
                   </td>
                 </tr>
-              ))
-            )}
+              ));
+            })()}
             </tbody>
           </table>
         </div>
