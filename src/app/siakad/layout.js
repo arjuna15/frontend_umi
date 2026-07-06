@@ -107,7 +107,7 @@ export default function SiakadLayout({ children }) {
             })) || []),
             ...(deadlineItems.slice(0, 1).map((item) => ({
               title: item.title || 'Tenggat akademik',
-              body: `${item.course || 'Mata kuliah'} H-${item.due_in_days}`,
+              body: `${item.course || 'Mata kuliah'} H-${Math.ceil(item.due_in_days)}`,
               time: 'Jadwal akademik',
             })) || []),
             ...(scheduleItems.slice(0, 1).map((item) => ({
