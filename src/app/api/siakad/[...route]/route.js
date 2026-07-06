@@ -15,6 +15,11 @@ async function handleProxy(req, { params }, method) {
       headers['Authorization'] = `Bearer ${token}`;
     }
     
+    const portalHeader = req.headers.get('x-siakad-portal');
+    if (portalHeader) {
+      headers['X-SIAKAD-PORTAL'] = portalHeader;
+    }
+    
     const contentType = req.headers.get('content-type') || '';
     
     let fetchOptions = {
@@ -48,8 +53,18 @@ async function handleProxy(req, { params }, method) {
       });
     }
     
-    const data = await backendRes.json();
-    return NextResponse.json(data, { status: backendRes.status });
+    if (resContentType.includes('application/json')) {
+      const data = await backendRes.json();
+      return NextResponse.json(data, { status: backendRes.status });
+    } else {
+      const text = await backendRes.text();
+      return new NextResponse(text, {
+        status: backendRes.status,
+        headers: {
+          'Content-Type': resContentType || 'text/html'
+        }
+      });
+    }
   } catch (err) {
     return NextResponse.json({ message: 'Proxy Error: ' + err.message }, { status: 500 });
   }
