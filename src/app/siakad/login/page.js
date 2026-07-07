@@ -376,23 +376,8 @@ export default function SiakadLogin() {
           display: inline-flex;
           justify-content: center;
           align-items: center;
-          background: rgba(255, 255, 255, 0.03);
-          padding: 24px;
-          border-radius: 50%;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          box-shadow: 0 0 40px rgba(196, 30, 58, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05);
           margin-bottom: 30px;
           position: relative;
-        }
-        /* Glowing pulse behind logo */
-        .logo-container::before {
-          content: '';
-          position: absolute;
-          inset: -10px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(196, 30, 58, 0.4) 0%, transparent 70%);
-          z-index: -1;
-          animation: pulseGlow 3s infinite alternate;
         }
 
         @keyframes pulseGlow {
