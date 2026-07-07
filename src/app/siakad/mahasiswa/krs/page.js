@@ -23,10 +23,11 @@ export default function KRSPage() {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
       
+      const semesterParam = localStorage.getItem('siakad_semester') || 'Ganjil 2026/2027';
       const [dashRes, availRes, subRes] = await Promise.all([
         fetch(`${apiUrl}/siakad/dashboard`, { headers: { 'Authorization': `Bearer ${token}` } }),
-        fetch(`${apiUrl}/siakad/krs/available`, { headers: { 'Authorization': `Bearer ${token}` } }),
-        fetch(`${apiUrl}/siakad/krs/submission`, { headers: { 'Authorization': `Bearer ${token}` } })
+        fetch(`${apiUrl}/siakad/krs/available?semester=${encodeURIComponent(semesterParam)}`, { headers: { 'Authorization': `Bearer ${token}` } }),
+        fetch(`${apiUrl}/siakad/krs/submission?semester=${encodeURIComponent(semesterParam)}`, { headers: { 'Authorization': `Bearer ${token}` } })
       ]);
 
       if (!dashRes.ok) throw new Error('Failed to fetch');
@@ -42,6 +43,8 @@ export default function KRSPage() {
 
       if (subData && subData.course_ids) {
         setSelectedCourses(subData.course_ids);
+      } else {
+        setSelectedCourses([]);
       }
     } catch (err) {
       router.push('/siakad/login');
