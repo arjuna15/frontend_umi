@@ -61,6 +61,41 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="min-h-full flex flex-col">
+        {/* PWA Animasi Splash Screen Overlay */}
+        <div id="pwa-splash" className="pwa-splash-overlay">
+          <div className="pwa-splash-logo-container">
+            <div className="pwa-splash-ring"></div>
+            <img src="/erasebg-transformed.png" alt="UMIBA Logo" className="pwa-splash-logo" />
+          </div>
+          <div className="pwa-splash-spinner"></div>
+        </div>
+        <Script id="hide-pwa-splash" strategy="afterInteractive">
+          {`
+            (function() {
+              window.addEventListener('load', function() {
+                var splash = document.getElementById('pwa-splash');
+                if (splash) {
+                  // Tambahkan class fade-out untuk fade transition
+                  splash.classList.add('fade-out');
+                  setTimeout(function() {
+                    splash.style.display = 'none';
+                  }, 800); // Cocok dengan durasi CSS transition 0.8s
+                }
+              });
+              // Fallback jika window load terlalu cepat atau lambat
+              setTimeout(function() {
+                var splash = document.getElementById('pwa-splash');
+                if (splash && !splash.classList.contains('fade-out')) {
+                  splash.classList.add('fade-out');
+                  setTimeout(function() {
+                    splash.style.display = 'none';
+                  }, 800);
+                }
+              }, 2000);
+            })();
+          `}
+        </Script>
+
         <ThemeProvider>
           <Providers>
             <ScrollAnimations />
