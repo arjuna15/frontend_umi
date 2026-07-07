@@ -1,8 +1,25 @@
 'use client';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '../../context/Providers';
 
 export default function Page() {
-  const { lang, t } = useLanguage();
+    const { lang, t } = useLanguage();
+    
+  const [dynamicHtml, setDynamicHtml] = useState(null);
+  const [dynamicHeroBg, setDynamicHeroBg] = useState(null);
+
+  useEffect(() => {
+    const api = process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api';
+    fetch(`${api}/contents`)
+      .then(res => res.json())
+      .then(data => {
+        const htmlContent = data.find(c => c.key === 'kurikulum_html');
+        const bgContent = data.find(c => c.key === 'kurikulum_hero_bg');
+        if (htmlContent && htmlContent.value) setDynamicHtml(htmlContent.value);
+        if (bgContent && bgContent.value) setDynamicHeroBg(bgContent.value);
+      })
+      .catch(err => console.error('Error fetching content for kurikulum:', err));
+  }, []);
     
   
   const heroBg = 'https://umiba.ac.id/wp-content/uploads/2024/05/bannerUMIBA26_2.png';
@@ -90,7 +107,7 @@ export default function Page() {
   
   return (
     <div>
-      <section className="hero hero-sub" style={{ background: `url('${heroBg}') center/cover`, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: 'white', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+      <section className="hero hero-sub" style={{ background: `url('${dynamicHeroBg || heroBg}') center/cover`, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: 'white', overflow: 'hidden', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
         <div style={{ position: 'absolute', inset: '-20px', background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9))', backdropFilter: 'blur(12px) saturate(150%)', WebkitBackdropFilter: 'blur(12px) saturate(150%)', zIndex: 1 }}></div>
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="fade-up">
@@ -99,7 +116,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <div dangerouslySetInnerHTML={{ __html: mainHtml }} />
+      <div dangerouslySetInnerHTML={{ __html: dynamicHtml || mainHtml }} />
     </div>
   );
 }
