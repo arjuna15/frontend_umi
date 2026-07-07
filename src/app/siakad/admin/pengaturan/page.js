@@ -126,11 +126,25 @@ export default function AdminPengaturan() {
               style={{ width: '100%', padding: '12px 14px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none', cursor: 'pointer' }}
             >
               <option value="">-- Pilih Tahun Ajaran --</option>
-              <option value="Ganjil 2026/2027">Ganjil 2026/2027</option>
-              <option value="Genap 2025/2026">Genap 2025/2026</option>
-              <option value="Ganjil 2025/2026">Ganjil 2025/2026</option>
-              <option value="Genap 2024/2025">Genap 2024/2025</option>
-              <option value="Ganjil 2024/2025">Ganjil 2024/2025</option>
+              {(() => {
+                const currentYear = new Date().getFullYear();
+                const options = [];
+                // Buat opsi dinamis dari 2 tahun ke depan hingga 3 tahun ke belakang
+                for (let y = currentYear + 2; y >= currentYear - 3; y--) {
+                  const nextYear = y + 1;
+                  options.push(
+                    <option key={`ganjil-${y}`} value={`Ganjil ${y}/${nextYear}`}>
+                      Ganjil {y}/{nextYear}
+                    </option>
+                  );
+                  options.push(
+                    <option key={`genap-${y}`} value={`Genap ${y}/${nextYear}`}>
+                      Genap {y}/{nextYear}
+                    </option>
+                  );
+                }
+                return options;
+              })()}
             </select>
             <p style={{ margin: '8px 0 0 0', fontSize: '0.8rem', color: 'var(--color-muted)' }}>Perubahan semester aktif akan berdampak pada seluruh modul sistem.</p>
           </div>
