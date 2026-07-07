@@ -69,6 +69,18 @@ export default function MahasiswaGradebook() {
   });
   const ipSemester = totalSks > 0 ? (totalBobot / totalSks).toFixed(2) : 0;
 
+  const uniqueSemesters = data && Array.isArray(data) 
+    ? Array.from(new Set(data.map(item => item.semester_num).filter(Boolean))).sort((a, b) => a - b)
+    : [];
+
+  const selectOptions = [
+    { value: "Semua", label: "Semua Semester" },
+    ...uniqueSemesters.map(sem => ({
+      value: String(sem),
+      label: `Semester ${sem}`
+    }))
+  ];
+
   return (
     <div>
       <div className="siakad-page-header">
@@ -110,9 +122,7 @@ export default function MahasiswaGradebook() {
             <CustomSelect 
               value={semesterFilter} 
               onChange={val => setSemesterFilter(val)}
-              options={[
-                { value: "Semua", label: "Semua Semester" }
-              ]}
+              options={selectOptions}
               style={{ flex: '1 1 150px', minWidth: 0 }}
             />
             <input 
@@ -143,7 +153,11 @@ export default function MahasiswaGradebook() {
             </thead>
             <tbody>
               {(() => {
-                const filteredData = data.filter(item => item.course_name.toLowerCase().includes(search.toLowerCase()));
+                const filteredData = data.filter(item => {
+                  const matchSearch = item.course_name.toLowerCase().includes(search.toLowerCase());
+                  const matchSemester = semesterFilter === 'Semua' || String(item.semester_num) === semesterFilter;
+                  return matchSearch && matchSemester;
+                });
                 if (filteredData.length === 0) {
                   return <tr><td colSpan="8" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Mata kuliah tidak ditemukan.</td></tr>;
                 }
