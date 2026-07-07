@@ -120,13 +120,18 @@ export default function AdminPengaturan() {
           
           <div style={{ marginBottom: '16px', padding: '0 4px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-muted)', fontSize: '0.95rem' }}>Tahun Ajaran Aktif</label>
-            <input
-              type="text"
+            <select
               value={semester}
               onChange={(e) => setSemester(e.target.value)}
-              placeholder="Contoh: Semester berjalan"
-              style={{ width: '100%', padding: '12px 14px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
-            />
+              style={{ width: '100%', padding: '12px 14px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none', cursor: 'pointer' }}
+            >
+              <option value="">-- Pilih Tahun Ajaran --</option>
+              <option value="Ganjil 2026/2027">Ganjil 2026/2027</option>
+              <option value="Genap 2025/2026">Genap 2025/2026</option>
+              <option value="Ganjil 2025/2026">Ganjil 2025/2026</option>
+              <option value="Genap 2024/2025">Genap 2024/2025</option>
+              <option value="Ganjil 2024/2025">Ganjil 2024/2025</option>
+            </select>
             <p style={{ margin: '8px 0 0 0', fontSize: '0.8rem', color: 'var(--color-muted)' }}>Perubahan semester aktif akan berdampak pada seluruh modul sistem.</p>
           </div>
         </div>
