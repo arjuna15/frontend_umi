@@ -2,7 +2,7 @@ from PIL import Image
 import os
 
 sizes = [72, 96, 128, 144, 152, 192, 384, 512]
-src_path = 'public/erasebg-transformed.png'
+src_path = 'src/app/icon.png'
 out_dir = 'public/icons'
 
 if not os.path.exists(out_dir):
