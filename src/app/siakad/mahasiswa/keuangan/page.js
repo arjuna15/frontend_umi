@@ -6,6 +6,7 @@ export default function KeuanganPage() {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchDashboard = async () => {
     const token = localStorage.getItem('siakad_token');
@@ -69,50 +70,75 @@ export default function KeuanganPage() {
         </div>
       </div>
 
-      <div className="siakad-card" style={{ padding: '24px' }}>
-        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Daftar Tagihan Anda</h2>
+      <div className="siakad-card" style={{ padding: '0px', overflow: 'hidden' }}>
+        <div style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Tagihan Anda</h3>
+          <div style={{ position: 'relative', width: '300px' }}>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <input type="text" placeholder="Cari tagihan, status..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px 14px 10px 38px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.9rem' }} />
+          </div>
+        </div>
         
         {data.billings && data.billings.length > 0 ? (
           <div style={{ overflowX: 'auto' }}>
-            <table className="siakad-table">
+            <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
-                <tr>
-                  <th>Deskripsi Tagihan</th>
-                  <th>Jatuh Tempo</th>
-                  <th>Nominal (Rp)</th>
-                  <th>Status</th>
-                  <th>Aksi</th>
+                <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
+                  <th style={{ padding: '16px' }}>Deskripsi Tagihan</th>
+                  <th style={{ padding: '16px' }}>Jatuh Tempo</th>
+                  <th style={{ padding: '16px' }}>Nominal (Rp)</th>
+                  <th style={{ padding: '16px' }}>Status</th>
+                  <th style={{ padding: '16px' }}>Aksi</th>
                 </tr>
               </thead>
               <tbody>
-                {data.billings.map((bill, i) => (
-                  <tr key={i}>
-                    <td style={{ fontWeight: '500' }}>{bill.description}</td>
-                    <td>{bill.due_date}</td>
-                    <td style={{ fontWeight: 'bold' }}>{new Intl.NumberFormat('id-ID').format(bill.amount)}</td>
-                    <td>
-                      <span className="siakad-badge" style={{
-                        background: bill.status === 'Lunas' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)',
-                        color: bill.status === 'Lunas' ? '#10b981' : '#ef4444'
-                      }}>
-                        {bill.status}
-                      </span>
-                    </td>
-                    <td>
-                      <div style={{ display: 'flex', gap: '8px' }}>
-                        {bill.status !== 'Lunas' ? (
-                          <button onClick={() => handlePay(bill.id)} style={{ padding: '8px 14px', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px', boxShadow: '0 2px 6px rgba(16, 185, 129, 0.3)' }}>
-                            <i className="ph ph-wallet"></i> Bayar
-                          </button>
-                        ) : (
-                          <button onClick={() => window.print()} style={{ padding: '6px 12px', background: '#10b981', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <i className="ph ph-download-simple"></i> Bukti Bayar
-                          </button>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                {(() => {
+                  const filtered = data.billings.filter(bill => {
+                    const query = searchQuery.toLowerCase().trim();
+                    if (!query) return true;
+                    return (
+                      bill.description?.toLowerCase().includes(query) ||
+                      bill.status?.toLowerCase().includes(query)
+                    );
+                  });
+
+                  if (filtered.length === 0) {
+                    return (
+                      <tr>
+                        <td colSpan="5" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data tagihan yang sesuai.</td>
+                      </tr>
+                    );
+                  }
+
+                  return filtered.map((bill, i) => (
+                    <tr key={i} style={{ borderBottom: '1px solid var(--color-border)', transition: 'all 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.background='var(--glass-bg)'} onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
+                      <td style={{ padding: '16px', fontWeight: '500', color: 'var(--color-text)' }}>{bill.description}</td>
+                      <td style={{ padding: '16px' }}>{bill.due_date}</td>
+                      <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{new Intl.NumberFormat('id-ID').format(bill.amount)}</td>
+                      <td style={{ padding: '16px' }}>
+                        <span className="siakad-badge" style={{
+                          background: bill.status === 'Lunas' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)',
+                          color: bill.status === 'Lunas' ? '#10b981' : '#ef4444'
+                        }}>
+                          {bill.status}
+                        </span>
+                      </td>
+                      <td style={{ padding: '16px' }}>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          {bill.status !== 'Lunas' ? (
+                            <button onClick={() => handlePay(bill.id)} style={{ padding: '8px 14px', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px', boxShadow: '0 2px 6px rgba(16, 185, 129, 0.3)' }}>
+                              <i className="ph ph-wallet"></i> Bayar
+                            </button>
+                          ) : (
+                            <button onClick={() => window.print()} style={{ padding: '6px 12px', background: '#10b981', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <i className="ph ph-download-simple"></i> Bukti Bayar
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ));
+                })()}
               </tbody>
             </table>
           </div>

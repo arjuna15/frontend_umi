@@ -10,6 +10,7 @@ export default function AdminProdiPage() {
   const [loading, setLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({ id: '', code: '', name: '', kaprodi: '', jenjang: 'S1' });
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchData();
@@ -129,7 +130,15 @@ export default function AdminProdiPage() {
         </div>
       </div>
 
-      <div className="siakad-card" style={{ padding: '24px' }}>
+      <div className="siakad-card" style={{ padding: '0px', overflow: 'hidden' }}>
+        <div style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Program Studi</h3>
+          <div style={{ position: 'relative', width: '300px' }}>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <input type="text" placeholder="Cari kode, nama prodi, kaprodi..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px 14px 10px 38px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.9rem' }} />
+          </div>
+        </div>
+
         <div style={{ overflowX: 'auto' }}>
           <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
             <thead>
@@ -142,25 +151,41 @@ export default function AdminProdiPage() {
               </tr>
             </thead>
             <tbody>
-              {prodis.map((p) => (
-                <tr key={p.id} style={{ borderBottom: '1px solid var(--color-border)', transition: 'all 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.background='var(--glass-bg)'} onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
-                  <td style={{ padding: '16px', fontWeight: '600' }}>{p.code}</td>
-                  <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{p.name}</td>
-                  <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{p.kaprodi}</td>
-                  <td style={{ padding: '16px' }}>
-                    <span style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', padding: '4px 10px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold' }}>{p.jenjang}</span>
-                  </td>
-                  <td style={{ padding: '16px', textAlign: 'right' }}>
-                    <button onClick={() => { setEditFormData(p); setIsEditModalOpen(true); }} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', marginRight: '8px' }}><i className="ph ph-pencil-simple"></i></button>
-                    <button onClick={() => handleDelete(p.id)} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}><i className="ph ph-trash"></i></button>
-                  </td>
-                </tr>
-              ))}
-              {prodis.length === 0 && (
-                <tr>
-                  <td colSpan="5" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada daftar program studi.</td>
-                </tr>
-              )}
+              {(() => {
+                const filtered = prodis.filter(p => {
+                  const query = searchQuery.toLowerCase().trim();
+                  if (!query) return true;
+                  return (
+                    p.code?.toLowerCase().includes(query) ||
+                    p.name?.toLowerCase().includes(query) ||
+                    p.kaprodi?.toLowerCase().includes(query) ||
+                    p.jenjang?.toLowerCase().includes(query)
+                  );
+                });
+
+                if (filtered.length === 0) {
+                  return (
+                    <tr>
+                      <td colSpan="5" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data program studi.</td>
+                    </tr>
+                  );
+                }
+
+                return filtered.map((p) => (
+                  <tr key={p.id} style={{ borderBottom: '1px solid var(--color-border)', transition: 'all 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.background='var(--glass-bg)'} onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
+                    <td style={{ padding: '16px', fontWeight: '600' }}>{p.code}</td>
+                    <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{p.name}</td>
+                    <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{p.kaprodi}</td>
+                    <td style={{ padding: '16px' }}>
+                      <span style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', padding: '4px 10px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold' }}>{p.jenjang}</span>
+                    </td>
+                    <td style={{ padding: '16px', textAlign: 'right' }}>
+                      <button onClick={() => { setEditFormData(p); setIsEditModalOpen(true); }} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', marginRight: '8px' }}><i className="ph ph-pencil-simple"></i></button>
+                      <button onClick={() => handleDelete(p.id)} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}><i className="ph ph-trash"></i></button>
+                    </td>
+                  </tr>
+                ));
+              })()}
             </tbody>
           </table>
         </div>

@@ -11,6 +11,7 @@ export default function KaprodiPlotting() {
   const [dosens, setDosens] = useState([]);
   const [loading, setLoading] = useState(true);
   const [assigningId, setAssigningId] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Jadwal Modal States
   const [showScheduleModal, setShowScheduleModal] = useState(false);
@@ -144,7 +145,15 @@ export default function KaprodiPlotting() {
       </div>
 
 
-      <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
+      <div className="siakad-card stagger-1" style={{ padding: '0px', overflow: 'hidden' }}>
+        <div style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Plotting Mata Kuliah</h3>
+          <div style={{ position: 'relative', width: '300px' }}>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <input type="text" placeholder="Cari mata kuliah, kode, dosen..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px 14px 10px 38px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.9rem' }} />
+          </div>
+        </div>
+
         <div style={{ overflowX: 'auto' }}>
           <table className="siakad-table" style={{ minWidth: '1000px' }}>
           <thead>
@@ -157,12 +166,27 @@ export default function KaprodiPlotting() {
             </tr>
           </thead>
           <tbody>
-            {courses.length === 0 ? (
-              <tr>
-                <td colSpan="5" style={{ textAlign: 'center', padding: '40px' }}>Belum ada kelas aktif.</td>
-              </tr>
-            ) : (
-              courses.map(course => (
+            {(() => {
+              const filtered = courses.filter(course => {
+                const query = searchQuery.toLowerCase().trim();
+                if (!query) return true;
+                return (
+                  course.name?.toLowerCase().includes(query) ||
+                  course.code?.toLowerCase().includes(query) ||
+                  course.dosen?.name?.toLowerCase().includes(query) ||
+                  course.ruang?.toLowerCase().includes(query)
+                );
+              });
+
+              if (filtered.length === 0) {
+                return (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: 'center', padding: '40px', color: 'var(--color-muted)' }}>Tidak ada data plotting.</td>
+                  </tr>
+                );
+              }
+
+              return filtered.map(course => (
                 <tr key={course.id}>
                   <td>
                     <div style={{ fontWeight: 600, color: 'var(--color-text)' }}>{course.name}</div>
@@ -206,8 +230,8 @@ export default function KaprodiPlotting() {
                     </button>
                   </td>
                 </tr>
-              ))
-            )}
+                ));
+              })()}
             </tbody>
           </table>
         </div>

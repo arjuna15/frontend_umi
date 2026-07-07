@@ -12,43 +12,84 @@ export default function AdminPengaturan() {
   
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    const savedKrs = localStorage.getItem('siakad_krs_open');
-    const savedSemester = localStorage.getItem('siakad_semester');
-    const savedBintaro = localStorage.getItem('siakad_coord_bintaro');
-    const savedPasarMinggu = localStorage.getItem('siakad_coord_pasar_minggu');
-    
-    if (savedKrs !== null) {
-      setKrsOpen(savedKrs === 'true');
-    }
-    if (savedSemester) {
-      setSemester(savedSemester);
-    }
-    if (savedBintaro) {
-      setCoordBintaro(savedBintaro);
-    }
-    if (savedPasarMinggu) {
-      setCoordPasarMinggu(savedPasarMinggu);
-    }
+    fetchSettings();
   }, []);
 
-  const handleSave = () => {
-    localStorage.setItem('siakad_krs_open', krsOpen);
-    localStorage.setItem('siakad_khs_open', khsOpen);
-    localStorage.setItem('siakad_nilai_open', nilaiOpen);
-    localStorage.setItem('siakad_semester', semester);
-    
+  const fetchSettings = async () => {
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    try {
+      const res = await fetch(`${apiUrl}/siakad/settings`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.siakad_krs_open !== undefined) setKrsOpen(data.siakad_krs_open === 'true');
+        if (data.siakad_khs_open !== undefined) setKhsOpen(data.siakad_khs_open === 'true');
+        if (data.siakad_nilai_open !== undefined) setNilaiOpen(data.siakad_nilai_open === 'true');
+        if (data.siakad_semester) setSemester(data.siakad_semester);
+        if (data.siakad_coord_bintaro) setCoordBintaro(data.siakad_coord_bintaro);
+        if (data.siakad_coord_pasar_minggu) setCoordPasarMinggu(data.siakad_coord_pasar_minggu);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSave = async () => {
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     const bintaroVal = document.getElementById('coordBintaro').value;
     const pmVal = document.getElementById('coordPasarMinggu').value;
-    
-    localStorage.setItem('siakad_coord_bintaro', bintaroVal);
-    localStorage.setItem('siakad_coord_pasar_minggu', pmVal);
-    setCoordBintaro(bintaroVal);
-    setCoordPasarMinggu(pmVal);
 
-    setIsConfirmModalOpen(false);
-    window.toast('Pengaturan sistem berhasil disimpan permanen!');
+    const payload = {
+      settings: {
+        siakad_krs_open: String(krsOpen),
+        siakad_khs_open: String(khsOpen),
+        siakad_nilai_open: String(nilaiOpen),
+        siakad_semester: semester,
+        siakad_coord_bintaro: bintaroVal,
+        siakad_coord_pasar_minggu: pmVal
+      }
+    };
+
+    try {
+      const res = await fetch(`${apiUrl}/siakad/settings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (res.ok) {
+        localStorage.setItem('siakad_krs_open', krsOpen);
+        localStorage.setItem('siakad_khs_open', khsOpen);
+        localStorage.setItem('siakad_nilai_open', nilaiOpen);
+        localStorage.setItem('siakad_semester', semester);
+        localStorage.setItem('siakad_coord_bintaro', bintaroVal);
+        localStorage.setItem('siakad_coord_pasar_minggu', pmVal);
+        
+        setCoordBintaro(bintaroVal);
+        setCoordPasarMinggu(pmVal);
+        setIsConfirmModalOpen(false);
+        window.toast?.('Pengaturan sistem berhasil disimpan di database global!');
+      } else {
+        window.toast?.('Gagal menyimpan pengaturan');
+      }
+    } catch (err) {
+      console.error(err);
+      window.toast?.('Terjadi kesalahan: ' + err.message);
+    }
   };
+
+  if (loading) return <div style={{ padding: '20px', color: 'var(--color-text)' }}>Loading...</div>;
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>

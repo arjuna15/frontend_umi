@@ -24,6 +24,7 @@ export default function AdminKeuangan() {
     due_date: '',
     status: 'Belum Lunas'
   });
+  const [searchQuery, setSearchQuery] = useState('');
 
   const fetchData = async () => {
     try {
@@ -253,6 +254,14 @@ export default function AdminKeuangan() {
       </div>
 
       <div className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden' }}>
+        <div style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Tagihan Keuangan</h3>
+          <div style={{ position: 'relative', width: '300px' }}>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <input type="text" placeholder="Cari nama mahasiswa, deskripsi, status..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px 14px 10px 38px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.9rem' }} />
+          </div>
+        </div>
+
         {loading ? (
           <div style={{ textAlign: 'center', padding: '40px', color: 'var(--color-text)' }}>Memuat data keuangan...</div>
         ) : (
@@ -269,47 +278,64 @@ export default function AdminKeuangan() {
                 </tr>
               </thead>
               <tbody>
-                {billings.length === 0 ? (
-                  <tr>
-                    <td colSpan="6" style={{ textAlign: 'center', padding: '32px', color: 'var(--color-text)' }}>Belum ada tagihan.</td>
-                  </tr>
-                ) : billings.map((billing) => (
-                  <tr key={billing.id}>
-                    <td style={{ padding: '16px', fontWeight: '600', color: 'var(--color-text)' }}>{billing.user?.name || 'User Tidak Diketahui'}</td>
-                    <td style={{ padding: '16px', color: 'var(--color-text)' }}>{billing.description}</td>
-                    <td style={{ padding: '16px', color: 'var(--color-text)', fontWeight: '700' }}>{formatRupiah(billing.amount)}</td>
-                    <td style={{ padding: '16px', color: 'var(--color-text)' }}>{billing.due_date}</td>
-                    <td style={{ padding: '16px' }}>
-                      <span className="siakad-badge" style={{
-                        background: billing.status === 'Lunas' ? '#dcfce7' : '#fee2e2',
-                        color: billing.status === 'Lunas' ? '#166534' : '#991b1b'
-                      }}>
-                        {billing.status === 'Lunas' ? <i className="ph ph-check-circle"></i> : <i className="ph ph-clock-circle"></i>}
-                        {billing.status}
-                      </span>
-                    </td>
-                    <td style={{ padding: '16px' }}>
-                      <div style={{ display: 'flex', gap: '8px' , flexWrap: 'wrap'}}>
-                        <button 
-                          onClick={() => openModal(billing)}
-                          style={{
-                            background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '8px', 
-                            borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s'
-                          }}
-                          title="Edit Tagihan"
-                        ><i className="ph ph-pencil-simple" style={{ fontSize: '1.2rem' }}></i></button>
-                        <button 
-                          onClick={() => handleDelete(billing.id)}
-                          style={{
-                            background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '8px', 
-                            borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s'
-                          }}
-                          title="Hapus Tagihan"
-                        ><i className="ph ph-trash" style={{ fontSize: '1.2rem' }}></i></button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                {(() => {
+                  const filtered = billings.filter(billing => {
+                    const query = searchQuery.toLowerCase().trim();
+                    if (!query) return true;
+                    return (
+                      billing.user?.name?.toLowerCase().includes(query) ||
+                      billing.description?.toLowerCase().includes(query) ||
+                      billing.status?.toLowerCase().includes(query) ||
+                      String(billing.amount).includes(query)
+                    );
+                  });
+
+                  if (filtered.length === 0) {
+                    return (
+                      <tr>
+                        <td colSpan="6" style={{ textAlign: 'center', padding: '32px', color: 'var(--color-text)' }}>Tidak ada data tagihan.</td>
+                      </tr>
+                    );
+                  }
+
+                  return filtered.map((billing) => (
+                    <tr key={billing.id}>
+                      <td style={{ padding: '16px', fontWeight: '600', color: 'var(--color-text)' }}>{billing.user?.name || 'User Tidak Diketahui'}</td>
+                      <td style={{ padding: '16px', color: 'var(--color-text)' }}>{billing.description}</td>
+                      <td style={{ padding: '16px', color: 'var(--color-text)', fontWeight: '700' }}>{formatRupiah(billing.amount)}</td>
+                      <td style={{ padding: '16px', color: 'var(--color-text)' }}>{billing.due_date}</td>
+                      <td style={{ padding: '16px' }}>
+                        <span className="siakad-badge" style={{
+                          background: billing.status === 'Lunas' ? '#dcfce7' : '#fee2e2',
+                          color: billing.status === 'Lunas' ? '#166534' : '#991b1b'
+                        }}>
+                          {billing.status === 'Lunas' ? <i className="ph ph-check-circle"></i> : <i className="ph ph-clock-circle"></i>}
+                          {billing.status}
+                        </span>
+                      </td>
+                      <td style={{ padding: '16px' }}>
+                        <div style={{ display: 'flex', gap: '8px' , flexWrap: 'wrap'}}>
+                          <button 
+                            onClick={() => openModal(billing)}
+                            style={{
+                              background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '8px', 
+                              borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s'
+                            }}
+                            title="Edit Tagihan"
+                          ><i className="ph ph-pencil-simple" style={{ fontSize: '1.2rem' }}></i></button>
+                          <button 
+                            onClick={() => handleDelete(billing.id)}
+                            style={{
+                              background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '8px', 
+                              borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s'
+                            }}
+                            title="Hapus Tagihan"
+                          ><i className="ph ph-trash" style={{ fontSize: '1.2rem' }}></i></button>
+                        </div>
+                      </td>
+                    </tr>
+                  ));
+                })()}
               </tbody>
             </table>
           </div>
