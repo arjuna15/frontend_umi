@@ -305,50 +305,93 @@ export default function SiakadLayout({ children }) {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 cursor: 'pointer',
                 color: 'var(--color-text)',
-                transition: 'all 0.3s'
-              , flexShrink: 0 }}
+                transition: 'all 0.3s',
+                position: 'relative',
+                flexShrink: 0
+              }}
             >
               <i className="ph ph-bell" style={{ fontSize: '1.2rem' }}></i>
-              <span style={{ position: 'absolute', top: 0, right: '2px', background: '#ef4444', border: '2px solid var(--color-bg)', borderRadius: '50%', width: '12px', height: '12px' , flexShrink: 0 }}></span>
+              {notifications.length > 0 && (
+                <span style={{ position: 'absolute', top: 0, right: '2px', background: '#ef4444', border: '2px solid var(--color-bg)', borderRadius: '50%', width: '12px', height: '12px', flexShrink: 0 }}></span>
+              )}
             </button>
             
             <AnimatePresence>
               {showNotif && (
-                <motion.div 
-                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                  style={{
-                    position: 'absolute', top: '50px', right: 0,
-                    width: '320px', background: 'var(--color-bg)',
-                    borderRadius: '16px', boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
-                    border: '1px solid var(--color-border)',
-                    zIndex: 1000, overflow: 'hidden'
-                  }}
-                >
-                  <div style={{ padding: '16px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--glass-bg)' }}>
-                    <h4 style={{ margin: 0, fontWeight: 'bold', color: 'var(--color-text)' }}>Notifikasi</h4>
-                    <span style={{ fontSize: '0.75rem', color: '#3b82f6', cursor: 'pointer', fontWeight: 'bold' }}>Tandai sudah dibaca</span>
-                  </div>
-                  <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
-                    {notifications.length > 0 ? notifications.map((item, idx) => (
-                      <div key={idx} style={{ padding: '16px', borderBottom: idx < notifications.length - 1 ? '1px solid var(--color-border)' : 'none', display: 'flex', gap: '12px', cursor: 'pointer' }}>
-                        <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                          <i className="ph ph-bell"></i>
-                        </div>
-                        <div>
-                          <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{item.title}</p>
-                          <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)' }}>{item.body}</p>
-                          <p style={{ margin: '4px 0 0 0', fontSize: '0.7rem', color: 'var(--color-muted)' }}>{item.time}</p>
-                        </div>
+                <>
+                  {/* Backdrop click-away helper */}
+                  <div 
+                    onClick={() => setShowNotif(false)} 
+                    style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 999 }}
+                  />
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    className="siakad-notif-dropdown"
+                    style={{
+                      position: 'absolute', top: '50px', right: 0,
+                      width: '350px', background: 'var(--color-bg)',
+                      borderRadius: '16px', boxShadow: '0 10px 40px rgba(0,0,0,0.2)',
+                      border: '1px solid var(--color-border)',
+                      zIndex: 1000, overflow: 'hidden'
+                    }}
+                  >
+                    <div style={{ padding: '16px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--glass-bg)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <h4 style={{ margin: 0, fontWeight: 'bold', color: 'var(--color-text)', fontSize: '1rem' }}>Notifikasi</h4>
+                        {notifications.length > 0 && (
+                          <span style={{ background: '#ef4444', color: 'white', fontSize: '0.75rem', padding: '2px 8px', borderRadius: '20px', fontWeight: 'bold' }}>{notifications.length} new</span>
+                        )}
                       </div>
-                    )) : (
-                      <div style={{ padding: '20px', textAlign: 'center', color: 'var(--color-muted)' }}>
-                        Tidak ada notifikasi baru dari backend.
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        {notifications.length > 0 && (
+                          <span 
+                            onClick={() => {
+                              setNotifications([]);
+                              window.toast?.('Semua notifikasi ditandai telah dibaca!');
+                            }} 
+                            style={{ fontSize: '0.75rem', color: '#3b82f6', cursor: 'pointer', fontWeight: 'bold' }}
+                          >
+                            Tandai dibaca
+                          </span>
+                        )}
+                        <i 
+                          className="ph ph-x" 
+                          onClick={() => setShowNotif(false)} 
+                          style={{ cursor: 'pointer', color: 'var(--color-muted)', fontSize: '1.1rem' }}
+                        ></i>
                       </div>
-                    )}
-                  </div>
-                </motion.div>
+                    </div>
+                    <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
+                      {notifications.length > 0 ? notifications.map((item, idx) => (
+                        <div key={idx} style={{ padding: '16px', borderBottom: idx < notifications.length - 1 ? '1px solid var(--color-border)' : 'none', display: 'flex', gap: '12px', cursor: 'pointer', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = 'var(--glass-bg)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
+                          <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <i className="ph ph-info" style={{ fontSize: '1.1rem' }}></i>
+                          </div>
+                          <div style={{ flex: 1 }}>
+                            <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: 'bold', lineHeight: '1.3' }}>{item.title}</p>
+                            <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>{item.body}</p>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px' }}>
+                              <span style={{ fontSize: '0.7rem', color: 'var(--color-muted)', fontWeight: '500' }}>{item.time}</span>
+                              <span style={{ fontSize: '0.7rem', color: '#3b82f6', fontWeight: 'bold' }} onClick={(e) => { e.stopPropagation(); setNotifications(notifications.filter((_, i) => i !== idx)); }}>Hapus</span>
+                            </div>
+                          </div>
+                        </div>
+                      )) : (
+                        <div style={{ padding: '32px 16px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px' }}>
+                          <div style={{ background: 'var(--glass-bg)', width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
+                            <i className="ph ph-bell-slash" style={{ fontSize: '1.5rem' }}></i>
+                          </div>
+                          <div>
+                            <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--color-text)', fontSize: '0.9rem' }}>Tidak Ada Notifikasi</p>
+                            <p style={{ margin: '4px 0 0 0', color: 'var(--color-muted)', fontSize: '0.8rem' }}>Semua notifikasi baru dari sistem sudah dibaca.</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                </>
               )}
             </AnimatePresence>
           </div>

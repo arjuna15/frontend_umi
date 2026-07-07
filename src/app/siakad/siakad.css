@@ -1333,3 +1333,34 @@
   z-index: 0;
 }
 
+/* Responsive Notification Dropdown styles */
+.siakad-notif-dropdown {
+  max-width: 350px;
+}
+
+@media (max-width: 768px) {
+  .siakad-notif-dropdown {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 24px 24px 0 0 !important;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.2) !important;
+    border: none !important;
+    border-top: 1px solid var(--color-border) !important;
+    animation: slideUpBottom 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  }
+}
+
+@keyframes slideUpBottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
