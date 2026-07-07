@@ -7,12 +7,25 @@ export default function MahasiswaPresensi() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [coords, setCoords] = useState({ bintaro: '-6.2758, 106.7405', pasar_minggu: '-6.2842, 106.8442' });
 
   const fetchPresensi = async () => {
     const token = localStorage.getItem('siakad_token');
     if (!token) return router.push('/siakad/login');
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      
+      const settingsRes = await fetch(`${apiUrl}/siakad/settings`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (settingsRes.ok) {
+        const settingsData = await settingsRes.json();
+        setCoords({
+          bintaro: settingsData.siakad_coord_bintaro || '-6.2758, 106.7405',
+          pasar_minggu: settingsData.siakad_coord_pasar_minggu || '-6.2842, 106.8442'
+        });
+      }
+
       const res = await fetch(`${apiUrl}/siakad/mahasiswa/presensi`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -77,8 +90,8 @@ export default function MahasiswaPresensi() {
       setSubmitting(true);
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
-        const bintaroStr = localStorage.getItem('siakad_coord_bintaro') || '-6.2758, 106.7405';
-        const pmStr = localStorage.getItem('siakad_coord_pasar_minggu') || '-6.2842, 106.8442';
+        const bintaroStr = coords.bintaro;
+        const pmStr = coords.pasar_minggu;
         
         const parseCoord = (str) => {
           const parts = str.split(',');
