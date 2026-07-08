@@ -793,6 +793,11 @@ header.top-transparent .glass {
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
 }
 .hero-glass-container h1 {
   margin-bottom: var(--space-4);
