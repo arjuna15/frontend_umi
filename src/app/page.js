@@ -565,8 +565,8 @@ export default function Home() {
     <div className="testi-slider fade-up">
       {testiData.length > 0 ? (
         testiData.map((testi, index) => (
-          <div key={testi.id} className="testi-card" style={{ border: 'none', background: 'transparent', boxShadow: 'none' }}>
-            <Image className="alumni-img" style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 10px 30px rgba(0,0,0,0.3)', objectFit: 'cover' }} src={testi.image_url} width={300} height={400} alt={`Testimoni ${index + 1}`}/>
+          <div key={testi.id} className="testi-card">
+            <Image className="alumni-img" style={{ objectFit: 'cover' }} src={testi.image_url} width={380} height={440} alt={`Testimoni ${index + 1}`}/>
           </div>
         ))
       ) : (
