@@ -33,11 +33,13 @@
   --font-body: 'Outfit', system-ui, sans-serif;
   --font-heading: 'Outfit', system-ui, sans-serif;
 
-  /* Glassmorphism Variables */
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: 1px solid rgba(15, 23, 42, 0.12);
-  --glass-blur: blur(24px);
-  --glass-shadow: 0 10px 40px -10px rgba(31, 38, 135, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  /* Glassmorphism Variables - Apple Liquid Glass */
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+  --glass-blur: blur(40px) saturate(210%);
+  --glass-shadow: 0 12px 40px rgba(31, 38, 135, 0.04), 
+                  inset 0 1px 0 rgba(255, 255, 255, 0.6), 
+                  inset 0 -1px 0 rgba(0, 0, 0, 0.01);
 
   /* Spacing */
   --space-1: 4px; --space-2: 8px; --space-3: 16px;
