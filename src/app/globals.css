@@ -451,25 +451,28 @@ header.top-transparent .glass {
   margin: 0;
   padding: 0 !important;
 }
-
-/* -------------------- Mega Menu -------------------- */
+/* -------------------- Mega Menu - Liquid Glass style -------------------- */
 .mega-menu {
   position: absolute;
   top: 100%;
   left: -20px;
   transform: translateY(15px);
   width: max-content;
-  background: white;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(40px) saturate(210%);
+  -webkit-backdrop-filter: blur(40px) saturate(210%);
   border-radius: var(--radius-lg);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.06), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.6), 
+              inset 0 -1px 0 rgba(0, 0, 0, 0.01);
   padding: var(--space-4);
   display: grid;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
   z-index: 100;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 /* Invisible hover bridge to prevent mega menu from closing on diagonal mouse movement */
@@ -548,12 +551,12 @@ header.top-transparent .glass {
   gap: 16px;
   padding: 12px;
   border-radius: var(--radius-md);
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background 0.3s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   text-decoration: none !important;
   color: var(--color-text) !important;
 }
 .mega-menu-item:hover {
-  background: rgba(185, 28, 28, 0.04);
+  background: rgba(185, 28, 28, 0.05);
   transform: translateX(4px);
 }
 .mega-menu-icon {
@@ -583,18 +586,20 @@ header.top-transparent .glass {
   font-weight: 400;
 }
 
-/* Dropdown styling */
+/* Dropdown styling - Liquid Glass */
 .dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
   min-width: 260px;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(40px) saturate(210%);
+  -webkit-backdrop-filter: blur(40px) saturate(210%);
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: var(--radius-lg);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(255,255,255,0.3);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.06), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.6), 
+              inset 0 -1px 0 rgba(0, 0, 0, 0.01);
   padding: 12px;
   list-style: none;
   opacity: 0;
@@ -623,7 +628,7 @@ header.top-transparent .glass {
   color: var(--color-text);
   text-decoration: none;
   font-size: 0.85rem;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   font-weight: 500;
   border-radius: var(--radius-md);
 }
