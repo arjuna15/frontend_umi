@@ -233,12 +233,12 @@ export default function SiakadLogin() {
         }
         .aurora-input:focus {
           background: rgba(255, 255, 255, 0.8);
-          border-color: #0071e3;
-          box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15), inset 0 1px 2px rgba(0,0,0,0.02);
+          border-color: #B91C1C;
+          box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.15), inset 0 1px 2px rgba(0,0,0,0.02);
         }
         .aurora-input:focus + .aurora-icon-box, 
         .aurora-input-group:focus-within .aurora-icon-box {
-          color: #0071e3;
+          color: #B91C1C;
           transform: translateY(-50%) scale(1.08);
         }
         .aurora-input::placeholder {
@@ -257,7 +257,7 @@ export default function SiakadLogin() {
           transition: all 0.3s;
         }
         .aurora-eye:hover { 
-          color: #0071e3; 
+          color: #B91C1C; 
         }
 
         .aurora-options {
@@ -288,9 +288,9 @@ export default function SiakadLogin() {
           transition: all 0.2s;
         }
         input:checked + .aurora-checkbox {
-          background: #0071e3;
-          border-color: #0071e3;
-          box-shadow: 0 0 8px rgba(0, 113, 227, 0.3);
+          background: #B91C1C;
+          border-color: #B91C1C;
+          box-shadow: 0 0 8px rgba(185, 28, 28, 0.3);
         }
 
         .aurora-btn {
@@ -301,23 +301,23 @@ export default function SiakadLogin() {
           padding: 16px;
           border-radius: 14px;
           border: none;
-          background: linear-gradient(135deg, #0071e3, #1d1d1f);
+          background: linear-gradient(135deg, #B91C1C, #1d1d1f);
           color: white;
           font-size: 1rem;
           font-weight: 700;
           cursor: pointer;
-          box-shadow: 0 8px 24px rgba(0, 113, 227, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          box-shadow: 0 8px 24px rgba(185, 28, 28, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
           transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
           letter-spacing: 0.05em;
           text-transform: uppercase;
         }
         .aurora-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 12px 32px rgba(0, 113, 227, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+          box-shadow: 0 12px 32px rgba(185, 28, 28, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
         .aurora-btn:active {
           transform: translateY(1px);
-          box-shadow: 0 4px 12px rgba(0, 113, 227, 0.2);
+          box-shadow: 0 4px 12px rgba(185, 28, 28, 0.2);
         }
         .aurora-btn:disabled {
           background: #86868b;
