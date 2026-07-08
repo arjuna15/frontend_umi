@@ -654,15 +654,17 @@
     animation: fadeIn 0.3s ease;
   }
 
-  /* Drawer Content */
+  /* Drawer Content - Liquid Glass style */
   .siakad-drawer-content {
-    background: var(--color-bg);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
     width: 100%;
     border-radius: 24px 24px 0 0;
     padding: 24px;
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
-    animation: slideUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border-top: 1px solid var(--color-border);
+    box-shadow: var(--glass-shadow);
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-top: var(--glass-border);
     max-height: 85vh;
     display: flex;
     flex-direction: column;
@@ -695,7 +697,7 @@
   .drawer-avatar {
     width: 48px;
     height: 48px;
-    background: var(--glass-bg);
+    background: rgba(255, 255, 255, 0.2);
     color: var(--color-text);
     border-radius: 50%;
     display: flex;
@@ -719,7 +721,7 @@
   }
 
   .drawer-close-btn {
-    background: var(--glass-bg);
+    background: rgba(255, 255, 255, 0.2);
     border: 1px solid var(--color-border);
     width: 40px;
     height: 40px;
@@ -730,45 +732,46 @@
     color: var(--color-text);
     font-size: 1.2rem;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .drawer-logout-btn {
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.2);
-    color: #ef4444;
+    background: rgba(255, 59, 48, 0.1);
+    border: 1px solid rgba(255, 59, 48, 0.2);
+    color: var(--apple-red);
     width: 40px;
     height: 40px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ef4444;
     font-size: 1.2rem;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .drawer-logout-btn:active {
-    background-color: transparent;
+    background-color: var(--apple-red);
+    color: white;
   }
 
-  /* Beautiful Select Dropdown */
+  /* Beautiful Select Dropdown - Apple Liquid Style */
   .siakad-select {
     appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%236b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2386868b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
     background-repeat: no-repeat;
     background-position: right 12px center;
     background-size: 16px;
     padding-right: 40px !important;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.45);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   }
   .siakad-select:hover {
-    border-color: #94a3b8 !important;
+    border-color: var(--apple-blue) !important;
+    background-color: rgba(255, 255, 255, 0.6) !important;
   }
   .siakad-select:focus {
-    border-color: #3b82f6 !important;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: var(--apple-blue) !important;
+    box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
   }
 
   .siakad-drawer-content .drawer-body {
@@ -782,16 +785,16 @@
     display: flex;
     align-items: center;
     padding: 16px;
-    background: var(--glass-bg);
+    background: rgba(255, 255, 255, 0.2);
     border: 1px solid var(--color-border);
     border-radius: 16px;
     text-decoration: none;
     color: var(--color-text);
-    transition: 0.2s;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   .siakad-drawer-content .drawer-item:active {
-    background: var(--color-bg);
+    background: rgba(255, 255, 255, 0.4);
     transform: scale(0.98);
   }
 
