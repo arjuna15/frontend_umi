@@ -319,13 +319,15 @@ body::after {
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
 
-/* -------------------- Glass Utilities -------------------- */
+/* -------------------- Glass Utilities - Apple Liquid style -------------------- */
 .glass {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(24px) saturate(150%);
-  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(40px) saturate(210%);
+  -webkit-backdrop-filter: blur(40px) saturate(210%);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 10px 40px -10px rgba(31, 38, 135, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.04), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.6), 
+              inset 0 -1px 0 rgba(0, 0, 0, 0.01);
   border-radius: var(--radius-lg);
 }
 
@@ -1574,52 +1576,48 @@ body.dark-mode {
 .orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.5;
-  animation: floatOrb 20s infinite ease-in-out alternate;
+  filter: blur(120px);
+  opacity: 0.65;
+  mix-blend-mode: multiply;
+  animation: floatOrb 25s infinite alternate cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 body.dark-mode .orb {
-  opacity: 0.25;
+  opacity: 0.35;
+  mix-blend-mode: screen;
 }
 
 .orb-1 {
-  width: 400px;
-  height: 400px;
-  background: var(--umiba-red);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(185, 28, 28, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
   top: -100px;
   left: -100px;
   animation-delay: 0s;
 }
 
 .orb-2 {
-  width: 500px;
-  height: 500px;
-  background: #3b82f6; /* Blue accent */
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
   bottom: -200px;
   right: -100px;
-  animation-delay: -5s;
+  animation-delay: -6s;
 }
 
 .orb-3 {
-  width: 300px;
-  height: 300px;
-  background: #8b5cf6; /* Purple accent */
-  top: 40%;
-  left: 60%;
-  animation-delay: -10s;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+  top: 30%;
+  left: 55%;
+  animation-delay: -12s;
 }
 
 @keyframes floatOrb {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(50px, 30px) scale(1.1);
-  }
-  100% {
-    transform: translate(-30px, 50px) scale(0.9);
-  }
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(80px, 40px) scale(1.15) rotate(120deg); }
+  100% { transform: translate(-40px, 80px) scale(0.9) rotate(240deg); }
 }
 
 
