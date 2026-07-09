@@ -190,6 +190,7 @@ export default function SiakadLayout({ children }) {
       { label: 'Jadwal Mengajar', icon: 'ph ph-calendar-plus', path: '/siakad/dosen/jadwal', isMobilePrimary: true },
       { label: 'Isi BAP', icon: 'ph ph-file-text', path: '/siakad/dosen/bap' },
       { label: 'Persetujuan KRS', icon: 'ph ph-check-square', path: '/siakad/dosen/krs-approval', isMobilePrimary: true },
+      { label: 'Bimbingan Akademik', icon: 'ph ph-users', path: '/siakad/dosen/bimbingan' },
       { label: 'E-Learning', icon: 'ph ph-books', path: '/siakad/dosen/elearning' },
       { label: 'Presensi Mahasiswa', icon: 'ph ph-calendar-check', path: '/siakad/dosen/presensi', isMobilePrimary: true },
       { label: 'Rekap Presensi', icon: 'ph ph-chart-bar', path: '/siakad/dosen/rekap-presensi' },
