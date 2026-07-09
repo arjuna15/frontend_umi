@@ -1193,9 +1193,9 @@ header.top-transparent .glass {
     right: 0;
     width: 100%;
     max-height: 75vh;
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
+    background: var(--color-white) !important; /* Solid background for maximum text readability on mobile */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     flex-direction: column;
     padding: var(--space-4);
     transition: all 0.4s var(--ease);
