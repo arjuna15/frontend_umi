@@ -41,7 +41,7 @@ export default function Home() {
   <div style={{ position: 'relative', overflow: 'hidden', height: '100%', width: '100%', minHeight: 'calc(100vh - 54px)' }}>
     
     {/*  Slider Backgrounds & Contents  */}
-    <div id="heroSlides" style={{ position: 'absolute', inset: '0', zIndex: '-2' }}>
+    <div id="heroSlides" style={{ position: 'absolute', inset: '0', zIndex: '1' }}>
       
       {/* SLIDE 1: Magister Manajemen */}
       <div className={`hero-slide hero-content-padding ${currentSlide === 0 ? 'active' : ''}`} style={{ backgroundImage: `url('/1.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 0 ? 1 : 0, pointerEvents: currentSlide === 0 ? 'auto' : 'none', zIndex: currentSlide === 0 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center' }}>
