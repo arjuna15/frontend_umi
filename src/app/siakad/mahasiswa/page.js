@@ -198,9 +198,9 @@ export default function MahasiswaDashboard() {
 
       {/* Kartu Hasil Studi (KHS) Summary */}
       <div id="khs-print-section" className="siakad-card" style={{ padding: '24px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }} className="no-print">
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Kartu Hasil Studi (KHS)</h2>
-          <div style={{ display: 'flex', gap: '8px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }} className="no-print">
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 4px 0' }}>Kartu Hasil Studi (KHS)</h2>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             <button onClick={() => window.print()} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 16px', borderRadius: '8px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
               <i className="ph ph-printer"></i> Print View
             </button>

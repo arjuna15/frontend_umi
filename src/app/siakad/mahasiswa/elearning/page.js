@@ -182,10 +182,33 @@ export default function ElearningPage() {
                                 window.toast('Error: ' + err.message);
                               }
                             }}
-                            style={{ display: 'flex', gap: '8px', alignItems: 'center' }}
+                            style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', width: '100%' }}
                           >
-                            <input type="file" name="file" required style={{ fontSize: '0.85rem', color: 'var(--color-text)' }} />
-                            <button type="submit" style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', padding: '8px 14px', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 2px 6px rgba(16, 185, 129, 0.3)' }}>Upload & Kumpulkan</button>
+                            <input 
+                              type="file" 
+                              name="file" 
+                              required 
+                              className="siakad-file-input"
+                              style={{ flex: '1 1 200px' }} 
+                            />
+                            <button 
+                              type="submit" 
+                              style={{ 
+                                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', 
+                                color: 'white', 
+                                border: 'none', 
+                                padding: '10px 16px', 
+                                borderRadius: '8px', 
+                                fontSize: '0.85rem', 
+                                fontWeight: 'bold', 
+                                cursor: 'pointer', 
+                                boxShadow: '0 2px 6px rgba(16, 185, 129, 0.3)',
+                                flex: '0 0 auto',
+                                whiteSpace: 'nowrap'
+                              }}
+                            >
+                              Upload & Kumpulkan
+                            </button>
                           </form>
                         )}
                       </li>
