@@ -508,6 +508,7 @@ export default function SiakadLayout({ children }) {
             </AnimatePresence>
           </div>
         </main>
+      </div>
 
       {/* MOBILE BOTTOM NAVIGATION */}
       <nav className="siakad-bottom-nav">
