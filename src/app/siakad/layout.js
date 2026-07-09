@@ -265,85 +265,26 @@ export default function SiakadLayout({ children }) {
   }
 
   return (
-    <div className="siakad-container">
+    <div className="siakad-container-wrapper">
       <ToastContainer />
       <ConfirmModal />
       <PromptModal />
       <FormModal />
-      {/* Animated Background Blobs */}
-      <div className="siakad-bg-shapes">
-        <div className="siakad-blob siakad-blob-1"></div>
-        <div className="siakad-blob siakad-blob-2"></div>
-        <div className="siakad-blob siakad-blob-3"></div>
-      </div>
 
-      {/* Floating Glass Sidebar */}
-      <aside className="siakad-sidebar">
-        <div className="siakad-sidebar-header">
-          <div className="siakad-sidebar-logo">
-            <img src="/icon.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+      {/* Sleek Glass Header (Full Width on Desktop) */}
+      <header className="siakad-header no-print">
+        {/* Logo brand on left side for desktop */}
+        <div className="siakad-header-logo-container" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'var(--apple-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '1.2rem', flexShrink: 0 }}>
+            <img src="/icon.png" alt="Logo" style={{ width: '24px', height: '24px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
           </div>
           <div>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: '800', margin: 0, letterSpacing: '1px', color: 'var(--color-text)', lineHeight: '1.2' }}>SIAKAD</h2>
-            <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)', fontWeight: '600' }}>Universitas Mitra Bangsa</p>
+            <h2 style={{ fontSize: '1.2rem', fontWeight: '900', margin: 0, letterSpacing: '0.5px', color: 'var(--color-text)', lineHeight: '1.1' }}>SIAKAD</h2>
+            <p style={{ margin: 0, fontSize: '0.7rem', color: 'var(--color-muted)', fontWeight: '600' }}>Universitas Mitra Bangsa</p>
           </div>
         </div>
 
-        <nav className="siakad-nav">
-          <p style={{ padding: '0 20px', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-muted)', fontWeight: '800', marginBottom: '8px', letterSpacing: '1.5px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            Menu Utama
-            <span style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, var(--color-border) 0%, transparent 100%)' }}></span>
-          </p>
-          {menuItems.map((item, i) => {
-            const isActive = pathname === item.path;
-            const iconClass = isActive ? item.icon.replace('ph ', 'ph-fill ph ') : item.icon;
-            return (
-              <Link key={i} href={item.path} className={`siakad-nav-item ${isActive ? 'active' : ''}`}>
-                <i className={iconClass} style={{ fontSize: '1.3rem', flexShrink: 0 }}></i>
-                <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.label}</span>
-                {i === 0 && <span style={{ background: isActive ? 'rgba(255,255,255,0.2)' : '#e0e7ff', color: isActive ? 'white' : '#4f46e5', padding: '2px 8px', borderRadius: '10px', fontSize: '0.65rem', fontWeight: 'bold', flexShrink: 0 }}>BARU</span>}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="siakad-user-profile">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, cursor: 'pointer', overflow: 'hidden' }} onClick={() => router.push('/siakad/profile')}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', flexShrink: 0 }}>
-              {effectiveRole ? effectiveRole.charAt(0).toUpperCase() : 'U'}
-            </div>
-            <div style={{ overflow: 'hidden', flex: 1 }}>
-              <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--color-text)', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                {user?.name || 'Pengguna SIAKAD'}
-              </h4>
-              <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', textTransform: 'capitalize', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                Role: {role || 'Guest'}{role === 'kaprodi' && portalRole ? ` • Portal: ${portalRole}` : ''}
-              </p>
-            </div>
-          </div>
-          <button 
-            onClick={() => {
-              fetch('/api/siakad/logout', { method: 'POST' }).finally(() => {
-                localStorage.removeItem('siakad_token');
-                localStorage.removeItem('siakad_role');
-                localStorage.removeItem('siakad_user');
-                localStorage.removeItem('siakad_portal');
-                window.location.href = '/siakad/login';
-              });
-            }} 
-            className="btn-logout-icon" 
-            title="Keluar"
-          >
-            <i className="ph ph-sign-out" style={{ fontSize: '1.2rem' }}></i>
-          </button>
-        </div>
-      </aside>
-
-      {/* Main Content Area */}
-      <main className="siakad-main">
-        {/* Sleek Glass Header */}
-        <header className="siakad-header" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '16px' }}>
-          
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <div style={{ position: 'relative' }}>
             <button 
               onClick={() => setShowNotif(!showNotif)} 
@@ -486,24 +427,87 @@ export default function SiakadLayout({ children }) {
               </svg>
             </div>
           </Link>
-        </header>
-
-        {/* Scrollable Content */}
-        <div className="siakad-content" id="siakad-scroll-area">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={pathname}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-              style={{ minHeight: '100%' }}
-            >
-              {children}
-            </motion.div>
-          </AnimatePresence>
         </div>
-      </main>
+      </header>
+
+      <div className="siakad-container">
+        {/* Animated Background Blobs */}
+        <div className="siakad-bg-shapes">
+          <div className="siakad-blob siakad-blob-1"></div>
+          <div className="siakad-blob siakad-blob-2"></div>
+          <div className="siakad-blob siakad-blob-3"></div>
+        </div>
+
+        {/* Floating Glass Sidebar */}
+        <aside className="siakad-sidebar">
+          <nav className="siakad-nav" style={{ paddingTop: '20px' }}>
+            <p style={{ padding: '0 20px', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-muted)', fontWeight: '800', marginBottom: '8px', letterSpacing: '1.5px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              Menu Utama
+              <span style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, var(--color-border) 0%, transparent 100%)' }}></span>
+            </p>
+            {menuItems.map((item, i) => {
+              const isActive = pathname === item.path;
+              const iconClass = isActive ? item.icon.replace('ph ', 'ph-fill ph ') : item.icon;
+              return (
+                <Link key={i} href={item.path} className={`siakad-nav-item ${isActive ? 'active' : ''}`}>
+                  <i className={iconClass} style={{ fontSize: '1.3rem', flexShrink: 0 }}></i>
+                  <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.label}</span>
+                  {i === 0 && <span style={{ background: isActive ? 'rgba(255,255,255,0.2)' : '#e0e7ff', color: isActive ? 'white' : '#4f46e5', padding: '2px 8px', borderRadius: '10px', fontSize: '0.65rem', fontWeight: 'bold', flexShrink: 0 }}>BARU</span>}
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="siakad-user-profile">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, cursor: 'pointer', overflow: 'hidden' }} onClick={() => router.push('/siakad/profile')}>
+              <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', flexShrink: 0 }}>
+                {effectiveRole ? effectiveRole.charAt(0).toUpperCase() : 'U'}
+              </div>
+              <div style={{ overflow: 'hidden', flex: 1 }}>
+                <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--color-text)', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                  {user?.name || 'Pengguna SIAKAD'}
+                </h4>
+                <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', textTransform: 'capitalize', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+                  Role: {role || 'Guest'}{role === 'kaprodi' && portalRole ? ` • Portal: ${portalRole}` : ''}
+                </p>
+              </div>
+            </div>
+            <button 
+              onClick={() => {
+                fetch('/api/siakad/logout', { method: 'POST' }).finally(() => {
+                  localStorage.removeItem('siakad_token');
+                  localStorage.removeItem('siakad_role');
+                  localStorage.removeItem('siakad_user');
+                  localStorage.removeItem('siakad_portal');
+                  window.location.href = '/siakad/login';
+                });
+              }} 
+              className="btn-logout-icon" 
+              title="Keluar"
+            >
+              <i className="ph ph-sign-out" style={{ fontSize: '1.2rem' }}></i>
+            </button>
+          </div>
+        </aside>
+
+        {/* Main Content Area */}
+        <main className="siakad-main">
+          {/* Scrollable Content */}
+          <div className="siakad-content" id="siakad-scroll-area">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={pathname}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                style={{ minHeight: '100%' }}
+              >
+                {children}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </main>
 
       {/* MOBILE BOTTOM NAVIGATION */}
       <nav className="siakad-bottom-nav">
