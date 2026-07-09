@@ -169,6 +169,7 @@ export default function SiakadLayout({ children }) {
       { label: 'Log Aktivitas (Audit)', icon: 'ph ph-list-magnifying-glass', path: '/siakad/admin/logs' },
       { label: 'Backup & Restore', icon: 'ph ph-database', path: '/siakad/admin/backup' },
       { label: 'Pengaturan Sistem', icon: 'ph ph-gear', path: '/siakad/admin/pengaturan' },
+      { label: 'Pengaturan Profil', icon: 'ph ph-user-gear', path: '/siakad/profile' },
     ];
   } else if (effectiveRole === 'kaprodi') {
     menuItems = [
@@ -182,6 +183,7 @@ export default function SiakadLayout({ children }) {
       { label: 'Distribusi Nilai', icon: 'ph ph-student', path: '/siakad/kaprodi/students' },
       { label: 'Hasil EDOM', icon: 'ph ph-star-half', path: '/siakad/kaprodi/edom', isMobilePrimary: true },
       { label: 'Laporan Akreditasi', icon: 'ph ph-file-pdf', path: '/siakad/kaprodi/reports' },
+      { label: 'Pengaturan Profil', icon: 'ph ph-user-gear', path: '/siakad/profile' },
     ];
   } else if (effectiveRole === 'dosen') {
     menuItems = [
@@ -211,6 +213,7 @@ export default function SiakadLayout({ children }) {
       { label: 'Forum Diskusi', icon: 'ph ph-chats', path: '/siakad/mahasiswa/forum' },
       { label: 'Surat & Administrasi', icon: 'ph ph-envelope-simple', path: '/siakad/mahasiswa/surat' },
       { label: 'Keuangan', icon: 'ph ph-wallet', path: '/siakad/mahasiswa/keuangan' },
+      { label: 'Pengaturan Profil', icon: 'ph ph-user-gear', path: '/siakad/profile' },
     ];
   }
 
@@ -531,7 +534,7 @@ export default function SiakadLayout({ children }) {
             
             <div className="drawer-body">
               <h4 style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: 'var(--color-text)', textTransform: 'uppercase', letterSpacing: '1px' }}>Menu Lainnya</h4>
-              {menuItems.filter(item => !item.isMobilePrimary).map((item, i) => {
+              {menuItems.filter(item => !item.isMobilePrimary && item.path !== '/siakad/profile').map((item, i) => {
                 const isActive = pathname === item.path;
                 return (
                   <Link key={i} href={item.path} className={`drawer-item ${isActive ? 'active' : ''}`} onClick={() => setIsDrawerOpen(false)}>
