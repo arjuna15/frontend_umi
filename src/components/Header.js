@@ -68,6 +68,11 @@ export default function Header() {
 
   return (
     <div style={{ width: '100%' }}>
+      {/* Backdrop overlay for blurring page content behind mega menu / mobile menu */}
+      <div 
+        className="header-overlay" 
+        onClick={() => setMenuOpen(false)}
+      />
       <div className="top-banner" style={{
         background: '#B91C1C', 
         color: '#ffffff', 
