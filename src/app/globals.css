@@ -56,6 +56,22 @@
   /* Transitions */
   --duration: 0.4s;
   --ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  /* Missing variables */
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --color-background: var(--color-bg);
+  --color-background-alt: #f1f5f9;
+  --color-text-muted: var(--color-muted);
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
 }
 
 /* -------------------- Dark Mode Overrides -------------------- */
@@ -70,6 +86,12 @@
   --glass-bg: rgba(15, 23, 42, 0.92);
   --glass-border: 1px solid rgba(255, 255, 255, 0.1);
   --glass-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --color-background: var(--color-bg);
+  --color-background-alt: #0f172a;
+  --color-text-muted: var(--color-muted);
+  --slate-50: #0f172a;
+  --slate-500: #94a3b8;
+  --slate-600: #cbd5e1;
   background-color: var(--color-bg);
   color: var(--color-text);
 }
@@ -2168,6 +2190,25 @@ header.top-transparent .nav-link.active::after {
   
   .prodi-card span {
     font-size: 0.72rem !important;
+  }
+}
+
+/* Keyframes for ping & pulse animations */
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: .5;
+    transform: scale(0.95);
   }
 }
 

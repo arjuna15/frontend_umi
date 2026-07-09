@@ -145,7 +145,7 @@ export default function Page() {
   <div class="container">
     <div class="fade-up" style="text-align: center; margin-bottom: 48px;">
       <span class="text-red" style="font-weight: 600; text-transform: uppercase;">Unduhan Resmi</span>
-      <h2>Dokumen {data['title']}</h2>
+      <h2>Dokumen ${heroTitle}</h2>
     </div>
     <div class="grid grid-3" style="gap: 24px;">
       
