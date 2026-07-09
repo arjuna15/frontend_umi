@@ -13,8 +13,10 @@ export default function SiakadLayout({ children }) {
   const { theme, toggleTheme } = useTheme();
   const [hydrated, setHydrated] = useState(false);
   const [session, setSession] = useState({ role: null, portalRole: null });
+  const [user, setUser] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
+  const [showMobileNotifs, setShowMobileNotifs] = useState(false);
   const [notifications, setNotifications] = useState([]);
 
   const role = session.role;
@@ -34,6 +36,14 @@ export default function SiakadLayout({ children }) {
       role: localStorage.getItem('siakad_role'),
       portalRole: localStorage.getItem('siakad_portal'),
     });
+    try {
+      const userStr = localStorage.getItem('siakad_user');
+      if (userStr) {
+        setUser(JSON.parse(userStr));
+      }
+    } catch (e) {
+      console.error(e);
+    }
   }, [pathname]);
 
   // Premium Spotlight Hover Tracker
@@ -304,7 +314,7 @@ export default function SiakadLayout({ children }) {
             </div>
             <div style={{ overflow: 'hidden', flex: 1 }}>
               <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: 'bold', color: 'var(--color-text)', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                Pengguna SIAKAD
+                {user?.name || 'Pengguna SIAKAD'}
               </h4>
               <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', textTransform: 'capitalize', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
                 Role: {role || 'Guest'}{role === 'kaprodi' && portalRole ? ` • Portal: ${portalRole}` : ''}
@@ -543,17 +553,28 @@ export default function SiakadLayout({ children }) {
 
       {/* MOBILE DRAWER OVERLAY */}
       {isDrawerOpen && (
-        <div className="siakad-drawer-overlay" onClick={() => setIsDrawerOpen(false)}>
+        <div className="siakad-drawer-overlay" onClick={() => { setIsDrawerOpen(false); setShowMobileNotifs(false); }}>
           <div className="siakad-drawer-content" onClick={e => e.stopPropagation()}>
             <div className="drawer-header">
               <div className="drawer-profile">
                 <div className="drawer-avatar"><i className="ph ph-user"></i></div>
                 <div className="drawer-user-info">
-                  <h4>User</h4>
+                  <h4>{user?.name || 'User'}</h4>
                   <p>{role}</p>
                 </div>
               </div>
-              <div style={{ display: 'flex', gap: '8px' }}>
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <button 
+                  className="drawer-close-btn" 
+                  title="Notifikasi"
+                  style={{ position: 'relative' }}
+                  onClick={() => setShowMobileNotifs(!showMobileNotifs)}
+                >
+                  <i className="ph ph-bell"></i>
+                  {notifications.length > 0 && (
+                    <span style={{ position: 'absolute', top: '8px', right: '8px', background: '#ef4444', borderRadius: '50%', width: '8px', height: '8px' }}></span>
+                  )}
+                </button>
                 <button 
                   className="drawer-close-btn" 
                   title="Toggle Theme"
@@ -576,30 +597,72 @@ export default function SiakadLayout({ children }) {
                 >
                   <i className="ph ph-sign-out"></i>
                 </button>
-                <button className="drawer-close-btn" onClick={() => setIsDrawerOpen(false)}><i className="ph ph-x"></i></button>
+                <button className="drawer-close-btn" onClick={() => { setIsDrawerOpen(false); setShowMobileNotifs(false); }}><i className="ph ph-x"></i></button>
               </div>
             </div>
             
             <div className="drawer-body">
-              <h4 style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: 'var(--color-text)', textTransform: 'uppercase', letterSpacing: '1px' }}>Menu Lainnya</h4>
-              {menuItems.filter(item => !item.isMobilePrimary && item.path !== '/siakad/profile').map((item, i) => {
-                const isActive = pathname === item.path;
-                return (
-                  <Link key={i} href={item.path} className={`drawer-item ${isActive ? 'active' : ''}`} onClick={() => setIsDrawerOpen(false)}>
-                    <div className="icon"><i className={item.icon}></i></div>
-                    <div className="label">{item.label}</div>
-                    <i className="ph ph-caret-right chevron"></i>
-                  </Link>
-                );
-              })}
+              {showMobileNotifs ? (
+                <>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                    <h4 style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text)', textTransform: 'uppercase', letterSpacing: '1px' }}>Notifikasi ({notifications.length})</h4>
+                    <button 
+                      onClick={() => setShowMobileNotifs(false)}
+                      style={{ background: 'none', border: 'none', color: '#3b82f6', fontSize: '0.85rem', cursor: 'pointer', fontWeight: 'bold' }}
+                    >
+                      Kembali ke Menu
+                    </button>
+                  </div>
+                  {notifications.length > 0 ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '350px', overflowY: 'auto' }}>
+                      {notifications.map((item, idx) => (
+                        <div 
+                          key={idx} 
+                          onClick={() => {
+                            if (item.path) {
+                              router.push(item.path);
+                              setIsDrawerOpen(false);
+                              setShowMobileNotifs(false);
+                            }
+                          }}
+                          style={{ padding: '12px', borderRadius: '12px', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', cursor: 'pointer' }}
+                        >
+                          <p style={{ margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{item.title}</p>
+                          <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)' }}>{item.body}</p>
+                          <span style={{ fontSize: '0.7rem', color: 'var(--color-muted)', display: 'block', marginTop: '6px' }}>{item.time}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div style={{ padding: '32px 16px', textAlign: 'center', color: 'var(--color-muted)' }}>
+                      <i className="ph ph-bell-slash" style={{ fontSize: '2rem', opacity: 0.5, marginBottom: '8px' }}></i>
+                      <p style={{ margin: 0, fontSize: '0.9rem' }}>Tidak ada notifikasi baru.</p>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <h4 style={{ margin: '0 0 12px 0', fontSize: '0.85rem', color: 'var(--color-text)', textTransform: 'uppercase', letterSpacing: '1px' }}>Menu Lainnya</h4>
+                  {menuItems.filter(item => !item.isMobilePrimary && item.path !== '/siakad/profile').map((item, i) => {
+                    const isActive = pathname === item.path;
+                    return (
+                      <Link key={i} href={item.path} className={`drawer-item ${isActive ? 'active' : ''}`} onClick={() => { setIsDrawerOpen(false); setShowMobileNotifs(false); }}>
+                        <div className="icon"><i className={item.icon}></i></div>
+                        <div className="label">{item.label}</div>
+                        <i className="ph ph-caret-right chevron"></i>
+                      </Link>
+                    );
+                  })}
 
-              <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--color-border)' }}>
-                <Link href="/siakad/profile" className={`drawer-item ${pathname === '/siakad/profile' ? 'active' : ''}`} onClick={() => setIsDrawerOpen(false)}>
-                  <div className="icon"><i className="ph ph-user-gear"></i></div>
-                  <div className="label">Pengaturan Profil</div>
-                  <i className="ph ph-caret-right chevron"></i>
-                </Link>
-              </div>
+                  <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--color-border)' }}>
+                    <Link href="/siakad/profile" className={`drawer-item ${pathname === '/siakad/profile' ? 'active' : ''}`} onClick={() => { setIsDrawerOpen(false); setShowMobileNotifs(false); }}>
+                      <div className="icon"><i className="ph ph-user-gear"></i></div>
+                      <div className="label">Pengaturan Profil</div>
+                      <i className="ph ph-caret-right chevron"></i>
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -715,8 +715,9 @@
   }
   .drawer-user-info p {
     margin: 0;
-    font-size: 0.8rem;
-    color: var(--color-muted);
+    font-size: 0.85rem;
+    color: var(--color-text);
+    font-weight: 600;
     text-transform: capitalize;
   }
 
