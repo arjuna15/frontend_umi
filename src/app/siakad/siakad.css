@@ -282,7 +282,9 @@
 /* Top Header - Liquid Blur */
 .siakad-header {
   height: 88px;
-  margin: 0 0 0 20px;
+  width: calc(100% - 12px) !important;
+  max-width: none !important;
+  margin: 0 0 0 12px !important;
   border-bottom-left-radius: 24px;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
@@ -299,6 +301,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
+  box-sizing: border-box;
 }
 .siakad-user-badge {
   display: flex;
