@@ -8,7 +8,7 @@ async function handleProxy(req, context, method) {
     const urlObj = new URL(req.url);
     const searchParams = urlObj.searchParams.toString();
     
-    const apiUrl = process.env.BACKEND_API_URL || 'http://127.0.0.1:8000/api';
+    const apiUrl = process.env.BACKEND_API_URL || (process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000/api' : 'https://backend.bikinwebdikitaaja.com/api');
     const backendUrl = `${apiUrl}/siakad/${route}${searchParams ? '?' + searchParams : ''}`;
     
     const headers = {};

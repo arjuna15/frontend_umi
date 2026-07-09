@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 export async function POST(req) {
   try {
     const { nim_nip, password } = await req.json();
-    const apiUrl = process.env.BACKEND_API_URL || 'http://127.0.0.1:8000/api';
+    const apiUrl = process.env.BACKEND_API_URL || (process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000/api' : 'https://backend.bikinwebdikitaaja.com/api');
     
     const backendRes = await fetch(`${apiUrl}/siakad/login`, {
       method: 'POST',
