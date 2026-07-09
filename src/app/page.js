@@ -199,11 +199,11 @@ export default function Home() {
             <h3 style={{ color: '#FFFFFF', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
               {lang === "en" ? "Available Study Programs:" : "Program Studi Pilihan:"}
             </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px' }}>
+            <div className="prodi-grid">
               {['(S2) Magister Manajemen', '(S1) Manajemen', '(S1) Ilmu Aktuaria', '(S1) Ilmu Komputer', '(S1) Hukum', '(S1) Sistem & Teknologi Informasi'].map((prodi, idx) => (
-                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', background: 'rgba(255,255,255,0.1)', padding: '10px 14px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.15)', transition: 'background 0.3s ease' }}>
-                  <div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div>
-                  <span style={{ color: 'white', fontSize: 'clamp(0.8rem, 1.5vw, 0.9rem)', fontWeight: 700 }}>{prodi}</span>
+                <div key={idx} className="prodi-card">
+                  <div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)', flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div>
+                  <span style={{ color: 'white', fontWeight: 700 }}>{prodi}</span>
                 </div>
               ))}
             </div>

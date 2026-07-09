@@ -752,6 +752,7 @@ header.top-transparent .glass {
   pointer-events: none;
   z-index: 0;
   transition: opacity 1s ease-in-out; /* Pure fade */
+  overflow: hidden;
 }
 .hero-slide.active {
   opacity: 1;
@@ -2097,4 +2098,40 @@ header.top-transparent .nav-link.active::after {
     transform: rotate(360deg);
   }
 }
+
+/* Custom responsive study program layouts for Slide 3 */
+.prodi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.prodi-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .prodi-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  
+  .prodi-card {
+    padding: 8px 10px !important;
+    border-radius: 8px !important;
+    gap: 6px !important;
+  }
+  
+  .prodi-card span {
+    font-size: 0.72rem !important;
+  }
+}
+
 
