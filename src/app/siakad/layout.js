@@ -123,16 +123,19 @@ export default function SiakadLayout({ children }) {
               title: 'KRS menunggu persetujuan',
               body: `${krsItems.length} mata kuliah sudah masuk daftar KHS/KRS kamu.`,
               time: 'Baru',
+              path: '/siakad/mahasiswa/krs',
             })) || []),
             ...(deadlineItems.slice(0, 1).map((item) => ({
               title: item.title || 'Tenggat akademik',
               body: `${item.course || 'Mata kuliah'} H-${Math.ceil(item.due_in_days)}`,
               time: 'Jadwal akademik',
+              path: '/siakad/mahasiswa/jadwal',
             })) || []),
             ...(scheduleItems.slice(0, 1).map((item) => ({
               title: 'Jadwal kuliah aktif',
               body: `${item.course || '-'} ${item.time || ''} ${item.room ? `di ${item.room}` : ''}`.trim(),
               time: 'Hari ini',
+              path: '/siakad/mahasiswa/jadwal',
             })) || []),
           ].filter((item) => item.title));
         } else if (effectiveRole === 'dosen') {
@@ -140,15 +143,30 @@ export default function SiakadLayout({ children }) {
           if (!res.ok) throw new Error('Failed to load dosen dashboard');
           const dash = await res.json();
           setNotifications([
-            ...(Array.isArray(dash.todos) ? dash.todos.slice(0, 3).map((todo) => ({
-              title: 'Tugas dosen',
-              body: todo,
-              time: 'Dashboard dosen',
-            })) : []),
+            ...(Array.isArray(dash.todos) ? dash.todos.slice(0, 3).map((todo) => {
+              let targetPath = '/siakad/dosen';
+              const text = todo.toLowerCase();
+              if (text.includes('nilai') || text.includes('grade') || text.includes('gradebook')) {
+                targetPath = '/siakad/dosen/gradebook';
+              } else if (text.includes('bap')) {
+                targetPath = '/siakad/dosen/bap';
+              } else if (text.includes('tugas') || text.includes('quiz') || text.includes('kuis') || text.includes('learning')) {
+                targetPath = '/siakad/dosen/elearning';
+              } else if (text.includes('krs') || text.includes('persetujuan')) {
+                targetPath = '/siakad/dosen/krs-approval';
+              }
+              return {
+                title: 'Tugas dosen',
+                body: todo,
+                time: 'Dashboard dosen',
+                path: targetPath,
+              };
+            }) : []),
             ...(Array.isArray(dash.schedule) ? dash.schedule.slice(0, 1).map((item) => ({
               title: 'Jadwal mengajar aktif',
               body: `${item.course || '-'} ${item.time || ''} ${item.room ? `di ${item.room}` : ''}`.trim(),
               time: 'Hari ini',
+              path: '/siakad/dosen/jadwal',
             })) : []),
           ]);
         } else if (effectiveRole === 'kaprodi' || effectiveRole === 'admin' || effectiveRole === 'superadmin') {
@@ -156,8 +174,8 @@ export default function SiakadLayout({ children }) {
           if (!res.ok) throw new Error('Failed to load admin dashboard');
           const dash = await res.json();
           setNotifications([
-            { title: 'Ringkasan pengguna', body: `${dash.users_count || 0} akun aktif terdata di sistem.`, time: 'Dashboard admin' },
-            { title: 'Data perkuliahan', body: `${Array.isArray(dash.courses) ? dash.courses.length : 0} mata kuliah tersedia.`, time: 'Dashboard admin' },
+            { title: 'Ringkasan pengguna', body: `${dash.users_count || 0} akun aktif terdata di sistem.`, time: 'Dashboard admin', path: '/siakad/admin/users' },
+            { title: 'Data perkuliahan', body: `${Array.isArray(dash.courses) ? dash.courses.length : 0} mata kuliah tersedia.`, time: 'Dashboard admin', path: '/siakad/admin/courses' },
           ]);
         } else {
           setNotifications([]);
@@ -345,7 +363,7 @@ export default function SiakadLayout({ children }) {
                   {/* Backdrop click-away helper */}
                   <div 
                     onClick={() => setShowNotif(false)} 
-                    style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 999 }}
+                    style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 9999 }}
                   />
                   <motion.div 
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -357,7 +375,7 @@ export default function SiakadLayout({ children }) {
                       width: '350px', background: 'var(--color-bg)',
                       borderRadius: '16px', boxShadow: '0 10px 40px rgba(0,0,0,0.2)',
                       border: '1px solid var(--color-border)',
-                      zIndex: 1000, overflow: 'hidden'
+                      zIndex: 10000, overflow: 'hidden'
                     }}
                   >
                     <div style={{ padding: '16px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--glass-bg)' }}>
@@ -388,7 +406,18 @@ export default function SiakadLayout({ children }) {
                     </div>
                     <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
                       {notifications.length > 0 ? notifications.map((item, idx) => (
-                        <div key={idx} style={{ padding: '16px', borderBottom: idx < notifications.length - 1 ? '1px solid var(--color-border)' : 'none', display: 'flex', gap: '12px', cursor: 'pointer', transition: 'background 0.2s' }} onMouseOver={(e) => e.currentTarget.style.background = 'var(--glass-bg)'} onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}>
+                        <div 
+                          key={idx} 
+                          onClick={() => {
+                            if (item.path) {
+                              router.push(item.path);
+                              setShowNotif(false);
+                            }
+                          }}
+                          style={{ padding: '16px', borderBottom: idx < notifications.length - 1 ? '1px solid var(--color-border)' : 'none', display: 'flex', gap: '12px', cursor: 'pointer', transition: 'background 0.2s' }} 
+                          onMouseOver={(e) => e.currentTarget.style.background = 'var(--glass-bg)'} 
+                          onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}
+                        >
                           <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', width: '36px', height: '36px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                             <i className="ph ph-info" style={{ fontSize: '1.1rem' }}></i>
                           </div>
