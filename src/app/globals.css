@@ -160,22 +160,27 @@ body.dark-mode .media-content {
 }
 
 .logo-badge {
-  background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
+  background: #ffffff !important; /* Solid white background shape so logo is visible on red footer */
+  border-radius: 50% !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid rgba(15, 23, 42, 0.08) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .logo-badge img {
-  filter: brightness(1.3) saturate(1.15);
+  filter: none !important; /* Disable brightness filter so logo colors are natural on white bg */
 }
 
 body.dark-mode .logo-badge {
-  background: transparent !important;
-  border: none !important;
+  background: #0f172a !important; /* Solid dark shape for dark mode */
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
 }
 
 body.dark-mode .logo-badge img {
-  filter: brightness(1.8) saturate(1.3);
+  filter: none !important;
 }
 
 body.dark-mode .btn[style*="background: white"] {
