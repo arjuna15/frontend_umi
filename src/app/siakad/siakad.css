@@ -281,22 +281,24 @@
 }
 /* Top Header - Liquid Blur */
 .siakad-header {
-  height: 80px;
-  margin: 16px 40px 16px 24px;
-  border-radius: 20px;
+  height: 88px;
+  margin: 0 0 0 20px;
+  border-bottom-left-radius: 24px;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: var(--glass-border) !important;
+  border-bottom: var(--glass-border) !important;
+  border-left: var(--glass-border) !important;
+  border-top: none !important;
+  border-right: none !important;
   box-shadow: var(--glass-shadow);
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 0 32px;
+  padding: 0 40px;
   position: sticky;
-  top: 16px;
+  top: 0;
   z-index: 50;
-  transition: all 0.3s;
 }
 .siakad-user-badge {
   display: flex;
