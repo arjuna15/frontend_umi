@@ -1513,9 +1513,13 @@
 }
 
 /* Glass Inner Border Light reflection */
-.siakad-card, .siakad-sidebar, .siakad-header {
+.siakad-card, .siakad-sidebar {
   position: relative;
   overflow: hidden;
+}
+
+.siakad-header {
+  position: relative;
 }
 
 .siakad-card::before {
