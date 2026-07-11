@@ -2229,7 +2229,7 @@ header.top-transparent .nav-link.active::after {
     align-items: flex-start !important;
     padding-top: 110px !important;
     padding-bottom: 40px !important;
-    overflow-y: auto !important;
+    overflow: hidden !important;
   }
 
   /* Make glass cards more compact on mobile */
