@@ -214,6 +214,7 @@ export default function SiakadLayout({ children }) {
       { label: 'Manajemen Keuangan', icon: 'ph ph-wallet', path: '/siakad/admin/keuangan', isMobilePrimary: true },
       { label: 'Manajemen Surat', icon: 'ph ph-envelope-simple', path: '/siakad/admin/surat', isMobilePrimary: true },
       { label: 'Log Aktivitas (Audit)', icon: 'ph ph-list-magnifying-glass', path: '/siakad/admin/logs' },
+      { label: 'Integrasi PDDIKTI Feeder', icon: 'ph ph-swap', path: '/siakad/admin/feeder' },
       { label: 'Backup & Restore', icon: 'ph ph-database', path: '/siakad/admin/backup' },
       { label: 'Pengaturan Sistem', icon: 'ph ph-gear', path: '/siakad/admin/pengaturan' },
       { label: 'Pengaturan Profil', icon: 'ph ph-user-gear', path: '/siakad/profile' },
