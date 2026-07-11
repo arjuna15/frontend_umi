@@ -2217,4 +2217,72 @@ header.top-transparent .nav-link.active::after {
   }
 }
 
+/* Homepage Hero Mobile Responsiveness Custom Rules */
+@media (max-width: 768px) {
+  #beranda,
+  #beranda > div {
+    min-height: 820px !important;
+  }
+  
+  .hero-slide {
+    min-height: 820px !important;
+    align-items: flex-start !important;
+    padding-top: 110px !important;
+    padding-bottom: 40px !important;
+    overflow-y: auto !important;
+  }
+
+  /* Make glass cards more compact on mobile */
+  .hero-slide div[style*="backdropFilter"] {
+    padding: 12px 14px !important;
+    margin-bottom: 12px !important;
+    border-radius: 12px !important;
+  }
+
+  /* Reduce margins and text spacing */
+  .hero-slide h1 {
+    margin-bottom: 8px !important;
+    font-size: 1.6rem !important;
+  }
+  
+  .hero-slide h2 {
+    font-size: 1.3rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* Grid item styles in Slide 1 Keunggulan */
+  .hero-slide div[style*="gridTemplateColumns"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  /* WhatsApp button and Register buttons responsive styling */
+  .hero-slide div[style*="flexWrap"] {
+    gap: 10px !important;
+  }
+
+  .hero-slide a[style*="background"] {
+    padding: 10px 20px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .hero-slide a[href*="wa.me"] {
+    padding: 8px 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #beranda,
+  #beranda > div,
+  .hero-slide {
+    min-height: 780px !important;
+  }
+
+  .hero-slide div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+}
+
+
 

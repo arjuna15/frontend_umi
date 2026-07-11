@@ -61,7 +61,7 @@ export default function Home() {
             <h3 style={{ color: '#FFFFFF', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: '8px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>
               {lang === "en" ? "Why study Master's at UMIBA?" : "Keunggulan Kuliah S2 di UMIBA"}
             </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph ph-fill ph-certificate" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Dual Certificate</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Ijazah & BNSP</span></div>
