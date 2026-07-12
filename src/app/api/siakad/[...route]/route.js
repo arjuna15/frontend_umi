@@ -86,3 +86,7 @@ export async function PUT(req, context) {
 export async function DELETE(req, context) {
   return handleProxy(req, context, 'DELETE');
 }
+
+export async function PATCH(req, context) {
+  return handleProxy(req, context, 'PATCH');
+}
