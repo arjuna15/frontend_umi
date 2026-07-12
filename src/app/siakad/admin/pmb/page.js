@@ -17,6 +17,7 @@ export default function PMBAdminPage() {
   const [loadingApplicants, setLoadingApplicants] = useState(false);
   const [showApplicantDetail, setShowApplicantDetail] = useState(null);
   const [updatingStatus, setUpdatingStatus] = useState(null);
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getToken = () => localStorage.getItem('siakad_token');
@@ -322,13 +323,33 @@ export default function PMBAdminPage() {
             {/* Documents */}
             {(showApplicantDetail.documents || []).length > 0 && (
               <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', marginBottom: '8px' }}>Dokumen</label>
-                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                  {showApplicantDetail.documents.map((doc, i) => (
-                    <a key={i} href={doc.file_url || doc.url || doc.path || '#'} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 14px', borderRadius: '10px', background: 'var(--color-surface)', border: '1px solid var(--color-border)', color: '#3b82f6', fontSize: '0.85rem', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <i className="ph ph-file"></i> {doc.original_name || doc.type || `Dokumen ${i + 1}`}
-                    </a>
-                  ))}
+                <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', marginBottom: '8px' }}>Dokumen & Foto Terunggah</label>
+                <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+                  {showApplicantDetail.documents.map((doc, i) => {
+                    const isImg = doc.type === 'foto' || 
+                                  (doc.file_url && /\.(jpeg|jpg|png|webp|gif)/i.test(doc.file_url)) || 
+                                  (doc.original_name && /\.(jpeg|jpg|png|webp|gif)/i.test(doc.original_name));
+                    
+                    if (isImg) {
+                      return (
+                        <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '110px' }}>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase', textAlign: 'center' }}>{doc.type}</span>
+                          <div onClick={() => setLightboxImage(doc.file_url)} style={{ width: '110px', height: '110px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', cursor: 'zoom-in', background: 'rgba(0,0,0,0.1)', position: 'relative' }}>
+                            <img src={doc.file_url} alt={doc.original_name || doc.type} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase' }}>{doc.type}</span>
+                        <a href={doc.file_url || doc.url || doc.path || '#'} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 14px', borderRadius: '10px', background: 'var(--color-surface)', border: '1px solid var(--color-border)', color: '#3b82f6', fontSize: '0.85rem', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <i className="ph ph-file"></i> Unduh {doc.original_name || doc.type}
+                        </a>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -338,6 +359,16 @@ export default function PMBAdminPage() {
               <button id="btn-detail-accept" onClick={() => updateApplicantStatus(showApplicantDetail.id, 'accepted')} disabled={updatingStatus === showApplicantDetail.id} style={{ padding: '10px 16px', borderRadius: '10px', border: 'none', background: 'rgba(16,185,129,0.15)', color: '#10b981', cursor: 'pointer', fontWeight: '600' }}>Terima</button>
               <button id="btn-detail-reject" onClick={() => updateApplicantStatus(showApplicantDetail.id, 'rejected')} disabled={updatingStatus === showApplicantDetail.id} style={{ padding: '10px 16px', borderRadius: '10px', border: 'none', background: 'rgba(239,68,68,0.15)', color: '#ef4444', cursor: 'pointer', fontWeight: '600' }}>Tolak</button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Fullscreen Lightbox / Zoom Overlay */}
+      {lightboxImage && (
+        <div onClick={() => setLightboxImage(null)} style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'zoom-out' }}>
+          <div style={{ position: 'relative', maxWidth: '85%', maxHeight: '85%' }} onClick={e => e.stopPropagation()}>
+            <img src={lightboxImage} alt="Detail" style={{ maxWidth: '100%', maxHeight: '85vh', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.15)', boxShadow: '0 25px 50px rgba(0,0,0,0.5)' }} />
+            <button onClick={() => setLightboxImage(null)} style={{ position: 'absolute', top: '-40px', right: '0', background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', padding: '6px 14px', borderRadius: '20px', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem' }}>✕ Tutup</button>
           </div>
         </div>
       )}
