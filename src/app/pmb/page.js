@@ -14,6 +14,7 @@ export default function PMBRegistrationPage() {
   const [biodata, setBiodata] = useState({ name: '', email: '', phone: '', gender: '', birth_date: '', birth_place: '', address: '', school_origin: '', program_choice: '' });
   const [files, setFiles] = useState({ ijazah: null, foto: null, ktp: null });
   const [fileNames, setFileNames] = useState({ ijazah: '', foto: '', ktp: '' });
+  const [copied, setCopied] = useState(false);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
 
@@ -36,7 +37,26 @@ export default function PMBRegistrationPage() {
     }
   };
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(registrationNumber);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const validateBiodata = () => {
+    const required = ['name', 'email', 'phone', 'gender', 'birth_date', 'birth_place', 'address', 'school_origin', 'program_choice'];
+    for (const key of required) {
+      if (!biodata[key]) {
+        setMessage({ text: 'Mohon lengkapi seluruh formulir data diri.', type: 'error' });
+        return false;
+      }
+    }
+    setMessage({ text: '', type: '' });
+    return true;
+  };
+
   const submitApplication = async () => {
+    if (!validateBiodata()) return;
     setSubmitting(true);
     setMessage({ text: '', type: '' });
     try {
@@ -47,20 +67,31 @@ export default function PMBRegistrationPage() {
       });
       if (!res.ok) throw new Error('Failed');
       const data = await res.json();
-      const appId = data.data?.id || data.applicant_id || data.id;
+      
+      const appId = data.applicant?.id || data.data?.id || data.id;
+      const regNum = data.applicant?.registration_number || data.data?.registration_number || data.registration_number;
+      
       setApplicantId(appId);
-      setRegistrationNumber(data.data?.registration_number || data.registration_number || `PMB-${Date.now()}`);
+      setRegistrationNumber(regNum || `PMB-${Date.now()}`);
 
       // Upload files if any
       if (appId && (files.ijazah || files.foto || files.ktp)) {
         setUploading(true);
-        const formData = new FormData();
-        if (files.ijazah) formData.append('ijazah', files.ijazah);
-        if (files.foto) formData.append('foto', files.foto);
-        if (files.ktp) formData.append('ktp', files.ktp);
-        try {
-          await fetch(`${apiUrl}/siakad/pmb/upload/${appId}`, { method: 'POST', body: formData });
-        } catch (e) { console.error('Upload error:', e); }
+        for (const key of ['ijazah', 'foto', 'ktp']) {
+          if (files[key]) {
+            const formData = new FormData();
+            formData.append('type', key);
+            formData.append('file', files[key]);
+            try {
+              await fetch(`${apiUrl}/siakad/pmb/upload/${appId}`, { 
+                method: 'POST', 
+                body: formData 
+              });
+            } catch (e) { 
+              console.error(`Upload error for ${key}:`, e); 
+            }
+          }
+        }
         setUploading(false);
       }
 
@@ -70,89 +101,190 @@ export default function PMBRegistrationPage() {
     } finally { setSubmitting(false); }
   };
 
-  const inputStyle = { width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' };
-  const labelStyle = { display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' };
+  const containerStyle = {
+    fontFamily: "'Inter', sans-serif",
+    minHeight: '100vh',
+    background: '#0a0d1a',
+    color: '#e2e8f0',
+    backgroundImage: 'radial-gradient(circle at 10% 20%, rgba(90, 80, 250, 0.05) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(123, 97, 255, 0.05) 0%, transparent 40%)'
+  };
+
+  const cardStyle = {
+    background: 'rgba(255, 255, 255, 0.03)',
+    backdropFilter: 'blur(20px)',
+    borderRadius: '24px',
+    padding: '40px',
+    border: '1px solid rgba(255, 255, 255, 0.06)',
+    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.3)',
+    transition: 'all 0.3s ease'
+  };
+
+  const inputStyle = {
+    width: '100%',
+    padding: '14px 18px',
+    borderRadius: '14px',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'rgba(255, 255, 255, 0.03)',
+    color: '#fff',
+    fontSize: '0.95rem',
+    outline: 'none',
+    boxSizing: 'border-box',
+    transition: 'all 0.2s ease',
+    boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.2)'
+  };
+
+  const labelStyle = {
+    display: 'block',
+    marginBottom: '8px',
+    fontSize: '0.85rem',
+    color: '#94a3b8',
+    fontWeight: '600',
+    letterSpacing: '0.05em',
+    textTransform: 'uppercase'
+  };
+
+  const btnPrimary = {
+    background: 'linear-gradient(135deg, #4a90e2 0%, #7b61ff 100%)',
+    border: 'none',
+    color: 'white',
+    padding: '14px 28px',
+    borderRadius: '14px',
+    cursor: 'pointer',
+    fontWeight: '700',
+    fontSize: '1rem',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    transition: 'transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease',
+    boxShadow: '0 4px 20px rgba(123, 97, 255, 0.3)'
+  };
 
   const stepLabels = [
     { num: 1, label: 'Pilih Periode', icon: 'ph ph-calendar' },
     { num: 2, label: 'Biodata', icon: 'ph ph-user' },
     { num: 3, label: 'Upload Dokumen', icon: 'ph ph-upload' },
     { num: 4, label: 'Review', icon: 'ph ph-eye' },
-    { num: 5, label: 'Status', icon: 'ph ph-check-circle' },
+    { num: 5, label: 'Selesai', icon: 'ph ph-check-circle' },
   ];
 
   return (
-    <div className="fade-in" style={{ minHeight: '100vh' }}>
-      {/* Hero Header */}
-      <div style={{ background: 'linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1e1b4b 100%)', padding: '48px 24px 40px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '-50%', right: '-20%', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%)' }}></div>
-        <div style={{ position: 'absolute', bottom: '-30%', left: '-10%', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)' }}></div>
-        <div style={{ maxWidth: '800px', margin: '0 auto', position: 'relative', zIndex: 1, textAlign: 'center' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '16px' }}>
-            <img src="/icon.png" alt="Logo" style={{ width: '48px', height: '48px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} onError={e => { e.target.style.display = 'none'; }} />
-            <h2 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'white', margin: 0, letterSpacing: '2px' }}>UNIVERSITAS MITRA BANGSA</h2>
+    <div style={containerStyle}>
+      {/* Premium Glassmorphic Header */}
+      <div style={{ background: 'linear-gradient(180deg, rgba(26, 32, 53, 0.6) 0%, rgba(10, 13, 26, 0) 100%)', backdropFilter: 'blur(10px)', padding: '32px 24px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{ background: 'linear-gradient(135deg, #4a90e2 0%, #7b61ff 100%)', width: '50px', height: '50px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(123, 97, 255, 0.3)' }}>
+              <span style={{ fontSize: '1.6rem', fontWeight: '800', color: 'white' }}>U</span>
+            </div>
+            <div>
+              <h2 style={{ fontSize: '1.1rem', fontWeight: '800', color: 'white', margin: 0, letterSpacing: '1px' }}>UNIVERSITAS MITRA BANGSA</h2>
+              <p style={{ margin: 0, fontSize: '0.8rem', color: '#94a3b8' }}>Portal Penerimaan Mahasiswa Baru Mandiri</p>
+            </div>
           </div>
-          <h1 style={{ color: 'white', fontSize: '2.4rem', fontWeight: '800', margin: '0 0 12px 0', letterSpacing: '-0.03em' }}>Pendaftaran Mahasiswa Baru</h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0, fontSize: '1rem' }}>Daftar sekarang dan raih masa depan cemerlang bersama kami.</p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.04)', padding: '8px 16px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', display: 'inline-block', boxShadow: '0 0 8px #22c55e' }}></span>
+            <span style={{ fontSize: '0.8rem', fontWeight: '600', color: '#e2e8f0' }}>Pendaftaran Online Aktif</span>
+          </div>
         </div>
       </div>
 
-      <div style={{ maxWidth: '800px', margin: '0 auto', padding: '32px 24px' }}>
-        {/* Progress Steps */}
+      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '40px 24px 80px' }}>
+        
+        {/* Progress Tracker with Premium Styling */}
         {step <= 5 && (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', marginBottom: '32px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '40px', background: 'rgba(255,255,255,0.02)', padding: '16px 24px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.04)', flexWrap: 'wrap', gap: '16px' }}>
             {stepLabels.map((s, i) => (
-              <div key={s.num} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 14px', borderRadius: '20px', background: step === s.num ? 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)' : step > s.num ? 'rgba(16,185,129,0.15)' : 'var(--color-surface)', border: step === s.num ? 'none' : '1px solid var(--color-border)', transition: 'all 0.3s ease' }}>
-                  <i className={step > s.num ? 'ph-fill ph-check-circle' : s.icon} style={{ fontSize: '0.95rem', color: step === s.num ? 'white' : step > s.num ? '#10b981' : 'var(--color-muted)' }}></i>
-                  <span style={{ fontSize: '0.78rem', fontWeight: '600', color: step === s.num ? 'white' : step > s.num ? '#10b981' : 'var(--color-muted)', display: 'none' }} className="pmb-step-label">{s.label}</span>
+              <div key={s.num} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '8px', 
+                  padding: '8px 16px', 
+                  borderRadius: '30px', 
+                  background: step === s.num ? 'linear-gradient(135deg, #4a90e2 0%, #7b61ff 100%)' : step > s.num ? 'rgba(34, 197, 94, 0.1)' : 'rgba(255, 255, 255, 0.02)', 
+                  border: step === s.num ? 'none' : `1px solid ${step > s.num ? 'rgba(34, 197, 94, 0.2)' : 'rgba(255, 255, 255, 0.06)'}`, 
+                  transition: 'all 0.3s ease',
+                  boxShadow: step === s.num ? '0 4px 15px rgba(123, 97, 255, 0.3)' : 'none'
+                }}>
+                  <span style={{ fontSize: '0.9rem', fontWeight: '700', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : '#64748b' }}>{s.num}</span>
+                  <span style={{ fontSize: '0.85rem', fontWeight: '600', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : '#64748b' }}>{s.label}</span>
                 </div>
-                {i < stepLabels.length - 1 && <div style={{ width: '24px', height: '2px', background: step > s.num ? '#10b981' : 'var(--color-border)' }}></div>}
+                {i < stepLabels.length - 1 && <span style={{ color: 'rgba(255,255,255,0.15)', fontWeight: '300' }}>→</span>}
               </div>
             ))}
           </div>
         )}
 
         {message.text && (
-          <div style={{ padding: '16px 20px', borderRadius: '12px', marginBottom: '24px', background: 'rgba(239,68,68,0.1)', border: '1px solid #ef4444', color: '#ef4444', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <i className="ph-fill ph-warning-circle" style={{ fontSize: '1.4rem' }}></i>
-            {message.text}
+          <div style={{ padding: '16px 20px', borderRadius: '16px', marginBottom: '30px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: '#ef4444', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem' }}>
+            <span style={{ fontSize: '1.2rem' }}>⚠️</span>
+            <span>{message.text}</span>
           </div>
         )}
 
         {/* Step 1: Select Period */}
         {step === 1 && (
           <div>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 8px 0', textAlign: 'center' }}>Pilih Periode Pendaftaran</h2>
-            <p style={{ color: 'var(--color-muted)', textAlign: 'center', margin: '0 0 28px 0' }}>Pilih periode PMB yang sedang dibuka untuk memulai pendaftaran.</p>
+            <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+              <h1 style={{ fontSize: '2.2rem', fontWeight: '800', color: '#fff', margin: '0 0 10px 0', letterSpacing: '-0.02em' }}>Pilih Periode Pendaftaran</h1>
+              <p style={{ color: '#94a3b8', fontSize: '1.05rem', margin: 0 }}>Silakan pilih gelombang PMB yang aktif untuk memulai pendaftaran Anda.</p>
+            </div>
+
             {loading ? (
-              <div style={{ textAlign: 'center', padding: '40px', color: 'var(--color-muted)' }}>
-                <i className="ph ph-spinner" style={{ animation: 'pwaSpin 1s linear infinite', fontSize: '2rem' }}></i>
+              <div style={{ textAlign: 'center', padding: '60px 0' }}>
+                <div style={{ border: '4px solid rgba(255,255,255,0.05)', borderTop: '4px solid #7b61ff', borderRadius: '50%', width: '40px', height: '40px', margin: '0 auto 20px', animation: 'spin 1s linear infinite' }}></div>
+                <p style={{ color: '#94a3b8', fontSize: '0.95rem' }}>Memuat gelombang pendaftaran...</p>
+                <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
               </div>
             ) : periods.length === 0 ? (
-              <div className="siakad-card" style={{ padding: '40px', textAlign: 'center' }}>
-                <i className="ph ph-calendar-x" style={{ fontSize: '3rem', color: 'var(--color-muted)', display: 'block', marginBottom: '12px', opacity: 0.4 }}></i>
-                <p style={{ color: 'var(--color-muted)', margin: 0 }}>Saat ini tidak ada periode PMB yang dibuka.</p>
+              <div style={{ ...cardStyle, textAlign: 'center', padding: '60px 40px' }}>
+                <span style={{ fontSize: '3.5rem', display: 'block', marginBottom: '16px', opacity: 0.6 }}>📅</span>
+                <h3 style={{ fontSize: '1.3rem', color: '#fff', margin: '0 0 8px 0' }}>Belum Ada Gelombang Dibuka</h3>
+                <p style={{ color: '#94a3b8', margin: 0, fontSize: '0.95rem' }}>Mohon maaf, saat ini pendaftaran online mandiri belum dibuka atau telah ditutup sementara.</p>
               </div>
             ) : (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
                 {periods.map(p => (
-                  <div key={p.id} id={`period-${p.id}`} className="siakad-card" onClick={() => { setSelectedPeriod(p); setStep(2); }} style={{ padding: '24px', cursor: 'pointer', border: selectedPeriod?.id === p.id ? '2px solid #3b82f6' : '1px solid transparent', transition: 'all 0.2s ease' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
-                      <div style={{ width: '44px', height: '44px', background: 'rgba(59,130,246,0.1)', color: '#3b82f6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem' }}>
-                        <i className="ph ph-calendar"></i>
+                  <div key={p.id} onClick={() => { setSelectedPeriod(p); setStep(2); }} style={{ 
+                    ...cardStyle, 
+                    cursor: 'pointer', 
+                    background: 'rgba(255, 255, 255, 0.02)',
+                    border: '1px solid rgba(255, 255, 255, 0.05)',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = 'translateY(-6px)';
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
+                    e.currentTarget.style.borderColor = 'rgba(123, 97, 255, 0.3)';
+                    e.currentTarget.style.boxShadow = '0 15px 30px rgba(123, 97, 255, 0.15)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.boxShadow = '0 20px 50px rgba(0, 0, 0, 0.3)';
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
+                      <div style={{ width: '48px', height: '48px', background: 'linear-gradient(135deg, rgba(74,144,226,0.1) 0%, rgba(123,97,255,0.1) 100%)', color: '#4a90e2', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' }}>
+                        📅
                       </div>
                       <div>
-                        <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: '700', color: 'var(--color-text)' }}>{p.name || 'Periode PMB'}</h3>
-                        <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--color-muted)' }}>{p.academic_year || '-'}</p>
+                        <h3 style={{ margin: 0, fontSize: '1.15rem', fontWeight: '700', color: '#fff' }}>{p.name}</h3>
+                        <p style={{ margin: 0, fontSize: '0.85rem', color: '#94a3b8', marginTop: '2px' }}>Tahun Akademik {p.academic_year}</p>
                       </div>
                     </div>
-                    <div style={{ display: 'flex', gap: '12px', fontSize: '0.82rem', color: 'var(--color-muted)' }}>
-                      <span><i className="ph ph-users"></i> Kuota: {p.quota || '-'}</span>
-                      {p.end_date && <span><i className="ph ph-clock"></i> s/d {new Date(p.end_date).toLocaleDateString('id-ID')}</span>}
+                    <div style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '16px', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem', color: '#94a3b8' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span>👥 Kuota Gelombang:</span>
+                        <span style={{ color: '#fff', fontWeight: '600' }}>{p.quota} Pendaftar</span>
+                      </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <span>⏰ Batas Pendaftaran:</span>
+                        <span style={{ color: '#fff', fontWeight: '600' }}>{p.end_date ? new Date(p.end_date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</span>
+                      </div>
                     </div>
-                    <div style={{ marginTop: '16px', textAlign: 'center' }}>
-                      <span style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', padding: '8px 20px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: '600' }}>Pilih Periode Ini</span>
+                    <div style={{ marginTop: '24px', textAlign: 'center' }}>
+                      <button style={{ ...btnPrimary, width: '100%', justifyContent: 'center' }}>Mulai Pendaftaran Mandiri</button>
                     </div>
                   </div>
                 ))}
@@ -163,45 +295,69 @@ export default function PMBRegistrationPage() {
 
         {/* Step 2: Biodata */}
         {step === 2 && (
-          <div className="siakad-card" style={{ padding: '32px' }}>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Data Diri Calon Mahasiswa</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
-              {[
-                { label: 'Nama Lengkap', key: 'name', placeholder: 'Nama sesuai ijazah' },
-                { label: 'Email', key: 'email', placeholder: 'email@example.com', type: 'email' },
-                { label: 'Nomor HP', key: 'phone', placeholder: '08xxxxxxxxx', type: 'tel' },
-                { label: 'Tempat Lahir', key: 'birth_place', placeholder: 'Kota kelahiran' },
-                { label: 'Tanggal Lahir', key: 'birth_date', type: 'date' },
-                { label: 'Asal Sekolah', key: 'school_origin', placeholder: 'Nama SMA/SMK' },
-              ].map(f => (
-                <div key={f.key}>
-                  <label style={labelStyle}>{f.label}</label>
-                  <input id={`input-bio-${f.key}`} type={f.type || 'text'} value={biodata[f.key]} onChange={e => setBiodata({ ...biodata, [f.key]: e.target.value })} placeholder={f.placeholder || ''} style={inputStyle} />
-                </div>
-              ))}
+          <div style={cardStyle}>
+            <div style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '20px', marginBottom: '30px' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#fff', margin: '0 0 6px 0' }}>Formulir Data Diri Calon Mahasiswa</h2>
+              <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: 0 }}>Lengkapi seluruh formulir dengan data asli yang sesuai dengan berkas resmi Anda.</p>
+            </div>
+            
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
+              <div>
+                <label style={labelStyle}>Nama Lengkap</label>
+                <input type="text" value={biodata.name} onChange={e => setBiodata({ ...biodata, name: e.target.value })} placeholder="Nama sesuai ijazah resmi" style={inputStyle} />
+              </div>
+              <div>
+                <label style={labelStyle}>Email Aktif</label>
+                <input type="email" value={biodata.email} onChange={e => setBiodata({ ...biodata, email: e.target.value })} placeholder="email@contoh.com" style={inputStyle} />
+              </div>
+              <div>
+                <label style={labelStyle}>Nomor HP / WhatsApp</label>
+                <input type="tel" value={biodata.phone} onChange={e => setBiodata({ ...biodata, phone: e.target.value })} placeholder="08xxxxxxxxxx" style={inputStyle} />
+              </div>
               <div>
                 <label style={labelStyle}>Jenis Kelamin</label>
-                <select id="input-bio-gender" value={biodata.gender} onChange={e => setBiodata({ ...biodata, gender: e.target.value })} style={inputStyle}>
-                  <option value="">-- Pilih --</option>
+                <select value={biodata.gender} onChange={e => setBiodata({ ...biodata, gender: e.target.value })} style={inputStyle}>
+                  <option value="">-- Pilih Jenis Kelamin --</option>
                   <option value="L">Laki-laki</option>
                   <option value="P">Perempuan</option>
                 </select>
               </div>
               <div>
-                <label style={labelStyle}>Program Studi Pilihan</label>
-                <input id="input-bio-program" type="text" value={biodata.program_choice} onChange={e => setBiodata({ ...biodata, program_choice: e.target.value })} placeholder="Contoh: Teknik Informatika" style={inputStyle} />
+                <label style={labelStyle}>Tempat Lahir</label>
+                <input type="text" value={biodata.birth_place} onChange={e => setBiodata({ ...biodata, birth_place: e.target.value })} placeholder="Kota / Kabupaten Lahir" style={inputStyle} />
+              </div>
+              <div>
+                <label style={labelStyle}>Tanggal Lahir</label>
+                <input type="date" value={biodata.birth_date} onChange={e => setBiodata({ ...biodata, birth_date: e.target.value })} style={inputStyle} />
+              </div>
+              <div>
+                <label style={labelStyle}>Asal Sekolah (SMA/SMK/MA)</label>
+                <input type="text" value={biodata.school_origin} onChange={e => setBiodata({ ...biodata, school_origin: e.target.value })} placeholder="Contoh: SMAN 1 Jakarta" style={inputStyle} />
+              </div>
+              <div>
+                <label style={labelStyle}>Pilihan Program Studi</label>
+                <select value={biodata.program_choice} onChange={e => setBiodata({ ...biodata, program_choice: e.target.value })} style={inputStyle}>
+                  <option value="">-- Pilih Program Studi --</option>
+                  <option value="S1 Aktuaria">S1 Aktuaria</option>
+                  <option value="S1 Ilmu Hukum">S1 Ilmu Hukum</option>
+                  <option value="S1 Teknik Komputer">S1 Teknik Komputer</option>
+                  <option value="S1 Manajemen">S1 Manajemen</option>
+                  <option value="S1 Sistem Informasi">S1 Sistem Informasi</option>
+                  <option value="S2 Magister Manajemen">S2 Magister Manajemen</option>
+                </select>
               </div>
             </div>
-            <div style={{ marginTop: '16px' }}>
-              <label style={labelStyle}>Alamat Lengkap</label>
-              <textarea id="input-bio-address" value={biodata.address} onChange={e => setBiodata({ ...biodata, address: e.target.value })} placeholder="Alamat domisili lengkap" rows={3} style={{ ...inputStyle, resize: 'vertical' }} />
+            <div style={{ marginTop: '24px' }}>
+              <label style={labelStyle}>Alamat Domisili Lengkap</label>
+              <textarea value={biodata.address} onChange={e => setBiodata({ ...biodata, address: e.target.value })} placeholder="Alamat jalan, RT/RW, Kecamatan, Kota/Kabupaten, Kode Pos" rows={4} style={{ ...inputStyle, resize: 'vertical' }} />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '28px' }}>
-              <button id="btn-back-step2" onClick={() => setStep(1)} style={{ padding: '12px 24px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <i className="ph ph-arrow-left"></i> Kembali
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '24px' }}>
+              <button onClick={() => setStep(1)} style={{ ...btnPrimary, background: 'rgba(255,255,255,0.04)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)', boxShadow: 'none' }}>
+                ← Pilih Gelombang
               </button>
-              <button id="btn-next-step2" onClick={() => setStep(3)} style={{ padding: '12px 24px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', cursor: 'pointer', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                Selanjutnya <i className="ph ph-arrow-right"></i>
+              <button onClick={() => { if (validateBiodata()) setStep(3); }} style={btnPrimary}>
+                Selanjutnya: Berkas →
               </button>
             </div>
           </div>
@@ -209,30 +365,58 @@ export default function PMBRegistrationPage() {
 
         {/* Step 3: Upload Documents */}
         {step === 3 && (
-          <div className="siakad-card" style={{ padding: '32px' }}>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Upload Dokumen</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={cardStyle}>
+            <div style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '20px', marginBottom: '30px' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#fff', margin: '0 0 6px 0' }}>Unggah Dokumen Syarat</h2>
+              <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: 0 }}>Unggah salinan dokumen pendukung pendaftaran Anda. Format yang diterima: PDF, JPG, atau PNG (Maksimal 5MB per berkas).</p>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               {[
-                { key: 'ijazah', label: 'Ijazah / SKL', icon: 'ph ph-certificate' },
-                { key: 'foto', label: 'Pas Foto (3x4)', icon: 'ph ph-camera' },
-                { key: 'ktp', label: 'KTP / Kartu Identitas', icon: 'ph ph-identification-card' },
+                { key: 'ijazah', label: 'Salinan Ijazah Terakhir / SKL', desc: 'Unggah bukti kelulusan formal Anda', icon: '🎓' },
+                { key: 'foto', label: 'Pas Foto Resmi (Latar Biru / Merah)', desc: 'Pas foto resmi berukuran 3x4 atau 4x6 terbaru', icon: '📸' },
+                { key: 'ktp', label: 'Kartu Tanda Penduduk (KTP) / Kartu Keluarga', desc: 'Kartu Identitas KTP asli / KK untuk pendaftar di bawah umur', icon: '🪪' },
               ].map(doc => (
-                <div key={doc.key} style={{ border: '2px dashed var(--color-border)', borderRadius: '14px', padding: '24px', textAlign: 'center', position: 'relative', background: files[doc.key] ? 'rgba(16,185,129,0.05)' : 'transparent', borderColor: files[doc.key] ? 'rgba(16,185,129,0.3)' : 'var(--color-border)', transition: 'all 0.2s ease' }}>
-                  <input type="file" id={`file-${doc.key}`} accept=".pdf,.jpg,.jpeg,.png" onChange={e => handleFileChange(doc.key, e)} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer' }} />
-                  <i className={files[doc.key] ? 'ph-fill ph-check-circle' : doc.icon} style={{ fontSize: '2rem', color: files[doc.key] ? '#10b981' : 'var(--color-muted)', marginBottom: '8px', display: 'block' }}></i>
-                  <p style={{ margin: '0 0 4px', fontWeight: '600', color: 'var(--color-text)', fontSize: '0.95rem' }}>{doc.label}</p>
-                  <p style={{ margin: 0, fontSize: '0.82rem', color: files[doc.key] ? '#10b981' : 'var(--color-muted)' }}>
-                    {fileNames[doc.key] || 'Klik atau seret file ke sini (PDF, JPG, PNG)'}
-                  </p>
+                <div key={doc.key} style={{ 
+                  border: '2px dashed rgba(255, 255, 255, 0.1)', 
+                  borderRadius: '16px', 
+                  padding: '24px', 
+                  textAlign: 'center', 
+                  position: 'relative', 
+                  background: files[doc.key] ? 'rgba(34, 197, 94, 0.03)' : 'rgba(255,255,255,0.01)', 
+                  borderColor: files[doc.key] ? 'rgba(34, 197, 94, 0.3)' : 'rgba(255,255,255,0.1)', 
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '20px',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px', textAlign: 'left' }}>
+                    <div style={{ fontSize: '2.2rem' }}>{doc.icon}</div>
+                    <div>
+                      <h4 style={{ margin: 0, color: '#fff', fontSize: '1rem', fontWeight: '700' }}>{doc.label}</h4>
+                      <p style={{ margin: '2px 0 0', color: files[doc.key] ? '#22c55e' : '#94a3b8', fontSize: '0.85rem', fontWeight: files[doc.key] ? '600' : '400' }}>
+                        {fileNames[doc.key] || doc.desc}
+                      </p>
+                    </div>
+                  </div>
+                  <div style={{ position: 'relative' }}>
+                    <input type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={e => handleFileChange(doc.key, e)} style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer', width: '100%', height: '100%' }} />
+                    <button style={{ ...btnPrimary, padding: '8px 18px', fontSize: '0.85rem', background: files[doc.key] ? '#22c55e' : 'rgba(255,255,255,0.08)', boxShadow: 'none', color: '#fff' }}>
+                      {files[doc.key] ? '✓ Berhasil Diunggah' : 'Pilih Berkas'}
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '28px' }}>
-              <button id="btn-back-step3" onClick={() => setStep(2)} style={{ padding: '12px 24px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <i className="ph ph-arrow-left"></i> Kembali
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '24px' }}>
+              <button onClick={() => setStep(2)} style={{ ...btnPrimary, background: 'rgba(255,255,255,0.04)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)', boxShadow: 'none' }}>
+                ← Edit Data Diri
               </button>
-              <button id="btn-next-step3" onClick={() => setStep(4)} style={{ padding: '12px 24px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', cursor: 'pointer', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                Review Data <i className="ph ph-arrow-right"></i>
+              <button onClick={() => setStep(4)} style={btnPrimary}>
+                Review Pendaftaran →
               </button>
             </div>
           </div>
@@ -240,81 +424,93 @@ export default function PMBRegistrationPage() {
 
         {/* Step 4: Review */}
         {step === 4 && (
-          <div className="siakad-card" style={{ padding: '32px' }}>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Review Pendaftaran</h2>
-            <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: '0 0 24px 0' }}>Periksa kembali data Anda sebelum mengirim pendaftaran.</p>
-
-            <div style={{ background: 'var(--color-surface)', borderRadius: '14px', padding: '20px', border: '1px solid var(--color-border)', marginBottom: '20px' }}>
-              <h3 style={{ fontSize: '0.9rem', fontWeight: '700', color: '#3b82f6', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Periode</h3>
-              <p style={{ margin: 0, color: 'var(--color-text)', fontWeight: '600' }}>{selectedPeriod?.name} — {selectedPeriod?.academic_year}</p>
+          <div style={cardStyle}>
+            <div style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '20px', marginBottom: '30px' }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#fff', margin: '0 0 6px 0' }}>Review & Konfirmasi</h2>
+              <p style={{ color: '#94a3b8', fontSize: '0.9rem', margin: 0 }}>Harap periksa seluruh data pendaftaran Anda sebelum dikirimkan ke sistem admisi.</p>
             </div>
 
-            <div style={{ background: 'var(--color-surface)', borderRadius: '14px', padding: '20px', border: '1px solid var(--color-border)', marginBottom: '20px' }}>
-              <h3 style={{ fontSize: '0.9rem', fontWeight: '700', color: '#3b82f6', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Data Diri</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
-                {[
-                  { label: 'Nama', value: biodata.name },
-                  { label: 'Email', value: biodata.email },
-                  { label: 'Telepon', value: biodata.phone },
-                  { label: 'Gender', value: biodata.gender === 'L' ? 'Laki-laki' : biodata.gender === 'P' ? 'Perempuan' : '-' },
-                  { label: 'Tempat, Tanggal Lahir', value: `${biodata.birth_place}, ${biodata.birth_date}` },
-                  { label: 'Asal Sekolah', value: biodata.school_origin },
-                  { label: 'Program Pilihan', value: biodata.program_choice },
-                ].map((f, i) => (
-                  <div key={i}>
-                    <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</p>
-                    <p style={{ margin: '2px 0 0', color: 'var(--color-text)', fontSize: '0.9rem' }}>{f.value || '-'}</p>
-                  </div>
-                ))}
+            <div style={{ display: 'grid', gap: '20px', marginBottom: '30px' }}>
+              
+              <div style={{ background: 'rgba(255,255,255,0.02)', borderRadius: '16px', padding: '20px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <h3 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#4a90e2', margin: '0 0 10px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Gelombang Pendaftaran</h3>
+                <p style={{ margin: 0, color: '#fff', fontSize: '1.05rem', fontWeight: '600' }}>{selectedPeriod?.name} (Tahun Akademik {selectedPeriod?.academic_year})</p>
               </div>
-              {biodata.address && (
-                <div style={{ marginTop: '12px' }}>
-                  <p style={{ margin: 0, fontSize: '0.78rem', color: 'var(--color-muted)', fontWeight: '600' }}>Alamat</p>
-                  <p style={{ margin: '2px 0 0', color: 'var(--color-text)', fontSize: '0.9rem' }}>{biodata.address}</p>
+
+              <div style={{ background: 'rgba(255,255,255,0.02)', borderRadius: '16px', padding: '24px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <h3 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#4a90e2', margin: '0 0 16px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Biodata Pendaftar</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+                  {[
+                    { label: 'Nama Lengkap', value: biodata.name },
+                    { label: 'Email Pendaftar', value: biodata.email },
+                    { label: 'WhatsApp', value: biodata.phone },
+                    { label: 'Jenis Kelamin', value: biodata.gender === 'L' ? 'Laki-laki' : 'Perempuan' },
+                    { label: 'Tempat, Tanggal Lahir', value: `${biodata.birth_place}, ${biodata.birth_date}` },
+                    { label: 'Asal Sekolah', value: biodata.school_origin },
+                    { label: 'Program Studi Pilihan', value: biodata.program_choice, highlight: true },
+                  ].map((f, i) => (
+                    <div key={i}>
+                      <span style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: '500', marginBottom: '2px' }}>{f.label}</span>
+                      <span style={{ fontSize: '0.95rem', color: f.highlight ? '#7b61ff' : '#fff', fontWeight: f.highlight ? '700' : '600' }}>{f.value || '-'}</span>
+                    </div>
+                  ))}
                 </div>
-              )}
-            </div>
-
-            <div style={{ background: 'var(--color-surface)', borderRadius: '14px', padding: '20px', border: '1px solid var(--color-border)', marginBottom: '24px' }}>
-              <h3 style={{ fontSize: '0.9rem', fontWeight: '700', color: '#3b82f6', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Dokumen</h3>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                {[{ key: 'ijazah', label: 'Ijazah' }, { key: 'foto', label: 'Pas Foto' }, { key: 'ktp', label: 'KTP' }].map(d => (
-                  <div key={d.key} style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '8px', background: files[d.key] ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: files[d.key] ? '#10b981' : '#ef4444', fontSize: '0.85rem', fontWeight: '600' }}>
-                    <i className={files[d.key] ? 'ph-fill ph-check-circle' : 'ph ph-x-circle'}></i>
-                    {d.label}: {fileNames[d.key] || 'Belum diupload'}
+                {biodata.address && (
+                  <div style={{ marginTop: '16px', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '16px' }}>
+                    <span style={{ display: 'block', fontSize: '0.78rem', color: '#94a3b8', fontWeight: '500', marginBottom: '2px' }}>Alamat Lengkap</span>
+                    <p style={{ margin: 0, fontSize: '0.95rem', color: '#fff', lineHeight: '1.5' }}>{biodata.address}</p>
                   </div>
-                ))}
+                )}
+              </div>
+
+              <div style={{ background: 'rgba(255,255,255,0.02)', borderRadius: '16px', padding: '20px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <h3 style={{ fontSize: '0.85rem', fontWeight: '700', color: '#4a90e2', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Persyaratan Dokumen</h3>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  {[{ key: 'ijazah', label: 'Ijazah' }, { key: 'foto', label: 'Pas Foto' }, { key: 'ktp', label: 'Identitas KTP' }].map(d => (
+                    <div key={d.key} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 14px', borderRadius: '10px', background: files[d.key] ? 'rgba(34,197,94,0.08)' : 'rgba(239,68,68,0.08)', color: files[d.key] ? '#22c55e' : '#ef4444', fontSize: '0.85rem', fontWeight: '600', border: `1px solid ${files[d.key] ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)'}` }}>
+                      <span style={{ fontSize: '1rem' }}>{files[d.key] ? '✓' : '✗'}</span>
+                      {d.label}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <button id="btn-back-step4" onClick={() => setStep(3)} style={{ padding: '12px 24px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <i className="ph ph-arrow-left"></i> Kembali
+            <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '24px' }}>
+              <button onClick={() => setStep(3)} style={{ ...btnPrimary, background: 'rgba(255,255,255,0.04)', color: '#fff', border: '1px solid rgba(255,255,255,0.1)', boxShadow: 'none' }}>
+                ← Edit Dokumen
               </button>
-              <button id="btn-submit-pmb" onClick={submitApplication} disabled={submitting} style={{ padding: '12px 28px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #10b981 0%, #047857 100%)', color: 'white', cursor: 'pointer', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1rem', opacity: submitting ? 0.6 : 1 }}>
-                {submitting ? <><i className="ph ph-spinner" style={{ animation: 'pwaSpin 1s linear infinite' }}></i> {uploading ? 'Mengupload...' : 'Mendaftar...'}</> : <><i className="ph ph-paper-plane-tilt"></i> Kirim Pendaftaran</>}
+              <button onClick={submitApplication} disabled={submitting} style={{ ...btnPrimary, background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', boxShadow: '0 4px 20px rgba(16, 185, 129, 0.3)', opacity: submitting ? 0.6 : 1 }}>
+                {submitting ? 'Memproses Pendaftaran...' : 'Kirim Pendaftaran Mandiri'}
               </button>
             </div>
           </div>
         )}
 
-        {/* Step 5: Success */}
+        {/* Step 5: Success Screen */}
         {step === 5 && (
-          <div className="siakad-card" style={{ padding: '48px', textAlign: 'center' }}>
-            <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(16,185,129,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
-              <i className="ph-fill ph-check-circle" style={{ fontSize: '3rem', color: '#10b981' }}></i>
+          <div style={{ ...cardStyle, textAlign: 'center', padding: '60px 40px' }}>
+            <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(34, 197, 94, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px', border: '2px solid rgba(34, 197, 94, 0.2)' }}>
+              <span style={{ fontSize: '2.5rem', color: '#22c55e' }}>✓</span>
             </div>
-            <h2 style={{ fontSize: '1.6rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 12px 0' }}>Pendaftaran Berhasil!</h2>
-            <p style={{ color: 'var(--color-muted)', fontSize: '1rem', margin: '0 0 24px 0', lineHeight: '1.6' }}>
-              Selamat! Pendaftaran Anda telah berhasil dikirim. Simpan nomor registrasi berikut:
+            <h1 style={{ fontSize: '2rem', fontWeight: '800', color: '#fff', margin: '0 0 12px 0' }}>Pendaftaran Terkirim!</h1>
+            <p style={{ color: '#94a3b8', fontSize: '1.05rem', margin: '0 0 32px 0', lineHeight: '1.6', maxWidth: '600px', marginInside: 'auto' }}>
+              Selamat, data Anda telah berhasil didaftarkan secara mandiri ke sistem Universitas Mitra Bangsa. Harap catat dan simpan nomor pendaftaran di bawah ini untuk memantau status Anda:
             </p>
-            <div style={{ background: 'var(--color-surface)', borderRadius: '14px', padding: '20px', border: '2px solid rgba(59,130,246,0.3)', marginBottom: '24px', display: 'inline-block' }}>
-              <p style={{ margin: '0 0 4px', fontSize: '0.8rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nomor Registrasi</p>
-              <p style={{ margin: 0, fontSize: '1.5rem', fontWeight: '800', color: '#3b82f6', letterSpacing: '0.05em' }}>{registrationNumber}</p>
+
+            <div style={{ background: 'rgba(123, 97, 255, 0.05)', borderRadius: '20px', padding: '24px 40px', border: '2px dashed rgba(123, 97, 255, 0.3)', marginBottom: '32px', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: '600', letterSpacing: '0.05em' }}>NOMOR REGISTRASI PMB</span>
+              <span style={{ fontSize: '1.8rem', fontWeight: '900', color: '#7b61ff', letterSpacing: '0.05em' }}>{registrationNumber}</span>
+              <button onClick={copyToClipboard} style={{ ...btnPrimary, padding: '6px 14px', fontSize: '0.8rem', background: copied ? '#22c55e' : 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', boxShadow: 'none', marginTop: '6px' }}>
+                {copied ? '✓ Berhasil Disalin' : 'Copy Nomor Registrasi'}
+              </button>
             </div>
-            <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0 }}>
-              Tim admisi akan memverifikasi data Anda. Pantau status pendaftaran melalui email yang terdaftar.
-            </p>
+
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '24px', maxWidth: '500px', margin: '0 auto' }}>
+              <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: '1.5' }}>
+                Proses peninjauan berkas pendaftaran membutuhkan waktu maksimal 3 hari kerja. Notifikasi status kelulusan berkas akan dikirimkan langsung ke email pendaftaran Anda.
+              </p>
+            </div>
           </div>
         )}
       </div>
