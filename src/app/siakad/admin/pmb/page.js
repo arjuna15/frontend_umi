@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { createPortal } from 'react-dom';
 
 export default function PMBAdminPage() {
   const router = useRouter();
@@ -364,13 +365,14 @@ export default function PMBAdminPage() {
       )}
 
       {/* Fullscreen Lightbox / Zoom Overlay */}
-      {lightboxImage && (
+      {lightboxImage && typeof document !== 'undefined' && createPortal(
         <div onClick={() => setLightboxImage(null)} style={{ position: 'fixed', inset: 0, zIndex: 999999, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'zoom-out' }}>
           <div style={{ position: 'relative', maxWidth: '85%', maxHeight: '85%' }} onClick={e => e.stopPropagation()}>
             <img src={lightboxImage} alt="Detail" style={{ maxWidth: '100%', maxHeight: '85vh', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.15)', boxShadow: '0 25px 50px rgba(0,0,0,0.5)' }} />
             <button onClick={() => setLightboxImage(null)} style={{ position: 'absolute', top: '-40px', right: '0', background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', padding: '6px 14px', borderRadius: '20px', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem' }}>✕ Tutup</button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
