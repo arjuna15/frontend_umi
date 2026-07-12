@@ -325,8 +325,8 @@ export default function PMBAdminPage() {
                 <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', marginBottom: '8px' }}>Dokumen</label>
                 <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                   {showApplicantDetail.documents.map((doc, i) => (
-                    <a key={i} href={doc.url || doc.path || '#'} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 14px', borderRadius: '10px', background: 'var(--color-surface)', border: '1px solid var(--color-border)', color: '#3b82f6', fontSize: '0.85rem', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <i className="ph ph-file"></i> {doc.name || doc.type || `Dokumen ${i + 1}`}
+                    <a key={i} href={doc.file_url || doc.url || doc.path || '#'} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 14px', borderRadius: '10px', background: 'var(--color-surface)', border: '1px solid var(--color-border)', color: '#3b82f6', fontSize: '0.85rem', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <i className="ph ph-file"></i> {doc.original_name || doc.type || `Dokumen ${i + 1}`}
                     </a>
                   ))}
                 </div>
