@@ -1353,18 +1353,21 @@
 /* Premium Buttons inside Modals */
 .siakad-modal-content button[type="submit"],
 .siakad-modal-content button.siakad-btn-primary {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 50.1%), rgba(12, 28, 60, 0.55) !important;
-  backdrop-filter: blur(16px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(150%) !important;
+  background: 
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 35%, rgba(255, 255, 255, 0) 40%),
+    rgba(12, 28, 60, 0.62) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
   color: #ffffff !important;
   padding: 12px 28px !important;
   border-radius: 12px !important;
-  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.42) !important;
   font-weight: 700 !important;
   letter-spacing: 0.5px;
   box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.5), 
-    inset 0 -2px 4px rgba(6, 12, 26, 0.75), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.45), 
+    inset 0 -2px 6px rgba(5, 10, 20, 0.75), 
     0 8px 24px rgba(12, 28, 60, 0.4) !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   position: relative;
@@ -1375,11 +1378,14 @@
 .siakad-modal-content button[type="submit"]:hover,
 .siakad-modal-content button.siakad-btn-primary:hover {
   transform: translateY(-1px) !important;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 50.1%), rgba(12, 28, 60, 0.65) !important;
-  border-color: rgba(255, 255, 255, 0.6) !important;
+  background: 
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.12) 35%, rgba(255, 255, 255, 0) 40%),
+    rgba(12, 28, 60, 0.72) !important;
+  border-color: rgba(255, 255, 255, 0.55) !important;
   box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.6), 
-    inset 0 -2px 4px rgba(6, 12, 26, 0.75), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.55), 
+    inset 0 -2px 6px rgba(5, 10, 20, 0.75), 
     0 10px 28px rgba(12, 28, 60, 0.55) !important;
 }
 
