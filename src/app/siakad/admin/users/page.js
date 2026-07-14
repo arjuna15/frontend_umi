@@ -16,6 +16,8 @@ export default function AdminUsersPage() {
     id: '', name: '', nim_nip: '', role: '', prodi: '', password: ''
   });
   const [searchQuery, setSearchQuery] = useState('');
+  const [resetPasswordUser, setResetPasswordUser] = useState(null);
+  const [resetPasswordValue, setResetPasswordValue] = useState('');
 
   useEffect(() => {
     fetchUsers();
@@ -116,28 +118,33 @@ export default function AdminUsersPage() {
     }
   };
 
-  const handleResetPassword = async (user) => {
-    const nextPassword = window.prompt(`Masukkan password baru untuk ${user.name}:`);
-    if (!nextPassword) return;
+  const handleResetPassword = (user) => {
+    setResetPasswordUser(user);
+    setResetPasswordValue('');
+  };
+
+  const submitResetPassword = async () => {
+    if (!resetPasswordUser || !resetPasswordValue.trim()) return;
     const token = localStorage.getItem('siakad_token');
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     try {
-      const res = await fetch(`${apiUrl}/siakad/admin/users/${user.id}`, {
+      const res = await fetch(`${apiUrl}/siakad/admin/users/${resetPasswordUser.id}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: user.name,
-          nim_nip: user.nim_nip,
-          role: user.role,
-          prodi: user.prodi || '',
-          password: nextPassword
+          name: resetPasswordUser.name,
+          nim_nip: resetPasswordUser.nim_nip,
+          role: resetPasswordUser.role,
+          prodi: resetPasswordUser.prodi || '',
+          password: resetPasswordValue
         })
       });
       if (res.ok) {
         window.toast && window.toast('Password berhasil diperbarui');
+        setResetPasswordUser(null);
         fetchUsers();
       } else {
         const errorData = await res.json();
@@ -408,6 +415,36 @@ export default function AdminUsersPage() {
               <input type="password" value={editFormData.password} onChange={(e) => setEditFormData({...editFormData, password: e.target.value})} placeholder="Biarkan kosong jika tidak ingin mengubah..." style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
             </div>
           </form>
+        </ModalShell>
+      )}
+
+      {/* Custom Reset Password Modal */}
+      {resetPasswordUser && (
+        <ModalShell
+          title="Reset Password Pengguna"
+          onClose={() => setResetPasswordUser(null)}
+          maxWidth="440px"
+          footer={
+            <>
+              <button onClick={() => setResetPasswordUser(null)} className="btn" style={{ padding: '10px 18px', borderRadius: '10px', border: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
+              <button onClick={submitResetPassword} disabled={!resetPasswordValue.trim()} className="btn btn-primary" style={{ padding: '10px 18px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: '#ffffff', cursor: 'pointer', fontWeight: '600', boxShadow: '0 4px 12px rgba(59, 130, 246, 0.2)', transition: 'all 0.2s', opacity: !resetPasswordValue.trim() ? 0.6 : 1 }}>Simpan Password</button>
+            </>
+          }
+        >
+          <div style={{ marginBottom: '16px' }}>
+            <p style={{ margin: '0 0 16px 0', fontSize: '0.9rem' }}>
+              Masukkan password baru untuk pengguna <strong>{resetPasswordUser.name}</strong> ({resetPasswordUser.nim_nip}):
+            </p>
+            <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Password Baru</label>
+            <input 
+              type="password" 
+              value={resetPasswordValue} 
+              onChange={(e) => setResetPasswordValue(e.target.value)} 
+              placeholder="Masukkan password baru..." 
+              required 
+              style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} 
+            />
+          </div>
         </ModalShell>
       )}
     </div>

@@ -72,7 +72,7 @@ export default function CustomSelect({ name, options, value, onChange, placehold
         top: coords.top,
         left: coords.left,
         width: coords.width,
-        zIndex: 99999,
+        zIndex: 2000000,
         background: 'var(--color-bg)',
         border: '1px solid var(--color-border)',
         borderRadius: '12px',
