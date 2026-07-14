@@ -152,7 +152,7 @@ export default function KRSPage() {
           </div>
           <button 
             onClick={() => window.open('/api/siakad/export/krs', '_blank')}
-            style={{ background: '#10b981', border: 'none', padding: '8px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.2)' }}
+            style={{ background: '#10b981', border: 'none', padding: '10px 24px', borderRadius: '50px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.2)' }}
           >
             <i className="ph ph-file-pdf"></i> Unduh KRS Resmi (PDF)
           </button>
@@ -209,7 +209,7 @@ export default function KRSPage() {
                 }} 
               />
             </div>
-            <div style={{ background: 'var(--color-border)', padding: '10px 16px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-muted)', whiteSpace: 'nowrap' }}>
+            <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--color-border)', padding: '10px 20px', borderRadius: '50px', fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--color-muted)', whiteSpace: 'nowrap' }}>
               Total: {totalSKS} SKS
             </div>
             {(!submission?.status || submission?.status === 'rejected') && (
@@ -218,11 +218,11 @@ export default function KRSPage() {
                 disabled={isSubmitting || selectedCourses.length === 0}
                 style={{
                   background: (isSubmitting || selectedCourses.length === 0) ? 'var(--color-muted)' : 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)',
-                  color: 'white', border: 'none', padding: '10px 20px', borderRadius: '12px',
+                  color: 'white', border: 'none', padding: '10px 24px', borderRadius: '50px',
                   fontWeight: 'bold', cursor: (isSubmitting || selectedCourses.length === 0) ? 'not-allowed' : 'pointer',
                   display: 'flex', alignItems: 'center', gap: '8px',
                   boxShadow: (isSubmitting || selectedCourses.length === 0) ? 'none' : '0 4px 12px rgba(196, 30, 58, 0.3)', transition: 'all 0.2s',
-                  fontSize: '1rem'
+                  fontSize: '0.9rem'
                 }}
               >
                 <i className="ph ph-paper-plane-right"></i> {isSubmitting ? 'Mengajukan...' : 'Ajukan KRS'}
