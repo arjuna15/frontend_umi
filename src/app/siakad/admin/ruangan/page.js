@@ -126,11 +126,11 @@ export default function AdminRuanganPage() {
         <div className="siakad-page-header-grid"></div>
           <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <div style={{ flex: '1 1 300px' }}>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
-              <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Ruangan</h1>
-              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola daftar ruangan kelas dan laboratorium untuk perkuliahan.</p>
+              <p style={{ color: 'var(--color-muted)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
+              <h1 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Ruangan</h1>
+              <p style={{ margin: 0 }}>Kelola daftar ruangan kelas dan laboratorium untuk perkuliahan.</p>
             </div>
-            <button onClick={openAddModal} style={{ background: '#3b82f6', color: 'white', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)' , flexWrap: 'wrap'}}>
+            <button onClick={openAddModal} className="siakad-btn-primary" style={{ padding: '12px 24px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
               <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Tambah Ruangan
             </button>
           </div>
@@ -142,7 +142,7 @@ export default function AdminRuanganPage() {
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Ruangan</h3>
           <div style={{ position: 'relative', width: '300px' }}>
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
-            <input type="text" placeholder="Cari nama ruangan, kode, tipe..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px 14px 10px 38px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.9rem' }} />
+            <input type="text" className="siakad-input" placeholder="Cari nama ruangan, kode, tipe..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', color: 'var(--color-text)', fontSize: '0.9rem' }} />
           </div>
         </div>
 
@@ -214,8 +214,8 @@ export default function AdminRuanganPage() {
           onClose={() => setIsEditModalOpen(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="ruangan-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan</button>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700, transition: 'all 0.2s' }}>Batal</button>
+              <button type="submit" form="ruangan-form" className="siakad-btn-primary" style={{ padding: '12px 20px', fontWeight: 700 }}>Simpan</button>
             </>
           )}
         >
