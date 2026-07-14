@@ -52,14 +52,20 @@ export default function MahasiswaForumPage() {
             <div>
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Forum Diskusi Kelas</h1>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(15, 23, 42, 0.65)', padding: '10px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.12)', width: '300px', backdropFilter: 'blur(10px)' }}>
-              <i className="ph ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.8)', marginRight: '8px' }}></i>
+            <div style={{ position: 'relative', width: '300px' }}>
+              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1rem' }}></i>
               <input 
                 type="text" 
                 placeholder="Cari mata kuliah atau topik..." 
+                className="siakad-input"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                style={{ border: 'none', outline: 'none', background: 'transparent', width: '100%', color: 'white' }}
+                style={{ 
+                  width: '100%', 
+                  paddingLeft: '46px', 
+                  color: 'var(--color-text)',
+                  fontSize: '0.85rem'
+                }} 
               />
             </div>
           </div>
