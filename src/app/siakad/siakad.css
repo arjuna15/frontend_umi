@@ -392,27 +392,64 @@
 .stagger-5 { animation: fadeSlideUp 0.5s ease forwards 0.5s; opacity: 0; }
 
 @media print {
-  body * {
-    visibility: hidden;
-  }
-  #khs-print-section, #khs-print-section * {
-    visibility: visible;
-  }
-  #khs-print-section {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    border: none;
-  }
-  .no-print {
+  /* Sembunyikan elemen non-cetak */
+  .no-print,
+  .siakad-sidebar,
+  .siakad-navbar,
+  aside,
+  header,
+  footer,
+  nav,
+  button,
+  .siakad-page-header-glow,
+  .siakad-page-header-grid {
     display: none !important;
   }
-  .print-header {
+  
+  /* Reset container utama agar tampil penuh */
+  body, 
+  main,
+  html,
+  #root,
+  .siakad-content,
+  .siakad-layout,
+  div {
+    background: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+    overflow: visible !important;
+    visibility: visible !important;
+    box-shadow: none !important;
+  }
+
+  /* Target KHS Print Section */
+  #khs-print-section {
     display: block !important;
+    background: white !important;
+    color: black !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    width: 100% !important;
+    visibility: visible !important;
+  }
+  
+  /* Aturan tabel cetak agar terbaca jelas */
+  .siakad-table {
+    border: 1px solid #000000 !important;
+    background: transparent !important;
+    color: black !important;
+  }
+  .siakad-table th, .siakad-table td {
+    border: 1px solid #000000 !important;
+    color: black !important;
+    padding: 12px 18px !important;
+    background: transparent !important;
   }
 }
 
