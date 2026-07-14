@@ -250,7 +250,7 @@ export default function ProfilePage() {
                 </div>
 
                 <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'flex-end' }}>
-                  <button type="submit" style={{ background: '#C41E3A', color: 'white', border: 'none', padding: '14px 28px', borderRadius: '10px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)', display: 'inline-flex', alignItems: 'center', gap: '8px', transition: 'all 0.3s' }} onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.target.style.transform = 'none'}>
+                  <button type="submit" className="siakad-btn-primary" style={{ padding: '14px 28px', borderRadius: '10px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                     Simpan Perubahan
                   </button>
                 </div>
@@ -282,7 +282,7 @@ export default function ProfilePage() {
                   <input type="password" name="confirm" required minLength="6" placeholder="••••••••" style={{ width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
                 </div>
                 <div style={{ marginTop: '16px' }}>
-                  <button type="submit" style={{ background: '#C41E3A', color: 'white', border: 'none', padding: '14px 28px', borderRadius: '10px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)', display: 'inline-flex', alignItems: 'center', gap: '8px', transition: 'all 0.3s' }} onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'} onMouseLeave={(e) => e.target.style.transform = 'none'}>
+                  <button type="submit" className="siakad-btn-primary" style={{ padding: '14px 28px', borderRadius: '10px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                     Perbarui Password
                   </button>
                 </div>
