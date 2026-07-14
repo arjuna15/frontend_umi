@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function AdminPengaturan() {
   const [krsOpen, setKrsOpen] = useState(true);
@@ -120,58 +121,29 @@ export default function AdminPengaturan() {
           
           <div style={{ marginBottom: '16px', padding: '0 4px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-muted)', fontSize: '0.95rem' }}>Tahun Ajaran Aktif</label>
-            <div style={{ position: 'relative', width: '100%' }}>
-              <select
-                value={semester}
-                onChange={(e) => setSemester(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '12px 40px 12px 16px',
-                  borderRadius: '12px',
-                  border: '1px solid var(--color-border)',
-                  background: 'var(--color-bg) no-repeat right 16px center',
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cpath fill='%237b61ff' d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80a8,8,0,0,1,11.32-11.32L128,164.69l74.34-74.34a8,8,0,0,1,11.32,11.32Z'/%3E%3C/svg%3E")`,
-                  backgroundSize: '16px',
-                  color: 'var(--color-text)',
-                  outline: 'none',
-                  cursor: 'pointer',
-                  appearance: 'none',
-                  WebkitAppearance: 'none',
-                  fontSize: '0.95rem',
-                  fontWeight: '500',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
-                  transition: 'all 0.2s ease',
-                }}
-                onFocus={(e) => {
-                  e.target.style.borderColor = '#7b61ff';
-                  e.target.style.boxShadow = '0 0 0 3px rgba(123, 97, 255, 0.15)';
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = 'var(--color-border)';
-                  e.target.style.boxShadow = '0 2px 8px rgba(0,0,0,0.05)';
-                }}
-              >
-                <option value="" style={{ background: 'var(--color-bg)', color: 'var(--color-text)' }}>-- Pilih Tahun Ajaran --</option>
-                {(() => {
-                  const currentYear = new Date().getFullYear();
-                  const options = [];
-                  for (let y = currentYear + 2; y >= currentYear - 3; y--) {
-                    const nextYear = y + 1;
-                    options.push(
-                      <option key={`ganjil-${y}`} value={`Ganjil ${y}/${nextYear}`} style={{ background: 'var(--color-bg)', color: 'var(--color-text)' }}>
-                        Ganjil {y}/{nextYear}
-                      </option>
-                    );
-                    options.push(
-                      <option key={`genap-${y}`} value={`Genap ${y}/${nextYear}`} style={{ background: 'var(--color-bg)', color: 'var(--color-text)' }}>
-                        Genap {y}/{nextYear}
-                      </option>
-                    );
-                  }
-                  return options;
-                })()}
-              </select>
-            </div>
+            <CustomSelect
+              value={semester}
+              onChange={(val) => setSemester(val)}
+              placeholder="-- Pilih Tahun Ajaran --"
+              options={(() => {
+                const currentYear = new Date().getFullYear();
+                const opts = [];
+                for (let y = currentYear + 2; y >= currentYear - 3; y--) {
+                  const nextYear = y + 1;
+                  opts.push({
+                    value: `Ganjil ${y}/${nextYear}`,
+                    label: `Ganjil ${y}/${nextYear}`,
+                    icon: 'ph ph-sun-dim'
+                  });
+                  opts.push({
+                    value: `Genap ${y}/${nextYear}`,
+                    label: `Genap ${y}/${nextYear}`,
+                    icon: 'ph ph-cloud-rain'
+                  });
+                }
+                return opts;
+              })()}
+            />
             <p style={{ margin: '8px 0 0 0', fontSize: '0.8rem', color: 'var(--color-muted)' }}>Perubahan semester aktif akan berdampak pada seluruh modul sistem.</p>
           </div>
         </div>
