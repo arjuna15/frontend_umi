@@ -26,7 +26,7 @@ export default function ModalShell({
         style={{ maxWidth, padding: '32px', display: 'flex', flexDirection: 'column' }}
       >
         {/* Simple Header without icons or dividers */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+        <div className="siakad-modal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', width: '100%', flexWrap: 'nowrap' }}>
           <h2 style={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>
             {title}
           </h2>
@@ -43,15 +43,15 @@ export default function ModalShell({
                 justifyContent: 'center',
                 padding: '6px',
                 transition: 'all 0.2s ease',
-                opacity: 0.6,
+                opacity: 0.95,
                 outline: 'none'
               }}
-              onMouseEnter={e => e.currentTarget.style.opacity = '1'}
-              onMouseLeave={e => e.currentTarget.style.opacity = '0.6'}
+              onMouseEnter={e => e.currentTarget.style.color = '#ef4444'}
+              onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text)'}
               aria-label="Tutup modal"
               type="button"
             >
-              <i className="ph ph-x" style={{ fontSize: '1rem' }}></i>
+              <i className="ph ph-x" style={{ fontSize: '1.1rem' }}></i>
             </button>
           )}
         </div>
