@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import ModalShell from '../../components/ModalShell';
 
 export default function ProctoringAdminPage() {
   const router = useRouter();
@@ -205,42 +206,42 @@ export default function ProctoringAdminPage() {
 
       {/* Logs Modal */}
       {showLogs && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }} onClick={() => setShowLogs(null)}>
-          <div className="siakad-card" onClick={e => e.stopPropagation()} style={{ padding: '32px', width: '100%', maxWidth: '600px', borderRadius: '20px', maxHeight: '80vh', overflowY: 'auto' }}>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Log Pelanggaran</h2>
-            <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: '0 0 20px 0' }}>Sesi: {showLogs.quiz_name || showLogs.title || showLogs.id}</p>
-            
-            {logs.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '30px', color: 'var(--color-muted)' }}>
-                <i className="ph ph-shield-check" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '12px', opacity: 0.4 }}></i>
-                <p style={{ margin: 0 }}>Tidak ada pelanggaran terdeteksi.</p>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {logs.map((log, idx) => {
-                  const vc = violationColor(log.type || log.event_type);
-                  return (
-                    <div key={log.id || idx} style={{ display: 'flex', gap: '12px', padding: '12px', borderRadius: '10px', background: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
-                      <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: `${vc}15`, color: vc, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '1.1rem' }}>
-                        <i className={violationIcon(log.type || log.event_type)}></i>
-                      </div>
-                      <div style={{ flex: 1 }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                          <span style={{ fontWeight: '600', color: vc, fontSize: '0.88rem', textTransform: 'capitalize' }}>{(log.type || log.event_type || 'violation').replace(/_/g, ' ')}</span>
-                          <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>{log.created_at ? new Date(log.created_at).toLocaleTimeString('id-ID') : ''}</span>
-                        </div>
-                        <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--color-muted)' }}>{log.student_name || log.user_name || 'Mahasiswa'} — {log.description || log.message || '-'}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
-              <button id="btn-close-logs" onClick={() => setShowLogs(null)} style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Tutup</button>
+        <ModalShell
+          title="Log Pelanggaran"
+          subtitle={`Sesi: ${showLogs.quiz_name || showLogs.title || showLogs.id}`}
+          icon="ph-shield-warning"
+          onClose={() => setShowLogs(null)}
+          footer={
+            <button id="btn-close-logs" onClick={() => setShowLogs(null)} className="btn" style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Tutup</button>
+          }
+        >
+          {logs.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '30px', color: 'var(--color-muted)' }}>
+              <i className="ph ph-shield-check" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '12px', opacity: 0.4 }}></i>
+              <p style={{ margin: 0 }}>Tidak ada pelanggaran terdeteksi.</p>
             </div>
-          </div>
-        </div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {logs.map((log, idx) => {
+                const vc = violationColor(log.type || log.event_type);
+                return (
+                  <div key={log.id || idx} style={{ display: 'flex', gap: '12px', padding: '12px', borderRadius: '10px', background: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                    <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: `${vc}15`, color: vc, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: '1.1rem' }}>
+                      <i className={violationIcon(log.type || log.event_type)}></i>
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                        <span style={{ fontWeight: '600', color: vc, fontSize: '0.88rem', textTransform: 'capitalize' }}>{(log.type || log.event_type || 'violation').replace(/_/g, ' ')}</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>{log.created_at ? new Date(log.created_at).toLocaleTimeString('id-ID') : ''}</span>
+                      </div>
+                      <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--color-muted)' }}>{log.student_name || log.user_name || 'Mahasiswa'} — {log.description || log.message || '-'}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </ModalShell>
       )}
     </div>
   );

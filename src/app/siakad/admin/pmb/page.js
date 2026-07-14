@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
+import ModalShell from '../../components/ModalShell';
 
 export default function PMBAdminPage() {
   const router = useRouter();
@@ -259,109 +260,118 @@ export default function PMBAdminPage() {
 
       {/* Period Modal */}
       {showPeriodModal && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }} onClick={() => setShowPeriodModal(false)}>
-          <div className="siakad-card" onClick={e => e.stopPropagation()} style={{ padding: '32px', width: '100%', maxWidth: '520px', borderRadius: '20px' }}>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>{editingPeriod ? 'Edit Periode' : 'Tambah Periode PMB'}</h2>
-            {[
-              { label: 'Nama Periode', key: 'name', type: 'text', placeholder: 'Contoh: Gelombang 1' },
-              { label: 'Tahun Akademik', key: 'academic_year', type: 'text', placeholder: 'Contoh: 2025/2026' },
-              { label: 'Tanggal Mulai', key: 'start_date', type: 'date' },
-              { label: 'Tanggal Selesai', key: 'end_date', type: 'date' },
-              { label: 'Kuota', key: 'quota', type: 'number', placeholder: 'Jumlah kuota' },
-            ].map(f => (
-              <div key={f.key} style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-                <input id={`input-period-${f.key}`} type={f.type} value={periodForm[f.key]} onChange={e => setPeriodForm({ ...periodForm, [f.key]: e.target.value })} placeholder={f.placeholder || ''} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
-              </div>
-            ))}
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Status</label>
-              <select id="input-period-status" value={periodForm.status} onChange={e => setPeriodForm({ ...periodForm, status: e.target.value })} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }}>
-                <option value="open">Dibuka</option>
-                <option value="closed">Ditutup</option>
-                <option value="upcoming">Akan Datang</option>
-              </select>
-            </div>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-              <button id="btn-cancel-period" onClick={() => setShowPeriodModal(false)} style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-              <button id="btn-save-period" onClick={savePeriod} disabled={saving} style={{ padding: '10px 24px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', cursor: 'pointer', fontWeight: '600', opacity: saving ? 0.6 : 1 }}>
+        <ModalShell
+          title={editingPeriod ? 'Edit Periode' : 'Tambah Periode PMB'}
+          subtitle="Penerimaan Mahasiswa Baru"
+          icon="ph-calendar"
+          onClose={() => setShowPeriodModal(false)}
+          footer={
+            <>
+              <button id="btn-cancel-period" onClick={() => setShowPeriodModal(false)} className="btn" style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+              <button id="btn-save-period" onClick={savePeriod} disabled={saving} className="btn btn-primary" style={{ padding: '10px 24px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', cursor: 'pointer', fontWeight: '600', opacity: saving ? 0.6 : 1 }}>
                 {saving ? 'Menyimpan...' : 'Simpan'}
               </button>
+            </>
+          }
+        >
+          {[
+            { label: 'Nama Periode', key: 'name', type: 'text', placeholder: 'Contoh: Gelombang 1' },
+            { label: 'Tahun Akademik', key: 'academic_year', type: 'text', placeholder: 'Contoh: 2025/2026' },
+            { label: 'Tanggal Mulai', key: 'start_date', type: 'date' },
+            { label: 'Tanggal Selesai', key: 'end_date', type: 'date' },
+            { label: 'Kuota', key: 'quota', type: 'number', placeholder: 'Jumlah kuota' },
+          ].map(f => (
+            <div key={f.key} style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
+              <input id={`input-period-${f.key}`} type={f.type} value={periodForm[f.key]} onChange={e => setPeriodForm({ ...periodForm, [f.key]: e.target.value })} placeholder={f.placeholder || ''} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
             </div>
+          ))}
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Status</label>
+            <select id="input-period-status" value={periodForm.status} onChange={e => setPeriodForm({ ...periodForm, status: e.target.value })} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }}>
+              <option value="open">Dibuka</option>
+              <option value="closed">Ditutup</option>
+              <option value="upcoming">Akan Datang</option>
+            </select>
           </div>
-        </div>
+        </ModalShell>
       )}
 
       {/* Applicant Detail Modal */}
       {showApplicantDetail && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }} onClick={() => setShowApplicantDetail(null)}>
-          <div className="siakad-card" onClick={e => e.stopPropagation()} style={{ padding: '32px', width: '100%', maxWidth: '560px', borderRadius: '20px', maxHeight: '85vh', overflowY: 'auto' }}>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Detail Pendaftar</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '20px' }}>
-              {[
-                { label: 'Nama', value: showApplicantDetail.name },
-                { label: 'Email', value: showApplicantDetail.email },
-                { label: 'Telepon', value: showApplicantDetail.phone },
-                { label: 'Gender', value: showApplicantDetail.gender },
-                { label: 'Tanggal Lahir', value: showApplicantDetail.birth_date },
-                { label: 'Tempat Lahir', value: showApplicantDetail.birth_place },
-                { label: 'Asal Sekolah', value: showApplicantDetail.school_origin },
-                { label: 'Program Pilihan', value: showApplicantDetail.program_choice || showApplicantDetail.program },
-                { label: 'Status', value: showApplicantDetail.status },
-              ].map((f, i) => (
-                <div key={i}>
-                  <label style={{ display: 'block', fontSize: '0.78rem', color: 'var(--color-muted)', fontWeight: '600', marginBottom: '4px' }}>{f.label}</label>
-                  <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.92rem', fontWeight: '500' }}>{f.value || '-'}</p>
-                </div>
-              ))}
-            </div>
-            {showApplicantDetail.address && (
-              <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', fontSize: '0.78rem', color: 'var(--color-muted)', fontWeight: '600', marginBottom: '4px' }}>Alamat</label>
-                <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.92rem' }}>{showApplicantDetail.address}</p>
+        <ModalShell
+          title="Detail Pendaftar"
+          subtitle="Biodata & Dokumen Calon Mahasiswa"
+          icon="ph-user-list"
+          onClose={() => setShowApplicantDetail(null)}
+          maxWidth="640px"
+          footer={
+            <>
+              <button onClick={() => setShowApplicantDetail(null)} className="btn" style={{ padding: '10px 18px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Tutup</button>
+              <button id="btn-detail-verify" onClick={() => updateApplicantStatus(showApplicantDetail.id, 'verified')} disabled={updatingStatus === showApplicantDetail.id} className="btn" style={{ padding: '10px 16px', borderRadius: '10px', border: 'none', background: 'rgba(59,130,246,0.15)', color: '#3b82f6', cursor: 'pointer', fontWeight: '600' }}>Verifikasi</button>
+              <button id="btn-detail-accept" onClick={() => updateApplicantStatus(showApplicantDetail.id, 'accepted')} disabled={updatingStatus === showApplicantDetail.id} className="btn" style={{ padding: '10px 16px', borderRadius: '10px', border: 'none', background: 'rgba(16,185,129,0.15)', color: '#10b981', cursor: 'pointer', fontWeight: '600' }}>Terima</button>
+              <button id="btn-detail-reject" onClick={() => updateApplicantStatus(showApplicantDetail.id, 'rejected')} disabled={updatingStatus === showApplicantDetail.id} className="btn" style={{ padding: '10px 16px', borderRadius: '10px', border: 'none', background: 'rgba(239,68,68,0.15)', color: '#ef4444', cursor: 'pointer', fontWeight: '600' }}>Tolak</button>
+            </>
+          }
+        >
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '20px' }}>
+            {[
+              { label: 'Nama', value: showApplicantDetail.name },
+              { label: 'Email', value: showApplicantDetail.email },
+              { label: 'Telepon', value: showApplicantDetail.phone },
+              { label: 'Gender', value: showApplicantDetail.gender },
+              { label: 'Tanggal Lahir', value: showApplicantDetail.birth_date },
+              { label: 'Tempat Lahir', value: showApplicantDetail.birth_place },
+              { label: 'Asal Sekolah', value: showApplicantDetail.school_origin },
+              { label: 'Program Pilihan', value: showApplicantDetail.program_choice || showApplicantDetail.program },
+              { label: 'Status', value: showApplicantDetail.status },
+            ].map((f, i) => (
+              <div key={i}>
+                <label style={{ display: 'block', fontSize: '0.78rem', color: 'var(--color-muted)', fontWeight: '600', marginBottom: '4px' }}>{f.label}</label>
+                <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.92rem', fontWeight: '500' }}>{f.value || '-'}</p>
               </div>
-            )}
-            {/* Documents */}
-            {(showApplicantDetail.documents || []).length > 0 && (
-              <div style={{ marginBottom: '20px' }}>
-                <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', marginBottom: '8px' }}>Dokumen & Foto Terunggah</label>
-                <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
-                  {showApplicantDetail.documents.map((doc, i) => {
-                    const isImg = doc.type === 'foto' || 
-                                  (doc.file_url && /\.(jpeg|jpg|png|webp|gif)/i.test(doc.file_url)) || 
-                                  (doc.original_name && /\.(jpeg|jpg|png|webp|gif)/i.test(doc.original_name));
-                    
-                    if (isImg) {
-                      return (
-                        <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '110px' }}>
-                          <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase', textAlign: 'center' }}>{doc.type}</span>
-                          <div onClick={() => setLightboxImage(doc.file_url)} style={{ width: '110px', height: '110px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', cursor: 'zoom-in', background: 'rgba(0,0,0,0.1)', position: 'relative' }}>
-                            <img src={doc.file_url} alt={doc.original_name || doc.type} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                          </div>
-                        </div>
-                      );
-                    }
-
+            ))}
+          </div>
+          {showApplicantDetail.address && (
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', fontSize: '0.78rem', color: 'var(--color-muted)', fontWeight: '600', marginBottom: '4px' }}>Alamat</label>
+              <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.92rem' }}>{showApplicantDetail.address}</p>
+            </div>
+          )}
+          {/* Documents */}
+          {(showApplicantDetail.documents || []).length > 0 && (
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', marginBottom: '8px' }}>Dokumen & Foto Terunggah</label>
+              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
+                {showApplicantDetail.documents.map((doc, i) => {
+                  const isImg = doc.type === 'foto' || 
+                                (doc.file_url && /\.(jpeg|jpg|png|webp|gif)/i.test(doc.file_url)) || 
+                                (doc.original_name && /\.(jpeg|jpg|png|webp|gif)/i.test(doc.original_name));
+                  
+                  if (isImg) {
                     return (
-                      <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase' }}>{doc.type}</span>
-                        <a href={doc.file_url || doc.url || doc.path || '#'} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 14px', borderRadius: '10px', background: 'var(--color-surface)', border: '1px solid var(--color-border)', color: '#3b82f6', fontSize: '0.85rem', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <i className="ph ph-file"></i> Unduh {doc.original_name || doc.type}
-                        </a>
+                      <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '110px' }}>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase', textAlign: 'center' }}>{doc.type}</span>
+                        <div onClick={() => setLightboxImage(doc.file_url)} style={{ width: '110px', height: '110px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', cursor: 'zoom-in', background: 'rgba(0,0,0,0.1)', position: 'relative' }}>
+                          <img src={doc.file_url} alt={doc.original_name || doc.type} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        </div>
                       </div>
                     );
-                  })}
-                </div>
+                  }
+
+                  return (
+                    <div key={i} style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                      <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase' }}>{doc.type}</span>
+                      <a href={doc.file_url || doc.url || doc.path || '#'} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 14px', borderRadius: '10px', background: 'var(--color-surface)', border: '1px solid var(--color-border)', color: '#3b82f6', fontSize: '0.85rem', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <i className="ph ph-file"></i> Unduh {doc.original_name || doc.type}
+                      </a>
+                    </div>
+                  );
+                })}
               </div>
-            )}
-            <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-end', marginTop: '20px' }}>
-              <button onClick={() => setShowApplicantDetail(null)} style={{ padding: '10px 18px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Tutup</button>
-              <button id="btn-detail-verify" onClick={() => updateApplicantStatus(showApplicantDetail.id, 'verified')} disabled={updatingStatus === showApplicantDetail.id} style={{ padding: '10px 16px', borderRadius: '10px', border: 'none', background: 'rgba(59,130,246,0.15)', color: '#3b82f6', cursor: 'pointer', fontWeight: '600' }}>Verifikasi</button>
-              <button id="btn-detail-accept" onClick={() => updateApplicantStatus(showApplicantDetail.id, 'accepted')} disabled={updatingStatus === showApplicantDetail.id} style={{ padding: '10px 16px', borderRadius: '10px', border: 'none', background: 'rgba(16,185,129,0.15)', color: '#10b981', cursor: 'pointer', fontWeight: '600' }}>Terima</button>
-              <button id="btn-detail-reject" onClick={() => updateApplicantStatus(showApplicantDetail.id, 'rejected')} disabled={updatingStatus === showApplicantDetail.id} style={{ padding: '10px 16px', borderRadius: '10px', border: 'none', background: 'rgba(239,68,68,0.15)', color: '#ef4444', cursor: 'pointer', fontWeight: '600' }}>Tolak</button>
             </div>
-          </div>
-        </div>
+          )}
+        </ModalShell>
       )}
 
       {/* Fullscreen Lightbox / Zoom Overlay */}

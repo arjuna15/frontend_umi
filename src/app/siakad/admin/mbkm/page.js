@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import ModalShell from '../../components/ModalShell';
 
 export default function MBKMAdminPage() {
   const router = useRouter();
@@ -200,87 +201,92 @@ export default function MBKMAdminPage() {
 
       {/* Create Program Modal */}
       {showCreateModal && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }} onClick={() => setShowCreateModal(false)}>
-          <div className="siakad-card" onClick={e => e.stopPropagation()} style={{ padding: '32px', width: '100%', maxWidth: '520px', borderRadius: '20px' }}>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Tambah Program MBKM</h2>
-            {[
-              { label: 'Judul Program', key: 'title', type: 'text', placeholder: 'Masukkan judul program' },
-              { label: 'Deskripsi', key: 'description', type: 'textarea', placeholder: 'Deskripsi program' },
-              { label: 'Jumlah SKS', key: 'sks', type: 'number', placeholder: 'Contoh: 20' },
-              { label: 'Periode', key: 'period', type: 'text', placeholder: 'Contoh: 2025/2026 Ganjil' },
-            ].map(f => (
-              <div key={f.key} style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-                {f.type === 'textarea' ? (
-                  <textarea id={`input-${f.key}`} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} rows={3} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', resize: 'vertical', boxSizing: 'border-box' }} />
-                ) : (
-                  <input id={`input-${f.key}`} type={f.type} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
-                )}
-              </div>
-            ))}
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Status</label>
-              <select id="input-status" value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }}>
-                <option value="active">Aktif</option>
-                <option value="inactive">Tidak Aktif</option>
-                <option value="closed">Ditutup</option>
-              </select>
-            </div>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-              <button id="btn-cancel-create" onClick={() => setShowCreateModal(false)} style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-              <button id="btn-confirm-create" onClick={createProgram} disabled={saving} style={{ padding: '10px 24px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', cursor: 'pointer', fontWeight: '600', opacity: saving ? 0.6 : 1 }}>
+        <ModalShell
+          title="Tambah Program MBKM"
+          subtitle="Manajemen Program"
+          icon="ph-graduation-cap"
+          onClose={() => setShowCreateModal(false)}
+          footer={
+            <>
+              <button id="btn-cancel-create" onClick={() => setShowCreateModal(false)} className="btn" style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+              <button id="btn-confirm-create" onClick={createProgram} disabled={saving} className="btn btn-primary" style={{ padding: '10px 24px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', cursor: 'pointer', fontWeight: '600', opacity: saving ? 0.6 : 1 }}>
                 {saving ? 'Menyimpan...' : 'Simpan Program'}
               </button>
+            </>
+          }
+        >
+          {[
+            { label: 'Judul Program', key: 'title', type: 'text', placeholder: 'Masukkan judul program' },
+            { label: 'Deskripsi', key: 'description', type: 'textarea', placeholder: 'Deskripsi program' },
+            { label: 'Jumlah SKS', key: 'sks', type: 'number', placeholder: 'Contoh: 20' },
+            { label: 'Periode', key: 'period', type: 'text', placeholder: 'Contoh: 2025/2026 Ganjil' },
+          ].map(f => (
+            <div key={f.key} style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
+              {f.type === 'textarea' ? (
+                <textarea id={`input-${f.key}`} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} rows={3} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', resize: 'vertical', boxSizing: 'border-box' }} />
+              ) : (
+                <input id={`input-${f.key}`} type={f.type} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
+              )}
             </div>
+          ))}
+          <div style={{ marginBottom: '20px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Status</label>
+            <select id="input-status" value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }}>
+              <option value="active">Aktif</option>
+              <option value="inactive">Tidak Aktif</option>
+              <option value="closed">Ditutup</option>
+            </select>
           </div>
-        </div>
+        </ModalShell>
       )}
 
       {/* Submissions Modal */}
       {showSubmissions && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }} onClick={() => setShowSubmissions(null)}>
-          <div className="siakad-card" onClick={e => e.stopPropagation()} style={{ padding: '32px', width: '100%', maxWidth: '680px', borderRadius: '20px', maxHeight: '80vh', overflowY: 'auto' }}>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Pendaftar: {showSubmissions.title}</h2>
-            <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: '0 0 20px 0' }}>{submissions.length} pendaftar ditemukan</p>
-            {submissions.length === 0 ? (
-              <p style={{ textAlign: 'center', color: 'var(--color-muted)', padding: '20px' }}>Belum ada pendaftar.</p>
-            ) : (
-              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                <thead>
-                  <tr>
-                    {['Mahasiswa', 'NIM', 'Status', 'Aksi'].map(h => (
-                      <th key={h} style={{ padding: '10px 12px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase' }}>{h}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {submissions.map(s => (
-                    <tr key={s.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                      <td style={{ padding: '12px', color: 'var(--color-text)', fontWeight: '600' }}>{s.student_name || s.user_name || '-'}</td>
-                      <td style={{ padding: '12px', color: 'var(--color-muted)' }}>{s.nim || '-'}</td>
-                      <td style={{ padding: '12px' }}>{statusBadge(s.status)}</td>
-                      <td style={{ padding: '12px' }}>
-                        {s.status === 'pending' && (
-                          <div style={{ display: 'flex', gap: '8px' }}>
-                            <button id={`btn-approve-${s.id}`} onClick={() => handleSubmission(s.id, 'approve')} disabled={processingId === s.id} style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981', border: 'none', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '600' }}>
-                              <i className="ph ph-check"></i> Setuju
-                            </button>
-                            <button id={`btn-reject-${s.id}`} onClick={() => handleSubmission(s.id, 'reject')} disabled={processingId === s.id} style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: 'none', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '600' }}>
-                              <i className="ph ph-x"></i> Tolak
-                            </button>
-                          </div>
-                        )}
-                      </td>
-                    </tr>
+        <ModalShell
+          title={`Pendaftar: ${showSubmissions.title}`}
+          subtitle={`${submissions.length} pendaftar ditemukan`}
+          icon="ph-users"
+          onClose={() => setShowSubmissions(null)}
+          footer={
+            <button id="btn-close-submissions" onClick={() => setShowSubmissions(null)} className="btn" style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Tutup</button>
+          }
+        >
+          {submissions.length === 0 ? (
+            <p style={{ textAlign: 'center', color: 'var(--color-muted)', padding: '20px' }}>Belum ada pendaftar.</p>
+          ) : (
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+              <thead>
+                <tr>
+                  {['Mahasiswa', 'NIM', 'Status', 'Aksi'].map(h => (
+                    <th key={h} style={{ padding: '10px 12px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase' }}>{h}</th>
                   ))}
-                </tbody>
-              </table>
-            )}
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
-              <button id="btn-close-submissions" onClick={() => setShowSubmissions(null)} style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Tutup</button>
-            </div>
-          </div>
-        </div>
+                </tr>
+              </thead>
+              <tbody>
+                {submissions.map(s => (
+                  <tr key={s.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                    <td style={{ padding: '12px', color: 'var(--color-text)', fontWeight: '600' }}>{s.student_name || s.user_name || '-'}</td>
+                    <td style={{ padding: '12px', color: 'var(--color-muted)' }}>{s.nim || '-'}</td>
+                    <td style={{ padding: '12px' }}>{statusBadge(s.status)}</td>
+                    <td style={{ padding: '12px' }}>
+                      {s.status === 'pending' && (
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <button id={`btn-approve-${s.id}`} onClick={() => handleSubmission(s.id, 'approve')} disabled={processingId === s.id} style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981', border: 'none', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '600' }}>
+                            <i className="ph ph-check"></i> Setuju
+                          </button>
+                          <button id={`btn-reject-${s.id}`} onClick={() => handleSubmission(s.id, 'reject')} disabled={processingId === s.id} style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: 'none', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '600' }}>
+                            <i className="ph ph-x"></i> Tolak
+                          </button>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </ModalShell>
       )}
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import ModalShell from '../../components/ModalShell';
 
 export default function TracerStudyAdminPage() {
   const router = useRouter();
@@ -248,27 +249,31 @@ export default function TracerStudyAdminPage() {
 
       {/* Add Alumni Modal */}
       {showAddModal && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }} onClick={() => setShowAddModal(false)}>
-          <div className="siakad-card" onClick={e => e.stopPropagation()} style={{ padding: '32px', width: '100%', maxWidth: '480px', borderRadius: '20px' }}>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Tambah Alumni</h2>
-            {[
-              { label: 'Cari User', key: 'user_search', placeholder: 'Nama atau NIM...' },
-              { label: 'Tahun Lulus', key: 'graduation_year', placeholder: 'Contoh: 2024' },
-              { label: 'Program Studi', key: 'program', placeholder: 'Contoh: Teknik Informatika' },
-            ].map(f => (
-              <div key={f.key} style={{ marginBottom: '16px' }}>
-                <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-                <input id={`input-alumni-${f.key}`} type="text" value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
-              </div>
-            ))}
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-              <button id="btn-cancel-alumni" onClick={() => setShowAddModal(false)} style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-              <button id="btn-confirm-alumni" onClick={addAlumni} disabled={saving} style={{ padding: '10px 24px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', cursor: 'pointer', fontWeight: '600', opacity: saving ? 0.6 : 1 }}>
+        <ModalShell
+          title="Tambah Alumni"
+          subtitle="Pelacakan Lulusan"
+          icon="ph-graduation-cap"
+          onClose={() => setShowAddModal(false)}
+          footer={
+            <>
+              <button id="btn-cancel-alumni" onClick={() => setShowAddModal(false)} className="btn" style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+              <button id="btn-confirm-alumni" onClick={addAlumni} disabled={saving} className="btn btn-primary" style={{ padding: '10px 24px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', cursor: 'pointer', fontWeight: '600', opacity: saving ? 0.6 : 1 }}>
                 {saving ? 'Menyimpan...' : 'Tambah Alumni'}
               </button>
+            </>
+          }
+        >
+          {[
+            { label: 'Cari User', key: 'user_search', placeholder: 'Nama atau NIM...' },
+            { label: 'Tahun Lulus', key: 'graduation_year', placeholder: 'Contoh: 2024' },
+            { label: 'Program Studi', key: 'program', placeholder: 'Contoh: Teknik Informatika' },
+          ].map(f => (
+            <div key={f.key} style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
+              <input id={`input-alumni-${f.key}`} type="text" value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
             </div>
-          </div>
-        </div>
+          ))}
+        </ModalShell>
       )}
     </div>
   );
