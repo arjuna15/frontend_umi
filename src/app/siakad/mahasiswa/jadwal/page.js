@@ -90,7 +90,6 @@ export default function JadwalKalenderPage() {
   }
 
   return (
-  return (
     <div className="fade-in">
       <div className="siakad-page-header">
         <div className="siakad-page-header-glow"></div>
