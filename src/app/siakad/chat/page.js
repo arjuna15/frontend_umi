@@ -75,17 +75,34 @@ export default function ChatPage() {
     const token = getToken();
     if (!token) return;
 
+    let portIndex = 0;
+    const ports = ['', ':8080', ':6001', ':8000']; 
+
     const connectWs = () => {
       try {
-        const ws = new WebSocket(`${wsUrl}?token=${token}`);
+        let currentWsUrl = wsUrl;
+        if (wsUrl.includes('wss://') || wsUrl.includes('ws://')) {
+          try {
+            const urlObj = new URL(wsUrl);
+            const currentPort = ports[portIndex];
+            currentWsUrl = `${urlObj.protocol}//${urlObj.hostname}${currentPort}${urlObj.pathname}`;
+          } catch(e) {}
+        }
+
+        const ws = new WebSocket(`${currentWsUrl}?token=${token}`);
         wsRef.current = ws;
 
-        ws.onopen = () => { setWsConnected(true); };
+        ws.onopen = () => { 
+          setWsConnected(true); 
+        };
         ws.onclose = () => {
           setWsConnected(false);
-          setTimeout(connectWs, 3000);
+          portIndex = (portIndex + 1) % ports.length;
+          setTimeout(connectWs, 4000);
         };
-        ws.onerror = () => { setWsConnected(false); };
+        ws.onerror = () => { 
+          setWsConnected(false); 
+        };
         ws.onmessage = (event) => {
           try {
             const data = JSON.parse(event.data);
