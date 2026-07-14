@@ -116,7 +116,8 @@ export default function KrsApprovalPage() {
                   outline: 'none', 
                   background: 'var(--color-bg)', 
                   color: 'var(--color-text)',
-                  fontSize: '0.85rem'
+                  fontSize: '0.85rem',
+                  boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.15)'
                 }} 
               />
             </div>

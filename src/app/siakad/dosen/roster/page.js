@@ -171,6 +171,7 @@ export default function RosterPage() {
                     width: '240px',
                     outline: 'none',
                     fontSize: '0.88rem',
+                    boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.15)',
                   }}
                 />
               </div>

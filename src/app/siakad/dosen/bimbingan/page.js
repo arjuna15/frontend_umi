@@ -158,7 +158,8 @@ export default function DosenBimbinganPage() {
                   background: 'var(--glass-bg)',
                   color: 'var(--color-text)',
                   outline: 'none',
-                  fontSize: '0.9rem'
+                  fontSize: '0.9rem',
+                  boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.15)'
                 }}
               />
               <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>

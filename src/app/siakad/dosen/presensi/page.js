@@ -241,7 +241,7 @@ export default function DosenPresensiPage() {
                 placeholder="Cari mahasiswa..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ padding: '8px 10px 8px 46px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '220px', maxWidth: '100%' }}
+                style={{ padding: '8px 10px 8px 46px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '220px', maxWidth: '100%', boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.15)' }}
               />
             </div>
           </div>
