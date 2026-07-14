@@ -235,13 +235,13 @@ export default function DosenPresensiPage() {
               Pilih status kehadiran untuk tiap mahasiswa.
             </div>
             <div style={{ position: 'relative' }}>
-              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
+              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
               <input 
                 type="text" 
                 placeholder="Cari mahasiswa..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ padding: '8px 10px 8px 36px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '220px', maxWidth: '100%' }}
+                style={{ padding: '8px 10px 8px 46px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '220px', maxWidth: '100%' }}
               />
             </div>
           </div>

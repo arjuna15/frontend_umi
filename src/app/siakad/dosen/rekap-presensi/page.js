@@ -112,9 +112,9 @@ export default function RekapPresensiPage() {
                 <p style={{ margin: 0, color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem' }}>{filteredStudents.length} mahasiswa · {selectedCourse?.total_meetings || 0} pertemuan</p>
               </div>
               <div style={{ position: 'relative' }}>
-                <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.5)' }}></i>
+                <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.5)' }}></i>
                 <input type="text" placeholder="Cari mahasiswa..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)}
-                  style={{ padding: '10px 10px 10px 36px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.1)', color: 'white', outline: 'none', width: '220px', fontSize: '0.9rem' }} />
+                  style={{ padding: '10px 10px 10px 46px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(255,255,255,0.1)', color: 'white', outline: 'none', width: '220px', fontSize: '0.9rem' }} />
               </div>
             </div>
             <div style={{ overflowX: 'auto' }}>

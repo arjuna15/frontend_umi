@@ -102,7 +102,7 @@ export default function KrsApprovalPage() {
           </div>
           <div style={{ padding: '12px 12px 6px 12px', borderBottom: '1px solid var(--color-border)' }}>
             <div style={{ position: 'relative', width: '100%' }}>
-              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.05rem' }}></i>
+              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.05rem' }}></i>
               <input 
                 type="text" 
                 placeholder="Cari nama atau NIM..." 
@@ -110,7 +110,7 @@ export default function KrsApprovalPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{ 
                   width: '100%', 
-                  padding: '8px 12px 8px 36px', 
+                  padding: '8px 12px 8px 46px', 
                   borderRadius: '8px', 
                   border: '1px solid var(--color-border)', 
                   outline: 'none', 

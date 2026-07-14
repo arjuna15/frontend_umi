@@ -152,7 +152,7 @@ export default function DosenBimbinganPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '8px 12px 8px 36px',
+                  padding: '8px 12px 8px 46px',
                   borderRadius: '8px',
                   border: '1px solid var(--color-border)',
                   background: 'var(--glass-bg)',
@@ -161,7 +161,7 @@ export default function DosenBimbinganPage() {
                   fontSize: '0.9rem'
                 }}
               />
-              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
+              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
             </div>
           </div>
 
