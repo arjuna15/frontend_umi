@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import ModalShell from '../components/ModalShell';
 
 export default function ChatPage() {
   const router = useRouter();
@@ -282,21 +283,26 @@ export default function ChatPage() {
 
       {/* Create Room Modal */}
       {showCreateRoom && (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }} onClick={() => setShowCreateRoom(false)}>
-          <div className="siakad-card" onClick={e => e.stopPropagation()} style={{ padding: '32px', width: '100%', maxWidth: '440px', borderRadius: '20px' }}>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Buat Percakapan Baru</h2>
-            <div style={{ marginBottom: '20px' }}>
-              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Room</label>
-              <input id="input-room-name" type="text" value={newRoomName} onChange={e => setNewRoomName(e.target.value)} placeholder="Masukkan nama room..." style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
-            </div>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-              <button id="btn-cancel-room" onClick={() => setShowCreateRoom(false)} style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-              <button id="btn-confirm-create-room" onClick={createRoom} disabled={creatingRoom || !newRoomName.trim()} style={{ padding: '10px 24px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', cursor: 'pointer', fontWeight: '600', opacity: (creatingRoom || !newRoomName.trim()) ? 0.6 : 1 }}>
+        <ModalShell
+          title="Buat Percakapan Baru"
+          subtitle="Real-Time Chat"
+          icon="ph-chat-circle-dots"
+          onClose={() => setShowCreateRoom(false)}
+          maxWidth="440px"
+          footer={
+            <>
+              <button id="btn-cancel-room" onClick={() => setShowCreateRoom(false)} className="btn" style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+              <button id="btn-confirm-create-room" onClick={createRoom} disabled={creatingRoom || !newRoomName.trim()} className="btn btn-primary" style={{ padding: '10px 24px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', cursor: 'pointer', fontWeight: '600', opacity: (creatingRoom || !newRoomName.trim()) ? 0.6 : 1 }}>
                 {creatingRoom ? 'Membuat...' : 'Buat Room'}
               </button>
-            </div>
+            </>
+          }
+        >
+          <div style={{ marginBottom: '8px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Ruang Obrolan</label>
+            <input id="input-room-name" type="text" value={newRoomName} onChange={e => setNewRoomName(e.target.value)} placeholder="Masukkan nama room..." style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
           </div>
-        </div>
+        </ModalShell>
       )}
     </div>
   );
