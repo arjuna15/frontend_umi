@@ -173,7 +173,7 @@ export default function EdomMahasiswaPage() {
           <div key={q.id} style={{ marginBottom: '24px', padding: '20px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
               <p style={{ color: 'var(--color-text)', fontWeight: '600', margin: 0, flex: 1 }}><span style={{ color: 'var(--color-muted)', marginRight: '8px' }}>{qi + 1}.</span>{q.question}</p>
-              <span style={{ padding: '2px 10px', borderRadius: '12px', fontSize: '0.7rem', fontWeight: '700', background: 'rgba(59,130,246,0.1)', color: '#3b82f6', whiteSpace: 'nowrap' }}>{q.category}</span>
+              <span style={{ display: 'inline-block', minWidth: '100px', textAlign: 'center', padding: '4px 10px', borderRadius: '50px', fontSize: '0.7rem', fontWeight: '700', background: 'rgba(59,130,246,0.1)', color: '#3b82f6', whiteSpace: 'nowrap' }}>{q.category}</span>
             </div>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               {[1,2,3,4,5].map(score => {

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
 import SkeletonLoader from '../../components/SkeletonLoader';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function QualityAssurancePage() {
   const router = useRouter();
@@ -145,9 +146,16 @@ export default function QualityAssurancePage() {
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Judul Dokumen</label>
             <input className="siakad-input" value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Contoh: Standar Pendidikan 2025" /></div>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Kategori</label>
-            <select className="siakad-input" value={form.category} onChange={e => setForm({...form, category: e.target.value})}>
-              <option value="standar">Standar</option><option value="audit">Audit</option><option value="evaluasi">Evaluasi</option><option value="akreditasi">Akreditasi</option>
-            </select></div>
+            <CustomSelect
+              value={form.category}
+              onChange={val => setForm({...form, category: val})}
+              options={[
+                { value: 'standar', label: 'Standar' },
+                { value: 'audit', label: 'Audit' },
+                { value: 'evaluasi', label: 'Evaluasi' },
+                { value: 'akreditasi', label: 'Akreditasi' }
+              ]}
+            /></div>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tahun Akademik</label>
             <input className="siakad-input" value={form.academic_year} onChange={e => setForm({...form, academic_year: e.target.value})} placeholder="2025/2026" /></div>
         </ModalShell>

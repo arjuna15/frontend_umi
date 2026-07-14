@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
 import SkeletonLoader from '../../components/SkeletonLoader';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function WisudaMahasiswaPage() {
   const router = useRouter();
@@ -142,9 +143,11 @@ export default function WisudaMahasiswaPage() {
           footer={<><button onClick={() => setShowWisModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
             <button onClick={submitWisuda} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Daftar Wisuda'}</button></>}>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Ukuran Toga</label>
-            <select className="siakad-input" value={wisForm.toga_size} onChange={e => setWisForm({...wisForm, toga_size: e.target.value})}>
-              {['S','M','L','XL','XXL'].map(s => <option key={s} value={s}>{s}</option>)}
-            </select></div>
+            <CustomSelect
+              value={wisForm.toga_size}
+              onChange={val => setWisForm({...wisForm, toga_size: val})}
+              options={['S','M','L','XL','XXL'].map(s => ({ value: s, label: s }))}
+            /></div>
         </ModalShell>
       )}
       </div>

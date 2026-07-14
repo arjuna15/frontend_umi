@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
 import SkeletonLoader from '../../components/SkeletonLoader';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function SkpiMahasiswaPage() {
   const router = useRouter();
@@ -107,15 +108,27 @@ export default function SkpiMahasiswaPage() {
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Kategori</label>
-            <select className="siakad-input" value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})}>
-              <option value="akademik">Akademik</option><option value="non-akademik">Non-Akademik</option>
-            </select>
+            <CustomSelect
+              value={formData.category}
+              onChange={val => setFormData({...formData, category: val})}
+              options={[
+                { value: 'akademik', label: 'Akademik' },
+                { value: 'non-akademik', label: 'Non-Akademik' }
+              ]}
+            />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tingkat</label>
-            <select className="siakad-input" value={formData.level} onChange={e => setFormData({...formData, level: e.target.value})}>
-              <option value="internal">Internal</option><option value="regional">Regional</option><option value="nasional">Nasional</option><option value="internasional">Internasional</option>
-            </select>
+            <CustomSelect
+              value={formData.level}
+              onChange={val => setFormData({...formData, level: val})}
+              options={[
+                { value: 'internal', label: 'Internal' },
+                { value: 'regional', label: 'Regional' },
+                { value: 'nasional', label: 'Nasional' },
+                { value: 'internasional', label: 'Internasional' }
+              ]}
+            />
           </div>
         </ModalShell>
       )}

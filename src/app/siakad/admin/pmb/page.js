@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import ModalShell from '../../components/ModalShell';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function PMBAdminPage() {
   const router = useRouter();
@@ -288,11 +289,15 @@ export default function PMBAdminPage() {
           ))}
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Status</label>
-            <select id="input-period-status" className="siakad-input" value={periodForm.status} onChange={e => setPeriodForm({ ...periodForm, status: e.target.value })}>
-              <option value="open">Dibuka</option>
-              <option value="closed">Ditutup</option>
-              <option value="upcoming">Akan Datang</option>
-            </select>
+            <CustomSelect
+              value={periodForm.status}
+              onChange={val => setPeriodForm({ ...periodForm, status: val })}
+              options={[
+                { value: 'open', label: 'Dibuka' },
+                { value: 'closed', label: 'Ditutup' },
+                { value: 'upcoming', label: 'Akan Datang' }
+              ]}
+            />
           </div>
         </ModalShell>
       )}

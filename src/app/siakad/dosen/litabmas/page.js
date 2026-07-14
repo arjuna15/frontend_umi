@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
 import SkeletonLoader from '../../components/SkeletonLoader';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function LitabmasDosenPage() {
   const router = useRouter();
@@ -95,7 +96,14 @@ export default function LitabmasDosenPage() {
           footer={<><button onClick={() => setShowModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
             <button onClick={handleSubmit} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Ajukan'}</button></>}>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tipe</label>
-            <select className="siakad-input" value={form.type} onChange={e => setForm({...form, type: e.target.value})}><option value="penelitian">Penelitian</option><option value="pengabdian">Pengabdian Masyarakat</option></select></div>
+            <CustomSelect
+              value={form.type}
+              onChange={val => setForm({...form, type: val})}
+              options={[
+                { value: 'penelitian', label: 'Penelitian' },
+                { value: 'pengabdian', label: 'Pengabdian Masyarakat' }
+              ]}
+            /></div>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Judul</label>
             <input className="siakad-input" value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Judul proposal..." /></div>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Abstrak</label>
