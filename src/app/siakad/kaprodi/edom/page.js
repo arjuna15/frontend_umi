@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 export default function KaprodiEdom() {
   const router = useRouter();
   const [edoms, setEdoms] = useState([]);
+  const [aspects, setAspects] = useState({ pedagogik: 0, profesional: 0, sosial: 0, kepribadian: 0 });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,7 +27,10 @@ export default function KaprodiEdom() {
 
       if (res.ok) {
         const data = await res.json();
-        setEdoms(data.edoms);
+        setEdoms(data.edoms || []);
+        if (data.aspect_averages) {
+          setAspects(data.aspect_averages);
+        }
       }
     } catch (err) {
       console.error(err);
@@ -41,23 +45,7 @@ export default function KaprodiEdom() {
     </div>
   );
 
-  const calculateAggregates = () => {
-    if (!edoms || edoms.length === 0) return { avg: 0, aspects: { pedagogik: 0, profesional: 0, sosial: 0, kepribadian: 0 } };
-    const avg = (edoms.reduce((acc, curr) => acc + curr.score, 0) / edoms.length).toFixed(2);
-    // Mocking aspect breakdown if not in DB, based on score
-    const base = parseFloat(avg);
-    return {
-      avg,
-      aspects: {
-        pedagogik: Math.min(5, (base + 0.1)).toFixed(2),
-        profesional: Math.min(5, (base + 0.2)).toFixed(2),
-        sosial: Math.max(1, (base - 0.1)).toFixed(2),
-        kepribadian: base.toFixed(2)
-      }
-    };
-  };
-
-  const { avg, aspects } = calculateAggregates();
+  const avg = edoms.length > 0 ? (edoms.reduce((acc, curr) => acc + curr.score, 0) / edoms.length).toFixed(2) : '0.00';
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
