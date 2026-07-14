@@ -160,7 +160,7 @@ export default function KaprodiKrs() {
             {activeTab === 'pending' ? 'Daftar Pengajuan Pending' : 'Riwayat Pengajuan'}
           </h3>
           <div style={{ position: 'relative', width: '300px' }}>
-            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
             <input 
               className="siakad-input"
               type="text" 
@@ -169,7 +169,7 @@ export default function KaprodiKrs() {
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{ 
                 width: '100%', 
-                paddingLeft: '38px', 
+                paddingLeft: '46px', 
                 color: 'var(--color-text)',
                 fontSize: '0.9rem'
               }} 

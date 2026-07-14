@@ -156,14 +156,14 @@ export default function RosterPage() {
                 </p>
               </div>
               <div style={{ position: 'relative' }}>
-                <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}></i>
+                <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}></i>
                 <input
                   type="text"
                   placeholder="Cari NIM atau Nama..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   style={{
-                    padding: '10px 14px 10px 36px',
+                    padding: '10px 14px 10px 46px',
                     background: 'rgba(255,255,255,0.1)',
                     border: '1px solid rgba(255,255,255,0.2)',
                     borderRadius: '10px',

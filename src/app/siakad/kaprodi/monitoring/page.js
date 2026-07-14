@@ -62,7 +62,7 @@ export default function KaprodiMonitoring() {
         <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Kelas & BAP</h3>
           <div style={{ position: 'relative', width: '300px' }}>
-            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
             <input 
               className="siakad-input"
               type="text" 
@@ -71,7 +71,7 @@ export default function KaprodiMonitoring() {
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{ 
                 width: '100%', 
-                paddingLeft: '38px', 
+                paddingLeft: '46px', 
                 color: 'var(--color-text)',
                 fontSize: '0.9rem'
               }} 

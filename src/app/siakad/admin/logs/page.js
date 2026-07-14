@@ -83,7 +83,7 @@ export default function AdminLogsPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="siakad-input"
-              style={{ width: '100%', paddingLeft: '44px' }}
+              style={{ width: '100%', paddingLeft: '46px' }}
             />
           </div>
         </div>

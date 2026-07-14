@@ -141,8 +141,8 @@ export default function AdminRuanganPage() {
         <div style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Ruangan</h3>
           <div style={{ position: 'relative', width: '300px' }}>
-            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
-            <input type="text" className="siakad-input" placeholder="Cari nama ruangan, kode, tipe..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', color: 'var(--color-text)', fontSize: '0.9rem' }} />
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <input type="text" className="siakad-input" placeholder="Cari nama ruangan, kode, tipe..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', paddingLeft: '46px', color: 'var(--color-text)', fontSize: '0.9rem' }} />
           </div>
         </div>
 

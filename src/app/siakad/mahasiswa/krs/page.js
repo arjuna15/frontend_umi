@@ -194,7 +194,7 @@ export default function KRSPage() {
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Daftar Mata Kuliah Tersedia</h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
             <div style={{ position: 'relative', width: '250px' }}>
-              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1rem' }}></i>
+              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1rem' }}></i>
               <input 
                 type="text" 
                 placeholder="Cari matkul, kode, dosen..." 
@@ -203,7 +203,7 @@ export default function KRSPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{ 
                   width: '100%', 
-                  paddingLeft: '32px', 
+                  paddingLeft: '46px', 
                   color: 'var(--color-text)',
                   fontSize: '0.85rem'
                 }} 

@@ -195,8 +195,8 @@ export default function ChatPage() {
               </button>
             </div>
             <div style={{ position: 'relative' }}>
-              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1rem' }}></i>
-              <input id="input-search-rooms" type="text" placeholder="Cari percakapan..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px 12px 10px 36px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1rem' }}></i>
+              <input id="input-search-rooms" type="text" placeholder="Cari percakapan..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px 12px 10px 46px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
             </div>
           </div>
           <div style={{ flex: 1, overflowY: 'auto' }}>
