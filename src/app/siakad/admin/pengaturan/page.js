@@ -132,13 +132,11 @@ export default function AdminPengaturan() {
                   const nextYear = y + 1;
                   opts.push({
                     value: `Ganjil ${y}/${nextYear}`,
-                    label: `Ganjil ${y}/${nextYear}`,
-                    icon: 'ph ph-sun-dim'
+                    label: `Ganjil ${y}/${nextYear}`
                   });
                   opts.push({
                     value: `Genap ${y}/${nextYear}`,
-                    label: `Genap ${y}/${nextYear}`,
-                    icon: 'ph ph-cloud-rain'
+                    label: `Genap ${y}/${nextYear}`
                   });
                 }
                 return opts;

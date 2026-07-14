@@ -25,15 +25,29 @@ export default function CustomSelect({ name, options, value, onChange, placehold
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
-  // Update coords when open
+  // Update coords when open and handle scroll/resize positioning
   useEffect(() => {
     if (!isOpen || !triggerRef.current) return;
-    const rect = triggerRef.current.getBoundingClientRect();
-    setCoords({
-      top: rect.bottom + window.scrollY + 4,
-      left: rect.left + window.scrollX,
-      width: rect.width,
-    });
+    
+    const updateCoords = () => {
+      const rect = triggerRef.current.getBoundingClientRect();
+      setCoords({
+        top: rect.bottom + window.scrollY + 4,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+      });
+    };
+
+    updateCoords();
+    
+    // Capture scroll events at the document level
+    window.addEventListener('scroll', updateCoords, true);
+    window.addEventListener('resize', updateCoords);
+
+    return () => {
+      window.removeEventListener('scroll', updateCoords, true);
+      window.removeEventListener('resize', updateCoords);
+    };
   }, [isOpen]);
 
   const handleToggle = () => {
