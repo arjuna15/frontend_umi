@@ -94,7 +94,7 @@ export default function MahasiswaDashboard() {
                 <i className="ph ph-identification-card" style={{ color: '#60a5fa' }}></i>
               </div>
               <div>
-                <p style={{ margin: 0, fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.65)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '1px' }}>NIM Mahasiswa</p>
+                <p style={{ margin: 0, fontSize: '0.75rem', color: '#ffffff', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '1px', opacity: 0.9 }}>NIM Mahasiswa</p>
                 <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: '800' }}>{data.user.nim_nip || '-'}</h3>
               </div>
             </div>
@@ -177,7 +177,7 @@ export default function MahasiswaDashboard() {
             {dashboardExt.upcoming_deadlines?.length > 0 ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {dashboardExt.upcoming_deadlines.map((deadline, idx) => (
-                  <div key={idx} style={{ padding: '16px', background: Math.ceil(deadline.due_in_days) <= 1 ? 'rgba(239, 68, 68, 0.1)' : 'rgba(245, 158, 11, 0.1)', border: `1px solid ${Math.ceil(deadline.due_in_days) <= 1 ? 'rgba(239, 68, 68, 0.3)' : 'rgba(245, 158, 11, 0.3)'}`, borderRadius: '12px' }}>
+                  <div key={idx} onClick={() => router.push(deadline.target_url || '#')} style={{ padding: '16px', background: Math.ceil(deadline.due_in_days) <= 1 ? 'rgba(239, 68, 68, 0.1)' : 'rgba(245, 158, 11, 0.1)', border: `1px solid ${Math.ceil(deadline.due_in_days) <= 1 ? 'rgba(239, 68, 68, 0.3)' : 'rgba(245, 158, 11, 0.3)'}`, borderRadius: '12px', cursor: 'pointer', transition: 'transform 0.2s', ':hover': { transform: 'scale(1.02)' } }}>
                     <div className="siakad-modal-header">
                       <h4 style={{ margin: 0, fontSize: '1rem', color: 'var(--color-text)', fontWeight: '700' }}>{deadline.title}</h4>
                       <span style={{ fontSize: '0.75rem', fontWeight: 'bold', padding: '4px 8px', borderRadius: '999px', background: Math.ceil(deadline.due_in_days) <= 1 ? '#ef4444' : '#f59e0b', color: 'white' }}>
