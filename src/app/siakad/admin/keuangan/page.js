@@ -429,7 +429,7 @@ export default function AdminKeuangan() {
             </div>
           </form>
         </ModalShell>
-      }      {isBulkModalOpen && (
+      )}      {isBulkModalOpen && (
         <ModalShell
           title="Generate Tagihan Massal"
           icon="ph-receipt"
