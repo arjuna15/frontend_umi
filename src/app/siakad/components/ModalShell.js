@@ -36,21 +36,22 @@ export default function ModalShell({
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: 'var(--color-muted)',
+                color: 'var(--color-text)',
                 cursor: 'pointer',
-                fontSize: '1.2rem',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                padding: '4px',
-                transition: 'color 0.2s'
+                padding: '6px',
+                transition: 'all 0.2s ease',
+                opacity: 0.6,
+                outline: 'none'
               }}
-              onMouseEnter={e => e.target.style.color = 'var(--color-text)'}
-              onMouseLeave={e => e.target.style.color = 'var(--color-muted)'}
+              onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+              onMouseLeave={e => e.currentTarget.style.opacity = '0.6'}
               aria-label="Tutup modal"
               type="button"
             >
-              ✕
+              <i className="ph ph-x" style={{ fontSize: '1rem' }}></i>
             </button>
           )}
         </div>
