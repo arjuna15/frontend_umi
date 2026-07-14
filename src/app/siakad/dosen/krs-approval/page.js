@@ -105,13 +105,13 @@ export default function KrsApprovalPage() {
               <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.05rem' }}></i>
               <input 
                 type="text" 
-                placeholder="Cari nama atau NIM..." 
+                placeholder="Cari nama, NIM, atau status..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{ 
                   width: '100%', 
                   padding: '8px 12px 8px 46px', 
-                  borderRadius: '8px', 
+                  borderRadius: '50px', 
                   border: '1px solid var(--color-border)', 
                   outline: 'none', 
                   background: 'var(--color-bg)', 
@@ -147,7 +147,7 @@ export default function KrsApprovalPage() {
                 const isActive = selectedSub?.id === sub.id;
                 return (
                   <button key={sub.id} onClick={() => { setSelectedSub(sub); setNotes(sub.notes || ''); }}
-                    style={{ padding: '14px 16px', textAlign: 'left', background: isActive ? 'linear-gradient(135deg, rgba(196,30,58,0.2), rgba(99,102,241,0.2))' : 'var(--glass-bg)', border: `1px solid ${isActive ? 'rgba(196,30,58,0.4)' : 'var(--color-border)'}`, borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s', width: '100%' }}>
+                    style={{ padding: '14px 16px', textAlign: 'left', background: isActive ? 'linear-gradient(135deg, rgba(196,30,58,0.2), rgba(99,102,241,0.2))' : 'var(--glass-bg)', border: `1px solid ${isActive ? 'rgba(196,30,58,0.4)' : 'var(--color-border)'}`, borderRadius: '24px', cursor: 'pointer', transition: 'all 0.2s', width: '100%' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                       <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366f1', fontWeight: '800', flexShrink: 0 }}>
                         {(sub.mahasiswa?.name || '?').charAt(0)}
@@ -156,7 +156,7 @@ export default function KrsApprovalPage() {
                         <p style={{ margin: '0 0 2px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{sub.mahasiswa?.name || 'Mahasiswa'}</p>
                         <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)' }}>NIM: {sub.mahasiswa?.nim || '—'}</p>
                       </div>
-                      <span style={{ padding: '3px 8px', background: st.bg, color: st.color, border: `1px solid ${st.border}`, borderRadius: '6px', fontSize: '0.7rem', fontWeight: '700', whiteSpace: 'nowrap' }}>{st.label}</span>
+                      <span style={{ padding: '4px 10px', background: st.bg, color: st.color, border: `1px solid ${st.border}`, borderRadius: '50px', fontSize: '0.7rem', fontWeight: '700', whiteSpace: 'nowrap' }}>{st.label}</span>
                     </div>
                   </button>
                 );
@@ -198,15 +198,15 @@ export default function KrsApprovalPage() {
                     <tbody>
                       {(selectedSub.courses || []).map((c, i) => (
                         <tr key={c.id || i} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                          <td style={{ padding: '12px 16px' }}><span style={{ padding: '4px 10px', background: 'rgba(99,102,241,0.1)', color: '#6366f1', borderRadius: '6px', fontSize: '0.8rem', fontWeight: '700' }}>{c.code}</span></td>
+                          <td style={{ padding: '12px 16px' }}><span style={{ padding: '4px 12px', background: 'rgba(99,102,241,0.1)', color: '#6366f1', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>{c.code}</span></td>
                           <td style={{ padding: '12px 16px', fontWeight: '600', color: 'var(--color-text)' }}>{c.name}</td>
-                          <td style={{ padding: '12px 16px' }}><span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '4px 10px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '6px', fontSize: '0.8rem', fontWeight: '700' }}>{c.sks} SKS</span></td>
+                          <td style={{ padding: '12px 16px' }}><span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '4px 12px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>{c.sks} SKS</span></td>
                         </tr>
                       ))}
                       <tr style={{ background: 'rgba(0,0,0,0.02)' }}>
                         <td colSpan="2" style={{ padding: '12px 16px', fontWeight: '700', color: 'var(--color-text)', textAlign: 'right' }}>Total SKS:</td>
                         <td style={{ padding: '12px 16px' }}>
-                          <span style={{ padding: '6px 14px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', borderRadius: '8px', fontWeight: '800', fontSize: '1rem' }}>
+                          <span style={{ padding: '6px 14px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', borderRadius: '50px', fontWeight: '800', fontSize: '1rem' }}>
                             {(selectedSub.courses || []).reduce((acc, c) => acc + (parseInt(c.sks) || 0), 0)} SKS
                           </span>
                         </td>
@@ -224,18 +224,18 @@ export default function KrsApprovalPage() {
                   <textarea value={notes} onChange={e => setNotes(e.target.value)}
                     placeholder={selectedSub.status === 'pending' ? 'Berikan catatan revisi jika KRS akan ditolak...' : (notes || 'Tidak ada catatan.')}
                     rows="3" disabled={selectedSub.status !== 'pending'}
-                    style={{ width: '100%', padding: '14px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: selectedSub.status !== 'pending' ? 'var(--glass-bg)' : 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }}></textarea>
+                    style={{ width: '100%', padding: '14px 20px', borderRadius: '24px', border: '1px solid var(--color-border)', background: selectedSub.status !== 'pending' ? 'var(--glass-bg)' : 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }}></textarea>
                 </div>
 
                 {/* Action Buttons */}
                 {selectedSub.status === 'pending' && (
                   <div style={{ display: 'flex', gap: '12px' }}>
                     <button onClick={() => handleAction('approved')} disabled={processing}
-                      style={{ flex: 1, padding: '14px', background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', borderRadius: '12px', border: 'none', cursor: processing ? 'not-allowed' : 'pointer', fontWeight: '800', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 8px 20px rgba(16,185,129,0.3)', transition: 'all 0.2s' }}>
+                      style={{ flex: 1, padding: '14px', background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', borderRadius: '50px', border: 'none', cursor: processing ? 'not-allowed' : 'pointer', fontWeight: '800', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 8px 20px rgba(16,185,129,0.3)', transition: 'all 0.2s' }}>
                       <i className="ph ph-check-circle" style={{ fontSize: '1.2rem' }}></i> Setujui KRS
                     </button>
                     <button onClick={() => handleAction('rejected')} disabled={processing || !notes.trim()}
-                      style={{ flex: 1, padding: '14px', background: (!notes.trim() || processing) ? 'var(--color-border)' : 'linear-gradient(135deg, #ef4444, #dc2626)', color: (!notes.trim() || processing) ? 'var(--color-muted)' : 'white', borderRadius: '12px', border: 'none', cursor: (!notes.trim() || processing) ? 'not-allowed' : 'pointer', fontWeight: '800', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: (!notes.trim() || processing) ? 'none' : '0 8px 20px rgba(239,68,68,0.3)', transition: 'all 0.2s' }}
+                      style={{ flex: 1, padding: '14px', background: (!notes.trim() || processing) ? 'var(--color-border)' : 'linear-gradient(135deg, #ef4444, #dc2626)', color: (!notes.trim() || processing) ? 'var(--color-muted)' : 'white', borderRadius: '50px', border: 'none', cursor: (!notes.trim() || processing) ? 'not-allowed' : 'pointer', fontWeight: '800', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: (!notes.trim() || processing) ? 'none' : '0 8px 20px rgba(239,68,68,0.3)', transition: 'all 0.2s' }}
                       title={!notes.trim() ? 'Isi catatan terlebih dahulu untuk menolak KRS' : ''}>
                       <i className="ph ph-x-circle" style={{ fontSize: '1.2rem' }}></i>
                       {!notes.trim() ? 'Isi Catatan Dulu' : 'Tolak & Minta Revisi'}

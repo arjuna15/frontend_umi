@@ -120,12 +120,10 @@ export default function BapPage() {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Form Card */}
+        </div>        {/* Form Card */}
         <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
           <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 28px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
               <i className="ph ph-file-text" style={{ color: 'white', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, color: 'white', fontWeight: '700' }}>Form Pengisian BAP</h3>
@@ -133,7 +131,7 @@ export default function BapPage() {
 
           <div style={{ padding: '32px' }}>
             {submitted && (
-              <div style={{ padding: '16px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: '12px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px', color: '#10b981' }}>
+              <div style={{ padding: '16px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: '24px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px', color: '#10b981' }}>
                 <i className="ph ph-check-circle" style={{ fontSize: '1.3rem' }}></i>
                 <span style={{ fontWeight: '600' }}>BAP berhasil disimpan!</span>
               </div>
@@ -190,7 +188,7 @@ export default function BapPage() {
               </div>
 
               <button type="submit" disabled={submitting}
-                style={{ width: '100%', padding: '16px', background: submitting ? 'var(--color-muted)' : 'linear-gradient(135deg, #1e1b4b, #C41E3A)', color: 'white', border: 'none', borderRadius: '12px', fontWeight: '800', fontSize: '1rem', cursor: submitting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', transition: 'all 0.2s', boxShadow: submitting ? 'none' : '0 8px 20px rgba(196,30,58,0.3)' }}>
+                style={{ width: '100%', padding: '16px', background: submitting ? 'var(--color-muted)' : 'linear-gradient(135deg, #1e1b4b, #C41E3A)', color: 'white', border: 'none', borderRadius: '50px', fontWeight: '800', fontSize: '1rem', cursor: submitting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', transition: 'all 0.2s', boxShadow: submitting ? 'none' : '0 8px 20px rgba(196,30,58,0.3)' }}>
                 {submitting ? (
                   <><i className="ph ph-spinner ph-spin"></i> Menyimpan...</>
                 ) : (

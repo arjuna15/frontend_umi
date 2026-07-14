@@ -138,7 +138,7 @@ export default function JadwalPage() {
               { label: 'Terkonfigurasi', value: configuredCount, icon: 'ph-check-circle', color: '#10b981' },
               { label: 'Belum Diatur', value: courses.length - configuredCount, icon: 'ph-warning', color: '#f59e0b' },
             ].map((s, i) => (
-              <div key={i} style={{ flex: '1 1 90px', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.15)' }}>
+              <div key={i} style={{ flex: '1 1 90px', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '24px', padding: '16px 20px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.15)' }}>
                 <i className={`ph ${s.icon}`} style={{ fontSize: '1.3rem', color: s.color, display: 'block', marginBottom: '4px' }}></i>
                 <p style={{ color: 'white', fontWeight: '800', fontSize: '1.4rem', margin: '0 0 2px 0' }}>{s.value}</p>
                 <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.65rem', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.label}</p>
@@ -151,11 +151,11 @@ export default function JadwalPage() {
       {/* Table Card */}
       <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
         <div style={{ background: 'linear-gradient(to right, #1e3a5f, #1e1b4b)', padding: '20px 28px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
+          <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
             <i className="ph ph-calendar-plus" style={{ color: 'white', fontSize: '1.1rem' }}></i>
           </div>
           <h3 style={{ margin: 0, color: 'white', fontWeight: '700' }}>Daftar Mata Kuliah & Jadwal</h3>
-          <span style={{ marginLeft: 'auto', padding: '4px 12px', background: 'rgba(255,255,255,0.15)', color: 'white', borderRadius: '999px', fontSize: '0.8rem', fontWeight: '700' , flexShrink: 0 }}>{courses.length} MK</span>
+          <span style={{ marginLeft: 'auto', padding: '4px 12px', background: 'rgba(255,255,255,0.15)', color: 'white', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' , flexShrink: 0 }}>{courses.length} MK</span>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
@@ -176,7 +176,7 @@ export default function JadwalPage() {
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                     <td style={{ padding: '16px 20px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                           <span style={{ color: '#6366f1', fontWeight: '800', fontSize: '0.85rem' }}>{c.code?.substring(0, 2) || '??'}</span>
                         </div>
                         <div>
@@ -186,7 +186,7 @@ export default function JadwalPage() {
                       </div>
                     </td>
                     <td style={{ padding: '16px 20px' }}>
-                      <span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '4px 10px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem' }}>{c.sks} SKS</span>
+                      <span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '4px 12px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem' }}>{c.sks} SKS</span>
                     </td>
                     {isEditing ? (
                       <>
@@ -224,11 +224,11 @@ export default function JadwalPage() {
                         <td style={{ padding: '12px 16px', textAlign: 'center' }}>
                           <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
                             <button onClick={() => handleSave(c.id)} disabled={saving}
-                              style={{ padding: '8px 16px', background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', borderRadius: '8px', border: 'none', cursor: 'pointer', fontWeight: '700', fontSize: '0.85rem', boxShadow: '0 4px 10px rgba(16,185,129,0.3)' }}>
+                              style={{ padding: '8px 18px', background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', borderRadius: '50px', border: 'none', cursor: 'pointer', fontWeight: '700', fontSize: '0.85rem', boxShadow: '0 4px 10px rgba(16,185,129,0.3)' }}>
                               {saving ? '...' : 'Simpan'}
                             </button>
                             <button onClick={handleCancel}
-                              style={{ padding: '8px 16px', background: 'var(--glass-bg)', color: 'var(--color-muted)', borderRadius: '8px', border: '1px solid var(--color-border)', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem' }}>
+                              style={{ padding: '8px 18px', background: 'var(--glass-bg)', color: 'var(--color-muted)', borderRadius: '50px', border: '1px solid var(--color-border)', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem' }}>
                                 Batal
                             </button>
                           </div>
@@ -238,7 +238,7 @@ export default function JadwalPage() {
                       <>
                         <td style={{ padding: '16px 20px' }}>
                           {c.hari && dayStyle ? (
-                            <span style={{ display: 'inline-block', minWidth: '90px', textAlign: 'center', padding: '6px 14px', background: dayStyle.bg, color: dayStyle.color, border: `1px solid ${dayStyle.border}`, borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem' }}>{c.hari}</span>
+                            <span style={{ display: 'inline-block', minWidth: '95px', textAlign: 'center', padding: '6px 14px', background: dayStyle.bg, color: dayStyle.color, border: `1px solid ${dayStyle.border}`, borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem' }}>{c.hari}</span>
                           ) : <span style={{ color: 'var(--color-muted)', fontStyle: 'italic', fontSize: '0.85rem' }}>Belum diatur</span>}
                         </td>
                         <td style={{ padding: '16px 20px', color: 'var(--color-text)', fontSize: '0.9rem', fontWeight: '500' }}>
@@ -246,14 +246,14 @@ export default function JadwalPage() {
                         </td>
                         <td style={{ padding: '16px 20px' }}>
                           {(c.ruang || c.ruangan) ? (
-                            <span style={{ display: 'inline-flex', minWidth: '130px', justifyContent: 'center', alignItems: 'center', gap: '6px', padding: '6px 12px', background: 'var(--glass-bg)', borderRadius: '8px', fontWeight: '600', fontSize: '0.85rem', color: 'var(--color-text)', border: '1px solid var(--color-border)', whiteSpace: 'nowrap' }}>
+                            <span style={{ display: 'inline-flex', minWidth: '130px', justifyContent: 'center', alignItems: 'center', gap: '6px', padding: '6px 14px', background: 'var(--glass-bg)', borderRadius: '50px', fontWeight: '600', fontSize: '0.85rem', color: 'var(--color-text)', border: '1px solid var(--color-border)', whiteSpace: 'nowrap' }}>
                               <i className="ph ph-map-pin" style={{ color: '#C41E3A' }}></i>{c.ruang || c.ruangan}
                             </span>
                           ) : <span style={{ color: 'var(--color-muted)', fontStyle: 'italic', fontSize: '0.85rem' }}>—</span>}
                         </td>
                         <td style={{ padding: '16px 20px', textAlign: 'center' }}>
                           <button onClick={() => handleEdit(c)}
-                            style={{ padding: '8px 16px', background: 'var(--glass-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '600', fontSize: '0.85rem', transition: 'all 0.2s' }}>
+                            style={{ padding: '8px 18px', background: 'var(--glass-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '50px', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '600', fontSize: '0.85rem', transition: 'all 0.2s' }}>
                             <i className="ph ph-pencil-simple"></i> Atur
                           </button>
                         </td>

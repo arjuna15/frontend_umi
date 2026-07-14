@@ -69,8 +69,8 @@ export default function DosenDashboard() {
           { label: 'Notifikasi Aktif', value: todos.length, icon: 'ph-bell-ringing', color: ['#f59e0b', '#d97706'], shadow: 'rgba(245,158,11,0.3)' },
           { label: 'Semester', value: data.semester || '-', icon: 'ph-graduation-cap', color: ['#C41E3A', '#ef4444'], shadow: 'rgba(196,30,58,0.3)', small: true },
         ].map((stat, i) => (
-          <div key={i} className={`siakad-card stagger-${i + 1}`} style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: `linear-gradient(135deg, ${stat.color[0]}, ${stat.color[1]})`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 8px 20px ${stat.shadow}`, flexShrink: 0 }}>
+          <div key={i} className={`siakad-card stagger-${i + 1}`} style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderRadius: '24px' }}>
+            <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: `linear-gradient(135deg, ${stat.color[0]}, ${stat.color[1]})`, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 8px 20px ${stat.shadow}`, flexShrink: 0 }}>
               <i className={`ph ${stat.icon}`} style={{ fontSize: '1.5rem', color: 'white' }}></i>
             </div>
             <div style={{ minWidth: 0 }}>
@@ -91,15 +91,15 @@ export default function DosenDashboard() {
           </div>
           <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {todaySchedules.length > 0 ? todaySchedules.map((sch, i) => (
-              <div key={i} style={{ padding: '16px', background: 'var(--glass-bg)', borderRadius: '16px', borderLeft: `4px solid ${dayColors[sch.day] || '#8b5cf6'}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+              <div key={i} style={{ padding: '16px 20px', background: 'var(--glass-bg)', borderRadius: '50px', borderLeft: `4px solid ${dayColors[sch.day] || '#8b5cf6'}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
                 <div>
-                  <p style={{ margin: '0 0 6px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '1rem' }}>{sch.course}</p>
+                  <p style={{ margin: '0 0 4px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '1rem' }}>{sch.course}</p>
                   <div style={{ display: 'flex', gap: '12px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>
                     <span><i className="ph ph-clock" style={{ marginRight: '4px' }}></i>{sch.time || 'Belum diatur'}</span>
                     <span><i className="ph ph-map-pin" style={{ marginRight: '4px' }}></i>{sch.room || 'Belum ada ruang'}</span>
                   </div>
                 </div>
-                <span style={{ padding: '4px 10px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '8px', fontSize: '0.8rem', fontWeight: '700' }}>
+                <span style={{ padding: '4px 12px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>
                   Sesi {sch.meeting || '?'}
                 </span>
               </div>
@@ -126,9 +126,9 @@ export default function DosenDashboard() {
           </div>
           <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {todos.length > 0 ? todos.map((todo, i) => (
-              <div key={i} style={{ padding: '14px 16px', background: 'var(--glass-bg)', borderRadius: '12px', display: 'flex', alignItems: 'flex-start', gap: '12px', borderLeft: '4px solid #f59e0b' }}>
-                <i className="ph ph-warning-circle" style={{ marginTop: '2px', color: '#f59e0b', fontSize: '1.1rem', flexShrink: 0 }}></i>
-                <span style={{ fontSize: '0.9rem', color: 'var(--color-text)', lineHeight: 1.5 }}>{todo}</span>
+              <div key={i} style={{ padding: '14px 20px', background: 'var(--glass-bg)', borderRadius: '50px', display: 'flex', alignItems: 'center', gap: '12px', borderLeft: '4px solid #f59e0b' }}>
+                <i className="ph ph-warning-circle" style={{ color: '#f59e0b', fontSize: '1.1rem', flexShrink: 0 }}></i>
+                <span style={{ fontSize: '0.9rem', color: 'var(--color-text)' }}>{todo}</span>
               </div>
             )) : (
               <div style={{ textAlign: 'center', padding: '32px 0', color: 'var(--color-muted)' }}>
@@ -152,15 +152,15 @@ export default function DosenDashboard() {
             </div>
             <div style={{ padding: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
               {courses.map((c, i) => (
-                <div key={i} style={{ padding: '20px', background: 'var(--glass-bg)', borderRadius: '16px', border: '1px solid var(--color-border)', display: 'flex', gap: '16px', alignItems: 'center', transition: 'all 0.2s' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <div key={i} style={{ padding: '20px', background: 'var(--glass-bg)', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', gap: '16px', alignItems: 'center', transition: 'all 0.2s' }}>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <i className="ph ph-chalkboard-teacher" style={{ color: '#6366f1', fontSize: '1.3rem' }}></i>
                   </div>
                   <div style={{ minWidth: 0 }}>
                     <p style={{ margin: '0 0 4px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.95rem' }}>{c.name}</p>
                     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                      <span style={{ padding: '2px 8px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600' }}>{c.code}</span>
-                      <span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '2px 8px', background: 'rgba(16,185,129,0.15)', color: '#10b981', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '600' }}>{c.sks} SKS</span>
+                      <span style={{ padding: '2px 10px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '600' }}>{c.code}</span>
+                      <span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '2px 10px', background: 'rgba(16,185,129,0.15)', color: '#10b981', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '600' }}>{c.sks} SKS</span>
                     </div>
                   </div>
                 </div>

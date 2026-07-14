@@ -234,7 +234,7 @@ export default function DosenElearningPage() {
             </div>
             <button 
               onClick={() => router.push('/siakad/dosen/elearning/quiz')}
-              style={{ background: '#3b82f6', color: 'white', padding: '10px 20px', borderRadius: '8px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', flexShrink: 0 }}
+              style={{ background: '#3b82f6', color: 'white', padding: '10px 24px', borderRadius: '50px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', flexShrink: 0 }}
             >
               <i className="ph ph-plus-circle"></i> Buat Kuis / Ujian (CBT)
             </button>
@@ -252,7 +252,7 @@ export default function DosenElearningPage() {
                 key={course.id} 
                 onClick={() => loadSessions(course.id)}
                 style={{ 
-                  padding: '14px', borderRadius: '12px', cursor: 'pointer',
+                  padding: '14px', borderRadius: '24px', cursor: 'pointer',
                   background: selectedCourse === course.id ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--glass-bg)',
                   border: selectedCourse === course.id ? '1px solid rgba(196,30,58,0.5)' : '1px solid var(--color-border)',
                   color: selectedCourse === course.id ? 'white' : 'var(--color-text)',
@@ -282,11 +282,11 @@ export default function DosenElearningPage() {
                   <div style={{ flex: '1 1 300px' }}>
                     <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.1rem', fontWeight: '700' }}>Sesi {sess.session}: {sess.title}</h3>
                     <div style={{ display: 'flex', gap: '16px', color: 'var(--color-muted)', fontSize: '0.85rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(99,102,241,0.1)', color: '#6366f1', padding: '4px 10px', borderRadius: '20px', fontWeight: '600' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(99,102,241,0.1)', color: '#6366f1', padding: '4px 12px', borderRadius: '50px', fontWeight: '600' }}>
                         <i className="ph ph-file-pdf"></i> {sess.material_count} Materi Terupload
                       </span>
                       {sess.meet_link ? (
-                        <a href={sess.meet_link} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '4px 10px', borderRadius: '20px', fontWeight: '600', textDecoration: 'none' }}>
+                        <a href={sess.meet_link} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '4px 12px', borderRadius: '50px', fontWeight: '600', textDecoration: 'none' }}>
                           <i className="ph ph-video-camera"></i> Link Active Meet
                         </a>
                       ) : (
@@ -299,13 +299,13 @@ export default function DosenElearningPage() {
                   <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                     <button 
                       onClick={() => { setUploadSession(sess.session); setShowUploadModal(true); }} 
-                      style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
+                      style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
                     >
                       <i className="ph ph-upload-simple"></i> Upload
                     </button>
                     <button 
                       onClick={() => { setMeetSession(sess.session); setMeetUrl(sess.meet_link || ''); setShowMeetModal(true); }} 
-                      style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
+                      style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
                     >
                       <i className="ph ph-video-camera"></i> Link Meet
                     </button>
@@ -330,7 +330,7 @@ export default function DosenElearningPage() {
                     </div>
                     <button 
                       onClick={() => setShowAssignmentModal(true)}
-                      style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '10px 16px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}
+                      style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '50px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}
                     >
                       <i className="ph ph-plus-circle"></i> Buat Tugas Baru
                     </button>
@@ -339,10 +339,10 @@ export default function DosenElearningPage() {
                   {selectedCourseData?.assignments && selectedCourseData.assignments.length > 0 ? (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                       {selectedCourseData.assignments.map((ass, i) => (
-                        <div key={i} style={{ border: '1px solid var(--color-border)', borderRadius: '12px', padding: '16px', background: 'rgba(255,255,255,0.02)' }}>
+                        <div key={i} style={{ border: '1px solid var(--color-border)', borderRadius: '24px', padding: '16px 20px', background: 'rgba(255,255,255,0.02)' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
                             <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>{ass.title}</strong>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'white', background: '#C41E3A', padding: '4px 10px', borderRadius: '999px' }}>
+                            <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'white', background: '#C41E3A', padding: '4px 12px', borderRadius: '50px' }}>
                               Deadline: {ass.deadline}
                             </span>
                           </div>
@@ -363,7 +363,7 @@ export default function DosenElearningPage() {
                                 setGradingValues(initialGrades);
                                 setShowSubmissionsModal(true); 
                               }}
-                              style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '8px 14px', borderRadius: '8px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem' }}
+                              style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '8px 18px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem' }}
                             >
                               <i className="ph ph-eye"></i> Periksa & Nilai
                             </button>
@@ -391,8 +391,8 @@ export default function DosenElearningPage() {
           onClose={() => setShowUploadModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowUploadModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="upload-form" disabled={uploading} style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(99, 102, 241, 0.28)' }}>{uploading ? 'Mengupload...' : 'Upload Materi'}</button>
+              <button type="button" onClick={() => setShowUploadModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="upload-form" disabled={uploading} style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(99, 102, 241, 0.28)' }}>{uploading ? 'Mengupload...' : 'Upload Materi'}</button>
             </>
           )}
         >
@@ -431,8 +431,8 @@ export default function DosenElearningPage() {
           onClose={() => setShowMeetModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowMeetModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="meet-form" disabled={savingMeet} style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(16, 185, 129, 0.28)' }}>{savingMeet ? 'Menyimpan...' : 'Simpan Link Meet'}</button>
+              <button type="button" onClick={() => setShowMeetModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="meet-form" disabled={savingMeet} style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(16, 185, 129, 0.28)' }}>{savingMeet ? 'Menyimpan...' : 'Simpan Link Meet'}</button>
             </>
           )}
         >
@@ -460,8 +460,8 @@ export default function DosenElearningPage() {
           onClose={() => setShowAssignmentModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowAssignmentModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="assignment-form" disabled={isCreatingAss} style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(196, 30, 58, 0.28)' }}>{isCreatingAss ? 'Menerbitkan...' : 'Terbitkan Tugas'}</button>
+              <button type="button" onClick={() => setShowAssignmentModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="assignment-form" disabled={isCreatingAss} style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(196, 30, 58, 0.28)' }}>{isCreatingAss ? 'Menerbitkan...' : 'Terbitkan Tugas'}</button>
             </>
           )}
         >
@@ -512,7 +512,7 @@ export default function DosenElearningPage() {
           icon="ph-users"
           onClose={() => setShowSubmissionsModal(false)}
           footer={(
-            <button type="button" onClick={() => setShowSubmissionsModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Tutup</button>
+            <button type="button" onClick={() => setShowSubmissionsModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Tutup</button>
           )}
         >
           <div style={{ marginBottom: '16px' }}>

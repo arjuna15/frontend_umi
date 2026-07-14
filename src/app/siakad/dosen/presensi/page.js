@@ -144,7 +144,7 @@ export default function DosenPresensiPage() {
                 <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#10b981', fontWeight: '800' }}>{course.name}</h3>
                 <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: 'var(--color-text)', fontWeight: '600', padding: '4px 12px', background: 'var(--glass-bg)', borderRadius: '999px' }}>{course.code} • {course.sks} SKS</span>
               </div>
-              <button onClick={() => { setSelectedCourseId(course.id); setShowSessionModal(true); }} style={{ zIndex: 1, flexShrink: 0, background: '#10b981', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '12px', fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' , flexWrap: 'wrap'}}>
+              <button onClick={() => { setSelectedCourseId(course.id); setShowSessionModal(true); }} style={{ zIndex: 1, flexShrink: 0, background: '#10b981', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '50px', fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' , flexWrap: 'wrap'}}>
                 <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Buka Sesi Baru
               </button>
             </div>
@@ -153,7 +153,7 @@ export default function DosenPresensiPage() {
               {course.attendances && course.attendances.length > 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
                   {course.attendances.map((att, j) => (
-                    <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', padding: '20px', background: 'var(--glass-bg)', border: '1px solid rgba(229, 231, 235, 0.8)', borderRadius: '16px', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
+                    <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', padding: '20px', background: 'var(--glass-bg)', border: '1px solid rgba(229, 231, 235, 0.8)', borderRadius: '24px', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
                       <div style={{ flex: '1 1 150px' }}>
                         <strong style={{ color: 'var(--color-text)', display: 'block', marginBottom: '8px', fontSize: '1.1rem', fontWeight: '800' }}>Pertemuan ke-{att.meeting_number}</strong>
                         <span style={{ fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' , flexWrap: 'wrap'}}>
@@ -161,13 +161,13 @@ export default function DosenPresensiPage() {
                         </span>
                       </div>
                       <div style={{ display: 'flex', gap: '16px', alignItems: 'center' , flexWrap: 'wrap' }}>
-                        <div className="siakad-badge" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+                        <div className="siakad-badge" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '50px' }}>
                           {att.records?.filter(r => r.status === 'present').length || 0} Hadir
                         </div>
-                        <div className="siakad-badge" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
+                        <div className="siakad-badge" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '50px' }}>
                           {att.records?.filter(r => r.status === 'absent').length || 0} Alpa
                         </div>
-                        <button onClick={() => { setSelectedAttendance(att); setSelectedCourseId(course.id); setSearchTerm(''); setShowDetailModal(true); }} style={{ background: 'var(--color-bg)', border: '1px solid #d1d5db', padding: '8px 16px', borderRadius: '8px', fontSize: '0.9rem', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>Input & Detail</button>
+                        <button onClick={() => { setSelectedAttendance(att); setSelectedCourseId(course.id); setSearchTerm(''); setShowDetailModal(true); }} style={{ background: 'var(--color-bg)', border: '1px solid #d1d5db', padding: '8px 18px', borderRadius: '50px', fontSize: '0.9rem', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>Input & Detail</button>
                       </div>
                     </div>
                   ))}

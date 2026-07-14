@@ -166,7 +166,7 @@ export default function RosterPage() {
                     padding: '10px 14px 10px 46px',
                     background: 'rgba(255,255,255,0.1)',
                     border: '1px solid rgba(255,255,255,0.2)',
-                    borderRadius: '10px',
+                    borderRadius: '50px',
                     color: 'white',
                     width: '240px',
                     outline: 'none',
@@ -213,7 +213,7 @@ export default function RosterPage() {
                           </div>
                         </td>
                         <td style={{ padding: '16px 20px' }}>
-                          <span style={{ background: 'rgba(99,102,241,0.1)', color: '#6366f1', padding: '4px 10px', borderRadius: '20px', fontSize: '0.8rem', fontWeight: '600', whiteSpace: 'nowrap' }}>
+                          <span style={{ background: 'rgba(99,102,241,0.1)', color: '#6366f1', padding: '4px 12px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '600', whiteSpace: 'nowrap' }}>
                             {mhs.prodi || 'Teknik Informatika'}
                           </span>
                         </td>
