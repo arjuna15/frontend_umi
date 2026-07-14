@@ -174,13 +174,13 @@ export default function ChatPage() {
         <div className="siakad-page-header-glow"></div>
         <div className="siakad-page-header-grid"></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — KOMUNIKASI</p>
-          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Chat Real-Time</h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Komunikasi langsung antar civitas akademika secara real-time.</p>
+          <p style={{ color: 'var(--color-muted)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — KOMUNIKASI</p>
+          <h1 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Chat Real-Time</h1>
+          <p style={{ color: 'var(--color-muted)', margin: 0 }}>Komunikasi langsung antar civitas akademika secara real-time.</p>
         </div>
         <div style={{ position: 'absolute', top: '20px', right: '24px', zIndex: 2, display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: wsConnected ? '#10b981' : '#ef4444', boxShadow: `0 0 8px ${wsConnected ? '#10b981' : '#ef4444'}` }}></div>
-          <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem' }}>{wsConnected ? 'Terhubung' : 'Terputus'}</span>
+          <span style={{ color: wsConnected ? '#10b981' : '#ef4444', fontSize: '0.85rem', fontWeight: 'bold' }}>{wsConnected ? 'Terhubung' : 'Terputus'}</span>
         </div>
       </div>
 
