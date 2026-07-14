@@ -70,8 +70,8 @@ export default function RosterPage() {
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', margin: '0 0 8px 0', letterSpacing: '0.12em', textTransform: 'uppercase' }}>SIAKAD — DOSEN</p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '8px' }}>
-            <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(196,30,58,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(196,30,58,0.4)' , flexShrink: 0 }}>
-              <i className="ph ph-student" style={{ fontSize: '1.6rem', color: '#fca5a5' }}></i>
+            <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'rgba(196,30,58,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid rgba(196,30,58,0.25)' , flexShrink: 0 }}>
+              <i className="ph ph-student" style={{ fontSize: '1.6rem', color: '#C41E3A' }}></i>
             </div>
             <h1 style={{ color: 'white', fontSize: '2rem', fontWeight: '800', margin: 0, letterSpacing: '-0.03em' }}>Manajemen Kelas (Roster)</h1>
           </div>

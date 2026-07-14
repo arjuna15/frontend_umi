@@ -1404,6 +1404,15 @@
   box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(41, 151, 255, 0.25) !important;
 }
 
+/* Premium Datepicker UX styling */
+.siakad-modal-content input[type="date"],
+.siakad-input[type="date"] {
+  -webkit-appearance: listbox !important;
+  appearance: auto !important;
+  cursor: pointer;
+  padding: 10px 18px !important;
+}
+
 /* Premium Buttons inside Modals */
 .siakad-modal-content button[type="submit"],
 .siakad-modal-content button.siakad-btn-primary {
