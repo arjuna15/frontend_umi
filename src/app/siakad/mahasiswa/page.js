@@ -201,12 +201,12 @@ export default function MahasiswaDashboard() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }} className="no-print">
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 4px 0' }}>Kartu Hasil Studi (KHS)</h2>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-            <button onClick={() => window.print()} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 16px', borderRadius: '8px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
+            <button onClick={() => window.print()} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 24px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
               <i className="ph ph-printer"></i> Print View
             </button>
             <button 
               onClick={() => window.open('/api/siakad/export/khs', '_blank')} 
-              style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', border: 'none', padding: '10px 16px', borderRadius: '8px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}
+              style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', border: 'none', padding: '10px 24px', borderRadius: '50px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}
             >
               <i className="ph ph-file-pdf"></i> Unduh PDF Resmi
             </button>
