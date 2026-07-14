@@ -13,6 +13,12 @@ async function handleProxy(req, context, method) {
     const contentType = req.headers.get('content-type') || '';
     const headers = {};
     
+    // Forward Authorization header from browser request to backend
+    const authHeader = req.headers.get('authorization');
+    if (authHeader) {
+      headers['Authorization'] = authHeader;
+    }
+    
     let fetchOptions = {
       method,
       headers

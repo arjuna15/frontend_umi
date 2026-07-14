@@ -12,8 +12,14 @@ async function handleProxy(req, context, method) {
     const backendUrl = `${apiUrl}/siakad/${route}${searchParams ? '?' + searchParams : ''}`;
     
     const headers = {};
+    // Try cookie first, then fall back to Authorization header from browser request
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
+    } else {
+      const authHeader = req.headers.get('authorization');
+      if (authHeader) {
+        headers['Authorization'] = authHeader;
+      }
     }
     
     const portalHeader = req.headers.get('x-siakad-portal');
