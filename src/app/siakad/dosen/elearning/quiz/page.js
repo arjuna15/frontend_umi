@@ -109,7 +109,7 @@ export default function DosenQuizCreate() {
         <div className="siakad-page-header-glow"></div>
         <div className="siakad-page-header-grid"></div>
           <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <button type="button" onClick={() => router.back()} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '12px 16px', borderRadius: '12px', cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.3s' }}>
+            <button type="button" onClick={() => router.back()} style={{ background: 'rgba(196, 30, 58, 0.15)', border: '1px solid rgba(196, 30, 58, 0.3)', padding: '12px 20px', borderRadius: '50px', cursor: 'pointer', color: '#C41E3A', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.3s', fontWeight: 'bold' }}>
               <i className="ph ph-arrow-left"></i> Kembali
             </button>
             <div style={{ flex: '1 1 300px' }}>

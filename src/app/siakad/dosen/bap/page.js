@@ -122,11 +122,11 @@ export default function BapPage() {
           </div>
         </div>        {/* Form Card */}
         <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
-          <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 28px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
-              <i className="ph ph-file-text" style={{ color: 'white', fontSize: '1.1rem' }}></i>
+          <div style={{ background: 'var(--glass-bg)', padding: '20px 28px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(99, 102, 241, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
+              <i className="ph ph-file-text" style={{ color: '#6366f1', fontSize: '1.1rem' }}></i>
             </div>
-            <h3 style={{ margin: 0, color: 'white', fontWeight: '700' }}>Form Pengisian BAP</h3>
+            <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700' }}>Form Pengisian BAP</h3>
           </div>
 
           <div style={{ padding: '32px' }}>

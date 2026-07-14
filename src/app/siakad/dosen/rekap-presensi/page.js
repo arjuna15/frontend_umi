@@ -87,8 +87,8 @@ export default function RekapPresensiPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start' }}>
           {/* Course Selector */}
           <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
-            <div style={{ background: 'linear-gradient(to right, #064e3b, #065f46)', padding: '16px 20px' }}>
-              <h3 style={{ margin: 0, color: 'white', fontWeight: '700', fontSize: '0.95rem' }}>Pilih Mata Kuliah</h3>
+            <div style={{ background: 'var(--glass-bg)', padding: '16px 20px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)' }}>
+              <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700', fontSize: '0.95rem' }}>Pilih Mata Kuliah</h3>
             </div>
             <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {courses.map((c, i) => {
@@ -106,10 +106,10 @@ export default function RekapPresensiPage() {
 
           {/* Table */}
           <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
-            <div style={{ background: 'linear-gradient(to right, #064e3b, #1e1b4b)', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+            <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
               <div>
-                <h3 style={{ margin: '0 0 4px 0', color: 'white', fontWeight: '700' }}>{selectedCourse?.name}</h3>
-                <p style={{ margin: 0, color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem' }}>{filteredStudents.length} mahasiswa · {selectedCourse?.total_meetings || 0} pertemuan</p>
+                <h3 style={{ margin: '0 0 4px 0', color: 'var(--color-text)', fontWeight: '700' }}>{selectedCourse?.name}</h3>
+                <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>{filteredStudents.length} mahasiswa · {selectedCourse?.total_meetings || 0} pertemuan</p>
               </div>
               <div style={{ position: 'relative' }}>
                 <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.5)' }}></i>

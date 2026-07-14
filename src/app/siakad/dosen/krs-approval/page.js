@@ -171,10 +171,10 @@ export default function KrsApprovalPage() {
           {selectedSub ? (
             <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
               {/* Header */}
-              <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 28px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+              <div style={{ background: 'var(--glass-bg)', padding: '20px 28px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
-                  <h2 style={{ margin: '0 0 4px 0', color: 'white', fontWeight: '800', fontSize: '1.2rem' }}>{selectedSub.mahasiswa?.name}</h2>
-                  <p style={{ margin: 0, color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem' }}>NIM: {selectedSub.mahasiswa?.nim} · Semester {selectedSub.semester}</p>
+                  <h2 style={{ margin: '0 0 4px 0', color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>{selectedSub.mahasiswa?.name}</h2>
+                  <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>NIM: {selectedSub.mahasiswa?.nim} · Semester {selectedSub.semester}</p>
                 </div>
                 {(() => {
                   const st = STATUS_STYLES[selectedSub.status] || STATUS_STYLES.pending;

@@ -83,11 +83,11 @@ export default function DosenDashboard() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
         <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
-          <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <i className="ph ph-clock" style={{ color: 'white', fontSize: '1.1rem' }}></i>
+          <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(99, 102, 241, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <i className="ph ph-clock" style={{ color: '#6366f1', fontSize: '1.1rem' }}></i>
             </div>
-            <h3 style={{ margin: 0, color: 'white', fontWeight: '700' }}>Jadwal Mengajar Hari Ini</h3>
+            <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700' }}>Jadwal Mengajar Hari Ini</h3>
           </div>
           <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {todaySchedules.length > 0 ? todaySchedules.map((sch, i) => (
@@ -113,11 +113,11 @@ export default function DosenDashboard() {
         </div>
 
         <div className="siakad-card stagger-3" style={{ overflow: 'hidden' }}>
-          <div style={{ background: 'linear-gradient(to right, #064e3b, #065f46)', padding: '20px 24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <i className="ph ph-bell-ringing" style={{ color: 'white', fontSize: '1.1rem' }}></i>
+          <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <i className="ph ph-bell-ringing" style={{ color: '#f59e0b', fontSize: '1.1rem' }}></i>
             </div>
-            <h3 style={{ margin: 0, color: 'white', fontWeight: '700' }}>Notifikasi & To-Do</h3>
+            <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700' }}>Notifikasi & To-Do</h3>
             {todos.length > 0 && (
               <span style={{ marginLeft: 'auto', padding: '2px 8px', background: '#f59e0b', color: 'white', borderRadius: '12px', fontSize: '0.75rem', fontWeight: '700' }}>
                 {todos.length}
@@ -141,12 +141,12 @@ export default function DosenDashboard() {
 
         {courses.length > 0 && (
           <div className="siakad-card stagger-4" style={{ overflow: 'hidden', gridColumn: '1 / -1' }}>
-            <div style={{ background: 'linear-gradient(to right, #7c2d12, #9a3412)', padding: '20px 24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <i className="ph ph-books" style={{ color: 'white', fontSize: '1.1rem' }}></i>
+            <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <i className="ph ph-books" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
               </div>
-              <h3 style={{ margin: 0, color: 'white', fontWeight: '700' }}>Mata Kuliah yang Diampu</h3>
-              <span style={{ marginLeft: 'auto', padding: '4px 12px', background: 'rgba(255,255,255,0.2)', color: 'white', borderRadius: '999px', fontSize: '0.8rem', fontWeight: '700' }}>
+              <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700' }}>Mata Kuliah yang Diampu</h3>
+              <span style={{ marginLeft: 'auto', padding: '4px 12px', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', border: '1px solid rgba(196, 30, 58, 0.25)', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>
                 {courses.length} MK
               </span>
             </div>

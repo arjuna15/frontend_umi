@@ -100,9 +100,9 @@ export default function RosterPage() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start' }}>
           {/* ── Left Sidebar: Course Selector ── */}
           <div className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden' }}>
-            <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '16px 20px' }}>
-              <h3 style={{ color: 'white', margin: 0, fontSize: '0.88rem', fontWeight: '700', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                <i className="ph ph-book-open" style={{ marginRight: '8px' }}></i>Mata Kuliah
+            <div style={{ background: 'var(--glass-bg)', padding: '16px 20px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)' }}>
+              <h3 style={{ color: 'var(--color-text)', margin: 0, fontSize: '0.88rem', fontWeight: '700', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                <i className="ph ph-book-open" style={{ marginRight: '8px', color: '#C41E3A' }}></i>Mata Kuliah
               </h3>
             </div>
             <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -145,18 +145,18 @@ export default function RosterPage() {
 
           {/* ── Right: Student Table ── */}
           <div className="siakad-card stagger-2" style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ background: 'linear-gradient(to right, #1e1b4b, #312e81)', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+            <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
               <div>
-                <h3 style={{ color: 'white', margin: '0 0 4px 0', fontWeight: '700' }}>
+                <h3 style={{ color: 'var(--color-text)', margin: '0 0 4px 0', fontWeight: '700' }}>
                   Daftar Mahasiswa — {selectedCourse?.name}
                 </h3>
-                <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0, fontSize: '0.85rem' }}>
-                  <i className="ph ph-users" style={{ marginRight: '4px' }}></i>
+                <p style={{ color: 'var(--color-muted)', margin: 0, fontSize: '0.85rem' }}>
+                  <i className="ph ph-users" style={{ marginRight: '4px', color: '#6366f1' }}></i>
                   {filteredStudents.length} dari {selectedCourse?.students?.length || 0} mahasiswa
                 </p>
               </div>
               <div style={{ position: 'relative' }}>
-                <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}></i>
+                <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '0.9rem' }}></i>
                 <input
                   type="text"
                   placeholder="Cari NIM atau Nama..."
