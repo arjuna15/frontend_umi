@@ -423,8 +423,8 @@ export default function AdminUsersPage() {
           maxWidth="440px"
           footer={
             <>
-              <button onClick={() => setResetPasswordUser(null)} className="btn" style={{ padding: '10px 18px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
-              <button onClick={submitResetPassword} disabled={!resetPasswordValue.trim()} className="siakad-btn-primary" style={{ padding: '10px 18px', fontWeight: '600' }}>Simpan Password</button>
+              <button onClick={() => setResetPasswordUser(null)} style={{ padding: '12px 24px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold', transition: 'all 0.2s' }}>Batal</button>
+              <button onClick={submitResetPassword} disabled={!resetPasswordValue.trim()} className="siakad-btn-primary" style={{ padding: '12px 24px' }}>Simpan Password</button>
             </>
           }
         >
@@ -435,11 +435,12 @@ export default function AdminUsersPage() {
             <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Password Baru</label>
             <input 
               type="password" 
+              className="siakad-input"
               value={resetPasswordValue} 
               onChange={(e) => setResetPasswordValue(e.target.value)} 
               placeholder="Masukkan password baru..." 
               required 
-              style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} 
+              style={{ width: '100%', color: 'var(--color-text)', fontSize: '0.9rem' }} 
             />
           </div>
         </ModalShell>
