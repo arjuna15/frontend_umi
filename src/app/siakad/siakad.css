@@ -1635,7 +1635,39 @@
 [data-theme='light'] .siakad-file-input::file-selector-button:hover {
   background: rgba(0, 0, 0, 0.05);
 }
+.siakad-btn-primary {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%), rgba(15, 32, 67, 0.72) !important;
+  backdrop-filter: blur(12px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.32) !important;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.35), 
+    inset 0 -1px 2px rgba(5, 10, 20, 0.5), 
+    0 6px 16px rgba(10, 30, 63, 0.2) !important;
+  font-weight: 600 !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer;
+}
 
+.siakad-btn-primary:hover {
+  transform: translateY(-1px) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 50%), rgba(15, 32, 67, 0.8) !important;
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.45), 
+    inset 0 -1px 2px rgba(5, 10, 20, 0.5), 
+    0 8px 24px rgba(10, 30, 63, 0.35) !important;
+}
 
+.siakad-btn-primary:active {
+  transform: scale(0.97) !important;
+  background: rgba(10, 20, 45, 0.85) !important;
+}
 
-
+.siakad-btn-primary:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
