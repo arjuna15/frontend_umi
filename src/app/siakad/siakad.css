@@ -1406,6 +1406,25 @@
 
 /* Premium Datepicker UX styling */
 .siakad-modal-content input[type="date"],
+/* Custom Readability Placeholders */
+.siakad-input::placeholder, 
+.siakad-modal-content input::placeholder, 
+.siakad-modal-content textarea::placeholder, 
+input::placeholder, 
+textarea::placeholder {
+  color: rgba(0, 0, 0, 0.45) !important;
+  opacity: 1 !important;
+}
+
+[data-theme='dark'] .siakad-input::placeholder,
+[data-theme='dark'] .siakad-modal-content input::placeholder,
+[data-theme='dark'] .siakad-modal-content textarea::placeholder,
+[data-theme='dark'] input::placeholder,
+[data-theme='dark'] textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45) !important;
+  opacity: 1 !important;
+}
+
 .siakad-input[type="date"] {
   -webkit-appearance: listbox !important;
   appearance: auto !important;
