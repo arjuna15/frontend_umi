@@ -128,9 +128,10 @@ export default function MahasiswaGradebook() {
             <input 
               type="text" 
               placeholder="Cari mata kuliah..." 
+              className="siakad-input"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              style={{ flex: '1 1 150px', minWidth: 0, padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
+              style={{ flex: '1 1 150px', minWidth: 0, color: 'var(--color-text)' }}
             />
             <button onClick={() => window.print()} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '8px 16px', borderRadius: '8px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
               <i className="ph ph-printer"></i> Cetak Transkrip
