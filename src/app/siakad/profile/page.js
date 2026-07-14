@@ -121,6 +121,39 @@ export default function ProfilePage() {
       } else {
         window.toast('Gagal mengunggah foto profil.');
       }
+    }
+  };
+  const handlePreferenceToggle = async (key) => {
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    
+    // Calculate new values based on current state
+    const newPrefs = {
+      email_notifications: key === 'email_notifications' ? !user.email_notifications : !!user.email_notifications,
+      public_visibility: key === 'public_visibility' ? !user.public_visibility : !!user.public_visibility
+    };
+
+    try {
+      const res = await fetch(`${apiUrl}/siakad/profile/preferences`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newPrefs)
+      });
+      
+      if (res.ok) {
+        const result = await res.json();
+        setUser({ 
+          ...user, 
+          email_notifications: result.user.email_notifications,
+          public_visibility: result.user.public_visibility
+        });
+        window.toast('Preferensi berhasil disimpan!');
+      } else {
+        window.toast('Gagal menyimpan preferensi.');
+      }
     } catch (err) {
       window.toast('Error: ' + err.message);
     }
@@ -302,10 +335,15 @@ export default function ProfilePage() {
                     <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', color: 'var(--color-text)' }}>Notifikasi Email</h4>
                     <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Terima pembaruan penting dan jadwal di email Anda.</p>
                   </div>
-                  <label style={{ position: 'relative', display: 'inline-block', width: '50px', height: '26px', flexShrink: 0 }}>
-                    <input type="checkbox" defaultChecked style={{ opacity: 0, width: 0, height: 0 }} />
-                    <span style={{ position: 'absolute', cursor: 'pointer', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: '#C41E3A', transition: '.4s', borderRadius: '34px' }}>
-                      <span style={{ position: 'absolute', content: '""', height: '20px', width: '20px', left: '3px', bottom: '3px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', transform: 'translateX(24px)', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}></span>
+                  <label style={{ position: 'relative', display: 'inline-block', width: '50px', height: '26px', flexShrink: 0, cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={!!user.email_notifications} 
+                      onChange={() => handlePreferenceToggle('email_notifications')}
+                      style={{ opacity: 0, width: 0, height: 0 }} 
+                    />
+                    <span style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: user.email_notifications ? '#C41E3A' : 'var(--color-border)', transition: '.4s', borderRadius: '34px' }}>
+                      <span style={{ position: 'absolute', content: '""', height: '20px', width: '20px', left: '3px', bottom: '3px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', transform: user.email_notifications ? 'translateX(24px)' : 'translateX(0)', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}></span>
                     </span>
                   </label>
                 </div>
@@ -315,10 +353,15 @@ export default function ProfilePage() {
                     <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', color: 'var(--color-text)' }}>Visibilitas Publik</h4>
                     <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Izinkan pengguna lain melihat nomor HP dan email Anda.</p>
                   </div>
-                  <label style={{ position: 'relative', display: 'inline-block', width: '50px', height: '26px', flexShrink: 0 }}>
-                    <input type="checkbox" style={{ opacity: 0, width: 0, height: 0 }} />
-                    <span style={{ position: 'absolute', cursor: 'pointer', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'var(--color-border)', transition: '.4s', borderRadius: '34px' }}>
-                      <span style={{ position: 'absolute', content: '""', height: '20px', width: '20px', left: '3px', bottom: '3px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}></span>
+                  <label style={{ position: 'relative', display: 'inline-block', width: '50px', height: '26px', flexShrink: 0, cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={!!user.public_visibility} 
+                      onChange={() => handlePreferenceToggle('public_visibility')}
+                      style={{ opacity: 0, width: 0, height: 0 }} 
+                    />
+                    <span style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: user.public_visibility ? '#C41E3A' : 'var(--color-border)', transition: '.4s', borderRadius: '34px' }}>
+                      <span style={{ position: 'absolute', content: '""', height: '20px', width: '20px', left: '3px', bottom: '3px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', transform: user.public_visibility ? 'translateX(24px)' : 'translateX(0)', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}></span>
                     </span>
                   </label>
                 </div>
