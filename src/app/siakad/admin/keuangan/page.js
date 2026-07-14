@@ -301,7 +301,10 @@ export default function AdminKeuangan() {
                       <td style={{ padding: '16px' }}>
                         <span className="siakad-badge" style={{
                           background: billing.status === 'Lunas' ? '#dcfce7' : '#fee2e2',
-                          color: billing.status === 'Lunas' ? '#166534' : '#991b1b'
+                          color: billing.status === 'Lunas' ? '#166534' : '#991b1b',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px'
                         }}>
                           {billing.status === 'Lunas' ? <i className="ph ph-check-circle"></i> : <i className="ph ph-clock-circle"></i>}
                           {billing.status}
@@ -334,312 +337,168 @@ export default function AdminKeuangan() {
             </table>
           </div>
         )}
-      </div>
-
-      {isModalOpen && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content">
-            <div style={{
-              padding: '24px 28px',
-              borderBottom: '1px solid var(--color-border)',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              gap: '16px',
-              flexWrap: 'wrap'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-                <div style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: '12px',
-                  background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 10px 20px rgba(99, 102, 241, 0.25)',
-                  flexShrink: 0
-                }}>
-                  <i className={`ph ${isEdit ? 'ph-pencil-simple-line' : 'ph-receipt'}`} style={{ fontSize: '1.2rem' }}></i>
-                </div>
-                <div>
-                  <p style={{ margin: 0, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-muted)', fontWeight: 700 }}>
-                    Manajemen Keuangan
-                  </p>
-                  <h2 style={{ margin: '4px 0 0 0', fontSize: '1.25rem', fontWeight: '800', color: 'var(--color-text)' }}>
-                    {isEdit ? 'Edit Tagihan' : 'Tambah Tagihan Baru'}
-                  </h2>
-                </div>
-              </div>
+      </div>      {isModalOpen && (
+        <ModalShell
+          title={isEdit ? 'Edit Tagihan' : 'Tambah Tagihan Baru'}
+          icon={isEdit ? 'ph-pencil-simple-line' : 'ph-receipt'}
+          onClose={closeModal}
+          footer={
+            <>
               <button
+                type="button"
                 onClick={closeModal}
                 style={{
-                  background: 'transparent',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: '12px',
+                  border: 'none',
                   color: 'var(--color-text)',
                   cursor: 'pointer',
-                  width: '40px',
-                  height: '40px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
+                  fontWeight: 'bold',
+                  transition: 'all 0.2s'
                 }}
-                aria-label="Tutup modal"
               >
-                <i className="ph ph-x" style={{ fontSize: '1.1rem' }}></i>
+                Batal
               </button>
+              <button type="submit" form="single-billing-form" className="siakad-btn-primary" style={{ minWidth: '180px' }}>
+                {isEdit ? 'Simpan Perubahan' : 'Buat Tagihan'}
+              </button>
+            </>
+          }
+        >
+          <form id="single-billing-form" onSubmit={handleSubmit}>
+            <div style={{ display: 'grid', gap: '18px' }}>
+              {!isEdit && (
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Pilih Mahasiswa</label>
+                  <CustomSelect 
+                    name="user_id"
+                    value={formData.user_id} 
+                    onChange={(val) => setFormData({...formData, user_id: val})}
+                    placeholder="-- Pilih Mahasiswa --"
+                    options={users.map(u => ({ value: u.id, label: `${u.name} (${u.npm || u.email})`, icon: 'ph ph-user' }))}
+                  />
+                </div>
+              )}
+              
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Deskripsi Tagihan</label>
+                <input 
+                  type="text" 
+                  value={formData.description} 
+                  onChange={(e) => setFormData({...formData, description: e.target.value})}
+                  required
+                  placeholder="Contoh: UKT semester berjalan"
+                  className="siakad-input"
+                  style={{ width: '100%', color: 'var(--color-text)' }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Nominal (Rp)</label>
+                <input 
+                  type="number" 
+                  value={formData.amount} 
+                  onChange={(e) => setFormData({...formData, amount: e.target.value})}
+                  required
+                  placeholder="4500000"
+                  className="siakad-input"
+                  style={{ width: '100%', color: 'var(--color-text)' }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Jatuh Tempo</label>
+                <CustomDatePicker 
+                  value={formData.due_date} 
+                  onChange={(val) => setFormData({...formData, due_date: val})}
+                />
+              </div>
+
+              {isEdit && (
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Status Pembayaran</label>
+                  <CustomSelect 
+                    name="status"
+                    value={formData.status} 
+                    onChange={(val) => setFormData({...formData, status: val})}
+                    options={[
+                      { value: 'Belum Lunas', label: 'Belum Lunas', icon: 'ph ph-x-circle' },
+                      { value: 'Lunas', label: 'Lunas', icon: 'ph ph-check-circle' }
+                    ]}
+                  />
+                </div>
+              )}
             </div>
-            
-            <form onSubmit={handleSubmit} style={{ padding: '28px' }}>
-              <div style={{ display: 'grid', gap: '18px' }}>
-                {!isEdit && (
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Pilih Mahasiswa</label>
-                    <CustomSelect 
-                      name="user_id"
-                      value={formData.user_id} 
-                      onChange={(val) => setFormData({...formData, user_id: val})}
-                      placeholder="-- Pilih Mahasiswa --"
-                      options={users.map(u => ({ value: u.id, label: `${u.name} (${u.npm || u.email})`, icon: 'ph ph-user' }))}
-                    />
-                  </div>
-                )}
-                
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Deskripsi Tagihan</label>
-                  <input 
-                    type="text" 
-                    value={formData.description} 
-                    onChange={(e) => setFormData({...formData, description: e.target.value})}
-                    required
-                    placeholder="Contoh: UKT semester berjalan"
-                    className="siakad-input"
-                    style={{ width: '100%', color: 'var(--color-text)' }}
-                  />
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Nominal (Rp)</label>
-                  <input 
-                    type="number" 
-                    value={formData.amount} 
-                    onChange={(e) => setFormData({...formData, amount: e.target.value})}
-                    required
-                    placeholder="4500000"
-                    className="siakad-input"
-                    style={{ width: '100%', color: 'var(--color-text)' }}
-                  />
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Jatuh Tempo</label>
-                  <CustomDatePicker 
-                    value={formData.due_date} 
-                    onChange={(val) => setFormData({...formData, due_date: val})} 
-                  />
-                </div>
-
-                {isEdit && (
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Status Pembayaran</label>
-                    <CustomSelect 
-                      name="status"
-                      value={formData.status} 
-                      onChange={(val) => setFormData({...formData, status: val})}
-                      options={[
-                        { value: 'Belum Lunas', label: 'Belum Lunas', icon: 'ph ph-x-circle' },
-                        { value: 'Lunas', label: 'Lunas', icon: 'ph ph-check-circle' }
-                      ]}
-                    />
-                  </div>
-                )}
-              </div>
-
-              <div style={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                gap: '12px',
-                marginTop: '28px',
-                paddingTop: '20px',
-                borderTop: '1px solid var(--color-border)',
-                flexWrap: 'wrap'
-              }}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsEdit(false);
-                    setEditData(null);
-                    setIsFormModalOpen(false);
-                  }}
-                  style={{
-                    border: 'none',
-                    padding: '14px 20px',
-                    color: 'var(--color-text)',
-                    fontWeight: 'bold',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s'
-                  }}
-                >
-                  Batal
-                </button>
-                <button type="submit" className="siakad-btn-primary" style={{
-                  minWidth: '180px',
-                  padding: '14px 20px',
-                  fontSize: '1rem'
-                }}>
-                  {isEdit ? 'Simpan Perubahan' : 'Buat Tagihan'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {isBulkModalOpen && (
-        <div className="siakad-modal-overlay">
-          <div className="siakad-modal-content" style={{ maxWidth: '560px' }}>
-            <div style={{
-              padding: '24px 28px',
-              borderBottom: '1px solid var(--color-border)',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              gap: '16px',
-              flexWrap: 'wrap'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-                <div style={{
-                  width: '44px',
-                  height: '44px',
-                  borderRadius: '12px',
-                  background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 10px 20px rgba(99, 102, 241, 0.25)',
-                  flexShrink: 0
-                }}>
-                  <i className="ph ph-receipt" style={{ fontSize: '1.2rem' }}></i>
-                </div>
-                <div>
-                  <p style={{ margin: 0, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-muted)', fontWeight: 700 }}>
-                    Manajemen Keuangan
-                  </p>
-                  <h2 style={{ margin: '4px 0 0 0', fontSize: '1.25rem', fontWeight: '800', color: 'var(--color-text)' }}>
-                    Generate Tagihan Massal
-                  </h2>
-                </div>
-              </div>
+          </form>
+        </ModalShell>
+      )})}      {isBulkModalOpen && (
+        <ModalShell
+          title="Generate Tagihan Massal"
+          icon="ph-receipt"
+          onClose={closeBulkModal}
+          footer={
+            <>
               <button
+                type="button"
                 onClick={closeBulkModal}
                 style={{
-                  background: 'transparent',
-                  border: '1px solid var(--color-border)',
-                  borderRadius: '12px',
+                  border: 'none',
                   color: 'var(--color-text)',
                   cursor: 'pointer',
-                  width: '40px',
-                  height: '40px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
+                  fontWeight: 'bold',
+                  transition: 'all 0.2s'
                 }}
-                aria-label="Tutup modal"
               >
-                <i className="ph ph-x" style={{ fontSize: '1.1rem' }}></i>
+                Batal
               </button>
+              <button type="submit" form="bulk-billing-form" className="siakad-btn-primary" style={{ minWidth: '180px' }}>
+                Simpan & Kirim
+              </button>
+            </>
+          }
+        >
+          <form
+            id="bulk-billing-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleBulkGenerate();
+            }}
+          >
+            <div style={{ display: 'grid', gap: '18px' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Deskripsi Tagihan</label>
+                <input
+                  type="text"
+                  autoFocus
+                  value={bulkForm.description}
+                  onChange={(e) => setBulkForm({ ...bulkForm, description: e.target.value })}
+                  placeholder="Contoh: UKT semester berjalan"
+                  className="siakad-input"
+                  style={{ width: '100%', color: 'var(--color-text)' }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Nominal (Rp)</label>
+                <input
+                  type="number"
+                  value={bulkForm.amount}
+                  onChange={(e) => setBulkForm({ ...bulkForm, amount: e.target.value })}
+                  placeholder="4500000"
+                  className="siakad-input"
+                  style={{ width: '100%', color: 'var(--color-text)' }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Jatuh Tempo</label>
+                <CustomDatePicker
+                  value={bulkForm.due_date}
+                  onChange={(val) => setBulkForm({ ...bulkForm, due_date: val })}
+                />
+              </div>
             </div>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleBulkGenerate();
-              }}
-              style={{ padding: '28px' }}
-            >
-              <div style={{ display: 'grid', gap: '18px' }}>
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Deskripsi Tagihan</label>
-                  <input
-                    type="text"
-                    autoFocus
-                    value={bulkForm.description}
-                    onChange={(e) => setBulkForm({ ...bulkForm, description: e.target.value })}
-                    placeholder="Contoh: UKT semester berjalan"
-                    className="siakad-input"
-                    style={{ width: '100%', color: 'var(--color-text)' }}
-                  />
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Nominal (Rp)</label>
-                  <input
-                    type="number"
-                    value={bulkForm.amount}
-                    onChange={(e) => setBulkForm({ ...bulkForm, amount: e.target.value })}
-                    placeholder="4500000"
-                    className="siakad-input"
-                    style={{ width: '100%', color: 'var(--color-text)' }}
-                  />
-                </div>
-
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '8px' }}>Jatuh Tempo</label>
-                  <CustomDatePicker
-                    value={bulkForm.due_date}
-                    onChange={(val) => setBulkForm({ ...bulkForm, due_date: val })}
-                  />
-                </div>
-              </div>
-
-              <div style={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                gap: '12px',
-                marginTop: '28px',
-                paddingTop: '20px',
-                borderTop: '1px solid var(--color-border)',
-                flexWrap: 'wrap'
-              }}>
-                <button
-                  type="button"
-                  onClick={closeBulkModal}
-                  style={{
-                    padding: '12px 20px',
-                    borderRadius: '12px',
-                    border: '1px solid var(--color-border)',
-                    background: 'transparent',
-                    color: 'var(--color-text)',
-                    cursor: 'pointer',
-                    fontWeight: 700
-                  }}
-                >
-                  Batal
-                </button>
-                <button type="submit" style={{
-                  minWidth: '180px',
-                  background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)',
-                  color: 'white',
-                  border: 'none',
-                  padding: '14px 20px',
-                  borderRadius: '12px',
-                  fontWeight: '800',
-                  fontSize: '1rem',
-                  cursor: 'pointer',
-                  boxShadow: '0 12px 24px rgba(99, 102, 241, 0.28)'
-                }}>
-                  Simpan & Kirim
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+          </form>
+        </ModalShell>
+      )})}
     </div>
   );
 }
