@@ -126,24 +126,24 @@ export default function CustomSelect({ name, options, value, onChange, placehold
       {/* Trigger */}
       <div
         onClick={handleToggle}
+        className="siakad-input"
         style={{
-          padding: '12px 16px',
-          background: disabled ? 'var(--glass-bg)' : 'var(--color-bg)',
-          border: isOpen ? '2px solid #3b82f6' : '1px solid var(--color-border)',
-          borderRadius: '12px',
-          cursor: disabled ? 'not-allowed' : 'pointer',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          boxShadow: isOpen ? '0 0 0 4px rgba(59,130,246,0.1)' : '0 2px 4px rgba(0,0,0,0.02)',
+          cursor: disabled ? 'not-allowed' : 'pointer',
           transition: 'all 0.2s ease',
-          color: selectedOption ? 'var(--color-text)' : 'var(--color-muted)',
           fontWeight: '500',
           fontSize: '0.95rem',
           userSelect: 'none',
+          opacity: disabled ? 0.6 : 1,
+          border: isOpen ? '1px solid rgba(0, 120, 255, 0.5) !important' : undefined,
+          boxShadow: isOpen ? 'inset 0 3px 8px rgba(0,0,0,0.12), 0 0 0 3px rgba(0, 120, 255, 0.15) !important' : undefined
         }}
       >
-        <span>{selectedOption ? selectedOption.label : placeholder}</span>
+        <span style={{ color: selectedOption ? 'var(--color-text)' : 'var(--color-muted)' }}>
+          {selectedOption ? selectedOption.label : placeholder}
+        </span>
         <i
           className="ph ph-caret-down"
           style={{
