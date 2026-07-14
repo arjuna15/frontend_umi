@@ -162,17 +162,14 @@ export default function KaprodiKrs() {
           <div style={{ position: 'relative', width: '300px' }}>
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
             <input 
+              className="siakad-input"
               type="text" 
               placeholder="Cari nama mahasiswa atau NIM..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{ 
                 width: '100%', 
-                padding: '10px 14px 10px 38px', 
-                borderRadius: '8px', 
-                border: '1px solid var(--color-border)', 
-                outline: 'none', 
-                background: 'var(--color-bg)', 
+                paddingLeft: '38px', 
                 color: 'var(--color-text)',
                 fontSize: '0.9rem'
               }} 

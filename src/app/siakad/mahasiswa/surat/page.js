@@ -101,15 +101,12 @@ export default function SuratAdministrasiPage() {
             <input 
               type="text" 
               placeholder="Cari jenis surat, status, catatan..." 
+              className="siakad-input"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{ 
                 width: '100%', 
-                padding: '10px 14px 10px 38px', 
-                borderRadius: '8px', 
-                border: '1px solid var(--color-border)', 
-                outline: 'none', 
-                background: 'var(--color-bg)', 
+                paddingLeft: '38px', 
                 color: 'var(--color-text)',
                 fontSize: '0.9rem'
               }} 

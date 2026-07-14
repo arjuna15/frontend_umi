@@ -110,14 +110,15 @@ export default function AdminBackupPage() {
         <div className="siakad-page-header-grid"></div>
           <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <div style={{ flex: '1 1 300px' }}>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
-              <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Backup & Restore Data</h1>
-              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Amankan data akademik dengan melakukan pencadangan secara berkala.</p>
+              <p style={{ color: 'var(--color-muted)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
+              <h1 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Backup & Restore Data</h1>
+              <p style={{ margin: 0 }}>Amankan data akademik dengan melakukan pencadangan secara berkala.</p>
             </div>
             <button 
               onClick={handleGenerateBackup} 
               disabled={isGenerating || isRestoring}
-              style={{ background: '#10b981', color: 'white', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: (isGenerating || isRestoring) ? 'not-allowed' : 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)', opacity: (isGenerating || isRestoring) ? 0.7 : 1 }}
+              className="siakad-btn-primary"
+              style={{ padding: '12px 24px', cursor: (isGenerating || isRestoring) ? 'not-allowed' : 'pointer', opacity: (isGenerating || isRestoring) ? 0.7 : 1 }}
             >
               {isGenerating ? (
                 <><i className="ph ph-spinner ph-spin" style={{ fontSize: '1.2rem' }}></i> Memproses Backup...</>

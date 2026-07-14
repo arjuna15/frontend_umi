@@ -198,15 +198,12 @@ export default function KRSPage() {
               <input 
                 type="text" 
                 placeholder="Cari matkul, kode, dosen..." 
+                className="siakad-input"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{ 
                   width: '100%', 
-                  padding: '8px 12px 8px 32px', 
-                  borderRadius: '8px', 
-                  border: '1px solid var(--color-border)', 
-                  outline: 'none', 
-                  background: 'var(--color-bg)', 
+                  paddingLeft: '32px', 
                   color: 'var(--color-text)',
                   fontSize: '0.85rem'
                 }} 
