@@ -13,7 +13,7 @@ export default function EdomMahasiswaPage() {
   const [message, setMessage] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ course_id: '', dosen_id: '', answers: [], comments: '' });
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api';
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getToken = () => localStorage.getItem('siakad_token');
 
   useEffect(() => {
