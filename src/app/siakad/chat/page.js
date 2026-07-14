@@ -134,7 +134,6 @@ export default function ChatPage() {
   const fetchRooms = async () => {
     try {
       const res = await fetch(`${apiUrl}/siakad/chat/rooms`, {
-        credentials: 'include',
         headers: { 
           'Authorization': `Bearer ${getToken()}`,
           'Accept': 'application/json'
@@ -149,7 +148,6 @@ export default function ChatPage() {
   const fetchMessages = async (roomId) => {
     try {
       const res = await fetch(`${apiUrl}/siakad/chat/rooms/${roomId}`, {
-        credentials: 'include',
         headers: { 
           'Authorization': `Bearer ${getToken()}`,
           'Accept': 'application/json'
@@ -176,7 +174,6 @@ export default function ChatPage() {
     try {
       const res = await fetch(`${apiUrl}/siakad/chat/rooms/${selectedRoom.id}/messages`, {
         method: 'POST',
-        credentials: 'include',
         headers: { 
           'Content-Type': 'application/json', 
           'Authorization': `Bearer ${getToken()}`,
@@ -201,7 +198,6 @@ export default function ChatPage() {
     try {
       const res = await fetch(`${apiUrl}/siakad/chat/rooms`, {
         method: 'POST',
-        credentials: 'include',
         headers: { 
           'Content-Type': 'application/json', 
           'Authorization': `Bearer ${getToken()}`,
