@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
+import SkeletonLoader from '../../components/SkeletonLoader';
 
 export default function QualityAssurancePage() {
   const router = useRouter();
@@ -41,16 +42,28 @@ export default function QualityAssurancePage() {
 
   const catColors = { standar: '#3b82f6', audit: '#8b5cf6', evaluasi: '#f59e0b', akreditasi: '#10b981' };
 
-  if (loading) return <div style={{ padding: '40px', textAlign: 'center' }}><h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)' }}>Memuat...</h1></div>;
+  if (loading) return (
+    <div style={{ padding: '24px' }}>
+      <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat Penjaminan Mutu & IKU...</h1>
+      <SkeletonLoader type="card" />
+      <SkeletonLoader type="table" />
+    </div>
+  );
 
   return (
-    <div className="siakad-container">
-      {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
-
-      <div className="siakad-card stagger-1" style={{ padding: '28px', marginBottom: '24px', background: 'linear-gradient(135deg, rgba(239,68,68,0.12) 0%, rgba(245,158,11,0.1) 100%)', border: '1px solid rgba(239,68,68,0.2)' }}>
-        <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0' }}>Penjaminan Mutu & IKU</h1>
-        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Dashboard SPMI/SPME dan Indikator Kinerja Utama Kampus</p>
+    <div className="fade-in">
+      <div className="siakad-page-header">
+        <div className="siakad-page-header-glow"></div>
+        <div className="siakad-page-header-grid"></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — PENJAMINAN MUTU</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Penjaminan Mutu & IKU</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola dokumen standar SPMI/SPME dan pantau status pemenuhan 8 Indikator Kinerja Utama Kampus.</p>
+        </div>
       </div>
+
+      <div style={{ padding: '24px' }}>
+        {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '16px', marginBottom: '24px' }}>
         {[{ label: 'Total Mahasiswa', val: summary.total_mahasiswa || 0, icon: 'ph-student', color: '#3b82f6' }, { label: 'Total Dosen', val: summary.total_dosen || 0, icon: 'ph-chalkboard-teacher', color: '#8b5cf6' }, { label: 'Total Alumni', val: summary.total_alumni || 0, icon: 'ph-users', color: '#10b981' }, { label: 'Dokumen SPMI', val: docs.length, icon: 'ph-files', color: '#f59e0b' }].map((s,i) => (
@@ -139,6 +152,7 @@ export default function QualityAssurancePage() {
             <input className="siakad-input" value={form.academic_year} onChange={e => setForm({...form, academic_year: e.target.value})} placeholder="2025/2026" /></div>
         </ModalShell>
       )}
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import SkeletonLoader from '../../components/SkeletonLoader';
 
 export default function WisudaAdminPage() {
   const router = useRouter();
@@ -50,16 +51,29 @@ export default function WisudaAdminPage() {
     return <span style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: c[0], background: c[1] }}>{labels[s] || s}</span>;
   };
 
-  if (loading) return <div style={{ padding: '40px', textAlign: 'center' }}><h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)' }}>Memuat...</h1></div>;
+  if (loading) return (
+    <div style={{ padding: '24px' }}>
+      <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat Kelola Yudisium & Wisuda...</h1>
+      <SkeletonLoader type="card" />
+      <SkeletonLoader type="table" />
+    </div>
+  );
 
   return (
-    <div className="siakad-container">
-      {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
-
-      <div className="siakad-card stagger-1" style={{ padding: '28px', marginBottom: '24px', background: 'linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(236,72,153,0.1) 100%)', border: '1px solid rgba(139,92,246,0.2)' }}>
-        <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0' }}>Kelola Yudisium & Wisuda</h1>
-        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Verifikasi pengajuan yudisium dan konfirmasi pendaftaran wisuda</p>
+    <div className="fade-in">
+      <div className="siakad-page-header">
+        <div className="siakad-page-header-glow"></div>
+        <div className="siakad-page-header-grid"></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Kelola Yudisium & Wisuda</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Verifikasi pengajuan kelulusan yudisium mahasiswa dan tentukan nomor kursi wisuda.</p>
+        </div>
       </div>
+
+      <div style={{ padding: '24px' }}>
+        {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
+        <p style={{ color: 'var(--color-muted)', margin: '0 0 24px 0' }}>Verifikasi pengajuan yudisium dan konfirmasi pendaftaran wisuda</p>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '16px', marginBottom: '24px' }}>
         {[{ label: 'Total Yudisium', val: yudisiums.length, color: '#3b82f6' }, { label: 'Menunggu', val: yudisiums.filter(y=>y.status==='pending').length, color: '#f59e0b' }, { label: 'Terverifikasi', val: yudisiums.filter(y=>y.status==='verified').length, color: '#10b981' }, { label: 'Total Wisuda', val: wisudas.length, color: '#8b5cf6' }].map((s,i) => (
@@ -115,6 +129,7 @@ export default function WisudaAdminPage() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

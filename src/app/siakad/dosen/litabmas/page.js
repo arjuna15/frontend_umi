@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
+import SkeletonLoader from '../../components/SkeletonLoader';
 
 export default function LitabmasDosenPage() {
   const router = useRouter();
@@ -42,21 +43,31 @@ export default function LitabmasDosenPage() {
 
   const formatCurrency = (val) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(val);
 
-  if (loading) return <div style={{ padding: '40px', textAlign: 'center' }}><h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)' }}>Memuat Litabmas...</h1></div>;
+  if (loading) return (
+    <div style={{ padding: '24px' }}>
+      <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat Litabmas...</h1>
+      <SkeletonLoader type="card" />
+      <SkeletonLoader type="table" />
+    </div>
+  );
 
   return (
-    <div className="siakad-container">
-      {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
-
-      <div className="siakad-card stagger-1" style={{ padding: '28px', marginBottom: '24px', background: 'linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(59,130,246,0.1) 100%)', border: '1px solid rgba(16,185,129,0.2)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+    <div className="fade-in">
+      <div className="siakad-page-header">
+        <div className="siakad-page-header-glow"></div>
+        <div className="siakad-page-header-grid"></div>
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0' }}>Litabmas</h1>
-            <p style={{ color: 'var(--color-muted)', margin: 0 }}>Pengajuan proposal penelitian dan pengabdian masyarakat</p>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — DOSEN</p>
+            <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Litabmas Dosen</h1>
+            <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Ajukan usulan proposal penelitian ilmiah (Penelitian) dan Pengabdian Kepada Masyarakat (Litabmas).</p>
           </div>
           <button onClick={() => setShowModal(true)} className="siakad-btn-primary" style={{ padding: '12px 24px' }}><i className="ph ph-plus-circle"></i> Ajukan Proposal</button>
         </div>
       </div>
+
+      <div style={{ padding: '24px' }}>
+        {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
 
       <div className="siakad-card stagger-2" style={{ padding: '24px' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 16px 0' }}>Riwayat Proposal</h2>
@@ -93,6 +104,7 @@ export default function LitabmasDosenPage() {
             <input className="siakad-input" type="number" value={form.budget} onChange={e => setForm({...form, budget: e.target.value})} placeholder="Contoh: 15000000" /></div>
         </ModalShell>
       )}
+      </div>
     </div>
   );
 }

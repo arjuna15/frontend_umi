@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
+import SkeletonLoader from '../../components/SkeletonLoader';
 
 export default function WisudaMahasiswaPage() {
   const router = useRouter();
@@ -55,19 +56,26 @@ export default function WisudaMahasiswaPage() {
     return <span style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: c[0], background: c[1] }}>{labels[s] || s}</span>;
   };
 
-  if (loading) return <div style={{ padding: '40px', textAlign: 'center' }}><h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)' }}>Memuat...</h1></div>;
+  if (loading) return (
+    <div style={{ padding: '24px' }}>
+      <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat Yudisium & Wisuda...</h1>
+      <SkeletonLoader type="card" />
+      <SkeletonLoader type="table" />
+    </div>
+  );
 
   const verifiedYuds = yudisiums.filter(y => y.status === 'verified' && !wisudas.some(w => w.yudisium_registration_id === y.id));
 
   return (
-    <div className="siakad-container">
-      {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
-
-      <div className="siakad-card stagger-1" style={{ padding: '28px', marginBottom: '24px', background: 'linear-gradient(135deg, rgba(139,92,246,0.15) 0%, rgba(236,72,153,0.1) 100%)', border: '1px solid rgba(139,92,246,0.2)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+    <div className="fade-in">
+      <div className="siakad-page-header">
+        <div className="siakad-page-header-glow"></div>
+        <div className="siakad-page-header-grid"></div>
+        <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0' }}>Yudisium & Wisuda</h1>
-            <p style={{ color: 'var(--color-muted)', margin: 0 }}>Kelola pengajuan yudisium dan pendaftaran wisuda</p>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
+            <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Yudisium & Wisuda</h1>
+            <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola kelayakan berkas yudisium kelulusan Anda dan daftarkan diri untuk seremoni Wisuda.</p>
           </div>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
             <button onClick={() => setShowYudModal(true)} className="siakad-btn-primary" style={{ padding: '12px 24px' }}><i className="ph ph-graduation-cap"></i> Ajukan Yudisium</button>
@@ -75,6 +83,9 @@ export default function WisudaMahasiswaPage() {
           </div>
         </div>
       </div>
+
+      <div style={{ padding: '24px' }}>
+        {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
 
       <div className="siakad-card stagger-2" style={{ padding: '24px', marginBottom: '24px' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 16px 0' }}>Riwayat Yudisium</h2>
@@ -136,6 +147,7 @@ export default function WisudaMahasiswaPage() {
             </select></div>
         </ModalShell>
       )}
+      </div>
     </div>
   );
 }

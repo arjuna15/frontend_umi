@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import SkeletonLoader from '../../components/SkeletonLoader';
 
 export default function EdomMahasiswaPage() {
   const router = useRouter();
@@ -39,26 +40,48 @@ export default function EdomMahasiswaPage() {
     } catch(e) { setMessage({ text: 'Terjadi kesalahan.', type: 'error' }); } finally { setSaving(false); }
   };
 
-  if (loading) return <div style={{ padding: '40px', textAlign: 'center' }}><h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)' }}>Memuat EDOM...</h1></div>;
+  if (loading) return (
+    <div style={{ padding: '24px' }}>
+      <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat Kuesioner EDOM...</h1>
+      <SkeletonLoader type="card" />
+      <SkeletonLoader type="table" />
+    </div>
+  );
 
   if (submitted) return (
-    <div className="siakad-container">
-      <div className="siakad-card" style={{ padding: '60px 40px', textAlign: 'center' }}>
-        <i className="ph ph-check-circle" style={{ fontSize: '4rem', color: '#10b981', marginBottom: '16px' }}></i>
-        <h1 style={{ color: 'var(--color-text)', fontSize: '2rem', fontWeight: '800', margin: '0 0 12px 0' }}>Terima Kasih!</h1>
-        <p style={{ color: 'var(--color-muted)', fontSize: '1.1rem', margin: 0 }}>Evaluasi dosen Anda telah berhasil disimpan.</p>
+    <div className="fade-in">
+      <div className="siakad-page-header">
+        <div className="siakad-page-header-glow"></div>
+        <div className="siakad-page-header-grid"></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — EVALUASI</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Evaluasi Dosen (EDOM)</h1>
+        </div>
+      </div>
+      <div style={{ padding: '24px' }}>
+        <div className="siakad-card" style={{ padding: '60px 40px', textAlign: 'center' }}>
+          <i className="ph ph-check-circle" style={{ fontSize: '4rem', color: '#10b981', marginBottom: '16px' }}></i>
+          <h1 style={{ color: 'var(--color-text)', fontSize: '2rem', fontWeight: '800', margin: '0 0 12px 0' }}>Terima Kasih!</h1>
+          <p style={{ color: 'var(--color-muted)', fontSize: '1.1rem', margin: 0 }}>Evaluasi dosen Anda telah berhasil disimpan.</p>
+        </div>
       </div>
     </div>
   );
 
   return (
-    <div className="siakad-container">
-      {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
-
-      <div className="siakad-card stagger-1" style={{ padding: '28px', marginBottom: '24px', background: 'linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(239,68,68,0.1) 100%)', border: '1px solid rgba(245,158,11,0.2)' }}>
-        <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0' }}>Evaluasi Dosen (EDOM)</h1>
-        <p style={{ color: 'var(--color-muted)', margin: 0 }}>Berikan penilaian Anda terhadap dosen pengampu mata kuliah</p>
+    <div className="fade-in">
+      <div className="siakad-page-header">
+        <div className="siakad-page-header-glow"></div>
+        <div className="siakad-page-header-grid"></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Evaluasi Dosen (EDOM)</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Berikan evaluasi objektif mengenai kinerja pengajaran Dosen untuk menjaga mutu akademik.</p>
+        </div>
       </div>
+
+      <div style={{ padding: '24px' }}>
+        {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
 
       <div className="siakad-card stagger-2" style={{ padding: '24px', marginBottom: '24px' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Kuesioner Penilaian</h2>
@@ -92,6 +115,7 @@ export default function EdomMahasiswaPage() {
         <button onClick={handleSubmit} disabled={saving} className="siakad-btn-primary" style={{ padding: '14px 32px', width: '100%' }}>
           {saving ? 'Menyimpan...' : <><i className="ph ph-paper-plane-tilt"></i> Kirim Evaluasi</>}
         </button>
+      </div>
       </div>
     </div>
   );
