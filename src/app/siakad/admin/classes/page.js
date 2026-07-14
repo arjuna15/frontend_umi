@@ -205,7 +205,7 @@ export default function AdminClassesPage() {
           </div>
           <div style={{ flex: '0 0 auto' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'transparent', fontWeight: '600', userSelect: 'none' }}>&nbsp;</label>
-            <button type="submit" style={{ background: 'linear-gradient(180deg, rgba(200, 255, 220, 0.28) 0%, rgba(140, 255, 190, 0.10) 35%, transparent 42%), rgba(0, 140, 80, 0.55)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(140, 255, 190, 0.40)', color: 'white', padding: '12px 24px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: 'inset 0 1px 0 rgba(180, 255, 220, 0.55), inset 0 -2px 8px rgba(0, 60, 30, 0.45), 0 8px 24px rgba(0, 140, 80, 0.25)', whiteSpace: 'nowrap' }}>
+            <button type="submit" className="siakad-btn-primary" style={{ padding: '12px 24px', whiteSpace: 'nowrap' }}>
               <i className="ph ph-plus-circle"></i> Tambah
             </button>
           </div>
