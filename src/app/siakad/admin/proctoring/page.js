@@ -150,7 +150,7 @@ export default function ProctoringAdminPage() {
       <div className="siakad-card" style={{ padding: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Sesi Proctoring</h2>
-          <button id="btn-generate-token" onClick={generateToken} disabled={generatingToken} className="btn" style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '30px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', opacity: generatingToken ? 0.6 : 1 }}>
+          <button id="btn-generate-token" onClick={generateToken} disabled={generatingToken} className="siakad-btn-primary" style={{ padding: '10px 20px', borderRadius: '30px', display: 'flex', alignItems: 'center', gap: '8px' }}>
             {generatingToken && <i className="ph ph-spinner" style={{ animation: 'pwaSpin 1s linear infinite' }}></i>}
             <i className="ph ph-key"></i> Generate Token
           </button>
@@ -212,7 +212,7 @@ export default function ProctoringAdminPage() {
           icon="ph-shield-warning"
           onClose={() => setShowLogs(null)}
           footer={
-            <button id="btn-close-logs" onClick={() => setShowLogs(null)} className="btn" style={{ padding: '10px 20px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Tutup</button>
+            <button id="btn-close-logs" onClick={() => setShowLogs(null)} className="btn" style={{ padding: '10px 20px', borderRadius: '10px', border: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Tutup</button>
           }
         >
           {logs.length === 0 ? (

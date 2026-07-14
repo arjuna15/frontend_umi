@@ -261,7 +261,7 @@ export default function AdminUsersPage() {
           </div>
           <div style={{ flex: '0 0 auto' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'transparent', fontWeight: '600', userSelect: 'none' }}>&nbsp;</label>
-            <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)', whiteSpace: 'nowrap' }}>
+            <button type="submit" className="siakad-btn-primary" style={{ padding: '10px 24px', borderRadius: '8px', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
               <i className="ph ph-plus-circle"></i> Tambah
             </button>
           </div>
@@ -372,8 +372,8 @@ export default function AdminUsersPage() {
           onClose={() => setIsEditModalOpen(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', background: 'transparent', border: '1px solid var(--color-border)', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="user-edit-form" style={{ padding: '12px 20px', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', border: 'none', borderRadius: '12px', cursor: 'pointer', fontWeight: 700 }}>Simpan Perubahan</button>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', background: 'var(--glass-bg)', border: 'none', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 700, transition: 'all 0.2s' }}>Batal</button>
+              <button type="button" onClick={handleUpdateUser} className="siakad-btn-primary" style={{ padding: '12px 20px', borderRadius: '12px', fontWeight: 700 }}>Simpan Perubahan</button>
             </>
           )}
         >
@@ -427,7 +427,7 @@ export default function AdminUsersPage() {
           footer={
             <>
               <button onClick={() => setResetPasswordUser(null)} className="btn" style={{ padding: '10px 18px', borderRadius: '10px', border: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
-              <button onClick={submitResetPassword} disabled={!resetPasswordValue.trim()} className="btn btn-primary" style={{ padding: '10px 18px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: '#ffffff', cursor: 'pointer', fontWeight: '600', boxShadow: '0 4px 12px rgba(59, 130, 246, 0.2)', transition: 'all 0.2s', opacity: !resetPasswordValue.trim() ? 0.6 : 1 }}>Simpan Password</button>
+              <button onClick={submitResetPassword} disabled={!resetPasswordValue.trim()} className="siakad-btn-primary" style={{ padding: '10px 18px', borderRadius: '10px', fontWeight: '600' }}>Simpan Password</button>
             </>
           }
         >
