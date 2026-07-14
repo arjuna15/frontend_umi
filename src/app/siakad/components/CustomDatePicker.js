@@ -422,10 +422,9 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
               Hapus
             </button>
           </div>
-        </>
-      )}
-    </div>
-  );
+        </div>
+      </>
+    );
 
   return (
     <div style={{ position: 'relative', ...style }}>
