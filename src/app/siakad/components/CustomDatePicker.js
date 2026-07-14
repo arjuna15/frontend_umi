@@ -413,28 +413,21 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
         type="button"
         onClick={handleToggle}
         disabled={disabled}
+        className="siakad-input"
         style={{
           width: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '12px 16px',
-          borderRadius: '12px',
-          border: '1px solid var(--color-border)',
-          background: 'var(--color-bg)',
           color: value ? 'var(--color-text)' : 'var(--color-muted)',
-          fontSize: '0.95rem',
           fontWeight: value ? '500' : 'normal',
           cursor: disabled ? 'not-allowed' : 'pointer',
           textAlign: 'left',
-          outline: 'none',
           transition: 'all 0.2s ease-out',
-          boxShadow: isOpen ? '0 0 0 3px rgba(185, 28, 28, 0.15), 0 2px 4px rgba(0,0,0,0.02)' : 'none',
-          borderColor: isOpen ? '#ef4444' : 'var(--color-border)',
         }}
       >
         <span>{formatDisplayDate(value)}</span>
-        <i className="ph ph-calendar" style={{ fontSize: '1.2rem', color: isOpen ? '#ef4444' : 'var(--color-muted)' }} />
+        <i className="ph ph-calendar" style={{ fontSize: '1.2rem', color: isOpen ? 'rgb(59, 130, 246)' : 'var(--color-muted)' }} />
       </button>
 
       {mounted && (() => {
