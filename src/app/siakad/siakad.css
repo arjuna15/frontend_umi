@@ -1724,3 +1724,15 @@
   transform: none !important;
   box-shadow: none !important;
 }
+
+/* Beautiful Options styling for select dropdowns */
+.siakad-select option, .siakad-modal-content select option {
+  background-color: var(--color-surface, #ffffff) !important;
+  color: var(--color-text, #111111) !important;
+  padding: 10px !important;
+}
+
+[data-theme='dark'] .siakad-select option, [data-theme='dark'] .siakad-modal-content select option {
+  background-color: #1e1e24 !important;
+  color: #ffffff !important;
+}
