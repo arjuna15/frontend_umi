@@ -51,10 +51,9 @@ export default function MahasiswaForumPage() {
           <div className="siakad-modal-header">
             <div>
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Forum Diskusi Kelas</h1>
-              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Berdiskusi dengan dosen dan teman sekelas Anda.</p>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(255,255,255,0.1)', padding: '8px 16px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.2)', width: '300px', backdropFilter: 'blur(10px)' }}>
-              <i className="ph ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.7)', marginRight: '8px' }}></i>
+            <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(15, 23, 42, 0.65)', padding: '10px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.12)', width: '300px', backdropFilter: 'blur(10px)' }}>
+              <i className="ph ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.8)', marginRight: '8px' }}></i>
               <input 
                 type="text" 
                 placeholder="Cari mata kuliah atau topik..." 
@@ -98,7 +97,7 @@ export default function MahasiswaForumPage() {
                     <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
                   <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>{course.code}</span>
                 </div>
-                <button onClick={() => { setActiveCourseId(course.id); setTopicForm({ title: '', content: '' }); setShowTopicModal(true); }} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}>
+                <button onClick={() => { setActiveCourseId(course.id); setTopicForm({ title: '', content: '' }); setShowTopicModal(true); }} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '8px 20px', borderRadius: '50px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}>
                   <i className="ph ph-plus"></i> Buat Topik Baru
                 </button>
               </div>
@@ -145,41 +144,41 @@ export default function MahasiswaForumPage() {
                               const res = await fetch(`${apiUrl}/siakad/forum/${forum.id}/reply`, {
                                 method: 'POST',
                                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ content })
-                              });
-                              if (res.ok) window.location.reload();
-                              else window.toast('Gagal mengirim balasan');
-                            } catch (err) { window.toast('Error: ' + err.message); }
-                          }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
-                            <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, minWidth: 0, padding: '8px 12px', borderRadius: '6px', border: '1px solid var(--color-border)', outline: 'none', fontSize: '0.9rem', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
-                            <button type="submit" style={{ background: '#C41E3A', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 2px 6px rgba(196, 30, 58, 0.3)' }}>Kirim</button>
-                          </form>
+                                  body: JSON.stringify({ content })
+                                });
+                                if (res.ok) window.location.reload();
+                                else window.toast('Gagal mengirim balasan');
+                              } catch (err) { window.toast('Error: ' + err.message); }
+                            }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
+                              <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, minWidth: 0, padding: '8px 16px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', fontSize: '0.9rem', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+                              <button type="submit" style={{ background: '#C41E3A', color: 'white', border: 'none', padding: '8px 20px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 2px 6px rgba(196, 30, 58, 0.3)' }}>Kirim</button>
+                            </form>
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0, fontStyle: 'italic', textAlign: 'center' }}>Belum ada topik diskusi dari dosen.</p>
-                )}
+                      ))}
+                    </div>
+                  ) : (
+                    <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0, fontStyle: 'italic', textAlign: 'center' }}>Belum ada topik diskusi dari dosen.</p>
+                  )}
+                </div>
               </div>
-            </div>
-          );
-          });
-        })()}
-      </div>
-
-      {showTopicModal && (
-        <ModalShell
-          title="Buat Topik Diskusi Baru"
-          icon="ph-pencil-simple-line"
-          onClose={() => setShowTopicModal(false)}
-          footer={(
-            <>
-              <button type="button" onClick={() => setShowTopicModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="topic-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan & Kirim</button>
-            </>
-          )}
-        >
+            );
+            });
+          })()}
+        </div>
+  
+        {showTopicModal && (
+          <ModalShell
+            title="Buat Topik Diskusi Baru"
+            icon="ph-pencil-simple-line"
+            onClose={() => setShowTopicModal(false)}
+            footer={(
+              <>
+                <button type="button" onClick={() => setShowTopicModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+                <button type="submit" form="topic-form" style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan & Kirim</button>
+              </>
+            )}
+          >
           <form id="topic-form" onSubmit={async (e) => {
             e.preventDefault();
             if (!topicForm.title.trim() || !topicForm.content.trim()) return;

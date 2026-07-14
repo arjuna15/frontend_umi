@@ -180,7 +180,7 @@ export default function MahasiswaPresensi() {
                   <button 
                     onClick={() => handleAttend(course.active_session)}
                     disabled={submitting}
-                    style={{ background: '#10b981', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '8px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%', boxShadow: '0 4px 10px rgba(16,185,129,0.3)' }}
+                    style={{ background: '#10b981', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '50px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%', boxShadow: '0 4px 10px rgba(16,185,129,0.3)' }}
                   >
                     {submitting ? 'Mencatat...' : 'KLIK UNTUK HADIR'}
                   </button>

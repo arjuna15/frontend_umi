@@ -216,9 +216,9 @@ export default function BimbinganAkademikPage() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Tulis pesan ke Dosen Wali..."
-              style={{ flex: 1, padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
+              style={{ flex: 1, padding: '12px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
             />
-            <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '0 20px', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79,70,229,0.3)' }}>
+            <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '0 24px', borderRadius: '50px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79,70,229,0.3)' }}>
               Kirim
             </button>
           </form>
