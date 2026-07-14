@@ -30,7 +30,7 @@ export default function SiakadLogin() {
         throw new Error(data.message || 'Kredensial tidak valid.');
       }
 
-      localStorage.setItem('siakad_token', 'cookie_authenticated');
+      localStorage.setItem('siakad_token', data.token);
       localStorage.setItem('siakad_role', data.user.role);
       localStorage.setItem('siakad_user', JSON.stringify(data.user));
 
