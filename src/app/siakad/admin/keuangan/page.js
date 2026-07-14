@@ -205,26 +205,20 @@ export default function AdminKeuangan() {
             <button 
               onClick={openBulkModal}
               style={{
-                background: 'rgba(16, 185, 129, 0.2)', backdropFilter: 'blur(10px)',
-                color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '12px 24px', borderRadius: '12px',
+                background: 'rgba(16, 185, 129, 0.15)', backdropFilter: 'blur(10px)',
+                color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.4)', padding: '12px 24px', borderRadius: '30px',
                 fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
                 transition: 'all 0.3s'
               , flexWrap: 'wrap'}}
-              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(16, 185, 129, 0.3)'}
-              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(16, 185, 129, 0.2)'}
+              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(16, 185, 129, 0.25)'}
+              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(16, 185, 129, 0.15)'}
             >
               <i className="ph ph-receipt"></i> Generate Tagihan Massal
             </button>
             <button 
               onClick={() => openModal()}
-              style={{
-                background: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(10px)',
-                color: 'white', border: '1px solid rgba(255,255,255,0.2)', padding: '12px 24px', borderRadius: '12px',
-                fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
-                transition: 'all 0.3s'
-              , flexWrap: 'wrap'}}
-              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)'}
-              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)'}
+              className="siakad-btn-primary"
+              style={{ padding: '12px 24px' }}
             >
               <i className="ph ph-plus-circle"></i> Tambah Tagihan
             </button>
