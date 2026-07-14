@@ -148,7 +148,7 @@ export default function JadwalKalenderPage() {
                     <td>{item.course}</td>
                     <td style={{ color: 'var(--color-muted)' }}>{item.dosen}</td>
                     <td>
-                      <span style={{ display: 'inline-block', minWidth: '130px', textAlign: 'center', background: 'var(--glass-bg)', padding: '4px 12px', borderRadius: '6px', fontSize: '0.85rem', border: '1px solid var(--color-border)', whiteSpace: 'nowrap' }}>
+                      <span style={{ display: 'inline-block', minWidth: '100px', textAlign: 'center', background: 'rgba(59, 130, 246, 0.12)', padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', color: '#60a5fa', border: '1px solid rgba(59, 130, 246, 0.25)', whiteSpace: 'nowrap' }}>
                         {item.room}
                       </span>
                     </td>

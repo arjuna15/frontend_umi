@@ -89,13 +89,13 @@ export default function MahasiswaDashboard() {
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Halo, {data.user.name?.split(' ')[0] || 'Mahasiswa'}!</h1>
               <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Selamat datang kembali di Portal Akademik Anda.</p>
             </div>
-            <div style={{ background: 'rgba(15, 23, 42, 0.55)', border: '1px solid rgba(255, 255, 255, 0.12)', padding: '12px 24px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '14px', backdropFilter: 'blur(16px)', boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.25)' }}>
+            <div style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', padding: '12px 28px', borderRadius: '50px', display: 'flex', alignItems: 'center', gap: '14px', backdropFilter: 'blur(16px)', boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.15)' }}>
               <div style={{ width: '42px', height: '42px', background: 'rgba(59, 130, 246, 0.18)', color: '#60a5fa', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' , flexShrink: 0, border: '1px solid rgba(59, 130, 246, 0.25)' }}>
                 <i className="ph ph-identification-card" style={{ color: '#60a5fa' }}></i>
               </div>
               <div>
-                <p style={{ margin: 0, fontSize: '0.75rem', color: '#ffffff', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '1px', opacity: 0.9 }}>NIM Mahasiswa</p>
-                <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#ffffff', fontWeight: '800' }}>{data.user.nim_nip || '-'}</h3>
+                <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '1px' }}>NIM Mahasiswa</p>
+                <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--color-text)', fontWeight: '800' }}>{data.user.nim_nip || '-'}</h3>
               </div>
             </div>
           </div>
