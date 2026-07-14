@@ -219,16 +219,12 @@ export default function AdminClassesPage() {
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
             <input 
               type="text" 
+              className="siakad-input"
               placeholder="Cari kode, nama, semester..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{ 
                 width: '100%', 
-                padding: '10px 14px 10px 38px', 
-                borderRadius: '8px', 
-                border: '1px solid var(--color-border)', 
-                outline: 'none', 
-                background: 'var(--color-bg)', 
                 color: 'var(--color-text)',
                 fontSize: '0.9rem'
               }} 
@@ -307,16 +303,16 @@ export default function AdminClassesPage() {
           <form onSubmit={handleUpdateCourse}>
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Kode Mata Kuliah</label>
-              <input value={editFormData.code} onChange={(e) => setEditFormData({...editFormData, code: e.target.value})} required style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
+              <input value={editFormData.code} onChange={(e) => setEditFormData({...editFormData, code: e.target.value})} required className="siakad-input" style={{ width: '100%', color: 'var(--color-text)' }} />
             </div>
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Nama Mata Kuliah</label>
-              <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
+              <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required className="siakad-input" style={{ width: '100%', color: 'var(--color-text)' }} />
             </div>
             <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' , flexWrap: 'wrap' }}>
               <div style={{ flex: 1 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>SKS</label>
-                <input type="number" min="1" max="6" value={editFormData.sks} onChange={(e) => setEditFormData({...editFormData, sks: e.target.value})} required style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
+                <input type="number" min="1" max="6" value={editFormData.sks} onChange={(e) => setEditFormData({...editFormData, sks: e.target.value})} required className="siakad-input" style={{ width: '100%', color: 'var(--color-text)' }} />
               </div>
               <div style={{ flex: 2 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Dosen Pengampu</label>
@@ -338,7 +334,7 @@ export default function AdminClassesPage() {
               </div>
               <div style={{ flex: 1 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Prasyarat</label>
-                <input value={editFormData.prasyarat} onChange={(e) => setEditFormData({...editFormData, prasyarat: e.target.value})} placeholder="Opsional..." style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
+                <input value={editFormData.prasyarat} onChange={(e) => setEditFormData({...editFormData, prasyarat: e.target.value})} placeholder="Opsional..." className="siakad-input" style={{ width: '100%', color: 'var(--color-text)' }} />
               </div>
             </div>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '20px' }}>

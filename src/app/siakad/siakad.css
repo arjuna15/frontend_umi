@@ -472,7 +472,7 @@
 .siakad-input {
   padding: 10px 16px;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border-radius: 50px;
   font-size: 0.95rem;
   outline: none;
   transition: all 0.3s ease;

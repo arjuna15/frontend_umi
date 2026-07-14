@@ -258,7 +258,7 @@ export default function AdminKeuangan() {
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Tagihan Keuangan</h3>
           <div style={{ position: 'relative', width: '300px' }}>
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
-            <input type="text" placeholder="Cari nama mahasiswa, deskripsi, status..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px 14px 10px 38px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.9rem' }} />
+            <input type="text" className="siakad-input" placeholder="Cari nama mahasiswa, deskripsi, status..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', color: 'var(--color-text)', fontSize: '0.9rem' }} />
           </div>
         </div>
 
@@ -422,7 +422,8 @@ export default function AdminKeuangan() {
                     onChange={(e) => setFormData({...formData, description: e.target.value})}
                     required
                     placeholder="Contoh: UKT semester berjalan"
-                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
+                    className="siakad-input"
+                    style={{ width: '100%', color: 'var(--color-text)' }}
                   />
                 </div>
 
@@ -434,7 +435,8 @@ export default function AdminKeuangan() {
                     onChange={(e) => setFormData({...formData, amount: e.target.value})}
                     required
                     placeholder="4500000"
-                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
+                    className="siakad-input"
+                    style={{ width: '100%', color: 'var(--color-text)' }}
                   />
                 </div>
 
@@ -578,7 +580,8 @@ export default function AdminKeuangan() {
                     value={bulkForm.description}
                     onChange={(e) => setBulkForm({ ...bulkForm, description: e.target.value })}
                     placeholder="Contoh: UKT semester berjalan"
-                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
+                    className="siakad-input"
+                    style={{ width: '100%', color: 'var(--color-text)' }}
                   />
                 </div>
 
@@ -589,7 +592,8 @@ export default function AdminKeuangan() {
                     value={bulkForm.amount}
                     onChange={(e) => setBulkForm({ ...bulkForm, amount: e.target.value })}
                     placeholder="4500000"
-                    style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)' }}
+                    className="siakad-input"
+                    style={{ width: '100%', color: 'var(--color-text)' }}
                   />
                 </div>
 
