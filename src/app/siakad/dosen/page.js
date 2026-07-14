@@ -17,6 +17,13 @@ export default function DosenDashboard() {
         const res = await fetch(`${apiUrl}/siakad/dosen/dashboard`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
+        if (res.status === 401 || res.status === 403) {
+          localStorage.removeItem('siakad_token');
+          localStorage.removeItem('siakad_role');
+          localStorage.removeItem('siakad_user');
+          router.push('/siakad/login');
+          return;
+        }
         if (!res.ok) throw new Error('Failed to fetch');
         const result = await res.json();
         setData(result);
