@@ -90,102 +90,43 @@ export default function JadwalKalenderPage() {
   }
 
   return (
-    <div>
-      <div style={{
-        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%)',
-        border: '1px solid var(--color-border)',
-        borderRadius: '24px',
-        padding: '36px 40px',
-        marginBottom: '32px',
-        position: 'relative',
-        overflow: 'hidden',
-        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)'
-      }}>
-        <div style={{
-          position: 'absolute',
-          top: '-50%',
-          right: '-10%',
-          width: '300px',
-          height: '300px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(185, 28, 28, 0.15) 0%, rgba(185, 28, 28, 0) 70%)',
-          filter: 'blur(30px)',
-          pointerEvents: 'none',
-          flexShrink: 0
-        }}></div>
-
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          opacity: 0.05,
-          backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px)',
-          backgroundSize: '16px 16px',
-          pointerEvents: 'none'
-        }}></div>
-
-        <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
-          <div>
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              background: 'rgba(255, 255, 255, 0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              padding: '4px 10px',
-              borderRadius: '999px',
-              marginBottom: '12px'
-            }}>
-              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#EF4444' }}></span>
-              <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.75rem', margin: 0, letterSpacing: '0.05em', fontWeight: '600', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
-            </div>
-            <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 6px 0', letterSpacing: '-0.02em' }}>Jadwal & Kalender</h1>
-            <p style={{ color: 'rgba(255, 255, 255, 0.55)', margin: 0, fontSize: '0.95rem' }}>Data jadwal dan agenda akademik diambil dari backend.</p>
-          </div>
-
-          <div style={{
-            width: '64px',
-            height: '64px',
-            borderRadius: '16px',
-            background: 'rgba(255, 255, 255, 0.04)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-            backdropFilter: 'blur(4px)',
-            flexShrink: 0
-          }}>
-            <i className="ph ph-calendar-blank" style={{ fontSize: '2rem', color: 'rgba(255, 255, 255, 0.8)' }}></i>
-          </div>
+  return (
+    <div className="fade-in">
+      <div className="siakad-page-header">
+        <div className="siakad-page-header-glow"></div>
+        <div className="siakad-page-header-grid"></div>
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Jadwal & Kalender</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Lihat jadwal kuliah mingguan dan agenda kegiatan kalender akademik kampus.</p>
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' }}>
-        <button
-          onClick={() => setActiveTab('jadwal')}
-          style={{
-            background: activeTab === 'jadwal' ? '#0f172a' : 'var(--glass-bg)',
-            color: activeTab === 'jadwal' ? 'white' : 'var(--color-text)',
-            border: activeTab === 'jadwal' ? 'none' : '1px solid var(--color-border)',
-            padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer',
-            boxShadow: activeTab === 'jadwal' ? '0 4px 10px rgba(15,23,42,0.3)' : 'none',
-            transition: 'all 0.2s'
-          }}>
-          <i className="ph ph-calendar-blank" style={{ marginRight: '8px' }}></i> Jadwal Kuliah
-        </button>
-        <button
-          onClick={() => setActiveTab('kalender')}
-          style={{
-            background: activeTab === 'kalender' ? '#0f172a' : 'var(--glass-bg)',
-            color: activeTab === 'kalender' ? 'white' : 'var(--color-text)',
-            border: activeTab === 'kalender' ? 'none' : '1px solid var(--color-border)',
-            padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer',
-            boxShadow: activeTab === 'kalender' ? '0 4px 10px rgba(15,23,42,0.3)' : 'none',
-            transition: 'all 0.2s'
-          }}>
-          <i className="ph ph-calendar-check" style={{ marginRight: '8px' }}></i> Kalender Akademik
-        </button>
-      </div>
+      <div style={{ padding: '24px' }}>
+        <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' }}>
+          <button
+            onClick={() => setActiveTab('jadwal')}
+            style={{
+              background: activeTab === 'jadwal' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+              color: activeTab === 'jadwal' ? '#3b82f6' : 'var(--color-muted)',
+              border: activeTab === 'jadwal' ? '2px solid #3b82f6' : '1px solid var(--color-border)',
+              padding: '10px 22px', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}>
+            <i className="ph ph-calendar-blank" style={{ marginRight: '8px' }}></i> Jadwal Kuliah
+          </button>
+          <button
+            onClick={() => setActiveTab('kalender')}
+            style={{
+              background: activeTab === 'kalender' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+              color: activeTab === 'kalender' ? '#3b82f6' : 'var(--color-muted)',
+              border: activeTab === 'kalender' ? '2px solid #3b82f6' : '1px solid var(--color-border)',
+              padding: '10px 22px', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}>
+            <i className="ph ph-calendar-check" style={{ marginRight: '8px' }}></i> Kalender Akademik
+          </button>
+        </div>
 
       {activeTab === 'jadwal' && (
         <div className="siakad-card" style={{ overflow: 'hidden' }}>
@@ -243,6 +184,7 @@ export default function JadwalKalenderPage() {
           )}
         </div>
       )}
+      </div>
     </div>
   );
 }
