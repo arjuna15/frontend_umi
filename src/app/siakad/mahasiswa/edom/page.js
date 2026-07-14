@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import SkeletonLoader from '../../components/SkeletonLoader';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function EdomMahasiswaPage() {
   const router = useRouter();
@@ -151,18 +152,15 @@ export default function EdomMahasiswaPage() {
         <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', marginBottom: '24px' }}>
           <label style={{ display: 'block', marginBottom: '10px', fontSize: '0.95rem', color: 'var(--color-text)', fontWeight: '700' }}>Pilih Mata Kuliah & Dosen Pengajar</label>
           {myCourses.length > 0 ? (
-            <select
+            <CustomSelect
               value={selectedCourseIndex}
-              onChange={e => handleCourseChange(e.target.value)}
-              className="siakad-input"
-              style={{ width: '100%', padding: '12px 16px', fontSize: '0.95rem', color: 'var(--color-text)' }}
-            >
-              {myCourses.map((c, idx) => (
-                <option key={idx} value={idx} style={{ background: 'var(--color-surface)', color: 'var(--color-text)' }}>
-                  [{c.course_code}] {c.course_name} — {c.dosen_name}
-                </option>
-              ))}
-            </select>
+              onChange={val => handleCourseChange(val)}
+              options={myCourses.map((c, idx) => ({
+                value: String(idx),
+                label: `[${c.course_code}] ${c.course_name} — ${c.dosen_name}`
+              }))}
+              style={{ width: '100%' }}
+            />
           ) : (
             <div style={{ padding: '14px', background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', color: '#ef4444', borderRadius: '12px', fontSize: '0.9rem', fontWeight: '600' }}>
               Anda belum memiliki KRS yang disetujui untuk mengisi kuesioner evaluasi dosen.
