@@ -22,13 +22,22 @@ export default function ChatPage() {
   const [currentUserId, setCurrentUserId] = useState(null);
 
   const getApiUrl = () => {
+    if (process.env.NEXT_PUBLIC_API_URL) {
+      // If it's a relative path like /api, we should use host dynamically on client side
+      if (process.env.NEXT_PUBLIC_API_URL.startsWith('/')) {
+        if (typeof window !== 'undefined') {
+          return `${window.location.protocol}//${window.location.host}${process.env.NEXT_PUBLIC_API_URL}`;
+        }
+      }
+      return process.env.NEXT_PUBLIC_API_URL;
+    }
     if (typeof window !== 'undefined') {
       const hostname = window.location.hostname;
       if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-        return 'https://backend.bikinwebdikitaaja.com/api';
+        return `${window.location.protocol}//${window.location.host}/api`;
       }
     }
-    return process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+    return 'http://127.0.0.1:8000/api';
   };
 
   const apiUrl = getApiUrl();
@@ -37,12 +46,16 @@ export default function ChatPage() {
     if (typeof window === 'undefined') return 'ws://localhost:8080/app/chat';
     if (process.env.NEXT_PUBLIC_WS_URL) return process.env.NEXT_PUBLIC_WS_URL;
     try {
-      const url = new URL(apiUrl);
-      const wsProto = url.protocol === 'https:' ? 'wss:' : 'ws:';
-      if (url.port === '8000') {
-        return `${wsProto}//${url.hostname}:8080/app/chat`;
+      // If the apiUrl is relative, resolve it to current host
+      let absoluteApiUrl = apiUrl;
+      if (apiUrl.startsWith('/')) {
+        absoluteApiUrl = `${window.location.protocol}//${window.location.host}${apiUrl}`;
       }
-      return `${wsProto}//${url.hostname}/app/chat`;
+      const url = new URL(absoluteApiUrl);
+      const wsProto = url.protocol === 'https:' ? 'wss:' : 'ws:';
+      
+      // Laravel Reverb default port is 8080 (or 6001). Connect to hostname with port 8080
+      return `${wsProto}//${url.hostname}:8080/app/chat`;
     } catch (e) {
       return 'ws://localhost:8080/app/chat';
     }
