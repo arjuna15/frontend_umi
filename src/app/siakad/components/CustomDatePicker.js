@@ -205,7 +205,7 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
             width: '36px',
             border: 'none',
             borderRadius: '10px',
-            background: isSelected ? 'linear-gradient(135deg, #b91c1c 0%, #ef4444 100%)' : isToday ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
+            background: isSelected ? 'linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%)' : isToday ? 'rgba(59, 130, 246, 0.1)' : 'transparent',
             color: isSelected ? 'white' : cell.isCurrentMonth ? 'var(--color-text)' : 'var(--color-muted)',
             fontWeight: isSelected || isToday ? 'bold' : 'normal',
             cursor: 'pointer',
@@ -214,7 +214,7 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
             justifyContent: 'center',
             fontSize: '0.85rem',
             transition: 'all 0.15s ease',
-            boxShadow: isSelected ? '0 4px 10px rgba(185, 28, 28, 0.3)' : 'none',
+            boxShadow: isSelected ? '0 4px 12px rgba(29, 78, 216, 0.3)' : 'none',
             border: isToday ? '1px solid rgba(59, 130, 246, 0.4)' : 'none',
           }}
           className="siakad-datepicker-day"
@@ -229,44 +229,66 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
   const startYear = 2020;
   const yearsList = Array.from({ length: 15 }, (_, i) => startYear + i);
 
-  const dropdown = coords && isOpen && (
-    <div
-      id="siakad-datepicker-portal"
-      style={{
-        position: 'absolute',
-        top: coords.top,
-        left: coords.left,
-        width: coords.width,
-        zIndex: 9999999,
-        background: 'var(--color-bg)',
-        border: '1px solid var(--color-border)',
-        borderRadius: '16px',
-        boxShadow: '0 10px 30px -10px rgba(0,0,0,0.3)',
-        overflow: 'hidden',
-        padding: '16px',
-        animation: 'csDropIn 0.15s ease-out',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-      }}
-    >
-      <style>{`
-        @keyframes csDropIn {
-          from { opacity: 0; transform: translateY(-6px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        .siakad-datepicker-day:hover {
-          background: rgba(185, 28, 28, 0.1) !important;
-          color: #ef4444 !important;
-          transform: scale(1.05);
-        }
-        .siakad-datepicker-nav-btn:hover {
-          background: var(--glass-bg) !important;
-          color: var(--color-text) !important;
-        }
-        .siakad-datepicker-year-item:hover {
-          background: var(--glass-bg) !important;
-        }
-      `}</style>
+  const dropdown = isOpen && (
+    <>
+      {/* Backdrop overlay for centered calendar */}
+      <div 
+        onClick={() => {
+          setIsOpen(false);
+          setIsYearSelectOpen(false);
+        }}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0, 0, 0, 0.45)',
+          backdropFilter: 'blur(4px)',
+          WebkitBackdropFilter: 'blur(4px)',
+          zIndex: 9999998,
+          animation: 'csFadeIn 0.2s ease-out'
+        }}
+      />
+      <div
+        id="siakad-datepicker-portal"
+        style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '340px',
+          zIndex: 9999999,
+          background: 'rgba(255, 255, 255, 0.70)',
+          border: '1px solid rgba(255, 255, 255, 0.45)',
+          borderRadius: '24px',
+          boxShadow: '0 24px 64px rgba(0, 0, 0, 0.35)',
+          overflow: 'hidden',
+          padding: '20px',
+          animation: 'csModalIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
+          backdropFilter: 'blur(30px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(30px) saturate(180%)',
+        }}
+      >
+        <style>{`
+          @keyframes csFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+          @keyframes csModalIn {
+            from { opacity: 0; transform: translate(-50%, -46%) scale(0.95); }
+            to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+          }
+          .siakad-datepicker-day:hover {
+            background: rgba(59, 130, 246, 0.15) !important;
+            color: rgb(29, 78, 216) !important;
+            transform: scale(1.05);
+          }
+          .siakad-datepicker-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.25) !important;
+            color: var(--color-text) !important;
+          }
+          .siakad-datepicker-year-item:hover {
+            background: rgba(255, 255, 255, 0.25) !important;
+          }
+        `}</style>
 
       {/* Calendar Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
