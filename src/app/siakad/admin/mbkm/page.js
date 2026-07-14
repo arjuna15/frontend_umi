@@ -224,15 +224,15 @@ export default function MBKMAdminPage() {
             <div key={f.key} style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
               {f.type === 'textarea' ? (
-                <textarea id={`input-${f.key}`} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} rows={3} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', resize: 'vertical', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+                <textarea id={`input-${f.key}`} className="siakad-input" value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} rows={3} style={{ resize: 'vertical' }} />
               ) : (
-                <input id={`input-${f.key}`} type={f.type} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+                <input id={`input-${f.key}`} className="siakad-input" type={f.type} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} />
               )}
             </div>
           ))}
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Status</label>
-            <select id="input-status" value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box' }}>
+            <select id="input-status" className="siakad-select" value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })}>
               <option value="active">Aktif</option>
               <option value="inactive">Tidak Aktif</option>
               <option value="closed">Ditutup</option>
