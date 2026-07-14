@@ -43,7 +43,7 @@ export default function AlumniSurveyPage() {
     { num: 3, label: 'Survei Kepuasan', icon: 'ph ph-star' },
   ];
 
-  const inputStyle = { width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' };
+  const inputStyle = { width: '100%', padding: '12px 16px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' };
   const labelStyle = { display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' };
 
   const ratingOptions = ['1', '2', '3', '4', '5'];

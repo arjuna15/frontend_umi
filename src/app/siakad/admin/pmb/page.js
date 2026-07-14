@@ -283,12 +283,12 @@ export default function PMBAdminPage() {
           ].map(f => (
             <div key={f.key} style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-              <input id={`input-period-${f.key}`} type={f.type} value={periodForm[f.key]} onChange={e => setPeriodForm({ ...periodForm, [f.key]: e.target.value })} placeholder={f.placeholder || ''} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
+              <input id={`input-period-${f.key}`} type={f.type} value={periodForm[f.key]} onChange={e => setPeriodForm({ ...periodForm, [f.key]: e.target.value })} placeholder={f.placeholder || ''} style={{ width: '100%', padding: '10px 14px', color: 'var(--color-text)', fontSize: '0.9rem', boxSizing: 'border-box' }} />
             </div>
           ))}
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Status</label>
-            <select id="input-period-status" value={periodForm.status} onChange={e => setPeriodForm({ ...periodForm, status: e.target.value })} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }}>
+            <select id="input-period-status" value={periodForm.status} onChange={e => setPeriodForm({ ...periodForm, status: e.target.value })} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box' }}>
               <option value="open">Dibuka</option>
               <option value="closed">Ditutup</option>
               <option value="upcoming">Akan Datang</option>

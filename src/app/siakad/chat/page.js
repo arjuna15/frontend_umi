@@ -196,7 +196,7 @@ export default function ChatPage() {
             </div>
             <div style={{ position: 'relative' }}>
               <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1rem' }}></i>
-              <input id="input-search-rooms" type="text" placeholder="Cari percakapan..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px 12px 10px 36px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
+              <input id="input-search-rooms" type="text" placeholder="Cari percakapan..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px 12px 10px 36px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
             </div>
           </div>
           <div style={{ flex: 1, overflowY: 'auto' }}>
@@ -271,7 +271,7 @@ export default function ChatPage() {
 
               {/* Message Input */}
               <div style={{ padding: '14px 20px', borderTop: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <input id="input-message" type="text" placeholder="Ketik pesan..." value={newMessage} onChange={e => setNewMessage(e.target.value)} onKeyDown={handleKeyPress} style={{ flex: 1, padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none' }} />
+                <input id="input-message" type="text" placeholder="Ketik pesan..." value={newMessage} onChange={e => setNewMessage(e.target.value)} onKeyDown={handleKeyPress} style={{ flex: 1, padding: '12px 16px', fontSize: '0.9rem', color: 'var(--color-text)' }} />
                 <button id="btn-send-message" onClick={sendMessage} disabled={sendingMessage || !newMessage.trim()} style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', width: '44px', height: '44px', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', opacity: (!newMessage.trim() || sendingMessage) ? 0.5 : 1, transition: 'opacity 0.2s ease' }}>
                   <i className={sendingMessage ? "ph ph-spinner" : "ph ph-paper-plane-tilt"} style={sendingMessage ? { animation: 'pwaSpin 1s linear infinite' } : {}}></i>
                 </button>
@@ -300,7 +300,7 @@ export default function ChatPage() {
         >
           <div style={{ marginBottom: '8px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Ruang Obrolan</label>
-            <input id="input-room-name" type="text" value={newRoomName} onChange={e => setNewRoomName(e.target.value)} placeholder="Masukkan nama room..." style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-surface)', color: 'var(--color-text)', fontSize: '0.9rem', outline: 'none', boxSizing: 'border-box' }} />
+            <input id="input-room-name" type="text" value={newRoomName} onChange={e => setNewRoomName(e.target.value)} placeholder="Masukkan nama room..." style={{ width: '100%', padding: '12px 16px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
           </div>
         </ModalShell>
       )}

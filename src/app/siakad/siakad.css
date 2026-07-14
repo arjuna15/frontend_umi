@@ -1315,38 +1315,56 @@
    LUXURY FORM INPUTS & BUTTONS
    ========================================================= */
 
-.siakad-input, .siakad-select, .siakad-modal-content input, .siakad-modal-content select {
+.siakad-input, .siakad-select, .siakad-modal-content input, .siakad-modal-content select, .siakad-modal-content textarea {
   width: 100%;
   padding: 12px 16px;
-  border-radius: 12px;
-  border: 1px solid var(--color-border) !important;
-  background: rgba(255,255,255,0.45) !important;
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  background: rgba(0, 0, 0, 0.04) !important;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08), inset 0 1px 2px rgba(0, 0, 0, 0.05) !important;
   color: var(--color-text);
   font-family: inherit;
   font-size: 0.95rem;
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.siakad-input:focus, .siakad-select:focus, .siakad-modal-content input:focus, .siakad-modal-content select:focus {
   outline: none;
-  background: rgba(255, 255, 255, 0.8) !important;
-  border-color: var(--apple-blue) !important;
-  box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15), inset 0 1px 2px rgba(0,0,0,0.02) !important;
-  transform: translateY(-1px);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
-[data-theme='dark'] .siakad-input, [data-theme='dark'] .siakad-select, [data-theme='dark'] .siakad-modal-content input, [data-theme='dark'] .siakad-modal-content select {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border: 1px solid rgba(255,255,255,0.08) !important;
+.siakad-modal-content textarea {
+  border-radius: 16px;
+}
+
+.siakad-modal-content select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 16px center !important;
+  padding-right: 40px;
+}
+
+.siakad-input:focus, .siakad-select:focus, .siakad-modal-content input:focus, .siakad-modal-content select:focus, .siakad-modal-content textarea:focus {
+  outline: none;
+  background: rgba(0, 0, 0, 0.02) !important;
+  border-color: rgba(0, 120, 255, 0.3) !important;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08), inset 0 1px 2px rgba(0, 0, 0, 0.05), 0 0 0 3px rgba(0, 120, 255, 0.12) !important;
+}
+
+[data-theme='dark'] .siakad-input, [data-theme='dark'] .siakad-select, [data-theme='dark'] .siakad-modal-content input, [data-theme='dark'] .siakad-modal-content select, [data-theme='dark'] .siakad-modal-content textarea {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(0, 0, 0, 0.15) !important;
   color: white;
 }
 
-[data-theme='dark'] .siakad-input:focus, [data-theme='dark'] .siakad-select:focus {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border-color: var(--apple-blue) !important;
-  box-shadow: 0 0 0 4px rgba(41, 151, 255, 0.25) !important;
+[data-theme='dark'] .siakad-modal-content select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23aaa' d='M6 8L1 3h10z'/%3E%3C/svg%3E") !important;
+}
+
+[data-theme='dark'] .siakad-input:focus, [data-theme='dark'] .siakad-select:focus, [data-theme='dark'] .siakad-modal-content input:focus, [data-theme='dark'] .siakad-modal-content select:focus, [data-theme='dark'] .siakad-modal-content textarea:focus {
+  background: rgba(255, 255, 255, 0.09) !important;
+  border-color: rgba(80, 160, 255, 0.4) !important;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(0, 0, 0, 0.15), 0 0 0 3px rgba(41, 151, 255, 0.2) !important;
 }
 
 /* Premium Liquid Glass Buttons inside Modals */
@@ -1354,20 +1372,20 @@
 .siakad-modal-content button.siakad-btn-primary {
   background: 
     radial-gradient(ellipse at 25% -10%, rgba(255, 255, 255, 0.50) 0%, rgba(255, 255, 255, 0) 55%),
-    linear-gradient(180deg, rgba(180, 210, 255, 0.25) 0%, rgba(120, 160, 255, 0.08) 35%, transparent 42%),
-    rgba(15, 45, 120, 0.55) !important;
+    linear-gradient(180deg, rgba(200, 225, 255, 0.28) 0%, rgba(140, 190, 255, 0.10) 35%, transparent 42%),
+    rgba(0, 55, 160, 0.55) !important;
   backdrop-filter: blur(25px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
   color: #ffffff !important;
   padding: 12px 28px !important;
-  border-radius: 12px !important;
-  border: 1px solid rgba(150, 190, 255, 0.40) !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(140, 200, 255, 0.40) !important;
   font-weight: 700 !important;
   letter-spacing: 0.5px;
   box-shadow: 
-    inset 0 1px 0 rgba(180, 210, 255, 0.50), 
-    inset 0 -2px 8px rgba(10, 25, 70, 0.50), 
-    0 8px 24px rgba(15, 45, 120, 0.30) !important;
+    inset 0 1px 0 rgba(180, 220, 255, 0.55), 
+    inset 0 -2px 8px rgba(0, 30, 90, 0.45), 
+    0 8px 24px rgba(0, 55, 160, 0.25) !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   position: relative;
   cursor: pointer;
@@ -1383,8 +1401,8 @@
   left: 0;
   right: 0;
   height: 45%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 60%, transparent 100%);
-  border-radius: 12px 12px 50% 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.06) 60%, transparent 100%);
+  border-radius: 14px 14px 50% 50%;
   pointer-events: none;
 }
 
@@ -1393,19 +1411,19 @@
   transform: translateY(-1px) !important;
   background: 
     radial-gradient(ellipse at 25% -10%, rgba(255, 255, 255, 0.60) 0%, rgba(255, 255, 255, 0) 55%),
-    linear-gradient(180deg, rgba(180, 210, 255, 0.32) 0%, rgba(120, 160, 255, 0.12) 35%, transparent 42%),
-    rgba(15, 45, 120, 0.65) !important;
-  border-color: rgba(180, 220, 255, 0.55) !important;
+    linear-gradient(180deg, rgba(200, 225, 255, 0.35) 0%, rgba(140, 190, 255, 0.14) 35%, transparent 42%),
+    rgba(0, 55, 160, 0.68) !important;
+  border-color: rgba(160, 220, 255, 0.55) !important;
   box-shadow: 
-    inset 0 1px 0 rgba(180, 210, 255, 0.60), 
-    inset 0 -2px 8px rgba(10, 25, 70, 0.50), 
-    0 10px 32px rgba(15, 45, 120, 0.40) !important;
+    inset 0 1px 0 rgba(180, 220, 255, 0.65), 
+    inset 0 -2px 8px rgba(0, 30, 90, 0.45), 
+    0 10px 32px rgba(0, 55, 160, 0.35) !important;
 }
 
 .siakad-modal-content button[type="submit"]:active,
 .siakad-modal-content button.siakad-btn-primary:active {
   transform: scale(0.97) !important;
-  background: rgba(10, 35, 90, 0.75) !important;
+  background: rgba(0, 40, 120, 0.75) !important;
 }
 
 .siakad-modal-content button[type="button"]:not(.siakad-btn-primary) {
@@ -1670,16 +1688,16 @@
 .siakad-btn-primary {
   background: 
     radial-gradient(ellipse at 25% -10%, rgba(255, 255, 255, 0.50) 0%, rgba(255, 255, 255, 0) 55%),
-    linear-gradient(180deg, rgba(180, 210, 255, 0.25) 0%, rgba(120, 160, 255, 0.08) 35%, transparent 42%),
-    rgba(15, 45, 120, 0.55) !important;
+    linear-gradient(180deg, rgba(200, 225, 255, 0.28) 0%, rgba(140, 190, 255, 0.10) 35%, transparent 42%),
+    rgba(0, 55, 160, 0.55) !important;
   backdrop-filter: blur(25px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
   color: #ffffff !important;
-  border: 1px solid rgba(150, 190, 255, 0.40) !important;
+  border: 1px solid rgba(140, 200, 255, 0.40) !important;
   box-shadow: 
-    inset 0 1px 0 rgba(180, 210, 255, 0.50), 
-    inset 0 -2px 8px rgba(10, 25, 70, 0.50), 
-    0 8px 24px rgba(15, 45, 120, 0.30) !important;
+    inset 0 1px 0 rgba(180, 220, 255, 0.55), 
+    inset 0 -2px 8px rgba(0, 30, 90, 0.45), 
+    0 8px 24px rgba(0, 55, 160, 0.25) !important;
   font-weight: 600 !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   cursor: pointer;
@@ -1694,8 +1712,8 @@
   left: 0;
   right: 0;
   height: 45%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.05) 60%, transparent 100%);
-  border-radius: 12px 12px 50% 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.06) 60%, transparent 100%);
+  border-radius: 14px 14px 50% 50%;
   pointer-events: none;
 }
 
@@ -1703,18 +1721,18 @@
   transform: translateY(-1px) !important;
   background: 
     radial-gradient(ellipse at 25% -10%, rgba(255, 255, 255, 0.60) 0%, rgba(255, 255, 255, 0) 55%),
-    linear-gradient(180deg, rgba(180, 210, 255, 0.32) 0%, rgba(120, 160, 255, 0.12) 35%, transparent 42%),
-    rgba(15, 45, 120, 0.65) !important;
-  border-color: rgba(180, 220, 255, 0.55) !important;
+    linear-gradient(180deg, rgba(200, 225, 255, 0.35) 0%, rgba(140, 190, 255, 0.14) 35%, transparent 42%),
+    rgba(0, 55, 160, 0.68) !important;
+  border-color: rgba(160, 220, 255, 0.55) !important;
   box-shadow: 
-    inset 0 1px 0 rgba(180, 210, 255, 0.60), 
-    inset 0 -2px 8px rgba(10, 25, 70, 0.50), 
-    0 10px 32px rgba(15, 45, 120, 0.40) !important;
+    inset 0 1px 0 rgba(180, 220, 255, 0.65), 
+    inset 0 -2px 8px rgba(0, 30, 90, 0.45), 
+    0 10px 32px rgba(0, 55, 160, 0.35) !important;
 }
 
 .siakad-btn-primary:active {
   transform: scale(0.97) !important;
-  background: rgba(10, 35, 90, 0.75) !important;
+  background: rgba(0, 40, 120, 0.75) !important;
 }
 
 .siakad-btn-primary:disabled {
