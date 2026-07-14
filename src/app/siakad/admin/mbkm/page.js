@@ -232,7 +232,7 @@ export default function MBKMAdminPage() {
           ))}
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Status</label>
-            <select id="input-status" className="siakad-select" value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })}>
+            <select id="input-status" className="siakad-input" value={formData.status} onChange={e => setFormData({ ...formData, status: e.target.value })}>
               <option value="active">Aktif</option>
               <option value="inactive">Tidak Aktif</option>
               <option value="closed">Ditutup</option>

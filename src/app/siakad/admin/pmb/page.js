@@ -288,7 +288,7 @@ export default function PMBAdminPage() {
           ))}
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Status</label>
-            <select id="input-period-status" value={periodForm.status} onChange={e => setPeriodForm({ ...periodForm, status: e.target.value })} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box' }}>
+            <select id="input-period-status" className="siakad-input" value={periodForm.status} onChange={e => setPeriodForm({ ...periodForm, status: e.target.value })}>
               <option value="open">Dibuka</option>
               <option value="closed">Ditutup</option>
               <option value="upcoming">Akan Datang</option>
