@@ -22,7 +22,23 @@ export default function ChatPage() {
   const [currentUserId, setCurrentUserId] = useState(null);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-  const wsUrl = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8080/app/chat';
+  
+  const getWsUrl = () => {
+    if (typeof window === 'undefined') return 'ws://localhost:8080/app/chat';
+    if (process.env.NEXT_PUBLIC_WS_URL) return process.env.NEXT_PUBLIC_WS_URL;
+    try {
+      const url = new URL(apiUrl);
+      const wsProto = url.protocol === 'https:' ? 'wss:' : 'ws:';
+      if (url.port === '8000') {
+        return `${wsProto}//${url.hostname}:8080/app/chat`;
+      }
+      return `${wsProto}//${url.hostname}/app/chat`;
+    } catch (e) {
+      return 'ws://localhost:8080/app/chat';
+    }
+  };
+
+  const wsUrl = getWsUrl();
 
   const getToken = () => localStorage.getItem('siakad_token');
 
