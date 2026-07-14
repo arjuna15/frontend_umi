@@ -473,30 +473,29 @@ export default function AdminKeuangan() {
               }}>
                 <button
                   type="button"
-                  onClick={closeModal}
+                  onClick={() => {
+                    setIsEdit(false);
+                    setEditData(null);
+                    setIsFormModalOpen(false);
+                  }}
                   style={{
-                    padding: '12px 20px',
+                    background: 'var(--glass-bg)',
+                    border: 'none',
+                    padding: '14px 20px',
                     borderRadius: '12px',
-                    border: '1px solid var(--color-border)',
-                    background: 'transparent',
                     color: 'var(--color-text)',
+                    fontWeight: 'bold',
                     cursor: 'pointer',
-                    fontWeight: 700
+                    transition: 'all 0.2s'
                   }}
                 >
                   Batal
                 </button>
-                <button type="submit" style={{
+                <button type="submit" className="siakad-btn-primary" style={{
                   minWidth: '180px',
-                  background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)',
-                  color: 'white',
-                  border: 'none',
                   padding: '14px 20px',
                   borderRadius: '12px',
-                  fontWeight: '800',
-                  fontSize: '1rem',
-                  cursor: 'pointer',
-                  boxShadow: '0 12px 24px rgba(99, 102, 241, 0.28)'
+                  fontSize: '1rem'
                 }}>
                   {isEdit ? 'Simpan Perubahan' : 'Buat Tagihan'}
                 </button>

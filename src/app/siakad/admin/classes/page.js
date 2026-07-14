@@ -341,9 +341,9 @@ export default function AdminClassesPage() {
                 <input value={editFormData.prasyarat} onChange={(e) => setEditFormData({...editFormData, prasyarat: e.target.value})} placeholder="Opsional..." style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }} />
               </div>
             </div>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', borderTop: '1px solid var(--color-border)', paddingTop: '20px', marginTop: '20px' , flexWrap: 'wrap'}}>
-              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 24px', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '12px', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold' }}>Batal</button>
-              <button type="submit" style={{ padding: '12px 24px', background: '#10b981', color: 'white', border: 'none', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(16, 185, 129, 0.2)' }}>Simpan Perubahan</button>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '20px' }}>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 24px', background: 'var(--glass-bg)', border: 'none', borderRadius: '12px', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold', transition: 'all 0.2s' }}>Batal</button>
+              <button type="submit" className="siakad-btn-primary" style={{ padding: '12px 24px', borderRadius: '12px' }}>Simpan Perubahan</button>
             </div>
           </form>
         </ModalShell>

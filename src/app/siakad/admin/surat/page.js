@@ -246,8 +246,8 @@ export default function AdminSuratPage() {
           onClose={() => setIsModalOpen(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setIsModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="status-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan Perubahan</button>
+              <button type="button" onClick={() => setIsModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700, transition: 'all 0.2s' }}>Batal</button>
+              <button type="submit" form="status-form" className="siakad-btn-primary" style={{ padding: '12px 20px', borderRadius: '12px', fontWeight: 700 }}>Simpan Perubahan</button>
             </>
           )}
         >
