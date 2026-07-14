@@ -121,6 +121,8 @@ export default function ProfilePage() {
       } else {
         window.toast('Gagal mengunggah foto profil.');
       }
+    } catch (err) {
+      window.toast('Error: ' + err.message);
     }
   };
   const handlePreferenceToggle = async (key) => {

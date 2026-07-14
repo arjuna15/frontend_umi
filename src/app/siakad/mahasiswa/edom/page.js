@@ -196,9 +196,11 @@ export default function EdomMahasiswaPage() {
           <textarea className="siakad-input" value={form.comments} onChange={e => setForm({...form, comments: e.target.value})} placeholder="Tulis komentar atau saran Anda..." rows={3} style={{ resize: 'vertical' }} />
         </div>
 
-        <button onClick={handleSubmit} disabled={saving || myCourses.length === 0} className="siakad-btn-primary" style={{ padding: '14px 32px', width: '100%', borderRadius: '50px' }}>
-          {saving ? 'Menyimpan...' : <><i className="ph ph-paper-plane-tilt"></i> Kirim Evaluasi</>}
-        </button>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '24px' }}>
+          <button onClick={handleSubmit} disabled={saving || myCourses.length === 0} className="siakad-btn-primary" style={{ padding: '14px 36px', borderRadius: '50px' }}>
+            {saving ? 'Menyimpan...' : <><i className="ph ph-paper-plane-tilt"></i> Kirim Evaluasi</>}
+          </button>
+        </div>
       </div>
       </div>
     </div>
