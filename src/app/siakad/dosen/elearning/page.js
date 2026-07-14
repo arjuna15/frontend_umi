@@ -232,9 +232,9 @@ export default function DosenElearningPage() {
               </h1>
               <p style={{ margin: 0, color: 'rgba(255,255,255,0.6)' }}>Kelola materi pembelajaran, absensi, dan kuis untuk 14 sesi pertemuan.</p>
             </div>
-            <button 
+             <button 
               onClick={() => router.push('/siakad/dosen/elearning/quiz')}
-              style={{ background: '#3b82f6', color: 'white', padding: '10px 24px', borderRadius: '50px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', flexShrink: 0 }}
+              style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', padding: '10px 24px', borderRadius: '50px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', flexShrink: 0, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}
             >
               <i className="ph ph-plus-circle"></i> Buat Kuis / Ujian (CBT)
             </button>
@@ -243,9 +243,12 @@ export default function DosenElearningPage() {
       </div>
 
       <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-        {/* Course Sidebar */}
-        <div className="siakad-card" style={{ flex: '1 1 300px', padding: '20px', height: 'fit-content' }}>
-          <h3 style={{ margin: '0 0 16px 0', fontSize: '1rem', color: 'var(--color-text)' }}>Mata Kuliah Saya</h3>
+         <div className="siakad-card" style={{ flex: '1 1 300px', padding: '20px', height: 'fit-content', overflow: 'hidden' }}>
+          <div style={{ background: 'var(--glass-bg)', padding: '16px 20px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', margin: '-20px -20px 16px -20px' }}>
+            <h3 style={{ margin: 0, fontSize: '0.95rem', color: 'var(--color-text)', fontWeight: '700' }}>
+              <i className="ph ph-books" style={{ color: '#C41E3A', marginRight: '6px' }}></i>Mata Kuliah Saya
+            </h3>
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {courses.map(course => (
               <div 
@@ -320,10 +323,10 @@ export default function DosenElearningPage() {
             (() => {
               const selectedCourseData = fullCourses.find(c => c.id === selectedCourse);
               return (
-                <div className="siakad-card" style={{ padding: '24px', marginTop: '24px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
+                <div className="siakad-card" style={{ padding: '24px', marginTop: '24px', overflow: 'hidden' }}>
+                  <div style={{ background: 'var(--glass-bg)', padding: '16px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', margin: '-24px -24px 20px -24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                     <div>
-                      <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <i className="ph ph-clipboard-text" style={{ color: '#C41E3A' }}></i> Tugas & Kuis E-Learning
                       </h3>
                       <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}>Buat tugas baru dan periksa berkas pengumpulan mahasiswa.</p>

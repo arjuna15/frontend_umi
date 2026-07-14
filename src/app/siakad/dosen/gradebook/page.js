@@ -358,7 +358,7 @@ export default function DosenGradebookPage() {
                     placeholder="Cari mahasiswa..." 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ padding: '10px 10px 10px 46px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '200px' }}
+                    style={{ padding: '10px 10px 10px 46px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '200px', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.15)' }}
                   />
                 </div>
                 
@@ -369,16 +369,15 @@ export default function DosenGradebookPage() {
                   style={{ display: 'none' }} 
                   onChange={(e) => handleImportCSV(e, course)}
                 />
-                
-                <button onClick={() => setShowWeightModal(true)} style={{ padding: '10px 16px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                              <button onClick={() => setShowWeightModal(true)} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
                   <i className="ph ph-sliders"></i> Atur Bobot
                 </button>
 
-                <button onClick={() => fileInputRef.current?.click()} style={{ padding: '10px 16px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                <button onClick={() => fileInputRef.current?.click()} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
                   <i className="ph ph-upload-simple"></i> Import CSV
                 </button>
                 
-                <button onClick={() => handleExportCSV(course)} style={{ padding: '10px 16px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                <button onClick={() => handleExportCSV(course)} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
                   <i className="ph ph-download-simple"></i> Export CSV
                 </button>
 
@@ -386,8 +385,8 @@ export default function DosenGradebookPage() {
                   onClick={() => handleSaveGrades(course.id)}
                   disabled={savingGrades}
                   style={{
-                    background: '#10b981', color: 'white', border: 'none', padding: '10px 20px', 
-                    borderRadius: '8px', cursor: savingGrades ? 'not-allowed' : 'pointer', fontWeight: 'bold',
+                    background: '#10b981', color: 'white', border: 'none', padding: '10px 24px', 
+                    borderRadius: '50px', cursor: savingGrades ? 'not-allowed' : 'pointer', fontWeight: 'bold',
                     display: 'flex', alignItems: 'center', gap: '8px',
                     transition: 'all 0.2s'
                   }}
@@ -426,7 +425,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.kehadiran || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'kehadiran', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500' }}
+                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
@@ -434,7 +433,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.tugas || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'tugas', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500' }}
+                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
@@ -442,7 +441,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.uts || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'uts', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500' }}
+                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
@@ -450,7 +449,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.uas || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'uas', e.target.value)}
-                            style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500' }}
+                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
@@ -459,7 +458,7 @@ export default function DosenGradebookPage() {
                         <td style={{ padding: '16px 24px' }}>
                           <div style={{ 
                             display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                            width: '40px', height: '40px', borderRadius: '8px', fontWeight: 'bold', fontSize: '1.2rem',
+                            width: '40px', height: '40px', borderRadius: '50%', fontWeight: 'bold', fontSize: '1.2rem',
                             background: edits.grade ? (isPassed ? '#dcfce7' : '#fee2e2') : 'rgba(255,255,255,0.05)',
                             color: edits.grade ? (isPassed ? '#166534' : '#991b1b') : 'var(--color-muted)',
                             border: `1px solid ${edits.grade ? (isPassed ? '#86efac' : '#f87171') : 'var(--color-border)'}`

@@ -164,6 +164,9 @@ export default function DosenPresensiPage() {
                         <div className="siakad-badge" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '50px' }}>
                           {att.records?.filter(r => r.status === 'present').length || 0} Hadir
                         </div>
+                        <div className="siakad-badge" style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '50px' }}>
+                          {att.records?.filter(r => r.status === 'excused').length || 0} Izin
+                        </div>
                         <div className="siakad-badge" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '50px' }}>
                           {att.records?.filter(r => r.status === 'absent').length || 0} Alpa
                         </div>
@@ -283,16 +286,19 @@ export default function DosenPresensiPage() {
                           </td>
                           <td style={{ padding: '12px 16px', textAlign: 'center' }}>
                             {status === 'present' ? (
-                              <span style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold' }}>Hadir</span>
+                              <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', padding: '4px 12px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: 'bold', border: '1px solid rgba(16, 185, 129, 0.3)' }}>Hadir</span>
+                            ) : status === 'excused' ? (
+                              <span style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', padding: '4px 12px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: 'bold', border: '1px solid rgba(245, 158, 11, 0.3)' }}>Izin</span>
                             ) : (
-                              <span style={{ background: 'var(--glass-bg)', color: '#dc2626', padding: '4px 10px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold' }}>Alpa</span>
+                              <span style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', padding: '4px 12px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: 'bold', border: '1px solid rgba(239, 68, 68, 0.3)' }}>Alpa</span>
                             )}
                           </td>
                           <td style={{ padding: '12px 16px' }}>
                             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '4px' , flexWrap: 'wrap'}}>
-                              <div style={{ display: 'inline-flex', background: 'var(--glass-bg)', borderRadius: '8px', padding: '4px', gap: '4px' }}>
-                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} style={{ background: status === 'present' ? 'white' : 'transparent', color: status === 'present' ? '#059669' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'present' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>H</button>
-                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'absent')} style={{ background: status === 'absent' ? 'white' : 'transparent', color: status === 'absent' ? '#dc2626' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'absent' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>A</button>
+                              <div style={{ display: 'inline-flex', background: 'var(--glass-bg)', borderRadius: '50px', padding: '4px', gap: '4px', border: '1px solid var(--color-border)' }}>
+                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} style={{ background: status === 'present' ? 'white' : 'transparent', color: status === 'present' ? '#059669' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'present' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>H</button>
+                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'excused')} style={{ background: status === 'excused' ? 'white' : 'transparent', color: status === 'excused' ? '#f59e0b' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'excused' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>I</button>
+                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'absent')} style={{ background: status === 'absent' ? 'white' : 'transparent', color: status === 'absent' ? '#dc2626' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'absent' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>A</button>
                               </div>
                             </div>
                           </td>

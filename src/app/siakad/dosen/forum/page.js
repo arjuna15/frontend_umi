@@ -76,7 +76,7 @@ export default function DosenForumPage() {
                 setActiveCourseId(course.id);
                 setTopicForm({ title: '', content: '' });
                 setShowTopicModal(true);
-              }} style={{ background: '#f97316', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(249, 115, 22, 0.3)' }}>
+              }} style={{ background: '#f97316', color: 'white', border: 'none', padding: '8px 20px', borderRadius: '50px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(249, 115, 22, 0.3)' }}>
                 <i className="ph ph-plus"></i> Buat Topik Baru
               </button>
             </div>
@@ -85,7 +85,7 @@ export default function DosenForumPage() {
               {course.forums && course.forums.length > 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   {course.forums.map((forum, j) => (
-                    <div key={j} style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '20px' }}>
+                    <div key={j} style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '24px', padding: '20px 24px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
                         <div style={{ width: '40px', height: '40px', background: 'rgba(99, 102, 241, 0.1)', color: '#4f46e5', border: '1px solid rgba(99, 102, 241, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' , flexShrink: 0 }}>
                           D
@@ -108,7 +108,7 @@ export default function DosenForumPage() {
                             <p style={{ margin: '4px 0 0 0', fontSize: '0.9rem', color: 'var(--color-muted)' }}>{reply.content}</p>
                           </div>
                         ))}
-                          <form onSubmit={async (e) => {
+                           <form onSubmit={async (e) => {
                             e.preventDefault();
                             const content = e.target.content.value;
                             if (!content.trim()) return;
@@ -124,8 +124,8 @@ export default function DosenForumPage() {
                               else window.toast('Gagal mengirim balasan');
                             } catch (err) { window.toast('Error: ' + err.message); }
                           }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
-                            <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, minWidth: 0, padding: '8px 12px', borderRadius: '6px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem' }} />
-                            <button type="submit" style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>Kirim</button>
+                            <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, minWidth: 0, padding: '8px 16px', borderRadius: '50px', border: '1px solid #d1d5db', outline: 'none', fontSize: '0.9rem', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.15)' }} />
+                            <button type="submit" style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '8px 20px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold' }}>Kirim</button>
                           </form>
                       </div>
                     </div>
@@ -149,14 +149,14 @@ export default function DosenForumPage() {
               <button
                 type="button"
                 onClick={() => setShowTopicModal(false)}
-                style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}
+                style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}
               >
                 Batal
               </button>
               <button
                 type="submit"
                 form="dosen-topic-form"
-                style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}
+                style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}
               >
                 Simpan & Kirim
               </button>

@@ -28,7 +28,16 @@ export default function KrsApprovalPage() {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
       const res = await fetch(`${apiUrl}/siakad/dosen/krs`, { headers: { 'Authorization': `Bearer ${token}` } });
-      if (res.ok) { const result = await res.json(); setSubmissions(result.submissions || []); }
+      if (res.ok) { 
+        const result = await res.json(); 
+        const fetchedSubs = result.submissions || [];
+        setSubmissions(fetchedSubs);
+        
+        if (selectedSub) {
+          const freshSub = fetchedSubs.find(s => s.id === selectedSub.id);
+          if (freshSub) setSelectedSub(freshSub);
+        }
+      }
     } catch (err) { console.error(err); }
     finally { setLoading(false); }
   };
@@ -46,7 +55,9 @@ export default function KrsApprovalPage() {
       });
       if (res.ok) {
         window.toast && window.toast(`KRS berhasil di-${status === 'approved' ? 'Setujui' : 'Tolak'}!`);
-        setSelectedSub(null); setNotes(''); fetchSubmissions();
+        setSelectedSub(null); 
+        setNotes(''); 
+        await fetchSubmissions();
       } else {
         const err = await res.json();
         window.toast && window.toast('Gagal: ' + (err.message || 'Error'));
@@ -54,6 +65,44 @@ export default function KrsApprovalPage() {
     } catch (err) { window.toast && window.toast('Error: ' + err.message); }
     finally { setProcessing(false); }
   };
+
+  // Group submissions by student NIM to avoid multiple entries for the same student
+  const groupedStudents = {};
+  submissions.forEach(sub => {
+    const nim = sub.mahasiswa?.nim || sub.mahasiswa?.nim_nip || 'unknown';
+    if (!groupedStudents[nim]) {
+      groupedStudents[nim] = [];
+    }
+    groupedStudents[nim].push(sub);
+  });
+
+  // Convert grouped students to list representation
+  const studentList = Object.keys(groupedStudents).map(nim => {
+    const subs = groupedStudents[nim];
+    const sortedSubs = [...subs].sort((a, b) => {
+      if (a.status === 'pending' && b.status !== 'pending') return -1;
+      if (a.status !== 'pending' && b.status === 'pending') return 1;
+      return b.id - a.id;
+    });
+
+    const activeSubmission = sortedSubs[0]; 
+    const historySubmissions = sortedSubs.slice(1); 
+
+    return {
+      nim,
+      mahasiswa: activeSubmission.mahasiswa,
+      activeSubmission,
+      historySubmissions,
+      hasPending: subs.some(s => s.status === 'pending'),
+    };
+  });
+
+  // Sort student list: Put students with pending requests at the top
+  const sortedStudents = [...studentList].sort((a, b) => {
+    if (a.hasPending && !b.hasPending) return -1;
+    if (!a.hasPending && b.hasPending) return 1;
+    return (a.mahasiswa?.name || '').localeCompare(b.mahasiswa?.name || '');
+  });
 
   const pendingCount = submissions.filter(s => s.status === 'pending').length;
 
@@ -77,7 +126,7 @@ export default function KrsApprovalPage() {
           </div>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', flex: '1 1 300px', justifyContent: 'center' }}>
             {[
-              { label: 'Total Mahasiswa', value: submissions.length, icon: 'ph-users', color: '#6366f1' },
+              { label: 'Total Mahasiswa', value: sortedStudents.length, icon: 'ph-users', color: '#6366f1' },
               { label: 'Menunggu', value: pendingCount, icon: 'ph-clock', color: '#f59e0b' },
               { label: 'Disetujui', value: submissions.filter(s=>s.status==='approved').length, icon: 'ph-check-circle', color: '#10b981' },
             ].map((s, i) => (
@@ -94,8 +143,8 @@ export default function KrsApprovalPage() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', alignItems: 'start' }}>
         {/* Left List */}
         <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
-          <div style={{ background: 'linear-gradient(to right, #4c0519, #7f1d1d)', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <h3 style={{ margin: 0, color: 'white', fontWeight: '700', fontSize: '0.95rem' }}>Daftar Mahasiswa Bimbingan</h3>
+          <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700', fontSize: '0.95rem' }}>Daftar Mahasiswa Bimbingan</h3>
             {pendingCount > 0 && (
               <span style={{ padding: '3px 10px', background: '#f59e0b', color: 'white', borderRadius: '999px', fontSize: '0.75rem', fontWeight: '800' }}>{pendingCount}</span>
             )}
@@ -124,17 +173,17 @@ export default function KrsApprovalPage() {
           </div>
           <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '60vh', overflowY: 'auto' }}>
             {(() => {
-              const filteredSubmissions = submissions.filter(sub => {
+              const filteredStudents = sortedStudents.filter(std => {
                 const query = searchQuery.toLowerCase().trim();
                 if (!query) return true;
                 return (
-                  sub.mahasiswa?.name?.toLowerCase().includes(query) ||
-                  sub.mahasiswa?.nim?.toLowerCase().includes(query) ||
-                  sub.status?.toLowerCase().includes(query)
+                  std.mahasiswa?.name?.toLowerCase().includes(query) ||
+                  std.nim?.toLowerCase().includes(query) ||
+                  std.activeSubmission?.status?.toLowerCase().includes(query)
                 );
               });
 
-              if (filteredSubmissions.length === 0) {
+              if (filteredStudents.length === 0) {
                 return (
                   <div style={{ padding: '40px 20px', textAlign: 'center', color: 'var(--color-muted)' }}>
                     <i className="ph ph-magnifying-glass" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '8px', opacity: 0.3 }}></i>
@@ -143,21 +192,35 @@ export default function KrsApprovalPage() {
                 );
               }
 
-              return filteredSubmissions.map((sub, i) => {
+              return filteredStudents.map((std, i) => {
+                const sub = std.activeSubmission;
                 const st = STATUS_STYLES[sub.status] || STATUS_STYLES.pending;
-                const isActive = selectedSub?.id === sub.id;
+                const isActive = selectedSub?.mahasiswa?.nim === std.nim;
+                
                 return (
-                  <button key={sub.id} onClick={() => { setSelectedSub(sub); setNotes(sub.notes || ''); }}
-                    style={{ padding: '14px 16px', textAlign: 'left', background: isActive ? 'linear-gradient(135deg, rgba(196,30,58,0.2), rgba(99,102,241,0.2))' : 'var(--glass-bg)', border: `1px solid ${isActive ? 'rgba(196,30,58,0.4)' : 'var(--color-border)'}`, borderRadius: '24px', cursor: 'pointer', transition: 'all 0.2s', width: '100%' }}>
+                  <button key={std.nim} onClick={() => { setSelectedSub(sub); setNotes(sub.notes || ''); }}
+                    style={{ padding: '14px 16px', textAlign: 'left', background: isActive ? 'linear-gradient(135deg, rgba(196,30,58,0.1), rgba(99,102,241,0.1))' : 'var(--glass-bg)', border: `1px solid ${isActive ? 'rgba(196,30,58,0.4)' : 'var(--color-border)'}`, borderRadius: '24px', cursor: 'pointer', transition: 'all 0.2s', width: '100%' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                       <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366f1', fontWeight: '800', flexShrink: 0 }}>
-                        {(sub.mahasiswa?.name || '?').charAt(0)}
+                        {(std.mahasiswa?.name || '?').charAt(0)}
                       </div>
                       <div style={{ minWidth: 0, flex: 1 }}>
-                        <p style={{ margin: '0 0 2px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{sub.mahasiswa?.name || 'Mahasiswa'}</p>
-                        <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)' }}>NIM: {sub.mahasiswa?.nim || '—'}</p>
+                        <p style={{ margin: '0 0 2px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{std.mahasiswa?.name || 'Mahasiswa'}</p>
+                        <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)' }}>NIM: {std.nim}</p>
                       </div>
-                      <span style={{ padding: '4px 10px', background: st.bg, color: st.color, border: `1px solid ${st.border}`, borderRadius: '50px', fontSize: '0.7rem', fontWeight: '700', whiteSpace: 'nowrap' }}>{st.label}</span>
+                      <span style={{ 
+                        padding: '4px 10px', 
+                        background: st.bg, 
+                        color: st.color, 
+                        border: `1px solid ${st.border}`, 
+                        borderRadius: '50px', 
+                        fontSize: '0.7rem', 
+                        fontWeight: '700', 
+                        whiteSpace: 'nowrap',
+                        minWidth: '95px',
+                        textAlign: 'center',
+                        display: 'inline-block'
+                      }}>{st.label}</span>
                     </div>
                   </button>
                 );
@@ -174,11 +237,21 @@ export default function KrsApprovalPage() {
               <div style={{ background: 'var(--glass-bg)', padding: '20px 28px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
                   <h2 style={{ margin: '0 0 4px 0', color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>{selectedSub.mahasiswa?.name}</h2>
-                  <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>NIM: {selectedSub.mahasiswa?.nim} · Semester {selectedSub.semester}</p>
+                  <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>NIM: {selectedSub.mahasiswa?.nim || selectedSub.mahasiswa?.nim_nip} · Semester {selectedSub.semester}</p>
                 </div>
                 {(() => {
                   const st = STATUS_STYLES[selectedSub.status] || STATUS_STYLES.pending;
-                  return <span style={{ padding: '8px 16px', background: st.bg, color: st.color, border: `1px solid ${st.border}`, borderRadius: '999px', fontWeight: '800', fontSize: '0.85rem' }}>{st.label}</span>;
+                  return <span style={{ 
+                    padding: '8px 16px', 
+                    background: st.bg, 
+                    color: st.color, 
+                    border: `1px solid ${st.border}`, 
+                    borderRadius: '999px', 
+                    fontWeight: '800', 
+                    fontSize: '0.85rem',
+                    minWidth: '100px',
+                    textAlign: 'center'
+                  }}>{st.label}</span>;
                 })()}
               </div>
 
@@ -216,6 +289,49 @@ export default function KrsApprovalPage() {
                   </table>
                 </div>
 
+                {/* History Log Section */}
+                {(() => {
+                  const studentNim = selectedSub.mahasiswa?.nim || selectedSub.mahasiswa?.nim_nip;
+                  const record = studentList.find(s => s.nim === studentNim);
+                  if (!record || !record.historySubmissions || record.historySubmissions.length === 0) return null;
+
+                  return (
+                    <div style={{ marginBottom: '24px' }}>
+                      <h3 style={{ margin: '0 0 12px 0', fontWeight: '700', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.95rem' }}>
+                        <i className="ph ph-clock-counter-clockwise" style={{ color: '#8b5cf6' }}></i> Riwayat Pengajuan Sebelumnya
+                      </h3>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        {record.historySubmissions.map((hist, k) => {
+                          const hs = STATUS_STYLES[hist.status] || STATUS_STYLES.pending;
+                          return (
+                            <div key={k} style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border)', borderRadius: '16px', fontSize: '0.85rem' }}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                                <span style={{ fontWeight: '700', color: 'var(--color-text)' }}>Pengajuan ID #{hist.id}</span>
+                                <span style={{ 
+                                  padding: '2px 8px', 
+                                  background: hs.bg, 
+                                  color: hs.color, 
+                                  border: `1px solid ${hs.border}`, 
+                                  borderRadius: '50px', 
+                                  fontSize: '0.7rem', 
+                                  fontWeight: '700',
+                                  minWidth: '80px',
+                                  textAlign: 'center'
+                                }}>{hs.label}</span>
+                              </div>
+                              {hist.notes && (
+                                <p style={{ margin: '4px 0 0 0', color: 'var(--color-muted)', fontStyle: 'italic' }}>
+                                  Catatan: &ldquo;{hist.notes}&rdquo;
+                                </p>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })()}
+
                 {/* Notes */}
                 <div style={{ marginBottom: '24px' }}>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
@@ -249,7 +365,7 @@ export default function KrsApprovalPage() {
             <div className="siakad-card stagger-2" style={{ padding: '80px 40px', textAlign: 'center', color: 'var(--color-muted)' }}>
               <i className="ph ph-check-square-offset" style={{ fontSize: '5rem', display: 'block', marginBottom: '16px', opacity: 0.25 }}></i>
               <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)' }}>Pilih Mahasiswa</h3>
-              <p style={{ margin: 0 }}>Pilih mahasiswa dari daftar di samping untuk melihat detail KRS dan melakukan validasi.</p>
+              <p style={{ margin: 0 }}>Pilih mahasiswa dari daftar di samping untuk melihat detail KRS, riwayat pengajuan, dan melakukan validasi.</p>
             </div>
           )}
         </div>
