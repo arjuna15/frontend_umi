@@ -84,14 +84,14 @@ export default function DosenDashboard() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
         <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
           <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(99, 102, 241, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              <i className="ph ph-clock" style={{ color: '#6366f1', fontSize: '1.1rem' }}></i>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <i className="ph ph-clock" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700' }}>Jadwal Mengajar Hari Ini</h3>
           </div>
           <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {todaySchedules.length > 0 ? todaySchedules.map((sch, i) => (
-              <div key={i} style={{ padding: '16px 20px', background: 'var(--glass-bg)', borderRadius: '50px', borderLeft: `4px solid ${dayColors[sch.day] || '#8b5cf6'}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+               <div key={i} style={{ padding: '16px 20px', background: 'var(--glass-bg)', borderRadius: '50px', borderLeft: '4px solid #C41E3A', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
                 <div>
                   <p style={{ margin: '0 0 4px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '1rem' }}>{sch.course}</p>
                   <div style={{ display: 'flex', gap: '12px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>
@@ -99,7 +99,7 @@ export default function DosenDashboard() {
                     <span><i className="ph ph-map-pin" style={{ marginRight: '4px' }}></i>{sch.room || 'Belum ada ruang'}</span>
                   </div>
                 </div>
-                <span style={{ padding: '4px 12px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>
+                <span style={{ padding: '4px 12px', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>
                   Sesi {sch.meeting || '?'}
                 </span>
               </div>
@@ -153,14 +153,14 @@ export default function DosenDashboard() {
             <div style={{ padding: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
               {courses.map((c, i) => (
                 <div key={i} style={{ padding: '20px', background: 'var(--glass-bg)', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', gap: '16px', alignItems: 'center', transition: 'all 0.2s' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <i className="ph ph-chalkboard-teacher" style={{ color: '#6366f1', fontSize: '1.3rem' }}></i>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <i className="ph ph-chalkboard-teacher" style={{ color: '#C41E3A', fontSize: '1.3rem' }}></i>
                   </div>
                   <div style={{ minWidth: 0 }}>
                     <p style={{ margin: '0 0 4px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.95rem' }}>{c.name}</p>
                     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                      <span style={{ padding: '2px 10px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '600' }}>{c.code}</span>
-                      <span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '2px 10px', background: 'rgba(16,185,129,0.15)', color: '#10b981', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '600' }}>{c.sks} SKS</span>
+                      <span style={{ padding: '2px 10px', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '600' }}>{c.code}</span>
+                      <span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '2px 10px', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '600' }}>{c.sks} SKS</span>
                     </div>
                   </div>
                 </div>

@@ -285,7 +285,7 @@ export default function DosenElearningPage() {
                   <div style={{ flex: '1 1 300px' }}>
                     <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.1rem', fontWeight: '700' }}>Sesi {sess.session}: {sess.title}</h3>
                     <div style={{ display: 'flex', gap: '16px', color: 'var(--color-muted)', fontSize: '0.85rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(99,102,241,0.1)', color: '#6366f1', padding: '4px 12px', borderRadius: '50px', fontWeight: '600' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(196, 30, 58, 0.1)', color: '#C41E3A', padding: '4px 12px', borderRadius: '50px', fontWeight: '600' }}>
                         <i className="ph ph-file-pdf"></i> {sess.material_count} Materi Terupload
                       </span>
                       {sess.meet_link ? (

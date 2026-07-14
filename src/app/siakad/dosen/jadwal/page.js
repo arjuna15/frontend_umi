@@ -151,11 +151,11 @@ export default function JadwalPage() {
       {/* Table Card */}
       <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
         <div style={{ background: 'var(--glass-bg)', padding: '20px 28px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(59, 130, 246, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
-            <i className="ph ph-calendar-plus" style={{ color: '#3b82f6', fontSize: '1.1rem' }}></i>
+          <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
+            <i className="ph ph-calendar-plus" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
           </div>
           <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700' }}>Daftar Mata Kuliah & Jadwal</h3>
-          <span style={{ marginLeft: 'auto', padding: '4px 12px', background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6', border: '1px solid rgba(59, 130, 246, 0.25)', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' , flexShrink: 0 }}>{courses.length} MK</span>
+          <span style={{ marginLeft: 'auto', padding: '4px 12px', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', border: '1px solid rgba(196, 30, 58, 0.25)', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' , flexShrink: 0 }}>{courses.length} MK</span>
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
@@ -176,8 +176,8 @@ export default function JadwalPage() {
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
                     <td style={{ padding: '16px 20px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                          <span style={{ color: '#6366f1', fontWeight: '800', fontSize: '0.85rem' }}>{c.code?.substring(0, 2) || '??'}</span>
+                        <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          <span style={{ color: '#C41E3A', fontWeight: '800', fontSize: '0.85rem' }}>{c.code?.substring(0, 2) || '??'}</span>
                         </div>
                         <div>
                           <p style={{ margin: 0, fontWeight: '700', color: 'var(--color-text)' }}>{c.name}</p>
@@ -186,7 +186,7 @@ export default function JadwalPage() {
                       </div>
                     </td>
                     <td style={{ padding: '16px 20px' }}>
-                      <span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '4px 12px', background: 'rgba(99,102,241,0.15)', color: '#6366f1', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem' }}>{c.sks} SKS</span>
+                      <span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '4px 12px', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem' }}>{c.sks} SKS</span>
                     </td>
                     {isEditing ? (
                       <>

@@ -95,7 +95,7 @@ export default function RekapPresensiPage() {
                 const isActive = selectedCourseId === c.id.toString();
                 return (
                   <button key={c.id} onClick={() => { setSelectedCourseId(c.id.toString()); setSearchTerm(''); }}
-                    style={{ padding: '14px 16px', textAlign: 'left', background: isActive ? 'linear-gradient(135deg, #065f46, #064e3b)' : 'var(--glass-bg)', color: isActive ? 'white' : 'var(--color-text)', border: `1px solid ${isActive ? 'transparent' : 'var(--color-border)'}`, borderRadius: '24px', cursor: 'pointer', transition: 'all 0.2s', boxShadow: isActive ? '0 4px 12px rgba(6,95,70,0.4)' : 'none' }}>
+                    style={{ padding: '14px 16px', textAlign: 'left', background: isActive ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--glass-bg)', color: isActive ? 'white' : 'var(--color-text)', border: `1px solid ${isActive ? 'transparent' : 'var(--color-border)'}`, borderRadius: '24px', cursor: 'pointer', transition: 'all 0.2s', boxShadow: isActive ? '0 4px 12px rgba(196,30,58,0.4)' : 'none' }}>
                     <div style={{ fontSize: '0.75rem', opacity: 0.7, marginBottom: '2px', fontWeight: '600' }}>{c.code}</div>
                     <div style={{ fontWeight: '700', fontSize: '0.9rem', lineHeight: 1.3 }}>{c.name}</div>
                   </button>
@@ -137,7 +137,7 @@ export default function RekapPresensiPage() {
                         <td style={{ padding: '16px 20px', fontWeight: '600', color: 'var(--color-muted)', fontSize: '0.9rem' }}>{mhs.nim || '—'}</td>
                         <td style={{ padding: '16px 20px' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366f1', fontWeight: '800', fontSize: '0.9rem', flexShrink: 0 }}>
+                            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196,30,58,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#C41E3A', fontWeight: '800', fontSize: '0.9rem', flexShrink: 0 }}>
                               {mhs.name.charAt(0)}
                             </div>
                             <span style={{ fontWeight: '600', color: 'var(--color-text)' }}>{mhs.name}</span>
