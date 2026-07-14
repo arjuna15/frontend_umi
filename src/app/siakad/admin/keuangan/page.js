@@ -481,10 +481,8 @@ export default function AdminKeuangan() {
                     setIsFormModalOpen(false);
                   }}
                   style={{
-                    background: 'var(--glass-bg)',
                     border: 'none',
                     padding: '14px 20px',
-                    borderRadius: '12px',
                     color: 'var(--color-text)',
                     fontWeight: 'bold',
                     cursor: 'pointer',
@@ -496,7 +494,6 @@ export default function AdminKeuangan() {
                 <button type="submit" className="siakad-btn-primary" style={{
                   minWidth: '180px',
                   padding: '14px 20px',
-                  borderRadius: '12px',
                   fontSize: '1rem'
                 }}>
                   {isEdit ? 'Simpan Perubahan' : 'Buat Tagihan'}

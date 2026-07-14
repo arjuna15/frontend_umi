@@ -338,8 +338,8 @@ export default function AdminClassesPage() {
               </div>
             </div>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '20px' }}>
-              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 24px', background: 'var(--glass-bg)', border: 'none', borderRadius: '12px', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold', transition: 'all 0.2s' }}>Batal</button>
-              <button type="submit" className="siakad-btn-primary" style={{ padding: '12px 24px', borderRadius: '12px' }}>Simpan Perubahan</button>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 24px', border: 'none', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold', transition: 'all 0.2s' }}>Batal</button>
+              <button type="submit" className="siakad-btn-primary" style={{ padding: '12px 24px' }}>Simpan Perubahan</button>
             </div>
           </form>
         </ModalShell>
