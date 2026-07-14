@@ -301,7 +301,7 @@ export default function ElearningPage() {
                     style={{
                       width: '100%',
                       padding: '12px',
-                      borderRadius: '12px',
+                      borderRadius: '50px',
                       background: 'linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)',
                       color: 'white',
                       border: 'none',

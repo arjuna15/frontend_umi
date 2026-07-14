@@ -152,7 +152,7 @@ export default function ProfilePage() {
           <button 
             onClick={() => setActiveTab('pribadi')}
             style={{ 
-              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
+              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '50px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
               background: activeTab === 'pribadi' ? '#C41E3A' : 'transparent',
               color: activeTab === 'pribadi' ? 'white' : 'var(--color-muted)'
             }}
@@ -163,7 +163,7 @@ export default function ProfilePage() {
           <button 
             onClick={() => setActiveTab('keamanan')}
             style={{ 
-              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
+              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '50px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
               background: activeTab === 'keamanan' ? '#C41E3A' : 'transparent',
               color: activeTab === 'keamanan' ? 'white' : 'var(--color-muted)'
             }}
@@ -174,7 +174,7 @@ export default function ProfilePage() {
           <button 
             onClick={() => setActiveTab('preferensi')}
             style={{ 
-              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '12px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
+              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '50px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
               background: activeTab === 'preferensi' ? '#C41E3A' : 'transparent',
               color: activeTab === 'preferensi' ? 'white' : 'var(--color-muted)'
             }}
@@ -250,7 +250,7 @@ export default function ProfilePage() {
                 </div>
 
                 <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'flex-end' }}>
-                  <button type="submit" className="siakad-btn-primary" style={{ padding: '14px 28px', borderRadius: '10px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <button type="submit" className="siakad-btn-primary" style={{ padding: '14px 32px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                     Simpan Perubahan
                   </button>
                 </div>
@@ -282,7 +282,7 @@ export default function ProfilePage() {
                   <input type="password" name="confirm" required minLength="6" placeholder="••••••••" style={{ width: '100%', padding: '14px', borderRadius: '10px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
                 </div>
                 <div style={{ marginTop: '16px' }}>
-                  <button type="submit" className="siakad-btn-primary" style={{ padding: '14px 28px', borderRadius: '10px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <button type="submit" className="siakad-btn-primary" style={{ padding: '14px 32px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                     Perbarui Password
                   </button>
                 </div>
