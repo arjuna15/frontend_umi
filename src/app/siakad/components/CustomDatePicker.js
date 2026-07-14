@@ -237,7 +237,7 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
         top: coords.top,
         left: coords.left,
         width: coords.width,
-        zIndex: 99999,
+        zIndex: 9999999,
         background: 'var(--color-bg)',
         border: '1px solid var(--color-border)',
         borderRadius: '16px',
