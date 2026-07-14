@@ -207,12 +207,12 @@ export default function AdminUsersPage() {
         <div className="siakad-page-header-grid"></div>
         <div style={{ position: 'relative', zIndex: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
           <div style={{ flex: '1 1 300px' }}>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
-            <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Pengguna</h1>
-            <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
+            <p style={{ color: 'var(--color-muted)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — ADMIN</p>
+            <h1 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Pengguna</h1>
+            <p style={{ margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
           </div>
           <div>
-            <button onClick={() => window.toast?.('Silakan pilih file CSV...')} style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '10px 20px', borderRadius: '12px', cursor: 'pointer', color: 'white', display: 'flex', alignItems: 'center', gap: '8px' , flexWrap: 'wrap'}}>
+            <button onClick={() => window.toast?.('Silakan pilih file CSV...')} className="siakad-btn-primary" style={{ padding: '12px 22px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
               <i className="ph ph-upload-simple"></i> Import CSV
             </button>
           </div>
@@ -261,7 +261,7 @@ export default function AdminUsersPage() {
           </div>
           <div style={{ flex: '0 0 auto' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'transparent', fontWeight: '600', userSelect: 'none' }}>&nbsp;</label>
-            <button type="submit" className="siakad-btn-primary" style={{ padding: '10px 24px', borderRadius: '8px', fontWeight: 'bold', height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
+            <button type="submit" className="siakad-btn-primary" style={{ padding: '12px 24px', borderRadius: '50px', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
               <i className="ph ph-plus-circle"></i> Tambah
             </button>
           </div>
