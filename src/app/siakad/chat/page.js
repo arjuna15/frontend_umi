@@ -134,7 +134,10 @@ export default function ChatPage() {
   const fetchRooms = async () => {
     try {
       const res = await fetch(`${apiUrl}/siakad/chat/rooms`, {
-        headers: { 'Authorization': `Bearer ${getToken()}` }
+        headers: { 
+          'Authorization': `Bearer ${getToken()}`,
+          'Accept': 'application/json'
+        }
       });
       if (!res.ok) throw new Error('Failed');
       const data = await res.json();
@@ -145,7 +148,10 @@ export default function ChatPage() {
   const fetchMessages = async (roomId) => {
     try {
       const res = await fetch(`${apiUrl}/siakad/chat/rooms/${roomId}`, {
-        headers: { 'Authorization': `Bearer ${getToken()}` }
+        headers: { 
+          'Authorization': `Bearer ${getToken()}`,
+          'Accept': 'application/json'
+        }
       });
       if (!res.ok) throw new Error('Failed');
       const data = await res.json();
@@ -168,7 +174,11 @@ export default function ChatPage() {
     try {
       const res = await fetch(`${apiUrl}/siakad/chat/rooms/${selectedRoom.id}/messages`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getToken()}` },
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${getToken()}`,
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({ content })
       });
       const data = await res.json();
@@ -188,7 +198,11 @@ export default function ChatPage() {
     try {
       const res = await fetch(`${apiUrl}/siakad/chat/rooms`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getToken()}` },
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${getToken()}`,
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({ name: newRoomName.trim() })
       });
       if (res.ok) { fetchRooms(); setShowCreateRoom(false); setNewRoomName(''); }
