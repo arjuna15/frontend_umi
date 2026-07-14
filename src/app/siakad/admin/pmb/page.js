@@ -267,8 +267,8 @@ export default function PMBAdminPage() {
           onClose={() => setShowPeriodModal(false)}
           footer={
             <>
-              <button id="btn-cancel-period" onClick={() => setShowPeriodModal(false)} className="btn" style={{ padding: '10px 20px', borderRadius: '10px', border: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
-              <button id="btn-save-period" onClick={savePeriod} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px', borderRadius: '10px' }}>
+              <button id="btn-cancel-period" onClick={() => setShowPeriodModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
+              <button id="btn-save-period" onClick={savePeriod} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
                 {saving ? 'Menyimpan...' : 'Simpan'}
               </button>
             </>

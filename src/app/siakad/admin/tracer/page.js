@@ -256,8 +256,8 @@ export default function TracerStudyAdminPage() {
           onClose={() => setShowAddModal(false)}
           footer={
             <>
-              <button id="btn-cancel-alumni" onClick={() => setShowAddModal(false)} className="btn" style={{ padding: '10px 20px', borderRadius: '10px', border: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
-              <button id="btn-confirm-alumni" onClick={addAlumni} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px', borderRadius: '10px' }}>
+              <button id="btn-cancel-alumni" onClick={() => setShowAddModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
+              <button id="btn-confirm-alumni" onClick={addAlumni} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
                 {saving ? 'Menyimpan...' : 'Tambah Alumni'}
               </button>
             </>

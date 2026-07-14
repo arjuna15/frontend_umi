@@ -212,7 +212,7 @@ export default function AdminUsersPage() {
             <p style={{ margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
           </div>
           <div>
-            <button onClick={() => window.toast?.('Silakan pilih file CSV...')} className="siakad-btn-primary" style={{ padding: '12px 22px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            <button onClick={() => window.toast?.('Silakan pilih file CSV...')} className="siakad-btn-primary" style={{ padding: '12px 22px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
               <i className="ph ph-upload-simple"></i> Import CSV
             </button>
           </div>
@@ -261,7 +261,7 @@ export default function AdminUsersPage() {
           </div>
           <div style={{ flex: '0 0 auto' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'transparent', fontWeight: '600', userSelect: 'none' }}>&nbsp;</label>
-            <button type="submit" className="siakad-btn-primary" style={{ padding: '12px 24px', borderRadius: '50px', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
+            <button type="submit" className="siakad-btn-primary" style={{ padding: '12px 24px', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
               <i className="ph ph-plus-circle"></i> Tambah
             </button>
           </div>
@@ -372,8 +372,8 @@ export default function AdminUsersPage() {
           onClose={() => setIsEditModalOpen(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', background: 'var(--glass-bg)', border: 'none', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 700, transition: 'all 0.2s' }}>Batal</button>
-              <button type="button" onClick={handleUpdateUser} className="siakad-btn-primary" style={{ padding: '12px 20px', borderRadius: '12px', fontWeight: 700 }}>Simpan Perubahan</button>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', border: 'none', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 700, transition: 'all 0.2s' }}>Batal</button>
+              <button type="button" onClick={handleUpdateUser} className="siakad-btn-primary" style={{ padding: '12px 20px', fontWeight: 700 }}>Simpan Perubahan</button>
             </>
           )}
         >
@@ -426,8 +426,8 @@ export default function AdminUsersPage() {
           maxWidth="440px"
           footer={
             <>
-              <button onClick={() => setResetPasswordUser(null)} className="btn" style={{ padding: '10px 18px', borderRadius: '10px', border: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
-              <button onClick={submitResetPassword} disabled={!resetPasswordValue.trim()} className="siakad-btn-primary" style={{ padding: '10px 18px', borderRadius: '10px', fontWeight: '600' }}>Simpan Password</button>
+              <button onClick={() => setResetPasswordUser(null)} className="btn" style={{ padding: '10px 18px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
+              <button onClick={submitResetPassword} disabled={!resetPasswordValue.trim()} className="siakad-btn-primary" style={{ padding: '10px 18px', fontWeight: '600' }}>Simpan Password</button>
             </>
           }
         >

@@ -291,8 +291,8 @@ export default function ChatPage() {
           maxWidth="440px"
           footer={
             <>
-              <button id="btn-cancel-room" onClick={() => setShowCreateRoom(false)} className="btn" style={{ padding: '10px 20px', borderRadius: '10px', border: 'none', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
-              <button id="btn-confirm-create-room" onClick={createRoom} disabled={creatingRoom || !newRoomName.trim()} className="siakad-btn-primary" style={{ padding: '10px 24px', borderRadius: '10px' }}>
+              <button id="btn-cancel-room" onClick={() => setShowCreateRoom(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
+              <button id="btn-confirm-create-room" onClick={createRoom} disabled={creatingRoom || !newRoomName.trim()} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
                 {creatingRoom ? 'Membuat...' : 'Buat Room'}
               </button>
             </>
