@@ -1,76 +1,142 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import SkeletonLoader from '../../components/SkeletonLoader';
 
 export default function JadwalKalenderPage() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState('jadwal');
-  const [data, setData] = useState(null);
-  const [dashboardExt, setDashboardExt] = useState(null);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [activeTab, setActiveTab] = useState('kalender'); // Default to interactive calendar view
+  const [schedules, setSchedules] = useState([]);
+  const [overrides, setOverrides] = useState([]);
   const [calendarEvents, setCalendarEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedDay, setSelectedDay] = useState(null);
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+  const getToken = () => localStorage.getItem('siakad_token');
 
   useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem('siakad_token');
-      if (!token) return router.push('/siakad/login');
-
-      try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-        const [dashRes, extRes, calRes] = await Promise.all([
-          fetch(`${apiUrl}/siakad/dashboard`, { headers: { 'Authorization': `Bearer ${token}` } }),
-          fetch(`${apiUrl}/siakad/mahasiswa/dashboard`, { headers: { 'Authorization': `Bearer ${token}` } }),
-          fetch(`${apiUrl}/siakad/calendar`, { headers: { 'Authorization': `Bearer ${token}` } })
-        ]);
-
-        if (!dashRes.ok) throw new Error('Failed to fetch');
-        const result = await dashRes.json();
-        if (result.user.role !== 'mahasiswa') return router.push('/siakad/login');
-        setData(result);
-
-        if (extRes.ok) {
-          const extResult = await extRes.json();
-          setDashboardExt(extResult);
-        }
-
-        if (calRes.ok) {
-          const calendarResult = await calRes.json();
-          setCalendarEvents(Array.isArray(calendarResult) ? calendarResult : []);
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
+    if (!getToken()) return router.push('/siakad/login');
     fetchData();
-  }, [router]);
+  }, [currentDate, router]);
 
-  const normalizeScheduleItem = (item) => ({
-    day: item.day || item.hari || 'Hari ini',
-    time: item.time || [item.start_time, item.end_time].filter(Boolean).join(' - ') || '-',
-    course: item.course || item.course_name || item.name || '-',
-    room: item.room || item.ruang || '-',
-    dosen: item.dosen || item.lecturer || item.dosen_name || '-',
-  });
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+      const [calRes, eventRes] = await Promise.all([
+        fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
+          headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/json' }
+        }),
+        fetch(`${apiUrl}/siakad/calendar`, {
+          headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/json' }
+        })
+      ]);
 
-  const rawSchedule = dashboardExt?.weekly_schedule || dashboardExt?.schedule || dashboardExt?.schedule_today || data?.schedule || data?.krs?.map((item) => ({
-    day: item.course?.day || item.day,
-    time: item.course?.time || item.time,
-    course: item.course?.name || item.course_name,
-    room: item.course?.room || item.room,
-    dosen: item.course?.dosen?.name || item.dosen
-  })) || [];
-  const schedule = Array.isArray(rawSchedule) ? rawSchedule.map(normalizeScheduleItem).filter((item) => item.course && item.course !== '-') : [];
+      if (calRes.ok) {
+        const payload = await calRes.json();
+        setSchedules(payload.schedules || []);
+        setOverrides(payload.overrides || []);
+      }
 
-  const mappedCalendarEvents = Array.isArray(calendarEvents) ? calendarEvents.map((item) => ({
-    date: item.startDate && item.endDate
-      ? `${item.startDate} - ${item.endDate}`
-      : item.startDate || item.endDate || '-',
-    event: item.name || '-',
-    type: item.type || 'academic'
-  })) : [];
+      if (eventRes.ok) {
+        const events = await eventRes.json();
+        setCalendarEvents(Array.isArray(events) ? events : []);
+      }
+
+      // Default select today if in the current month
+      const today = new Date();
+      if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
+        setSelectedDay(today.getDate());
+      } else {
+        setSelectedDay(1);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePrevMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+  };
+
+  // Generate days in month grid
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const firstDayIndex = new Date(year, month, 1).getDay();
+  const totalDays = new Date(year, month + 1, 0).getDate();
+
+  const daysGrid = [];
+  for (let i = 0; i < (firstDayIndex === 0 ? 6 : firstDayIndex - 1); i++) {
+    daysGrid.push({ day: null, dateStr: '' });
+  }
+  for (let d = 1; d <= totalDays; d++) {
+    const formattedDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    daysGrid.push({ day: d, dateStr: formattedDate });
+  }
+
+  // Get active schedule for day
+  const getDayAgenda = (dateStr) => {
+    if (!dateStr) return [];
+    
+    // Find active overrides on this date
+    const dayOverrides = overrides.filter(o => o.override_date === dateStr);
+    
+    const dateObj = new Date(dateStr);
+    let dayOfWeek = dateObj.getDay();
+    if (dayOfWeek === 0) dayOfWeek = 7;
+
+    // Match recurring weekly classes on this day of week
+    const dayWeeklySchedules = schedules.filter(s => parseInt(s.day_of_week) === dayOfWeek);
+    
+    const finalAgenda = [];
+
+    // Filter weekly schedules that are NOT cancelled/swapped out by overrides
+    dayWeeklySchedules.forEach(s => {
+      const isOverridden = dayOverrides.some(o => o.original_schedule_id === s.id);
+      if (!isOverridden) {
+        finalAgenda.push({
+          id: s.id,
+          title: s.course_name || s.course?.name || 'Kuliah',
+          time: s.start_time,
+          room: s.room_name || s.room?.name || '-',
+          lecturer: s.lecturer_name || s.lecturer?.name || '-',
+          type: 'regular'
+        });
+      }
+    });
+
+    // Add swap additions
+    dayOverrides.forEach(o => {
+      if (o.status === 'swapped' && o.swapped_with_schedule) {
+        const sw = o.swapped_with_schedule;
+        finalAgenda.push({
+          id: sw.id,
+          title: sw.course_name || sw.course?.name || 'Kuliah Pengganti',
+          time: o.new_time || sw.start_time,
+          room: sw.room_name || sw.room?.name || '-',
+          lecturer: sw.lecturer_name || sw.lecturer?.name || '-',
+          type: 'swap',
+          notes: o.notes
+        });
+      }
+    });
+
+    return finalAgenda;
+  };
+
+  const selectedDateStr = selectedDay ? `${year}-${String(month + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}` : '';
+  const selectedDayAgenda = getDayAgenda(selectedDateStr);
+
+  const monthsMap = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
   const getEventIcon = (type) => {
     switch(type) {
@@ -81,39 +147,28 @@ export default function JadwalKalenderPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-muted)' }}>
-        <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat jadwal...
-      </div>
-    );
-  }
+  if (loading) return (
+    <div style={{ padding: '24px' }}>
+      <SkeletonLoader type="card" />
+      <SkeletonLoader type="table" />
+    </div>
+  );
 
   return (
-    <div className="fade-in">
+    <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <div className="siakad-page-header">
         <div className="siakad-page-header-glow"></div>
         <div className="siakad-page-header-grid"></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
           <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Jadwal & Kalender</h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Lihat jadwal kuliah mingguan dan agenda kegiatan kalender akademik kampus.</p>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Lihat agenda perkuliahan harian serta kalender akademik terintegrasi.</p>
         </div>
       </div>
 
       <div style={{ padding: '24px' }}>
+        {/* Tab Selector */}
         <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' }}>
-          <button
-            onClick={() => setActiveTab('jadwal')}
-            style={{
-              background: activeTab === 'jadwal' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
-              color: activeTab === 'jadwal' ? '#3b82f6' : 'var(--color-muted)',
-              border: activeTab === 'jadwal' ? '2px solid #3b82f6' : '1px solid var(--color-border)',
-              padding: '10px 22px', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer',
-              transition: 'all 0.2s'
-            }}>
-            <i className="ph ph-calendar-blank" style={{ marginRight: '8px' }}></i> Jadwal Kuliah
-          </button>
           <button
             onClick={() => setActiveTab('kalender')}
             style={{
@@ -123,66 +178,155 @@ export default function JadwalKalenderPage() {
               padding: '10px 22px', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer',
               transition: 'all 0.2s'
             }}>
-            <i className="ph ph-calendar-check" style={{ marginRight: '8px' }}></i> Kalender Akademik
+            <i className="ph ph-calendar" style={{ marginRight: '8px' }}></i> Kalender Kuliah
+          </button>
+          <button
+            onClick={() => setActiveTab('kegiatan')}
+            style={{
+              background: activeTab === 'kegiatan' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+              color: activeTab === 'kegiatan' ? '#3b82f6' : 'var(--color-muted)',
+              border: activeTab === 'kegiatan' ? '2px solid #3b82f6' : '1px solid var(--color-border)',
+              padding: '10px 22px', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}>
+            <i className="ph ph-calendar-check" style={{ marginRight: '8px' }}></i> Agenda Kampus
           </button>
         </div>
 
-      {activeTab === 'jadwal' && (
-        <div className="siakad-card" style={{ overflow: 'hidden' }}>
-          <div style={{ overflowX: 'auto' }}>
-            <table className="siakad-table">
-              <thead>
-                <tr>
-                  <th>Hari</th>
-                  <th>Jam</th>
-                  <th>Mata Kuliah</th>
-                  <th>Dosen</th>
-                  <th>Ruang</th>
-                </tr>
-              </thead>
-              <tbody>
-                {schedule.length > 0 ? schedule.map((item, i) => (
-                  <tr key={i}>
-                    <td style={{ fontWeight: 'bold' }}>{item.day}</td>
-                    <td style={{ color: 'var(--color-muted)' }}>{item.time}</td>
-                    <td>{item.course}</td>
-                    <td style={{ color: 'var(--color-muted)' }}>{item.dosen}</td>
-                    <td>
-                      <span style={{ display: 'inline-block', minWidth: '130px', textAlign: 'center', background: 'rgba(59, 130, 246, 0.12)', padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', color: '#60a5fa', border: '1px solid rgba(59, 130, 246, 0.25)', whiteSpace: 'nowrap' }}>
-                        {item.room}
-                      </span>
-                    </td>
-                  </tr>
-                )) : (
-                  <tr>
-                    <td colSpan="5" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada jadwal yang dikirim backend.</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
+        {activeTab === 'kalender' && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+            {/* Grid Kalender */}
+            <div className="siakad-card" style={{ padding: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'white', margin: 0 }}>{monthsMap[month]} {year}</h3>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button onClick={handlePrevMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'white', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="ph ph-caret-left"></i>
+                  </button>
+                  <button onClick={handleNextMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'white', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="ph ph-caret-right"></i>
+                  </button>
+                </div>
+              </div>
 
-      {activeTab === 'kalender' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {mappedCalendarEvents.length > 0 ? mappedCalendarEvents.map((item, i) => (
-            <div key={i} className="siakad-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
-              <div style={{ background: 'var(--glass-bg)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                {getEventIcon(item.type)}
+              {/* Days Header */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '6px', textAlign: 'center', marginBottom: '8px' }}>
+                {['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'].map(d => (
+                  <span key={d} style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--color-muted)', textTransform: 'uppercase' }}>{d}</span>
+                ))}
               </div>
-              <div style={{ flex: 1 }}>
-                <h3 style={{ margin: '0 0 4px 0', fontSize: '1.1rem', color: 'var(--color-text)' }}>{item.event}</h3>
-                <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.9rem' }}>{item.date}</p>
+
+              {/* Grid Tanggal */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '6px' }}>
+                {daysGrid.map((item, idx) => {
+                  const isToday = new Date().toDateString() === new Date(item.dateStr).toDateString();
+                  const isSelected = selectedDay === item.day;
+                  const agenda = getDayAgenda(item.dateStr);
+                  const hasSwap = agenda.some(a => a.type === 'swap');
+                  const hasClass = agenda.length > 0;
+
+                  return (
+                    <div
+                      key={idx}
+                      onClick={() => item.day && setSelectedDay(item.day)}
+                      style={{
+                        aspectRatio: '1',
+                        borderRadius: '12px',
+                        border: isSelected ? '2px solid #3b82f6' : '1px solid var(--color-border)',
+                        background: isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.02)'),
+                        cursor: item.day ? 'pointer' : 'default',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        padding: '8px',
+                        position: 'relative',
+                        transition: 'all 0.15s ease'
+                      }}
+                    >
+                      <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#3b82f6' : 'white') : 'transparent' }}>{item.day}</span>
+                      
+                      {/* Indicators */}
+                      <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
+                        {hasClass && (
+                          <span style={{
+                            width: '6px', height: '6px', borderRadius: '50%',
+                            background: hasSwap ? '#f59e0b' : '#3b82f6',
+                            boxShadow: `0 0 6px ${hasSwap ? '#f59e0b' : '#3b82f6'}`
+                          }} />
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          )) : (
-            <div className="siakad-card" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>
-              Belum ada agenda kalender akademik dari backend.
+
+            {/* List Detail Jadwal Hari Terpilih */}
+            <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column' }}>
+              <div style={{ marginBottom: '20px', borderBottom: '1px solid var(--color-border)', paddingBottom: '12px' }}>
+                <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', fontWeight: '600' }}>JADWAL KULIAH HARI INI</p>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'white', margin: '2px 0 0 0' }}>
+                  {selectedDay ? `${selectedDay} ${monthsMap[month]} ${year}` : 'Pilih Tanggal'}
+                </h3>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1, overflowY: 'auto' }}>
+                {selectedDayAgenda.length === 0 ? (
+                  <div style={{ textAlign: 'center', padding: '40px', color: 'var(--color-muted)' }}>
+                    <i className="ph ph-calendar-blank" style={{ fontSize: '3rem', opacity: 0.3, marginBottom: '8px', display: 'block' }}></i>
+                    Tidak ada jadwal kuliah untuk hari ini.
+                  </div>
+                ) : selectedDayAgenda.map((agenda, index) => (
+                  <div 
+                    key={index} 
+                    style={{ 
+                      padding: '16px', 
+                      borderRadius: '16px', 
+                      background: 'var(--glass-bg)', 
+                      borderLeft: `4px solid ${agenda.type === 'swap' ? '#f59e0b' : '#3b82f6'}`,
+                      borderTop: '1px solid var(--color-border)',
+                      borderRight: '1px solid var(--color-border)',
+                      borderBottom: '1px solid var(--color-border)'
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
+                      <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: agenda.type === 'swap' ? 'rgba(245,158,11,0.15)' : 'rgba(59,130,246,0.15)', color: agenda.type === 'swap' ? '#f59e0b' : '#3b82f6' }}>
+                        {agenda.type === 'swap' ? 'Jadwal Pengganti (Swap)' : 'Jadwal Reguler'}
+                      </span>
+                      <span style={{ fontSize: '0.82rem', fontFamily: 'monospace', color: 'white', fontWeight: 'bold' }}>{agenda.time}</span>
+                    </div>
+                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', fontWeight: 'bold', color: 'white' }}>{agenda.title}</h4>
+                    <p style={{ margin: '0 0 4px 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-user"></i> {agenda.lecturer}</p>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-door"></i> Ruang {agenda.room}</p>
+                    {agenda.notes && <p style={{ margin: '6px 0 0 0', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', fontSize: '0.8rem', color: '#f59e0b' }}><strong>Catatan:</strong> {agenda.notes}</p>}
+                  </div>
+                ))}
+              </div>
             </div>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+
+        {activeTab === 'kegiatan' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {calendarEvents.length > 0 ? calendarEvents.map((item, i) => (
+              <div key={i} className="siakad-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
+                <div style={{ background: 'var(--glass-bg)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  {getEventIcon(item.type)}
+                </div>
+                <div style={{ flex: 1 }}>
+                  <h3 style={{ margin: '0 0 4px 0', fontSize: '1.1rem', color: 'var(--color-text)' }}>{item.name || item.event || '-'}</h3>
+                  <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.9rem' }}>
+                    {item.startDate && item.endDate ? `${item.startDate} - ${item.endDate}` : item.startDate || '-'}
+                  </p>
+                </div>
+              </div>
+            )) : (
+              <div className="siakad-card" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>
+                Belum ada kegiatan kalender akademik terdaftar.
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -212,6 +212,7 @@ export default function SiakadLayout({ children }) {
       { label: 'Manajemen Prodi', icon: 'ph ph-buildings', path: '/siakad/admin/prodi' },
       { label: 'Manajemen Kelas', icon: 'ph ph-chalkboard', path: '/siakad/admin/classes', isMobilePrimary: true },
       { label: 'Manajemen Ruangan', icon: 'ph ph-door', path: '/siakad/admin/ruangan' },
+      { label: 'Kalender Akademik', icon: 'ph ph-calendar', path: '/siakad/admin/calendar' },
       { label: 'Manajemen Keuangan', icon: 'ph ph-wallet', path: '/siakad/admin/keuangan', isMobilePrimary: true },
       { label: 'Manajemen Surat', icon: 'ph ph-envelope-simple', path: '/siakad/admin/surat', isMobilePrimary: true },
       { label: 'Chat Real-Time', icon: 'ph ph-chat-circle-dots', path: '/siakad/chat', isMobilePrimary: true },
