@@ -325,27 +325,39 @@ export default function PMBRegistrationPage() {
       }}></div>
 
       <style>{`
-        /* Overide Navbar Text to remain visible (dark/black color when not sticky/stay header) */
-        header:not(.sticky) .nav-link,
-        header:not(.sticky) .nav-links a {
+        /* Overide Navbar Text to remain dark and visible under both stay & sticky states */
+        header .nav-link,
+        header .nav-links a {
           color: var(--color-text) !important;
           text-shadow: none !important;
         }
         
-        /* Overide dropdown carets (icon) inside nav items under stay header state */
-        header:not(.sticky) .dropdown-icon {
+        header .dropdown-icon {
           color: var(--color-text) !important;
         }
 
-        header:not(.sticky) .logo h1,
-        header:not(.sticky) .logo p {
+        header .logo h1,
+        header .logo p {
           color: var(--color-text) !important;
         }
         
-        /* Keep lang switch and theme switcher icon white/light */
-        header:not(.sticky) .lang-btn, 
-        header:not(.sticky) .theme-toggle i {
+        /* Language and theme switcher dynamic adjustments */
+        header .lang-switch .lang-btn:not(.active) {
+          color: var(--color-text) !important;
+          text-shadow: none !important;
+        }
+        header .lang-switch .lang-btn.active {
           color: white !important;
+        }
+        header .theme-toggle i {
+          color: var(--color-text) !important;
+        }
+
+        /* Adaptive transparent backgrounds for switches */
+        header .lang-switch,
+        header .theme-toggle {
+          background: ${isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)'} !important;
+          border-color: var(--color-border) !important;
         }
 
         .custom-select {
