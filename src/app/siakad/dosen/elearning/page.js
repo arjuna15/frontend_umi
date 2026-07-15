@@ -282,7 +282,7 @@ export default function DosenElearningPage() {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {sessions.map((sess, idx) => (
-                <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+                <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
                   <div style={{ flex: '1 1 300px' }}>
                     <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.1rem', fontWeight: '700' }}>Sesi {sess.session}: {sess.title}</h3>
                     <div style={{ display: 'flex', gap: '16px', color: 'var(--color-muted)', fontSize: '0.85rem', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -319,12 +319,12 @@ export default function DosenElearningPage() {
             </div>
           )}
 
-          {/* Assignments Card Section */}
+          {/* Assignments Card Section (Pindahkan ke dalam kolom kanan agar tidak keluar layout/nabrak) */}
           {selectedCourse && (
             (() => {
               const selectedCourseData = fullCourses.find(c => c.id === selectedCourse);
               return (
-                <div className="siakad-card" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+                <div className="siakad-card" style={{ padding: '24px 0 0 0', marginTop: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
                   <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                     <div>
                       <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -395,8 +395,8 @@ export default function DosenElearningPage() {
           onClose={() => setShowUploadModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowUploadModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="upload-form" disabled={uploading} style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(99, 102, 241, 0.28)' }}>{uploading ? 'Mengupload...' : 'Upload Materi'}</button>
+              <button type="button" onClick={() => setShowUploadModal(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="upload-form" disabled={uploading} style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>{uploading ? 'Mengupload...' : 'Upload Materi'}</button>
             </>
           )}
         >
