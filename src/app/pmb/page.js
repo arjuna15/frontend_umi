@@ -476,10 +476,10 @@ export default function PMBRegistrationPage() {
 
         @media (max-width: 768px) {
           .pmb-step-wrapper {
-            justify-content: space-evenly;
+            justify-content: center;
             border-radius: 24px;
-            padding: 12px 16px;
-            gap: 6px;
+            padding: 8px 12px !important;
+            gap: 4px;
           }
           .pmb-step-item {
             display: none;
@@ -498,12 +498,30 @@ export default function PMBRegistrationPage() {
           }
           .pmb-step-item.active-step .pmb-step-pill span,
           .pmb-step-item.next-step .pmb-step-pill span {
-            font-size: 0.78rem !important;
+            font-size: 0.72rem !important;
+          }
+          .pmb-step-item.active-step .pmb-step-pill,
+          .pmb-step-item.next-step .pmb-step-pill {
+            padding: 6px 12px !important;
           }
           /* Show active step divider specifically to separate the two steps in mobile view */
           .pmb-step-item.active-step .pmb-step-divider {
             display: inline-block !important;
-            margin-left: 10px !important;
+            margin-left: 6px !important;
+          }
+          /* Fix card overflow by reducing padding on mobile */
+          .siakad-pmb-card {
+            padding: 20px !important;
+          }
+          .siakad-pmb-tab-wrapper {
+            flex-direction: column !important;
+            width: 100% !important;
+            gap: 10px !important;
+          }
+          .siakad-pmb-tab-btn {
+            width: 100% !important;
+            text-align: center !important;
+            justify-content: center !important;
           }
         }
 
@@ -570,9 +588,10 @@ export default function PMBRegistrationPage() {
         
         {/* Navigation Tabs for switching between Registration and Status Checks */}
         {step < 6 && (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginBottom: '45px' }}>
+          <div className="siakad-pmb-tab-wrapper" style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginBottom: '45px' }}>
             <button 
               onClick={() => { setActiveTab('register'); setStep(1); }} 
+              className="siakad-pmb-tab-btn"
               style={{
                 padding: '12px 28px',
                 borderRadius: '50px',
@@ -584,7 +603,9 @@ export default function PMBRegistrationPage() {
                 color: activeTab === 'register' ? 'white' : 'var(--color-text)',
                 border: activeTab === 'register' ? 'none' : '1px solid var(--color-border)',
                 boxShadow: activeTab === 'register' ? '0 6px 16px rgba(29, 78, 216, 0.25)' : 'none',
-                transition: 'all 0.25s ease'
+                transition: 'all 0.25s ease',
+                display: 'inline-flex',
+                alignItems: 'center'
               }}
             >
               <i className="ph-bold ph-note-pencil" style={{ marginRight: '8px' }}></i>
@@ -592,6 +613,7 @@ export default function PMBRegistrationPage() {
             </button>
             <button 
               onClick={() => { setActiveTab('status'); }} 
+              className="siakad-pmb-tab-btn"
               style={{
                 padding: '12px 28px',
                 borderRadius: '50px',
@@ -602,8 +624,10 @@ export default function PMBRegistrationPage() {
                 background: activeTab === 'status' ? 'linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%)' : 'var(--color-surface)',
                 color: activeTab === 'status' ? 'white' : 'var(--color-text)',
                 border: activeTab === 'status' ? 'none' : '1px solid var(--color-border)',
-                boxShadow: activeTab === 'status' ? '0 6px 16px rgba(29, 78, 216, 0.25)' : 'none',
-                transition: 'all 0.25s ease'
+                boxShadow: activeTab === 'status' ? '0 6px 16px rgba(29, 216, 120, 0)' : 'none',
+                transition: 'all 0.25s ease',
+                display: 'inline-flex',
+                alignItems: 'center'
               }}
             >
               <i className="ph-bold ph-sparkle" style={{ marginRight: '8px' }}></i>
@@ -707,7 +731,7 @@ export default function PMBRegistrationPage() {
 
             {/* Step 2: Biodata */}
             {step === 2 && (
-              <div style={cardStyle}>
+              <div className="siakad-pmb-card" style={cardStyle}>
                 <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', marginBottom: '30px' }}>
                   <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 6px 0' }}>{trans.form_title}</h2>
                   <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0 }}>{trans.form_desc}</p>
@@ -781,7 +805,7 @@ export default function PMBRegistrationPage() {
 
             {/* Step 3: File Uploads */}
             {step === 3 && (
-              <div style={cardStyle}>
+              <div className="siakad-pmb-card" style={cardStyle}>
                 <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', marginBottom: '30px' }}>
                   <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 6px 0' }}>{trans.upload_title}</h2>
                   <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0 }}>{trans.upload_desc}</p>
@@ -817,7 +841,7 @@ export default function PMBRegistrationPage() {
 
             {/* Step 4: Pembayaran */}
             {step === 4 && (
-              <div style={cardStyle}>
+              <div className="siakad-pmb-card" style={cardStyle}>
                 <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', marginBottom: '30px' }}>
                   <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 6px 0' }}>{trans.pay_title}</h2>
                   <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0 }}>{trans.pay_desc}</p>
@@ -883,7 +907,7 @@ export default function PMBRegistrationPage() {
 
             {/* Step 5: Review and Submit */}
             {step === 5 && (
-              <div style={cardStyle}>
+              <div className="siakad-pmb-card" style={cardStyle}>
                 <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', marginBottom: '30px' }}>
                   <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 6px 0' }}>{trans.review_title}</h2>
                   <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0 }}>{trans.review_desc}</p>
@@ -947,7 +971,7 @@ export default function PMBRegistrationPage() {
 
             {/* Step 6: Success Output */}
             {step === 6 && (
-              <div style={{ ...cardStyle, textAlign: 'center', padding: '60px 40px' }}>
+              <div className="siakad-pmb-card" style={{ ...cardStyle, textAlign: 'center', padding: '60px 40px' }}>
                 <div style={{ width: '80px', height: '80px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem', margin: '0 auto 24px' }}>
                   <i className="ph ph-check"></i>
                 </div>
@@ -988,7 +1012,7 @@ export default function PMBRegistrationPage() {
 
         {/* MODE 2: STATUS CHECK & TIMELINE SELECTION */}
         {activeTab === 'status' && (
-          <div style={cardStyle}>
+          <div className="siakad-pmb-card" style={cardStyle}>
             <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', marginBottom: '30px', textAlign: 'center' }}>
               <h2 style={{ fontSize: '1.6rem', fontWeight: '900', color: 'var(--color-text)', margin: '0 0 6px 0' }}>{trans.check_title}</h2>
               <p style={{ color: 'var(--color-muted)', fontSize: '0.92rem', margin: 0 }}>{trans.check_desc}</p>
