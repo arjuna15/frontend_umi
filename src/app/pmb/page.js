@@ -981,7 +981,7 @@ export default function PMBRegistrationPage() {
                   {trans.success_desc}
                 </p>
 
-                <div style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', padding: '24px', borderRadius: '24px', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '12px', width: '100%', maxWidth: '360px', boxSizing: 'border-box', marginBottom: '40px' }}>
+                <div style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', padding: '24px 32px', borderRadius: '24px', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '12px', width: 'fit-content', maxWidth: '100%', boxSizing: 'border-box', margin: '0 auto 40px' }}>
                   <span style={{ fontSize: '0.8rem', color: 'var(--color-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '1px' }}>{trans.success_reg}</span>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <strong style={{ fontSize: '1.8rem', color: 'var(--color-text)', letterSpacing: '2px', fontWeight: '900' }}>{registrationNumber}</strong>
