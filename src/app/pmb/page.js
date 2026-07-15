@@ -303,7 +303,7 @@ export default function PMBRegistrationPage() {
 
     try {
       // Find applicant detail by reg number
-      const res = await fetch(`${apiUrl}/siakad/pmb/applicant/${searchRegNum}`);
+      const res = await fetch(`${apiUrl}/siakad/pmb/applicant/status/${encodeURIComponent(searchRegNum)}`);
       if (!res.ok) throw new Error('Not Found');
       const data = await res.json();
       
