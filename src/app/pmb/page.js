@@ -476,23 +476,34 @@ export default function PMBRegistrationPage() {
 
         @media (max-width: 768px) {
           .pmb-step-wrapper {
-            justify-content: center;
+            justify-content: space-evenly;
             border-radius: 24px;
-            padding: 14px 20px;
+            padding: 12px 16px;
+            gap: 6px;
           }
           .pmb-step-item {
             display: none;
           }
-          .pmb-step-item.active-step {
+          .pmb-step-item.active-step,
+          .pmb-step-item.next-step {
             display: flex;
-            width: 100%;
-            justify-content: center;
+            align-items: center;
           }
-          .pmb-step-item.active-step span {
-            font-size: 0.95rem !important;
+          .pmb-step-item.next-step {
+            opacity: 0.55;
           }
-          .pmb-step-divider {
-            display: none !important;
+          .pmb-step-item.next-step .pmb-step-pill {
+            background: transparent !important;
+            border: 1px dashed var(--color-border) !important;
+          }
+          .pmb-step-item.active-step .pmb-step-pill span,
+          .pmb-step-item.next-step .pmb-step-pill span {
+            font-size: 0.78rem !important;
+          }
+          /* Show active step divider specifically to separate the two steps in mobile view */
+          .pmb-step-item.active-step .pmb-step-divider {
+            display: inline-block !important;
+            margin-left: 10px !important;
           }
         }
 
@@ -608,7 +619,7 @@ export default function PMBRegistrationPage() {
             {step <= 5 && (
               <div className="pmb-step-wrapper">
                 {stepLabels.map((s, i) => (
-                  <div key={s.num} className={`pmb-step-item ${step === s.num ? 'active-step' : ''}`}>
+                  <div key={s.num} className={`pmb-step-item ${step === s.num ? 'active-step' : s.num === step + 1 ? 'next-step' : ''}`}>
                     <div className="pmb-step-pill" style={{ 
                       display: 'flex', 
                       alignItems: 'center', 
