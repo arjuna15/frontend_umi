@@ -325,32 +325,34 @@ export default function PMBRegistrationPage() {
       }}></div>
 
       <style>{`
-        /* Overide Navbar Text to remain dark and visible under both stay & sticky states */
-        header .nav-link,
-        header .nav-links a {
-          color: var(--color-text) !important;
+        /* Overide Navbar Text to remain dark and visible under stay (not sticky) states */
+        header:not(.sticky) .nav-link,
+        header:not(.sticky) .nav-links a {
+          color: #000000 !important;
           text-shadow: none !important;
         }
         
-        header .dropdown-icon {
-          color: var(--color-text) !important;
+        header:not(.sticky) .dropdown-icon {
+          color: #000000 !important;
         }
 
-        header .logo h1,
-        header .logo p {
+        header:not(.sticky) .logo h1,
+        header:not(.sticky) .logo p {
           color: var(--color-text) !important;
         }
         
-        /* Language and theme switcher dynamic adjustments */
-        header .lang-switch .lang-btn:not(.active) {
-          color: var(--color-text) !important;
+        /* Language switcher active state stays white, inactive becomes black under stay state */
+        header:not(.sticky) .lang-switch .lang-btn:not(.active) {
+          color: #000000 !important;
           text-shadow: none !important;
         }
-        header .lang-switch .lang-btn.active {
+        header:not(.sticky) .lang-switch .lang-btn.active {
           color: white !important;
         }
-        header .theme-toggle i {
-          color: var(--color-text) !important;
+
+        /* Revert theme switch icon specifically to white color as requested */
+        header:not(.sticky) .theme-toggle i {
+          color: #ffffff !important;
         }
 
         /* Adaptive transparent backgrounds for switches */
