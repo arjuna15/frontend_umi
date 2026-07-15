@@ -240,8 +240,8 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: '12px 16px',
-          borderRadius: '12px',
+          padding: '12px 22px',
+          borderRadius: '50px',
           border: '1px solid var(--color-border)',
           background: 'var(--color-bg)',
           color: value ? 'var(--color-text)' : 'var(--color-muted)',
@@ -251,8 +251,8 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
           textAlign: 'left',
           outline: 'none',
           transition: 'all 0.2s ease-out',
-          boxShadow: isOpen ? '0 0 0 3px rgba(185, 28, 28, 0.15), 0 2px 4px rgba(0,0,0,0.02)' : 'none',
-          borderColor: isOpen ? '#ef4444' : 'var(--color-border)',
+          boxShadow: isOpen ? '0 0 0 3px rgba(196, 30, 58, 0.15), inset 0 3px 8px rgba(0, 0, 0, 0.12)' : 'inset 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(0, 0, 0, 0.04)',
+          borderColor: isOpen ? '#C41E3A' : 'var(--color-border)',
         }}
       >
         <span>{value ? `${value}` : placeholder}</span>
