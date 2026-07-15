@@ -330,7 +330,9 @@ export default function PMBRegistrationPage() {
         header:not(.sticky) nav a, 
         header:not(.sticky) .btn, 
         header:not(.sticky) .lang-btn, 
-        header:not(.sticky) .theme-toggle i {
+        header:not(.sticky) .theme-toggle i,
+        header:not(.sticky) .nav-link,
+        header:not(.sticky) .nav-links a {
           color: var(--color-text) !important;
         }
         header:not(.sticky) .logo h1,
