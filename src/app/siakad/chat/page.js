@@ -83,61 +83,55 @@ export default function ChatPage() {
     fetchRooms();
   }, [router]);
 
-  // WebSocket connection
+  // Smart Polling (Short Polling Pintar)
   useEffect(() => {
     const token = getToken();
     if (!token) return;
 
-    let portIndex = 0;
-    const ports = ['', ':8080', ':6001', ':8000']; 
+    let intervalId = null;
+    let isTabVisible = true;
+    let isTypingActive = true;
 
-    const connectWs = () => {
-      try {
-        let currentWsUrl = wsUrl;
-        if (wsUrl.includes('wss://') || wsUrl.includes('ws://')) {
-          try {
-            const urlObj = new URL(wsUrl);
-            const currentPort = ports[portIndex];
-            currentWsUrl = `${urlObj.protocol}//${urlObj.hostname}${currentPort}${urlObj.pathname}`;
-          } catch(e) {}
-        }
-
-        const ws = new WebSocket(`${currentWsUrl}?token=${token}`);
-        wsRef.current = ws;
-
-        ws.onopen = () => { 
-          setWsConnected(true); 
-        };
-        ws.onclose = () => {
-          setWsConnected(false);
-          portIndex = (portIndex + 1) % ports.length;
-          setTimeout(connectWs, 4000);
-        };
-        ws.onerror = () => { 
-          setWsConnected(false); 
-        };
-        ws.onmessage = (event) => {
-          try {
-            const data = JSON.parse(event.data);
-            if (data.type === 'new_message') {
-              setMessages(prev => {
-                if (prev.some(m => m.id === data.message.id)) return prev;
-                return [...prev, data.message];
-              });
-              setRooms(prev => prev.map(r =>
-                r.id === data.message.room_id
-                  ? { ...r, last_message: data.message.content, last_message_time: data.message.created_at, unread_count: (r.unread_count || 0) + 1 }
-                  : r
-              ));
-            }
-          } catch (e) { console.error('WS parse error:', e); }
-        };
-      } catch(e) { console.error('WS connection error:', e); }
+    // Monitor tab visibility to stop polling when user minimizes or leaves the page
+    const handleVisibilityChange = () => {
+      isTabVisible = !document.hidden;
+      restartPolling();
     };
 
-    connectWs();
-    return () => { if (wsRef.current) wsRef.current.close(); };
+    const runPoll = async () => {
+      if (!isTabVisible) return;
+      
+      // Update room list
+      await fetchRooms();
+
+      // Update messages if a room is active
+      if (selectedRoomRef.current) {
+        await fetchMessages(selectedRoomRef.current.id);
+      }
+    };
+
+    const restartPolling = () => {
+      if (intervalId) clearInterval(intervalId);
+      if (!isTabVisible) return;
+
+      setWsConnected(true); // Keep green active dot in UI
+      const delay = isTypingActive ? 3000 : 10000;
+      intervalId = setInterval(runPoll, delay);
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    restartPolling();
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      if (intervalId) clearInterval(intervalId);
+    };
   }, []);
+
+  const selectedRoomRef = useRef(selectedRoom);
+  useEffect(() => {
+    selectedRoomRef.current = selectedRoom;
+  }, [selectedRoom]);
 
   useEffect(() => {
     if (!searchQuery) { setFilteredRooms(rooms); return; }
@@ -199,9 +193,9 @@ export default function ChatPage() {
         const msg = data.data || data.message;
         setMessages(prev => [...prev, msg]);
       }
-      if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
-        wsRef.current.send(JSON.stringify({ type: 'send_message', room_id: selectedRoom.id, content }));
-      }
+      
+      // Instant refresh right after sending to prevent lag feeling
+      fetchRooms();
     } catch(e) { console.error(e); setNewMessage(content); } finally { setSendingMessage(false); }
   };
 
