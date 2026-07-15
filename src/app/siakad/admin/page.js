@@ -41,12 +41,14 @@ export default function AdminDashboard() {
     </div>
   );
 
-  const chartData = [
-    { name: 'Sistem Informasi', users: 120 },
-    { name: 'Teknik Informatika', users: 180 },
-    { name: 'Manajemen', users: 200 },
-    { name: 'Akuntansi', users: 150 }
-  ];
+  const chartData = Array.isArray(data.prodi_distribution) && data.prodi_distribution.length > 0
+    ? data.prodi_distribution
+    : [
+      { name: 'Sistem Informasi', users: 120 },
+      { name: 'Teknik Informatika', users: 180 },
+      { name: 'Manajemen', users: 200 },
+      { name: 'Akuntansi', users: 150 }
+    ];
 
   return (
     <div className="fade-in">

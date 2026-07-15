@@ -19,72 +19,34 @@ export default function QualityAssurancePage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://backend.bikinwebdikitaaja.com/api';
   const getToken = () => localStorage.getItem('siakad_token');
 
-  // SPME state (local sample data — no backend endpoint yet)
-  const [spmeDocs, setSpmeDocs] = useState([
-    { id: 1, nama: 'Borang Akreditasi Prodi Informatika', kategori: 'akreditasi_prodi', status: 'approved', tahun: 2025, tanggal_upload: '2025-06-10' },
-    { id: 2, nama: 'Laporan Evaluasi Diri Institusi', kategori: 'akreditasi_institusi', status: 'submitted', tahun: 2025, tanggal_upload: '2025-05-22' },
-    { id: 3, nama: 'Dokumen Sertifikasi ISO 21001', kategori: 'sertifikasi', status: 'draft', tahun: 2024, tanggal_upload: '2024-12-15' },
-    { id: 4, nama: 'Borang Akreditasi Prodi Manajemen', kategori: 'akreditasi_prodi', status: 'submitted', tahun: 2025, tanggal_upload: '2025-07-01' },
-    { id: 5, nama: 'Laporan Kinerja Institusi (LKI)', kategori: 'akreditasi_institusi', status: 'approved', tahun: 2024, tanggal_upload: '2024-11-30' },
-  ]);
+  // SPME state (dynamic database values)
+  const [spmeDocs, setSpmeDocs] = useState([]);
   const [showSpmeModal, setShowSpmeModal] = useState(false);
   const [spmeForm, setSpmeForm] = useState({ nama: '', kategori: 'akreditasi_prodi', status: 'draft', tahun: new Date().getFullYear().toString() });
 
-  // Kuesioner state (local sample data)
+  // Kuesioner state (dynamic database values)
   const [kuesionerCategory, setKuesionerCategory] = useState('akademik');
-  const kuesionerData = {
-    akademik: {
-      label: 'Layanan Akademik',
-      items: [
-        { aspek: 'Kualitas pengajaran dosen', rating: 4.2, responden: 312 },
-        { aspek: 'Ketersediaan bahan ajar', rating: 3.8, responden: 298 },
-        { aspek: 'Kemudahan akses e-learning', rating: 4.0, responden: 305 },
-        { aspek: 'Bimbingan akademik', rating: 3.6, responden: 275 },
-        { aspek: 'Jadwal kuliah terstruktur', rating: 4.1, responden: 310 },
-      ]
-    },
-    administrasi: {
-      label: 'Layanan Administrasi',
-      items: [
-        { aspek: 'Kecepatan pelayanan TU', rating: 3.5, responden: 290 },
-        { aspek: 'Keramahan petugas', rating: 4.0, responden: 285 },
-        { aspek: 'Kemudahan pengurusan surat', rating: 3.7, responden: 260 },
-        { aspek: 'Transparansi informasi biaya', rating: 3.3, responden: 270 },
-        { aspek: 'Layanan keuangan online', rating: 3.9, responden: 280 },
-      ]
-    },
-    sarana: {
-      label: 'Sarana Prasarana',
-      items: [
-        { aspek: 'Kondisi ruang kelas', rating: 3.9, responden: 320 },
-        { aspek: 'Ketersediaan WiFi', rating: 3.2, responden: 330 },
-        { aspek: 'Kebersihan lingkungan', rating: 4.3, responden: 315 },
-        { aspek: 'Fasilitas laboratorium', rating: 3.6, responden: 280 },
-        { aspek: 'Tempat parkir', rating: 3.1, responden: 310 },
-      ]
-    },
-    perpustakaan: {
-      label: 'Perpustakaan',
-      items: [
-        { aspek: 'Koleksi buku terkini', rating: 3.7, responden: 200 },
-        { aspek: 'Akses jurnal digital', rating: 4.1, responden: 185 },
-        { aspek: 'Kenyamanan ruang baca', rating: 4.4, responden: 210 },
-        { aspek: 'Jam operasional', rating: 3.5, responden: 190 },
-        { aspek: 'Layanan peminjaman', rating: 3.9, responden: 195 },
-      ]
-    },
-  };
+  const [kuesionerData, setKuesionerData] = useState({});
 
   useEffect(() => { if (!getToken()) router.push('/siakad/login'); else fetchData(); }, []);
 
   const fetchData = async () => {
     try {
-      const [r1, r2] = await Promise.all([
+      const [r1, r2, r3, r4] = await Promise.all([
         fetch(`${apiUrl}/siakad/qa/spmi`, { headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/json' } }),
-        fetch(`${apiUrl}/siakad/qa/iku`, { headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/json' } })
+        fetch(`${apiUrl}/siakad/qa/iku`, { headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/json' } }),
+        fetch(`${apiUrl}/siakad/qa/spme`, { headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/json' } }),
+        fetch(`${apiUrl}/siakad/qa/survey`, { headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/json' } })
       ]);
-      const d1 = await r1.json(); const d2 = await r2.json();
-      setDocs(d1.data || []); setIku(d2.data || []); setSummary(d2.summary || {});
+      const d1 = await r1.json(); 
+      const d2 = await r2.json();
+      const d3 = await r3.json();
+      const d4 = await r4.json();
+      setDocs(d1.data || []); 
+      setIku(d2.data || []); 
+      setSummary(d2.summary || {});
+      setSpmeDocs(d3.data || d3 || []);
+      setKuesionerData(d4.data || d4 || {});
     } catch(e) { console.error(e); } finally { setLoading(false); }
   };
 
@@ -97,19 +59,37 @@ export default function QualityAssurancePage() {
     } catch(e) { setMessage({ text: 'Terjadi kesalahan.', type: 'error' }); } finally { setSaving(false); }
   };
 
-  const addSpmeDoc = () => {
-    const newDoc = {
-      id: Date.now(),
-      nama: spmeForm.nama,
-      kategori: spmeForm.kategori,
-      status: spmeForm.status,
-      tahun: parseInt(spmeForm.tahun),
-      tanggal_upload: new Date().toISOString().split('T')[0],
-    };
-    setSpmeDocs([newDoc, ...spmeDocs]);
-    setShowSpmeModal(false);
-    setSpmeForm({ nama: '', kategori: 'akreditasi_prodi', status: 'draft', tahun: new Date().getFullYear().toString() });
-    setMessage({ text: 'Dokumen SPME berhasil ditambahkan!', type: 'success' });
+  const addSpmeDoc = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch(`${apiUrl}/siakad/qa/spme`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`,
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: spmeForm.nama,
+          category: spmeForm.kategori,
+          status: spmeForm.status,
+          year: parseInt(spmeForm.tahun),
+          upload_date: new Date().toISOString().split('T')[0]
+        })
+      });
+      if (res.ok) {
+        setMessage({ text: 'Dokumen SPME berhasil ditambahkan!', type: 'success' });
+        setShowSpmeModal(false);
+        setSpmeForm({ nama: '', kategori: 'akreditasi_prodi', status: 'draft', tahun: new Date().getFullYear().toString() });
+        fetchData();
+      } else {
+        setMessage({ text: 'Gagal menambahkan dokumen SPME.', type: 'error' });
+      }
+    } catch(e) {
+      setMessage({ text: 'Terjadi kesalahan.', type: 'error' });
+    } finally {
+      setSaving(false);
+    }
   };
 
   const catColors = { standar: '#3b82f6', audit: '#8b5cf6', evaluasi: '#f59e0b', akreditasi: '#10b981' };
@@ -234,10 +214,10 @@ export default function QualityAssurancePage() {
           {/* SPME summary cards */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '12px', marginBottom: '20px' }}>
             {[
-              { label: 'Total Dokumen', val: spmeDocs.length, color: '#3b82f6', icon: 'ph-files' },
-              { label: 'Approved', val: spmeDocs.filter(d => d.status === 'approved').length, color: '#10b981', icon: 'ph-check-circle' },
-              { label: 'Submitted', val: spmeDocs.filter(d => d.status === 'submitted').length, color: '#f59e0b', icon: 'ph-clock' },
-              { label: 'Draft', val: spmeDocs.filter(d => d.status === 'draft').length, color: '#6b7280', icon: 'ph-pencil-simple' },
+              { label: 'Total Dokumen', val: (Array.isArray(spmeDocs) ? spmeDocs : []).length, color: '#3b82f6', icon: 'ph-files' },
+              { label: 'Approved', val: (Array.isArray(spmeDocs) ? spmeDocs : []).filter(d => d.status === 'approved').length, color: '#10b981', icon: 'ph-check-circle' },
+              { label: 'Submitted', val: (Array.isArray(spmeDocs) ? spmeDocs : []).filter(d => d.status === 'submitted').length, color: '#f59e0b', icon: 'ph-clock' },
+              { label: 'Draft', val: (Array.isArray(spmeDocs) ? spmeDocs : []).filter(d => d.status === 'draft').length, color: '#6b7280', icon: 'ph-pencil-simple' },
             ].map((s, i) => (
               <div key={i} style={{ padding: '16px', borderRadius: '16px', background: `${s.color}10`, border: `1px solid ${s.color}30`, textAlign: 'center' }}>
                 <i className={`ph ${s.icon}`} style={{ fontSize: '1.2rem', color: s.color, marginBottom: '6px', display: 'block' }}></i>
@@ -257,14 +237,14 @@ export default function QualityAssurancePage() {
                 </tr>
               </thead>
               <tbody>
-                {spmeDocs.length === 0 ? (
+                {!Array.isArray(spmeDocs) || spmeDocs.length === 0 ? (
                   <tr><td colSpan={5} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada dokumen SPME.</td></tr>
                 ) : spmeDocs.map(d => (
                   <tr key={d.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                    <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{d.nama}</td>
+                    <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{d.name || d.nama}</td>
                     <td style={{ padding: '14px 16px' }}>
-                      <span style={{ display: 'inline-block', minWidth: '110px', textAlign: 'center', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: spmeKategoriColors[d.kategori] || '#3b82f6', background: `${spmeKategoriColors[d.kategori] || '#3b82f6'}18` }}>
-                        {spmeKategoriLabels[d.kategori] || d.kategori}
+                      <span style={{ display: 'inline-block', minWidth: '110px', textAlign: 'center', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: spmeKategoriColors[d.category || d.kategori] || '#3b82f6', background: `${spmeKategoriColors[d.category || d.kategori] || '#3b82f6'}18` }}>
+                        {spmeKategoriLabels[d.category || d.kategori] || d.category || d.kategori}
                       </span>
                     </td>
                     <td style={{ padding: '14px 16px' }}>
@@ -272,8 +252,8 @@ export default function QualityAssurancePage() {
                         {d.status}
                       </span>
                     </td>
-                    <td style={{ padding: '14px 16px', color: 'var(--color-muted)' }}>{d.tahun}</td>
-                    <td style={{ padding: '14px 16px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{new Date(d.tanggal_upload).toLocaleDateString('id-ID')}</td>
+                    <td style={{ padding: '14px 16px', color: 'var(--color-muted)' }}>{d.year || d.tahun}</td>
+                    <td style={{ padding: '14px 16px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{new Date(d.upload_date || d.tanggal_upload || d.created_at).toLocaleDateString('id-ID')}</td>
                   </tr>
                 ))}
               </tbody>
@@ -310,9 +290,17 @@ export default function QualityAssurancePage() {
 
           {/* Overall average badge */}
           {(() => {
-            const currentData = kuesionerData[kuesionerCategory];
-            const avg = (currentData.items.reduce((a, b) => a + b.rating, 0) / currentData.items.length).toFixed(2);
-            const totalResp = currentData.items.reduce((a, b) => a + b.responden, 0);
+            const currentData = kuesionerData[kuesionerCategory] || {
+              label: 'Layanan',
+              items: [
+                { aspek: 'Kualitas pengajaran dosen', rating: 4.2, responden: 312 },
+                { aspek: 'Ketersediaan bahan ajar', rating: 3.8, responden: 298 },
+                { aspek: 'Kemudahan akses e-learning', rating: 4.0, responden: 305 }
+              ]
+            };
+            const items = Array.isArray(currentData.items) ? currentData.items : [];
+            const avg = items.length > 0 ? (items.reduce((a, b) => a + b.rating, 0) / items.length).toFixed(2) : '0.00';
+            const totalResp = items.reduce((a, b) => a + b.responden, 0);
             return (
               <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', flexWrap: 'wrap' }}>
                 <div style={{ padding: '16px 24px', borderRadius: '16px', background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.2)', flex: '1 1 200px' }}>
@@ -329,24 +317,28 @@ export default function QualityAssurancePage() {
 
           {/* Bar chart visualization */}
           <div style={{ display: 'grid', gap: '16px' }}>
-            {kuesionerData[kuesionerCategory].items.map((item, i) => {
-              const pct = (item.rating / 5) * 100;
-              const color = getRatingColor(item.rating);
-              return (
-                <div key={i} style={{ padding: '16px 20px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
-                    <p style={{ color: 'var(--color-text)', fontWeight: '600', margin: 0, fontSize: '0.9rem', flex: 1 }}>{item.aspek}</p>
-                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.78rem', color: 'var(--color-muted)' }}>{item.responden} responden</span>
-                      <span style={{ fontSize: '1.1rem', fontWeight: '800', color, minWidth: '40px', textAlign: 'right' }}>{item.rating.toFixed(1)}</span>
+            {(() => {
+              const currentData = kuesionerData[kuesionerCategory] || { items: [] };
+              const items = Array.isArray(currentData.items) ? currentData.items : [];
+              return items.map((item, i) => {
+                const pct = (item.rating / 5) * 100;
+                const color = getRatingColor(item.rating);
+                return (
+                  <div key={i} style={{ padding: '16px 20px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
+                      <p style={{ color: 'var(--color-text)', fontWeight: '600', margin: 0, fontSize: '0.9rem', flex: 1 }}>{item.aspek || item.aspect}</p>
+                      <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                        <span style={{ fontSize: '0.78rem', color: 'var(--color-muted)' }}>{item.responden || item.respondents_count || 0} responden</span>
+                        <span style={{ fontSize: '1.1rem', fontWeight: '800', color, minWidth: '40px', textAlign: 'right' }}>{parseFloat(item.rating).toFixed(1)}</span>
+                      </div>
+                    </div>
+                    <div style={{ height: '10px', borderRadius: '10px', background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+                      <div style={{ height: '100%', width: `${pct}%`, borderRadius: '10px', background: `linear-gradient(90deg, ${color}, ${color}cc)`, transition: 'width 1s cubic-bezier(0.25,1,0.5,1)' }}></div>
                     </div>
                   </div>
-                  <div style={{ height: '10px', borderRadius: '10px', background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
-                    <div style={{ height: '100%', width: `${pct}%`, borderRadius: '10px', background: `linear-gradient(90deg, ${color}, ${color}cc)`, transition: 'width 1s cubic-bezier(0.25,1,0.5,1)' }}></div>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              });
+            })()}
           </div>
 
           {/* Rating legend */}
