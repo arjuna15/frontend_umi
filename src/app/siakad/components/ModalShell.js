@@ -23,7 +23,7 @@ export default function ModalShell({
       <div 
         className="siakad-modal-content" 
         onClick={e => e.stopPropagation()} 
-        style={{ maxWidth, padding: '32px', display: 'flex', flexDirection: 'column' }}
+        style={{ maxWidth, padding: '32px', display: 'flex', flexDirection: 'column', maxHeight: 'calc(100vh - 60px)' }}
       >
         {/* Simple Header without icons or dividers */}
         <div className="siakad-modal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', width: '100%', flexWrap: 'nowrap' }}>
@@ -57,13 +57,13 @@ export default function ModalShell({
         </div>
 
         {/* Content Area */}
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, overflowY: 'auto', paddingRight: '8px', marginBottom: '8px' }}>
           {children}
         </div>
 
         {/* Footer Area without top border dividers */}
         {footer && (
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '24px', flexShrink: 0 }}>
             {footer}
           </div>
         )}
