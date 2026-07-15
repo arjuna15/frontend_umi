@@ -123,8 +123,8 @@ export default function BapPage() {
         </div>        {/* Form Card */}
         <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
           <div style={{ background: 'var(--glass-bg)', padding: '20px 28px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(99, 102, 241, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
-              <i className="ph ph-file-text" style={{ color: '#6366f1', fontSize: '1.1rem' }}></i>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
+              <i className="ph ph-file-text" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700' }}>Form Pengisian BAP</h3>
           </div>
@@ -141,7 +141,7 @@ export default function BapPage() {
               {/* Mata Kuliah */}
               <div>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
-                  <i className="ph ph-books" style={{ color: '#6366f1' }}></i> Mata Kuliah
+                  <i className="ph ph-books" style={{ color: '#C41E3A' }}></i> Mata Kuliah
                 </label>
                 <CustomSelect 
                   name="course_id" 
@@ -181,14 +181,14 @@ export default function BapPage() {
               {/* Catatan */}
               <div>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
-                  <i className="ph ph-note-pencil" style={{ color: '#8b5cf6' }}></i> Catatan / Kendala <span style={{ fontWeight: '400', color: 'var(--color-muted)', fontSize: '0.8rem' }}>(opsional)</span>
+                  <i className="ph ph-note-pencil" style={{ color: '#C41E3A' }}></i> Catatan / Kendala <span style={{ fontWeight: '400', color: 'var(--color-muted)', fontSize: '0.8rem' }}>(opsional)</span>
                 </label>
                 <textarea name="notes" rows="2" placeholder="Kendala teknis, mahasiswa yang absen banyak, atau catatan lainnya..."
                   className="siakad-input" style={{ width: '100%', resize: 'vertical' }}></textarea>
               </div>
 
               <button type="submit" disabled={submitting}
-                style={{ width: '100%', padding: '16px', background: submitting ? 'var(--color-muted)' : 'linear-gradient(135deg, #1e1b4b, #C41E3A)', color: 'white', border: 'none', borderRadius: '50px', fontWeight: '800', fontSize: '1rem', cursor: submitting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', transition: 'all 0.2s', boxShadow: submitting ? 'none' : '0 8px 20px rgba(196,30,58,0.3)' }}>
+                style={{ width: '100%', padding: '12px 24px', background: submitting ? 'var(--color-muted)' : 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', borderRadius: '50px', fontWeight: '800', fontSize: '0.95rem', cursor: submitting ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', transition: 'all 0.2s', boxShadow: submitting ? 'none' : '0 8px 20px rgba(196,30,58,0.3)' }}>
                 {submitting ? (
                   <><i className="ph ph-spinner ph-spin"></i> Menyimpan...</>
                 ) : (
