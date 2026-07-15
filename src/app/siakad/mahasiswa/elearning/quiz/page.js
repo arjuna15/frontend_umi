@@ -114,7 +114,7 @@ function QuizContent() {
           <p style={{ margin: '0 0 8px 0', fontSize: '1.1rem', color: 'var(--color-text)' }}>Nilai Kamu:</p>
           <h1 style={{ fontSize: '4rem', margin: 0, color: 'var(--color-text)', fontWeight: '900' }}>{result.score}</h1>
         </div>
-        <button onClick={() => router.push('/siakad/mahasiswa/elearning')} style={{ background: '#0f172a', color: 'white', border: 'none', padding: '14px 24px', borderRadius: '12px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%' }}>
+        <button onClick={() => router.push('/siakad/mahasiswa/elearning')} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '50px', fontSize: '0.95rem', fontWeight: 'bold', cursor: 'pointer', width: '100%', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>
           Kembali ke Kelas
         </button>
       </div>
@@ -157,7 +157,7 @@ function QuizContent() {
         {quizData.questions && quizData.questions.length > 0 ? quizData.questions.map((q, idx) => (
           <div key={q.id} className="siakad-card" style={{ padding: '32px' }}>
             <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' , flexWrap: 'wrap' }}>
-              <div style={{ width: '36px', height: '36px', background: '#0f172a', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0 }}>
+              <div style={{ width: '36px', height: '36px', background: 'linear-gradient(135deg, #C41E3A, #9b1c2e)', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0 }}>
                 {idx + 1}
               </div>
               <h3 style={{ fontSize: '1.2rem', color: 'var(--color-text)', margin: 0, lineHeight: 1.5 }}>
@@ -167,16 +167,16 @@ function QuizContent() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingLeft: '52px' }}>
               {['a', 'b', 'c', 'd'].map(opt => (
-                <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', border: answers[q.id] === opt ? '2px solid #0f172a' : '1px solid var(--color-border)', background: answers[q.id] === opt ? 'rgba(15,23,42,0.05)' : 'var(--glass-bg)', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s' }}>
+                <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', border: answers[q.id] === opt ? '2px solid #C41E3A' : '1px solid var(--color-border)', background: answers[q.id] === opt ? 'rgba(196, 30, 58, 0.05)' : 'var(--glass-bg)', borderRadius: '24px', cursor: 'pointer', transition: 'all 0.2s' }}>
                   <input 
                     type="radio" 
                     name={`q_${q.id}`} 
                     value={opt} 
                     checked={answers[q.id] === opt} 
                     onChange={() => handleAnswer(q.id, opt)}
-                    style={{ width: '20px', height: '20px', accentColor: '#0f172a' , flexShrink: 0 }}
+                    style={{ width: '20px', height: '20px', accentColor: '#C41E3A' , flexShrink: 0 }}
                   />
-                  <span style={{ fontWeight: 'bold', textTransform: 'uppercase', color: answers[q.id] === opt ? '#0f172a' : 'var(--color-muted)' }}>{opt}.</span>
+                  <span style={{ fontWeight: 'bold', textTransform: 'uppercase', color: answers[q.id] === opt ? '#C41E3A' : 'var(--color-muted)' }}>{opt}.</span>
                   <span style={{ fontSize: '1rem', color: 'var(--color-text)' }}>{q[`option_${opt}`]}</span>
                 </label>
               ))}
@@ -191,7 +191,7 @@ function QuizContent() {
             <button 
               type="submit" 
               disabled={submitting}
-              style={{ background: '#C41E3A', color: 'white', border: 'none', padding: '16px 40px', borderRadius: '16px', fontSize: '1.1rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 10px 25px rgba(196, 30, 58, 0.3)', display: 'flex', alignItems: 'center', gap: '10px' }}
+              style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '12px 32px', borderRadius: '50px', fontSize: '0.95rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 10px 25px rgba(196, 30, 58, 0.3)', display: 'flex', alignItems: 'center', gap: '10px' }}
             >
               {submitting ? 'Mengirim...' : 'Kumpulkan Jawaban'} <i className="ph ph-paper-plane-right"></i>
             </button>
