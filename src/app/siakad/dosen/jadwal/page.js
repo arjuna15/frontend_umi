@@ -33,68 +33,66 @@ export default function JadwalPage() {
   const getToken = () => localStorage.getItem('siakad_token');
 
   useEffect(() => {
+    const token = getToken();
+    if (!token) return;
+
+    const fetchCourses = async () => {
+      try {
+        const res = await fetch(`${apiUrl}/siakad/dosen/roster`, { headers: { 'Authorization': `Bearer ${token}` } });
+        if (res.ok) {
+          const result = await res.json();
+          setCourses(result.courses || []);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchClassrooms = async () => {
+      try {
+        const res = await fetch(`${apiUrl}/siakad/admin/classrooms`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          setClassrooms(data || []);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    const fetchOverrides = async () => {
+      try {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        const res = await fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
+          headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
+        });
+        if (res.ok) {
+          const payload = await res.json();
+          setOverrides(payload.overrides || []);
+        }
+        
+        const today = new Date();
+        if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
+          setSelectedDay(today.getDate());
+        } else {
+          setSelectedDay(1);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
     fetchCourses();
     fetchClassrooms();
     fetchOverrides();
   }, [currentDate]);
 
-  const fetchCourses = async () => {
-    const token = getToken();
-    if (!token) return router.push('/siakad/login');
-    try {
-      const res = await fetch(`${apiUrl}/siakad/dosen/roster`, { headers: { 'Authorization': `Bearer ${token}` } });
-      if (res.ok) {
-        const result = await res.json();
-        setCourses(result.courses || []);
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  const fetchClassrooms = async () => {
-    const token = getToken();
-    if (!token) return;
-    try {
-      const res = await fetch(`${apiUrl}/siakad/admin/classrooms`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setClassrooms(data || []);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const fetchOverrides = async () => {
-    const token = getToken();
-    if (!token) return;
-    try {
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth() + 1;
-      const res = await fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
-        headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
-      });
-      if (res.ok) {
-        const payload = await res.json();
-        setOverrides(payload.overrides || []);
-      }
-      
-      // Default select today if in the current month
-      const today = new Date();
-      if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
-        setSelectedDay(today.getDate());
-      } else {
-        setSelectedDay(1);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
 
   const handleEdit = (course) => {
     setEditingId(course.id);
@@ -470,9 +468,9 @@ export default function JadwalPage() {
                       <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: agenda.type === 'swap' ? 'rgba(245,158,11,0.15)' : 'rgba(59,130,246,0.15)', color: agenda.type === 'swap' ? '#f59e0b' : '#3b82f6' }}>
                         {agenda.type === 'swap' ? 'Jadwal Pengganti (Swap)' : 'Jadwal Reguler'}
                       </span>
-                      <span style={{ fontSize: '0.82rem', fontFamily: 'monospace', color: 'white', fontWeight: 'bold' }}>{agenda.time}</span>
+                      <span style={{ fontSize: '0.82rem', fontFamily: 'monospace', color: 'var(--color-text)', fontWeight: 'bold' }}>{agenda.time}</span>
                     </div>
-                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', fontWeight: 'bold', color: 'white' }}>{agenda.title}</h4>
+                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{agenda.title}</h4>
                     <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-door"></i> Ruang {agenda.room}</p>
                     {agenda.notes && <p style={{ margin: '6px 0 0 0', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', fontSize: '0.8rem', color: '#f59e0b' }}><strong>Catatan:</strong> {agenda.notes}</p>}
                   </div>

@@ -8,6 +8,7 @@ export default function JadwalKalenderPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [activeTab, setActiveTab] = useState('kalender'); // Default to interactive calendar view
   const [schedules, setSchedules] = useState([]);
+  const [studentKrsIds, setStudentKrsIds] = useState([]);
   const [overrides, setOverrides] = useState([]);
   const [calendarEvents, setCalendarEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,48 +18,60 @@ export default function JadwalKalenderPage() {
   const getToken = () => localStorage.getItem('siakad_token');
 
   useEffect(() => {
-    if (!getToken()) return router.push('/siakad/login');
+    const token = getToken();
+    if (!token) return router.push('/siakad/login');
+
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        const [calRes, eventRes, dashRes] = await Promise.all([
+          fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
+            headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
+          }),
+          fetch(`${apiUrl}/siakad/calendar`, {
+            headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
+          }),
+          fetch(`${apiUrl}/siakad/dashboard`, {
+            headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
+          })
+        ]);
+
+        if (dashRes.ok) {
+          const dashResult = await dashRes.json();
+          const krsList = dashResult.krs || [];
+          const krsCourseIds = krsList.map(k => k.course_id || k.course?.id).filter(Boolean);
+          setStudentKrsIds(krsCourseIds);
+        }
+
+        if (calRes.ok) {
+          const payload = await calRes.json();
+          setSchedules(payload.schedules || []);
+          setOverrides(payload.overrides || []);
+        }
+
+        if (eventRes.ok) {
+          const events = await eventRes.json();
+          setCalendarEvents(Array.isArray(events) ? events : []);
+        }
+
+        // Default select today if in the current month
+        const today = new Date();
+        if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
+          setSelectedDay(today.getDate());
+        } else {
+          setSelectedDay(1);
+        }
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchData();
   }, [currentDate, router]);
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth() + 1;
-      const [calRes, eventRes] = await Promise.all([
-        fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
-          headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/json' }
-        }),
-        fetch(`${apiUrl}/siakad/calendar`, {
-          headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/json' }
-        })
-      ]);
-
-      if (calRes.ok) {
-        const payload = await calRes.json();
-        setSchedules(payload.schedules || []);
-        setOverrides(payload.overrides || []);
-      }
-
-      if (eventRes.ok) {
-        const events = await eventRes.json();
-        setCalendarEvents(Array.isArray(events) ? events : []);
-      }
-
-      // Default select today if in the current month
-      const today = new Date();
-      if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
-        setSelectedDay(today.getDate());
-      } else {
-        setSelectedDay(1);
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handlePrevMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
@@ -94,8 +107,12 @@ export default function JadwalKalenderPage() {
     let dayOfWeek = dateObj.getDay();
     if (dayOfWeek === 0) dayOfWeek = 7;
 
-    // Match recurring weekly classes on this day of week
-    const dayWeeklySchedules = schedules.filter(s => parseInt(s.day_of_week) === dayOfWeek);
+    // Match recurring weekly classes on this day of week that belong to student's KRS
+    const dayWeeklySchedules = schedules.filter(s => {
+      const matchDay = parseInt(s.day_of_week) === dayOfWeek;
+      const isMyKrs = studentKrsIds.includes(s.course_id || s.course?.id || s.id);
+      return matchDay && isMyKrs;
+    });
     
     const finalAgenda = [];
 
@@ -118,15 +135,18 @@ export default function JadwalKalenderPage() {
     dayOverrides.forEach(o => {
       if (o.status === 'swapped' && o.swapped_with_schedule) {
         const sw = o.swapped_with_schedule;
-        finalAgenda.push({
-          id: sw.id,
-          title: sw.course_name || sw.course?.name || 'Kuliah Pengganti',
-          time: o.new_time || sw.start_time,
-          room: sw.room_name || sw.room?.name || '-',
-          lecturer: sw.lecturer_name || sw.lecturer?.name || '-',
-          type: 'swap',
-          notes: o.notes
-        });
+        // Check if swap targets a course the student has in KRS
+        if (studentKrsIds.includes(sw.course_id || sw.course?.id || sw.id)) {
+          finalAgenda.push({
+            id: sw.id,
+            title: sw.course_name || sw.course?.name || 'Kuliah Pengganti',
+            time: o.new_time || sw.start_time,
+            room: sw.room_name || sw.room?.name || '-',
+            lecturer: sw.lecturer_name || sw.lecturer?.name || '-',
+            type: 'swap',
+            notes: o.notes
+          });
+        }
       }
     });
 
@@ -265,7 +285,7 @@ export default function JadwalKalenderPage() {
             <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ marginBottom: '20px', borderBottom: '1px solid var(--color-border)', paddingBottom: '12px' }}>
                 <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', fontWeight: '600' }}>JADWAL KULIAH HARI INI</p>
-                <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'white', margin: '2px 0 0 0' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: '2px 0 0 0' }}>
                   {selectedDay ? `${selectedDay} ${monthsMap[month]} ${year}` : 'Pilih Tanggal'}
                 </h3>
               </div>
@@ -293,9 +313,9 @@ export default function JadwalKalenderPage() {
                       <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: agenda.type === 'swap' ? 'rgba(245,158,11,0.15)' : 'rgba(59,130,246,0.15)', color: agenda.type === 'swap' ? '#f59e0b' : '#3b82f6' }}>
                         {agenda.type === 'swap' ? 'Jadwal Pengganti (Swap)' : 'Jadwal Reguler'}
                       </span>
-                      <span style={{ fontSize: '0.82rem', fontFamily: 'monospace', color: 'white', fontWeight: 'bold' }}>{agenda.time}</span>
+                      <span style={{ fontSize: '0.82rem', fontFamily: 'monospace', color: 'var(--color-text)', fontWeight: 'bold' }}>{agenda.time}</span>
                     </div>
-                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', fontWeight: 'bold', color: 'white' }}>{agenda.title}</h4>
+                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{agenda.title}</h4>
                     <p style={{ margin: '0 0 4px 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-user"></i> {agenda.lecturer}</p>
                     <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-door"></i> Ruang {agenda.room}</p>
                     {agenda.notes && <p style={{ margin: '6px 0 0 0', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', fontSize: '0.8rem', color: '#f59e0b' }}><strong>Catatan:</strong> {agenda.notes}</p>}

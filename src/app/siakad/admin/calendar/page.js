@@ -26,36 +26,38 @@ export default function AdminCalendarPage() {
   const getToken = () => localStorage.getItem('siakad_token');
 
   useEffect(() => {
-    if (!getToken()) return router.push('/siakad/login');
+    const token = getToken();
+    if (!token) return router.push('/siakad/login');
+
+    const fetchCalendarData = async () => {
+      setLoading(true);
+      try {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        const res = await fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
+          headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
+        });
+        if (!res.ok) throw new Error('Failed to fetch calendar');
+        const payload = await res.json();
+        setSchedules(payload.schedules || []);
+        setOverrides(payload.overrides || []);
+        
+        // Default select today if in the current month
+        const today = new Date();
+        if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
+          setSelectedDay(today.getDate());
+        } else {
+          setSelectedDay(1);
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchCalendarData();
   }, [currentDate, router]);
-
-  const fetchCalendarData = async () => {
-    setLoading(true);
-    try {
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth() + 1;
-      const res = await fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
-        headers: { Authorization: `Bearer ${getToken()}`, Accept: 'application/json' }
-      });
-      if (!res.ok) throw new Error('Failed to fetch calendar');
-      const payload = await res.json();
-      setSchedules(payload.schedules || []);
-      setOverrides(payload.overrides || []);
-      
-      // Default select today if in the current month
-      const today = new Date();
-      if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
-        setSelectedDay(today.getDate());
-      } else {
-        setSelectedDay(1);
-      }
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handlePrevMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
