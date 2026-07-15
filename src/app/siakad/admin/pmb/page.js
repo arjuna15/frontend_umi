@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import ModalShell from '../../components/ModalShell';
 import CustomSelect from '../../components/CustomSelect';
+import CustomDatePicker from '../../components/CustomDatePicker';
 
 export default function PMBAdminPage() {
   const router = useRouter();
@@ -280,18 +281,26 @@ export default function PMBAdminPage() {
             </>
           }
         >
-          {[
-            { label: 'Nama Periode', key: 'name', type: 'text', placeholder: 'Contoh: Gelombang 1' },
-            { label: 'Tahun Akademik', key: 'academic_year', type: 'text', placeholder: 'Contoh: 2025/2026' },
-            { label: 'Tanggal Mulai', key: 'start_date', type: 'date' },
-            { label: 'Tanggal Selesai', key: 'end_date', type: 'date' },
-            { label: 'Kuota', key: 'quota', type: 'number', placeholder: 'Jumlah kuota' },
-          ].map(f => (
-            <div key={f.key} style={{ marginBottom: '16px' }}>
-              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-              <input id={`input-period-${f.key}`} type={f.type} value={periodForm[f.key]} onChange={e => setPeriodForm({ ...periodForm, [f.key]: e.target.value })} placeholder={f.placeholder || ''} style={{ width: '100%', padding: '10px 14px', color: 'var(--color-text)', fontSize: '0.9rem', boxSizing: 'border-box' }} />
-            </div>
-          ))}
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Periode</label>
+            <input id="input-period-name" className="siakad-input" type="text" value={periodForm.name} onChange={e => setPeriodForm({ ...periodForm, name: e.target.value })} placeholder="Contoh: Gelombang 1" />
+          </div>
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tahun Akademik</label>
+            <input id="input-period-academic_year" className="siakad-input" type="text" value={periodForm.academic_year} onChange={e => setPeriodForm({ ...periodForm, academic_year: e.target.value })} placeholder="Contoh: 2025/2026" />
+          </div>
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tanggal Mulai</label>
+            <CustomDatePicker value={periodForm.start_date} onChange={val => setPeriodForm({ ...periodForm, start_date: val })} placeholder="Pilih tanggal mulai..." />
+          </div>
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tanggal Selesai</label>
+            <CustomDatePicker value={periodForm.end_date} onChange={val => setPeriodForm({ ...periodForm, end_date: val })} placeholder="Pilih tanggal selesai..." />
+          </div>
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Kuota</label>
+            <input id="input-period-quota" className="siakad-input" type="number" value={periodForm.quota} onChange={e => setPeriodForm({ ...periodForm, quota: e.target.value })} placeholder="Jumlah kuota" />
+          </div>
           <div style={{ marginBottom: '20px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Status</label>
             <CustomSelect
