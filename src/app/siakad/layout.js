@@ -222,6 +222,13 @@ export default function SiakadLayout({ children }) {
       { label: 'Proctoring Ujian', icon: 'ph ph-eye', path: '/siakad/admin/proctoring' },
       { label: 'Tracer Study', icon: 'ph ph-chart-pie-slice', path: '/siakad/admin/tracer' },
       { label: 'PMB', icon: 'ph ph-user-plus', path: '/siakad/admin/pmb', isMobilePrimary: true },
+      { label: 'Kepegawaian (HRD)', icon: 'ph ph-identification-card', path: '/siakad/admin/kepegawaian' },
+      { label: 'Manajemen Kerjasama', icon: 'ph ph-handshake', path: '/siakad/admin/kerjasama' },
+      { label: 'Manajemen RPL', icon: 'ph ph-user-switch', path: '/siakad/admin/rpl' },
+      { label: 'Career Center (Admin)', icon: 'ph ph-briefcase', path: '/siakad/admin/career' },
+      { label: 'CRM CAMABA', icon: 'ph ph-funnel', path: '/siakad/admin/crm' },
+      { label: 'Manajemen PPG', icon: 'ph ph-chalkboard-teacher', path: '/siakad/admin/ppg' },
+      { label: 'Integrasi sLimS', icon: 'ph ph-books', path: '/siakad/admin/perpustakaan' },
       { label: 'Log Aktivitas (Audit)', icon: 'ph ph-list-magnifying-glass', path: '/siakad/admin/logs' },
       { label: 'Integrasi PDDIKTI Feeder', icon: 'ph ph-swap', path: '/siakad/admin/feeder' },
       { label: 'Backup & Restore', icon: 'ph ph-database', path: '/siakad/admin/backup' },
@@ -278,6 +285,7 @@ export default function SiakadLayout({ children }) {
       { label: 'Forum Diskusi', icon: 'ph ph-chats', path: '/siakad/mahasiswa/forum' },
       { label: 'Surat & Administrasi', icon: 'ph ph-envelope-simple', path: '/siakad/mahasiswa/surat' },
       { label: 'Keuangan', icon: 'ph ph-wallet', path: '/siakad/mahasiswa/keuangan' },
+      { label: 'Alumni Career Portal', icon: 'ph ph-briefcase', path: '/siakad/alumni/career' },
       { label: 'Pengaturan Profil', icon: 'ph ph-user-gear', path: '/siakad/profile' },
     ];
   }

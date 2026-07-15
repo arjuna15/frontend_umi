@@ -12,6 +12,44 @@ export default function KaprodiKurikulumPage() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [userProdi, setUserProdi] = useState('');
   const [editFormData, setEditFormData] = useState({ id: '', code: '', name: '', sks: '', semester: '1', type: 'Wajib', dosen_id: '' });
+  const [activeTab, setActiveTab] = useState('kurikulum');
+
+  // OBE sample data — CPL (Capaian Pembelajaran Lulusan)
+  const cplData = [
+    { code: 'CPL-1', description: 'Mampu menerapkan pemikiran logis, kritis, sistematis, dan inovatif dalam pengembangan ilmu pengetahuan dan teknologi' },
+    { code: 'CPL-2', description: 'Mampu menunjukkan kinerja mandiri, bermutu, dan terukur sesuai standar kompetensi kerja' },
+    { code: 'CPL-3', description: 'Mampu mengkaji implikasi pengembangan atau implementasi IPTEK sesuai keahliannya berdasarkan kaidah, tata cara, dan etika ilmiah' },
+    { code: 'CPL-4', description: 'Mampu mengambil keputusan secara tepat berdasarkan analisis informasi dan data' },
+    { code: 'CPL-5', description: 'Mampu merancang dan mengimplementasikan solusi berbasis teknologi informasi untuk menyelesaikan permasalahan' },
+    { code: 'CPL-6', description: 'Mampu berkomunikasi efektif secara lisan dan tulisan dalam bahasa Indonesia dan Inggris' },
+  ];
+
+  // CPMK (Capaian Pembelajaran Mata Kuliah) mapped to CPLs
+  const cpmkData = [
+    { code: 'CPMK-1', description: 'Memahami konsep dasar pemrograman', cpl: ['CPL-1', 'CPL-5'] },
+    { code: 'CPMK-2', description: 'Merancang algoritma penyelesaian masalah', cpl: ['CPL-1', 'CPL-4'] },
+    { code: 'CPMK-3', description: 'Mengimplementasikan sistem basis data', cpl: ['CPL-3', 'CPL-5'] },
+    { code: 'CPMK-4', description: 'Menyusun dokumentasi teknis proyek', cpl: ['CPL-2', 'CPL-6'] },
+    { code: 'CPMK-5', description: 'Menganalisis kebutuhan pengguna sistem', cpl: ['CPL-4', 'CPL-5'] },
+    { code: 'CPMK-6', description: 'Menerapkan metodologi pengembangan perangkat lunak', cpl: ['CPL-1', 'CPL-2', 'CPL-3'] },
+  ];
+
+  // Matrix mapping: courses x CPLs with strength values
+  const matrixCourses = [
+    { name: 'Pemrograman Dasar', code: 'IF101', mapping: { 'CPL-1': 'Tinggi', 'CPL-5': 'Tinggi', 'CPL-4': 'Sedang' } },
+    { name: 'Struktur Data', code: 'IF102', mapping: { 'CPL-1': 'Tinggi', 'CPL-4': 'Tinggi', 'CPL-5': 'Sedang' } },
+    { name: 'Basis Data', code: 'IF201', mapping: { 'CPL-3': 'Tinggi', 'CPL-5': 'Tinggi', 'CPL-1': 'Rendah' } },
+    { name: 'Rekayasa Perangkat Lunak', code: 'IF301', mapping: { 'CPL-1': 'Sedang', 'CPL-2': 'Tinggi', 'CPL-3': 'Tinggi', 'CPL-5': 'Sedang' } },
+    { name: 'Komunikasi Profesional', code: 'MK201', mapping: { 'CPL-6': 'Tinggi', 'CPL-2': 'Sedang' } },
+    { name: 'Analisis Sistem Informasi', code: 'IF302', mapping: { 'CPL-4': 'Tinggi', 'CPL-5': 'Tinggi', 'CPL-3': 'Sedang' } },
+    { name: 'Proyek Akhir', code: 'IF401', mapping: { 'CPL-1': 'Tinggi', 'CPL-2': 'Tinggi', 'CPL-3': 'Sedang', 'CPL-4': 'Tinggi', 'CPL-5': 'Tinggi', 'CPL-6': 'Sedang' } },
+  ];
+
+  const strengthColors = {
+    Tinggi: { bg: 'rgba(16,185,129,0.2)', color: '#10b981', border: 'rgba(16,185,129,0.4)' },
+    Sedang: { bg: 'rgba(245,158,11,0.2)', color: '#f59e0b', border: 'rgba(245,158,11,0.4)' },
+    Rendah: { bg: 'rgba(249,115,22,0.2)', color: '#f97316', border: 'rgba(249,115,22,0.4)' },
+  };
 
   useEffect(() => {
     fetchData();
@@ -155,61 +193,230 @@ export default function KaprodiKurikulumPage() {
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Kurikulum</h1>
               <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola struktur mata kuliah dan sebaran SKS per semester ({userProdi || 'Belum tersedia'}).</p>
             </div>
-            <button onClick={openAddModal} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', padding: '10px 24px', borderRadius: '50px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(196, 30, 58, 0.3)' , flexWrap: 'wrap'}}>
-              <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Tambah MK
-            </button>
+            {activeTab === 'kurikulum' && (
+              <button id="btn-add-mk" onClick={openAddModal} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', padding: '10px 24px', borderRadius: '50px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(196, 30, 58, 0.3)' , flexWrap: 'wrap'}}>
+                <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Tambah MK
+              </button>
+            )}
           </div>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '24px' }}>
-        <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
-          <p style={{ margin: '0 0 8px 0', color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Mata Kuliah</p>
-          <h2 style={{ margin: 0, fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)' }}>{courses.length}</h2>
-        </div>
-        <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
-          <p style={{ margin: '0 0 8px 0', color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total SKS Kurikulum</p>
-          <h2 style={{ margin: 0, fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)' }}>{courses.reduce((acc, c) => acc + parseInt(c.sks), 0)} SKS</h2>
-        </div>
+      {/* Tab buttons */}
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
+        {[{ key: 'kurikulum', label: 'Struktur Kurikulum', icon: 'ph-list-bullets' }, { key: 'obe', label: 'OBE & CPL Mapping', icon: 'ph-graph' }].map(t => (
+          <button id={`kurikulum-tab-${t.key}`} key={t.key} onClick={() => setActiveTab(t.key)} style={{
+            padding: '10px 20px', borderRadius: '50px', border: activeTab === t.key ? '2px solid #C41E3A' : '1px solid var(--color-border)',
+            background: activeTab === t.key ? 'rgba(196,30,58,0.15)' : 'transparent', color: activeTab === t.key ? '#C41E3A' : 'var(--color-muted)',
+            fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '6px'
+          }}>
+            <i className={`ph ${t.icon}`} style={{ fontSize: '1rem' }}></i> {t.label}
+          </button>
+        ))}
       </div>
 
-      <div className="siakad-card" style={{ padding: '24px' }}>
-        <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
-            <thead>
-              <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
-                <th style={{ padding: '16px' }}>Semester</th>
-                <th style={{ padding: '16px' }}>Kode</th>
-                <th style={{ padding: '16px' }}>Mata Kuliah</th>
-                <th style={{ padding: '16px' }}>SKS</th>
-                <th style={{ padding: '16px' }}>Dosen Pengampu</th>
-                <th style={{ padding: '16px' }}>Sifat</th>
-                <th style={{ padding: '16px', textAlign: 'right' }}>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {courses.sort((a,b) => parseInt(a.semester) - parseInt(b.semester)).map((c) => (
-                <tr key={c.id} style={{ borderBottom: '1px solid var(--color-border)', transition: 'all 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.background='var(--glass-bg)'} onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
-                  <td style={{ padding: '16px', fontWeight: 'bold' }}>Semester {c.semester}</td>
-                  <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{c.code}</td>
-                  <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{c.name}</td>
-                  <td style={{ padding: '16px' }}>{c.sks} SKS</td>
-                  <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{c.dosen?.name || 'Belum diplot'}</td>
-                  <td style={{ padding: '16px' }}>
-                    <span className="siakad-badge" style={{ background: c.type === 'Wajib' ? 'rgba(196, 30, 58, 0.15)' : 'rgba(245, 158, 11, 0.15)', color: c.type === 'Wajib' ? '#C41E3A' : '#f59e0b', borderRadius: '50px', padding: '4px 12px' }}>{c.type}</span>
-                  </td>
-                  <td style={{ padding: '16px' }}>
-                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
-                      <button onClick={() => { setEditFormData(c); setIsEditModalOpen(true); }} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#3b82f6', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-pencil-simple"></i></button>
-                      <button onClick={() => handleDelete(c.id)} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#ef4444', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-trash"></i></button>
-                    </div>
-                  </td>
-                </tr>
+      {/* Kurikulum Tab */}
+      {activeTab === 'kurikulum' && (
+        <>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '24px' }}>
+            <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+              <p style={{ margin: '0 0 8px 0', color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Mata Kuliah</p>
+              <h2 style={{ margin: 0, fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)' }}>{courses.length}</h2>
+            </div>
+            <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+              <p style={{ margin: '0 0 8px 0', color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total SKS Kurikulum</p>
+              <h2 style={{ margin: 0, fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)' }}>{courses.reduce((acc, c) => acc + parseInt(c.sks), 0)} SKS</h2>
+            </div>
+          </div>
+
+          <div className="siakad-card" style={{ padding: '24px' }}>
+            <div style={{ overflowX: 'auto' }}>
+              <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
+                <thead>
+                  <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
+                    <th style={{ padding: '16px' }}>Semester</th>
+                    <th style={{ padding: '16px' }}>Kode</th>
+                    <th style={{ padding: '16px' }}>Mata Kuliah</th>
+                    <th style={{ padding: '16px' }}>SKS</th>
+                    <th style={{ padding: '16px' }}>Dosen Pengampu</th>
+                    <th style={{ padding: '16px' }}>Sifat</th>
+                    <th style={{ padding: '16px', textAlign: 'right' }}>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {courses.sort((a,b) => parseInt(a.semester) - parseInt(b.semester)).map((c) => (
+                    <tr key={c.id} style={{ borderBottom: '1px solid var(--color-border)', transition: 'all 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.background='var(--glass-bg)'} onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
+                      <td style={{ padding: '16px', fontWeight: 'bold' }}>Semester {c.semester}</td>
+                      <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{c.code}</td>
+                      <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{c.name}</td>
+                      <td style={{ padding: '16px' }}>{c.sks} SKS</td>
+                      <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{c.dosen?.name || 'Belum diplot'}</td>
+                      <td style={{ padding: '16px' }}>
+                        <span className="siakad-badge" style={{ background: c.type === 'Wajib' ? 'rgba(196, 30, 58, 0.15)' : 'rgba(245, 158, 11, 0.15)', color: c.type === 'Wajib' ? '#C41E3A' : '#f59e0b', borderRadius: '50px', padding: '4px 12px' }}>{c.type}</span>
+                      </td>
+                      <td style={{ padding: '16px' }}>
+                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
+                          <button id={`btn-edit-mk-${c.id}`} onClick={() => { setEditFormData(c); setIsEditModalOpen(true); }} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#3b82f6', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-pencil-simple"></i></button>
+                          <button id={`btn-delete-mk-${c.id}`} onClick={() => handleDelete(c.id)} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#ef4444', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-trash"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* OBE Tab — Outcome-Based Education Mapping */}
+      {activeTab === 'obe' && (
+        <div style={{ display: 'grid', gap: '24px' }}>
+          {/* CPL Section */}
+          <div className="siakad-card" style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+              <div style={{ background: 'rgba(16,185,129,0.15)', padding: '8px', borderRadius: '10px', color: '#10b981', display: 'flex' }}>
+                <i className="ph ph-target" style={{ fontSize: '1.3rem' }}></i>
+              </div>
+              <div>
+                <h2 style={{ fontSize: '1.15rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Capaian Pembelajaran Lulusan (CPL)</h2>
+                <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', margin: 0 }}>Program Learning Outcomes yang ditetapkan untuk prodi</p>
+              </div>
+            </div>
+            <div style={{ display: 'grid', gap: '12px' }}>
+              {cplData.map((cpl, i) => (
+                <div key={cpl.code} style={{ padding: '14px 18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)', display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+                  <span style={{ background: 'rgba(16,185,129,0.15)', color: '#10b981', padding: '4px 12px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: '800', whiteSpace: 'nowrap', marginTop: '2px' }}>{cpl.code}</span>
+                  <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '0.9rem', lineHeight: '1.5' }}>{cpl.description}</p>
+                </div>
               ))}
-            </tbody>
-          </table>
+            </div>
+          </div>
+
+          {/* CPMK Section */}
+          <div className="siakad-card" style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+              <div style={{ background: 'rgba(59,130,246,0.15)', padding: '8px', borderRadius: '10px', color: '#3b82f6', display: 'flex' }}>
+                <i className="ph ph-book-open" style={{ fontSize: '1.3rem' }}></i>
+              </div>
+              <div>
+                <h2 style={{ fontSize: '1.15rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Capaian Pembelajaran Mata Kuliah (CPMK)</h2>
+                <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', margin: 0 }}>Course Learning Outcomes yang dipetakan ke CPL</p>
+              </div>
+            </div>
+            <div style={{ display: 'grid', gap: '12px' }}>
+              {cpmkData.map((cpmk) => (
+                <div key={cpmk.code} style={{ padding: '14px 18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', marginBottom: '8px', flexWrap: 'wrap' }}>
+                    <span style={{ background: 'rgba(59,130,246,0.15)', color: '#3b82f6', padding: '4px 12px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: '800', whiteSpace: 'nowrap' }}>{cpmk.code}</span>
+                    <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '0.9rem', flex: 1 }}>{cpmk.description}</p>
+                  </div>
+                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginLeft: '0' }}>
+                    {cpmk.cpl.map(c => (
+                      <span key={c} style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '2px 10px', borderRadius: '12px', fontSize: '0.72rem', fontWeight: '700', border: '1px solid rgba(16,185,129,0.25)' }}>{c}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Matrix Visualization */}
+          <div className="siakad-card" style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+              <div style={{ background: 'rgba(139,92,246,0.15)', padding: '8px', borderRadius: '10px', color: '#8b5cf6', display: 'flex' }}>
+                <i className="ph ph-grid-four" style={{ fontSize: '1.3rem' }}></i>
+              </div>
+              <div>
+                <h2 style={{ fontSize: '1.15rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Matriks CPL — Mata Kuliah</h2>
+                <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', margin: 0 }}>Pemetaan kekuatan kontribusi setiap mata kuliah terhadap CPL</p>
+              </div>
+            </div>
+
+            {/* Legend */}
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '16px', flexWrap: 'wrap' }}>
+              {Object.entries(strengthColors).map(([label, styles]) => (
+                <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--color-muted)' }}>
+                  <div style={{ width: '20px', height: '20px', borderRadius: '6px', background: styles.bg, border: `1px solid ${styles.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ fontSize: '0.6rem', fontWeight: '800', color: styles.color }}>{label[0]}</span>
+                  </div>
+                  {label}
+                </div>
+              ))}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--color-muted)' }}>
+                <div style={{ width: '20px', height: '20px', borderRadius: '6px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}></div>
+                Tidak ada
+              </div>
+            </div>
+
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '700px' }}>
+                <thead>
+                  <tr>
+                    <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase', minWidth: '200px' }}>Mata Kuliah</th>
+                    {cplData.map(cpl => (
+                      <th key={cpl.code} style={{ padding: '12px 8px', textAlign: 'center', fontSize: '0.75rem', fontWeight: '800', color: '#10b981', borderBottom: '2px solid var(--color-border)', minWidth: '70px' }}>{cpl.code}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {matrixCourses.map((course, i) => (
+                    <tr key={course.code} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                      <td style={{ padding: '12px 16px' }}>
+                        <div>
+                          <p style={{ color: 'var(--color-text)', fontWeight: '600', margin: 0, fontSize: '0.85rem' }}>{course.name}</p>
+                          <p style={{ color: 'var(--color-muted)', margin: '2px 0 0 0', fontSize: '0.72rem' }}>{course.code}</p>
+                        </div>
+                      </td>
+                      {cplData.map(cpl => {
+                        const strength = course.mapping[cpl.code];
+                        const style = strength ? strengthColors[strength] : null;
+                        return (
+                          <td key={cpl.code} style={{ padding: '8px', textAlign: 'center' }}>
+                            {strength ? (
+                              <div style={{
+                                width: '42px', height: '42px', borderRadius: '10px', margin: '0 auto',
+                                background: style.bg, border: `1px solid ${style.border}`,
+                                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                transition: 'transform 0.2s', cursor: 'default'
+                              }} title={`${course.name} → ${cpl.code}: ${strength}`}>
+                                <span style={{ fontSize: '0.7rem', fontWeight: '800', color: style.color }}>{strength[0]}</span>
+                              </div>
+                            ) : (
+                              <div style={{
+                                width: '42px', height: '42px', borderRadius: '10px', margin: '0 auto',
+                                background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)'
+                              }}></div>
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* CPL coverage summary */}
+            <div style={{ marginTop: '20px', padding: '16px 20px', borderRadius: '16px', background: 'rgba(139,92,246,0.06)', border: '1px solid rgba(139,92,246,0.15)' }}>
+              <p style={{ fontSize: '0.82rem', fontWeight: '700', color: '#8b5cf6', margin: '0 0 12px 0' }}>Ringkasan Cakupan CPL</p>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                {cplData.map(cpl => {
+                  const count = matrixCourses.filter(c => c.mapping[cpl.code]).length;
+                  const pct = Math.round((count / matrixCourses.length) * 100);
+                  return (
+                    <div key={cpl.code} style={{ flex: '1 1 100px', textAlign: 'center', padding: '10px', borderRadius: '12px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}>
+                      <p style={{ fontSize: '0.72rem', fontWeight: '800', color: '#10b981', margin: '0 0 4px 0' }}>{cpl.code}</p>
+                      <p style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 2px 0' }}>{count}</p>
+                      <p style={{ fontSize: '0.68rem', color: 'var(--color-muted)', margin: 0 }}>{pct}% MK</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
       {isEditModalOpen && (
         <ModalShell
@@ -218,23 +425,23 @@ export default function KaprodiKurikulumPage() {
           onClose={() => setIsEditModalOpen(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="kurikulum-form" style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>Simpan</button>
+              <button id="btn-cancel-mk" type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button id="btn-save-mk" type="submit" form="kurikulum-form" style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>Simpan</button>
             </>
           )}
         >
           <form id="kurikulum-form" onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kode MK</label>
-              <input type="text" required value={editFormData.code} onChange={e=>setEditFormData({...editFormData, code: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: IF101" />
+              <input id="mk-code" type="text" required value={editFormData.code} onChange={e=>setEditFormData({...editFormData, code: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: IF101" />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Nama Mata Kuliah</label>
-              <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Pemrograman Dasar" />
+              <input id="mk-name" type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Pemrograman Dasar" />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>SKS</label>
-              <input type="number" required value={editFormData.sks} onChange={e=>setEditFormData({...editFormData, sks: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
+              <input id="mk-sks" type="number" required value={editFormData.sks} onChange={e=>setEditFormData({...editFormData, sks: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
             </div>
           </form>
         </ModalShell>
