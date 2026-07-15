@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function CRMCamabaPage() {
   const router = useRouter();
@@ -207,8 +208,8 @@ export default function CRMCamabaPage() {
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Daftar Prospek</h2>
           <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <div style={{ position: 'relative' }}>
-              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
-              <input id="input-search-prospect" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Cari nama/telepon/sekolah..." style={{ padding: '10px 14px 10px 36px', fontSize: '0.88rem', borderRadius: '30px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', minWidth: '220px' }} />
+              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
+              <input id="input-search-prospect" className="siakad-input" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Cari nama/telepon/sekolah..." style={{ paddingLeft: '46px', minWidth: '220px' }} />
             </div>
             <button id="btn-add-prospect" onClick={() => setShowAddModal(true)} className="btn" style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '30px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <i className="ph ph-plus"></i> Tambah Prospek
@@ -265,14 +266,22 @@ export default function CRMCamabaPage() {
           ].map(f => (
             <div key={f.key} style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-              <input id={`input-prospect-${f.key}`} type="text" value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+              <input id={`input-prospect-${f.key}`} className="siakad-input" type="text" value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} />
             </div>
           ))}
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Sumber</label>
-            <select id="input-prospect-source" value={formData.source} onChange={e => setFormData({ ...formData, source: e.target.value })} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)', background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}>
-              {['website', 'instagram', 'whatsapp', 'pameran', 'referral'].map(s => <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
-            </select>
+            <CustomSelect
+              value={formData.source}
+              onChange={val => setFormData({ ...formData, source: val })}
+              options={[
+                { value: 'website', label: 'Website' },
+                { value: 'instagram', label: 'Instagram' },
+                { value: 'whatsapp', label: 'WhatsApp' },
+                { value: 'pameran', label: 'Pameran' },
+                { value: 'referral', label: 'Referral' }
+              ]}
+            />
           </div>
         </ModalShell>
       )}
@@ -287,13 +296,20 @@ export default function CRMCamabaPage() {
         }>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Metode</label>
-            <select id="input-followup-method" value={followUpData.method} onChange={e => setFollowUpData({ ...followUpData, method: e.target.value })} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)', background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}>
-              {[['whatsapp', 'WhatsApp'], ['phone', 'Telepon'], ['email', 'Email'], ['visit', 'Kunjungan']].map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-            </select>
+            <CustomSelect
+              value={followUpData.method}
+              onChange={val => setFollowUpData({ ...followUpData, method: val })}
+              options={[
+                { value: 'whatsapp', label: 'WhatsApp' },
+                { value: 'phone', label: 'Telepon' },
+                { value: 'email', label: 'Email' },
+                { value: 'visit', label: 'Kunjungan' }
+              ]}
+            />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Catatan</label>
-            <textarea id="input-followup-notes" value={followUpData.notes} onChange={e => setFollowUpData({ ...followUpData, notes: e.target.value })} placeholder="Catatan follow-up..." rows={4} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)', resize: 'vertical' }} />
+            <textarea id="input-followup-notes" className="siakad-input" value={followUpData.notes} onChange={e => setFollowUpData({ ...followUpData, notes: e.target.value })} placeholder="Catatan follow-up..." rows={4} style={{ resize: 'vertical' }} />
           </div>
         </ModalShell>
       )}
