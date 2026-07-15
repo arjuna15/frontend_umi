@@ -174,7 +174,7 @@ export default function PPGManagementPage() {
                 </tr>
               </thead>
               <tbody>
-                {participants.length === 0 ? (
+                {!Array.isArray(participants) || participants.length === 0 ? (
                   <tr><td colSpan={7} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada peserta PPG.</td></tr>
                 ) : participants.map(p => (
                   <tr key={p.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
@@ -212,7 +212,7 @@ export default function PPGManagementPage() {
                 <span style={{ color: 'var(--color-muted)', margin: '0 8px' }}>•</span>
                 <span style={{ color: 'var(--color-muted)', fontSize: '0.88rem' }}>{selectedParticipant.subject || '-'}</span>
               </div>
-              {activities.length === 0 ? (
+              {!Array.isArray(activities) || activities.length === 0 ? (
                 <p style={{ textAlign: 'center', color: 'var(--color-muted)', padding: '30px' }}>Belum ada aktivitas tercatat.</p>
               ) : activities.map((a, i) => (
                 <div key={i} style={{ display: 'flex', gap: '16px', marginBottom: '16px', paddingLeft: '8px', borderLeft: '3px solid #3b82f6' }}>

@@ -502,11 +502,11 @@ export default function AdminPengaturan() {
         }>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Aplikasi / Client</label>
-            <input type="text" value={apiForm.name} onChange={(e) => setApiForm({ ...apiForm, name: e.target.value })} placeholder="Contoh: Mobile App UMIBA, Web Portal Partner" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input type="text" className="siakad-input" value={apiForm.name} onChange={(e) => setApiForm({ ...apiForm, name: e.target.value })} placeholder="Contoh: Mobile App UMIBA, Web Portal Partner" />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Rate Limit (Requests per jam)</label>
-            <input type="number" value={apiForm.rate_limit} onChange={(e) => setApiForm({ ...apiForm, rate_limit: e.target.value })} placeholder="1000" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input type="number" className="siakad-input" value={apiForm.rate_limit} onChange={(e) => setApiForm({ ...apiForm, rate_limit: e.target.value })} placeholder="1000" />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Masa Berlaku Hingga</label>

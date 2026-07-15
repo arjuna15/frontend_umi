@@ -107,11 +107,11 @@ export default function CRMCamabaPage() {
   const funnelMax = Math.max(...funnel.map(f => f.value), 1);
 
   const sourceData = [
-    { label: 'Website', value: prospects.filter(p => p.source === 'website').length || 12, color: '#3b82f6' },
-    { label: 'Instagram', value: prospects.filter(p => p.source === 'instagram').length || 8, color: '#e11d48' },
-    { label: 'WhatsApp', value: prospects.filter(p => p.source === 'whatsapp').length || 15, color: '#22c55e' },
-    { label: 'Pameran', value: prospects.filter(p => p.source === 'pameran').length || 6, color: '#f59e0b' },
-    { label: 'Referral', value: prospects.filter(p => p.source === 'referral').length || 4, color: '#8b5cf6' },
+    { label: 'Website', value: (Array.isArray(prospects) ? prospects : []).filter(p => p.source === 'website').length || 12, color: '#3b82f6' },
+    { label: 'Instagram', value: (Array.isArray(prospects) ? prospects : []).filter(p => p.source === 'instagram').length || 8, color: '#e11d48' },
+    { label: 'WhatsApp', value: (Array.isArray(prospects) ? prospects : []).filter(p => p.source === 'whatsapp').length || 15, color: '#22c55e' },
+    { label: 'Pameran', value: (Array.isArray(prospects) ? prospects : []).filter(p => p.source === 'pameran').length || 6, color: '#f59e0b' },
+    { label: 'Referral', value: (Array.isArray(prospects) ? prospects : []).filter(p => p.source === 'referral').length || 4, color: '#8b5cf6' },
   ];
   const srcTotal = sourceData.reduce((a, d) => a + d.value, 0) || 1;
   let srcGradient = '', srcCum = 0;
@@ -122,7 +122,7 @@ export default function CRMCamabaPage() {
     if (i < sourceData.length - 1) srcGradient += ', ';
   });
 
-  const filtered = prospects.filter(p => {
+  const filtered = (Array.isArray(prospects) ? prospects : []).filter(p => {
     const q = search.toLowerCase();
     return !q || (p.name || '').toLowerCase().includes(q) || (p.phone || '').includes(q) || (p.school_origin || '').toLowerCase().includes(q);
   });

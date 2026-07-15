@@ -18,6 +18,7 @@ export default function SiakadLayout({ children }) {
   const [showNotif, setShowNotif] = useState(false);
   const [showMobileNotifs, setShowMobileNotifs] = useState(false);
   const [notifications, setNotifications] = useState([]);
+  const [menuSearch, setMenuSearch] = useState('');
 
   const role = session.role;
   const portalRole = session.portalRole;
@@ -315,22 +316,60 @@ export default function SiakadLayout({ children }) {
           </div>
         </div>
 
-        <nav className="siakad-nav">
-          <p style={{ padding: '0 20px', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-muted)', fontWeight: '800', marginBottom: '8px', letterSpacing: '1.5px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <nav className="siakad-nav" style={{ display: 'flex', flexDirection: 'column', height: 'calc(100% - 110px)' }}>
+          {/* Real-time Menu Search */}
+          <div style={{ padding: '0 20px', marginBottom: '14px', position: 'relative' }}>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '32px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '0.95rem', pointerEvents: 'none' }}></i>
+            <input 
+              type="text" 
+              placeholder="Cari menu..." 
+              value={menuSearch} 
+              onChange={e => setMenuSearch(e.target.value)} 
+              className="siakad-input"
+              style={{ 
+                width: '100%', 
+                padding: '9px 12px 9px 38px', 
+                fontSize: '0.82rem',
+                height: '36px',
+                borderRadius: '50px'
+              }} 
+            />
+            {menuSearch && (
+              <i 
+                className="ph ph-x" 
+                onClick={() => setMenuSearch('')} 
+                style={{ position: 'absolute', right: '32px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '0.9rem', cursor: 'pointer', zIndex: 10 }}
+              ></i>
+            )}
+          </div>
+
+          <p style={{ padding: '0 20px', fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--color-muted)', fontWeight: '800', marginBottom: '8px', letterSpacing: '1.5px', display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
             Menu Utama
             <span style={{ flex: 1, height: '1px', background: 'linear-gradient(90deg, var(--color-border) 0%, transparent 100%)' }}></span>
           </p>
-          {menuItems.map((item, i) => {
-            const isActive = pathname === item.path;
-            const iconClass = isActive ? item.icon.replace('ph ', 'ph-fill ph ') : item.icon;
-            return (
-              <Link key={i} href={item.path} className={`siakad-nav-item ${isActive ? 'active' : ''}`}>
-                <i className={iconClass} style={{ fontSize: '1.3rem', flexShrink: 0 }}></i>
-                <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.label}</span>
-                {i === 0 && <span style={{ background: isActive ? 'rgba(255,255,255,0.2)' : '#e0e7ff', color: isActive ? 'white' : '#4f46e5', padding: '2px 8px', borderRadius: '10px', fontSize: '0.65rem', fontWeight: 'bold', flexShrink: 0 }}>BARU</span>}
-              </Link>
-            );
-          })}
+          
+          <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '2px', paddingRight: '4px' }}>
+            {menuItems.filter(item => 
+              !menuSearch || item.label.toLowerCase().includes(menuSearch.toLowerCase())
+            ).map((item, i) => {
+              const isActive = pathname === item.path;
+              const iconClass = isActive ? item.icon.replace('ph ', 'ph-fill ph ') : item.icon;
+              return (
+                <Link key={i} href={item.path} className={`siakad-nav-item ${isActive ? 'active' : ''}`} style={{ flexShrink: 0 }}>
+                  <i className={iconClass} style={{ fontSize: '1.3rem', flexShrink: 0 }}></i>
+                  <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.label}</span>
+                  {item.label === 'Admin Dashboard' && !isActive && <span style={{ background: '#e0e7ff', color: '#4f46e5', padding: '2px 8px', borderRadius: '10px', fontSize: '0.65rem', fontWeight: 'bold', flexShrink: 0 }}>BARU</span>}
+                </Link>
+              );
+            })}
+            {menuItems.filter(item => 
+              item.label.toLowerCase().includes(menuSearch.toLowerCase())
+            ).length === 0 && (
+              <div style={{ padding: '20px', textAlign: 'center', color: 'var(--color-muted)', fontSize: '0.8rem' }}>
+                Menu tidak ditemukan
+              </div>
+            )}
+          </div>
         </nav>
 
         <div className="siakad-user-profile">
