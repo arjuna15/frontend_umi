@@ -452,9 +452,15 @@ export default function PMBRegistrationPage() {
         }
 
         /* Responsive Progress Tracker Wizard */
+        .pmb-step-outer {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+        }
+
         .pmb-step-wrapper {
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
           align-items: center;
           gap: 12px;
           margin-bottom: 40px;
@@ -464,6 +470,7 @@ export default function PMBRegistrationPage() {
           border: 1px solid var(--color-border);
           box-sizing: border-box !important;
           width: fit-content;
+          /* hapus margin-left/right: auto kalau masih ada, gak perlu lagi */
         }
         .pmb-step-item {
           display: flex;
@@ -641,25 +648,27 @@ export default function PMBRegistrationPage() {
           <>
             {/* Progress Tracker with Premium Styling */}
             {step <= 5 && (
-              <div className="pmb-step-wrapper">
-                {stepLabels.map((s, i) => (
-                  <div key={s.num} className={`pmb-step-item ${step === s.num ? 'active-step' : s.num === step + 1 ? 'next-step' : ''}`}>
-                    <div className="pmb-step-pill" style={{ 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      gap: '8px', 
-                      padding: '8px 16px', 
-                      borderRadius: '50px', 
-                      background: step === s.num ? 'linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%)' : step > s.num ? 'rgba(34, 197, 94, 0.1)' : 'transparent',
-                      border: step === s.num ? 'none' : '1px solid var(--color-border)',
-                      boxShadow: step === s.num ? '0 4px 12px rgba(29, 78, 216, 0.25)' : 'none'
-                    }}>
-                      <i className={s.icon} style={{ fontSize: '1rem', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-muted)' }}></i>
-                      <span style={{ fontSize: '0.85rem', fontWeight: '800', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-text)' }}>{s.label}</span>
+              <div className="pmb-step-outer">
+                <div className="pmb-step-wrapper">
+                  {stepLabels.map((s, i) => (
+                    <div key={s.num} className={`pmb-step-item ${step === s.num ? 'active-step' : s.num === step + 1 ? 'next-step' : ''}`}>
+                      <div className="pmb-step-pill" style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '8px', 
+                        padding: '8px 16px', 
+                        borderRadius: '50px', 
+                        background: step === s.num ? 'linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%)' : step > s.num ? 'rgba(34, 197, 94, 0.1)' : 'transparent',
+                        border: step === s.num ? 'none' : '1px solid var(--color-border)',
+                        boxShadow: step === s.num ? '0 4px 12px rgba(29, 78, 216, 0.25)' : 'none'
+                      }}>
+                        <i className={s.icon} style={{ fontSize: '1rem', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-muted)' }}></i>
+                        <span style={{ fontSize: '0.85rem', fontWeight: '800', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-text)' }}>{s.label}</span>
+                      </div>
+                      {i < stepLabels.length - 1 && <span className="pmb-step-divider" style={{ color: 'var(--color-muted)', fontWeight: '300', marginLeft: '8px' }}>→</span>}
                     </div>
-                    {i < stepLabels.length - 1 && <span className="pmb-step-divider" style={{ color: 'var(--color-muted)', fontWeight: '300', marginLeft: '8px' }}>→</span>}
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             )}
 
