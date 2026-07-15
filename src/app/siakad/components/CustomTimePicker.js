@@ -90,7 +90,7 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
         top: coords.top,
         left: coords.left,
         width: coords.width,
-        zIndex: 99999,
+        zIndex: 9999999,
         background: 'var(--color-bg)',
         border: '1px solid var(--color-border)',
         borderRadius: '16px',
@@ -146,7 +146,7 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
                   padding: '6px',
                   border: 'none',
                   borderRadius: '8px',
-                  background: isSelected ? 'linear-gradient(135deg, #b91c1c 0%, #ef4444 100%)' : 'transparent',
+                  background: isSelected ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'transparent',
                   color: isSelected ? 'white' : 'var(--color-text)',
                   fontWeight: isSelected ? 'bold' : 'normal',
                   cursor: 'pointer',
@@ -188,7 +188,7 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
                   padding: '6px',
                   border: 'none',
                   borderRadius: '8px',
-                  background: isSelected ? 'linear-gradient(135deg, #b91c1c 0%, #ef4444 100%)' : 'transparent',
+                  background: isSelected ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'transparent',
                   color: isSelected ? 'white' : 'var(--color-text)',
                   fontWeight: isSelected ? 'bold' : 'normal',
                   cursor: 'pointer',
@@ -210,7 +210,7 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
           type="button"
           onClick={() => setIsOpen(false)}
           style={{
-            background: 'linear-gradient(135deg, #b91c1c 0%, #ef4444 100%)',
+            background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)',
             border: 'none',
             color: 'white',
             fontSize: '0.8rem',
@@ -218,7 +218,7 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
             cursor: 'pointer',
             padding: '6px 12px',
             borderRadius: '8px',
-            boxShadow: '0 4px 10px rgba(185, 28, 28, 0.2)'
+            boxShadow: '0 4px 10px rgba(196, 30, 58, 0.2)'
           }}
         >
           Selesai
