@@ -228,16 +228,21 @@ export default function PMBAdminPage() {
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
                     <tr>
-                      {['Nama', 'Email', 'Program', 'Status', 'Aksi'].map(h => (
+                      {['No. Registrasi', 'Nama', 'Email', 'Program', 'Status', 'Aksi'].map(h => (
                         <th key={h} style={{ padding: '10px 14px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', textTransform: 'uppercase', borderBottom: '2px solid var(--color-border)' }}>{h}</th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
                     {applicants.length === 0 ? (
-                      <tr><td colSpan={5} style={{ padding: '30px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada pendaftar.</td></tr>
+                      <tr><td colSpan={6} style={{ padding: '30px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada pendaftar.</td></tr>
                     ) : applicants.map(a => (
                       <tr key={a.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                        <td style={{ padding: '12px 14px', color: 'var(--color-text)', fontWeight: '700', fontSize: '0.85rem' }}>
+                          <span style={{ fontFamily: 'monospace', background: 'rgba(59,130,246,0.08)', padding: '4px 8px', borderRadius: '6px', border: '1px solid rgba(59,130,246,0.15)', color: '#3b82f6' }}>
+                            {a.registration_number || '-'}
+                          </span>
+                        </td>
                         <td style={{ padding: '12px 14px', color: 'var(--color-text)', fontWeight: '600', cursor: 'pointer' }} onClick={() => viewApplicantDetail(a)}>{a.name || '-'}</td>
                         <td style={{ padding: '12px 14px', color: 'var(--color-muted)' }}>{a.email || '-'}</td>
                         <td style={{ padding: '12px 14px', color: 'var(--color-muted)' }}>{a.program_choice || a.program || '-'}</td>
