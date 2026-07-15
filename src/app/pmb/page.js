@@ -414,15 +414,24 @@ export default function PMBRegistrationPage() {
       }}></div>
 
       <style>{`
-        /* Overide Navbar Text to remain dark and visible under stay (not sticky) states */
-        header:not(.sticky) .nav-link,
-        header:not(.sticky) .nav-links a {
+        /* Light Mode Specific: Stay Navbar Text remains black and visible */
+        body:not(.dark-mode) header:not(.sticky) .nav-link,
+        body:not(.dark-mode) header:not(.sticky) .nav-links a {
           color: #000000 !important;
           text-shadow: none !important;
         }
-        
-        header:not(.sticky) .dropdown-icon {
+        body:not(.dark-mode) header:not(.sticky) .dropdown-icon {
           color: #000000 !important;
+        }
+
+        /* Dark Mode Specific: Stay & Sticky Navbar Text remains white */
+        body.dark-mode header .nav-link,
+        body.dark-mode header .nav-links a {
+          color: #ffffff !important;
+          text-shadow: none !important;
+        }
+        body.dark-mode header .dropdown-icon {
+          color: #ffffff !important;
         }
 
         header:not(.sticky) .logo h1,
