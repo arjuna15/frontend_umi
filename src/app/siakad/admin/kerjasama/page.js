@@ -90,7 +90,7 @@ export default function KerjasamaPage() {
   let pieGradient = '', cumulative = 0;
   typeData.forEach((d, i) => { const pct = (d.count / pieTotal) * 100; pieGradient += `${d.color} ${cumulative}% ${cumulative + pct}%`; cumulative += pct; if (i < typeData.length - 1) pieGradient += ', '; });
 
-  const filtered = partnerships.filter(p => !search || (p.partner_name || '').toLowerCase().includes(search.toLowerCase()) || (p.mou_number || '').toLowerCase().includes(search.toLowerCase()));
+  const filtered = Array.isArray(partnerships) ? partnerships.filter(p => !search || (p.partner_name || '').toLowerCase().includes(search.toLowerCase()) || (p.mou_number || '').toLowerCase().includes(search.toLowerCase())) : [];
 
   const formFields = [
     { label: 'Nama Mitra', key: 'partner_name', placeholder: 'Nama institusi/perusahaan', span: true },

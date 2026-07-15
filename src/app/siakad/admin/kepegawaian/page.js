@@ -101,7 +101,7 @@ export default function KepegawaianPage() {
   pieData.forEach((d, i) => { const pct = (d.value / pieTotal) * 100; pieGradient += `${d.color} ${cumulative}% ${cumulative + pct}%`; cumulative += pct; if (i < pieData.length - 1) pieGradient += ', '; });
   const maxDeptCount = Math.max(...deptData.map(d => d.count || 0), 1);
 
-  const filtered = employees.filter(e => !search || (e.name || '').toLowerCase().includes(search.toLowerCase()) || (e.nip || '').includes(search));
+  const filtered = Array.isArray(employees) ? employees.filter(e => !search || (e.name || '').toLowerCase().includes(search.toLowerCase()) || (e.nip || '').includes(search)) : [];
   const tabs = [{ key: 'pegawai', label: 'Data Pegawai', icon: 'ph ph-user-list' }, { key: 'kehadiran', label: 'Kehadiran', icon: 'ph ph-calendar-check' }, { key: 'penggajian', label: 'Penggajian', icon: 'ph ph-wallet' }];
 
   const formFields = [
