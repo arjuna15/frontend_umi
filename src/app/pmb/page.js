@@ -463,7 +463,7 @@ export default function PMBRegistrationPage() {
           border-radius: 50px;
           border: 1px solid var(--color-border);
           box-sizing: border-box !important;
-          width: 100% !important;
+          width: fit-content;
         }
         .pmb-step-item {
           display: flex;
