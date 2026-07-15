@@ -292,7 +292,7 @@ export default function DosenPresensiPage() {
                             ) : (
                               <span style={{ background: '#ef4444', color: 'white', padding: '6px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 6px rgba(239,68,68,0.3)' }}>Alpa</span>
                             )}
-                          </td> </td>
+                          </td>
                           <td style={{ padding: '12px 16px' }}>
                             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '4px' , flexWrap: 'wrap'}}>
                               <div style={{ display: 'inline-flex', background: 'rgba(0,0,0,0.1)', borderRadius: '50px', padding: '4px', gap: '4px', border: '1px solid var(--color-border)' }}>
