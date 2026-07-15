@@ -151,11 +151,11 @@ export default function PMBRegistrationPage() {
   };
 
   const btnPrimary = {
-    background: 'linear-gradient(135deg, #4a90e2 0%, #7b61ff 100%)',
+    background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)',
     border: 'none',
     color: 'white',
     padding: '14px 28px',
-    borderRadius: '14px',
+    borderRadius: '50px',
     cursor: 'pointer',
     fontWeight: '700',
     fontSize: '1rem',
@@ -163,7 +163,7 @@ export default function PMBRegistrationPage() {
     alignItems: 'center',
     gap: '10px',
     transition: 'all 0.15s ease',
-    boxShadow: '0 4px 20px rgba(123, 97, 255, 0.25)'
+    boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)'
   };
 
   const stepLabels = [
@@ -179,7 +179,7 @@ export default function PMBRegistrationPage() {
       <style>{`
         .custom-select {
           appearance: none;
-          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%237b61ff%27%20stroke-width%3D%272.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpolyline%20points%3D%276%209%2012%2015%2018%209%27%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E") !important;
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23C41E3A%27%20stroke-width%3D%272.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpolyline%20points%3D%276%209%2012%2015%2018%209%27%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E") !important;
           background-repeat: no-repeat !important;
           background-position: right 16px center !important;
           background-size: 16px !important;
@@ -192,39 +192,20 @@ export default function PMBRegistrationPage() {
         .pmb-card-period:hover {
           transform: translateY(-6px);
           background: ${isDark ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.01)'} !important;
-          border-color: rgba(123, 97, 255, 0.3) !important;
-          box-shadow: ${isDark ? '0 15px 30px rgba(123, 97, 255, 0.15)' : '0 15px 30px rgba(123, 97, 255, 0.08)'} !important;
+          border-color: rgba(196, 30, 58, 0.3) !important;
+          box-shadow: ${isDark ? '0 15px 30px rgba(196, 30, 58, 0.15)' : '0 15px 30px rgba(196, 30, 58, 0.08)'} !important;
         }
         .pmb-step-pill {
           background: ${isDark ? 'rgba(255, 255, 255, 0.02)' : 'rgba(0, 0, 0, 0.02)'};
           border: 1px solid ${isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.06)'};
         }
         input:focus, select:focus, textarea:focus {
-          border-color: #7b61ff !important;
-          box-shadow: 0 0 0 3px rgba(123, 97, 255, 0.15) !important;
+          border-color: #C41E3A !important;
+          box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.25) !important;
         }
       `}</style>
 
-      {/* Premium Glassmorphic Header */}
-      <div style={{ background: isDark ? 'linear-gradient(180deg, rgba(26, 32, 53, 0.6) 0%, rgba(10, 13, 26, 0) 100%)' : 'linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 250, 252, 0) 100%)', backdropFilter: 'blur(10px)', padding: '32px 24px', borderBottom: isDark ? '1px solid rgba(255,255,255,0.05)' : '1px solid rgba(0,0,0,0.05)' }}>
-        <div style={{ maxWidth: '900px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '20px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            <div style={{ background: 'linear-gradient(135deg, #4a90e2 0%, #7b61ff 100%)', width: '50px', height: '50px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(123, 97, 255, 0.3)' }}>
-              <span style={{ fontSize: '1.6rem', fontWeight: '800', color: 'white' }}>U</span>
-            </div>
-            <div>
-              <h2 style={{ fontSize: '1.1rem', fontWeight: '800', color: isDark ? 'white' : '#0f172a', margin: 0, letterSpacing: '1px' }}>UNIVERSITAS MITRA BANGSA</h2>
-              <p style={{ margin: 0, fontSize: '0.8rem', color: isDark ? '#94a3b8' : '#64748b' }}>Portal Penerimaan Mahasiswa Baru Mandiri</p>
-            </div>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.03)', padding: '8px 16px', borderRadius: '20px', border: isDark ? '1px solid rgba(255,255,255,0.05)' : '1px solid rgba(0,0,0,0.05)' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', display: 'inline-block', boxShadow: '0 0 8px #22c55e' }}></span>
-            <span style={{ fontSize: '0.8rem', fontWeight: '600', color: isDark ? '#e2e8f0' : '#475569' }}>Pendaftaran Online Aktif</span>
-          </div>
-        </div>
-      </div>
-
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '40px 24px 80px' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '120px 24px 80px' }}>
         
         {/* Progress Tracker with Premium Styling */}
         {step <= 5 && (
