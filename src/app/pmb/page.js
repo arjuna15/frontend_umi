@@ -159,7 +159,7 @@ export default function PMBRegistrationPage() {
   };
 
   const btnPrimary = {
-    background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+    background: 'linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%)',
     border: 'none',
     color: 'white',
     padding: '14px 28px',
@@ -171,7 +171,7 @@ export default function PMBRegistrationPage() {
     alignItems: 'center',
     gap: '10px',
     transition: 'all 0.15s ease',
-    boxShadow: '0 8px 24px rgba(99, 102, 241, 0.3)'
+    boxShadow: '0 8px 24px rgba(29, 78, 216, 0.3)'
   };
 
   const stepLabels = [
@@ -184,17 +184,31 @@ export default function PMBRegistrationPage() {
 
   return (
     <div style={containerStyle}>
-      {/* Background Ornaments (Grid & Glowing Ambient) */}
+      {/* Background Ornaments (Glowing Ambient) */}
       <div className="siakad-page-header-glow" style={{ opacity: isDark ? 0.6 : 0.25 }}></div>
-      <div className="siakad-page-header-grid"></div>
+      
+      {/* Ornamen Grid Garis Kotak-Kotak (Symmetric 30px Grid Pattern) */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        opacity: isDark ? 0.08 : 0.03,
+        backgroundImage: `
+          linear-gradient(var(--color-text) 1px, transparent 1px),
+          linear-gradient(90deg, var(--color-text) 1px, transparent 1px)
+        `,
+        backgroundSize: '30px 30px',
+        pointerEvents: 'none',
+        zIndex: 0
+      }}></div>
 
       <style>{`
         .custom-select {
-          appearance: none;
-          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2724%27%20height%3D%2724%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%233b82f6%27%20stroke-width%3D%272.5%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpolyline%20points%3D%276%209%2012%2015%2018%209%27%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E") !important;
+          appearance: none !important;
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2712%27%20height%3D%2712%27%20viewBox%3D%270%200%2012%2012%27%3E%3Cpath%20fill%3D%27%233b82f6%27%20d%3D%27M6%208L1%203h10z%27%2F%3E%3C%2Fsvg%3E") !important;
           background-repeat: no-repeat !important;
           background-position: right 22px center !important;
-          background-size: 16px !important;
+          background-size: 12px !important;
+          padding-right: 46px !important;
           cursor: pointer;
         }
         .custom-select option {
@@ -204,8 +218,8 @@ export default function PMBRegistrationPage() {
         .pmb-card-period:hover {
           transform: translateY(-6px);
           background: rgba(255, 255, 255, 0.03) !important;
-          border-color: rgba(99, 102, 241, 0.3) !important;
-          box-shadow: 0 15px 30px rgba(99, 102, 241, 0.15) !important;
+          border-color: rgba(59, 130, 246, 0.3) !important;
+          box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15) !important;
         }
         .pmb-step-pill {
           background: var(--color-surface);
@@ -230,9 +244,9 @@ export default function PMBRegistrationPage() {
                   gap: '8px', 
                   padding: '8px 16px', 
                   borderRadius: '50px', 
-                  background: step === s.num ? 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)' : step > s.num ? 'rgba(34, 197, 94, 0.1)' : 'transparent',
+                  background: step === s.num ? 'linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%)' : step > s.num ? 'rgba(34, 197, 94, 0.1)' : 'transparent',
                   border: step === s.num ? 'none' : '1px solid var(--color-border)',
-                  boxShadow: step === s.num ? '0 4px 12px rgba(99, 102, 241, 0.25)' : 'none'
+                  boxShadow: step === s.num ? '0 4px 12px rgba(29, 78, 216, 0.25)' : 'none'
                 }}>
                   <i className={s.icon} style={{ fontSize: '1rem', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-muted)' }}></i>
                   <span style={{ fontSize: '0.85rem', fontWeight: '800', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-text)' }}>{s.label}</span>
