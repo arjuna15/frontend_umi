@@ -110,7 +110,8 @@ export default function JadwalKalenderPage() {
     // Match recurring weekly classes on this day of week that belong to student's KRS
     const dayWeeklySchedules = schedules.filter(s => {
       const matchDay = parseInt(s.day_of_week) === dayOfWeek;
-      const isMyKrs = studentKrsIds.includes(s.course_id || s.course?.id || s.id);
+      const courseId = s.course_id || s.course?.id;
+      const isMyKrs = studentKrsIds.includes(courseId);
       return matchDay && isMyKrs;
     });
     
@@ -135,8 +136,9 @@ export default function JadwalKalenderPage() {
     dayOverrides.forEach(o => {
       if (o.status === 'swapped' && o.swapped_with_schedule) {
         const sw = o.swapped_with_schedule;
+        const swapCourseId = sw.course_id || sw.course?.id;
         // Check if swap targets a course the student has in KRS
-        if (studentKrsIds.includes(sw.course_id || sw.course?.id || sw.id)) {
+        if (studentKrsIds.includes(swapCourseId)) {
           finalAgenda.push({
             id: sw.id,
             title: sw.course_name || sw.course?.name || 'Kuliah Pengganti',
