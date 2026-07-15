@@ -90,7 +90,7 @@ export default function JadwalPage() {
     fetchCourses();
     fetchClassrooms();
     fetchOverrides();
-  }, [currentDate]);
+  }, [currentDate.getFullYear(), currentDate.getMonth()]);
 
 
 

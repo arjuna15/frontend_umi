@@ -57,7 +57,7 @@ export default function AdminCalendarPage() {
     };
 
     fetchCalendarData();
-  }, [currentDate, router]);
+  }, [currentDate.getFullYear(), currentDate.getMonth(), router]);
 
   const handlePrevMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
