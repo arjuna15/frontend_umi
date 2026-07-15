@@ -90,7 +90,7 @@ export default function RPLPage() {
   ];
 
   const maxMonthCount = Math.max(...monthData.map(m => m.count || 0), 1);
-  const filtered = applications.filter(a => !search || (a.name || a.applicant_name || '').toLowerCase().includes(search.toLowerCase()) || (a.institution || a.origin_institution || '').toLowerCase().includes(search.toLowerCase()));
+  const filtered = Array.isArray(applications) ? applications.filter(a => !search || (a.name || a.applicant_name || '').toLowerCase().includes(search.toLowerCase()) || (a.institution || a.origin_institution || '').toLowerCase().includes(search.toLowerCase())) : [];
 
   const approvalRate = stats.total > 0 ? Math.round((stats.approved / stats.total) * 100) : 0;
 
