@@ -278,10 +278,12 @@ export default function ChatPage() {
                 <div style={{ flex: 1, overflow: 'hidden' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
                     <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: '600', color: 'var(--color-text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{room.name || `Room ${room.id}`}</h4>
-                    <span style={{ fontSize: '0.7rem', color: 'var(--color-muted)', flexShrink: 0 }}>{formatTime(room.last_message_time)}</span>
+                    <span style={{ fontSize: '0.7rem', color: 'var(--color-muted)', flexShrink: 0 }}>{formatTime(room.last_message?.created_at)}</span>
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--color-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1 }}>{room.last_message || 'Belum ada pesan'}</p>
+                    <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--color-muted)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1 }}>
+                      {room.last_message ? `${room.last_message.user ? `${room.last_message.user}: ` : ''}${room.last_message.content}` : 'Belum ada pesan'}
+                    </p>
                     {room.unread_count > 0 && (
                       <span style={{ background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', color: 'white', borderRadius: '10px', padding: '2px 8px', fontSize: '0.7rem', fontWeight: 'bold', flexShrink: 0 }}>{room.unread_count}</span>
                     )}
