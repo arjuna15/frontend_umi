@@ -234,7 +234,7 @@ export default function DosenPresensiPage() {
           maxWidth="1100px"
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap', marginBottom: '20px' }}>
-            <div style={{ fontSize: '0.95rem', color: 'var(--color-muted)', fontWeight: '600' }}>
+            <div style={{ fontSize: '0.95rem', color: 'var(--color-text)', fontWeight: '600' }}>
               Pilih status kehadiran untuk tiap mahasiswa.
             </div>
             <div style={{ position: 'relative' }}>
