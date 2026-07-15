@@ -167,7 +167,7 @@ export default function RosterPage() {
                     background: 'rgba(255,255,255,0.1)',
                     border: '1px solid rgba(255,255,255,0.2)',
                     borderRadius: '50px',
-                    color: 'white',
+                    color: 'var(--color-text)',
                     width: '240px',
                     outline: 'none',
                     fontSize: '0.88rem',

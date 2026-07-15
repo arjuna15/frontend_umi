@@ -385,10 +385,11 @@ export default function DosenGradebookPage() {
                   onClick={() => handleSaveGrades(course.id)}
                   disabled={savingGrades}
                   style={{
-                    background: '#10b981', color: 'white', border: 'none', padding: '10px 24px', 
+                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', padding: '10px 24px', 
                     borderRadius: '50px', cursor: savingGrades ? 'not-allowed' : 'pointer', fontWeight: 'bold',
                     display: 'flex', alignItems: 'center', gap: '8px',
-                    transition: 'all 0.2s'
+                    transition: 'all 0.2s',
+                    boxShadow: '0 8px 20px rgba(16,185,129,0.3)'
                   }}
                 >
                   <i className={savingGrades ? "ph-spinner ph-spin" : "ph-floppy-disk"}></i> {savingGrades ? 'Menyimpan...' : 'Simpan Nilai'}
