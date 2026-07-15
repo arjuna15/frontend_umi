@@ -416,7 +416,7 @@ export default function PMBRegistrationPage() {
       <style>{`
         /* Light Mode Specific: Stay Navbar Text remains black and visible */
         body:not(.dark-mode) header:not(.sticky) .nav-link,
-        body:not(.dark-mode) header:not(.sticky) .nav-links a {
+        body:not(.dark-mode) header:not(.sticky) .nav-links > li > a {
           color: #000000 !important;
           text-shadow: none !important;
         }
@@ -426,7 +426,7 @@ export default function PMBRegistrationPage() {
 
         /* Dark Mode Specific: Stay & Sticky Navbar Text remains white */
         body.dark-mode header .nav-link,
-        body.dark-mode header .nav-links a {
+        body.dark-mode header .nav-links > li > a {
           color: #ffffff !important;
           text-shadow: none !important;
         }
