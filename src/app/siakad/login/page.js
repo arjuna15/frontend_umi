@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
@@ -12,6 +12,11 @@ export default function SiakadLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [showPortalModal, setShowPortalModal] = useState(false);
   const [pendingUser, setPendingUser] = useState(null);
+
+  useEffect(() => {
+    // Paksa tema kembali ke light mode saat masuk halaman login agar teks tidak tidak kelihatan
+    document.documentElement.setAttribute('data-theme', 'light');
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
