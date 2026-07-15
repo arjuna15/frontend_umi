@@ -141,10 +141,10 @@ export default function DosenPresensiPage() {
                 <i className="ph ph-calendar-check"></i>
               </div>
               <div style={{ zIndex: 1, flex: '1 1 200px' }}>
-                <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#10b981', fontWeight: '800' }}>{course.name}</h3>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#059669', fontWeight: '800' }}>{course.name}</h3>
                 <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: 'var(--color-text)', fontWeight: '600', padding: '4px 12px', background: 'var(--glass-bg)', borderRadius: '999px' }}>{course.code} • {course.sks} SKS</span>
               </div>
-              <button onClick={() => { setSelectedCourseId(course.id); setShowSessionModal(true); }} style={{ zIndex: 1, flexShrink: 0, background: '#10b981', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '50px', fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' , flexWrap: 'wrap'}}>
+              <button onClick={() => { setSelectedCourseId(course.id); setShowSessionModal(true); }} style={{ zIndex: 1, flexShrink: 0, background: 'linear-gradient(135deg, #059669 0%, #047857 100%)', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '50px', fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 8px 20px rgba(4, 120, 87, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' , flexWrap: 'wrap'}}>
                 <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Buka Sesi Baru
               </button>
             </div>
@@ -286,7 +286,7 @@ export default function DosenPresensiPage() {
                           </td>
                           <td style={{ padding: '12px 16px', textAlign: 'center' }}>
                             {status === 'present' ? (
-                              <span style={{ background: '#10b981', color: 'white', padding: '6px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 6px rgba(16,185,129,0.3)' }}>Hadir</span>
+                              <span style={{ background: '#059669', color: 'white', padding: '6px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 6px rgba(5,150,105,0.3)' }}>Hadir</span>
                             ) : status === 'excused' ? (
                               <span style={{ background: '#f59e0b', color: 'white', padding: '6px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 6px rgba(245,158,11,0.3)' }}>Izin</span>
                             ) : (
@@ -298,10 +298,10 @@ export default function DosenPresensiPage() {
                               <div style={{ display: 'inline-flex', background: 'rgba(0,0,0,0.1)', borderRadius: '50px', padding: '4px', gap: '4px', border: '1px solid var(--color-border)' }}>
                                 <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} 
                                   style={{ 
-                                    background: status === 'present' ? '#10b981' : 'transparent', 
+                                    background: status === 'present' ? '#059669' : 'transparent', 
                                     color: status === 'present' ? 'white' : 'var(--color-muted)', 
                                     border: 'none', padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', 
-                                    boxShadow: status === 'present' ? '0 2px 6px rgba(16,185,129,0.3)' : 'none',
+                                    boxShadow: status === 'present' ? '0 2px 6px rgba(5,150,105,0.3)' : 'none',
                                     transition: 'all 0.15s'
                                   }}>H</button>
                                 <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'excused')} 
