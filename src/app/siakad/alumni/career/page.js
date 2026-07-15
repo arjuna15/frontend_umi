@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function AlumniCareerPage() {
   const router = useRouter();
@@ -123,13 +124,17 @@ export default function AlumniCareerPage() {
       <div className="siakad-card" style={{ padding: '24px', marginBottom: '24px' }}>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
           <div style={{ position: 'relative', flex: 1, minWidth: '240px' }}>
-            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
-            <input id="input-search-jobs" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Cari posisi, perusahaan, lokasi..." style={{ width: '100%', padding: '12px 14px 12px 40px', fontSize: '0.95rem', borderRadius: '30px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', boxSizing: 'border-box' }} />
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
+            <input id="input-search-jobs" className="siakad-input" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Cari posisi, perusahaan, lokasi..." style={{ paddingLeft: '46px' }} />
           </div>
-          <select id="filter-employment-type" value={filterType} onChange={e => setFilterType(e.target.value)} style={{ padding: '12px 18px', borderRadius: '30px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.9rem', cursor: 'pointer' }}>
-            <option value="">Semua Tipe</option>
-            {types.map(t => <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
-          </select>
+          <CustomSelect
+            value={filterType}
+            onChange={val => setFilterType(val)}
+            options={[
+              { value: '', label: 'Semua Tipe' },
+              ...types.map(t => ({ value: t, label: t.charAt(0).toUpperCase() + t.slice(1) }))
+            ]}
+          />
         </div>
       </div>
 
@@ -210,11 +215,11 @@ export default function AlumniCareerPage() {
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Upload Resume (PDF)</label>
-            <input id="input-resume-file" type="file" accept=".pdf,.doc,.docx" onChange={e => setResumeFile(e.target.files[0] || null)} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)', background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }} />
+            <input id="input-resume-file" className="siakad-input" type="file" accept=".pdf,.doc,.docx" onChange={e => setResumeFile(e.target.files[0] || null)} />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Cover Letter</label>
-            <textarea id="input-cover-letter" value={applyData.cover_letter} onChange={e => setApplyData({ ...applyData, cover_letter: e.target.value })} placeholder="Tuliskan surat lamaran singkat..." rows={6} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)', resize: 'vertical' }} />
+            <textarea id="input-cover-letter" className="siakad-input" value={applyData.cover_letter} onChange={e => setApplyData({ ...applyData, cover_letter: e.target.value })} placeholder="Tuliskan surat lamaran singkat..." rows={6} style={{ resize: 'vertical' }} />
           </div>
         </ModalShell>
       )}

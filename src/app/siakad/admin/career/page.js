@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
+import CustomSelect from '../../components/CustomSelect';
+import CustomDatePicker from '../../components/CustomDatePicker';
 
 export default function CareerCenterPage() {
   const router = useRouter();
@@ -176,99 +178,127 @@ export default function CareerCenterPage() {
           ))}
         </div>
 
-        {tab === 'lowongan' && (<>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
-            <input id="search-career" type="text" placeholder="Cari perusahaan atau posisi..." value={search} onChange={e => setSearch(e.target.value)} style={{ padding: '10px 16px', fontSize: '0.9rem', border: '1px solid var(--color-border)', borderRadius: '10px', background: 'var(--color-bg)', color: 'var(--color-text)', width: '280px' }} />
-            <button id="btn-add-job" onClick={() => { resetForm(); setShowModal(true); }} className="siakad-btn-primary" style={{ padding: '10px 24px' }}><i className="ph ph-plus"></i> Tambah Lowongan</button>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '16px' }}>
-            {filteredJobs.length === 0 ? (
-              <div style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)', gridColumn: '1 / -1' }}>Belum ada lowongan.</div>
-            ) : filteredJobs.map(j => (
-              <div key={j.id} style={{ border: '1px solid var(--color-border)', borderRadius: '14px', padding: '20px', background: 'var(--color-bg)', transition: 'all 0.2s' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-                  <div>
-                    <h4 style={{ margin: '0 0 4px', color: 'var(--color-text)', fontWeight: '700', fontSize: '1rem' }}>{j.position_title || '-'}</h4>
-                    <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>{j.company_name || '-'}</p>
+        {tab === 'lowongan' && (
+          <>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
+              <input id="search-career" className="siakad-input" type="text" placeholder="Cari perusahaan atau posisi..." value={search} onChange={e => setSearch(e.target.value)} style={{ width: '280px' }} />
+              <button id="btn-add-job" onClick={() => { resetForm(); setShowModal(true); }} className="siakad-btn-primary" style={{ padding: '10px 24px' }}><i className="ph ph-plus"></i> Tambah Lowongan</button>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '16px' }}>
+              {filteredJobs.length === 0 ? (
+                <div style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)', gridColumn: '1 / -1' }}>Belum ada lowongan.</div>
+              ) : filteredJobs.map(j => (
+                <div key={j.id} style={{ border: '1px solid var(--color-border)', borderRadius: '14px', padding: '20px', background: 'var(--color-bg)', transition: 'all 0.2s' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+                    <div>
+                      <h4 style={{ margin: '0 0 4px', color: 'var(--color-text)', fontWeight: '700', fontSize: '1rem' }}>{j.position_title || '-'}</h4>
+                      <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>{j.company_name || '-'}</p>
+                    </div>
+                    {jobBadge(j.status || 'open')}
                   </div>
-                  {jobBadge(j.status || 'open')}
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '14px' }}>
-                  {j.location && <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: 'var(--color-muted)' }}><i className="ph ph-map-pin"></i>{j.location}</span>}
-                  {typeBadge(j.employment_type || 'Full-time')}
-                  {j.salary_range && <span style={{ fontSize: '0.8rem', color: 'var(--color-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}><i className="ph ph-money"></i>{j.salary_range}</span>}
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px', borderTop: '1px solid var(--color-border)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <i className="ph ph-users" style={{ color: 'var(--color-muted)' }}></i>
-                    <span style={{ fontSize: '0.82rem', color: 'var(--color-muted)' }}>{j.applicant_count || 0} pelamar</span>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '14px' }}>
+                    {j.location && <span style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', color: 'var(--color-muted)' }}><i className="ph ph-map-pin"></i>{j.location}</span>}
+                    {typeBadge(j.employment_type || 'Full-time')}
+                    {j.salary_range && <span style={{ fontSize: '0.8rem', color: 'var(--color-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}><i className="ph ph-money"></i>{j.salary_range}</span>}
                   </div>
-                  <div style={{ display: 'flex', gap: '6px' }}>
-                    <button id={`btn-edit-job-${j.id}`} onClick={() => openEdit(j)} style={{ background: 'rgba(59,130,246,0.1)', color: '#3b82f6', border: 'none', padding: '6px 10px', borderRadius: '8px', cursor: 'pointer' }}><i className="ph ph-pencil-simple"></i></button>
-                    <button id={`btn-del-job-${j.id}`} onClick={() => deleteJob(j.id)} style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: 'none', padding: '6px 10px', borderRadius: '8px', cursor: 'pointer' }}><i className="ph ph-trash"></i></button>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px', borderTop: '1px solid var(--color-border)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <i className="ph ph-users" style={{ color: 'var(--color-muted)' }}></i>
+                      <span style={{ fontSize: '0.82rem', color: 'var(--color-muted)' }}>{j.applicant_count || 0} pelamar</span>
+                    </div>
+                    <div style={{ display: 'flex', gap: '6px' }}>
+                      <button id={`btn-edit-job-${j.id}`} onClick={() => openEdit(j)} style={{ background: 'rgba(59,130,246,0.1)', color: '#3b82f6', border: 'none', padding: '6px 10px', borderRadius: '8px', cursor: 'pointer' }}><i className="ph ph-pencil-simple"></i></button>
+                      <button id={`btn-del-job-${j.id}`} onClick={() => deleteJob(j.id)} style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: 'none', padding: '6px 10px', borderRadius: '8px', cursor: 'pointer' }}><i className="ph ph-trash"></i></button>
+                    </div>
                   </div>
+                  {j.deadline && <p style={{ margin: '8px 0 0', fontSize: '0.78rem', color: 'var(--color-muted)' }}><i className="ph ph-calendar" style={{ marginRight: '4px' }}></i>Deadline: {j.deadline}</p>}
                 </div>
-                {j.deadline && <p style={{ margin: '8px 0 0', fontSize: '0.78rem', color: 'var(--color-muted)' }}><i className="ph ph-calendar" style={{ marginRight: '4px' }}></i>Deadline: {j.deadline}</p>}
-              </div>
-            ))}
-          </div>
-        </>)}
+              ))}
+            </div>
+          </>
+        )}
 
-        {tab === 'pelamar' && (<>
-          <div style={{ marginBottom: '20px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Pilih Lowongan</label>
-            <select id="select-job-applicants" value={selectedJob || ''} onChange={e => { setSelectedJob(e.target.value); fetchApplicants(e.target.value); }} style={{ padding: '10px 14px', fontSize: '0.9rem', border: '1px solid var(--color-border)', borderRadius: '10px', background: 'var(--color-bg)', color: 'var(--color-text)', width: '100%', maxWidth: '400px' }}>
-              <option value="">-- Pilih Lowongan --</option>
-              {jobs.map(j => <option key={j.id} value={j.id}>{j.position_title} - {j.company_name}</option>)}
-            </select>
-          </div>
-          <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-              <thead><tr>
-                {['Nama', 'Email', 'No. HP', 'Tanggal Lamar', 'Status', 'Aksi'].map(h => (
-                  <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.8rem', fontWeight: '700', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '2px solid var(--color-border)' }}>{h}</th>
-                ))}
-              </tr></thead>
-              <tbody>
-                {applicants.length === 0 ? (
-                  <tr><td colSpan={6} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>{selectedJob ? 'Belum ada pelamar.' : 'Pilih lowongan terlebih dahulu.'}</td></tr>
-                ) : applicants.map(a => (
-                  <tr key={a.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                    <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{a.name || a.applicant_name || '-'}</td>
-                    <td style={{ padding: '14px 16px', color: 'var(--color-muted)' }}>{a.email || '-'}</td>
-                    <td style={{ padding: '14px 16px', color: 'var(--color-muted)' }}>{a.phone || '-'}</td>
-                    <td style={{ padding: '14px 16px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{a.applied_at || a.created_at || '-'}</td>
-                    <td style={{ padding: '14px 16px' }}>{appBadge(a.status || 'pending')}</td>
-                    <td style={{ padding: '14px 16px' }}>
-                      <select id={`select-status-${a.id}`} value={a.status || 'pending'} onChange={e => updateAppStatus(a.id, e.target.value)} style={{ padding: '6px 10px', fontSize: '0.82rem', border: '1px solid var(--color-border)', borderRadius: '8px', background: 'var(--color-bg)', color: 'var(--color-text)', cursor: 'pointer' }}>
-                        {['pending', 'reviewed', 'shortlisted', 'accepted', 'rejected'].map(s => <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
-                      </select>
-                    </td>
+        {tab === 'pelamar' && (
+          <>
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Pilih Lowongan</label>
+              <CustomSelect
+                value={selectedJob || ''}
+                onChange={val => { setSelectedJob(val); fetchApplicants(val); }}
+                options={[
+                  { value: '', label: '-- Pilih Lowongan --' },
+                  ...jobs.map(j => ({ value: j.id.toString(), label: `${j.position_title} - ${j.company_name}` }))
+                ]}
+              />
+            </div>
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr>
+                    {['Nama', 'Email', 'No. HP', 'Tanggal Lamar', 'Status', 'Aksi'].map(h => (
+                      <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.8rem', fontWeight: '700', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '2px solid var(--color-border)' }}>{h}</th>
+                    ))}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </>)}
+                </thead>
+                <tbody>
+                  {applicants.length === 0 ? (
+                    <tr><td colSpan={6} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>{selectedJob ? 'Belum ada pelamar.' : 'Pilih lowongan terlebih dahulu.'}</td></tr>
+                  ) : applicants.map(a => (
+                    <tr key={a.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                      <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{a.name || a.applicant_name || '-'}</td>
+                      <td style={{ padding: '14px 16px', color: 'var(--color-muted)' }}>{a.email || '-'}</td>
+                      <td style={{ padding: '14px 16px', color: 'var(--color-muted)' }}>{a.phone || '-'}</td>
+                      <td style={{ padding: '14px 16px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{a.applied_at || a.created_at || '-'}</td>
+                      <td style={{ padding: '14px 16px' }}>{appBadge(a.status || 'pending')}</td>
+                      <td style={{ padding: '14px 16px' }}>
+                        <CustomSelect
+                          value={a.status || 'pending'}
+                          onChange={val => updateAppStatus(a.id, val)}
+                          options={[
+                            { value: 'pending', label: 'Pending' },
+                            { value: 'reviewed', label: 'Reviewed' },
+                            { value: 'shortlisted', label: 'Shortlisted' },
+                            { value: 'accepted', label: 'Accepted' },
+                            { value: 'rejected', label: 'Rejected' }
+                          ]}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
       </div>
 
       {showModal && (
-        <ModalShell title={editId ? 'Edit Lowongan' : 'Tambah Lowongan'} onClose={() => setShowModal(false)} maxWidth="700px" footer={<>
-          <button id="btn-cancel-job" onClick={() => setShowModal(false)} style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-          <button id="btn-save-job" onClick={saveJob} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : editId ? 'Perbarui' : 'Tambah'}</button>
-        </>}>
+        <ModalShell title={editId ? 'Edit Lowongan' : 'Tambah Lowongan'} onClose={() => setShowModal(false)} maxWidth="700px" footer={
+          <>
+            <button id="btn-cancel-job" onClick={() => setShowModal(false)} style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+            <button id="btn-save-job" onClick={saveJob} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : editId ? 'Perbarui' : 'Tambah'}</button>
+          </>
+        }>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
             {formFields.map(f => (
               <div key={f.key} style={{ marginBottom: '4px', gridColumn: f.span ? 'span 2' : undefined }}>
                 <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
                 {f.type === 'select' ? (
-                  <select id={`input-job-${f.key}`} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }}>
-                    {f.options.map(o => <option key={o} value={o}>{o}</option>)}
-                  </select>
+                  <CustomSelect
+                    value={formData[f.key]}
+                    onChange={val => setFormData({ ...formData, [f.key]: val })}
+                    options={f.options.map(o => ({ value: o, label: o }))}
+                  />
+                ) : f.type === 'date' ? (
+                  <CustomDatePicker
+                    value={formData[f.key]}
+                    onChange={val => setFormData({ ...formData, [f.key]: val })}
+                    placeholder="Pilih deadline..."
+                  />
                 ) : f.type === 'textarea' ? (
-                  <textarea id={`input-job-${f.key}`} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder || ''} rows={3} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)', resize: 'vertical' }} />
+                  <textarea id={`input-job-${f.key}`} className="siakad-input" value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder || ''} rows={3} style={{ resize: 'vertical' }} />
                 ) : (
-                  <input id={`input-job-${f.key}`} type={f.type || 'text'} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder || ''} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+                  <input id={`input-job-${f.key}`} className="siakad-input" type={f.type || 'text'} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder || ''} />
                 )}
               </div>
             ))}
