@@ -3,159 +3,160 @@ import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { getPortalRoot } from './portalRoot';
 
-export default function CustomSelect({ name, options, value, onChange, placeholder = "Pilih...", disabled = false, style = {} }) {
+export default function CustomSelect({ value, onChange, options, placeholder = "Pilih opsi...", disabled = false, style = {} }) {
   const [isOpen, setIsOpen] = useState(false);
   const [coords, setCoords] = useState(null);
   const [mounted, setMounted] = useState(false);
   const triggerRef = useRef(null);
 
-  // Ensure we're mounted on client before using portals
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Close on outside click
+  // Close dropdown on outside click
   useEffect(() => {
     if (!isOpen) return;
     function handleClickOutside(e) {
       if (triggerRef.current && triggerRef.current.contains(e.target)) return;
+      const selectPortal = document.getElementById('siakad-select-portal');
+      if (selectPortal && selectPortal.contains(e.target)) return;
       setIsOpen(false);
     }
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
-  // Update coords when open and handle scroll/resize positioning
+  // Update coords to align with the trigger button position
   useEffect(() => {
     if (!isOpen || !triggerRef.current) return;
-    
-    const updateCoords = () => {
+    const updatePosition = () => {
+      if (!triggerRef.current) return;
       const rect = triggerRef.current.getBoundingClientRect();
       setCoords({
-        top: rect.bottom + window.scrollY + 4,
+        top: rect.bottom + window.scrollY + 6,
         left: rect.left + window.scrollX,
         width: rect.width,
       });
     };
-
-    updateCoords();
-    
-    // Capture scroll events at the document level
-    window.addEventListener('scroll', updateCoords, true);
-    window.addEventListener('resize', updateCoords);
-
+    updatePosition();
+    window.addEventListener('resize', updatePosition);
+    window.addEventListener('scroll', updatePosition);
     return () => {
-      window.removeEventListener('scroll', updateCoords, true);
-      window.removeEventListener('resize', updateCoords);
+      window.removeEventListener('resize', updatePosition);
+      window.removeEventListener('scroll', updatePosition);
     };
   }, [isOpen]);
 
   const handleToggle = () => {
     if (disabled) return;
-    if (!isOpen && triggerRef.current) {
-      const rect = triggerRef.current.getBoundingClientRect();
-      setCoords({
-        top: rect.bottom + window.scrollY + 4,
-        left: rect.left + window.scrollX,
-        width: rect.width,
-      });
-    }
     setIsOpen(prev => !prev);
+  };
+
+  const handleSelectOption = (val) => {
+    onChange(val);
+    setIsOpen(false);
   };
 
   const selectedOption = options.find(opt => opt.value === value);
 
-  const dropdown = coords && isOpen && (
+  const dropdown = isOpen && coords && (
     <div
+      id="siakad-select-portal"
       style={{
         position: 'absolute',
-        top: coords.top,
-        left: coords.left,
-        width: coords.width,
-        zIndex: 2000000,
-        background: 'var(--color-bg)',
+        top: `${coords.top}px`,
+        left: `${coords.left}px`,
+        width: `${coords.width}px`,
+        zIndex: 9999999,
+        background: 'var(--color-surface)',
         border: '1px solid var(--color-border)',
-        borderRadius: '12px',
-        boxShadow: '0 10px 25px -5px rgba(0,0,0,0.15), 0 8px 10px -6px rgba(0,0,0,0.1)',
+        borderRadius: '20px',
+        boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
         overflow: 'hidden',
+        padding: '8px',
+        backdropFilter: 'blur(30px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(30px) saturate(180%)',
+        animation: 'csSelectFadeIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
       }}
     >
       <style>{`
-        @keyframes csDropIn {
-          from { opacity: 0; transform: translateY(-6px); }
+        @keyframes csSelectFadeIn {
+          from { opacity: 0; transform: translateY(-8px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        .siakad-select-option {
+          width: 100%;
+          padding: 12px 18px;
+          border: none;
+          background: transparent;
+          color: var(--color-text);
+          font-size: 0.92rem;
+          text-align: left;
+          cursor: pointer;
+          border-radius: 50px;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-weight: 500;
+        }
+        .siakad-select-option:hover {
+          background: rgba(59, 130, 246, 0.15) !important;
+          color: #3b82f6 !important;
+        }
+        .siakad-select-option.active {
+          background: linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%) !important;
+          color: white !important;
+        }
       `}</style>
-      <div style={{ maxHeight: '132px', overflowY: 'auto', padding: '8px', animation: 'csDropIn 0.15s ease-out' }}>
-        {options.map((opt, idx) => (
-          <div
-            key={idx}
-            onMouseDown={(e) => {
-              e.preventDefault();
-              onChange(opt.value);
-              setIsOpen(false);
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = opt.value === value ? 'rgba(59,130,246,0.15)' : 'var(--glass-bg)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = opt.value === value ? 'rgba(59,130,246,0.1)' : 'transparent'; }}
-            style={{
-              padding: '10px 14px',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              background: opt.value === value ? 'rgba(59,130,246,0.1)' : 'transparent',
-              color: opt.value === value ? '#3b82f6' : 'var(--color-text)',
-              fontWeight: opt.value === value ? '600' : '500',
-              userSelect: 'none',
-            }}
+      {options.map((opt) => {
+        const isActive = opt.value === value;
+        return (
+          <button
+            key={opt.value}
+            type="button"
+            className={`siakad-select-option ${isActive ? 'active' : ''}`}
+            onClick={() => handleSelectOption(opt.value)}
           >
-            {opt.icon && <i className={opt.icon} style={{ fontSize: '1.1rem' }} />}
-            {opt.label}
-            {opt.value === value && <i className="ph ph-check" style={{ marginLeft: 'auto', color: '#3b82f6' }} />}
-          </div>
-        ))}
-      </div>
+            <span>{opt.label}</span>
+            {isActive && <i className="ph-bold ph-check" style={{ color: 'white' }}></i>}
+          </button>
+        );
+      })}
     </div>
   );
 
   return (
-    <div ref={triggerRef} style={{ position: 'relative', width: '100%', ...style }}>
-      {name && <input type="hidden" name={name} value={value || ''} />}
-
-      {/* Trigger */}
-      <div
+    <div style={{ position: 'relative', ...style }}>
+      <button
+        ref={triggerRef}
+        type="button"
         onClick={handleToggle}
-        className="siakad-input"
+        disabled={disabled}
         style={{
+          width: '100%',
           display: 'flex',
-          justifyContent: 'space-between',
           alignItems: 'center',
-          cursor: disabled ? 'not-allowed' : 'pointer',
-          transition: 'all 0.2s ease',
-          fontWeight: '500',
+          justifyContent: 'space-between',
+          padding: '12px 22px',
+          borderRadius: '50px',
+          border: '1px solid var(--color-border)',
+          background: 'var(--color-bg)',
+          color: value ? 'var(--color-text)' : 'var(--color-muted)',
           fontSize: '0.95rem',
-          userSelect: 'none',
-          opacity: disabled ? 0.6 : 1,
-          border: isOpen ? '1px solid rgba(0, 120, 255, 0.5) !important' : undefined,
-          boxShadow: isOpen ? 'inset 0 3px 8px rgba(0,0,0,0.12), 0 0 0 3px rgba(0, 120, 255, 0.15) !important' : undefined
+          fontWeight: value ? '600' : 'normal',
+          cursor: disabled ? 'not-allowed' : 'pointer',
+          textAlign: 'left',
+          outline: 'none',
+          transition: 'all 0.2s ease-out',
+          boxShadow: isOpen ? '0 0 0 3px rgba(59, 130, 246, 0.15), inset 0 3px 8px rgba(0, 0, 0, 0.12)' : 'inset 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(0, 0, 0, 0.04)',
+          borderColor: isOpen ? '#3b82f6' : 'var(--color-border)',
         }}
       >
-        <span style={{ color: selectedOption ? 'var(--color-text)' : 'var(--color-muted)' }}>
-          {selectedOption ? selectedOption.label : placeholder}
-        </span>
-        <i
-          className="ph ph-caret-down"
-          style={{
-            color: 'var(--color-text)',
-            transition: 'transform 0.2s',
-            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-            display: 'inline-block',
-          }}
-        />
-      </div>
+        <span>{selectedOption ? selectedOption.label : placeholder}</span>
+        <i className="ph-bold ph-caret-down" style={{ fontSize: '1rem', color: isOpen ? '#3b82f6' : 'var(--color-muted)', transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'none' }} />
+      </button>
 
-      {/* Portal: renders dropdown directly on document.body */}
       {mounted && (() => {
         const portalRoot = getPortalRoot();
         return portalRoot && createPortal(dropdown, portalRoot);

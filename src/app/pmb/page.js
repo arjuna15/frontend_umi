@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
+import CustomSelect from '../siakad/components/CustomSelect';
 
 export default function PMBRegistrationPage() {
   const { theme } = useTheme();
@@ -345,11 +346,15 @@ export default function PMBRegistrationPage() {
               </div>
               <div>
                 <label style={labelStyle}>Jenis Kelamin</label>
-                <select value={biodata.gender} onChange={e => setBiodata({ ...biodata, gender: e.target.value })} className="custom-select" style={inputStyle}>
-                  <option value="">Pilih jenis kelamin</option>
-                  <option value="L">Laki-laki</option>
-                  <option value="P">Perempuan</option>
-                </select>
+                <CustomSelect 
+                  value={biodata.gender} 
+                  onChange={val => setBiodata({ ...biodata, gender: val })} 
+                  placeholder="Pilih jenis kelamin" 
+                  options={[
+                    { value: 'L', label: 'Laki-laki' },
+                    { value: 'P', label: 'Perempuan' }
+                  ]}
+                />
               </div>
               <div>
                 <label style={labelStyle}>Tempat Lahir</label>
@@ -365,14 +370,18 @@ export default function PMBRegistrationPage() {
               </div>
               <div>
                 <label style={labelStyle}>Pilihan Program Studi</label>
-                <select value={biodata.program_choice} onChange={e => setBiodata({ ...biodata, program_choice: e.target.value })} className="custom-select" style={inputStyle}>
-                  <option value="">Pilih Program Studi</option>
-                  <option value="Manajemen S1">S1 Manajemen</option>
-                  <option value="Sistem Informasi S1">S1 Sistem Informasi</option>
-                  <option value="Ilmu Komputer S1">S1 Ilmu Komputer</option>
-                  <option value="Hukum S1">S1 Hukum</option>
-                  <option value="Magister Manajemen S2">S2 Magister Manajemen</option>
-                </select>
+                <CustomSelect
+                  value={biodata.program_choice}
+                  onChange={val => setBiodata({ ...biodata, program_choice: val })}
+                  placeholder="Pilih Program Studi"
+                  options={[
+                    { value: 'Manajemen S1', label: 'S1 Manajemen' },
+                    { value: 'Sistem Informasi S1', label: 'S1 Sistem Informasi' },
+                    { value: 'Ilmu Komputer S1', label: 'S1 Ilmu Komputer' },
+                    { value: 'Hukum S1', label: 'S1 Hukum' },
+                    { value: 'Magister Manajemen S2', label: 'S2 Magister Manajemen' }
+                  ]}
+                />
               </div>
             </div>
             
