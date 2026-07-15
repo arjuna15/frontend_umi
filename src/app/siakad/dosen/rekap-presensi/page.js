@@ -83,7 +83,8 @@ export default function RekapPresensiPage() {
           <i className="ph ph-chart-bar" style={{ fontSize: '4rem', display: 'block', marginBottom: '16px', opacity: 0.3 }}></i>
           <p style={{ margin: 0, fontSize: '1.1rem' }}>Belum ada data presensi untuk ditampilkan.</p>
         </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start' }}>
+      ) : (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start' }}>
           {/* Course Selector */}
           <div className="siakad-card stagger-1" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
