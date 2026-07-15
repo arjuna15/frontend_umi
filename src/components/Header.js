@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 const mockSearchData = [
   { title: "Berita & Pengumuman", url: "/berita", type: "Halaman" },
   { title: "Profil Kampus", url: "/profil", type: "Halaman" },
-  { title: "Pendaftaran Mahasiswa Baru (PMB)", url: "https://pmb.umiba.ac.id/", type: "Link Luar" },
+  { title: "Pendaftaran Mahasiswa Baru (PMB)", url: "/pmb", type: "Link Luar" },
   { title: "Program Studi Magister Manajemen", url: "/prodi-magister", type: "S2" },
   { title: "Program Studi Manajemen", url: "/prodi-manajemen", type: "S1" },
   { title: "Program Studi Hukum", url: "/prodi-hukum", type: "S1" },
@@ -105,7 +105,7 @@ export default function Header() {
                <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.9)', fontWeight: '600', letterSpacing: '0.5px', whiteSpace: 'nowrap' }}>Gelombang 1 Dibuka</span>
              </div>
            </div>
-           <a href="https://pmb.umiba.ac.id/" target="_blank" rel="noreferrer" className="btn-daftar-top" style={{ 
+           <a href="/pmb" className="btn-daftar-top" style={{ 
              background: '#ffffff', color: '#B91C1C', padding: '6px 16px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '800', marginLeft: 'auto', transition: 'all 0.3s', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0
            }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}>
              <span className="d-none-mobile">DAFTAR SEKARANG</span>
@@ -333,7 +333,7 @@ export default function Header() {
         <a href="#" className={`lang-btn ${lang === 'id' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); changeLang('id'); }}>ID</a>
         <a href="#" className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); changeLang('en'); }}>EN</a>
       </div>
-      <a href="https://pmb.umiba.ac.id/" target="_blank" className="btn btn-primary d-none-mobile">{t('nav.daftar_sekarang')}</a>
+      <a href="/pmb" className="btn btn-primary d-none-mobile">{t('nav.daftar_sekarang')}</a>
       <button className="theme-toggle" aria-label="Toggle Theme" onClick={toggleTheme}>
         <i className={`ph-bold ${theme === 'light' ? 'ph-moon' : 'ph-sun'}`}></i>
       </button>

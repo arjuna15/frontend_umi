@@ -91,7 +91,7 @@ export default function Home() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <a href="https://pmb.umiba.ac.id/" target="_blank" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 20px rgba(255, 255, 255, 0.3)', transition: 'all 0.3s ease' }}>
+            <a href="/pmb" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 20px rgba(255, 255, 255, 0.3)', transition: 'all 0.3s ease' }}>
               {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
             </a>
             <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
@@ -210,7 +210,7 @@ export default function Home() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <a href="https://pmb.umiba.ac.id/" target="_blank" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 20px rgba(255, 255, 255, 0.3)', transition: 'all 0.3s ease' }}>
+            <a href="/pmb" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 20px rgba(255, 255, 255, 0.3)', transition: 'all 0.3s ease' }}>
               {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
             </a>
             <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
@@ -463,7 +463,7 @@ export default function Home() {
         <p>{t("home.penerimaan_desc")}</p>
       </div>
       <div className="flex-center" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
-        <a href="https://pmb.umiba.ac.id/" target="_blank" className="btn btn-primary">{t("home.daftar_online")}</a>
+        <a href="/pmb" className="btn btn-primary">{t("home.daftar_online")}</a>
         <a href="https://wa.me/62811870114" target="_blank" className="btn btn-glass">{t("home.whatsapp_kami")}</a>
       </div>
     </div>

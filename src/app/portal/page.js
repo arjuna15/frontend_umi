@@ -45,7 +45,7 @@ export default function PortalGateway() {
       title: 'Portal PMB',
       desc: 'Pendaftaran Mahasiswa Baru dan Informasi Penerimaan UMIBA.',
       icon: 'ph-user-plus',
-      link: 'https://pmb.umiba.ac.id/',
+      link: '/pmb',
       color: '#B91C1C' // Red
     }
   ];
