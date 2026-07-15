@@ -341,9 +341,9 @@ export default function PMBRegistrationPage() {
           color: var(--color-text) !important;
         }
         
-        /* Language switcher active state stays white, inactive becomes black under stay state */
+        /* Language switcher active and inactive labels stay white under stay state */
         header:not(.sticky) .lang-switch .lang-btn:not(.active) {
-          color: #000000 !important;
+          color: #ffffff !important;
           text-shadow: none !important;
         }
         header:not(.sticky) .lang-switch .lang-btn.active {
