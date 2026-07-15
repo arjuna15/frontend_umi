@@ -128,7 +128,7 @@ export default function KaprodiKalenderPage() {
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Kalender Akademik</h1>
               <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola jadwal kegiatan akademik untuk program studi Anda.</p>
             </div>
-            <button onClick={openAddModal} style={{ background: '#3b82f6', color: 'white', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)' , flexWrap: 'wrap'}}>
+            <button onClick={openAddModal} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', padding: '10px 24px', borderRadius: '50px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(196, 30, 58, 0.3)' , flexWrap: 'wrap'}}>
               <i className="ph ph-calendar-plus" style={{ fontSize: '1.2rem' }}></i> Tambah Jadwal
             </button>
           </div>
@@ -155,16 +155,17 @@ export default function KaprodiKalenderPage() {
                   <td style={{ padding: '16px', color: 'var(--color-text)' }}>{formatDate(ev.endDate)}</td>
                   <td style={{ padding: '16px' }}>
                     <span className="siakad-badge" style={{ 
-                      background: ev.type === 'Ujian' ? 'rgba(239, 68, 68, 0.1)' : ev.type === 'Dosen' ? 'rgba(139, 92, 246, 0.1)' : 'rgba(59, 130, 246, 0.1)', 
-                      color: ev.type === 'Ujian' ? '#ef4444' : ev.type === 'Dosen' ? '#8b5cf6' : '#3b82f6' 
+                      background: ev.type === 'Ujian' ? 'rgba(239, 68, 68, 0.15)' : ev.type === 'Dosen' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(196, 30, 58, 0.15)', 
+                      color: ev.type === 'Ujian' ? '#ef4444' : ev.type === 'Dosen' ? '#f59e0b' : '#C41E3A',
+                      borderRadius: '50px', padding: '4px 12px'
                     }}>
                       {ev.type}
                     </span>
                   </td>
                   <td style={{ padding: '16px' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
-                      <button onClick={() => { setEditFormData(ev); setIsEditModalOpen(true); }} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0 }}><i className="ph ph-pencil-simple"></i></button>
-                      <button onClick={() => handleDelete(ev.id)} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0 }}><i className="ph ph-trash"></i></button>
+                      <button onClick={() => { setEditFormData(ev); setIsEditModalOpen(true); }} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#3b82f6', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-pencil-simple"></i></button>
+                      <button onClick={() => handleDelete(ev.id)} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#ef4444', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-trash"></i></button>
                     </div>
                   </td>
                 </tr>
@@ -181,8 +182,8 @@ export default function KaprodiKalenderPage() {
           onClose={() => setIsEditModalOpen(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="jadwal-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan</button>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="jadwal-form" style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>Simpan</button>
             </>
           )}
         >

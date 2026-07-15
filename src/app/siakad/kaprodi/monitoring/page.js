@@ -128,17 +128,17 @@ export default function KaprodiMonitoring() {
                   </td>
                   <td>
                     {course.materials?.length >= 2 ? (
-                      <span className="siakad-badge" style={{ background: '#dcfce7', color: '#166534' }}>Lancar</span>
+                      <span className="siakad-badge" style={{ background: 'rgba(5, 150, 105, 0.15)', color: '#059669', borderRadius: '50px', padding: '4px 12px' }}>Lancar</span>
                     ) : course.materials?.length > 0 ? (
-                      <span className="siakad-badge" style={{ background: '#fef3c7', color: '#b45309' }}>Kurang Aktif</span>
+                      <span className="siakad-badge" style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', borderRadius: '50px', padding: '4px 12px' }}>Kurang Aktif</span>
                     ) : (
-                      <span className="siakad-badge" style={{ background: '#fee2e2', color: '#b91c1c' }}>Kosong</span>
+                      <span className="siakad-badge" style={{ background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', borderRadius: '50px', padding: '4px 12px' }}>Kosong</span>
                     )}
                   </td>
                   <td style={{ textAlign: 'center' }}>
                     <button 
                       onClick={() => setSelectedCourse(course)}
-                      style={{ background: 'transparent', border: '1px solid #3b82f6', color: '#3b82f6', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem' }}
+                      style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '8px 18px', borderRadius: '50px', cursor: 'pointer', fontWeight: 700, fontSize: '0.85rem', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}
                     >
                       Lihat BAP
                     </button>

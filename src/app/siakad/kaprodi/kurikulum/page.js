@@ -155,7 +155,7 @@ export default function KaprodiKurikulumPage() {
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Kurikulum</h1>
               <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola struktur mata kuliah dan sebaran SKS per semester ({userProdi || 'Belum tersedia'}).</p>
             </div>
-            <button onClick={openAddModal} style={{ background: '#3b82f6', color: 'white', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)' , flexWrap: 'wrap'}}>
+            <button onClick={openAddModal} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', padding: '10px 24px', borderRadius: '50px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(196, 30, 58, 0.3)' , flexWrap: 'wrap'}}>
               <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Tambah MK
             </button>
           </div>
@@ -163,13 +163,13 @@ export default function KaprodiKurikulumPage() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '24px' }}>
-        <div className="siakad-card" style={{ padding: '24px', borderLeft: '4px solid #3b82f6' }}>
-          <p style={{ margin: '0 0 8px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Mata Kuliah</p>
-          <h2 style={{ margin: 0, fontSize: '1.8rem' }}>{courses.length}</h2>
+        <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+          <p style={{ margin: '0 0 8px 0', color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Mata Kuliah</p>
+          <h2 style={{ margin: 0, fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)' }}>{courses.length}</h2>
         </div>
-        <div className="siakad-card" style={{ padding: '24px', borderLeft: '4px solid #10b981' }}>
-          <p style={{ margin: '0 0 8px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total SKS Kurikulum</p>
-          <h2 style={{ margin: 0, fontSize: '1.8rem' }}>{courses.reduce((acc, c) => acc + parseInt(c.sks), 0)} SKS</h2>
+        <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+          <p style={{ margin: '0 0 8px 0', color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total SKS Kurikulum</p>
+          <h2 style={{ margin: 0, fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)' }}>{courses.reduce((acc, c) => acc + parseInt(c.sks), 0)} SKS</h2>
         </div>
       </div>
 
@@ -196,12 +196,12 @@ export default function KaprodiKurikulumPage() {
                   <td style={{ padding: '16px' }}>{c.sks} SKS</td>
                   <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{c.dosen?.name || 'Belum diplot'}</td>
                   <td style={{ padding: '16px' }}>
-                    <span className="siakad-badge" style={{ background: c.type === 'Wajib' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(245, 158, 11, 0.1)', color: c.type === 'Wajib' ? '#3b82f6' : '#f59e0b' }}>{c.type}</span>
+                    <span className="siakad-badge" style={{ background: c.type === 'Wajib' ? 'rgba(196, 30, 58, 0.15)' : 'rgba(245, 158, 11, 0.15)', color: c.type === 'Wajib' ? '#C41E3A' : '#f59e0b', borderRadius: '50px', padding: '4px 12px' }}>{c.type}</span>
                   </td>
                   <td style={{ padding: '16px' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
-                      <button onClick={() => { setEditFormData(c); setIsEditModalOpen(true); }} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0 }}><i className="ph ph-pencil-simple"></i></button>
-                      <button onClick={() => handleDelete(c.id)} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0 }}><i className="ph ph-trash"></i></button>
+                      <button onClick={() => { setEditFormData(c); setIsEditModalOpen(true); }} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#3b82f6', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-pencil-simple"></i></button>
+                      <button onClick={() => handleDelete(c.id)} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#ef4444', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-trash"></i></button>
                     </div>
                   </td>
                 </tr>
@@ -218,8 +218,8 @@ export default function KaprodiKurikulumPage() {
           onClose={() => setIsEditModalOpen(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="kurikulum-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan</button>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="kurikulum-form" style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>Simpan</button>
             </>
           )}
         >

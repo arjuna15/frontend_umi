@@ -78,8 +78,8 @@ export default function KaprodiReports() {
       </div>
 
       <div className="siakad-card stagger-1" style={{ padding: '40px', textAlign: 'center', margin: '0 auto' }}>
-        <div style={{ width: '80px', height: '80px', background: 'var(--glass-bg)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto', flexShrink: 0 }}>
-          <i className="ph ph-file-xls" style={{ fontSize: '3rem', color: '#ef4444' }}></i>
+        <div style={{ width: '80px', height: '80px', background: 'rgba(196, 30, 58, 0.15)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto', flexShrink: 0 }}>
+          <i className="ph ph-file-xls" style={{ fontSize: '3rem', color: '#C41E3A' }}></i>
         </div>
 
         <h3 style={{ margin: '0 0 10px 0', color: 'var(--color-text)' }}>Generate Laporan Komprehensif</h3>
@@ -98,39 +98,40 @@ export default function KaprodiReports() {
               { id: 'std4', title: 'Standar 4: SDM', desc: 'Profil dosen dan tenaga kependidikan' },
               { id: 'std5', title: 'Standar 5: Kurikulum', desc: 'Kurikulum dan pembelajaran' }
             ].map(std => (
-              <div
+               <div
                 key={std.id}
                 onClick={() => setSelectedStandard(std.id)}
                 style={{
-                  padding: '16px', borderRadius: '12px', border: `2px solid ${selectedStandard === std.id ? '#3b82f6' : 'var(--color-border)'}`,
-                  background: selectedStandard === std.id ? 'rgba(59, 130, 246, 0.05)' : 'var(--color-bg)',
+                  padding: '16px', borderRadius: '16px', border: `2px solid ${selectedStandard === std.id ? '#C41E3A' : 'var(--color-border)'}`,
+                  background: selectedStandard === std.id ? 'rgba(196, 30, 58, 0.05)' : 'var(--color-bg)',
                   cursor: 'pointer', transition: 'all 0.2s'
                 }}
               >
-                <h4 style={{ margin: '0 0 4px 0', color: selectedStandard === std.id ? '#3b82f6' : 'var(--color-text)' }}>{std.title}</h4>
+                <h4 style={{ margin: '0 0 4px 0', color: selectedStandard === std.id ? '#C41E3A' : 'var(--color-text)', fontWeight: '700' }}>{std.title}</h4>
                 <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{std.desc}</p>
               </div>
             ))}
           </div>
         )}
 
-        <button
+         <button
           onClick={handleDownload}
           disabled={downloading || loading}
           style={{
-            background: (downloading || loading) ? '#9ca3af' : '#ef4444',
+            background: (downloading || loading) ? 'var(--color-muted)' : 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)',
             color: 'white',
             border: 'none',
-            padding: '12px 24px',
-            borderRadius: '8px',
-            fontSize: '1.1rem',
-            fontWeight: 600,
+            padding: '12px 32px',
+            borderRadius: '50px',
+            fontSize: '1rem',
+            fontWeight: 800,
             cursor: (downloading || loading) ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
             margin: '0 auto',
-            transition: 'all 0.3s'
+            transition: 'all 0.3s',
+            boxShadow: (downloading || loading) ? 'none' : '0 8px 20px rgba(196, 30, 58, 0.28)'
           }}
         >
           {downloading ? (

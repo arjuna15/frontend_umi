@@ -196,7 +196,7 @@ export default function KaprodiPlotting() {
                     {course.dosen ? (
                       <span style={{ fontWeight: 500, color: 'var(--color-text)' }}>{course.dosen.name}</span>
                     ) : (
-                      <span className="siakad-badge" style={{ background: '#fee2e2', color: '#b91c1c' }}>Kosong</span>
+                      <span className="siakad-badge" style={{ background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A' }}>Kosong</span>
                     )}
                   </td>
                   <td>
@@ -206,7 +206,7 @@ export default function KaprodiPlotting() {
                           {course.hari}, {course.jamMulai} - {course.jamSelesai}
                         </div>
                         <div style={{ color: 'var(--color-muted)', fontSize: '0.85rem', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' , flexWrap: 'wrap'}}>
-                          <i className="ph ph-map-pin" style={{ color: '#8b5cf6' }}></i> {course.ruang}
+                          <i className="ph ph-map-pin" style={{ color: '#C41E3A' }}></i> {course.ruang}
                         </div>
                       </div>
                     ) : (
@@ -225,7 +225,7 @@ export default function KaprodiPlotting() {
                     />
                   </td>
                   <td style={{ textAlign: 'center' }}>
-                    <button onClick={() => openScheduleModal(course)} style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', margin: '0 auto' , flexWrap: 'wrap'}}>
+                    <button onClick={() => openScheduleModal(course)} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '8px 18px', borderRadius: '50px', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', margin: '0 auto' , flexWrap: 'wrap', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>
                       <i className="ph ph-calendar-edit"></i> Atur Jadwal
                     </button>
                   </td>
@@ -244,12 +244,12 @@ export default function KaprodiPlotting() {
           onClose={() => setShowScheduleModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowScheduleModal(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="plotting-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan Jadwal</button>
+              <button type="button" onClick={() => setShowScheduleModal(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="plotting-form" style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>Simpan Jadwal</button>
             </>
           )}
         >
-          <div style={{ marginBottom: '24px', padding: '16px', background: 'var(--glass-bg)', borderRadius: '12px', borderLeft: '4px solid #10b981' }}>
+          <div style={{ marginBottom: '24px', padding: '16px', background: 'var(--glass-bg)', borderRadius: '16px', borderLeft: '4px solid #C41E3A', border: '1px solid var(--color-border)' }}>
             <h4 style={{ margin: '0 0 4px 0', color: 'var(--color-text)' }}>{selectedCourse.name}</h4>
             <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{selectedCourse.code} • {selectedCourse.sks} SKS</p>
           </div>

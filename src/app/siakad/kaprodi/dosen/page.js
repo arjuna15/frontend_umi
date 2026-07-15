@@ -148,14 +148,16 @@ export default function KaprodiDosenPage() {
         window.toast?.('Terjadi kesalahan: ' + err.message);
       }
     }
-  };
-
   const openAddModal = () => {
     setEditFormData({ id: '', name: '', nip: '', status: 'Aktif', jfa: 'Asisten Ahli', password: '' });
     setIsEditModalOpen(true);
   };
 
-  if (loading) return <div style={{ padding: '20px' }}>Loading...</div>;
+  if (loading) return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
+      <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat Data Dosen...
+    </div>
+  );
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
@@ -169,7 +171,7 @@ export default function KaprodiDosenPage() {
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Dosen</h1>
               <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Kelola profil, jabatan, dan status keaktifan dosen di program studi {userProdi || 'Belum tersedia'}.</p>
             </div>
-            <button onClick={openAddModal} style={{ background: '#3b82f6', color: 'white', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)' , flexWrap: 'wrap'}}>
+            <button onClick={openAddModal} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', padding: '10px 24px', borderRadius: '50px', border: 'none', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 15px rgba(196, 30, 58, 0.3)' , flexWrap: 'wrap'}}>
               <i className="ph ph-user-plus" style={{ fontSize: '1.2rem' }}></i> Tambah Dosen
             </button>
           </div>
@@ -177,27 +179,27 @@ export default function KaprodiDosenPage() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '24px' }}>
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' , flexWrap: 'wrap'}}>
-          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
+        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' , flexWrap: 'wrap', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
             <i className="ph ph-users"></i>
           </div>
           <div>
-            <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Dosen</p>
-            <h3 style={{ margin: 0, fontSize: '1.5rem' }}>{dosen.length}</h3>
+            <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Dosen</p>
+            <h3 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '800' }}>{dosen.length}</h3>
           </div>
         </div>
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' , flexWrap: 'wrap'}}>
-          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
+        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' , flexWrap: 'wrap', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(5, 150, 105, 0.15)', color: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
             <i className="ph ph-user-check"></i>
           </div>
           <div>
-            <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.9rem' }}>Dosen Aktif</p>
-            <h3 style={{ margin: 0, fontSize: '1.5rem' }}>{dosen.filter(d => d.status === 'Aktif').length}</h3>
+            <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Dosen Aktif</p>
+            <h3 style={{ margin: 0, fontSize: '1.5rem', fontWeight: '800' }}>{dosen.filter(d => d.status === 'Aktif').length}</h3>
           </div>
         </div>
       </div>
 
-      <div className="siakad-card" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
+      <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
         <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Dosen</h3>
           <div style={{ position: 'relative', width: '300px' }}>
@@ -256,18 +258,19 @@ export default function KaprodiDosenPage() {
                     <td style={{ padding: '16px' }}>{d.jfa}</td>
                     <td style={{ padding: '16px' }}>
                       <span className="siakad-badge" style={{
-                        background: d.status === 'Aktif' ? 'rgba(16, 185, 129, 0.1)' : 
-                                    d.status === 'Studi Lanjut' ? 'rgba(59, 130, 246, 0.1)' : 
-                                    d.status === 'Cuti' ? 'rgba(245, 158, 11, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-                        color: d.status === 'Aktif' ? '#10b981' : 
-                               d.status === 'Studi Lanjut' ? '#3b82f6' : 
-                               d.status === 'Cuti' ? '#f59e0b' : '#ef4444'
+                        background: d.status === 'Aktif' ? 'rgba(5, 150, 105, 0.15)' : 
+                                    d.status === 'Studi Lanjut' ? 'rgba(196, 30, 58, 0.15)' : 
+                                    d.status === 'Cuti' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(239, 68, 68, 0.15)',
+                        color: d.status === 'Aktif' ? '#059669' : 
+                               d.status === 'Studi Lanjut' ? '#C41E3A' : 
+                               d.status === 'Cuti' ? '#f59e0b' : '#ef4444',
+                        borderRadius: '50px', padding: '4px 12px'
                       }}>{d.status}</span>
                     </td>
                     <td style={{ padding: '16px' }}>
                       <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
-                        <button onClick={() => { setEditFormData(d); setIsEditModalOpen(true); }} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0 }}><i className="ph ph-pencil-simple"></i></button>
-                        <button onClick={() => handleDelete(d.id)} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0 }}><i className="ph ph-trash"></i></button>
+                        <button onClick={() => { setEditFormData(d); setIsEditModalOpen(true); }} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#3b82f6', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-pencil-simple"></i></button>
+                        <button onClick={() => handleDelete(d.id)} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#ef4444', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-trash"></i></button>
                       </div>
                     </td>
                   </tr>
@@ -285,8 +288,8 @@ export default function KaprodiDosenPage() {
           onClose={() => setIsEditModalOpen(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="dosen-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan</button>
+              <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="dosen-form" style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>Simpan</button>
             </>
           )}
         >

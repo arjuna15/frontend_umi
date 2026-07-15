@@ -78,7 +78,7 @@ export default function KaprodiEdom() {
                 <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'capitalize', fontWeight: 600 }}>{key}</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
                   <div style={{ flex: 1, height: '8px', background: 'var(--color-bg)', borderRadius: '4px', overflow: 'hidden' }}>
-                    <div style={{ height: '100%', width: `${(val / 5) * 100}%`, background: '#3b82f6', borderRadius: '4px' }}></div>
+                    <div style={{ height: '100%', width: `${(val / 5) * 100}%`, background: 'linear-gradient(to right, #C41E3A, #9b1c2e)', borderRadius: '4px' }}></div>
                   </div>
                   <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>{val}</span>
                 </div>
@@ -87,7 +87,7 @@ export default function KaprodiEdom() {
           </div>
         </div>
       </div>
-
+ 
       <h3 style={{ margin: '0 0 16px 0', fontSize: '1.2rem', color: 'var(--color-text)' }}>Detail Masukan Mahasiswa</h3>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
         {edoms.length === 0 ? (
@@ -100,12 +100,12 @@ export default function KaprodiEdom() {
                   <h3 style={{ margin: '0 0 4px 0', fontSize: '1.2rem', color: 'var(--color-text)' }}>{edom.dosen?.name}</h3>
                   <span style={{ fontSize: '0.9rem', color: 'var(--color-muted)' }}>{edom.course?.name}</span>
                 </div>
-                <div style={{ background: 'var(--glass-bg)', padding: '6px 12px', borderRadius: '8px', color: 'var(--color-text)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <i className="ph ph-star-fill"></i> {edom.score} / 5
+                <div style={{ background: 'var(--glass-bg)', padding: '6px 14px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px', border: '1px solid var(--color-border)' }}>
+                  <i className="ph ph-star-fill" style={{ color: '#f59e0b' }}></i> {edom.score} / 5
                 </div>
               </div>
               
-              <div style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: '8px', border: '1px solid #e5e7eb' }}>
+              <div style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: '16px', border: '1px solid var(--color-border)' }}>
                 <p style={{ margin: 0, fontStyle: 'italic', color: 'var(--color-muted)', fontSize: '0.95rem' }}>
                   "{edom.comment}"
                 </p>

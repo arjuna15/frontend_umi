@@ -78,7 +78,7 @@ export default function KaprodiStudents() {
           {Object.keys(dist).map(key => {
             const count = dist[key];
             const heightPercentage = total > 0 ? (count / total) * 100 : 0;
-            const color = key === 'A' ? '#10b981' : key === 'B' ? '#3b82f6' : key === 'C' ? '#f59e0b' : key === 'Belum' ? 'var(--color-muted)' : '#ef4444';
+            const color = key === 'A' ? '#059669' : key === 'B' ? '#C41E3A' : key === 'C' ? '#f59e0b' : key === 'Belum' ? 'var(--color-muted)' : '#ef4444';
             return (
               <div key={key} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: '8px' }}>
                 <div style={{ color: 'var(--color-text)', fontWeight: 600, fontSize: '0.9rem' }}>{count}</div>
@@ -147,16 +147,16 @@ export default function KaprodiStudents() {
                   <td style={{ padding: '16px 24px', fontWeight: 600 }}>{grade.mahasiswa?.name} <br/><small style={{ color: 'var(--color-muted)', fontWeight: 'normal' }}>{grade.mahasiswa?.nim_nip}</small></td>
                   <td style={{ padding: '16px 24px' }}>{grade.course?.name}</td>
                   <td style={{ padding: '16px 24px' }}>{grade.score !== null ? grade.score : '-'}</td>
-                  <td style={{ padding: '16px 24px', fontWeight: 800, color: ['A', 'A-'].includes(grade.grade) ? '#10b981' : ['E', 'D'].includes(grade.grade) ? '#ef4444' : '#1f2937' }}>
+                  <td style={{ padding: '16px 24px', fontWeight: 800, color: ['A', 'A-'].includes(grade.grade) ? '#059669' : ['E', 'D'].includes(grade.grade) ? '#ef4444' : 'var(--color-text)' }}>
                     {grade.grade || '-'}
                   </td>
                   <td style={{ padding: '16px 24px' }}>
                     {grade.grade === null ? (
-                      <span className="siakad-badge" style={{ background: 'var(--color-border)', color: 'var(--color-muted)' }}>Belum Dinilai</span>
+                      <span className="siakad-badge" style={{ background: 'var(--color-border)', color: 'var(--color-muted)', borderRadius: '50px', padding: '4px 12px' }}>Belum Dinilai</span>
                     ) : ['E', 'D'].includes(grade.grade) ? (
-                      <span className="siakad-badge" style={{ background: '#fee2e2', color: '#b91c1c' }}>Tidak Lulus</span>
+                      <span className="siakad-badge" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', borderRadius: '50px', padding: '4px 12px' }}>Tidak Lulus</span>
                     ) : (
-                      <span className="siakad-badge" style={{ background: '#dcfce7', color: '#166534' }}>Lulus</span>
+                      <span className="siakad-badge" style={{ background: 'rgba(5, 150, 105, 0.15)', color: '#059669', borderRadius: '50px', padding: '4px 12px' }}>Lulus</span>
                     )}
                   </td>
                 </tr>

@@ -77,33 +77,33 @@ export default function KaprodiDashboard() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '30px' }}>
-        <div className="siakad-card stagger-1" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '4px solid #3b82f6' }}>
-          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(59,130,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <i className="ph ph-books" style={{ fontSize: '2rem', color: '#3b82f6' }}></i>
+        <div className="siakad-card stagger-1" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', border: '1px solid var(--color-border)', borderRadius: '24px' }}>
+          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <i className="ph ph-books" style={{ fontSize: '1.5rem', color: '#C41E3A' }}></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Kelas Aktif</p>
-            <h3 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--color-text)' }}>{stats.total_classes ?? 0}</h3>
+            <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Kelas Aktif</p>
+            <h3 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--color-text)', fontWeight: '800' }}>{stats.total_classes ?? 0}</h3>
           </div>
         </div>
 
-        <div className="siakad-card stagger-2" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '4px solid #10b981' }}>
-          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(16,185,129,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <i className="ph ph-student" style={{ fontSize: '2rem', color: '#10b981' }}></i>
+        <div className="siakad-card stagger-2" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', border: '1px solid var(--color-border)', borderRadius: '24px' }}>
+          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(5, 150, 105, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <i className="ph ph-student" style={{ fontSize: '1.5rem', color: '#059669' }}></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Mahasiswa</p>
-            <h3 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--color-text)' }}>{stats.total_students ?? 0}</h3>
+            <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Mahasiswa</p>
+            <h3 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--color-text)', fontWeight: '800' }}>{stats.total_students ?? 0}</h3>
           </div>
         </div>
 
-        <div className="siakad-card stagger-3" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderLeft: '4px solid #8b5cf6' }}>
-          <div style={{ width: '50px', height: '50px', borderRadius: '12px', background: 'rgba(139,92,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <i className="ph ph-chalkboard-teacher" style={{ fontSize: '2rem', color: '#8b5cf6' }}></i>
+        <div className="siakad-card stagger-3" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', border: '1px solid var(--color-border)', borderRadius: '24px' }}>
+          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <i className="ph ph-chalkboard-teacher" style={{ fontSize: '1.5rem', color: '#f59e0b' }}></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Total Dosen</p>
-            <h3 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--color-text)' }}>{stats.total_dosens ?? 0}</h3>
+            <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Dosen</p>
+            <h3 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--color-text)', fontWeight: '800' }}>{stats.total_dosens ?? 0}</h3>
           </div>
         </div>
       </div>

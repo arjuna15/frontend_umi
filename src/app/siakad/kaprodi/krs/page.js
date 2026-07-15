@@ -148,10 +148,10 @@ export default function KaprodiKrs() {
       </div>
       
       <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' , flexWrap: 'wrap' }}>
-        <button onClick={() => setActiveTab('pending')} style={{ background: activeTab === 'pending' ? 'rgba(59, 130, 246, 0.1)' : 'transparent', color: activeTab === 'pending' ? '#3b82f6' : 'var(--color-muted)', border: 'none', padding: '12px 24px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' , flexWrap: 'wrap'}}>
+        <button onClick={() => setActiveTab('pending')} style={{ background: activeTab === 'pending' ? 'rgba(196, 30, 58, 0.15)' : 'transparent', color: activeTab === 'pending' ? '#C41E3A' : 'var(--color-muted)', border: 'none', padding: '10px 24px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' , flexWrap: 'wrap' }}>
           <i className="ph ph-clock"></i> Menunggu Persetujuan ({submissions.length})
         </button>
-        <button onClick={() => setActiveTab('history')} style={{ background: activeTab === 'history' ? 'rgba(16, 185, 129, 0.1)' : 'transparent', color: activeTab === 'history' ? '#10b981' : 'var(--color-muted)', border: 'none', padding: '12px 24px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' , flexWrap: 'wrap'}}>
+        <button onClick={() => setActiveTab('history')} style={{ background: activeTab === 'history' ? 'rgba(196, 30, 58, 0.15)' : 'transparent', color: activeTab === 'history' ? '#C41E3A' : 'var(--color-muted)', border: 'none', padding: '10px 24px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' , flexWrap: 'wrap' }}>
           <i className="ph ph-clock-counter-clockwise"></i> Riwayat KRS Mahasiswa ({history.length})
         </button>
       </div>      <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
@@ -265,10 +265,10 @@ export default function KaprodiKrs() {
                         <button 
                           onClick={() => approveKrs(sub.id)}
                           style={{ 
-                            background: '#10b981', color: 'white', border: 'none', 
-                            padding: '8px 16px', borderRadius: '8px', cursor: 'pointer',
-                            fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px'
-                          , flexWrap: 'wrap'}}
+                            background: '#059669', color: 'white', border: 'none', 
+                            padding: '8px 18px', borderRadius: '50px', cursor: 'pointer',
+                            fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px'
+                          , flexWrap: 'wrap', boxShadow: '0 4px 12px rgba(5,150,105,0.25)'}}
                         >
                           <i className="ph ph-check-circle"></i> Setujui
                         </button>
@@ -276,9 +276,9 @@ export default function KaprodiKrs() {
                           onClick={() => openRejectModal(sub.id)}
                           style={{ 
                             background: '#ef4444', color: 'white', border: 'none', 
-                            padding: '8px 16px', borderRadius: '8px', cursor: 'pointer',
-                            fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px'
-                          , flexWrap: 'wrap'}}
+                            padding: '8px 18px', borderRadius: '50px', cursor: 'pointer',
+                            fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px'
+                          , flexWrap: 'wrap', boxShadow: '0 4px 12px rgba(239,68,68,0.25)'}}
                         >
                           <i className="ph ph-x-circle"></i> Tolak
                         </button>
@@ -302,8 +302,8 @@ export default function KaprodiKrs() {
           onClose={() => setIsRejectModalOpen(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setIsRejectModalOpen(false)} style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="krs-reject-form" style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Konfirmasi Tolak KRS</button>
+              <button type="button" onClick={() => setIsRejectModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="submit" form="krs-reject-form" style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>Konfirmasi Tolak KRS</button>
             </>
           )}
         >
@@ -316,7 +316,7 @@ export default function KaprodiKrs() {
                 placeholder="Berikan alasan spesifik agar mahasiswa bisa memperbaikinya (misal: SKS melebihi batas IPS, Prasyarat belum lulus, dll)..."
                 required
                 rows={4}
-                style={{ width: '100%', padding: '12px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', resize: 'vertical' }}
+                style={{ width: '100%', padding: '12px', borderRadius: '16px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', resize: 'vertical' }}
               />
             </div>
           </form>
