@@ -83,6 +83,20 @@ export default function DosenPresensiPage() {
     const token = localStorage.getItem('siakad_token');
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     
+    // Simpan status lama untuk rollback jika request gagal
+    let oldStatus = null;
+    setSelectedAttendance(prev => {
+      if (!prev) return prev;
+      const record = prev.records.find(r => r.mahasiswa_id === mahasiswaId);
+      if (record) {
+        oldStatus = record.status;
+      }
+      return {
+        ...prev,
+        records: prev.records.map(r => r.mahasiswa_id === mahasiswaId ? { ...r, status } : r)
+      };
+    });
+
     try {
       const res = await fetch(`${apiUrl}/siakad/attendance/${attendanceId}/record`, {
         method: 'POST',
@@ -95,19 +109,32 @@ export default function DosenPresensiPage() {
           status: status
         })
       });
+      
       if (res.ok) {
+        // Refresh dashboard data secara asynchronous di background
         fetchDashboard();
-        // Update local state for the modal view
+      } else {
+        // Rollback ke status semula jika server merespon dengan error
         setSelectedAttendance(prev => {
-          if (!prev) return prev;
+          if (!prev || oldStatus === null) return prev;
           return {
             ...prev,
-            records: prev.records.map(r => r.mahasiswa_id === mahasiswaId ? { ...r, status } : r)
+            records: prev.records.map(r => r.mahasiswa_id === mahasiswaId ? { ...r, status: oldStatus } : r)
           };
         });
+        window.toast && window.toast('Gagal memperbarui status presensi di server');
       }
     } catch (err) {
       console.error(err);
+      // Rollback jika terjadi kegagalan jaringan
+      setSelectedAttendance(prev => {
+        if (!prev || oldStatus === null) return prev;
+        return {
+          ...prev,
+          records: prev.records.map(r => r.mahasiswa_id === mahasiswaId ? { ...r, status: oldStatus } : r)
+        };
+      });
+      window.toast && window.toast('Terjadi kesalahan jaringan');
     }
   };
 
