@@ -397,7 +397,7 @@ export default function PMBRegistrationPage() {
   return (
     <div style={containerStyle}>
       {/* Background Ornaments (Glowing Ambient) */}
-      <div className="siakad-page-header-glow" style={{ opacity: isDark ? 0.6 : 0.25 }}></div>
+      <div style={{ opacity: isDark ? 0.6 : 0.25 }}></div>
       
       {/* Ornamen Grid Garis Kotak-Kotak (Symmetric 30px Grid Pattern) */}
       <div style={{
