@@ -260,10 +260,10 @@ export default function DosenQuizCreate() {
         ))}
 
         <div style={{ display: 'flex', gap: '16px' , flexWrap: 'wrap' }}>
-          <button type="button" onClick={addQuestion} style={{ flex: 1, background: 'var(--color-border)', color: 'var(--color-text)', border: '2px dashed var(--color-muted)', padding: '16px', borderRadius: '12px', cursor: 'pointer', fontWeight: 600 }}>
+          <button type="button" onClick={addQuestion} style={{ flex: 1, background: 'var(--glass-bg)', color: 'var(--color-text)', border: '2px dashed var(--color-border)', padding: '12px 24px', borderRadius: '50px', cursor: 'pointer', fontWeight: 600 }}>
             <i className="ph ph-plus"></i> Tambah Soal
           </button>
-          <button type="submit" disabled={loading} style={{ flex: 1, background: '#3b82f6', color: 'white', border: 'none', padding: '16px', borderRadius: '12px', cursor: loading ? 'not-allowed' : 'pointer', fontWeight: 600, fontSize: '1.1rem' }}>
+          <button type="submit" disabled={loading} style={{ flex: 1, background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '50px', cursor: loading ? 'not-allowed' : 'pointer', fontWeight: 800, fontSize: '1rem', boxShadow: '0 8px 20px rgba(37,99,235,0.3)' }}>
             {loading ? 'Menyimpan...' : 'Terbitkan Kuis Sekarang'}
           </button>
         </div>
