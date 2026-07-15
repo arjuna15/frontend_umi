@@ -142,14 +142,14 @@ export default function KrsApprovalPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', alignItems: 'start' }}>
         {/* Left List */}
-        <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
-          <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700', fontSize: '0.95rem' }}>Daftar Mahasiswa Bimbingan</h3>
+        <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+          <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Bimbingan KRS</h3>
             {pendingCount > 0 && (
               <span style={{ padding: '3px 10px', background: '#f59e0b', color: 'white', borderRadius: '999px', fontSize: '0.75rem', fontWeight: '800' }}>{pendingCount}</span>
             )}
           </div>
-          <div style={{ padding: '12px 12px 6px 12px', borderBottom: '1px solid var(--color-border)' }}>
+          <div style={{ padding: '12px 24px 6px 24px', borderBottom: '1px solid var(--color-border)' }}>
             <div style={{ position: 'relative', width: '100%' }}>
               <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.05rem' }}></i>
               <input 
@@ -232,9 +232,9 @@ export default function KrsApprovalPage() {
         {/* Right Detail */}
         <div>
           {selectedSub ? (
-            <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
+            <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column' }}>
               {/* Header */}
-              <div style={{ background: 'var(--glass-bg)', padding: '20px 28px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+              <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
                   <h2 style={{ margin: '0 0 4px 0', color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>{selectedSub.mahasiswa?.name}</h2>
                   <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>NIM: {selectedSub.mahasiswa?.nim || selectedSub.mahasiswa?.nim_nip} · Semester {selectedSub.semester}</p>

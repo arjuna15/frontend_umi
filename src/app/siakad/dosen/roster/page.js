@@ -99,13 +99,14 @@ export default function RosterPage() {
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start' }}>
           {/* ── Left Sidebar: Course Selector ── */}
-          <div className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden' }}>
-            <div style={{ background: 'var(--glass-bg)', padding: '16px 20px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)' }}>
-              <h3 style={{ color: 'var(--color-text)', margin: 0, fontSize: '0.88rem', fontWeight: '700', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                <i className="ph ph-book-open" style={{ marginRight: '8px', color: '#C41E3A' }}></i>Mata Kuliah
-              </h3>
+          <div className="siakad-card stagger-1" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <i className="ph ph-book-open" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
+              </div>
+              <h3 style={{ color: 'var(--color-text)', margin: 0, fontSize: '1.1rem', fontWeight: '800' }}>Mata Kuliah</h3>
             </div>
-            <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {courses.map(c => {
                 const isActive = selectedCourseId === c.id.toString();
                 return (
@@ -144,15 +145,14 @@ export default function RosterPage() {
           </div>
 
           {/* ── Right: Student Table ── */}
-          <div className="siakad-card stagger-2" style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+          <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
               <div>
-                <h3 style={{ color: 'var(--color-text)', margin: '0 0 4px 0', fontWeight: '700' }}>
-                  Daftar Mahasiswa — {selectedCourse?.name}
+                <h3 style={{ color: 'var(--color-text)', margin: '0 0 4px 0', fontWeight: '800', fontSize: '1.2rem' }}>
+                  Daftar Mahasiswa
                 </h3>
                 <p style={{ color: 'var(--color-muted)', margin: 0, fontSize: '0.85rem' }}>
-                  <i className="ph ph-users" style={{ marginRight: '4px', color: '#6366f1' }}></i>
-                  {filteredStudents.length} dari {selectedCourse?.students?.length || 0} mahasiswa
+                  {filteredStudents.length} dari {selectedCourse?.students?.length || 0} mahasiswa terdaftar
                 </p>
               </div>
               <div style={{ position: 'relative' }}>

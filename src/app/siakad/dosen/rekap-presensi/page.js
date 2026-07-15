@@ -83,14 +83,16 @@ export default function RekapPresensiPage() {
           <i className="ph ph-chart-bar" style={{ fontSize: '4rem', display: 'block', marginBottom: '16px', opacity: 0.3 }}></i>
           <p style={{ margin: 0, fontSize: '1.1rem' }}>Belum ada data presensi untuk ditampilkan.</p>
         </div>
-      ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start' }}>
           {/* Course Selector */}
-          <div className="siakad-card stagger-1" style={{ overflow: 'hidden' }}>
-            <div style={{ background: 'var(--glass-bg)', padding: '16px 20px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)' }}>
-              <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700', fontSize: '0.95rem' }}>Pilih Mata Kuliah</h3>
+          <div className="siakad-card stagger-1" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <i className="ph ph-book" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
+              </div>
+              <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.1rem' }}>Pilih Mata Kuliah</h3>
             </div>
-            <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               {courses.map((c, i) => {
                 const isActive = selectedCourseId === c.id.toString();
                 return (
@@ -105,10 +107,10 @@ export default function RekapPresensiPage() {
           </div>
 
           {/* Table */}
-          <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
-            <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+          <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+            <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
               <div>
-                <h3 style={{ margin: '0 0 4px 0', color: 'var(--color-text)', fontWeight: '700' }}>{selectedCourse?.name}</h3>
+                <h3 style={{ margin: '0 0 4px 0', color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>{selectedCourse?.name}</h3>
                 <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>{filteredStudents.length} mahasiswa · {selectedCourse?.total_meetings || 0} pertemuan</p>
               </div>
               <div style={{ position: 'relative' }}>

@@ -121,15 +121,15 @@ export default function BapPage() {
             ))}
           </div>
         </div>        {/* Form Card */}
-        <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
-          <div style={{ background: 'var(--glass-bg)', padding: '20px 28px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div className="siakad-card stagger-2" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
             <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
               <i className="ph ph-file-text" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
             </div>
-            <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '700' }}>Form Pengisian BAP</h3>
+            <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Form Pengisian BAP</h3>
           </div>
 
-          <div style={{ padding: '32px' }}>
+          <div>
             {submitted && (
               <div style={{ padding: '16px', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: '24px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px', color: '#10b981' }}>
                 <i className="ph ph-check-circle" style={{ fontSize: '1.3rem' }}></i>
