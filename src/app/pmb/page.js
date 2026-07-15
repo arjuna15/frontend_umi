@@ -340,7 +340,9 @@ export default function PMBRegistrationPage() {
     padding: '40px',
     border: '1px solid var(--color-border)',
     boxShadow: isDark ? '0 20px 50px rgba(0, 0, 0, 0.4)' : '0 10px 30px rgba(0, 0, 0, 0.05)',
-    transition: 'all 0.3s ease'
+    transition: 'all 0.3s ease',
+    boxSizing: 'border-box',
+    width: '100%'
   };
 
   const inputStyle = {
@@ -460,6 +462,8 @@ export default function PMBRegistrationPage() {
           padding: 16px 24px;
           border-radius: 50px;
           border: 1px solid var(--color-border);
+          box-sizing: border-box !important;
+          width: 100% !important;
         }
         .pmb-step-item {
           display: flex;
