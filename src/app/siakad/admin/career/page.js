@@ -110,7 +110,7 @@ export default function CareerCenterPage() {
   ];
 
   const maxMonthCount = Math.max(...monthlyData.map(m => m.count || 0), 1);
-  const filteredJobs = jobs.filter(j => !search || (j.company_name || '').toLowerCase().includes(search.toLowerCase()) || (j.position_title || '').toLowerCase().includes(search.toLowerCase()));
+  const filteredJobs = Array.isArray(jobs) ? jobs.filter(j => !search || (j.company_name || '').toLowerCase().includes(search.toLowerCase()) || (j.position_title || '').toLowerCase().includes(search.toLowerCase())) : [];
   const tabs = [{ key: 'lowongan', label: 'Lowongan Kerja', icon: 'ph ph-briefcase' }, { key: 'pelamar', label: 'Pelamar', icon: 'ph ph-user-list' }];
 
   const formFields = [
