@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import CustomSelect from '../../components/CustomSelect';
+import CustomDatePicker from '../../components/CustomDatePicker';
 import ModalShell from '../../components/ModalShell';
 
 export default function AdminPengaturan() {
@@ -509,7 +510,7 @@ export default function AdminPengaturan() {
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Masa Berlaku Hingga</label>
-            <input type="date" value={apiForm.expires_at} onChange={(e) => setApiForm({ ...apiForm, expires_at: e.target.value })} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <CustomDatePicker value={apiForm.expires_at} onChange={(val) => setApiForm({ ...apiForm, expires_at: val })} placeholder="Pilih tanggal kedaluwarsa..." />
           </div>
         </ModalShell>
       )}

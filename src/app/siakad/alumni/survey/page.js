@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import CustomDatePicker from '../../components/CustomDatePicker';
 
 export default function AlumniSurveyPage() {
   const [step, setStep] = useState(1);
@@ -176,7 +177,7 @@ export default function AlumniSurveyPage() {
               </div>
               <div style={{ marginBottom: '16px' }}>
                 <label style={labelStyle}>Mulai Bekerja</label>
-                <input id="input-work_start_date" type="date" value={formData.work_start_date} onChange={e => updateField('work_start_date', e.target.value)} style={inputStyle} />
+                <CustomDatePicker value={formData.work_start_date} onChange={val => updateField('work_start_date', val)} placeholder="Pilih tanggal mulai bekerja..." />
               </div>
               <div style={{ marginBottom: '16px' }}>
                 <label style={labelStyle}>Relevansi Pekerjaan dengan Jurusan</label>
