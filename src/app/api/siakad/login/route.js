@@ -22,7 +22,8 @@ export async function POST(req) {
     const token = data.token;
     
     const response = NextResponse.json({
-      user: data.user
+      user: data.user,
+      token: token
     });
     
     response.cookies.set('siakad_token', token, {
