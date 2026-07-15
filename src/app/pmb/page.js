@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
-import { useTheme } from '../../context/ThemeContext';
-import { useLanguage } from '../../context/Providers';
+import { useTheme, useLanguage } from '../../context/Providers';
 import CustomSelect from '../siakad/components/CustomSelect';
 
 const PMB_TRANSLATIONS = {
@@ -327,19 +326,25 @@ export default function PMBRegistrationPage() {
 
       <style>{`
         /* Overide Navbar Text to remain visible (dark/black color when not sticky/stay header) */
-        header:not(.sticky) nav a, 
-        header:not(.sticky) .btn, 
-        header:not(.sticky) .lang-btn, 
-        header:not(.sticky) .theme-toggle i,
         header:not(.sticky) .nav-link,
         header:not(.sticky) .nav-links a {
           color: var(--color-text) !important;
+          text-shadow: none !important;
         }
+        
+        /* Overide dropdown carets (icon) inside nav items under stay header state */
+        header:not(.sticky) .dropdown-icon {
+          color: var(--color-text) !important;
+        }
+
         header:not(.sticky) .logo h1,
         header:not(.sticky) .logo p {
           color: var(--color-text) !important;
         }
-        header:not(.sticky) .btn-primary {
+        
+        /* Keep lang switch and theme switcher icon white/light */
+        header:not(.sticky) .lang-btn, 
+        header:not(.sticky) .theme-toggle i {
           color: white !important;
         }
 
