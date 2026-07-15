@@ -242,7 +242,8 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '680px',
+          width: '90%',
+          maxWidth: '680px',
           zIndex: 9999999,
           background: 'var(--color-surface)',
           border: '1px solid var(--color-border)',
@@ -351,9 +352,9 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
           </div>
         ) : (
           /* Double Calendar Grid View */
-          <div style={{ display: 'flex', gap: '32px' }}>
+          <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap', justifyContent: 'center' }}>
             {/* Month 1: Current Month */}
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: '1 1 280px', minWidth: '280px' }}>
               <div style={{ textAlign: 'center', fontWeight: '800', color: 'var(--color-text)', fontSize: '0.95rem', marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 {MONTHS_ID[currentMonth]} {currentYear}
               </div>
@@ -370,7 +371,7 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
             </div>
 
             {/* Month 2: Next Month */}
-            <div style={{ flex: 1 }}>
+            <div style={{ flex: '1 1 280px', minWidth: '280px' }}>
               <div style={{ textAlign: 'center', fontWeight: '800', color: 'var(--color-text)', fontSize: '0.95rem', marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 {MONTHS_ID[nextMonthNum]} {nextMonthYear}
               </div>
