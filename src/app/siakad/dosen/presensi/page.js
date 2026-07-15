@@ -286,13 +286,13 @@ export default function DosenPresensiPage() {
                           </td>
                           <td style={{ padding: '12px 16px', textAlign: 'center' }}>
                             {status === 'present' ? (
-                              <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', padding: '4px 12px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: 'bold', border: '1px solid rgba(16, 185, 129, 0.3)' }}>Hadir</span>
+                              <span style={{ background: '#10b981', color: 'white', padding: '6px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 6px rgba(16,185,129,0.3)' }}>Hadir</span>
                             ) : status === 'excused' ? (
-                              <span style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', padding: '4px 12px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: 'bold', border: '1px solid rgba(245, 158, 11, 0.3)' }}>Izin</span>
+                              <span style={{ background: '#f59e0b', color: 'white', padding: '6px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 6px rgba(245,158,11,0.3)' }}>Izin</span>
                             ) : (
-                              <span style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', padding: '4px 12px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: 'bold', border: '1px solid rgba(239, 68, 68, 0.3)' }}>Alpa</span>
+                              <span style={{ background: '#ef4444', color: 'white', padding: '6px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 6px rgba(239,68,68,0.3)' }}>Alpa</span>
                             )}
-                          </td>
+                          </td> </td>
                           <td style={{ padding: '12px 16px' }}>
                             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '4px' , flexWrap: 'wrap'}}>
                               <div style={{ display: 'inline-flex', background: 'rgba(0,0,0,0.1)', borderRadius: '50px', padding: '4px', gap: '4px', border: '1px solid var(--color-border)' }}>
