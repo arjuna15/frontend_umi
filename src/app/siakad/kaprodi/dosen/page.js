@@ -148,6 +148,8 @@ export default function KaprodiDosenPage() {
         window.toast?.('Terjadi kesalahan: ' + err.message);
       }
     }
+  };
+
   const openAddModal = () => {
     setEditFormData({ id: '', name: '', nip: '', status: 'Aktif', jfa: 'Asisten Ahli', password: '' });
     setIsEditModalOpen(true);
