@@ -411,7 +411,9 @@ export default function PMBRegistrationPage() {
                 const fileIcon = key === 'foto' ? 'ph-image-square' : 'ph-file-pdf';
                 return (
                   <div key={key} style={{ display: 'flex', flexDirection: 'column' }}>
-                    <label style={labelStyle}>{label}</label>
+                    <div style={{ minHeight: '40px', display: 'flex', alignItems: 'flex-end', marginBottom: '8px' }}>
+                      <label style={{ ...labelStyle, marginBottom: 0 }}>{label}</label>
+                    </div>
                     <div style={{ position: 'relative', border: '2px dashed var(--color-border)', borderRadius: '24px', padding: '24px 16px', textAlign: 'center', background: 'var(--color-bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', transition: 'all 0.2s', cursor: 'pointer' }} onMouseOver={e=>e.currentTarget.style.borderColor='#3b82f6'} onMouseOut={e=>e.currentTarget.style.borderColor='var(--color-border)'}>
                       <input type="file" onChange={(e) => handleFileChange(key, e)} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer' }} />
                       <i className={`ph-duotone ${fileIcon}`} style={{ fontSize: '2.5rem', color: fileNames[key] ? '#10b981' : 'var(--color-muted)' }} />
