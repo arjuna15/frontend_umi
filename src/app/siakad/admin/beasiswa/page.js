@@ -310,7 +310,7 @@ export default function BeasiswaPage() {
         }>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>NIM Mahasiswa</label>
-            <input type="text" value={formAdd.nim} onChange={e => setFormAdd({ ...formAdd, nim: e.target.value })} placeholder="Masukkan NIM Mahasiswa" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input type="text" className="siakad-input" value={formAdd.nim} onChange={e => setFormAdd({ ...formAdd, nim: e.target.value })} placeholder="Masukkan NIM Mahasiswa" />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Pilih Beasiswa / Kategori</label>
@@ -323,15 +323,15 @@ export default function BeasiswaPage() {
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Mulai dari Semester</label>
-            <input type="text" value={formAdd.start_semester} onChange={e => setFormAdd({ ...formAdd, start_semester: e.target.value })} placeholder="Contoh: Semester 3 (Ganjil 2026/2027)" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input type="text" className="siakad-input" value={formAdd.start_semester} onChange={e => setFormAdd({ ...formAdd, start_semester: e.target.value })} placeholder="Contoh: Semester 3 (Ganjil 2026/2027)" />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nomor SK</label>
-            <input type="text" value={formAdd.sk_number} onChange={e => setFormAdd({ ...formAdd, sk_number: e.target.value })} placeholder="Contoh: SK/123/KIP-K/2026" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input type="text" className="siakad-input" value={formAdd.sk_number} onChange={e => setFormAdd({ ...formAdd, sk_number: e.target.value })} placeholder="Contoh: SK/123/KIP-K/2026" />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Catatan</label>
-            <textarea value={formAdd.notes} onChange={e => setFormAdd({ ...formAdd, notes: e.target.value })} placeholder="Tulis catatan jika diperlukan" rows={3} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', resize: 'vertical' }} />
+            <textarea className="siakad-input" value={formAdd.notes} onChange={e => setFormAdd({ ...formAdd, notes: e.target.value })} placeholder="Tulis catatan jika diperlukan" rows={3} style={{ resize: 'vertical' }} />
           </div>
         </ModalShell>
       )}
@@ -348,11 +348,11 @@ export default function BeasiswaPage() {
         }>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Beasiswa</label>
-            <input type="text" value={formMaster.name} onChange={e => setFormMaster({ ...formMaster, name: e.target.value })} placeholder="Contoh: KIP Kuliah, Beasiswa Yayasan" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input type="text" className="siakad-input" value={formMaster.name} onChange={e => setFormMaster({ ...formMaster, name: e.target.value })} placeholder="Contoh: KIP Kuliah, Beasiswa Yayasan" />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Pihak Penyedia</label>
-            <input type="text" value={formMaster.provider} onChange={e => setFormMaster({ ...formMaster, provider: e.target.value })} placeholder="Contoh: Kemendikbud, Yayasan UMIBA" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input type="text" className="siakad-input" value={formMaster.provider} onChange={e => setFormMaster({ ...formMaster, provider: e.target.value })} placeholder="Contoh: Kemendikbud, Yayasan UMIBA" />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jenis Potongan</label>
@@ -367,7 +367,7 @@ export default function BeasiswaPage() {
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Besaran Potongan (Value)</label>
-            <input type="number" value={formMaster.discount_value} onChange={e => setFormMaster({ ...formMaster, discount_value: e.target.value })} placeholder="Contoh: 100 untuk KIP, atau 2500000" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+            <input type="number" className="siakad-input" value={formMaster.discount_value} onChange={e => setFormMaster({ ...formMaster, discount_value: e.target.value })} placeholder="Contoh: 100 untuk KIP, atau 2500000" />
           </div>
         </ModalShell>
       )}
@@ -389,7 +389,7 @@ export default function BeasiswaPage() {
               onChange={val => setFormStatus({ ...formStatus, status: val })}
               options={[
                 { value: 'active', label: 'Aktif (KIP gratis kuliah)' },
-                { value: 'revoked', label: 'Dicabut (Dibatalkan/Kembali ke UKT normal)' },
+                { value: 'revoked', label: 'Dicabut (Dibatalkan/Kembali to UKT normal)' },
                 { value: 'completed', label: 'Selesai (Tuntas lulus kuliah)' }
               ]}
             />
@@ -397,12 +397,12 @@ export default function BeasiswaPage() {
           {formStatus.status !== 'active' && (
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Semester Selesai / Dicabut</label>
-              <input type="text" value={formStatus.end_semester} onChange={e => setFormStatus({ ...formStatus, end_semester: e.target.value })} placeholder="Contoh: Semester 4 (Genap 2026/2027)" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+              <input type="text" className="siakad-input" value={formStatus.end_semester} onChange={e => setFormStatus({ ...formStatus, end_semester: e.target.value })} placeholder="Contoh: Semester 4 (Genap 2026/2027)" />
             </div>
           )}
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Catatan / Alasan Perubahan</label>
-            <textarea value={formStatus.notes} onChange={e => setFormStatus({ ...formStatus, notes: e.target.value })} placeholder="Tulis alasan, contoh: IPK di bawah target/Telah lulus sidang skripsi" rows={3} style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', resize: 'vertical' }} />
+            <textarea className="siakad-input" value={formStatus.notes} onChange={e => setFormStatus({ ...formStatus, notes: e.target.value })} placeholder="Tulis alasan, contoh: IPK di bawah target/Telah lulus sidang skripsi" rows={3} style={{ resize: 'vertical' }} />
           </div>
         </ModalShell>
       )}
