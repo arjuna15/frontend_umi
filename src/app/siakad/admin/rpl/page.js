@@ -162,7 +162,7 @@ export default function RPLPage() {
       <div className="siakad-card" style={{ padding: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Daftar Pengajuan RPL</h2>
-          <input id="search-rpl" type="text" placeholder="Cari nama atau institusi..." value={search} onChange={e => setSearch(e.target.value)} style={{ padding: '10px 16px', fontSize: '0.9rem', border: '1px solid var(--color-border)', borderRadius: '10px', background: 'var(--color-bg)', color: 'var(--color-text)', width: '280px' }} />
+          <input id="search-rpl" className="siakad-input" type="text" placeholder="Cari nama atau institusi..." value={search} onChange={e => setSearch(e.target.value)} style={{ width: '280px' }} />
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -253,11 +253,11 @@ export default function RPLPage() {
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jumlah SKS Diakui</label>
-            <input id="input-rpl-credits" type="number" value={reviewData.credits_recognized} onChange={e => setReviewData({ ...reviewData, credits_recognized: e.target.value })} placeholder="Jumlah SKS" style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+            <input id="input-rpl-credits" className="siakad-input" type="number" value={reviewData.credits_recognized} onChange={e => setReviewData({ ...reviewData, credits_recognized: e.target.value })} placeholder="Jumlah SKS" />
           </div>
           <div>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Catatan Reviewer</label>
-            <textarea id="input-rpl-notes" value={reviewData.reviewer_notes} onChange={e => setReviewData({ ...reviewData, reviewer_notes: e.target.value })} placeholder="Catatan review..." rows={3} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)', resize: 'vertical' }} />
+            <textarea id="input-rpl-notes" className="siakad-input" value={reviewData.reviewer_notes} onChange={e => setReviewData({ ...reviewData, reviewer_notes: e.target.value })} placeholder="Catatan review..." rows={3} style={{ resize: 'vertical' }} />
           </div>
         </ModalShell>
       )}
