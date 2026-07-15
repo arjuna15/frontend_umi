@@ -400,19 +400,34 @@ export default function AdminPengaturan() {
               <tbody>
                 {apiTokens.length === 0 ? (
                   <tr><td colSpan={6} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada API Token aktif.</td></tr>
-                ) : apiTokens.map(t => (
+                ) : (Array.isArray(apiTokens) ? apiTokens : []).map(t => (
                   <tr key={t.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                    <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{t.name}</td>
-                    <td style={{ padding: '14px 16px', fontFamily: 'monospace', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{t.token ? `${t.token.slice(0, 10)}...[MASKED]` : '-'}</td>
-                    <td style={{ padding: '14px 16px', color: 'var(--color-text)' }}>{t.rate_limit} req/jam</td>
+                    <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{t.name || '-'}</td>
                     <td style={{ padding: '14px 16px' }}>
-                      <span onClick={() => toggleApiToken(t.id)} style={{ cursor: 'pointer', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: t.is_active ? '#10b981' : '#ef4444', background: t.is_active ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)' }}>
-                        {t.is_active ? 'Aktif' : 'Nonaktif'}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <code style={{ background: 'rgba(255,255,255,0.05)', padding: '4px 8px', borderRadius: '6px', fontSize: '0.8rem', fontFamily: 'monospace', color: 'var(--color-muted)' }}>
+                          {t.token ? `${t.token.substring(0, 10)}...` : '-'}
+                        </code>
+                      </div>
+                    </td>
+                    <td style={{ padding: '14px 16px', color: 'var(--color-text)' }}>{t.rate_limit || 1000} req/jam</td>
+                    <td style={{ padding: '14px 16px' }}>
+                      <span style={{ padding: '4px 10px', borderRadius: '20px', fontSize: '0.72rem', fontWeight: 'bold', background: t.is_active ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)', color: t.is_active ? '#10b981' : '#ef4444' }}>
+                        {t.is_active ? 'Aktif' : 'Non-aktif'}
                       </span>
                     </td>
-                    <td style={{ padding: '14px 16px', color: 'var(--color-muted)' }}>{t.last_used_at ? new Date(t.last_used_at).toLocaleString('id-ID') : '-'}</td>
+                    <td style={{ padding: '14px 16px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>
+                      {t.last_used_at ? new Date(t.last_used_at).toLocaleDateString('id-ID') : 'Belum pernah'}
+                    </td>
                     <td style={{ padding: '14px 16px' }}>
-                      <button id={`btn-del-token-${t.id}`} onClick={() => deleteApiToken(t.id)} style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '1.1rem' }}><i className="ph ph-trash"></i></button>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <button id={`btn-toggle-token-${t.id}`} onClick={() => toggleApiToken(t.id, t.is_active)} style={{ background: 'transparent', border: '1px solid var(--color-border)', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', color: 'var(--color-text)' }}>
+                          {t.is_active ? 'Nonaktifkan' : 'Aktifkan'}
+                        </button>
+                        <button id={`btn-delete-token-${t.id}`} onClick={() => deleteApiToken(t.id)} style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: 'none', padding: '6px 10px', borderRadius: '8px', cursor: 'pointer' }}>
+                          <i className="ph ph-trash"></i>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -446,17 +461,17 @@ export default function AdminPengaturan() {
 
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Base URL Endpoint</label>
-              <input type="text" value={esignConfig.base_url || ''} onChange={(e) => setEsignConfig({ ...esignConfig, base_url: e.target.value })} placeholder="https://api.esign.provider.id/v1" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+              <input type="text" className="siakad-input" value={esignConfig.base_url || ''} onChange={(e) => setEsignConfig({ ...esignConfig, base_url: e.target.value })} placeholder="https://api.esign.provider.id/v1" />
             </div>
 
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>API Key / Client ID</label>
-              <input type="text" value={esignConfig.api_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, api_key: e.target.value })} placeholder="Masukkan API Key" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+              <input type="text" className="siakad-input" value={esignConfig.api_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, api_key: e.target.value })} placeholder="Masukkan API Key" />
             </div>
 
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Secret Key</label>
-              <input type="password" value={esignConfig.secret_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, secret_key: e.target.value })} placeholder="•••••••••••••••••••••••••••••" style={{ width: '100%', padding: '10px 14px', borderRadius: '10px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
+              <input type="password" className="siakad-input" value={esignConfig.secret_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, secret_key: e.target.value })} placeholder="•••••••••••••••••••••••••••••" />
             </div>
 
             <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: '10px' }}>

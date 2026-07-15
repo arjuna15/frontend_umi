@@ -134,8 +134,8 @@ export default function ChatPage() {
   }, [selectedRoom]);
 
   useEffect(() => {
-    if (!searchQuery) { setFilteredRooms(rooms); return; }
-    setFilteredRooms(rooms.filter(r => r.name?.toLowerCase().includes(searchQuery.toLowerCase())));
+    if (!searchQuery) { setFilteredRooms(Array.isArray(rooms) ? rooms : []); return; }
+    setFilteredRooms((Array.isArray(rooms) ? rooms : []).filter(r => r.name?.toLowerCase().includes(searchQuery.toLowerCase())));
   }, [searchQuery, rooms]);
 
   const fetchRooms = async () => {
@@ -148,7 +148,7 @@ export default function ChatPage() {
       });
       if (!res.ok) throw new Error('Failed');
       const data = await res.json();
-      setRooms(data.data || data.rooms || []);
+      setRooms(Array.isArray(data) ? data : (data.data || data.rooms || []));
     } catch(e) { console.error(e); } finally { setLoading(false); }
   };
 
@@ -162,7 +162,8 @@ export default function ChatPage() {
       });
       if (!res.ok) throw new Error('Failed');
       const data = await res.json();
-      setMessages(data.data || data.messages || []);
+      const msgArray = Array.isArray(data) ? data : (data.messages?.data || data.messages || data.data || []);
+      setMessages(msgArray);
     } catch(e) { console.error(e); }
   };
 
