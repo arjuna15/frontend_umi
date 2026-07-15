@@ -188,12 +188,12 @@ export default function AdminCalendarPage() {
         {/* Kalender Bulanan */}
         <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'white', margin: 0 }}>{monthsMap[month]} {year}</h3>
+            <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>{monthsMap[month]} {year}</h3>
             <div style={{ display: 'flex', gap: '8px' }}>
-              <button onClick={handlePrevMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'white', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <button onClick={handlePrevMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <i className="ph ph-caret-left"></i>
               </button>
-              <button onClick={handleNextMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'white', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <button onClick={handleNextMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <i className="ph ph-caret-right"></i>
               </button>
             </div>
@@ -223,7 +223,7 @@ export default function AdminCalendarPage() {
                     aspectRatio: '1',
                     borderRadius: '12px',
                     border: isSelected ? '2px solid #3b82f6' : '1px solid var(--color-border)',
-                    background: isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.02)'),
+                    background: isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(128,128,128,0.2)' : 'rgba(128,128,128,0.06)'),
                     cursor: item.day ? 'pointer' : 'default',
                     display: 'flex',
                     flexDirection: 'column',
@@ -233,7 +233,7 @@ export default function AdminCalendarPage() {
                     transition: 'all 0.15s ease'
                   }}
                 >
-                  <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#3b82f6' : 'white') : 'transparent' }}>{item.day}</span>
+                  <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#3b82f6' : 'var(--color-text)') : 'transparent' }}>{item.day}</span>
                   
                   {/* Indicators */}
                   <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
@@ -256,7 +256,7 @@ export default function AdminCalendarPage() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid var(--color-border)', paddingBottom: '12px' }}>
             <div>
               <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', fontWeight: '600' }}>AGENDA HARIAN</p>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'white', margin: '2px 0 0 0' }}>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: '2px 0 0 0' }}>
                 {selectedDay ? `${selectedDay} ${monthsMap[month]} ${year}` : 'Pilih Tanggal'}
               </h3>
             </div>
