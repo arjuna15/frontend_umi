@@ -209,7 +209,7 @@ export default function QualityAssurancePage() {
                 docs.map(d => (
                   <tr key={d.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
                     <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{d.title}</td>
-                    <td style={{ padding: '14px 16px' }}><span style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: catColors[d.category] || '#3b82f6', background: `${catColors[d.category] || '#3b82f6'}18`, textTransform: 'capitalize' }}>{d.category}</span></td>
+                    <td style={{ padding: '14px 16px' }}><span style={{ display: 'inline-block', minWidth: '110px', textAlign: 'center', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: catColors[d.category] || '#3b82f6', background: `${catColors[d.category] || '#3b82f6'}18`, textTransform: 'capitalize' }}>{d.category}</span></td>
                     <td style={{ padding: '14px 16px', color: 'var(--color-muted)' }}>{d.academic_year}</td>
                     <td style={{ padding: '14px 16px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{new Date(d.created_at).toLocaleDateString('id-ID')}</td>
                   </tr>
@@ -263,12 +263,12 @@ export default function QualityAssurancePage() {
                   <tr key={d.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
                     <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{d.nama}</td>
                     <td style={{ padding: '14px 16px' }}>
-                      <span style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: spmeKategoriColors[d.kategori] || '#3b82f6', background: `${spmeKategoriColors[d.kategori] || '#3b82f6'}18` }}>
+                      <span style={{ display: 'inline-block', minWidth: '110px', textAlign: 'center', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: spmeKategoriColors[d.kategori] || '#3b82f6', background: `${spmeKategoriColors[d.kategori] || '#3b82f6'}18` }}>
                         {spmeKategoriLabels[d.kategori] || d.kategori}
                       </span>
                     </td>
                     <td style={{ padding: '14px 16px' }}>
-                      <span style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: spmeStatusColors[d.status] || '#6b7280', background: `${spmeStatusColors[d.status] || '#6b7280'}18`, textTransform: 'capitalize' }}>
+                      <span style={{ display: 'inline-block', minWidth: '90px', textAlign: 'center', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: spmeStatusColors[d.status] || '#6b7280', background: `${spmeStatusColors[d.status] || '#6b7280'}18`, textTransform: 'capitalize' }}>
                         {d.status}
                       </span>
                     </td>

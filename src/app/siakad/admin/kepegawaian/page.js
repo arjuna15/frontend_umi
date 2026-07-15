@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
+import CustomSelect from '../../components/CustomSelect';
+import CustomDatePicker from '../../components/CustomDatePicker';
 
 export default function KepegawaianPage() {
   const router = useRouter();
@@ -191,7 +193,7 @@ export default function KepegawaianPage() {
 
         {tab === 'pegawai' && (<>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
-            <input id="search-pegawai" type="text" placeholder="Cari NIP atau nama..." value={search} onChange={e => setSearch(e.target.value)} style={{ padding: '10px 16px', fontSize: '0.9rem', border: '1px solid var(--color-border)', borderRadius: '10px', background: 'var(--color-bg)', color: 'var(--color-text)', width: '280px' }} />
+            <input id="search-pegawai" className="siakad-input" type="text" placeholder="Cari NIP atau nama..." value={search} onChange={e => setSearch(e.target.value)} style={{ width: '280px' }} />
             <button id="btn-add-pegawai" onClick={() => { resetForm(); setShowModal(true); }} className="siakad-btn-primary" style={{ padding: '10px 24px' }}><i className="ph ph-plus"></i> Tambah Pegawai</button>
           </div>
           <div style={{ overflowX: 'auto' }}>
@@ -291,11 +293,19 @@ export default function KepegawaianPage() {
               <div key={f.key} style={{ marginBottom: '4px', gridColumn: f.key === 'name' || f.key === 'email' ? 'span 2' : undefined }}>
                 <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
                 {f.type === 'select' ? (
-                  <select id={`input-${f.key}`} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }}>
-                    {f.options.map(o => <option key={o} value={o}>{o}</option>)}
-                  </select>
+                  <CustomSelect
+                    value={formData[f.key]}
+                    onChange={val => setFormData({ ...formData, [f.key]: val })}
+                    options={f.options.map(o => ({ value: o, label: o }))}
+                  />
+                ) : f.type === 'date' ? (
+                  <CustomDatePicker
+                    value={formData[f.key]}
+                    onChange={val => setFormData({ ...formData, [f.key]: val })}
+                    placeholder="Pilih tanggal..."
+                  />
                 ) : (
-                  <input id={`input-${f.key}`} type={f.type || 'text'} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder || ''} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+                  <input id={`input-${f.key}`} className="siakad-input" type={f.type || 'text'} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder || ''} />
                 )}
               </div>
             ))}

@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function TracerStudyAdminPage() {
   const router = useRouter();
@@ -263,16 +264,29 @@ export default function TracerStudyAdminPage() {
             </>
           }
         >
-          {[
-            { label: 'Cari User', key: 'user_search', placeholder: 'Nama atau NIM...' },
-            { label: 'Tahun Lulus', key: 'graduation_year', placeholder: 'Contoh: 2024' },
-            { label: 'Program Studi', key: 'program', placeholder: 'Contoh: Teknik Informatika' },
-          ].map(f => (
-            <div key={f.key} style={{ marginBottom: '16px' }}>
-              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-              <input id={`input-alumni-${f.key}`} type="text" value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
-            </div>
-          ))}
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Cari User (Nama/NIM)</label>
+            <input id="input-alumni-user_search" className="siakad-input" type="text" value={formData.user_search} onChange={e => setFormData({ ...formData, user_search: e.target.value })} placeholder="Nama atau NIM..." />
+          </div>
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tahun Lulus</label>
+            <input id="input-alumni-graduation_year" className="siakad-input" type="text" value={formData.graduation_year} onChange={e => setFormData({ ...formData, graduation_year: e.target.value })} placeholder="Contoh: 2024" />
+          </div>
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Program Studi</label>
+            <CustomSelect
+              value={formData.program}
+              onChange={val => setFormData({ ...formData, program: val })}
+              options={[
+                { value: 'Sistem Informasi', label: 'Sistem Informasi' },
+                { value: 'Teknik Komputer', label: 'Teknik Komputer' },
+                { value: 'Manajemen', label: 'Manajemen' },
+                { value: 'Ilmu Hukum', label: 'Ilmu Hukum' },
+                { value: 'Aktuaria', label: 'Aktuaria' },
+                { value: 'Magister Manajemen', label: 'Magister Manajemen' }
+              ]}
+            />
+          </div>
         </ModalShell>
       )}
     </div>
