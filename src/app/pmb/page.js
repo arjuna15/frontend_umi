@@ -445,8 +445,8 @@ export default function PMBRegistrationPage() {
         /* Adaptive transparent backgrounds for switches */
         header .lang-switch,
         header .theme-toggle {
-          background: ${isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)'} !important;
-          border-color: var(--color-border) !important;
+          background: #0003 !important;
+          border-color: #fff6 !important;
         }
 
         .custom-select {
