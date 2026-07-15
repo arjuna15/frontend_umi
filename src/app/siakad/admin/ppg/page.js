@@ -2,6 +2,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
+import CustomDatePicker from '../../components/CustomDatePicker';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function PPGManagementPage() {
   const router = useRouter();
@@ -269,13 +271,16 @@ export default function PPGManagementPage() {
             { label: 'Sekolah Asal', key: 'school_origin', placeholder: 'Nama sekolah', type: 'text' },
             { label: 'Bidang Studi', key: 'subject', placeholder: 'Matematika, IPA, dll', type: 'text' },
             { label: 'Angkatan', key: 'batch', placeholder: 'Contoh: Angkatan 5', type: 'text' },
-            { label: 'Tanggal Mulai', key: 'start_date', placeholder: '', type: 'date' },
           ].map(f => (
             <div key={f.key} style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-              <input id={`input-ppg-${f.key}`} type={f.type} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+              <input id={`input-ppg-${f.key}`} className="siakad-input" type={f.type} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} />
             </div>
           ))}
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tanggal Mulai</label>
+            <CustomDatePicker value={formData.start_date} onChange={val => setFormData({ ...formData, start_date: val })} placeholder="Pilih tanggal mulai..." />
+          </div>
         </ModalShell>
       )}
 
@@ -289,23 +294,37 @@ export default function PPGManagementPage() {
         }>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jenis Aktivitas</label>
-            <select id="input-activity-type" value={activityData.activity_type} onChange={e => setActivityData({ ...activityData, activity_type: e.target.value })} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)', background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px' }}>
-              {[['workshop', 'Workshop'], ['teaching_practice', 'Praktik Mengajar'], ['exam', 'Ujian'], ['seminar', 'Seminar'], ['assignment', 'Tugas']].map(([v, l]) => <option key={v} value={v}>{l}</option>)}
-            </select>
+            <CustomSelect
+              value={activityData.activity_type}
+              onChange={val => setActivityData({ ...activityData, activity_type: val })}
+              options={[
+                { value: 'workshop', label: 'Workshop' },
+                { value: 'teaching_practice', label: 'Praktik Mengajar' },
+                { value: 'exam', label: 'Ujian' },
+                { value: 'seminar', label: 'Seminar' },
+                { value: 'assignment', label: 'Tugas' }
+              ]}
+            />
           </div>
           {[
             { label: 'Judul', key: 'title', placeholder: 'Judul aktivitas', type: 'text' },
-            { label: 'Tanggal', key: 'date', placeholder: '', type: 'date' },
-            { label: 'Nilai', key: 'score', placeholder: '0-100', type: 'number' },
           ].map(f => (
             <div key={f.key} style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-              <input id={`input-activity-${f.key}`} type={f.type} value={activityData[f.key]} onChange={e => setActivityData({ ...activityData, [f.key]: e.target.value })} placeholder={f.placeholder} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+              <input id={`input-activity-${f.key}`} className="siakad-input" type={f.type} value={activityData[f.key]} onChange={e => setActivityData({ ...activityData, [f.key]: e.target.value })} placeholder={f.placeholder} />
             </div>
           ))}
           <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tanggal</label>
+            <CustomDatePicker value={activityData.date} onChange={val => setActivityData({ ...activityData, date: val })} placeholder="Pilih tanggal aktivitas..." />
+          </div>
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nilai</label>
+            <input id="input-activity-score" className="siakad-input" type="number" value={activityData.score} onChange={e => setActivityData({ ...activityData, score: e.target.value })} placeholder="0-100" />
+          </div>
+          <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Catatan</label>
-            <textarea id="input-activity-notes" value={activityData.notes} onChange={e => setActivityData({ ...activityData, notes: e.target.value })} placeholder="Catatan tambahan..." rows={3} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)', resize: 'vertical' }} />
+            <textarea id="input-activity-notes" className="siakad-input" value={activityData.notes} onChange={e => setActivityData({ ...activityData, notes: e.target.value })} placeholder="Catatan tambahan..." rows={3} style={{ resize: 'vertical' }} />
           </div>
         </ModalShell>
       )}
