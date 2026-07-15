@@ -261,19 +261,19 @@ export default function KaprodiPlotting() {
                 value={scheduleForm.hari}
                 onChange={val => setScheduleForm({...scheduleForm, hari: val})}
                 options={['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'].map(d => ({ value: d, label: d }))}
-                style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
+                style={{ width: '100%' }}
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              <div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', position: 'relative', zIndex: 20 }}>
+              <div style={{ position: 'relative', zIndex: 21 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Jam Mulai</label>
                 <CustomTimePicker 
                   value={scheduleForm.jamMulai}
                   onChange={val => setScheduleForm({...scheduleForm, jamMulai: val})}
                 />
               </div>
-              <div>
+              <div style={{ position: 'relative', zIndex: 21 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Jam Selesai</label>
                 <CustomTimePicker 
                   value={scheduleForm.jamSelesai}
@@ -288,7 +288,7 @@ export default function KaprodiPlotting() {
                 value={scheduleForm.ruang}
                 onChange={val => setScheduleForm({...scheduleForm, ruang: val})}
                 options={['Lab Komputer A', 'Lab Komputer B', 'Ruang 401', 'Ruang 402', 'Ruang 405 (Aula)', 'Ruang Seminar 1'].map(r => ({ value: r, label: r }))}
-                style={{ width: '100%', background: 'var(--glass-bg)', color: 'var(--color-text)' }}
+                style={{ width: '100%' }}
               />
             </div>
           </form>
