@@ -21,7 +21,7 @@ export default function JadwalPage() {
   const [classrooms, setClassrooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
-  const [formData, setFormData] = useState({ day: '', start_time: '', end_time: '', room: '' });
+  const [formData, setFormData] = useState({ day: '', start_time: '', end_time: '', room: '', frequency: 'every_week' });
   const [saving, setSaving] = useState(false);
 
   // Calendar State
@@ -100,13 +100,14 @@ export default function JadwalPage() {
       day: course.hari || '',
       start_time: course.jam_mulai || '',
       end_time: course.jam_selesai || '',
-      room: course.ruangan || course.ruang || ''
+      room: course.ruangan || course.ruang || '',
+      frequency: course.frequency || 'every_week'
     });
   };
 
   const handleCancel = () => {
     setEditingId(null);
-    setFormData({ day: '', start_time: '', end_time: '', room: '' });
+    setFormData({ day: '', start_time: '', end_time: '', room: '', frequency: 'every_week' });
   };
 
   const handleSave = async (courseId) => {
@@ -165,11 +166,30 @@ export default function JadwalPage() {
     let dayOfWeek = dateObj.getDay();
     if (dayOfWeek === 0) dayOfWeek = 7;
 
+    // Calculate ISO-8601 week number
+    const getWeekNumber = (d) => {
+      const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+      const dayNum = date.getUTCDay() || 7;
+      date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+      const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+      return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+    };
+
+    const weekNum = getWeekNumber(dateObj);
+    const isOddWeek = (weekNum % 2) !== 0;
+
     // Filter lecturer's own course schedules
     const dayWeeklySchedules = courses.filter(s => {
       // Map day name to day of week index (Senin = 1, Minggu = 7)
       const dayMap = { 'Senin': 1, 'Selasa': 2, 'Rabu': 3, 'Kamis': 4, 'Jumat': 5, 'Sabtu': 6, 'Minggu': 7 };
-      return dayMap[s.hari] === dayOfWeek;
+      const matchDay = dayMap[s.hari] === dayOfWeek;
+      if (!matchDay) return false;
+
+      const freq = s.frequency || 'every_week';
+      if (freq === 'odd_weeks' && !isOddWeek) return false;
+      if (freq === 'even_weeks' && isOddWeek) return false;
+
+      return true;
     });
     
     const finalAgenda = [];
@@ -293,8 +313,8 @@ export default function JadwalPage() {
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                 <thead>
                   <tr style={{ background: 'rgba(0,0,0,0.04)', borderBottom: '2px solid var(--color-border)' }}>
-                    {['Mata Kuliah', 'SKS', 'Hari', 'Jam', 'Ruang', 'Aksi'].map((h, i) => (
-                      <th key={i} style={{ padding: '16px 20px', fontWeight: '700', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-muted)', whiteSpace: 'nowrap', textAlign: i === 5 ? 'center' : 'left' }}>{h}</th>
+                    {['Mata Kuliah', 'SKS', 'Hari', 'Jam', 'Ruang', 'Frekuensi', 'Aksi'].map((h, i) => (
+                      <th key={i} style={{ padding: '16px 20px', fontWeight: '700', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-muted)', whiteSpace: 'nowrap', textAlign: i === 6 ? 'center' : 'left' }}>{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -346,6 +366,25 @@ export default function JadwalPage() {
                             />
                           ) : (
                             c.ruangan || c.ruang || '-'
+                          )}
+                        </td>
+                        <td style={{ padding: '16px 20px' }}>
+                          {isEditing ? (
+                            <CustomSelect
+                              value={formData.frequency}
+                              onChange={(val) => setFormData({ ...formData, frequency: val })}
+                              placeholder="Frekuensi"
+                              options={[
+                                { label: 'Setiap Minggu', value: 'every_week' },
+                                { label: 'Ganjil Saja', value: 'odd_weeks' },
+                                { label: 'Genap Saja', value: 'even_weeks' }
+                              ]}
+                              style={{ width: '160px' }}
+                            />
+                          ) : (
+                            <span style={{ fontSize: '0.85rem', color: 'var(--color-text)' }}>
+                              {c.frequency === 'odd_weeks' ? 'Ganjil Saja' : c.frequency === 'even_weeks' ? 'Genap Saja' : 'Setiap Minggu'}
+                            </span>
                           )}
                         </td>
                         <td style={{ padding: '16px 20px', textAlign: 'center' }}>

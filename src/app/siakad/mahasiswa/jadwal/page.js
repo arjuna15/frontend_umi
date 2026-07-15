@@ -33,21 +33,22 @@ export default function JadwalKalenderPage() {
           fetch(`${apiUrl}/siakad/calendar`, {
             headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
           }),
-          fetch(`${apiUrl}/siakad/dashboard`, {
+          fetch(`${apiUrl}/siakad/mahasiswa/dashboard`, {
             headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
           })
         ]);
 
         if (dashRes.ok) {
           const dashResult = await dashRes.json();
-          const krsList = dashResult.krs || [];
-          const krsCourseIds = krsList.map(k => k.course_id || k.course?.id).filter(Boolean);
+          const weekly = dashResult.weekly_schedule || [];
+          setSchedules(weekly);
+          
+          const krsCourseIds = weekly.map(w => w.course_id || w.id).filter(Boolean);
           setStudentKrsIds(krsCourseIds);
         }
 
         if (calRes.ok) {
           const payload = await calRes.json();
-          setSchedules(payload.schedules || []);
           setOverrides(payload.overrides || []);
         }
 
@@ -107,12 +108,30 @@ export default function JadwalKalenderPage() {
     let dayOfWeek = dateObj.getDay();
     if (dayOfWeek === 0) dayOfWeek = 7;
 
+    // Calculate ISO-8601 week number
+    const getWeekNumber = (d) => {
+      const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+      const dayNum = date.getUTCDay() || 7;
+      date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+      const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+      return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+    };
+
+    const weekNum = getWeekNumber(dateObj);
+    const isOddWeek = (weekNum % 2) !== 0;
+
     // Match recurring weekly classes on this day of week that belong to student's KRS
     const dayWeeklySchedules = schedules.filter(s => {
       const matchDay = parseInt(s.day_of_week) === dayOfWeek;
-      const courseId = s.course_id || s.course?.id;
-      const isMyKrs = studentKrsIds.includes(courseId);
-      return matchDay && isMyKrs;
+      const courseId = s.course_id || s.course?.id || s.id;
+      const isMyKrs = studentKrsIds.includes(parseInt(courseId));
+      if (!matchDay || !isMyKrs) return false;
+
+      const freq = s.frequency || 'every_week';
+      if (freq === 'odd_weeks' && !isOddWeek) return false;
+      if (freq === 'even_weeks' && isOddWeek) return false;
+
+      return true;
     });
     
     const finalAgenda = [];
@@ -136,9 +155,9 @@ export default function JadwalKalenderPage() {
     dayOverrides.forEach(o => {
       if (o.status === 'swapped' && o.swapped_with_schedule) {
         const sw = o.swapped_with_schedule;
-        const swapCourseId = sw.course_id || sw.course?.id;
+        const swapCourseId = sw.course_id || sw.course?.id || sw.id;
         // Check if swap targets a course the student has in KRS
-        if (studentKrsIds.includes(swapCourseId)) {
+        if (studentKrsIds.includes(parseInt(swapCourseId))) {
           finalAgenda.push({
             id: sw.id,
             title: sw.course_name || sw.course?.name || 'Kuliah Pengganti',
