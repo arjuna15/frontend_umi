@@ -323,9 +323,6 @@ export default function PMBRegistrationPage() {
   const containerStyle = {
     fontFamily: "'Inter', sans-serif",
     minHeight: '100vh',
-    background: isDark 
-      ? 'linear-gradient(to bottom, #020617 0%, #0d1224 50%, #1a2035 100%)' 
-      : 'linear-gradient(to bottom, #ffffff 0%, #f8fafc 50%, #e2e8f0 100%)',
     color: 'var(--color-text)',
     transition: 'all 0.3s ease',
     position: 'relative',
@@ -397,16 +394,13 @@ export default function PMBRegistrationPage() {
   return (
     <div style={containerStyle}>
       {/* Background Ornaments (Glowing Ambient) */}
+      <div className="siakad-page-header-glow" style={{ opacity: isDark ? 0.6 : 0.25 }}></div>
       
       {/* Ornamen Grid Garis Kotak-Kotak (Symmetric 30px Grid Pattern) */}
       <div style={{
         position: 'absolute',
         inset: 0,
         opacity: isDark ? 0.08 : 0.03,
-        backgroundImage: `
-          linear-gradient(var(--color-text) 1px, transparent 1px),
-          linear-gradient(90deg, var(--color-text) 1px, transparent 1px)
-        `,
         backgroundSize: '30px 30px',
         pointerEvents: 'none',
         zIndex: 0

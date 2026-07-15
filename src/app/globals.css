@@ -1023,7 +1023,6 @@ header.top-transparent .glass {
 
 /* -------------------- Testimoni Section -------------------- */
 .testi-section {
-  background: var(--color-background-alt);
   padding: var(--space-8) 0;
   position: relative;
   overflow: hidden;
