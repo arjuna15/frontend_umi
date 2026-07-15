@@ -449,6 +449,49 @@ export default function PMBRegistrationPage() {
           border-color: #fff6 !important;
         }
 
+        /* Responsive Progress Tracker Wizard */
+        .pmb-step-wrapper {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 40px;
+          background: var(--glass-bg);
+          padding: 16px 24px;
+          border-radius: 50px;
+          border: 1px solid var(--color-border);
+        }
+        .pmb-step-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .pmb-step-pill span {
+          white-space: nowrap !important;
+        }
+
+        @media (max-width: 768px) {
+          .pmb-step-wrapper {
+            justify-content: center;
+            border-radius: 24px;
+            padding: 14px 20px;
+          }
+          .pmb-step-item {
+            display: none;
+          }
+          .pmb-step-item.active-step {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+          }
+          .pmb-step-item.active-step span {
+            font-size: 0.95rem !important;
+          }
+          .pmb-step-divider {
+            display: none !important;
+          }
+        }
+
         .custom-select {
           appearance: none !important;
           background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2712%27%20height%3D%2712%27%20viewBox%3D%270%200%2012%2012%27%3E%3Cpath%20fill%3D%27%233b82f6%27%20d%3D%27M6%208L1%203h10z%27%2F%3E%3C%2Fsvg%3E") !important;
@@ -559,9 +602,9 @@ export default function PMBRegistrationPage() {
           <>
             {/* Progress Tracker with Premium Styling */}
             {step <= 5 && (
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '40px', background: 'var(--glass-bg)', padding: '16px 24px', borderRadius: '50px', border: '1px solid var(--color-border)' }}>
+              <div className="pmb-step-wrapper">
                 {stepLabels.map((s, i) => (
-                  <div key={s.num} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div key={s.num} className={`pmb-step-item ${step === s.num ? 'active-step' : ''}`}>
                     <div className="pmb-step-pill" style={{ 
                       display: 'flex', 
                       alignItems: 'center', 
@@ -575,7 +618,7 @@ export default function PMBRegistrationPage() {
                       <i className={s.icon} style={{ fontSize: '1rem', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-muted)' }}></i>
                       <span style={{ fontSize: '0.85rem', fontWeight: '800', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-text)' }}>{s.label}</span>
                     </div>
-                    {i < stepLabels.length - 1 && <span style={{ color: 'var(--color-muted)', fontWeight: '300' }}>→</span>}
+                    {i < stepLabels.length - 1 && <span className="pmb-step-divider" style={{ color: 'var(--color-muted)', fontWeight: '300', marginLeft: '8px' }}>→</span>}
                   </div>
                 ))}
               </div>
