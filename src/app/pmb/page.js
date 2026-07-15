@@ -666,10 +666,11 @@ export default function PMBRegistrationPage() {
                     <p style={{ color: 'var(--color-muted)', margin: 0, fontSize: '0.95rem' }}>{trans.empty_wave_desc}</p>
                   </div>
                 ) : (
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
+                  <div style={{ display: 'flex', justifyContent: periods.length === 1 ? 'center' : 'flex-start', flexWrap: 'wrap', gap: '24px', width: '100%', boxSizing: 'border-box' }}>
                     {periods.map(p => (
                       <div key={p.id} onClick={() => { setSelectedPeriod(p); setStep(2); }} className="pmb-card-period" style={{ 
                         ...cardStyle, 
+                        maxWidth: '360px',
                         cursor: 'pointer', 
                         background: 'var(--color-surface)',
                         borderColor: 'var(--color-border)',
@@ -910,14 +911,14 @@ export default function PMBRegistrationPage() {
                   </div>
                 </div>
 
-                <div style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)', marginBottom: '32px' }}>
+                <div style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)', marginBottom: '32px', boxSizing: 'border-box', width: '100%', overflow: 'hidden' }}>
                   <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}><i className="ph-duotone ph-file-arrow-up" style={{ color: '#10b981' }}></i> {trans.review_docs}</h3>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', boxSizing: 'border-box' }}>
                     {['ijazah', 'foto', 'ktp', 'bukti_bayar'].map(key => (
-                      <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--color-surface)', padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', fontSize: '0.85rem' }}>
-                        <i className="ph ph-check-circle" style={{ color: fileNames[key] ? '#10b981' : 'var(--color-muted)' }}></i>
-                        <span style={{ color: 'var(--color-text)', fontWeight: '700' }}>{key.toUpperCase()}:</span>
-                        <span style={{ color: fileNames[key] ? 'var(--color-text)' : 'var(--color-muted)' }}>{fileNames[key] || 'Belum diupload'}</span>
+                      <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--color-surface)', padding: '10px 16px', borderRadius: '50px', border: '1px solid var(--color-border)', fontSize: '0.85rem', boxSizing: 'border-box', width: '100%', overflow: 'hidden' }}>
+                        <i className="ph ph-check-circle" style={{ color: fileNames[key] ? '#10b981' : 'var(--color-muted)', flexShrink: 0 }}></i>
+                        <span style={{ color: 'var(--color-text)', fontWeight: '700', flexShrink: 0 }}>{key.toUpperCase()}:</span>
+                        <span style={{ color: fileNames[key] ? 'var(--color-text)' : 'var(--color-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1, textAlign: 'left' }}>{fileNames[key] || 'Belum diupload'}</span>
                       </div>
                     ))}
                   </div>
@@ -956,7 +957,7 @@ export default function PMBRegistrationPage() {
                   {trans.success_desc}
                 </p>
 
-                <div style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', padding: '24px 32px', borderRadius: '24px', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '12px', minWidth: '320px', marginBottom: '40px' }}>
+                <div style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', padding: '24px', borderRadius: '24px', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '12px', width: '100%', maxWidth: '360px', boxSizing: 'border-box', marginBottom: '40px' }}>
                   <span style={{ fontSize: '0.8rem', color: 'var(--color-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '1px' }}>{trans.success_reg}</span>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <strong style={{ fontSize: '1.8rem', color: 'var(--color-text)', letterSpacing: '2px', fontWeight: '900' }}>{registrationNumber}</strong>
