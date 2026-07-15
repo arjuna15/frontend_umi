@@ -295,10 +295,31 @@ export default function DosenPresensiPage() {
                           </td>
                           <td style={{ padding: '12px 16px' }}>
                             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '4px' , flexWrap: 'wrap'}}>
-                              <div style={{ display: 'inline-flex', background: 'var(--glass-bg)', borderRadius: '50px', padding: '4px', gap: '4px', border: '1px solid var(--color-border)' }}>
-                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} style={{ background: status === 'present' ? 'white' : 'transparent', color: status === 'present' ? '#059669' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'present' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>H</button>
-                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'excused')} style={{ background: status === 'excused' ? 'white' : 'transparent', color: status === 'excused' ? '#f59e0b' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'excused' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>I</button>
-                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'absent')} style={{ background: status === 'absent' ? 'white' : 'transparent', color: status === 'absent' ? '#dc2626' : '#94a3b8', border: 'none', padding: '6px 12px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: status === 'absent' ? '0 2px 4px rgba(0,0,0,0.05)' : 'none' }}>A</button>
+                              <div style={{ display: 'inline-flex', background: 'rgba(0,0,0,0.1)', borderRadius: '50px', padding: '4px', gap: '4px', border: '1px solid var(--color-border)' }}>
+                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} 
+                                  style={{ 
+                                    background: status === 'present' ? '#10b981' : 'transparent', 
+                                    color: status === 'present' ? 'white' : 'var(--color-muted)', 
+                                    border: 'none', padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', 
+                                    boxShadow: status === 'present' ? '0 2px 6px rgba(16,185,129,0.3)' : 'none',
+                                    transition: 'all 0.15s'
+                                  }}>H</button>
+                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'excused')} 
+                                  style={{ 
+                                    background: status === 'excused' ? '#f59e0b' : 'transparent', 
+                                    color: status === 'excused' ? 'white' : 'var(--color-muted)', 
+                                    border: 'none', padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', 
+                                    boxShadow: status === 'excused' ? '0 2px 6px rgba(245,158,11,0.3)' : 'none',
+                                    transition: 'all 0.15s'
+                                  }}>I</button>
+                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'absent')} 
+                                  style={{ 
+                                    background: status === 'absent' ? '#ef4444' : 'transparent', 
+                                    color: status === 'absent' ? 'white' : 'var(--color-muted)', 
+                                    border: 'none', padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', 
+                                    boxShadow: status === 'absent' ? '0 2px 6px rgba(239,68,68,0.3)' : 'none',
+                                    transition: 'all 0.15s'
+                                  }}>A</button>
                               </div>
                             </div>
                           </td>
