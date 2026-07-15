@@ -69,7 +69,7 @@ export default function DosenDashboard() {
           { label: 'Notifikasi Aktif', value: todos.length, icon: 'ph-bell-ringing', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.15)' },
           { label: 'Semester', value: data.semester || '-', icon: 'ph-graduation-cap', color: '#C41E3A', bg: 'rgba(196, 30, 58, 0.15)', small: true },
         ].map((stat, i) => (
-          <div key={i} className={`siakad-card stagger-${i + 1}`} style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderRadius: '24px' }}>
+          <div key={i} className={`siakad-card stagger-${i + 1}`} style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
             <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: stat.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className={`ph ${stat.icon}`} style={{ fontSize: '1.5rem', color: stat.color }}></i>
             </div>
@@ -82,7 +82,7 @@ export default function DosenDashboard() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-        <div className="siakad-card stagger-2" style={{ overflow: 'hidden' }}>
+        <div className="siakad-card stagger-2" style={{ overflow: 'hidden', border: '1px solid var(--color-border)', borderRadius: '24px' }}>
           <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className="ph ph-clock" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
@@ -91,7 +91,7 @@ export default function DosenDashboard() {
           </div>
           <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {todaySchedules.length > 0 ? todaySchedules.map((sch, i) => (
-               <div key={i} style={{ padding: '16px 20px', background: 'var(--glass-bg)', borderRadius: '50px', borderLeft: '4px solid #C41E3A', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+               <div key={i} style={{ padding: '16px 20px', background: 'var(--glass-bg)', borderRadius: '50px', borderLeft: '4px solid #C41E3A', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', border: '1px solid var(--color-border)' }}>
                 <div>
                   <p style={{ margin: '0 0 4px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '1rem' }}>{sch.course}</p>
                   <div style={{ display: 'flex', gap: '12px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>
@@ -112,7 +112,7 @@ export default function DosenDashboard() {
           </div>
         </div>
 
-        <div className="siakad-card stagger-3" style={{ overflow: 'hidden' }}>
+        <div className="siakad-card stagger-3" style={{ overflow: 'hidden', border: '1px solid var(--color-border)', borderRadius: '24px' }}>
           <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', gap: '12px' }}>
             <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className="ph ph-bell-ringing" style={{ color: '#f59e0b', fontSize: '1.1rem' }}></i>
@@ -126,7 +126,7 @@ export default function DosenDashboard() {
           </div>
           <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {todos.length > 0 ? todos.map((todo, i) => (
-              <div key={i} style={{ padding: '14px 20px', background: 'var(--glass-bg)', borderRadius: '50px', display: 'flex', alignItems: 'center', gap: '12px', borderLeft: '4px solid #f59e0b' }}>
+              <div key={i} style={{ padding: '14px 20px', background: 'var(--glass-bg)', borderRadius: '50px', display: 'flex', alignItems: 'center', gap: '12px', borderLeft: '4px solid #f59e0b', border: '1px solid var(--color-border)' }}>
                 <i className="ph ph-warning-circle" style={{ color: '#f59e0b', fontSize: '1.1rem', flexShrink: 0 }}></i>
                 <span style={{ fontSize: '0.9rem', color: 'var(--color-text)' }}>{todo}</span>
               </div>
@@ -140,7 +140,7 @@ export default function DosenDashboard() {
         </div>
 
         {courses.length > 0 && (
-          <div className="siakad-card stagger-4" style={{ overflow: 'hidden', gridColumn: '1 / -1' }}>
+          <div className="siakad-card stagger-4" style={{ overflow: 'hidden', gridColumn: '1 / -1', border: '1px solid var(--color-border)', borderRadius: '24px' }}>
             <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', backdropFilter: 'blur(12px)', display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <i className="ph ph-books" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
