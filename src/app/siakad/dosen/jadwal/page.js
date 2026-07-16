@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
 import CustomTimePicker from '../../components/CustomTimePicker';
 import SkeletonLoader from '../../components/SkeletonLoader';
+import ModalShell from '../../components/ModalShell';
 
 const DAY_COLORS = {
   Senin: { bg: 'rgba(59,130,246,0.15)', color: '#3b82f6', border: 'rgba(59,130,246,0.3)' },
