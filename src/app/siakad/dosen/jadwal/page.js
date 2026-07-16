@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+import CustomDatePicker from '../../components/CustomDatePicker';
 import CustomTimePicker from '../../components/CustomTimePicker';
 import SkeletonLoader from '../../components/SkeletonLoader';
 import ModalShell from '../../components/ModalShell';
@@ -693,6 +694,17 @@ export default function JadwalPage() {
             </label>
           </div>
 
+          {editForm.editMode === 'session' && (
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tanggal Reschedule (Pindahkan Sesi ke Tanggal Ini)</label>
+              <CustomDatePicker
+                value={editForm.newDate}
+                onChange={(val) => setEditForm({ ...editForm, newDate: val })}
+                placeholder="Pilih tanggal reschedule"
+              />
+            </div>
+          )}
+
           {editForm.editMode === 'permanent' && (
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Hari Mengajar</label>
@@ -716,22 +728,18 @@ export default function JadwalPage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
             <div>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jam Mulai</label>
-              <input 
-                type="text" 
-                className="siakad-input" 
-                value={editForm.jamMulai} 
-                onChange={(e) => setEditForm({ ...editForm, jamMulai: e.target.value })} 
-                placeholder="Contoh: 08:00" 
+              <CustomTimePicker
+                value={editForm.jamMulai}
+                onChange={(val) => setEditForm({ ...editForm, jamMulai: val })}
+                placeholder="Pilih jam mulai"
               />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jam Selesai</label>
-              <input 
-                type="text" 
-                className="siakad-input" 
-                value={editForm.jamSelesai} 
-                onChange={(e) => setEditForm({ ...editForm, jamSelesai: e.target.value })} 
-                placeholder="Contoh: 10:30" 
+              <CustomTimePicker
+                value={editForm.jamSelesai}
+                onChange={(val) => setEditForm({ ...editForm, jamSelesai: val })}
+                placeholder="Pilih jam selesai"
               />
             </div>
           </div>

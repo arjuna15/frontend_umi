@@ -4,6 +4,9 @@ import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
 import CustomSelect from '../../components/CustomSelect';
 import SkeletonLoader from '../../components/SkeletonLoader';
+import CustomDatePicker from '../../components/CustomDatePicker';
+import CustomTimePicker from '../../components/CustomTimePicker';
+
 
 export default function AdminCalendarPage() {
   const router = useRouter();
@@ -23,6 +26,8 @@ export default function AdminCalendarPage() {
   const [saving, setSaving] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
   
+  const [rooms, setRooms] = useState([]);
+  
   const [showEditModal, setShowEditModal] = useState(false);
   const [editForm, setEditForm] = useState({
     course_id: '',
@@ -30,11 +35,29 @@ export default function AdminCalendarPage() {
     jamMulai: '08:00',
     jamSelesai: '10:00',
     ruang: '',
-    editMode: 'permanent'
+    editMode: 'permanent',
+    newDate: ''
   });
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getToken = () => localStorage.getItem('siakad_token');
+
+  const fetchRooms = async () => {
+    const token = getToken();
+    if (!token) return;
+    try {
+      const res = await fetch(`${apiUrl}/siakad/rooms`, {
+        headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setRooms(data || []);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
 
   const fetchCalendarData = async () => {
     const token = getToken();
@@ -69,6 +92,11 @@ export default function AdminCalendarPage() {
       }
     });
   }, [currentDate.getFullYear(), currentDate.getMonth(), router]);
+
+  useEffect(() => {
+    fetchRooms();
+  }, []);
+
 
   const handlePrevMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));

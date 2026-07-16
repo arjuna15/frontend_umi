@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
 import CustomSelect from '../../components/CustomSelect';
 import SkeletonLoader from '../../components/SkeletonLoader';
+import CustomDatePicker from '../../components/CustomDatePicker';
+import CustomTimePicker from '../../components/CustomTimePicker';
 
 export default function KaprodiKalenderPage() {
   const router = useRouter();
@@ -32,6 +34,7 @@ export default function KaprodiKalenderPage() {
   });
   const [saving, setSaving] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
+  const [rooms, setRooms] = useState([]);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getToken = () => localStorage.getItem('siakad_token');
@@ -58,6 +61,22 @@ export default function KaprodiKalenderPage() {
     }
   };
 
+  const fetchRooms = async () => {
+    const token = getToken();
+    if (!token) return;
+    try {
+      const res = await fetch(`${apiUrl}/siakad/rooms`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setRooms(data || []);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
     fetchCalendarData().then(() => {
       const year = currentDate.getFullYear();
@@ -69,6 +88,10 @@ export default function KaprodiKalenderPage() {
       }
     });
   }, [currentDate.getFullYear(), currentDate.getMonth(), router]);
+
+  useEffect(() => {
+    fetchRooms();
+  }, []);
 
   const handlePrevMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
@@ -548,11 +571,10 @@ export default function KaprodiKalenderPage() {
           {editForm.editMode === 'session' && (
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tanggal Reschedule (Pindahkan Sesi ke Tanggal Ini)</label>
-              <input 
-                type="date" 
-                className="siakad-input" 
-                value={editForm.newDate} 
-                onChange={(e) => setEditForm({ ...editForm, newDate: e.target.value })} 
+              <CustomDatePicker
+                value={editForm.newDate}
+                onChange={(val) => setEditForm({ ...editForm, newDate: val })}
+                placeholder="Pilih tanggal reschedule"
               />
             </div>
           )}
@@ -580,34 +602,29 @@ export default function KaprodiKalenderPage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
             <div>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jam Mulai</label>
-              <input 
-                type="text" 
-                className="siakad-input" 
-                value={editForm.jamMulai} 
-                onChange={(e) => setEditForm({ ...editForm, jamMulai: e.target.value })} 
-                placeholder="Contoh: 08:00" 
+              <CustomTimePicker
+                value={editForm.jamMulai}
+                onChange={(val) => setEditForm({ ...editForm, jamMulai: val })}
+                placeholder="Pilih jam mulai"
               />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jam Selesai</label>
-              <input 
-                type="text" 
-                className="siakad-input" 
-                value={editForm.jamSelesai} 
-                onChange={(e) => setEditForm({ ...editForm, jamSelesai: e.target.value })} 
-                placeholder="Contoh: 10:30" 
+              <CustomTimePicker
+                value={editForm.jamSelesai}
+                onChange={(val) => setEditForm({ ...editForm, jamSelesai: val })}
+                placeholder="Pilih jam selesai"
               />
             </div>
           </div>
 
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Ruangan Kelas</label>
-            <input 
-              type="text" 
-              className="siakad-input" 
-              value={editForm.ruang} 
-              onChange={(e) => setEditForm({ ...editForm, ruang: e.target.value })} 
-              placeholder="Contoh: Ruang A.32" 
+            <CustomSelect
+              value={editForm.ruang}
+              onChange={(val) => setEditForm({ ...editForm, ruang: val })}
+              placeholder="-- Pilih Ruangan --"
+              options={rooms.map(r => ({ value: r.name, label: r.name }))}
             />
           </div>
         </ModalShell>
