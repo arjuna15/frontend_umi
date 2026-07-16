@@ -256,9 +256,23 @@ export default function JadwalPage() {
         time: e.time,
         room: e.room,
         lecturer: e.dosen,
-        type: e.status === 'swapped' || e.status === 'swapped_here' || e.status === 'moved_here' ? 'swap' : 'regular',
+        status: e.status || 'normal',
         notes: e.notes
       }));
+  };
+
+  const getBadgeStyle = (status) => {
+    switch (status) {
+      case 'rescheduled':
+        return { bg: 'rgba(245,158,11,0.15)', text: '#f59e0b', label: 'Reschedule Jam/Ruang' };
+      case 'moved_here':
+        return { bg: 'rgba(139,92,246,0.15)', text: '#8b5cf6', label: 'Reschedule Tanggal' };
+      case 'swapped_here':
+      case 'swapped':
+        return { bg: 'rgba(236,72,153,0.15)', text: '#ec4899', label: 'Swap Kelas' };
+      default:
+        return { bg: 'rgba(59,130,246,0.15)', text: '#3b82f6', label: 'Jadwal Mingguan' };
+    }
   };
 
   const selectedDateStr = selectedDay ? `${year}-${String(month + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}` : '';
