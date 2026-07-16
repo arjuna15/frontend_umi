@@ -249,7 +249,7 @@ export default function JadwalPage() {
   const getDayAgenda = (dateStr) => {
     if (!dateStr) return [];
     return events
-      .filter(e => e.date === dateStr)
+      .filter(e => e.date === dateStr && e.status !== 'moved')
       .map(e => ({
         id: e.course_id,
         title: e.course_name,
