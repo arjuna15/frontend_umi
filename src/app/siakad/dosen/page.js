@@ -1,11 +1,20 @@
-'use client';
+"use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { getTranslation } from '../components/i18n';
 
 export default function DosenDashboard() {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [lang, setLang] = useState('id');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedLang = localStorage.getItem('siakad_lang');
+      if (savedLang) setLang(savedLang);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchDashboard = async () => {
@@ -58,15 +67,15 @@ export default function DosenDashboard() {
           <h1 style={{ color: 'white', fontSize: '2.4rem', fontWeight: '900', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>
             Selamat Datang, {data.name?.split(' ')[0] || 'Dosen'} 👋
           </h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0, fontSize: '1.05rem' }}>Berikut ringkasan aktivitas mengajar Anda hari ini.</p>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0, fontSize: '1.05rem' }}>{lang === 'en' ? 'Here is the summary of your teaching activities today.' : 'Berikut ringkasan aktivitas mengajar Anda hari ini.'}</p>
         </div>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         {[
-          { label: 'Total Mata Kuliah', value: courses.length || 0, icon: 'ph-books', color: '#C41E3A', bg: 'rgba(196, 30, 58, 0.15)' },
-          { label: 'Jadwal Hari Ini', value: todaySchedules.length, icon: 'ph-calendar-check', color: '#059669', bg: 'rgba(5, 150, 105, 0.15)' },
-          { label: 'Notifikasi Aktif', value: todos.length, icon: 'ph-bell-ringing', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.15)' },
+          { label: lang === 'en' ? 'Total Courses' : 'Total Mata Kuliah', value: courses.length || 0, icon: 'ph-books', color: '#C41E3A', bg: 'rgba(196, 30, 58, 0.15)' },
+          { label: getTranslation('class_schedule', lang), value: todaySchedules.length, icon: 'ph-calendar-check', color: '#059669', bg: 'rgba(5, 150, 105, 0.15)' },
+          { label: lang === 'en' ? 'Active Notifications' : 'Notifikasi Aktif', value: todos.length, icon: 'ph-bell-ringing', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.15)' },
           { label: 'Semester', value: data.semester || '-', icon: 'ph-graduation-cap', color: '#C41E3A', bg: 'rgba(196, 30, 58, 0.15)', small: true },
         ].map((stat, i) => (
           <div key={i} className={`siakad-card stagger-${i + 1}`} style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
@@ -88,7 +97,7 @@ export default function DosenDashboard() {
             <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className="ph ph-clock" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
             </div>
-            <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Jadwal Mengajar Hari Ini</h3>
+            <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>{lang === 'en' ? "Today's Teaching Schedule" : 'Jadwal Mengajar Hari Ini'}</h3>
           </div>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
@@ -102,13 +111,13 @@ export default function DosenDashboard() {
                   </div>
                 </div>
                 <span style={{ padding: '4px 12px', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>
-                  Sesi {sch.meeting || '?'}
+                  {lang === 'en' ? `Session ${sch.meeting || '?'}` : `Sesi ${sch.meeting || '?'}`}
                 </span>
               </div>
             )) : (
               <div style={{ textAlign: 'center', padding: '32px 0', color: 'var(--color-muted)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
                 <i className="ph ph-calendar-x" style={{ fontSize: '3rem', marginBottom: '8px', opacity: 0.4 }}></i>
-                <p style={{ margin: 0, fontSize: '0.95rem', fontStyle: 'italic' }}>Tidak ada jadwal kelas hari ini.</p>
+                <p style={{ margin: 0, fontSize: '0.95rem', fontStyle: 'italic' }}>{getTranslation('no_schedule', lang)}</p>
               </div>
             )}
           </div>

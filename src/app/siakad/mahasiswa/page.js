@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { getTranslation } from '../components/i18n';
 
 export default function MahasiswaDashboard() {
   const router = useRouter();
@@ -8,6 +9,14 @@ export default function MahasiswaDashboard() {
   const [dashboardExt, setDashboardExt] = useState(null);
   const [gradebook, setGradebook] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [lang, setLang] = useState('id');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedLang = localStorage.getItem('siakad_lang');
+      if (savedLang) setLang(savedLang);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchDashboard = async () => {
@@ -86,15 +95,15 @@ export default function MahasiswaDashboard() {
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
           <div className="siakad-modal-header">
             <div>
-              <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Halo, {data.user.name?.split(' ')[0] || 'Mahasiswa'}!</h1>
-              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Selamat datang kembali di Portal Akademik Anda.</p>
+              <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>{getTranslation('welcome', lang)} {data.user.name?.split(' ')[0] || 'Mahasiswa'}!</h1>
+              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>{lang === 'en' ? 'Welcome back to your Academic Portal.' : 'Selamat datang kembali di Portal Akademik Anda.'}</p>
             </div>
             <div style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', padding: '12px 28px', borderRadius: '50px', display: 'flex', alignItems: 'center', gap: '14px', backdropFilter: 'blur(16px)', boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.15)' }}>
-              <div style={{ width: '42px', height: '42px', background: 'rgba(59, 130, 246, 0.18)', color: '#60a5fa', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' , flexShrink: 0, border: '1px solid rgba(59, 130, 246, 0.25)' }}>
+               <div style={{ width: '42px', height: '42px', background: 'rgba(59, 130, 246, 0.18)', color: '#60a5fa', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' , flexShrink: 0, border: '1px solid rgba(59, 130, 246, 0.25)' }}>
                 <i className="ph ph-identification-card" style={{ color: '#60a5fa' }}></i>
               </div>
               <div>
-                <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '1px' }}>NIM Mahasiswa</p>
+                <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '1px' }}>{getTranslation('nim', lang)}</p>
                 <h3 style={{ margin: 0, fontSize: '1.2rem', color: 'var(--color-text)', fontWeight: '800' }}>{data.user.nim_nip || '-'}</h3>
               </div>
             </div>
@@ -109,7 +118,7 @@ export default function MahasiswaDashboard() {
             <i className="ph ph-student"></i>
           </div>
           <div>
-            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>Program Studi</p>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>{lang === 'en' ? 'Study Program' : 'Program Studi'}</p>
             <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{data.user.prodi || '-'}</h3>
           </div>
         </div>
@@ -118,7 +127,7 @@ export default function MahasiswaDashboard() {
             <i className="ph ph-books"></i>
           </div>
           <div>
-            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>Total SKS Diambil</p>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>{lang === 'en' ? 'Total SKS Enrolled' : 'Total SKS Diambil'}</p>
             <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{totalSKS} <span style={{ fontSize: '0.9rem', fontWeight: 'normal', color: 'var(--color-muted)' }}>SKS</span></h3>
           </div>
         </div>
@@ -127,7 +136,7 @@ export default function MahasiswaDashboard() {
             <i className="ph ph-chart-line-up"></i>
           </div>
           <div>
-            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>IPK Sementara</p>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>{lang === 'en' ? 'Temporary GPA' : 'IPK Sementara'}</p>
             <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{currentIpk}</h3>
           </div>
         </div>
@@ -143,7 +152,7 @@ export default function MahasiswaDashboard() {
               <div style={{ background: '#0f172a', color: 'white', padding: '10px', borderRadius: '12px' }}>
                 <i className="ph ph-calendar-check" style={{ fontSize: '1.4rem' }}></i>
               </div>
-              <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Jadwal Hari Ini</h2>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{getTranslation('class_schedule', lang)}</h2>
             </div>
 
             {dashboardExt.schedule_today?.length > 0 ? (
@@ -161,7 +170,7 @@ export default function MahasiswaDashboard() {
                 ))}
               </div>
             ) : (
-              <p style={{ color: 'var(--color-muted)', fontSize: '0.95rem', margin: 0, fontStyle: 'italic' }}>Tidak ada jadwal kuliah hari ini.</p>
+              <p style={{ color: 'var(--color-muted)', fontSize: '0.95rem', margin: 0, fontStyle: 'italic' }}>{getTranslation('no_schedule', lang)}</p>
             )}
           </div>
 
@@ -171,7 +180,7 @@ export default function MahasiswaDashboard() {
               <div style={{ background: 'rgba(196,30,58,0.1)', color: '#C41E3A', padding: '10px', borderRadius: '12px' }}>
                 <i className="ph ph-warning-circle" style={{ fontSize: '1.4rem' }}></i>
               </div>
-              <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Timeline & Deadline</h2>
+              <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{lang === 'en' ? 'Timeline & Deadlines' : 'Timeline & Deadline'}</h2>
             </div>
 
             {dashboardExt.upcoming_deadlines?.length > 0 ? (
