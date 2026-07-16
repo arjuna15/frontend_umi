@@ -143,7 +143,7 @@ export default function KaprodiKalenderPage() {
           })
         });
       } else {
-        res = await fetch(`${apiUrl}/siakad/courses/${editForm.course_id}/schedule`, {
+        res = await fetch(`${apiUrl}/siakad/kaprodi/courses/${editForm.course_id}/schedule`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
