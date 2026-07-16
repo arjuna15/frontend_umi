@@ -70,14 +70,16 @@ export default function AlumniCareerPage() {
   };
 
   const types = ['full-time', 'part-time', 'contract', 'internship', 'freelance'];
-  const filtered = jobs.filter(j => {
+  const jobsList = Array.isArray(jobs) ? jobs : [];
+
+  const filtered = jobsList.filter(j => {
     const q = search.toLowerCase();
     const matchSearch = !q || (j.position || j.title || '').toLowerCase().includes(q) || (j.company || j.company_name || '').toLowerCase().includes(q) || (j.location || '').toLowerCase().includes(q);
     const matchType = !filterType || j.employment_type === filterType || j.type === filterType;
     return matchSearch && matchType;
   });
 
-  const jobCounts = { total: jobs.length, fulltime: jobs.filter(j => (j.employment_type || j.type) === 'full-time').length, parttime: jobs.filter(j => (j.employment_type || j.type) === 'part-time').length, other: jobs.filter(j => !['full-time', 'part-time'].includes(j.employment_type || j.type)).length };
+  const jobCounts = { total: jobsList.length, fulltime: jobsList.filter(j => (j.employment_type || j.type) === 'full-time').length, parttime: jobsList.filter(j => (j.employment_type || j.type) === 'part-time').length, other: jobsList.filter(j => !['full-time', 'part-time'].includes(j.employment_type || j.type)).length };
 
   const statCards = [
     { label: 'Total Lowongan', value: jobCounts.total, icon: 'ph ph-briefcase', color: '#3b82f6', bg: 'rgba(59,130,246,0.1)' },
