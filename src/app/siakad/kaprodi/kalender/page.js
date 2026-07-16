@@ -107,13 +107,17 @@ export default function KaprodiKalenderPage() {
   };
 
   const handleSaveSchedule = async () => {
-    if (!editForm.course_id || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
-      window.toast?.('Harap lengkapi semua isian jadwal!');
-      return;
-    }
-    if (editForm.editMode === 'permanent' && !editForm.hari) {
-      window.toast?.('Harap lengkapi semua isian jadwal!');
-      return;
+    const isPermanent = editForm.editMode === 'permanent';
+    if (isPermanent) {
+      if (!editForm.course_id || !editForm.hari || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
+        window.toast?.('Harap lengkapi semua isian jadwal!');
+        return;
+      }
+    } else {
+      if (!editForm.course_id || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
+        window.toast?.('Harap lengkapi semua isian jadwal!');
+        return;
+      }
     }
     setSaving(true);
     try {
@@ -268,36 +272,36 @@ export default function KaprodiKalenderPage() {
           .siakad-card {
             padding: 16px !important;
           }
-          .segmented-control {
-            display: flex;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
-            padding: 4px;
-            gap: 4px;
-            margin-bottom: 20px;
-          }
-          .segment-btn {
-            flex: 1;
-            padding: 10px 14px;
-            border: none;
-            background: transparent;
-            color: var(--color-muted);
-            font-size: 0.85rem;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-          }
-          .segment-btn.active {
-            background: var(--color-primary, #3b82f6);
-            color: white;
-            box-shadow: 0 4px 12px rgba(59,130,246,0.3);
-          }
+        }
+        .segmented-control {
+          display: flex;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid var(--color-border);
+          border-radius: 12px;
+          padding: 4px;
+          gap: 4px;
+          margin-bottom: 20px;
+        }
+        .segment-btn {
+          flex: 1;
+          padding: 10px 14px;
+          border: none;
+          background: transparent;
+          color: var(--color-muted);
+          font-size: 0.85rem;
+          font-weight: 700;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+        }
+        .segment-btn.active {
+          background: var(--color-primary, #3b82f6);
+          color: white;
+          box-shadow: 0 4px 12px rgba(59,130,246,0.3);
         }
       `}} />
       <div className="siakad-page-header">

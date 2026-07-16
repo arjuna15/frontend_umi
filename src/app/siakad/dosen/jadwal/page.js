@@ -33,7 +33,8 @@ export default function JadwalPage() {
     jamSelesai: '10:00',
     ruang: '',
     frequency: 'every_week',
-    editMode: 'permanent'
+    editMode: 'permanent',
+    newDate: ''
   });
 
   // Calendar State
@@ -46,13 +47,17 @@ export default function JadwalPage() {
   const getToken = () => localStorage.getItem('siakad_token');
 
   const handleSaveFromCalendar = async () => {
-    if (!editForm.course_id || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
-      window.toast && window.toast('Harap lengkapi semua isian jadwal!');
-      return;
-    }
-    if (editForm.editMode === 'permanent' && !editForm.hari) {
-      window.toast && window.toast('Harap lengkapi semua isian jadwal!');
-      return;
+    const isPermanent = editForm.editMode === 'permanent';
+    if (isPermanent) {
+      if (!editForm.course_id || !editForm.hari || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
+        window.toast && window.toast('Harap lengkapi semua isian jadwal!');
+        return;
+      }
+    } else {
+      if (!editForm.course_id || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
+        window.toast && window.toast('Harap lengkapi semua isian jadwal!');
+        return;
+      }
     }
     setSaving(true);
     const token = getToken();
@@ -68,9 +73,9 @@ export default function JadwalPage() {
             original_schedule_id: editForm.course_id,
             override_date: dateStr,
             status: 'moved',
-            new_date: dateStr,
+            new_date: editForm.newDate || dateStr,
             new_time: `${editForm.jamMulai} - ${editForm.jamSelesai}`,
-            notes: `Reschedule sesi: Jam diubah menjadi ${editForm.jamMulai} - ${editForm.jamSelesai}, Ruang: ${editForm.ruang}`
+            notes: `Reschedule sesi ke ${editForm.newDate || dateStr} (Jam: ${editForm.jamMulai} - ${editForm.jamSelesai}, Ruang: ${editForm.ruang})`
           })
         });
         if (res.ok) {
@@ -273,6 +278,46 @@ export default function JadwalPage() {
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
       <style dangerouslySetInnerHTML={{__html: `
+        .segmented-control {
+          display: flex;
+          background: rgba(0, 0, 0, 0.05);
+          border-radius: 12px;
+          padding: 4px;
+          gap: 4px;
+          border: 1px solid var(--color-border);
+          margin-bottom: 20px;
+        }
+        [data-theme='dark'] .segmented-control, .dark .segmented-control {
+          background: rgba(255, 255, 255, 0.05);
+        }
+        .segment-btn {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 10px 14px;
+          border: none;
+          background: transparent;
+          color: var(--color-muted);
+          font-size: 0.85rem;
+          font-weight: 600;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .segment-btn:hover {
+          color: var(--color-text);
+          background: rgba(0, 0, 0, 0.02);
+        }
+        [data-theme='dark'] .segment-btn:hover, .dark .segment-btn:hover {
+          background: rgba(255, 255, 255, 0.02);
+        }
+        .segment-btn.active {
+          background: #3b82f6;
+          color: white;
+          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
         .calendar-responsive-container {
           display: grid;
           grid-template-columns: 1fr;
@@ -597,7 +642,8 @@ export default function JadwalPage() {
                               jamSelesai: originalCourse?.jam_selesai || '10:00',
                               ruang: originalCourse?.ruangan || originalCourse?.ruang || '',
                               frequency: originalCourse?.frequency || 'every_week',
-                              editMode: 'permanent'
+                              editMode: 'permanent',
+                              newDate: selectedDateStr
                             });
                             setShowEditModal(true);
                           }}
