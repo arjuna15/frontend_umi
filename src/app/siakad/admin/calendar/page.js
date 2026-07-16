@@ -46,7 +46,7 @@ export default function AdminCalendarPage() {
     const token = getToken();
     if (!token) return;
     try {
-      const res = await fetch(`${apiUrl}/siakad/rooms`, {
+      const res = await fetch(`${apiUrl}/siakad/admin/classrooms`, {
         headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
       });
       if (res.ok) {
@@ -290,15 +290,23 @@ export default function AdminCalendarPage() {
           box-sizing: border-box;
         }
         @media (max-width: 480px) {
+          .calendar-grid {
+            max-width: 290px;
+            gap: 4px;
+            margin: 0 auto;
+          }
           .day-cell {
-            padding: 4px;
-            border-radius: 8px;
-            max-width: 40px;
-            height: 40px;
+            padding: 3px;
+            border-radius: 6px;
+            max-width: 36px;
+            height: 36px;
             aspect-ratio: 1;
           }
           .day-cell span {
-            font-size: 0.8rem !important;
+            font-size: 0.75rem !important;
+          }
+          .siakad-card {
+            padding: 12px !important;
           }
         }
         .calendar-grid {
@@ -306,12 +314,6 @@ export default function AdminCalendarPage() {
           grid-template-columns: repeat(7, 1fr);
           gap: 6px;
           width: 100%;
-        }
-        @media (max-width: 480px) {
-          .calendar-grid {
-            max-width: 320px;
-            margin: 0 auto;
-          }
         }
       `}} />
 

@@ -65,7 +65,7 @@ export default function KaprodiKalenderPage() {
     const token = getToken();
     if (!token) return;
     try {
-      const res = await fetch(`${apiUrl}/siakad/rooms`, {
+      const res = await fetch(`${apiUrl}/siakad/admin/classrooms`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.ok) {
