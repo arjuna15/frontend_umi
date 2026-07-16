@@ -240,7 +240,23 @@ export default function DosenGradebookPage() {
 
       if (res.ok) {
         const payload = await res.json();
-        await fetchDashboard();
+        
+        // Update local state instantly
+        setData(prev => {
+          if (!prev || !prev.jadwal) return prev;
+          const updatedJadwal = prev.jadwal.map(c => {
+            if (c.id === courseId) {
+              const updatedGrades = (c.grades || []).map(g => ({
+                ...g,
+                is_published: !currentPublishStatus
+              }));
+              return { ...c, grades: updatedGrades };
+            }
+            return c;
+          });
+          return { ...prev, jadwal: updatedJadwal };
+        });
+
         window.toast(payload.message || 'Nilai berhasil dipublikasikan!');
       } else {
         window.toast('Gagal mengubah status publikasi nilai.');
