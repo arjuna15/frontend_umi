@@ -24,6 +24,16 @@ export default function JadwalPage() {
   const [formData, setFormData] = useState({ day: '', start_time: '', end_time: '', room: '', frequency: 'every_week' });
   const [saving, setSaving] = useState(false);
 
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editForm, setEditForm] = useState({
+    course_id: '',
+    hari: 'Senin',
+    jamMulai: '08:00',
+    jamSelesai: '10:00',
+    ruang: '',
+    frequency: 'every_week'
+  });
+
   // Calendar State
   const [currentDate, setCurrentDate] = useState(new Date());
   const [overrides, setOverrides] = useState([]);
@@ -31,6 +41,41 @@ export default function JadwalPage() {
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getToken = () => localStorage.getItem('siakad_token');
+
+  const handleSaveFromCalendar = async () => {
+    if (!editForm.course_id || !editForm.hari || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
+      window.toast && window.toast('Harap lengkapi semua isian jadwal!');
+      return;
+    }
+    setSaving(true);
+    const token = getToken();
+    try {
+      const res = await fetch(`${apiUrl}/siakad/dosen/jadwal/update`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          course_id: editForm.course_id,
+          day: editForm.hari,
+          start_time: editForm.jamMulai,
+          end_time: editForm.jamSelesai,
+          room: editForm.ruang,
+          frequency: editForm.frequency
+        })
+      });
+      if (res.ok) {
+        window.toast && window.toast('Jadwal mengajar berhasil diperbarui!');
+        setShowEditModal(false);
+        fetchCourses();
+      } else {
+        const err = await res.json();
+        window.toast && window.toast('Gagal: ' + (err.message || 'Error'));
+      }
+    } catch (err) {
+      window.toast && window.toast('Error: ' + err.message);
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const fetchCourses = async () => {
     const token = getToken();
@@ -512,7 +557,37 @@ export default function JadwalPage() {
                       </span>
                       <span style={{ fontSize: '0.82rem', fontFamily: 'monospace', color: 'var(--color-text)', fontWeight: 'bold' }}>{agenda.time}</span>
                     </div>
-                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{agenda.title}</h4>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                      <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{agenda.title}</h4>
+                      {agenda.type === 'regular' && (
+                        <button
+                          onClick={() => {
+                            const originalCourse = courses.find(c => c.id === agenda.id);
+                            setEditForm({
+                              course_id: agenda.id,
+                              hari: originalCourse?.hari || 'Senin',
+                              jamMulai: originalCourse?.jam_mulai || '08:00',
+                              jamSelesai: originalCourse?.jam_selesai || '10:00',
+                              ruang: originalCourse?.ruangan || originalCourse?.ruang || '',
+                              frequency: originalCourse?.frequency || 'every_week'
+                            });
+                            setShowEditModal(true);
+                          }}
+                          style={{
+                            background: 'rgba(255,255,255,0.05)',
+                            border: '1px solid rgba(255,255,255,0.1)',
+                            borderRadius: '50%',
+                            width: '28px', height: '28px',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            color: 'var(--color-text)', cursor: 'pointer',
+                            transition: 'all 0.2s'
+                          }}
+                          title="Ubah Jadwal"
+                        >
+                          <i className="ph ph-pencil-simple" style={{ fontSize: '0.95rem' }}></i>
+                        </button>
+                      )}
+                    </div>
                     <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-door"></i> Ruang {agenda.room}</p>
                     {agenda.notes && <p style={{ margin: '6px 0 0 0', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', fontSize: '0.8rem', color: '#f59e0b' }}><strong>Catatan:</strong> {agenda.notes}</p>}
                   </div>
@@ -522,6 +597,82 @@ export default function JadwalPage() {
           </div>
         )}
       </div>
+
+      {showEditModal && (
+        <ModalShell title="Ubah Jadwal Mengajar" icon="ph-calendar" onClose={() => setShowEditModal(false)} footer={
+          <>
+            <button onClick={() => setShowEditModal(false)} style={{ padding: '10px 20px', border: 'none', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+            <button onClick={handleSaveFromCalendar} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
+              {saving ? 'Menyimpan...' : 'Simpan Perubahan'}
+            </button>
+          </>
+        }>
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Hari Mengajar</label>
+            <CustomSelect
+              value={editForm.hari}
+              onChange={(val) => setEditForm({ ...editForm, hari: val })}
+              placeholder="-- Pilih Hari --"
+              options={[
+                { value: 'Senin', label: 'Senin' },
+                { value: 'Selasa', label: 'Selasa' },
+                { value: 'Rabu', label: 'Rabu' },
+                { value: 'Kamis', label: 'Kamis' },
+                { value: 'Jumat', label: 'Jumat' },
+                { value: 'Sabtu', label: 'Sabtu' },
+                { value: 'Minggu', label: 'Minggu' }
+              ]}
+            />
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jam Mulai</label>
+              <input 
+                type="text" 
+                className="siakad-input" 
+                value={editForm.jamMulai} 
+                onChange={(e) => setEditForm({ ...editForm, jamMulai: e.target.value })} 
+                placeholder="Contoh: 08:00" 
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jam Selesai</label>
+              <input 
+                type="text" 
+                className="siakad-input" 
+                value={editForm.jamSelesai} 
+                onChange={(e) => setEditForm({ ...editForm, jamSelesai: e.target.value })} 
+                placeholder="Contoh: 10:30" 
+              />
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Ruangan Kelas</label>
+            <CustomSelect
+              value={editForm.ruang}
+              onChange={(val) => setEditForm({ ...editForm, ruang: val })}
+              placeholder="-- Pilih Ruangan --"
+              options={roomOptions}
+            />
+          </div>
+
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Frekuensi Mengajar</label>
+            <CustomSelect
+              value={editForm.frequency}
+              onChange={(val) => setEditForm({ ...editForm, frequency: val })}
+              placeholder="Frekuensi"
+              options={[
+                { label: 'Setiap Minggu', value: 'every_week' },
+                { label: 'Ganjil Saja', value: 'odd_weeks' },
+                { label: 'Genap Saja', value: 'even_weeks' }
+              ]}
+            />
+          </div>
+        </ModalShell>
+      )}
     </div>
   );
 }
