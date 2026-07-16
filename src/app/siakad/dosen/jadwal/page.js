@@ -388,6 +388,36 @@ export default function JadwalPage() {
           gap: 6px;
           width: 100%;
         }
+        .segmented-control {
+          display: flex;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid var(--color-border);
+          border-radius: 12px;
+          padding: 4px;
+          gap: 4px;
+          margin-bottom: 20px;
+        }
+        .segment-btn {
+          flex: 1;
+          padding: 10px 14px;
+          border: none;
+          background: transparent;
+          color: var(--color-muted);
+          font-size: 0.85rem;
+          font-weight: 700;
+          border-radius: 8px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 6px;
+        }
+        .segment-btn.active {
+          background: var(--color-primary, #3b82f6);
+          color: white;
+          box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+        }
       `}} />
       {/* Hero Header */}
       <div className="siakad-page-header">
@@ -698,16 +728,21 @@ export default function JadwalPage() {
             </button>
           </>
         }>
-          <div style={{ marginBottom: '20px', padding: '14px', borderRadius: '14px', background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.15)' }}>
-            <p style={{ margin: '0 0 10px 0', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)' }}>Cakupan Perubahan</p>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-text)' }}>
-              <input type="radio" name="editMode" checked={editForm.editMode === 'permanent'} onChange={() => setEditForm({ ...editForm, editMode: 'permanent' })} style={{ accentColor: '#3b82f6' }} />
-              Ubah permanen untuk seluruh semester
-            </label>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--color-text)' }}>
-              <input type="radio" name="editMode" checked={editForm.editMode === 'session'} onChange={() => setEditForm({ ...editForm, editMode: 'session' })} style={{ accentColor: '#f59e0b' }} />
-              Hanya ubah untuk sesi tanggal {selectedDateStr || 'ini'} saja
-            </label>
+          <div className="segmented-control">
+            <button
+              type="button"
+              className={`segment-btn ${editForm.editMode === 'permanent' ? 'active' : ''}`}
+              onClick={() => setEditForm({ ...editForm, editMode: 'permanent' })}
+            >
+              <i className="ph ph-calendar-arrows"></i> Selamanya (Reguler)
+            </button>
+            <button
+              type="button"
+              className={`segment-btn ${editForm.editMode === 'session' ? 'active' : ''}`}
+              onClick={() => setEditForm({ ...editForm, editMode: 'session' })}
+            >
+              <i className="ph ph-clock"></i> Hanya Sesi Tanggal ini
+            </button>
           </div>
 
           {editForm.editMode === 'session' && (
