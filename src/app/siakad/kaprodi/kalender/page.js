@@ -218,6 +218,7 @@ export default function KaprodiKalenderPage() {
           grid-template-columns: 1fr;
           gap: 24px;
           padding: 16px;
+          align-items: start;
         }
         @media (min-width: 768px) {
           .calendar-responsive-container {
