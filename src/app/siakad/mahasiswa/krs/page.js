@@ -14,6 +14,7 @@ export default function KRSPage() {
   const [krsOpen, setKrsOpen] = useState(true);
   const [semesterSetting, setSemesterSetting] = useState('Semester aktif');
   const [searchQuery, setSearchQuery] = useState('');
+  const [billingError, setBillingError] = useState(null);
   const currentSemester = data?.semester || semesterSetting || 'Semester aktif';
 
   const fetchDashboard = async () => {
@@ -35,9 +36,17 @@ export default function KRSPage() {
       if (result.user.role !== 'mahasiswa') return router.push('/siakad/login');
       
       setData(result);
-      const availData = await availRes.json();
-      setAvailableCourses(availData);
-      
+
+      if (availRes.status === 402) {
+        const errObj = await availRes.json();
+        setBillingError(errObj.message || 'Pendaftaran KRS terkunci karena kendala tagihan.');
+        setAvailableCourses([]);
+      } else {
+        const availData = await availRes.json();
+        setAvailableCourses(availData);
+        setBillingError(null);
+      }
+
       const subData = await subRes.json();
       setSubmission(subData);
 
@@ -73,6 +82,11 @@ export default function KRSPage() {
   };
 
   const handleSubmit = async () => {
+    if (billingError) {
+      window.toast(billingError);
+      return;
+    }
+
     if (selectedCourses.length === 0) {
       window.toast('Pilih minimal satu mata kuliah!');
       return;
@@ -101,7 +115,8 @@ export default function KRSPage() {
         window.toast('KRS berhasil diajukan! Menunggu persetujuan Kaprodi.');
         fetchDashboard();
       } else {
-        window.toast('Gagal mengajukan KRS');
+        const errObj = await res.json();
+        window.toast(errObj.message || 'Gagal mengajukan KRS');
       }
     } catch (err) {
       window.toast('Error: ' + err.message);
@@ -140,6 +155,16 @@ export default function KRSPage() {
           <div>
             <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '1rem', fontWeight: 'bold' }}>Periode Pengisian KRS Ditutup</p>
             <p style={{ margin: '4px 0 0 0', color: 'var(--color-text)', fontSize: '0.9rem' }}>Saat ini Anda tidak dapat mengisi atau mengubah KRS. Silakan hubungi Admin atau Kaprodi jika ada pertanyaan.</p>
+          </div>
+        </div>
+      )}
+
+      {billingError && (
+        <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: '12px', padding: '18px 22px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '14px', borderLeft: '4px solid #ef4444' }}>
+          <i className="ph ph-warning-octagon" style={{ color: '#ef4444', fontSize: '1.8rem' }}></i>
+          <div>
+            <p style={{ margin: 0, color: '#ef4444', fontSize: '1rem', fontWeight: 'bold' }}>Akses KRS Terkunci</p>
+            <p style={{ margin: '4px 0 0 0', color: 'var(--color-text)', fontSize: '0.9rem' }}>{billingError}</p>
           </div>
         </div>
       )}

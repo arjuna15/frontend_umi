@@ -30,7 +30,12 @@ function QuizContent() {
         if (res.ok) {
           const result = await res.json();
           setQuizData(result);
-          if (result.duration_minutes) {
+          
+          // Persistent Time Recovery
+          const savedTime = localStorage.getItem(`siakad_quiz_time_${quizId}`);
+          if (savedTime !== null) {
+            setTimeLeft(parseInt(savedTime, 10));
+          } else if (result.duration_minutes) {
             setTimeLeft(result.duration_minutes * 60);
           }
         }
@@ -48,20 +53,48 @@ function QuizContent() {
 
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
-        if (prev <= 1) {
+        const nextTime = prev - 1;
+        if (nextTime <= 0) {
           clearInterval(timer);
-          handleSubmit(new Event('submit'));
+          autoSubmitAnswers();
           return 0;
         }
-        return prev - 1;
+        localStorage.setItem(`siakad_quiz_time_${quizId}`, String(nextTime));
+        return nextTime;
       });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [loading, result]);
+  }, [loading, result, answers, quizId]);
 
   const handleAnswer = (questionId, optionKey) => {
     setAnswers(prev => ({ ...prev, [questionId]: optionKey }));
+  };
+
+  const autoSubmitAnswers = async () => {
+    setSubmitting(true);
+    const token = localStorage.getItem('siakad_token');
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      const res = await fetch(`${apiUrl}/siakad/mahasiswa/quizzes/${quizId}/submit`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ answers })
+      });
+      if (res.ok) {
+        const resultData = await res.json();
+        setResult(resultData);
+        localStorage.removeItem(`siakad_quiz_time_${quizId}`);
+        window.toast && window.toast('Waktu habis! Jawaban Anda telah disubmit otomatis.');
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -84,6 +117,7 @@ function QuizContent() {
       if (res.ok) {
         const resultData = await res.json();
         setResult(resultData);
+        localStorage.removeItem(`siakad_quiz_time_${quizId}`);
       }
     } catch (err) {
       console.error(err);

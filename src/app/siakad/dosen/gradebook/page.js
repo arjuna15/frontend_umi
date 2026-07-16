@@ -223,6 +223,36 @@ export default function DosenGradebookPage() {
     }
   };
 
+  const [publishing, setPublishing] = useState(false);
+
+  const handlePublishGrades = async (courseId, currentPublishStatus) => {
+    setPublishing(true);
+    const token = getToken();
+    try {
+      const res = await fetch(`${apiUrl}/siakad/dosen/gradebook/publish`, {
+        method: 'POST',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ course_id: courseId, is_published: !currentPublishStatus })
+      });
+
+      if (res.ok) {
+        const payload = await res.json();
+        await fetchDashboard();
+        window.toast(payload.message || 'Nilai berhasil dipublikasikan!');
+      } else {
+        window.toast('Gagal mengubah status publikasi nilai.');
+      }
+    } catch (err) {
+      console.error(err);
+      window.toast('Error: ' + err.message);
+    } finally {
+      setPublishing(false);
+    }
+  };
+
   const handleExportCSV = (course) => {
     if (!course || !course.grades) return;
     const header = ["NIM", "Nama", "Kehadiran", "Tugas", "UTS", "UAS", "Nilai Akhir", "Grade"];
@@ -342,11 +372,23 @@ export default function DosenGradebookPage() {
           return name.includes(query) || nim.includes(query);
         });
         
+        const isPublished = (course.grades && course.grades.length > 0) ? (course.grades[0].is_published || false) : false;
+
         return (
           <div key={course.id} className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
             <div style={{ background: 'var(--glass-bg)', borderBottom: '1px solid var(--color-border)', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               <div>
-                <h2 style={{ color: 'var(--color-text)', margin: '0 0 4px 0', fontSize: '1.25rem' }}>{course.name}</h2>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+                  <h2 style={{ color: 'var(--color-text)', margin: 0, fontSize: '1.25rem' }}>{course.name}</h2>
+                  <span style={{ 
+                    padding: '4px 10px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 'bold',
+                    background: isPublished ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)',
+                    color: isPublished ? '#10b981' : '#f59e0b',
+                    border: `1px solid ${isPublished ? 'rgba(16,185,129,0.3)' : 'rgba(245,158,11,0.3)'}`
+                  }}>
+                    {isPublished ? 'Terpublikasi' : 'Draf'}
+                  </span>
+                </div>
                 <p style={{ color: 'var(--color-muted)', margin: 0, fontSize: '0.9rem' }}>{course.semester} • {course.sks} SKS</p>
               </div>
               
@@ -369,7 +411,8 @@ export default function DosenGradebookPage() {
                   style={{ display: 'none' }} 
                   onChange={(e) => handleImportCSV(e, course)}
                 />
-                              <button onClick={() => setShowWeightModal(true)} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                
+                <button onClick={() => setShowWeightModal(true)} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
                   <i className="ph ph-sliders"></i> Atur Bobot
                 </button>
 
@@ -379,6 +422,23 @@ export default function DosenGradebookPage() {
                 
                 <button onClick={() => handleExportCSV(course)} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
                   <i className="ph ph-download-simple"></i> Export CSV
+                </button>
+
+                <button 
+                  onClick={() => handlePublishGrades(course.id, isPublished)}
+                  disabled={publishing}
+                  style={{
+                    background: isPublished ? 'rgba(239, 68, 68, 0.15)' : 'rgba(59, 130, 246, 0.15)',
+                    color: isPublished ? '#ef4444' : '#3b82f6',
+                    border: `1px solid ${isPublished ? 'rgba(239,68,68,0.3)' : 'rgba(59,130,246,0.3)'}`,
+                    padding: '10px 20px', 
+                    borderRadius: '50px', cursor: publishing ? 'not-allowed' : 'pointer', fontWeight: 'bold',
+                    display: 'flex', alignItems: 'center', gap: '8px',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  <i className={publishing ? "ph-spinner ph-spin" : isPublished ? "ph ph-eye-slash" : "ph ph-eye"}></i> 
+                  {publishing ? 'Memproses...' : isPublished ? 'Tarik Publikasi' : 'Publikasikan Nilai'}
                 </button>
 
                 <button 
