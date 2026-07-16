@@ -163,7 +163,8 @@ export default function KaprodiKalenderPage() {
         setShowEditModal(false);
         fetchCalendarData();
       } else {
-        window.toast?.('Gagal memperbarui jadwal.');
+        const errJson = await res.json().catch(() => ({}));
+        window.toast?.('Gagal: ' + (errJson.message || 'Gagal memperbarui jadwal.'));
       }
     } catch (e) {
       console.error(e);
