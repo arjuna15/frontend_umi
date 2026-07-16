@@ -226,11 +226,21 @@ export default function KaprodiKalenderPage() {
             padding: 24px;
           }
         }
+        .calendar-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 6px;
+          width: 100%;
+        }
+        @media (max-width: 480px) {
+          .calendar-grid {
+            max-width: 320px;
+            margin: 0 auto;
+          }
+        }
         .day-cell {
           aspect-ratio: 1;
           width: 100%;
-          max-width: 50px;
-          margin: 0 auto;
           border-radius: 10px;
           border: 1px solid var(--color-border);
           background: rgba(128,128,128,0.06);
@@ -284,13 +294,13 @@ export default function KaprodiKalenderPage() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '6px', textAlign: 'center', marginBottom: '8px', width: '100%', maxWidth: '350px', margin: '0 auto' }}>
+          <div className="calendar-grid" style={{ textAlign: 'center', marginBottom: '8px' }}>
             {['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'].map(d => (
               <span key={d} style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--color-muted)', textTransform: 'uppercase' }}>{d}</span>
             ))}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '6px', width: '100%', maxWidth: '350px', margin: '0 auto' }}>
+          <div className="calendar-grid">
             {daysGrid.map((item, idx) => {
               const isToday = new Date().toDateString() === new Date(item.dateStr).toDateString();
               const isSelected = selectedDay === item.day;
