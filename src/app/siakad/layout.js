@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../context/ThemeContext';
 import { ToastContainer, ConfirmModal, PromptModal, FormModal } from './components/Toast';
+import { getTranslation } from './components/i18n';
 import './siakad.css';
 
 export default function SiakadLayout({ children }) {
@@ -19,6 +20,20 @@ export default function SiakadLayout({ children }) {
   const [showMobileNotifs, setShowMobileNotifs] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [menuSearch, setMenuSearch] = useState('');
+  const [lang, setLang] = useState('id');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedLang = localStorage.getItem('siakad_lang');
+      if (savedLang) setLang(savedLang);
+    }
+  }, []);
+
+  const changeLanguage = (newLang) => {
+    setLang(newLang);
+    localStorage.setItem('siakad_lang', newLang);
+    window.location.reload();
+  };
 
   const role = session.role;
   const portalRole = session.portalRole;
@@ -292,6 +307,46 @@ export default function SiakadLayout({ children }) {
     ];
   }
 
+  // Translate labels dynamically
+  menuItems = menuItems.map(item => {
+    let key = '';
+    const labelLower = item.label.toLowerCase();
+    
+    if (labelLower.includes('dash')) key = 'dashboard';
+    else if (labelLower.includes('transkrip') || labelLower.includes('rapor') || labelLower.includes('gradebook')) key = 'gradebook';
+    else if (labelLower.includes('krs') && !labelLower.includes('setuju')) key = 'krs';
+    else if (labelLower.includes('persetujuan krs') || labelLower.includes('approve')) key = 'krs_approval';
+    else if (labelLower.includes('presensi') || labelLower.includes('kehadiran')) key = 'presensi';
+    else if (labelLower.includes('elearning') || labelLower.includes('kuis') || labelLower.includes('elearning')) key = 'elearning';
+    else if (labelLower.includes('proctoring') || labelLower.includes('ujian')) key = 'proctoring';
+    else if (labelLower.includes('bimbingan')) key = 'bimbingan';
+    else if (labelLower.includes('wisuda') || labelLower.includes('yudisium')) key = 'wisuda';
+    else if (labelLower.includes('surat')) key = 'surat';
+    else if (labelLower.includes('skpi') || labelLower.includes('prestasi')) key = 'skpi';
+    else if (labelLower.includes('edom') || labelLower.includes('evaluasi')) key = 'edom';
+    else if (labelLower.includes('keuangan') || labelLower.includes('tagihan')) key = 'keuangan';
+    else if (labelLower.includes('chat') || labelLower.includes('diskusi')) key = 'chat';
+    else if (labelLower.includes('career') || labelLower.includes('karir') || labelLower.includes('lowongan')) key = 'career';
+    else if (labelLower.includes('profil')) key = 'profile';
+    else if (labelLower.includes('litabmas')) key = 'litabmas';
+    else if (labelLower.includes('kepegawaian') || labelLower.includes('hrd')) key = 'kepegawaian';
+    else if (labelLower.includes('kerjasama') || labelLower.includes('mitra')) key = 'kerjasama';
+    else if (labelLower.includes('rpl')) key = 'rpl';
+    else if (labelLower.includes('crm') || labelLower.includes('camaba')) key = 'crm';
+    else if (labelLower.includes('ppg')) key = 'ppg';
+    else if (labelLower.includes('perpustakaan') || labelLower.includes('slims')) key = 'perpustakaan';
+    else if (labelLower.includes('feeder') || labelLower.includes('pddikti')) key = 'feeder';
+    else if (labelLower.includes('mutu') || labelLower.includes('qa')) key = 'qa';
+    else if (labelLower.includes('backup')) key = 'backup';
+    else if (labelLower.includes('audit') || labelLower.includes('log')) key = 'logs';
+    else if (labelLower.includes('sistem') || labelLower.includes('pengaturan')) key = 'setting';
+
+    if (key) {
+      return { ...item, label: getTranslation(key, lang) };
+    }
+    return item;
+  });
+
   return (
     <div className="siakad-container">
       <ToastContainer />
@@ -410,6 +465,44 @@ export default function SiakadLayout({ children }) {
         {/* Sleek Glass Header */}
         <header className="siakad-header" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '16px' }}>
           
+          {/* Language Switcher */}
+          <div style={{ display: 'flex', gap: '8px', background: 'var(--glass-bg)', padding: '4px 8px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.4)', alignItems: 'center' }}>
+            <button 
+              onClick={() => changeLanguage('id')} 
+              style={{
+                background: lang === 'id' ? 'rgba(255,255,255,0.2)' : 'transparent',
+                border: 'none',
+                borderRadius: '50%',
+                width: '28px', height: '28px',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'all 0.2s',
+                opacity: lang === 'id' ? 1 : 0.6
+              }}
+              title="Bahasa Indonesia"
+            >
+              🇮🇩
+            </button>
+            <button 
+              onClick={() => changeLanguage('en')} 
+              style={{
+                background: lang === 'en' ? 'rgba(255,255,255,0.2)' : 'transparent',
+                border: 'none',
+                borderRadius: '50%',
+                width: '28px', height: '28px',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'all 0.2s',
+                opacity: lang === 'en' ? 1 : 0.6
+              }}
+              title="English"
+            >
+              🇬🇧
+            </button>
+          </div>
+
           <div style={{ position: 'relative' }}>
             <button 
               onClick={() => setShowNotif(!showNotif)} 
