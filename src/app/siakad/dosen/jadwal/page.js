@@ -137,7 +137,7 @@ export default function JadwalPage() {
     const token = getToken();
     if (!token) return;
     try {
-      const res = await fetch(`${apiUrl}/siakad/admin/classrooms`, {
+      const res = await fetch(`${apiUrl}/siakad/admin/classrooms?portal=dosen`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -155,7 +155,7 @@ export default function JadwalPage() {
     try {
       const year = currentDate.getFullYear();
       const month = currentDate.getMonth() + 1;
-      const res = await fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
+      const res = await fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}&portal=dosen`, {
         headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
       });
       if (res.ok) {
@@ -281,7 +281,7 @@ export default function JadwalPage() {
   const monthsMap = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
   const configuredCount = courses.filter(c => c.hari).length;
-  const roomOptions = classrooms.map(r => ({ label: r.name, value: r.name }));
+  const roomOptions = classrooms.map(r => ({ value: r.name, label: r.name }));
 
   if (loading) return (
     <div style={{ padding: '24px' }}>
