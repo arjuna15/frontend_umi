@@ -227,6 +227,9 @@ export default function KaprodiKalenderPage() {
         }
         .day-cell {
           aspect-ratio: 1;
+          width: 100%;
+          max-width: 50px;
+          margin: 0 auto;
           border-radius: 10px;
           border: 1px solid var(--color-border);
           background: rgba(128,128,128,0.06);
@@ -237,11 +240,15 @@ export default function KaprodiKalenderPage() {
           padding: 6px;
           position: relative;
           transition: all 0.15s ease;
+          box-sizing: border-box;
         }
         @media (max-width: 480px) {
           .day-cell {
             padding: 4px;
             border-radius: 8px;
+            max-width: 40px;
+            height: 40px;
+            aspect-ratio: 1;
           }
           .day-cell span {
             font-size: 0.8rem !important;
@@ -276,13 +283,13 @@ export default function KaprodiKalenderPage() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '6px', textAlign: 'center', marginBottom: '8px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '6px', textAlign: 'center', marginBottom: '8px', width: '100%', maxWidth: '350px', margin: '0 auto' }}>
             {['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'].map(d => (
               <span key={d} style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--color-muted)', textTransform: 'uppercase' }}>{d}</span>
             ))}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '6px', flex: 1 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '6px', width: '100%', maxWidth: '350px', margin: '0 auto' }}>
             {daysGrid.map((item, idx) => {
               const isToday = new Date().toDateString() === new Date(item.dateStr).toDateString();
               const isSelected = selectedDay === item.day;
