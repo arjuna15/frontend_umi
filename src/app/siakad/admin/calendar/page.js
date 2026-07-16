@@ -372,7 +372,7 @@ export default function AdminCalendarPage() {
                   </span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
-                  <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 'bold', color: 'white' }}>{agenda.title}</h4>
+                  <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{agenda.title}</h4>
                   {agenda.type === 'regular' && (
                     <button
                       onClick={() => {
