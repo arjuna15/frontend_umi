@@ -216,6 +216,43 @@ export default function AdminCalendarPage() {
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        .calendar-responsive-container {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 24px;
+          padding: 16px;
+        }
+        @media (min-width: 768px) {
+          .calendar-responsive-container {
+            grid-template-columns: 1.2fr 0.8fr;
+            padding: 24px;
+          }
+        }
+        .day-cell {
+          aspect-ratio: 1;
+          border-radius: 10px;
+          border: 1px solid var(--color-border);
+          background: rgba(128,128,128,0.06);
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding: 6px;
+          position: relative;
+          transition: all 0.15s ease;
+        }
+        @media (max-width: 480px) {
+          .day-cell {
+            padding: 4px;
+            border-radius: 8px;
+          }
+          .day-cell span {
+            font-size: 0.8rem !important;
+          }
+        }
+      `}} />
+
       <div className="siakad-page-header">
         <div className="siakad-page-header-glow"></div>
         <div className="siakad-page-header-grid"></div>
@@ -226,7 +263,7 @@ export default function AdminCalendarPage() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', padding: '24px' }}>
+      <div className="calendar-responsive-container">
         {/* Kalender Bulanan */}
         <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
@@ -261,18 +298,11 @@ export default function AdminCalendarPage() {
                 <div
                   key={idx}
                   onClick={() => item.day && setSelectedDay(item.day)}
+                  className="day-cell"
                   style={{
-                    aspectRatio: '1',
-                    borderRadius: '12px',
-                    border: isSelected ? '2px solid #3b82f6' : '1px solid var(--color-border)',
-                    background: isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(128,128,128,0.2)' : 'rgba(128,128,128,0.06)'),
+                    border: isSelected ? '2px solid #3b82f6' : undefined,
+                    background: isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(128,128,128,0.2)' : undefined),
                     cursor: item.day ? 'pointer' : 'default',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    padding: '8px',
-                    position: 'relative',
-                    transition: 'all 0.15s ease'
                   }}
                 >
                   <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#3b82f6' : 'var(--color-text)') : 'transparent' }}>{item.day}</span>
