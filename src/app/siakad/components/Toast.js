@@ -8,7 +8,8 @@ export const toast = (message, type = 'success') => {
     if (type === 'success' && (message.toLowerCase().includes('gagal') || message.toLowerCase().includes('error'))) {
       type = 'error';
     }
-    const event = new CustomEvent('siakad_toast', { detail: { id: Date.now(), message, type } });
+    const uniqueId = Date.now() + '-' + Math.random().toString(36).substring(2, 9);
+    const event = new CustomEvent('siakad_toast', { detail: { id: uniqueId, message, type } });
     window.dispatchEvent(event);
   } else {
     console.log(`[Toast ${type}] ${message}`);

@@ -32,61 +32,64 @@ export default function JadwalPage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getToken = () => localStorage.getItem('siakad_token');
 
-  useEffect(() => {
+  const fetchCourses = async () => {
+    const token = getToken();
+    if (!token) return router.push('/siakad/login');
+    try {
+      const res = await fetch(`${apiUrl}/siakad/dosen/roster`, { headers: { 'Authorization': `Bearer ${token}` } });
+      if (res.ok) {
+        const result = await res.json();
+        setCourses(result.courses || []);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchClassrooms = async () => {
     const token = getToken();
     if (!token) return;
-
-    const fetchCourses = async () => {
-      try {
-        const res = await fetch(`${apiUrl}/siakad/dosen/roster`, { headers: { 'Authorization': `Bearer ${token}` } });
-        if (res.ok) {
-          const result = await res.json();
-          setCourses(result.courses || []);
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
+    try {
+      const res = await fetch(`${apiUrl}/siakad/admin/classrooms`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setClassrooms(data || []);
       }
-    };
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-    const fetchClassrooms = async () => {
-      try {
-        const res = await fetch(`${apiUrl}/siakad/admin/classrooms`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        if (res.ok) {
-          const data = await res.json();
-          setClassrooms(data || []);
-        }
-      } catch (err) {
-        console.error(err);
+  const fetchOverrides = async () => {
+    const token = getToken();
+    if (!token) return;
+    try {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+      const res = await fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
+        headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
+      });
+      if (res.ok) {
+        const payload = await res.json();
+        setOverrides(payload.overrides || []);
       }
-    };
-
-    const fetchOverrides = async () => {
-      try {
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth() + 1;
-        const res = await fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
-          headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
-        });
-        if (res.ok) {
-          const payload = await res.json();
-          setOverrides(payload.overrides || []);
-        }
-        
-        const today = new Date();
-        if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
-          setSelectedDay(today.getDate());
-        } else {
-          setSelectedDay(1);
-        }
-      } catch (e) {
-        console.error(e);
+      
+      const today = new Date();
+      if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
+        setSelectedDay(today.getDate());
+      } else {
+        setSelectedDay(1);
       }
-    };
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
+  useEffect(() => {
     fetchCourses();
     fetchClassrooms();
     fetchOverrides();
