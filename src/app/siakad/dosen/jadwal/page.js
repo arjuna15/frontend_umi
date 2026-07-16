@@ -576,7 +576,7 @@ export default function JadwalPage() {
                   const isToday = new Date().toDateString() === new Date(item.dateStr).toDateString();
                   const isSelected = selectedDay === item.day;
                   const agenda = getDayAgenda(item.dateStr);
-                  const hasSwap = agenda.some(a => a.type === 'swap');
+                  const hasSwap = agenda.some(a => a.status !== 'normal');
                   const hasClass = agenda.length > 0;
 
                   return (
