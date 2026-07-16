@@ -38,6 +38,7 @@ export default function JadwalPage() {
 
   // Calendar State
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [events, setEvents] = useState([]);
   const [overrides, setOverrides] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
 
@@ -153,6 +154,7 @@ export default function JadwalPage() {
       });
       if (res.ok) {
         const payload = await res.json();
+        setEvents(payload.events || []);
         setOverrides(payload.overrides || []);
       }
       
@@ -238,77 +240,19 @@ export default function JadwalPage() {
     daysGrid.push({ day: d, dateStr: formattedDate });
   }
 
-  // Get active schedule for day for this lecturer
   const getDayAgenda = (dateStr) => {
     if (!dateStr) return [];
-    const dayOverrides = overrides.filter(o => o.override_date === dateStr);
-    
-    const dateObj = new Date(dateStr);
-    let dayOfWeek = dateObj.getDay();
-    if (dayOfWeek === 0) dayOfWeek = 7;
-
-    // Calculate ISO-8601 week number
-    const getWeekNumber = (d) => {
-      const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-      const dayNum = date.getUTCDay() || 7;
-      date.setUTCDate(date.getUTCDate() + 4 - dayNum);
-      const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-      return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
-    };
-
-    const weekNum = getWeekNumber(dateObj);
-    const isOddWeek = (weekNum % 2) !== 0;
-
-    // Filter lecturer's own course schedules
-    const dayWeeklySchedules = courses.filter(s => {
-      // Map day name to day of week index (Senin = 1, Minggu = 7)
-      const dayMap = { 'Senin': 1, 'Selasa': 2, 'Rabu': 3, 'Kamis': 4, 'Jumat': 5, 'Sabtu': 6, 'Minggu': 7 };
-      const matchDay = dayMap[s.hari] === dayOfWeek;
-      if (!matchDay) return false;
-
-      const freq = s.frequency || 'every_week';
-      if (freq === 'odd_weeks' && !isOddWeek) return false;
-      if (freq === 'even_weeks' && isOddWeek) return false;
-
-      return true;
-    });
-    
-    const finalAgenda = [];
-
-    // Filter weekly schedules that are NOT cancelled/swapped out
-    dayWeeklySchedules.forEach(s => {
-      const isOverridden = dayOverrides.some(o => o.original_schedule_id === s.id);
-      if (!isOverridden) {
-        finalAgenda.push({
-          id: s.id,
-          title: s.course_name || s.name || 'Kuliah',
-          time: s.jam_mulai ? `${s.jam_mulai} - ${s.jam_selesai || ''}` : '-',
-          room: s.ruangan || s.ruang || '-',
-          type: 'regular'
-        });
-      }
-    });
-
-    // Add swap additions where this lecturer's course is the target swap
-    dayOverrides.forEach(o => {
-      if (o.status === 'swapped' && o.swapped_with_schedule) {
-        const sw = o.swapped_with_schedule;
-        // Check if swapped_with_schedule belongs to this lecturer
-        const ownCourse = courses.find(c => c.id === sw.id);
-        if (ownCourse) {
-          finalAgenda.push({
-            id: sw.id,
-            title: sw.course_name || sw.course?.name || 'Kuliah Pengganti',
-            time: o.new_time || sw.start_time,
-            room: sw.room_name || sw.room?.name || '-',
-            type: 'swap',
-            notes: o.notes
-          });
-        }
-      }
-    });
-
-    return finalAgenda;
+    return events
+      .filter(e => e.date === dateStr)
+      .map(e => ({
+        id: e.course_id,
+        title: e.course_name,
+        time: e.time,
+        room: e.room,
+        lecturer: e.dosen,
+        type: e.status === 'swapped' || e.status === 'swapped_here' || e.status === 'moved_here' ? 'swap' : 'regular',
+        notes: e.notes
+      }));
   };
 
   const selectedDateStr = selectedDay ? `${year}-${String(month + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}` : '';

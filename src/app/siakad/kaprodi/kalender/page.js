@@ -11,6 +11,7 @@ export default function KaprodiKalenderPage() {
   const [loading, setLoading] = useState(true);
   const [schedules, setSchedules] = useState([]);
   const [overrides, setOverrides] = useState([]);
+  const [events, setEvents] = useState([]);
   const [showSwapModal, setShowSwapModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [swapForm, setSwapForm] = useState({
@@ -46,6 +47,7 @@ export default function KaprodiKalenderPage() {
       });
       if (!res.ok) throw new Error('Failed to fetch calendar');
       const payload = await res.json();
+      setEvents(payload.events || []);
       setSchedules(payload.schedules || []);
       setOverrides(payload.overrides || []);
     } catch (e) {
@@ -184,44 +186,17 @@ export default function KaprodiKalenderPage() {
   // Get active schedule for day
   const getDayAgenda = (dateStr) => {
     if (!dateStr) return [];
-    const dayOverrides = overrides.filter(o => o.override_date === dateStr);
-    const dateObj = new Date(dateStr);
-    let dayOfWeek = dateObj.getDay();
-    if (dayOfWeek === 0) dayOfWeek = 7;
-
-    const dayWeeklySchedules = schedules.filter(s => parseInt(s.day_of_week) === dayOfWeek);
-    const finalAgenda = [];
-
-    dayWeeklySchedules.forEach(s => {
-      const isOverridden = dayOverrides.some(o => o.original_schedule_id === s.id);
-      if (!isOverridden) {
-        finalAgenda.push({
-          id: s.id,
-          title: s.course_name || s.course?.name || 'Kuliah',
-          time: s.start_time,
-          room: s.room_name || s.room?.name || '-',
-          lecturer: s.lecturer_name || s.lecturer?.name || '-',
-          type: 'regular'
-        });
-      }
-    });
-
-    dayOverrides.forEach(o => {
-      if (o.status === 'swapped' && o.swapped_with_schedule) {
-        const sw = o.swapped_with_schedule;
-        finalAgenda.push({
-          id: sw.id,
-          title: sw.course_name || sw.course?.name || 'Kuliah Pengganti',
-          time: o.new_time || sw.start_time,
-          room: sw.room_name || sw.room?.name || '-',
-          lecturer: sw.lecturer_name || sw.lecturer?.name || '-',
-          type: 'swap',
-          notes: o.notes
-        });
-      }
-    });
-
-    return finalAgenda;
+    return events
+      .filter(e => e.date === dateStr)
+      .map(e => ({
+        id: e.course_id,
+        title: e.course_name,
+        time: e.time,
+        room: e.room,
+        lecturer: e.dosen,
+        type: e.status === 'swapped' || e.status === 'swapped_here' || e.status === 'moved_here' ? 'swap' : 'regular',
+        notes: e.notes
+      }));
   };
 
   const selectedDateStr = selectedDay ? `${year}-${String(month + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}` : '';
