@@ -65,7 +65,7 @@ export default function WisudaMahasiswaPage() {
     </div>
   );
 
-  const verifiedYuds = yudisiums.filter(y => y.status === 'verified' && !wisudas.some(w => w.yudisium_registration_id === y.id));
+  const verifiedYuds = (Array.isArray(yudisiums) ? yudisiums : []).filter(y => y.status === 'verified' && !(Array.isArray(wisudas) ? wisudas : []).some(w => w.yudisium_registration_id === y.id));
 
   return (
     <div className="fade-in">
