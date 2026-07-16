@@ -638,15 +638,23 @@ export default function KaprodiKalenderPage() {
             </div>
           </div>
 
-          <div style={{ marginBottom: '16px' }}>
-            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Ruangan Kelas</label>
-            <CustomSelect
-              value={editForm.ruang}
-              onChange={(val) => setEditForm({ ...editForm, ruang: val })}
-              placeholder="-- Pilih Ruangan --"
-              options={rooms.map(r => ({ value: r.name, label: r.name }))}
-            />
-          </div>
+          {(() => {
+            const currentEditingCourse = schedules.find(c => c.id == editForm.course_id);
+            const currentCampusLocation = currentEditingCourse?.campus_location || 'bintaro';
+            const filteredRooms = rooms.filter(r => (r.campus_location || 'bintaro') === currentCampusLocation);
+            const roomOptions = filteredRooms.map(r => ({ value: r.name, label: r.name }));
+            return (
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Ruangan Kelas</label>
+                <CustomSelect
+                  value={editForm.ruang}
+                  onChange={(val) => setEditForm({ ...editForm, ruang: val })}
+                  placeholder="-- Pilih Ruangan --"
+                  options={roomOptions}
+                />
+              </div>
+            );
+          })()}
         </ModalShell>
       )}
     </div>
