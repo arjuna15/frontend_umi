@@ -9,7 +9,7 @@ export default function AdminRuanganPage() {
   const [ruangan, setRuangan] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editFormData, setEditFormData] = useState({ id: '', name: '', capacity: '', building: '', type: 'Teori' });
+  const [editFormData, setEditFormData] = useState({ id: '', name: '', capacity: '', building: '', type: 'Teori', campus_location: 'bintaro' });
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -32,7 +32,8 @@ export default function AdminRuanganPage() {
           name: r.name,
           capacity: r.capacity,
           building: r.code,
-          type: r.type || 'Teori'
+          type: r.type || 'Teori',
+          campus_location: r.campus_location || 'bintaro'
         }));
         setRuangan(mapped);
       }
@@ -52,7 +53,8 @@ export default function AdminRuanganPage() {
       code: editFormData.building,
       name: editFormData.name,
       capacity: parseInt(editFormData.capacity),
-      type: editFormData.type
+      type: editFormData.type,
+      campus_location: editFormData.campus_location || 'bintaro'
     };
 
     try {
@@ -112,7 +114,7 @@ export default function AdminRuanganPage() {
   };
 
   const openAddModal = () => {
-    setEditFormData({ id: '', name: '', capacity: '', building: '', type: 'Teori' });
+    setEditFormData({ id: '', name: '', capacity: '', building: '', type: 'Teori', campus_location: 'bintaro' });
     setIsEditModalOpen(true);
   };
 
@@ -154,6 +156,7 @@ export default function AdminRuanganPage() {
                 <th style={{ padding: '16px' }}>Kode / Gedung</th>
                 <th style={{ padding: '16px' }}>Kapasitas</th>
                 <th style={{ padding: '16px' }}>Tipe</th>
+                <th style={{ padding: '16px' }}>Lokasi Kampus</th>
                 <th style={{ padding: '16px', textAlign: 'right' }}>Aksi</th>
               </tr>
             </thead>
@@ -165,14 +168,15 @@ export default function AdminRuanganPage() {
                   return (
                     r.name?.toLowerCase().includes(query) ||
                     r.building?.toLowerCase().includes(query) ||
-                    r.type?.toLowerCase().includes(query)
+                    r.type?.toLowerCase().includes(query) ||
+                    r.campus_location?.toLowerCase().includes(query)
                   );
                 });
 
                 if (filtered.length === 0) {
                   return (
                     <tr>
-                      <td colSpan="5" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data ruangan.</td>
+                      <td colSpan="6" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data ruangan.</td>
                     </tr>
                   );
                 }
@@ -194,6 +198,16 @@ export default function AdminRuanganPage() {
                         width: '130px',
                         textAlign: 'center'
                       }}>{r.type}</span>
+                    </td>
+                    <td style={{ padding: '16px', fontWeight: '600' }}>
+                      <span style={{ 
+                        background: r.campus_location === 'pasar_minggu' ? 'rgba(236,72,153,0.15)' : 'rgba(59,130,246,0.15)', 
+                        color: r.campus_location === 'pasar_minggu' ? '#ec4899' : '#3b82f6', 
+                        padding: '4px 10px', 
+                        borderRadius: '10px',
+                        fontSize: '0.8rem',
+                        textTransform: 'capitalize'
+                      }}>{r.campus_location === 'pasar_minggu' ? 'Pasar Minggu' : 'Bintaro'}</span>
                     </td>
                     <td style={{ padding: '16px', textAlign: 'right' }}>
                       <button onClick={() => { setEditFormData(r); setIsEditModalOpen(true); }} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', marginRight: '8px' }}><i className="ph ph-pencil-simple"></i></button>
@@ -242,6 +256,17 @@ export default function AdminRuanganPage() {
                   { value: "Laboratorium", label: "Laboratorium" },
                   { value: "Aula", label: "Aula" },
                   { value: "Seminar", label: "Seminar" }
+                ]}
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Lokasi Kampus</label>
+              <CustomSelect 
+                value={editFormData.campus_location || 'bintaro'} 
+                onChange={val => setEditFormData({...editFormData, campus_location: val})} 
+                options={[
+                  { value: "bintaro", label: "Bintaro" },
+                  { value: "pasar_minggu", label: "Pasar Minggu" }
                 ]}
               />
             </div>
