@@ -226,9 +226,23 @@ export default function AdminCalendarPage() {
         time: e.time,
         room: e.room,
         lecturer: e.dosen,
-        type: e.status === 'swapped' || e.status === 'swapped_here' || e.status === 'moved_here' ? 'swap' : 'regular',
+        status: e.status || 'normal',
         notes: e.notes
       }));
+  };
+
+  const getBadgeStyle = (status) => {
+    switch (status) {
+      case 'rescheduled':
+        return { bg: 'rgba(245,158,11,0.15)', text: '#f59e0b', label: 'Reschedule Jam/Ruang' };
+      case 'moved_here':
+        return { bg: 'rgba(139,92,246,0.15)', text: '#8b5cf6', label: 'Reschedule Tanggal' };
+      case 'swapped_here':
+      case 'swapped':
+        return { bg: 'rgba(236,72,153,0.15)', text: '#ec4899', label: 'Swap Kelas' };
+      default:
+        return { bg: 'rgba(59,130,246,0.15)', text: '#3b82f6', label: 'Jadwal Mingguan' };
+    }
   };
 
   const selectedDateStr = selectedDay ? `${year}-${String(month + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}` : '';
@@ -339,7 +353,7 @@ export default function AdminCalendarPage() {
               const isToday = new Date().toDateString() === new Date(item.dateStr).toDateString();
               const isSelected = selectedDay === item.day;
               const agenda = getDayAgenda(item.dateStr);
-              const hasSwap = agenda.some(a => a.type === 'swap');
+              const hasSwap = agenda.some(a => a.status !== 'normal');
               const hasClass = agenda.length > 0;
 
               return (
@@ -410,20 +424,25 @@ export default function AdminCalendarPage() {
                   padding: '16px', 
                   borderRadius: '16px', 
                   background: 'var(--glass-bg)', 
-                  borderLeft: `4px solid ${agenda.type === 'swap' ? '#f59e0b' : '#3b82f6'}`,
+                  borderLeft: `4px solid ${getBadgeStyle(agenda.status).text}`,
                   borderTop: '1px solid var(--color-border)',
                   borderRight: '1px solid var(--color-border)',
                   borderBottom: '1px solid var(--color-border)'
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
-                  <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: agenda.type === 'swap' ? 'rgba(245,158,11,0.15)' : 'rgba(59,130,246,0.15)', color: agenda.type === 'swap' ? '#f59e0b' : '#3b82f6' }}>
-                    {agenda.type === 'swap' ? 'Jadwal Dialihkan (Swap)' : 'Jadwal Mingguan'}
-                  </span>
+                  {(() => {
+                    const badge = getBadgeStyle(agenda.status);
+                    return (
+                      <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: badge.bg, color: badge.text }}>
+                        {badge.label}
+                      </span>
+                    );
+                  })()}
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                   <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{agenda.title}</h4>
-                  {agenda.type === 'regular' && (
+                  {agenda.status === 'normal' && (
                     <button
                       onClick={() => {
                         const originalCourse = schedules.find(s => s.id === agenda.id);

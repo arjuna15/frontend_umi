@@ -632,21 +632,21 @@ export default function JadwalPage() {
                       padding: '16px', 
                       borderRadius: '16px', 
                       background: 'var(--glass-bg)', 
-                      borderLeft: `4px solid ${agenda.type === 'swap' ? '#f59e0b' : '#3b82f6'}`,
+                      borderLeft: `4px solid ${getBadgeStyle(agenda.status).text}`,
                       borderTop: '1px solid var(--color-border)',
                       borderRight: '1px solid var(--color-border)',
                       borderBottom: '1px solid var(--color-border)'
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
-                      <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: agenda.type === 'swap' ? 'rgba(245,158,11,0.15)' : 'rgba(59,130,246,0.15)', color: agenda.type === 'swap' ? '#f59e0b' : '#3b82f6' }}>
-                        {agenda.type === 'swap' ? 'Jadwal Pengganti (Swap)' : 'Jadwal Reguler'}
+                      <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: getBadgeStyle(agenda.status).bg, color: getBadgeStyle(agenda.status).text }}>
+                        {getBadgeStyle(agenda.status).label}
                       </span>
                       <span style={{ fontSize: '0.82rem', fontFamily: 'monospace', color: 'var(--color-text)', fontWeight: 'bold' }}>{agenda.time}</span>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                       <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{agenda.title}</h4>
-                      {agenda.type === 'regular' && (
+                      {agenda.status === 'normal' && (
                         <button
                           onClick={() => {
                             const originalCourse = courses.find(c => c.id === agenda.id);
