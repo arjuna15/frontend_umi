@@ -21,42 +21,50 @@ export default function AdminCalendarPage() {
   });
   const [saving, setSaving] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
+  
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editForm, setEditForm] = useState({
+    course_id: '',
+    hari: 'Senin',
+    jamMulai: '08:00',
+    jamSelesai: '10:00',
+    ruang: ''
+  });
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getToken = () => localStorage.getItem('siakad_token');
 
-  useEffect(() => {
+  const fetchCalendarData = async () => {
     const token = getToken();
     if (!token) return router.push('/siakad/login');
+    setLoading(true);
+    try {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+      const res = await fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
+        headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
+      });
+      if (!res.ok) throw new Error('Failed to fetch calendar');
+      const payload = await res.json();
+      setSchedules(payload.schedules || []);
+      setOverrides(payload.overrides || []);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const fetchCalendarData = async () => {
-      setLoading(true);
-      try {
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth() + 1;
-        const res = await fetch(`${apiUrl}/siakad/schedules/calendar?year=${year}&month=${month}`, {
-          headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' }
-        });
-        if (!res.ok) throw new Error('Failed to fetch calendar');
-        const payload = await res.json();
-        setSchedules(payload.schedules || []);
-        setOverrides(payload.overrides || []);
-        
-        // Default select today if in the current month
-        const today = new Date();
-        if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
-          setSelectedDay(today.getDate());
-        } else {
-          setSelectedDay(1);
-        }
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setLoading(false);
+  useEffect(() => {
+    fetchCalendarData().then(() => {
+      const year = currentDate.getFullYear();
+      const today = new Date();
+      if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
+        setSelectedDay(today.getDate());
+      } else {
+        setSelectedDay(1);
       }
-    };
-
-    fetchCalendarData();
+    });
   }, [currentDate.getFullYear(), currentDate.getMonth(), router]);
 
   const handlePrevMonth = () => {
@@ -86,6 +94,42 @@ export default function AdminCalendarPage() {
         fetchCalendarData();
       } else {
         window.toast?.('Gagal menyimpan penukaran jadwal.');
+      }
+    } catch (e) {
+      console.error(e);
+      window.toast?.('Terjadi kesalahan koneksi.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleSaveSchedule = async () => {
+    if (!editForm.course_id || !editForm.hari || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
+      window.toast?.('Harap lengkapi semua isian jadwal!');
+      return;
+    }
+    setSaving(true);
+    try {
+      const res = await fetch(`${apiUrl}/siakad/courses/${editForm.course_id}/schedule`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`,
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          hari: editForm.hari,
+          jamMulai: editForm.jamMulai,
+          jamSelesai: editForm.jamSelesai,
+          ruang: editForm.ruang
+        })
+      });
+      if (res.ok) {
+        window.toast?.('Jadwal perkuliahan berhasil diperbarui secara permanen!');
+        setShowEditModal(false);
+        fetchCalendarData();
+      } else {
+        window.toast?.('Gagal memperbarui jadwal.');
       }
     } catch (e) {
       console.error(e);
@@ -300,9 +344,37 @@ export default function AdminCalendarPage() {
                   <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: agenda.type === 'swap' ? 'rgba(245,158,11,0.15)' : 'rgba(59,130,246,0.15)', color: agenda.type === 'swap' ? '#f59e0b' : '#3b82f6' }}>
                     {agenda.type === 'swap' ? 'Jadwal Dialihkan (Swap)' : 'Jadwal Mingguan'}
                   </span>
-                  <span style={{ fontSize: '0.82rem', fontFamily: 'monospace', color: 'white', fontWeight: 'bold' }}>{agenda.time}</span>
                 </div>
-                <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', fontWeight: 'bold', color: 'white' }}>{agenda.title}</h4>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                  <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: 'bold', color: 'white' }}>{agenda.title}</h4>
+                  {agenda.type === 'regular' && (
+                    <button
+                      onClick={() => {
+                        const originalCourse = schedules.find(s => s.id === agenda.id);
+                        setEditForm({
+                          course_id: agenda.id,
+                          hari: originalCourse?.hari || 'Senin',
+                          jamMulai: originalCourse?.jam_mulai || '08:00',
+                          jamSelesai: originalCourse?.jam_selesai || '10:00',
+                          ruang: originalCourse?.ruang || ''
+                        });
+                        setShowEditModal(true);
+                      }}
+                      style={{
+                        background: 'rgba(255,255,255,0.05)',
+                        border: '1px solid rgba(255,255,255,0.1)',
+                        borderRadius: '50%',
+                        width: '28px', height: '28px',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        color: 'var(--color-text)', cursor: 'pointer',
+                        transition: 'all 0.2s'
+                      }}
+                      title="Ubah Jadwal Permanen"
+                    >
+                      <i className="ph ph-pencil-simple" style={{ fontSize: '0.95rem' }}></i>
+                    </button>
+                  )}
+                </div>
                 <p style={{ margin: '0 0 4px 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-user"></i> {agenda.lecturer}</p>
                 <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-door"></i> Ruang {agenda.room}</p>
                 {agenda.notes && <p style={{ margin: '6px 0 0 0', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', fontSize: '0.8rem', color: '#f59e0b' }}><strong>Info:</strong> {agenda.notes}</p>}
@@ -362,6 +434,69 @@ export default function AdminCalendarPage() {
               placeholder="Contoh: Pertemuan diganti karena tanggal merah"
               rows={3}
               style={{ resize: 'vertical' }}
+            />
+          </div>
+        </ModalShell>
+      )}
+
+      {showEditModal && (
+        <ModalShell title="Ubah Jadwal Kuliah Permanen" icon="ph-calendar" onClose={() => setShowEditModal(false)} footer={
+          <>
+            <button onClick={() => setShowEditModal(false)} style={{ padding: '10px 20px', border: 'none', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+            <button onClick={handleSaveSchedule} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
+              {saving ? 'Menyimpan...' : 'Simpan Perubahan'}
+            </button>
+          </>
+        }>
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Hari Mengajar</label>
+            <CustomSelect
+              value={editForm.hari}
+              onChange={(val) => setEditForm({ ...editForm, hari: val })}
+              placeholder="-- Pilih Hari --"
+              options={[
+                { value: 'Senin', label: 'Senin' },
+                { value: 'Selasa', label: 'Selasa' },
+                { value: 'Rabu', label: 'Rabu' },
+                { value: 'Kamis', label: 'Kamis' },
+                { value: 'Jumat', label: 'Jumat' },
+                { value: 'Sabtu', label: 'Sabtu' },
+                { value: 'Minggu', label: 'Minggu' }
+              ]}
+            />
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jam Mulai</label>
+              <input 
+                type="text" 
+                className="siakad-input" 
+                value={editForm.jamMulai} 
+                onChange={(e) => setEditForm({ ...editForm, jamMulai: e.target.value })} 
+                placeholder="Contoh: 08:00" 
+              />
+            </div>
+            <div>
+              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jam Selesai</label>
+              <input 
+                type="text" 
+                className="siakad-input" 
+                value={editForm.jamSelesai} 
+                onChange={(e) => setEditForm({ ...editForm, jamSelesai: e.target.value })} 
+                placeholder="Contoh: 10:30" 
+              />
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '16px' }}>
+            <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Ruangan Kelas</label>
+            <input 
+              type="text" 
+              className="siakad-input" 
+              value={editForm.ruang} 
+              onChange={(e) => setEditForm({ ...editForm, ruang: e.target.value })} 
+              placeholder="Contoh: Ruang A.32" 
             />
           </div>
         </ModalShell>
