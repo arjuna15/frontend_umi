@@ -37,7 +37,41 @@ export const translations = {
     qa: "Mutu & IKU Kampus",
     backup: "Backup & Restore",
     logs: "Sistem Audit Log",
-    setting: "Pengaturan"
+    setting: "Pengaturan",
+
+    // Dashboard & Global keys
+    gpa: "IPK Kumulatif",
+    total_sks: "Total SKS",
+    active_semester: "Semester Aktif",
+    class_schedule: "Jadwal Hari Ini",
+    no_schedule: "Tidak ada jadwal kuliah hari ini.",
+    upcoming_exam: "Ujian Mendatang",
+    no_exam: "Tidak ada jadwal ujian terdekat.",
+    announcement: "Pengumuman Kampus",
+    loading_data: "Memuat data...",
+    
+    // KRS keys
+    choose_krs: "Pilih Mata Kuliah KRS",
+    krs_description: "Silakan pilih mata kuliah di bawah sesuai paket semester Anda.",
+    selected_sks: "SKS Terpilih",
+    max_sks: "Batas Maksimal SKS",
+    submit_krs: "Ajukan KRS Sekarang",
+    krs_status: "Status Pengajuan KRS",
+    subject_code: "Kode Matkul",
+    subject_name: "Nama Mata Kuliah",
+    sks: "SKS",
+    lecturer: "Dosen Pengampu",
+    action: "Aksi",
+    
+    // Gradebook keys
+    academic_transcript: "Transkrip Nilai Akademik",
+    transcript_desc: "Daftar perorehan nilai mata kuliah mahasiswa seluruh semester.",
+    semester: "Semester",
+    final_score: "Nilai Akhir",
+    grade_letter: "Huruf Mutu",
+    status: "Status",
+    published: "Terbit",
+    draft: "Draf"
   },
   en: {
     dashboard: "Main Dashboard",
@@ -77,7 +111,41 @@ export const translations = {
     qa: "Quality & IKU Analytics",
     backup: "Backup & Restore",
     logs: "System Audit Logs",
-    setting: "System Settings"
+    setting: "System Settings",
+
+    // Dashboard & Global keys
+    gpa: "Cumulative GPA",
+    total_sks: "Total SKS Credits",
+    active_semester: "Active Semester",
+    class_schedule: "Today's Class Schedule",
+    no_schedule: "No classes scheduled for today.",
+    upcoming_exam: "Upcoming Exams",
+    no_exam: "No upcoming exams scheduled.",
+    announcement: "Campus Announcements",
+    loading_data: "Loading data...",
+    
+    // KRS keys
+    choose_krs: "Select Study Plan Courses",
+    krs_description: "Please select your courses below according to your semester package.",
+    selected_sks: "Selected SKS",
+    max_sks: "Max SKS Allowed",
+    submit_krs: "Submit Study Plan (KRS)",
+    krs_status: "KRS Submission Status",
+    subject_code: "Course Code",
+    subject_name: "Course Title",
+    sks: "Credits (SKS)",
+    lecturer: "Instructor / Lecturer",
+    action: "Action",
+    
+    // Gradebook keys
+    academic_transcript: "Academic Grade Transcript",
+    transcript_desc: "Student academic grades record across all semesters.",
+    semester: "Semester",
+    final_score: "Final Score",
+    grade_letter: "Grade",
+    status: "Status",
+    published: "Published",
+    draft: "Draft"
   }
 };
 

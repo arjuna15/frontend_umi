@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import SkeletonLoader from '../../components/SkeletonLoader';
+import { getTranslation } from '../../components/i18n';
 
 export default function KRSPage() {
   const router = useRouter();
@@ -15,7 +16,15 @@ export default function KRSPage() {
   const [semesterSetting, setSemesterSetting] = useState('Semester aktif');
   const [searchQuery, setSearchQuery] = useState('');
   const [billingError, setBillingError] = useState(null);
+  const [lang, setLang] = useState('id');
   const currentSemester = data?.semester || semesterSetting || 'Semester aktif';
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedLang = localStorage.getItem('siakad_lang');
+      if (savedLang) setLang(savedLang);
+    }
+  }, []);
 
   const fetchDashboard = async () => {
     const token = localStorage.getItem('siakad_token');
@@ -207,7 +216,7 @@ export default function KRSPage() {
         <div style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <i className="ph ph-info" style={{ color: '#3b82f6', fontSize: '1.5rem' }}></i>
           <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>
-            Silakan pilih mata kuliah yang ingin diambil semester ini.
+            {lang === 'en' ? 'Please select the courses you want to take this semester.' : 'Silakan pilih mata kuliah yang ingin diambil semester ini.'}
           </p>
         </div>
       )}
@@ -216,13 +225,13 @@ export default function KRSPage() {
         <div className="siakad-card" style={{ padding: '24px' }}>
 
         <div className="siakad-modal-header">
-          <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Daftar Mata Kuliah Tersedia</h2>
+          <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{lang === 'en' ? 'Available Course List' : 'Daftar Mata Kuliah Tersedia'}</h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
             <div style={{ position: 'relative', width: '250px' }}>
               <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1rem' }}></i>
               <input 
                 type="text" 
-                placeholder="Cari matkul, kode, dosen..." 
+                placeholder={lang === 'en' ? "Search course, code, instructor..." : "Cari matkul, kode, dosen..."}
                 className="siakad-input"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -250,7 +259,7 @@ export default function KRSPage() {
                   fontSize: '0.9rem'
                 }}
               >
-                <i className="ph ph-paper-plane-right"></i> {isSubmitting ? 'Mengajukan...' : 'Ajukan KRS'}
+                <i className="ph ph-paper-plane-right"></i> {isSubmitting ? (lang === 'en' ? 'Submitting...' : 'Mengajukan...') : getTranslation('submit_krs', lang)}
               </button>
             )}
           </div>
@@ -260,11 +269,11 @@ export default function KRSPage() {
           <table className="siakad-table">
             <thead>
               <tr>
-                <th style={{ width: '50px' }}>Pilih</th>
-                <th>Kode MK</th>
-                <th>Mata Kuliah</th>
-                <th>Dosen Pengampu</th>
-                <th>SKS</th>
+                <th style={{ width: '50px' }}>{lang === 'en' ? 'Select' : 'Pilih'}</th>
+                <th>{getTranslation('subject_code', lang)}</th>
+                <th>{getTranslation('subject_name', lang)}</th>
+                <th>{getTranslation('lecturer', lang)}</th>
+                <th>{getTranslation('sks', lang)}</th>
               </tr>
             </thead>
             <tbody>
@@ -282,7 +291,7 @@ export default function KRSPage() {
                 if (filteredCourses.length === 0) {
                   return (
                     <tr>
-                      <td colSpan="5" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Mata kuliah tidak ditemukan</td>
+                      <td colSpan="5" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>{lang === 'en' ? 'Course not found' : 'Mata kuliah tidak ditemukan'}</td>
                     </tr>
                   );
                 }

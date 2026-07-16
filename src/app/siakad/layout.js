@@ -466,40 +466,39 @@ export default function SiakadLayout({ children }) {
         <header className="siakad-header" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '16px' }}>
           
           {/* Language Switcher */}
-          <div style={{ display: 'flex', gap: '8px', background: 'var(--glass-bg)', padding: '4px 8px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.4)', alignItems: 'center' }}>
+          <div style={{ display: 'flex', background: 'var(--glass-bg)', padding: '2px 4px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.4)', alignItems: 'center', fontSize: '0.8rem', fontWeight: 'bold' }}>
             <button 
               onClick={() => changeLanguage('id')} 
               style={{
-                background: lang === 'id' ? 'rgba(255,255,255,0.2)' : 'transparent',
+                background: lang === 'id' ? 'rgba(255,255,255,0.25)' : 'transparent',
                 border: 'none',
-                borderRadius: '50%',
-                width: '28px', height: '28px',
+                borderRadius: '20px',
+                padding: '4px 10px',
                 cursor: 'pointer',
-                fontSize: '1rem',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'var(--color-text)',
                 transition: 'all 0.2s',
-                opacity: lang === 'id' ? 1 : 0.6
+                opacity: lang === 'id' ? 1 : 0.5
               }}
               title="Bahasa Indonesia"
             >
-              🇮🇩
+              ID
             </button>
+            <span style={{ color: 'var(--color-muted)', padding: '0 2px', opacity: 0.5 }}>|</span>
             <button 
               onClick={() => changeLanguage('en')} 
               style={{
-                background: lang === 'en' ? 'rgba(255,255,255,0.2)' : 'transparent',
+                background: lang === 'en' ? 'rgba(255,255,255,0.25)' : 'transparent',
                 border: 'none',
-                borderRadius: '50%',
-                width: '28px', height: '28px',
+                borderRadius: '20px',
+                padding: '4px 10px',
                 cursor: 'pointer',
-                fontSize: '1rem',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'var(--color-text)',
                 transition: 'all 0.2s',
-                opacity: lang === 'en' ? 1 : 0.6
+                opacity: lang === 'en' ? 1 : 0.5
               }}
               title="English"
             >
-              🇬🇧
+              EN
             </button>
           </div>
 

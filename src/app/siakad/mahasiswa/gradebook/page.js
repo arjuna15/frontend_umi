@@ -2,12 +2,22 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import CustomSelect from '../../components/CustomSelect';
+import { getTranslation } from '../../components/i18n';
+
 export default function MahasiswaGradebook() {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [semesterFilter, setSemesterFilter] = useState('Semua');
+  const [lang, setLang] = useState('id');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedLang = localStorage.getItem('siakad_lang');
+      if (savedLang) setLang(savedLang);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchGrades = async () => {
@@ -74,7 +84,7 @@ export default function MahasiswaGradebook() {
     : [];
 
   const selectOptions = [
-    { value: "Semua", label: "Semua Semester" },
+    { value: "Semua", label: lang === 'en' ? "All Semesters" : "Semua Semester" },
     ...uniqueSemesters.map(sem => ({
       value: String(sem),
       label: `Semester ${sem}`
@@ -88,8 +98,8 @@ export default function MahasiswaGradebook() {
         <div className="siakad-page-header-grid"></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — MAHASISWA</p>
-          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Rapor & Transkrip</h1>
-          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Detail evaluasi akademik semester ini, dari tugas harian hingga UAS.</p>
+          <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>{getTranslation('gradebook', lang)}</h1>
+          <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>{lang === 'en' ? 'Detail academic evaluation this semester, from homework to final exams.' : 'Detail evaluasi akademik semester ini, dari tugas harian hingga UAS.'}</p>
         </div>
       </div>
 
@@ -99,7 +109,7 @@ export default function MahasiswaGradebook() {
             <i className="ph ph-medal"></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 8px 0', fontSize: '0.95rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Indeks Prestasi Semester</p>
+            <p style={{ margin: '0 0 8px 0', fontSize: '0.95rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>{getTranslation('gpa', lang)}</p>
             <h1 style={{ margin: 0, fontSize: '3.5rem', fontWeight: '900', color: 'var(--color-text)', lineHeight: '1' }}>{ipSemester}</h1>
           </div>
         </div>
@@ -109,7 +119,7 @@ export default function MahasiswaGradebook() {
             <i className="ph ph-books"></i>
           </div>
           <div>
-            <p style={{ margin: '0 0 8px 0', fontSize: '0.95rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>Total SKS Lulus</p>
+            <p style={{ margin: '0 0 8px 0', fontSize: '0.95rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px' }}>{getTranslation('total_sks', lang)}</p>
             <h1 style={{ margin: 0, fontSize: '3.5rem', fontWeight: '900', color: 'var(--color-text)', lineHeight: '1' }}>{totalSks}</h1>
           </div>
         </div>
@@ -117,7 +127,7 @@ export default function MahasiswaGradebook() {
 
       <div className="siakad-card" style={{ overflow: 'hidden' }}>
         <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--color-border)', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Rincian Nilai Mata Kuliah</h3>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{lang === 'en' ? 'Course Grades Detail' : 'Rincian Nilai Mata Kuliah'}</h3>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', flex: '1 1 100%' }}>
             <CustomSelect 
               value={semesterFilter} 
@@ -127,14 +137,14 @@ export default function MahasiswaGradebook() {
             />
             <input 
               type="text" 
-              placeholder="Cari mata kuliah..." 
+              placeholder={lang === 'en' ? "Search course..." : "Cari mata kuliah..."}
               className="siakad-input"
               value={search}
               onChange={e => setSearch(e.target.value)}
               style={{ flex: '1 1 150px', minWidth: 0, color: 'var(--color-text)' }}
             />
             <button onClick={() => window.print()} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 24px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
-              <i className="ph ph-printer"></i> Cetak Transkrip
+              <i className="ph ph-printer"></i> {lang === 'en' ? 'Print Transcript' : 'Cetak Transkrip'}
             </button>
           </div>
         </div>
@@ -142,14 +152,14 @@ export default function MahasiswaGradebook() {
           <table className="siakad-table">
             <thead>
               <tr>
-                <th>Mata Kuliah</th>
-                <th style={{ textAlign: 'center' }}>SKS</th>
-                <th style={{ textAlign: 'center' }}>Tugas</th>
-                <th style={{ textAlign: 'center' }}>Kuis</th>
+                <th>{getTranslation('subject_name', lang)}</th>
+                <th style={{ textAlign: 'center' }}>{getTranslation('sks', lang)}</th>
+                <th style={{ textAlign: 'center' }}>{lang === 'en' ? 'Assignment' : 'Tugas'}</th>
+                <th style={{ textAlign: 'center' }}>{lang === 'en' ? 'Quiz' : 'Kuis'}</th>
                 <th style={{ textAlign: 'center' }}>UTS</th>
                 <th style={{ textAlign: 'center' }}>UAS</th>
-                <th style={{ textAlign: 'center' }}>Angka</th>
-                <th style={{ textAlign: 'center' }}>Mutu</th>
+                <th style={{ textAlign: 'center' }}>{lang === 'en' ? 'Score' : 'Angka'}</th>
+                <th style={{ textAlign: 'center' }}>{lang === 'en' ? 'Grade' : 'Mutu'}</th>
               </tr>
             </thead>
             <tbody>
@@ -160,7 +170,7 @@ export default function MahasiswaGradebook() {
                   return matchSearch && matchSemester;
                 });
                 if (filteredData.length === 0) {
-                  return <tr><td colSpan="8" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>Mata kuliah tidak ditemukan.</td></tr>;
+                  return <tr><td colSpan="8" style={{ padding: '32px', textAlign: 'center', color: 'var(--color-muted)' }}>{lang === 'en' ? 'Course not found.' : 'Mata kuliah tidak ditemukan.'}</td></tr>;
                 }
                 return filteredData.map((item, idx) => (
                   <tr key={idx}>
