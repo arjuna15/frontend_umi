@@ -294,16 +294,18 @@ export default function KaprodiKalenderPage() {
                 <div
                   key={idx}
                   onClick={() => item.day && setSelectedDay(item.day)}
-                  className="day-cell"
+                  className={item.day ? "day-cell" : ""}
                   style={{
-                    border: isSelected ? '2px solid #3b82f6' : undefined,
-                    background: isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(128,128,128,0.2)' : undefined),
+                    border: item.day ? (isSelected ? '2px solid #3b82f6' : undefined) : 'none',
+                    background: item.day ? (isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(128,128,128,0.2)' : undefined)) : 'transparent',
                     cursor: item.day ? 'pointer' : 'default',
+                    pointerEvents: item.day ? 'auto' : 'none',
+                    aspectRatio: '1',
                   }}
                 >
                   <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#3b82f6' : 'var(--color-text)') : 'transparent' }}>{item.day}</span>
                   <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
-                    {hasClass && (
+                    {item.day && hasClass && (
                       <span style={{
                         width: '6px', height: '6px', borderRadius: '50%',
                         background: hasSwap ? '#f59e0b' : '#3b82f6',
