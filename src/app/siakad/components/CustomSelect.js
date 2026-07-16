@@ -9,9 +9,18 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
   const [mounted, setMounted] = useState(false);
   const triggerRef = useRef(null);
 
+  const [searchQuery, setSearchQuery] = useState('');
+
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Reset search query when dropdown opens or closes
+  useEffect(() => {
+    if (!isOpen) {
+      setSearchQuery('');
+    }
+  }, [isOpen]);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -59,6 +68,11 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
 
   const selectedOption = options.find(opt => opt.value === value);
 
+  // Filter options based on search query
+  const filteredOptions = options.filter(opt =>
+    (opt.label || '').toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const dropdown = isOpen && coords && (
     <div
       id="siakad-select-portal"
@@ -72,7 +86,7 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
         border: '1px solid var(--color-border)',
         borderRadius: '20px',
         boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
-        maxHeight: '160px',
+        maxHeight: '220px', // slightly taller to accommodate search bar
         overflowY: 'auto',
         padding: '8px',
         backdropFilter: 'blur(30px) saturate(180%)',
@@ -87,7 +101,7 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
         }
         .siakad-select-option {
           width: 100%;
-          padding: 12px 18px;
+          padding: 10px 18px;
           border: none;
           background: transparent;
           color: var(--color-text);
@@ -110,20 +124,76 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
           color: white !important;
         }
       `}</style>
-      {options.map((opt) => {
-        const isActive = opt.value === value;
-        return (
-          <button
-            key={opt.value}
-            type="button"
-            className={`siakad-select-option ${isActive ? 'active' : ''}`}
-            onClick={() => handleSelectOption(opt.value)}
-          >
-            <span>{opt.label}</span>
-            {isActive && <i className="ph-bold ph-check" style={{ color: 'white' }}></i>}
-          </button>
-        );
-      })}
+      
+      {/* Search Input for long lists (options size > 5) */}
+      {options.length > 5 && (
+        <div 
+          style={{ 
+            position: 'sticky', 
+            top: '-8px', 
+            background: 'var(--color-surface)', 
+            padding: '4px 0 10px 0', 
+            zIndex: 10,
+            borderBottom: '1px solid var(--color-border)',
+            marginBottom: '6px'
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div style={{ position: 'relative', width: '100%' }}>
+            <i 
+              className="ph ph-magnifying-glass" 
+              style={{ 
+                position: 'absolute', 
+                left: '14px', 
+                top: '50%', 
+                transform: 'translateY(-50%)', 
+                color: 'var(--color-muted)',
+                fontSize: '0.9rem',
+                pointerEvents: 'none'
+              }}
+            />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Cari..."
+              style={{
+                width: '100%',
+                padding: '8px 12px 8px 36px',
+                fontSize: '0.85rem',
+                borderRadius: '50px',
+                border: '1px solid var(--color-border)',
+                background: 'var(--color-bg)',
+                color: 'var(--color-text)',
+                outline: 'none',
+                boxSizing: 'border-box'
+              }}
+              autoFocus
+            />
+          </div>
+        </div>
+      )}
+
+      {filteredOptions.length === 0 ? (
+        <div style={{ padding: '20px 10px', textAlign: 'center', color: 'var(--color-muted)', fontSize: '0.85rem' }}>
+          Tidak ada hasil pencarian.
+        </div>
+      ) : (
+        filteredOptions.map((opt) => {
+          const isActive = opt.value === value;
+          return (
+            <button
+              key={opt.value}
+              type="button"
+              className={`siakad-select-option ${isActive ? 'active' : ''}`}
+              onClick={() => handleSelectOption(opt.value)}
+            >
+              <span>{opt.label}</span>
+              {isActive && <i className="ph ph-check" style={{ color: 'white' }}></i>}
+            </button>
+          );
+        })
+      )}
     </div>
   );
 

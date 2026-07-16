@@ -433,7 +433,8 @@ export default function AdminCalendarPage() {
                           jamMulai: originalCourse?.jam_mulai || '08:00',
                           jamSelesai: originalCourse?.jam_selesai || '10:00',
                           ruang: originalCourse?.ruang || '',
-                          editMode: 'permanent'
+                          editMode: 'permanent',
+                          newDate: selectedDateStr
                         });
                         setShowEditModal(true);
                       }}
