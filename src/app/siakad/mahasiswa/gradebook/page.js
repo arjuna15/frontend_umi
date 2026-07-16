@@ -35,7 +35,7 @@ export default function MahasiswaGradebook() {
     if (value === null || value === undefined || value === '') return '-';
     const num = Number(value);
     if (!Number.isFinite(num)) return '-';
-    return Number.isInteger(num) ? String(num) : num.toFixed(1).replace(/\.0$/, '');
+    return String(Math.round(num));
   };
 
   const formatValueWithWeight = (value, weight) => {

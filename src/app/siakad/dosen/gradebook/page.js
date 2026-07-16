@@ -41,7 +41,7 @@ export default function DosenGradebookPage() {
     if (value === null || value === undefined || value === '') return '-';
     const num = Number(value);
     if (!Number.isFinite(num)) return '-';
-    return Number(num.toFixed(2)).toString();
+    return String(Math.round(num));
   };
 
   const calculateScoreAndGrade = (components, weights = defaultWeights) => {
