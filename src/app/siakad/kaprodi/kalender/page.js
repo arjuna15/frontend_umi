@@ -27,7 +27,8 @@ export default function KaprodiKalenderPage() {
     jamMulai: '08:00',
     jamSelesai: '10:00',
     ruang: '',
-    editMode: 'permanent'
+    editMode: 'permanent',
+    newDate: ''
   });
   const [saving, setSaving] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
@@ -130,11 +131,11 @@ export default function KaprodiKalenderPage() {
           },
           body: JSON.stringify({
             original_schedule_id: editForm.course_id,
-            override_date: dateStr,
+            override_date: dateStr, // original date
             status: 'moved',
-            new_date: dateStr,
+            new_date: editForm.newDate || dateStr, // target date
             new_time: `${editForm.jamMulai} - ${editForm.jamSelesai}`,
-            notes: `Reschedule sesi: Jam diubah menjadi ${editForm.jamMulai} - ${editForm.jamSelesai}, Ruang: ${editForm.ruang}`
+            notes: `Reschedule sesi ke ${editForm.newDate || dateStr} (Jam: ${editForm.jamMulai} - ${editForm.jamSelesai}, Ruang: ${editForm.ruang})`
           })
         });
       } else {
@@ -267,6 +268,36 @@ export default function KaprodiKalenderPage() {
           .siakad-card {
             padding: 16px !important;
           }
+          .segmented-control {
+            display: flex;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 4px;
+            gap: 4px;
+            margin-bottom: 20px;
+          }
+          .segment-btn {
+            flex: 1;
+            padding: 10px 14px;
+            border: none;
+            background: transparent;
+            color: var(--color-muted);
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+          }
+          .segment-btn.active {
+            background: var(--color-primary, #3b82f6);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+          }
         }
       `}} />
       <div className="siakad-page-header">
@@ -398,7 +429,8 @@ export default function KaprodiKalenderPage() {
                           jamMulai: originalCourse?.jam_mulai || '08:00',
                           jamSelesai: originalCourse?.jam_selesai || '10:00',
                           ruang: originalCourse?.ruang || '',
-                          editMode: 'permanent'
+                          editMode: 'permanent',
+                          newDate: selectedDateStr // default to current selected date
                         });
                         setShowEditModal(true);
                       }}
@@ -450,7 +482,7 @@ export default function KaprodiKalenderPage() {
               placeholder="-- Pilih Kelas Asli --"
               options={schedules.map(s => ({
                 value: s.id,
-                label: `${s.course_name || s.course?.name || 'Kuliah'} (${s.start_time} - Ruang ${s.room_name || s.room?.name || '-'})`
+                label: `${s.name || s.course_name || 'Kuliah'} (${s.jam_mulai || ''} - Ruang ${s.ruang || '-'})`
               }))}
             />
           </div>
@@ -463,7 +495,7 @@ export default function KaprodiKalenderPage() {
               placeholder="-- Pilih Kelas Pengganti --"
               options={schedules.map(s => ({
                 value: s.id,
-                label: `${s.course_name || s.course?.name || 'Kuliah'} (${s.start_time} - Ruang ${s.room_name || s.room?.name || '-'})`
+                label: `${s.name || s.course_name || 'Kuliah'} (${s.jam_mulai || ''} - Ruang ${s.ruang || '-'})`
               }))}
             />
           </div>
@@ -491,17 +523,34 @@ export default function KaprodiKalenderPage() {
             </button>
           </>
         }>
-          <div style={{ marginBottom: '20px', padding: '14px', borderRadius: '14px', background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.15)' }}>
-            <p style={{ margin: '0 0 10px 0', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)' }}>Cakupan Perubahan</p>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-text)' }}>
-              <input type="radio" name="editMode" checked={editForm.editMode === 'permanent'} onChange={() => setEditForm({ ...editForm, editMode: 'permanent' })} style={{ accentColor: '#3b82f6' }} />
-              Ubah permanen untuk seluruh semester
-            </label>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--color-text)' }}>
-              <input type="radio" name="editMode" checked={editForm.editMode === 'session'} onChange={() => setEditForm({ ...editForm, editMode: 'session' })} style={{ accentColor: '#f59e0b' }} />
-              Hanya ubah untuk sesi tanggal {selectedDateStr || 'ini'} saja
-            </label>
+          <div className="segmented-control">
+            <button
+              type="button"
+              className={`segment-btn ${editForm.editMode === 'permanent' ? 'active' : ''}`}
+              onClick={() => setEditForm({ ...editForm, editMode: 'permanent' })}
+            >
+              <i className="ph ph-calendar-arrows"></i> Selamanya (Reguler)
+            </button>
+            <button
+              type="button"
+              className={`segment-btn ${editForm.editMode === 'session' ? 'active' : ''}`}
+              onClick={() => setEditForm({ ...editForm, editMode: 'session' })}
+            >
+              <i className="ph ph-clock"></i> Hanya Sesi Tanggal ini
+            </button>
           </div>
+
+          {editForm.editMode === 'session' && (
+            <div style={{ marginBottom: '16px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tanggal Reschedule (Pindahkan Sesi ke Tanggal Ini)</label>
+              <input 
+                type="date" 
+                className="siakad-input" 
+                value={editForm.newDate} 
+                onChange={(e) => setEditForm({ ...editForm, newDate: e.target.value })} 
+              />
+            </div>
+          )}
 
           {editForm.editMode === 'permanent' && (
           <div style={{ marginBottom: '16px' }}>
