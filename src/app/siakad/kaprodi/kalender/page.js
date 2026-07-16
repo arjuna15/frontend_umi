@@ -25,7 +25,8 @@ export default function KaprodiKalenderPage() {
     hari: 'Senin',
     jamMulai: '08:00',
     jamSelesai: '10:00',
-    ruang: ''
+    ruang: '',
+    editMode: 'permanent'
   });
   const [saving, setSaving] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
@@ -103,28 +104,55 @@ export default function KaprodiKalenderPage() {
   };
 
   const handleSaveSchedule = async () => {
-    if (!editForm.course_id || !editForm.hari || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
+    if (!editForm.course_id || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
+      window.toast?.('Harap lengkapi semua isian jadwal!');
+      return;
+    }
+    if (editForm.editMode === 'permanent' && !editForm.hari) {
       window.toast?.('Harap lengkapi semua isian jadwal!');
       return;
     }
     setSaving(true);
     try {
-      const res = await fetch(`${apiUrl}/siakad/courses/${editForm.course_id}/schedule`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${getToken()}`,
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          hari: editForm.hari,
-          jamMulai: editForm.jamMulai,
-          jamSelesai: editForm.jamSelesai,
-          ruang: editForm.ruang
-        })
-      });
+      let res;
+      if (editForm.editMode === 'session') {
+        const yr = currentDate.getFullYear();
+        const mo = currentDate.getMonth();
+        const dateStr = selectedDay ? `${yr}-${String(mo + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}` : '';
+        res = await fetch(`${apiUrl}/siakad/schedules/override`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`,
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            original_schedule_id: editForm.course_id,
+            override_date: dateStr,
+            status: 'moved',
+            new_date: dateStr,
+            new_time: `${editForm.jamMulai} - ${editForm.jamSelesai}`,
+            notes: `Reschedule sesi: Jam diubah menjadi ${editForm.jamMulai} - ${editForm.jamSelesai}, Ruang: ${editForm.ruang}`
+          })
+        });
+      } else {
+        res = await fetch(`${apiUrl}/siakad/courses/${editForm.course_id}/schedule`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getToken()}`,
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            hari: editForm.hari,
+            jamMulai: editForm.jamMulai,
+            jamSelesai: editForm.jamSelesai,
+            ruang: editForm.ruang
+          })
+        });
+      }
       if (res.ok) {
-        window.toast?.('Jadwal perkuliahan berhasil diperbarui secara permanen!');
+        window.toast?.(editForm.editMode === 'session' ? 'Jadwal sesi tanggal ini berhasil diubah!' : 'Jadwal perkuliahan berhasil diperbarui secara permanen!');
         setShowEditModal(false);
         fetchCalendarData();
       } else {
@@ -342,7 +370,8 @@ export default function KaprodiKalenderPage() {
                           hari: originalCourse?.hari || 'Senin',
                           jamMulai: originalCourse?.jam_mulai || '08:00',
                           jamSelesai: originalCourse?.jam_selesai || '10:00',
-                          ruang: originalCourse?.ruang || ''
+                          ruang: originalCourse?.ruang || '',
+                          editMode: 'permanent'
                         });
                         setShowEditModal(true);
                       }}
@@ -427,14 +456,27 @@ export default function KaprodiKalenderPage() {
       )}
 
       {showEditModal && (
-        <ModalShell title="Ubah Jadwal Kuliah Permanen" icon="ph-calendar" onClose={() => setShowEditModal(false)} footer={
+        <ModalShell title={editForm.editMode === 'session' ? `Ubah Jadwal Sesi ${selectedDateStr}` : 'Ubah Jadwal Kuliah Permanen'} icon="ph-calendar" onClose={() => setShowEditModal(false)} footer={
           <>
             <button onClick={() => setShowEditModal(false)} style={{ padding: '10px 20px', border: 'none', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
             <button onClick={handleSaveSchedule} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
-              {saving ? 'Menyimpan...' : 'Simpan Perubahan'}
+              {saving ? 'Menyimpan...' : (editForm.editMode === 'session' ? 'Terapkan untuk Sesi Ini' : 'Simpan Permanen')}
             </button>
           </>
         }>
+          <div style={{ marginBottom: '20px', padding: '14px', borderRadius: '14px', background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.15)' }}>
+            <p style={{ margin: '0 0 10px 0', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)' }}>Cakupan Perubahan</p>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-text)' }}>
+              <input type="radio" name="editMode" checked={editForm.editMode === 'permanent'} onChange={() => setEditForm({ ...editForm, editMode: 'permanent' })} style={{ accentColor: '#3b82f6' }} />
+              Ubah permanen untuk seluruh semester
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--color-text)' }}>
+              <input type="radio" name="editMode" checked={editForm.editMode === 'session'} onChange={() => setEditForm({ ...editForm, editMode: 'session' })} style={{ accentColor: '#f59e0b' }} />
+              Hanya ubah untuk sesi tanggal {selectedDateStr || 'ini'} saja
+            </label>
+          </div>
+
+          {editForm.editMode === 'permanent' && (
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Hari Mengajar</label>
             <CustomSelect
@@ -452,6 +494,7 @@ export default function KaprodiKalenderPage() {
               ]}
             />
           </div>
+          )}
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
             <div>

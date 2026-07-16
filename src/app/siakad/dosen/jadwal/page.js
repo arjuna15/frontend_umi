@@ -32,7 +32,8 @@ export default function JadwalPage() {
     jamMulai: '08:00',
     jamSelesai: '10:00',
     ruang: '',
-    frequency: 'every_week'
+    frequency: 'every_week',
+    editMode: 'permanent'
   });
 
   // Calendar State
@@ -44,32 +45,63 @@ export default function JadwalPage() {
   const getToken = () => localStorage.getItem('siakad_token');
 
   const handleSaveFromCalendar = async () => {
-    if (!editForm.course_id || !editForm.hari || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
+    if (!editForm.course_id || !editForm.jamMulai || !editForm.jamSelesai || !editForm.ruang) {
+      window.toast && window.toast('Harap lengkapi semua isian jadwal!');
+      return;
+    }
+    if (editForm.editMode === 'permanent' && !editForm.hari) {
       window.toast && window.toast('Harap lengkapi semua isian jadwal!');
       return;
     }
     setSaving(true);
     const token = getToken();
     try {
-      const res = await fetch(`${apiUrl}/siakad/dosen/jadwal/update`, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          course_id: editForm.course_id,
-          day: editForm.hari,
-          start_time: editForm.jamMulai,
-          end_time: editForm.jamSelesai,
-          room: editForm.ruang,
-          frequency: editForm.frequency
-        })
-      });
-      if (res.ok) {
-        window.toast && window.toast('Jadwal mengajar berhasil diperbarui!');
-        setShowEditModal(false);
-        fetchCourses();
+      if (editForm.editMode === 'session') {
+        const yr = currentDate.getFullYear();
+        const mo = currentDate.getMonth();
+        const dateStr = selectedDay ? `${yr}-${String(mo + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}` : '';
+        const res = await fetch(`${apiUrl}/siakad/schedules/override`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            original_schedule_id: editForm.course_id,
+            override_date: dateStr,
+            status: 'moved',
+            new_date: dateStr,
+            new_time: `${editForm.jamMulai} - ${editForm.jamSelesai}`,
+            notes: `Reschedule sesi: Jam diubah menjadi ${editForm.jamMulai} - ${editForm.jamSelesai}, Ruang: ${editForm.ruang}`
+          })
+        });
+        if (res.ok) {
+          window.toast && window.toast('Jadwal sesi tanggal ini berhasil diubah!');
+          setShowEditModal(false);
+          fetchCourses();
+          fetchOverrides();
+        } else {
+          const err = await res.json();
+          window.toast && window.toast('Gagal: ' + (err.message || 'Error'));
+        }
       } else {
-        const err = await res.json();
-        window.toast && window.toast('Gagal: ' + (err.message || 'Error'));
+        const res = await fetch(`${apiUrl}/siakad/dosen/jadwal/update`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            course_id: editForm.course_id,
+            day: editForm.hari,
+            start_time: editForm.jamMulai,
+            end_time: editForm.jamSelesai,
+            room: editForm.ruang,
+            frequency: editForm.frequency
+          })
+        });
+        if (res.ok) {
+          window.toast && window.toast('Jadwal mengajar berhasil diperbarui!');
+          setShowEditModal(false);
+          fetchCourses();
+        } else {
+          const err = await res.json();
+          window.toast && window.toast('Gagal: ' + (err.message || 'Error'));
+        }
       }
     } catch (err) {
       window.toast && window.toast('Error: ' + err.message);
@@ -570,7 +602,8 @@ export default function JadwalPage() {
                               jamMulai: originalCourse?.jam_mulai || '08:00',
                               jamSelesai: originalCourse?.jam_selesai || '10:00',
                               ruang: originalCourse?.ruangan || originalCourse?.ruang || '',
-                              frequency: originalCourse?.frequency || 'every_week'
+                              frequency: originalCourse?.frequency || 'every_week',
+                              editMode: 'permanent'
                             });
                             setShowEditModal(true);
                           }}
@@ -600,14 +633,27 @@ export default function JadwalPage() {
       </div>
 
       {showEditModal && (
-        <ModalShell title="Ubah Jadwal Mengajar" icon="ph-calendar" onClose={() => setShowEditModal(false)} footer={
+        <ModalShell title={editForm.editMode === 'session' ? `Ubah Jadwal Sesi ${selectedDateStr}` : 'Ubah Jadwal Mengajar'} icon="ph-calendar" onClose={() => setShowEditModal(false)} footer={
           <>
             <button onClick={() => setShowEditModal(false)} style={{ padding: '10px 20px', border: 'none', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
             <button onClick={handleSaveFromCalendar} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
-              {saving ? 'Menyimpan...' : 'Simpan Perubahan'}
+              {saving ? 'Menyimpan...' : (editForm.editMode === 'session' ? 'Terapkan untuk Sesi Ini' : 'Simpan Permanen')}
             </button>
           </>
         }>
+          <div style={{ marginBottom: '20px', padding: '14px', borderRadius: '14px', background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.15)' }}>
+            <p style={{ margin: '0 0 10px 0', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)' }}>Cakupan Perubahan</p>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-text)' }}>
+              <input type="radio" name="editMode" checked={editForm.editMode === 'permanent'} onChange={() => setEditForm({ ...editForm, editMode: 'permanent' })} style={{ accentColor: '#3b82f6' }} />
+              Ubah permanen untuk seluruh semester
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--color-text)' }}>
+              <input type="radio" name="editMode" checked={editForm.editMode === 'session'} onChange={() => setEditForm({ ...editForm, editMode: 'session' })} style={{ accentColor: '#f59e0b' }} />
+              Hanya ubah untuk sesi tanggal {selectedDateStr || 'ini'} saja
+            </label>
+          </div>
+
+          {editForm.editMode === 'permanent' && (
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Hari Mengajar</label>
             <CustomSelect
@@ -625,6 +671,7 @@ export default function JadwalPage() {
               ]}
             />
           </div>
+          )}
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
             <div>
@@ -659,6 +706,7 @@ export default function JadwalPage() {
             />
           </div>
 
+          {editForm.editMode === 'permanent' && (
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Frekuensi Mengajar</label>
             <CustomSelect
@@ -672,6 +720,7 @@ export default function JadwalPage() {
               ]}
             />
           </div>
+          )}
         </ModalShell>
       )}
     </div>
