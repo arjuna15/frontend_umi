@@ -13,6 +13,17 @@ export async function POST(req) {
       body: JSON.stringify({ nim_nip, password })
     });
     
+    const resContentType = backendRes.headers.get('content-type') || '';
+    
+    if (!resContentType.includes('application/json')) {
+      const text = await backendRes.text();
+      const isHtml = text.trim().startsWith('<');
+      if (isHtml) {
+        return NextResponse.json({ message: 'Gagal menghubungi server backend. Server Cloud/Hosting mengembalikan respon blokir/HTML. Silakan periksa koneksi internet atau Firewall VPS/Hosting Anda.' }, { status: 502 });
+      }
+      return NextResponse.json({ message: 'Respon server tidak valid: ' + text.substring(0, 100) }, { status: 502 });
+    }
+    
     const data = await backendRes.json();
     
     if (!backendRes.ok) {
