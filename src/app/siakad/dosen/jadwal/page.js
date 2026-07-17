@@ -175,11 +175,13 @@ export default function JadwalPage() {
     }
   };
 
+  /* eslint-disable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
   useEffect(() => {
     fetchCourses();
     fetchClassrooms();
     fetchOverrides();
   }, [currentDate.getFullYear(), currentDate.getMonth()]);
+  /* eslint-enable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
 
 
 
@@ -303,7 +305,7 @@ export default function JadwalPage() {
           margin-bottom: 20px;
         }
         [data-theme='dark'] .segmented-control, .dark .segmented-control {
-          background: rgba(255, 255, 255, 0.05);
+          background: var(--glass-bg);
         }
         .segment-btn {
           flex: 1;
@@ -326,7 +328,7 @@ export default function JadwalPage() {
           background: rgba(0, 0, 0, 0.02);
         }
         [data-theme='dark'] .segment-btn:hover, .dark .segment-btn:hover {
-          background: rgba(255, 255, 255, 0.02);
+          background: var(--liquid-bg);
         }
         .segment-btn.active {
           background: #3b82f6;

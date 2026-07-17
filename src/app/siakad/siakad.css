@@ -4,8 +4,8 @@
   /* Liquid Light Mode Colors & Specs */
   --liquid-bg: #eef2f7;
   --glass-bg: #eef2f7;
-  --glass-border: 1px solid rgba(255, 255, 255, 0.45);
-  --glass-shadow: 9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.5);
+  --glass-shadow: 6px 6px 16px rgba(165, 180, 203, 0.5), -6px -6px 16px rgba(255, 255, 255, 0.8);
   --glass-blur: none;
   --color-text: #1e293b;
   --color-muted: #64748b;
@@ -19,7 +19,7 @@
   --liquid-bg: #121620;
   --glass-bg: #121620;
   --glass-border: 1px solid rgba(255, 255, 255, 0.03);
-  --glass-shadow: 9px 9px 18px #090b10, -9px -9px 18px #1b2130;
+  --glass-shadow: 6px 6px 16px rgba(0, 0, 0, 0.4), -6px -6px 16px rgba(255, 255, 255, 0.04);
   --glass-blur: none;
   --color-text: #f1f5f9;
   --color-muted: #94a3b8;

@@ -37,7 +37,7 @@
   --glass-bg: #eef2f7;
   --glass-border: 1px solid rgba(255, 255, 255, 0.6);
   --glass-blur: blur(40px) saturate(210%);
-  --glass-shadow: 9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff;
+  --glass-shadow: 6px 6px 16px rgba(165, 180, 203, 0.5), -6px -6px 16px rgba(255, 255, 255, 0.8);
 
   /* Spacing */
   --space-1: 4px; --space-2: 8px; --space-3: 16px;
@@ -83,7 +83,7 @@
   --color-border: rgba(255, 255, 255, 0.1);
   --glass-bg: #121620;
   --glass-border: 1px solid rgba(255, 255, 255, 0.1);
-  --glass-shadow: 9px 9px 18px #090b10, -9px -9px 18px #1b2130;
+  --glass-shadow: 6px 6px 16px rgba(0, 0, 0, 0.4), -6px -6px 16px rgba(255, 255, 255, 0.04);
   --color-background: var(--color-bg);
   --color-background-alt: #0f172a;
   --color-text-muted: var(--color-muted);
