@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
+import CustomSelect from '../../components/CustomSelect';
 
 export default function ProctoringAdminPage() {
   const router = useRouter();
@@ -13,6 +14,8 @@ export default function ProctoringAdminPage() {
   const [logs, setLogs] = useState([]);
   const [generatingToken, setGeneratingToken] = useState(false);
   const [processingId, setProcessingId] = useState(null);
+  const [availableQuizzes, setAvailableQuizzes] = useState([]);
+  const [selectedQuizId, setSelectedQuizId] = useState('');
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getToken = () => localStorage.getItem('siakad_token');
@@ -43,7 +46,8 @@ export default function ProctoringAdminPage() {
     try {
       const res = await fetch(`${apiUrl}/siakad/proctoring/generate-token`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getToken()}` }
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${getToken()}` },
+        body: JSON.stringify({ quiz_id: selectedQuizId })
       });
       if (!res.ok) throw new Error('Failed');
       const data = await res.json();
@@ -80,7 +84,29 @@ export default function ProctoringAdminPage() {
     } catch (e) { setLogs([]); }
   };
 
-  useEffect(() => { fetchSessions(); }, [router]);
+  const fetchAvailableQuizzes = async () => {
+    const token = getToken();
+    if (!token) return;
+    try {
+      const res = await fetch(`${apiUrl}/siakad/proctoring/available-quizzes`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error('Failed');
+      const data = await res.json();
+      const quizzes = data.data || data.quizzes || [];
+      setAvailableQuizzes(quizzes);
+      if (quizzes.length > 0) {
+        setSelectedQuizId(String(quizzes[0].id));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchSessions();
+    fetchAvailableQuizzes();
+  }, [router]);
 
   const statusBadge = (status) => {
     const colors = { active: '#10b981', running: '#10b981', pending: '#f59e0b', waiting: '#f59e0b', completed: '#3b82f6', ended: '#94a3b8' };
@@ -150,10 +176,19 @@ export default function ProctoringAdminPage() {
       <div className="siakad-card" style={{ padding: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Sesi Proctoring</h2>
-          <button id="btn-generate-token" onClick={generateToken} disabled={generatingToken} className="siakad-btn-primary" style={{ padding: '10px 20px', borderRadius: '30px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            {generatingToken && <i className="ph ph-spinner" style={{ animation: 'pwaSpin 1s linear infinite' }}></i>}
-            <i className="ph ph-key"></i> Generate Token
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <CustomSelect
+              value={selectedQuizId}
+              onChange={setSelectedQuizId}
+              options={availableQuizzes.map(q => ({ value: String(q.id), label: q.title }))}
+              placeholder="Pilih Kuis..."
+              style={{ width: '240px' }}
+            />
+            <button id="btn-generate-token" onClick={generateToken} disabled={generatingToken} className="siakad-btn-primary" style={{ padding: '10px 20px', borderRadius: '30px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {generatingToken && <i className="ph ph-spinner" style={{ animation: 'pwaSpin 1s linear infinite' }}></i>}
+              <i className="ph ph-key"></i> Generate Token
+            </button>
+          </div>
         </div>
 
         <div style={{ overflowX: 'auto' }}>
@@ -170,8 +205,8 @@ export default function ProctoringAdminPage() {
                 <tr><td colSpan={8} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada sesi proctoring.</td></tr>
               ) : sessions.map(s => (
                 <tr key={s.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                  <td style={{ padding: '12px 14px', color: 'var(--color-text)', fontWeight: '600' }}>{s.quiz_name || s.title || '-'}</td>
-                  <td style={{ padding: '12px 14px', color: 'var(--color-muted)' }}>{s.teacher_name || s.dosen || '-'}</td>
+                  <td style={{ padding: '12px 14px', color: 'var(--color-text)', fontWeight: '600' }}>{s.quiz?.title || s.quiz_name || '-'}</td>
+                  <td style={{ padding: '12px 14px', color: 'var(--color-muted)' }}>{s.quiz?.course?.dosen?.name || s.teacher_name || '-'}</td>
                   <td style={{ padding: '12px 14px' }}>
                     <code style={{ background: 'var(--color-surface)', padding: '4px 8px', borderRadius: '6px', fontSize: '0.82rem', color: '#3b82f6', fontWeight: '600', border: '1px solid var(--color-border)' }}>{s.token || '-'}</code>
                   </td>
