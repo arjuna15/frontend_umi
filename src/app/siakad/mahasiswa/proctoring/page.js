@@ -302,7 +302,6 @@ export default function ProctoringStudentPage() {
             <p style={{ margin: 0, fontSize: '0.95rem' }}>Memuat lembar soal...</p>
           </div>
         ) : quizData !== null ? (
-        ) : quizData !== null ? (
           /* Case C: Quiz loaded */
           <div className="siakad-card" style={{ padding: '32px', minHeight: '400px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
             <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
