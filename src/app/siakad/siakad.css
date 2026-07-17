@@ -1519,29 +1519,25 @@ textarea::placeholder {
   }
 }
 
-/* Global Modern Page Header Design - Liquid Glass Style */
+/* Global Modern Page Header Design - Neumorphic Style */
 .siakad-page-header {
-  background: rgba(255, 255, 255, 0.45) !important;
-  backdrop-filter: blur(25px) saturate(160%) !important;
-  -webkit-backdrop-filter: blur(25px) saturate(160%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.50) !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
   border-radius: 24px;
   padding: 30px 36px;
   margin-bottom: 32px;
   position: relative;
   overflow: hidden;
-  box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.70),
-    0 15px 35px -10px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: var(--glass-shadow) !important;
   transition: all 0.4s ease;
 }
 
 [data-theme='dark'] .siakad-page-header {
-  background: rgba(20, 24, 33, 0.45) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 
-    inset 0 1px 1px rgba(255, 255, 255, 0.15),
-    0 20px 40px -15px rgba(0, 0, 0, 0.50) !important;
+  background: var(--glass-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.03) !important;
+  box-shadow: var(--glass-shadow) !important;
 }
 
 .siakad-page-header h1 {
@@ -1550,36 +1546,39 @@ textarea::placeholder {
 }
 
 .siakad-page-header p {
-  color: var(--color-text) !important;
-  opacity: 0.7;
+  color: var(--color-muted) !important;
+  opacity: 1 !important;
 }
 
 .siakad-page-header-glow {
-  position: absolute;
-  top: -60%;
-  right: -20%;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.18) 0%, rgba(59, 130, 246, 0) 70%);
-  filter: blur(40px);
-  pointer-events: none;
-  flex-shrink: 0;
-  z-index: 0;
+  display: none !important;
 }
 
 [data-theme='dark'] .siakad-page-header-glow {
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, rgba(59, 130, 246, 0) 70%);
+  display: none !important;
 }
 
 .siakad-page-header-grid {
-  position: absolute;
-  inset: 0;
-  opacity: 0.03;
-  background-image: radial-gradient(var(--color-text) 1px, transparent 1px);
-  background-size: 16px 16px;
-  pointer-events: none;
-  z-index: 0;
+  display: none !important;
+}
+
+/* Global Neumorphic Inset for Page Header Icon Container Boxes */
+.siakad-page-header div[style*="width:"],
+.siakad-page-header div[style*="width :"],
+.siakad-page-header div[style*="width: '"],
+.siakad-page-header div[style*="width:'"] {
+  background: var(--glass-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  box-shadow: inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff !important;
+}
+
+[data-theme='dark'] .siakad-page-header div[style*="width:"],
+[data-theme='dark'] .siakad-page-header div[style*="width :"],
+[data-theme='dark'] .siakad-page-header div[style*="width: '"],
+[data-theme='dark'] .siakad-page-header div[style*="width:'"] {
+  background: var(--glass-bg) !important;
+  border-color: rgba(255, 255, 255, 0.03) !important;
+  box-shadow: inset 2px 2px 5px #080a0f, inset -2px -2px 5px #1c2231 !important;
 }
 
 /* Responsive Notification Dropdown styles */
