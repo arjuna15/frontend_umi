@@ -30,7 +30,7 @@ export default function ProctoringAdminPage() {
       setSessions(list);
       const active = list.filter(s => s.status === 'active' || s.status === 'running').length;
       const completed = list.filter(s => s.status === 'completed' || s.status === 'ended').length;
-      const violations = list.reduce((acc, s) => acc + (s.violations_count || s.log_count || 0), 0);
+      const violations = list.reduce((acc, s) => acc + (s.logs_count || 0), 0);
       setStats({ total: list.length, active, completed, violations });
     } catch (e) {
       console.error(e);
@@ -180,7 +180,7 @@ export default function ProctoringAdminPage() {
                   <td style={{ padding: '12px 14px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{s.end_time ? new Date(s.end_time).toLocaleString('id-ID') : '-'}</td>
                   <td style={{ padding: '12px 14px' }}>
                     <button id={`btn-logs-${s.id}`} onClick={() => viewLogs(s)} style={{ background: 'rgba(139,92,246,0.1)', color: '#8b5cf6', border: 'none', padding: '4px 10px', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '600' }}>
-                      {s.log_count || s.violations_count || 0} <i className="ph ph-eye"></i>
+                      {s.logs_count || s.log_count || s.violations_count || 0} <i className="ph ph-eye"></i>
                     </button>
                   </td>
                   <td style={{ padding: '12px 14px' }}>
