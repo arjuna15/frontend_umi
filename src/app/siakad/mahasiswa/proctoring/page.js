@@ -13,12 +13,37 @@ export default function ProctoringStudentPage() {
   const [violations, setViolations] = useState([]);
   const [showWarning, setShowWarning] = useState(false);
   const [cameraActive, setCameraActive] = useState(false);
+  
+  // Quiz states
+  const [quizData, setQuizData] = useState(null);
+  const [answers, setAnswers] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [result, setResult] = useState(null);
+  const [loadingQuiz, setLoadingQuiz] = useState(false);
+
   const videoRef = useRef(null);
   const streamRef = useRef(null);
   const timerRef = useRef(null);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getAuthToken = () => localStorage.getItem('siakad_token');
+
+  const fetchQuiz = async (qId) => {
+    setLoadingQuiz(true);
+    try {
+      const res = await fetch(`${apiUrl}/siakad/mahasiswa/quizzes/${qId}`, {
+        headers: { 'Authorization': `Bearer ${getAuthToken()}` }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setQuizData(data);
+      }
+    } catch (e) {
+      console.error('Failed to load quiz:', e);
+    } finally {
+      setLoadingQuiz(false);
+    }
+  };
 
   const joinSession = async () => {
     if (!token.trim()) return;
@@ -32,16 +57,23 @@ export default function ProctoringStudentPage() {
       });
       if (!res.ok) throw new Error('Invalid token');
       const data = await res.json();
-      setSession(data.data || data.session || data);
+      const sessObj = data.data || data.session || data;
+      setSession(sessObj);
       setJoined(true);
 
       // Calculate remaining time
-      if (data.data?.end_time || data.session?.end_time) {
-        const end = new Date(data.data?.end_time || data.session?.end_time).getTime();
+      if (sessObj.end_time || data.data?.end_time || data.session?.end_time) {
+        const end = new Date(sessObj.end_time || data.data?.end_time || data.session?.end_time).getTime();
         const now = Date.now();
         setTimeLeft(Math.max(0, Math.floor((end - now) / 1000)));
       } else {
         setTimeLeft(3600); // default 1 hour
+      }
+
+      // Fetch the linked quiz questions
+      const qId = sessObj.quiz_id;
+      if (qId) {
+        fetchQuiz(qId);
       }
 
       // Start camera
@@ -75,6 +107,42 @@ export default function ProctoringStudentPage() {
         body: JSON.stringify({ token: token.trim(), event_type: type, description })
       });
     } catch (e) { console.error('Failed to log violation:', e); }
+  };
+
+  const submitQuizAnswers = async () => {
+    if (!quizData) return;
+    setSubmitting(true);
+    try {
+      const formattedAnswers = Object.entries(answers).map(([questionId, answer]) => ({
+        question_id: parseInt(questionId),
+        answer: answer
+      }));
+
+      const res = await fetch(`${apiUrl}/siakad/mahasiswa/quizzes/${quizData.id}/submit`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getAuthToken()}`
+        },
+        body: JSON.stringify({ answers: formattedAnswers })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setResult(data);
+        if (streamRef.current) {
+          streamRef.current.getTracks().forEach(track => track.stop());
+          setCameraActive(false);
+        }
+      } else {
+        alert('Gagal mengirimkan jawaban.');
+      }
+    } catch (e) {
+      console.error(e);
+      alert('Error: ' + e.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   // Tab switch detection
@@ -189,13 +257,154 @@ export default function ProctoringStudentPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: '20px', alignItems: 'start' }}>
         {/* Main exam area */}
-        <div className="siakad-card" style={{ padding: '32px', minHeight: '400px' }}>
-          <div style={{ textAlign: 'center', color: 'var(--color-muted)', padding: '60px 0' }}>
-            <i className="ph ph-exam" style={{ fontSize: '4rem', display: 'block', marginBottom: '16px', opacity: 0.3 }}></i>
-            <h3 style={{ margin: '0 0 8px 0', fontSize: '1.2rem', fontWeight: '600', color: 'var(--color-text)' }}>Ujian Sedang Berlangsung</h3>
-            <p style={{ margin: 0, fontSize: '0.9rem' }}>Soal ujian ditampilkan melalui platform e-learning. Pastikan Anda tetap di halaman ini.</p>
+        {result !== null ? (
+          /* Case A: Result is available */
+          <div className="siakad-card" style={{ padding: '32px', minHeight: '400px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+            <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px', color: '#10b981' }}>
+              <i className="ph ph-check" style={{ fontSize: '3rem' }}></i>
+            </div>
+            <h3 style={{ margin: '0 0 8px 0', fontSize: '1.6rem', fontWeight: '800', color: 'var(--color-text)' }}>Ujian Selesai Dikirim</h3>
+            <p style={{ margin: '0 0 24px 0', fontSize: '0.95rem', color: 'var(--color-muted)', maxWidth: '400px' }}>
+              Jawaban Anda telah berhasil disimpan di server ujian SIAKAD.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', width: '100%', maxWidth: '400px', marginBottom: '24px' }}>
+              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', padding: '16px' }}>
+                <span style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-muted)', marginBottom: '4px' }}>Nilai Anda</span>
+                <span style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)' }}>{result.score}</span>
+              </div>
+              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', padding: '16px' }}>
+                <span style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-muted)', marginBottom: '4px' }}>Benar / Total</span>
+                <span style={{ fontSize: '1.4rem', fontWeight: '800', color: '#10b981' }}>{result.correct_count} <span style={{ fontSize: '1rem', color: 'var(--color-muted)' }}>/ {result.total_questions}</span></span>
+              </div>
+            </div>
+
+            {(result.has_essay || result.essay_count > 0 || quizData?.questions?.some(q => q.type === 'essay' || q.question_type === 'essay')) && (
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.2)', color: '#f59e0b', padding: '10px 16px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: '600', marginBottom: '24px' }}>
+                <i className="ph ph-info"></i>
+                <span>Menunggu Penilaian Esai oleh Dosen</span>
+              </div>
+            )}
+
+            <button 
+              onClick={() => router.push('/siakad/mahasiswa/elearning')} 
+              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', color: 'var(--color-text)', padding: '12px 24px', borderRadius: '10px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px' }}
+              onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.12)'}
+              onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+            >
+              <i className="ph ph-arrow-left"></i> Kembali ke E-Learning
+            </button>
           </div>
-        </div>
+        ) : loadingQuiz === true ? (
+          /* Case B: Loading Quiz */
+          <div className="siakad-card" style={{ padding: '32px', minHeight: '400px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)' }}>
+            <i className="ph ph-spinner" style={{ fontSize: '3rem', marginBottom: '16px', display: 'block', animation: 'pwaSpin 1s linear infinite' }}></i>
+            <p style={{ margin: 0, fontSize: '0.95rem' }}>Memuat lembar soal...</p>
+          </div>
+        ) : quizData !== null ? (
+          /* Case C: Quiz loaded */
+          <div className="siakad-card" style={{ padding: '32px', minHeight: '400px' }}>
+            <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '16px', marginBottom: '24px' }}>
+              <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '700', color: 'var(--color-text)' }}>Lembar Soal Ujian</h3>
+              <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}>Jawab seluruh pertanyaan dengan teliti. Pindah tab akan terekam oleh sistem.</p>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+              {quizData.questions?.map((q, i) => (
+                <div key={q.id} style={{ borderBottom: i < quizData.questions.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none', paddingBottom: i < quizData.questions.length - 1 ? '24px' : '0' }}>
+                  <p style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--color-text)', margin: '0 0 16px 0', lineHeight: '1.5' }}>
+                    {i + 1}. {q.question}
+                  </p>
+
+                  {/* Render options based on type */}
+                  {(q.question_type === 'multiple_choice' || q.type === 'multiple_choice') && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingLeft: '16px' }}>
+                      {[
+                        { label: q.option_a, key: 'A' },
+                        { label: q.option_b, key: 'B' },
+                        { label: q.option_c, key: 'C' },
+                        { label: q.option_d, key: 'D' }
+                      ].map(opt => (
+                        <label key={opt.key} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', fontSize: '0.92rem', color: answers[q.id] === opt.key ? 'var(--color-text)' : 'var(--color-muted)', padding: '8px 12px', borderRadius: '8px', background: answers[q.id] === opt.key ? 'rgba(59,130,246,0.08)' : 'transparent', border: answers[q.id] === opt.key ? '1px solid rgba(59,130,246,0.2)' : '1px solid transparent', transition: 'all 0.2s' }}>
+                          <input 
+                            type="radio" 
+                            name={`q-${q.id}`} 
+                            value={opt.key} 
+                            checked={answers[q.id] === opt.key} 
+                            onChange={() => setAnswers(prev => ({ ...prev, [q.id]: opt.key }))}
+                            style={{ marginTop: '3px' }} 
+                          />
+                          <span><strong style={{ color: 'var(--color-text)', marginRight: '6px' }}>{opt.key}.</strong> {opt.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+
+                  {(q.question_type === 'true_false' || q.type === 'true_false') && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingLeft: '16px' }}>
+                      {[
+                        { label: 'Benar', key: 'True' },
+                        { label: 'Salah', key: 'False' }
+                      ].map(opt => (
+                        <label key={opt.key} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.92rem', color: answers[q.id] === opt.key ? 'var(--color-text)' : 'var(--color-muted)', padding: '8px 12px', borderRadius: '8px', background: answers[q.id] === opt.key ? 'rgba(59,130,246,0.08)' : 'transparent', border: answers[q.id] === opt.key ? '1px solid rgba(59,130,246,0.2)' : '1px solid transparent', transition: 'all 0.2s' }}>
+                          <input 
+                            type="radio" 
+                            name={`q-${q.id}`} 
+                            value={opt.key} 
+                            checked={answers[q.id] === opt.key} 
+                            onChange={() => setAnswers(prev => ({ ...prev, [q.id]: opt.key }))} 
+                          />
+                          <span>{opt.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+
+                  {(q.question_type === 'essay' || q.type === 'essay') && (
+                    <div style={{ paddingLeft: '16px' }}>
+                      <textarea 
+                        value={answers[q.id] || ''} 
+                        onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
+                        placeholder="Tuliskan jawaban esai Anda di sini..."
+                        style={{ width: '100%', minHeight: '120px', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: 'var(--color-text)', fontSize: '0.92rem', fontFamily: 'inherit', resize: 'vertical', outline: 'none' }}
+                        onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
+                        onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+                      />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '32px', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '20px' }}>
+              <button 
+                onClick={submitQuizAnswers} 
+                disabled={submitting} 
+                style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', padding: '14px 28px', borderRadius: '12px', fontWeight: '700', cursor: 'pointer', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '8px', opacity: submitting ? 0.6 : 1, transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(16,185,129,0.2)' }}
+                onMouseOver={e => !submitting && (e.currentTarget.style.boxShadow = '0 6px 16px rgba(16,185,129,0.3)')}
+                onMouseOut={e => (e.currentTarget.style.boxShadow = '0 4px 12px rgba(16,185,129,0.2)')}
+              >
+                {submitting ? (
+                  <>
+                    <i className="ph ph-spinner" style={{ animation: 'pwaSpin 1s linear infinite' }}></i>
+                    <span>Mengirim Jawaban...</span>
+                  </>
+                ) : (
+                  <>
+                    <i className="ph ph-paper-plane-tilt"></i>
+                    <span>Kirim & Selesaikan Ujian</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        ) : (
+          /* Case D: Fallback */
+          <div className="siakad-card" style={{ padding: '32px', minHeight: '400px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)', textAlign: 'center' }}>
+            <i className="ph ph-broadcast" style={{ fontSize: '3rem', marginBottom: '16px', opacity: 0.5 }}></i>
+            <p style={{ margin: 0, fontSize: '0.95rem' }}>Sesi terhubung. Menunggu lembar soal ujian dimuat...</p>
+          </div>
+        )}
 
         {/* Side panel */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
