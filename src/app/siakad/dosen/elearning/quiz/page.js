@@ -64,14 +64,37 @@ export default function DosenQuizCreate() {
         return;
       }
 
-      const normalizedQuestions = questions.map((q) => ({
-        question: q.question,
-        option_a: q.option_a,
-        option_b: q.option_b,
-        option_c: q.option_c,
-        option_d: q.option_d,
-        correct_answer: q.correct_answer,
-      }));
+      const normalizedQuestions = questions.map((q) => {
+        let optA = q.option_a || '';
+        let optB = q.option_b || '';
+        let optC = q.option_c || '';
+        let optD = q.option_d || '';
+        let corrAns = q.correct_answer || '';
+
+        if (q.type === 'true_false') {
+          optA = 'Benar';
+          optB = 'Salah';
+          optC = '';
+          optD = '';
+        } else if (q.type === 'essay') {
+          optA = '';
+          optB = '';
+          optC = '';
+          optD = '';
+          corrAns = '';
+        }
+
+        return {
+          question: q.question || '',
+          option_a: optA,
+          option_b: optB,
+          option_c: optC,
+          option_d: optD,
+          correct_answer: corrAns,
+          type: q.type || 'multiple_choice',
+          correct_answer_text: q.correct_answer_text || '',
+        };
+      });
 
       const payload = {
         course_id: selectedCourseId,
