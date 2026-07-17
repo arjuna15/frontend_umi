@@ -93,7 +93,7 @@ export default function ProctoringAdminPage() {
       });
       if (!res.ok) throw new Error('Failed');
       const data = await res.json();
-      const quizzes = data.data || data.quizzes || [];
+      const quizzes = Array.isArray(data) ? data : (data.data || data.quizzes || []);
       setAvailableQuizzes(quizzes);
       if (quizzes.length > 0) {
         setSelectedQuizId(String(quizzes[0].id));
