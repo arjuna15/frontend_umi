@@ -131,7 +131,7 @@ export default function DosenDashboard() {
             </div>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Notifikasi & To-Do</h3>
             {todos.length > 0 && (
-              <span className="siakad-badge" style={{ marginLeft: 'auto', minWidth: '40px !important', padding: '4px 10px !important', background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important' }}>
+              <span className="siakad-badge" style={{ marginLeft: 'auto !important', minWidth: '40px !important', padding: '4px 10px !important', background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important' }}>
                 {todos.length}
               </span>
             )}
@@ -160,7 +160,7 @@ export default function DosenDashboard() {
                 <i className="ph ph-books" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
               </div>
               <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Mata Kuliah Diampu</h3>
-              <span className="siakad-badge" style={{ marginLeft: 'auto', minWidth: '80px !important' }}>
+              <span className="siakad-badge" style={{ marginLeft: 'auto !important', minWidth: '80px !important' }}>
                 {courses.length} MK
               </span>
             </div>
