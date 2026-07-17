@@ -10,6 +10,8 @@ export default function DosenElearningPage() {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [quizzes, setQuizzes] = useState([]);
+  const [loadingQuizzes, setLoadingQuizzes] = useState(false);
 
   // Upload Modal States
   const [showUploadModal, setShowUploadModal] = useState(false);
@@ -62,13 +64,21 @@ export default function DosenElearningPage() {
 
   const loadSessions = async (courseId) => {
     setSelectedCourse(courseId);
+    setQuizzes([]);
+    setLoadingQuizzes(true);
     try {
       const res = await fetch(`/api/siakad/dosen/courses/${courseId}/sessions`);
       if (res.ok) {
         setSessions(await res.json());
       }
+      const quizRes = await fetch(`/api/siakad/dosen/courses/${courseId}/quizzes`);
+      if (quizRes.ok) {
+        setQuizzes(await quizRes.json());
+      }
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoadingQuizzes(false);
     }
   };
 
@@ -281,41 +291,130 @@ export default function DosenElearningPage() {
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              {sessions.map((sess, idx) => (
-                <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
-                  <div style={{ flex: '1 1 300px' }}>
-                    <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.1rem', fontWeight: '700' }}>Sesi {sess.session}: {sess.title}</h3>
-                    <div style={{ display: 'flex', gap: '16px', color: 'var(--color-muted)', fontSize: '0.85rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(196, 30, 58, 0.1)', color: '#C41E3A', padding: '4px 12px', borderRadius: '50px', fontWeight: '600' }}>
-                        <i className="ph ph-file-pdf"></i> {sess.material_count} Materi Terupload
-                      </span>
-                      {sess.meet_link ? (
-                        <a href={sess.meet_link} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '4px 12px', borderRadius: '50px', fontWeight: '600', textDecoration: 'none' }}>
-                          <i className="ph ph-video-camera"></i> Link Active Meet
-                        </a>
-                      ) : (
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-muted)' }}>
-                          <i className="ph ph-video-camera-slash"></i> Belum ada link meet
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {sessions.map((sess, idx) => (
+                  <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+                    <div style={{ flex: '1 1 300px' }}>
+                      <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.1rem', fontWeight: '700' }}>Sesi {sess.session}: {sess.title}</h3>
+                      <div style={{ display: 'flex', gap: '16px', color: 'var(--color-muted)', fontSize: '0.85rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(196, 30, 58, 0.1)', color: '#C41E3A', padding: '4px 12px', borderRadius: '50px', fontWeight: '600' }}>
+                          <i className="ph ph-file-pdf"></i> {sess.material_count} Materi Terupload
                         </span>
-                      )}
+                        {sess.meet_link ? (
+                          <a href={sess.meet_link} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '4px 12px', borderRadius: '50px', fontWeight: '600', textDecoration: 'none' }}>
+                            <i className="ph ph-video-camera"></i> Link Active Meet
+                          </a>
+                        ) : (
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-muted)' }}>
+                            <i className="ph ph-video-camera-slash"></i> Belum ada link meet
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                      <button 
+                        onClick={() => { setUploadSession(sess.session); setShowUploadModal(true); }} 
+                        style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
+                      >
+                        <i className="ph ph-upload-simple"></i> Upload
+                      </button>
+                      <button 
+                        onClick={() => { setMeetSession(sess.session); setMeetUrl(sess.meet_link || ''); setShowMeetModal(true); }} 
+                        style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
+                      >
+                        <i className="ph ph-video-camera"></i> Link Meet
+                      </button>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                ))}
+              </div>
+
+              {/* CBT Quizzes Section */}
+              <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
+                  <div>
+                    <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <i className="ph ph-exam" style={{ color: '#C41E3A' }}></i> Daftar Kuis & Ujian Kelas (CBT)
+                    </h3>
+                    <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}>
+                      Kuis, UTS, dan UAS berbasis Computer Based Test.
+                    </p>
+                  </div>
+                  <button 
+                    onClick={() => router.push('/siakad/dosen/elearning/quiz')}
+                    style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', padding: '8px 18px', borderRadius: '50px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}
+                  >
+                    <i className="ph ph-plus-circle"></i> Buat Kuis / Ujian
+                  </button>
+                </div>
+
+                {loadingQuizzes ? (
+                  <div style={{ textAlign: 'center', padding: '20px', color: 'var(--color-muted)' }}>
+                    <i className="ph ph-spinner ph-spin" style={{ fontSize: '1.5rem', marginRight: '8px' }}></i> Memuat kuis...
+                  </div>
+                ) : quizzes.length > 0 ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    {quizzes.map((quiz, i) => {
+                      let categoryBadge = null;
+                      if (quiz.category === 'uts') {
+                        categoryBadge = (
+                          <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#f97316', background: 'rgba(249, 115, 22, 0.1)', border: '1px solid rgba(249, 115, 22, 0.3)', padding: '2px 10px', borderRadius: '50px' }}>
+                            UTS
+                          </span>
+                        );
+                      } else if (quiz.category === 'uas') {
+                        categoryBadge = (
+                          <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#ef4444', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', padding: '2px 10px', borderRadius: '50px' }}>
+                            UAS
+                          </span>
+                        );
+                      } else {
+                        categoryBadge = (
+                          <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#3b82f6', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', padding: '2px 10px', borderRadius: '50px' }}>
+                            Kuis
+                          </span>
+                        );
+                      }
+
+                      return (
+                        <div key={i} style={{ border: '1px solid var(--color-border)', borderRadius: '24px', padding: '16px 20px', background: 'rgba(255,255,255,0.02)' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
+                            <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>{quiz.title}</strong>
+                            <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                              {categoryBadge}
+                              {(quiz.require_proctoring === true || quiz.require_proctoring === 1) && (
+                                <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#10b981', background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '2px 10px', borderRadius: '50px' }}>
+                                  Diawasi AI
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>
+                              <i className="ph ph-question" style={{ marginRight: '6px' }}></i>
+                              {quiz.questions?.length || 0} Soal
+                              <span style={{ margin: '0 8px' }}>•</span>
+                              <i className="ph ph-clock" style={{ marginRight: '6px' }}></i>
+                              {quiz.duration_minutes} menit
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div style={{ textAlign: 'center', padding: '32px', color: 'var(--color-muted)', border: '1px dashed var(--color-border)', borderRadius: '24px' }}>
+                    <i className="ph ph-folder-open" style={{ fontSize: '2.5rem', marginBottom: '8px', display: 'block', color: 'var(--color-muted)' }}></i>
+                    <p style={{ margin: '0 0 16px 0' }}>Belum ada Kuis/Ujian yang dibuat untuk kelas ini.</p>
                     <button 
-                      onClick={() => { setUploadSession(sess.session); setShowUploadModal(true); }} 
-                      style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
+                      onClick={() => router.push('/siakad/dosen/elearning/quiz')}
+                      style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '8px 18px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem' }}
                     >
-                      <i className="ph ph-upload-simple"></i> Upload
-                    </button>
-                    <button 
-                      onClick={() => { setMeetSession(sess.session); setMeetUrl(sess.meet_link || ''); setShowMeetModal(true); }} 
-                      style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
-                    >
-                      <i className="ph ph-video-camera"></i> Link Meet
+                      Buat Kuis Baru
                     </button>
                   </div>
-                </div>
-              ))}
+                )}
+              </div>
             </div>
           )}
 
