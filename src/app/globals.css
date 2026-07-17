@@ -22,8 +22,8 @@
   --gradient-red: linear-gradient(135deg, #B91C1C 0%, #E11D48 100%);
 
   /* Neutrals for Light Mode */
-  --color-bg: #eef2f7;
-  --color-surface: #eef2f7;
+  --color-bg: #e0e0e0;
+  --color-surface: #e0e0e0;
   --color-white: #ffffff;
   --color-text: #1e293b;
   --color-muted: #64748b;
@@ -34,10 +34,10 @@
   --font-heading: 'Outfit', system-ui, sans-serif;
 
   /* Glassmorphism Variables - Apple Liquid Glass */
-  --glass-bg: #eef2f7;
+  --glass-bg: #e0e0e0;
   --glass-border: 1px solid rgba(255, 255, 255, 0.6);
   --glass-blur: blur(40px) saturate(210%);
-  --glass-shadow: 6px 6px 16px #a3b1c6, -6px -6px 16px rgba(255, 255, 255, 0.55);
+  --glass-shadow: 6px 6px 16px #bebebe, -6px -6px 16px rgba(255, 255, 255, 0.7);
 
   /* Spacing */
   --space-1: 4px; --space-2: 8px; --space-3: 16px;

@@ -2,10 +2,10 @@
 
 :root {
   /* Liquid Light Mode Colors & Specs */
-  --liquid-bg: #eef2f7;
-  --glass-bg: #eef2f7;
+  --liquid-bg: #e0e0e0;
+  --glass-bg: #e0e0e0;
   --glass-border: 1px solid rgba(255, 255, 255, 0.5);
-  --glass-shadow: 6px 6px 16px #a3b1c6, -6px -6px 16px rgba(255, 255, 255, 0.55);
+  --glass-shadow: 6px 6px 16px #bebebe, -6px -6px 16px rgba(255, 255, 255, 0.7);
   --glass-blur: none;
   --color-text: #1e293b;
   --color-muted: #64748b;
@@ -42,6 +42,7 @@
 
 /* Background Animated Blobs - Apple Liquid Gradient Style */
 .siakad-bg-shapes {
+  display: none !important;
   position: absolute;
   inset: 0;
   overflow: hidden;
