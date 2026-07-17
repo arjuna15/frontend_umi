@@ -830,16 +830,16 @@
     display: flex;
     align-items: center;
     padding: 16px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid var(--color-border);
+    background: var(--glass-bg) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
     border-radius: 16px;
     text-decoration: none;
     color: var(--color-text);
+    box-shadow: var(--glass-shadow) !important;
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   .siakad-drawer-content .drawer-item:active {
-    background: rgba(255, 255, 255, 0.4);
     transform: scale(0.98);
   }
 
@@ -847,15 +847,15 @@
     width: 40px;
     height: 40px;
     border-radius: 12px;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
+    background: var(--glass-bg) !important;
+    border: 1px solid rgba(255, 255, 255, 0.55) !important;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-text);
     font-size: 1.2rem;
     margin-right: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff !important;
   }
 
   .siakad-drawer-content .drawer-item .label {
@@ -870,16 +870,16 @@
   }
 
   .siakad-drawer-content .drawer-item.active {
-    background: rgba(185, 28, 28, 0.06);
-    border-color: rgba(185, 28, 28, 0.3);
-    box-shadow: 0 4px 15px rgba(185, 28, 28, 0.05);
+    background: var(--liquid-bg) !important;
+    border-color: rgba(0, 0, 0, 0.03) !important;
+    box-shadow: inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff !important;
   }
 
   .siakad-drawer-content .drawer-item.active .icon {
-    background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%);
-    border-color: transparent;
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(185, 28, 28, 0.25);
+    background: linear-gradient(135deg, #b91c1c 0%, #ef4444 100%) !important;
+    border-color: transparent !important;
+    color: #ffffff !important;
+    box-shadow: 2px 2px 5px rgba(185, 28, 28, 0.25) !important;
   }
 
   .siakad-drawer-content .drawer-item.active .label {
