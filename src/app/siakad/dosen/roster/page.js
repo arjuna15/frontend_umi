@@ -177,29 +177,49 @@ export default function RosterPage() {
               </div>
             </div>
 
-            <div style={{ overflowX: 'auto', flex: 1 }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+            <div style={{ overflowX: 'auto', flex: 1, padding: '0 24px 24px 24px' }}>
+              <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
                 <thead>
-                  <tr style={{ background: 'rgba(196,30,58,0.05)', borderBottom: '2px solid var(--color-border)' }}>
-                    <th style={{ padding: '14px 20px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-muted)' }}>No</th>
-                    <th style={{ padding: '14px 20px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-muted)' }}>NIM</th>
-                    <th style={{ padding: '14px 20px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-muted)' }}>Nama Mahasiswa</th>
-                    <th style={{ padding: '14px 20px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-muted)' }}>Program Studi</th>
-                    <th style={{ padding: '14px 20px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-muted)' }}>Kontak</th>
+                  <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
+                    <th style={{ padding: '8px 20px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-muted)' }}>No</th>
+                    <th style={{ padding: '8px 20px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-muted)' }}>NIM</th>
+                    <th style={{ padding: '8px 20px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-muted)' }}>Nama Mahasiswa</th>
+                    <th style={{ padding: '8px 20px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-muted)' }}>Program Studi</th>
+                    <th style={{ padding: '8px 20px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-muted)' }}>Kontak</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredStudents.length > 0 ? (
                     filteredStudents.map((mhs, idx) => (
-                      <tr
-                        key={mhs.id}
-                        style={{ borderBottom: '1px solid var(--color-border)', transition: 'background 0.15s' }}
-                        onMouseEnter={e => e.currentTarget.style.background = 'rgba(196,30,58,0.04)'}
-                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-                      >
-                        <td style={{ padding: '16px 20px', color: 'var(--color-muted)', fontSize: '0.9rem' }}>{idx + 1}</td>
-                        <td style={{ padding: '16px 20px', fontWeight: '600', fontFamily: 'monospace', fontSize: '0.9rem' }}>{mhs.nim || '—'}</td>
-                        <td style={{ padding: '16px 20px' }}>
+                      <tr key={mhs.id}>
+                        <td style={{ 
+                          padding: '16px 20px', 
+                          color: 'var(--color-muted)', 
+                          fontSize: '0.9rem',
+                          background: 'var(--liquid-bg)',
+                          borderLeft: '1px solid rgba(0,0,0,0.03)',
+                          borderTop: '1px solid rgba(0,0,0,0.03)',
+                          borderBottom: '1px solid rgba(0,0,0,0.03)',
+                          borderRadius: '16px 0 0 16px',
+                          boxShadow: 'inset 3px 3px 5px #bebebe, inset 0 -3px 5px #ffffff'
+                        }}>{idx + 1}</td>
+                        <td style={{ 
+                          padding: '16px 20px', 
+                          fontWeight: '600', 
+                          fontFamily: 'monospace', 
+                          fontSize: '0.9rem',
+                          background: 'var(--liquid-bg)',
+                          borderTop: '1px solid rgba(0,0,0,0.03)',
+                          borderBottom: '1px solid rgba(0,0,0,0.03)',
+                          boxShadow: 'inset 0 3px 5px #bebebe, inset 0 -3px 5px #ffffff'
+                        }}>{mhs.nim || '—'}</td>
+                        <td style={{ 
+                          padding: '16px 20px',
+                          background: 'var(--liquid-bg)',
+                          borderTop: '1px solid rgba(0,0,0,0.03)',
+                          borderBottom: '1px solid rgba(0,0,0,0.03)',
+                          boxShadow: 'inset 0 3px 5px #bebebe, inset 0 -3px 5px #ffffff'
+                        }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                             <div style={{
                                width: '38px', height: '38px', borderRadius: '50%',
@@ -213,15 +233,29 @@ export default function RosterPage() {
                             <span style={{ fontWeight: '600' }}>{mhs.name}</span>
                           </div>
                         </td>
-                        <td style={{ padding: '16px 20px' }}>
-                          <span style={{ background: 'rgba(99,102,241,0.1)', color: '#6366f1', padding: '4px 12px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '600', whiteSpace: 'nowrap' }}>
+                        <td style={{ 
+                          padding: '16px 20px',
+                          background: 'var(--liquid-bg)',
+                          borderTop: '1px solid rgba(0,0,0,0.03)',
+                          borderBottom: '1px solid rgba(0,0,0,0.03)',
+                          boxShadow: 'inset 0 3px 5px #bebebe, inset 0 -3px 5px #ffffff'
+                        }}>
+                          <span style={{ background: 'rgba(99,102,241,0.15)', color: '#6366f1', padding: '4px 12px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '600', whiteSpace: 'nowrap' }}>
                             {mhs.prodi || 'Teknik Informatika'}
                           </span>
                         </td>
-                        <td style={{ padding: '16px 20px' }}>
+                        <td style={{ 
+                          padding: '16px 20px',
+                          background: 'var(--liquid-bg)',
+                          borderRight: '1px solid rgba(0,0,0,0.03)',
+                          borderTop: '1px solid rgba(0,0,0,0.03)',
+                          borderBottom: '1px solid rgba(0,0,0,0.03)',
+                          borderRadius: '0 16px 16px 0',
+                          boxShadow: 'inset -3px 3px 5px #bebebe, inset 0 -3px 5px #ffffff'
+                        }}>
                           {mhs.phone ? (
                             <a href={`https://wa.me/${mhs.phone}`} target="_blank" rel="noreferrer"
-                              style={{ color: '#10b981', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '500', fontSize: '0.88rem' }}>
+                              style={{ color: '#10b981', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '600', fontSize: '0.88rem' }}>
                               <i className="ph ph-whatsapp-logo" style={{ fontSize: '1.1rem' }}></i>
                               {mhs.phone}
                             </a>
