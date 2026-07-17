@@ -206,7 +206,7 @@ export default function AdminKeuangan() {
             <button 
               onClick={openBulkModal}
               style={{
-                background: 'rgba(16, 185, 129, 0.15)', backdropFilter: 'blur(10px)',
+                background: 'rgba(16, 185, 129, 0.15)', backdropFilter: 'none',
                 color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.4)', padding: '12px 24px', borderRadius: '30px',
                 fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px',
                 transition: 'all 0.3s'

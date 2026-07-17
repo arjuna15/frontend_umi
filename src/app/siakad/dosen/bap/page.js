@@ -88,7 +88,7 @@ export default function BapPage() {
               { label: 'Mata Kuliah', value: courses.length, icon: 'ph-books', color: '#10b981' },
               { label: 'Maks Pertemuan', value: 16, icon: 'ph-calendar', color: '#6366f1' },
             ].map((s, i) => (
-              <div key={i} style={{ flex: '1 1 90px', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.15)' }}>
+              <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', backdropFilter: 'none', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: 'var(--glass-border)' }}>
                 <i className={`ph ${s.icon}`} style={{ fontSize: '1.5rem', color: s.color, display: 'block', marginBottom: '4px' }}></i>
                 <p style={{ color: 'white', fontWeight: '800', fontSize: '1.4rem', margin: '0 0 2px 0' }}>{s.value}</p>
                 <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.7rem', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.label}</p>

@@ -403,7 +403,7 @@ export default function DosenBimbinganPage() {
 
       <style jsx global>{`
         .student-item-hover:hover {
-          background: rgba(255, 255, 255, 0.03) !important;
+          background: var(--glass-bg) !important;
         }
       `}</style>
     </div>

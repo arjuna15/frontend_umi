@@ -154,14 +154,12 @@ export default function SiakadLogin() {
           width: 100%;
           max-width: 1000px;
           min-height: 580px;
-          background: rgba(255, 255, 255, 0.45);
+          background: var(--glass-bg);
           backdrop-filter: blur(40px) saturate(210%);
           -webkit-backdrop-filter: blur(40px) saturate(210%);
           border: 1px solid rgba(255, 255, 255, 0.6);
           border-radius: 28px;
-          box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.04), 
-                      inset 0 1px 0 0 rgba(255, 255, 255, 0.6), 
-                      inset 0 -1px 0 0 rgba(0, 0, 0, 0.02);
+          box-shadow: var(--glass-shadow);
           display: flex;
           position: relative;
           z-index: 10;
@@ -232,14 +230,14 @@ export default function SiakadLogin() {
           font-size: 0.95rem;
           color: #1d1d1f;
           outline: none;
-          box-shadow: inset 0 1px 2px rgba(0,0,0,0.01);
+          box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff;
           transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
           font-weight: 500;
         }
         .aurora-input:focus {
           background: rgba(255, 255, 255, 0.8);
           border-color: #B91C1C;
-          box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.15), inset 0 1px 2px rgba(0,0,0,0.02);
+          box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.15), inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff;
         }
         .aurora-input:focus + .aurora-icon-box, 
         .aurora-input-group:focus-within .aurora-icon-box {

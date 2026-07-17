@@ -63,7 +63,7 @@ export default function DosenForumPage() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
         {data.jadwal.map((course, i) => (
           <div key={i} style={{ 
-            background: 'var(--glass-bg)', backdropFilter: 'blur(10px)',
+            background: 'var(--glass-bg)', backdropFilter: 'none',
             borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
             border: 'var(--glass-border)', overflow: 'hidden' 
           }}>

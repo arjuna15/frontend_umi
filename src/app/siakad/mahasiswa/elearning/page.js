@@ -299,17 +299,17 @@ export default function ElearningPage() {
                   
                   {/* Summary of content */}
                   <div style={{ display: 'flex', gap: '16px' }}>
-                    <div style={{ flex: 1, textAlign: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '12px' }}>
+                    <div style={{ flex: 1, textAlign: 'center', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '12px' }}>
                       <i className="ph ph-folder" style={{ fontSize: '1.2rem', color: 'var(--color-text)', display: 'block', marginBottom: '4px' }}></i>
                       <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', display: 'block' }}>Materi</span>
                       <strong style={{ fontSize: '1.1rem', color: 'var(--color-text)' }}>{materialCount}</strong>
                     </div>
-                    <div style={{ flex: 1, textAlign: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '12px' }}>
+                    <div style={{ flex: 1, textAlign: 'center', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '12px' }}>
                       <i className="ph ph-puzzle-piece" style={{ fontSize: '1.2rem', color: '#3b82f6', display: 'block', marginBottom: '4px' }}></i>
                       <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', display: 'block' }}>Kuis</span>
                       <strong style={{ fontSize: '1.1rem', color: 'var(--color-text)' }}>{quizCount}</strong>
                     </div>
-                    <div style={{ flex: 1, textAlign: 'center', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '12px' }}>
+                    <div style={{ flex: 1, textAlign: 'center', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '12px' }}>
                       <i className="ph ph-clipboard-text" style={{ fontSize: '1.2rem', color: '#C41E3A', display: 'block', marginBottom: '4px' }}></i>
                       <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', display: 'block' }}>Tugas</span>
                       <strong style={{ fontSize: '1.1rem', color: 'var(--color-text)' }}>{assignmentCount}</strong>
