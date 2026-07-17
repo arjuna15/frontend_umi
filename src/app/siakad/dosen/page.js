@@ -102,7 +102,7 @@ export default function DosenDashboard() {
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
             {todaySchedules.length > 0 ? todaySchedules.map((sch, i) => (
-              <div key={i} style={{ padding: '16px 20px', background: 'var(--glass-bg)', borderRadius: '50px', borderLeft: '4px solid #C41E3A', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', border: '1px solid var(--color-border)' }}>
+              <div key={i} style={{ padding: '16px 20px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', borderLeft: '5px solid #C41E3A', borderTop: '1px solid rgba(255,255,255,0.5)', borderRight: '1px solid rgba(0,0,0,0.02)', borderBottom: '1px solid rgba(0,0,0,0.02)', boxShadow: 'var(--glass-shadow)' }}>
                 <div>
                   <p style={{ margin: '0 0 4px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.95rem' }}>{sch.course}</p>
                   <div style={{ display: 'flex', gap: '12px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>
@@ -139,7 +139,7 @@ export default function DosenDashboard() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
             {todos.length > 0 ? todos.map((todo, i) => (
-              <div key={i} style={{ padding: '14px 20px', background: 'var(--glass-bg)', borderRadius: '50px', display: 'flex', alignItems: 'center', gap: '12px', borderLeft: '4px solid #f59e0b', border: '1px solid var(--color-border)' }}>
+              <div key={i} style={{ padding: '14px 20px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '12px', borderLeft: '5px solid #f59e0b', borderTop: '1px solid rgba(255,255,255,0.5)', borderRight: '1px solid rgba(0,0,0,0.02)', borderBottom: '1px solid rgba(0,0,0,0.02)', boxShadow: 'var(--glass-shadow)' }}>
                 <i className="ph ph-warning-circle" style={{ color: '#f59e0b', fontSize: '1.1rem', flexShrink: 0 }}></i>
                 <span style={{ fontSize: '0.9rem', color: 'var(--color-text)' }}>{todo}</span>
               </div>
