@@ -255,7 +255,7 @@ export default function RosterPage() {
                         }}>
                           {mhs.phone ? (
                             <a href={`https://wa.me/${mhs.phone}`} target="_blank" rel="noreferrer"
-                              style={{ color: '#10b981', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '600', fontSize: '0.88rem' }}>
+                              style={{ color: '#047857', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: '700', fontSize: '0.88rem' }}>
                               <i className="ph ph-whatsapp-logo" style={{ fontSize: '1.1rem' }}></i>
                               {mhs.phone}
                             </a>
