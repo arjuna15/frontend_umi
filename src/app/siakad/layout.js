@@ -465,20 +465,20 @@ export default function SiakadLayout({ children }) {
       <main className="siakad-main">
         {/* Sleek Glass Header */}
         <header className="siakad-header" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '16px' }}>
-          
-          {/* Language Switcher */}
-          <div style={{ display: 'flex', background: 'var(--glass-bg)', padding: '2px 4px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.4)', alignItems: 'center', fontSize: '0.8rem', fontWeight: 'bold' }}>
+                   {/* Language Switcher */}
+          <div style={{ display: 'flex', background: 'var(--glass-bg)', padding: '4px 6px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.55)', alignItems: 'center', fontSize: '0.8rem', fontWeight: 'bold', boxShadow: 'var(--glass-shadow)' }}>
             <button 
               onClick={() => changeLanguage('id')} 
               style={{
-                background: lang === 'id' ? 'rgba(255,255,255,0.25)' : 'transparent',
+                background: 'transparent',
                 border: 'none',
                 borderRadius: '20px',
-                padding: '4px 10px',
+                padding: '5px 12px',
                 cursor: 'pointer',
                 color: 'var(--color-text)',
                 transition: 'all 0.2s',
-                opacity: lang === 'id' ? 1 : 0.5
+                opacity: lang === 'id' ? 1 : 0.5,
+                boxShadow: lang === 'id' ? 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff' : 'none'
               }}
               title="Bahasa Indonesia"
             >
@@ -488,14 +488,15 @@ export default function SiakadLayout({ children }) {
             <button 
               onClick={() => changeLanguage('en')} 
               style={{
-                background: lang === 'en' ? 'rgba(255,255,255,0.25)' : 'transparent',
+                background: 'transparent',
                 border: 'none',
                 borderRadius: '20px',
-                padding: '4px 10px',
+                padding: '5px 12px',
                 cursor: 'pointer',
                 color: 'var(--color-text)',
                 transition: 'all 0.2s',
-                opacity: lang === 'en' ? 1 : 0.5
+                opacity: lang === 'en' ? 1 : 0.5,
+                boxShadow: lang === 'en' ? 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff' : 'none'
               }}
               title="English"
             >
@@ -509,7 +510,7 @@ export default function SiakadLayout({ children }) {
               title="Notifikasi"
               style={{
                 background: 'var(--glass-bg)',
-                border: '1px solid rgba(255,255,255,0.4)',
+                border: '1px solid rgba(255,255,255,0.55)',
                 borderRadius: '50%',
                 width: '40px', height: '40px',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -517,7 +518,8 @@ export default function SiakadLayout({ children }) {
                 color: 'var(--color-text)',
                 transition: 'all 0.3s',
                 position: 'relative',
-                flexShrink: 0
+                flexShrink: 0,
+                boxShadow: 'var(--glass-shadow)'
               }}
             >
               <i className="ph ph-bell" style={{ fontSize: '1.2rem' }}></i>
@@ -542,7 +544,7 @@ export default function SiakadLayout({ children }) {
                     style={{
                       position: 'absolute', top: '50px', right: 0,
                       width: '350px', background: 'var(--color-bg)',
-                      borderRadius: '16px', boxShadow: '0 10px 40px rgba(0,0,0,0.2)',
+                      borderRadius: '16px', boxShadow: 'var(--glass-shadow)',
                       border: '1px solid var(--color-border)',
                       zIndex: 10000, overflow: 'hidden'
                     }}
@@ -622,14 +624,16 @@ export default function SiakadLayout({ children }) {
             title="Toggle Dark Mode"
             style={{
               background: 'var(--glass-bg)',
-              border: '1px solid rgba(255,255,255,0.4)',
+              border: '1px solid rgba(255,255,255,0.55)',
               borderRadius: '50%',
               width: '40px', height: '40px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               cursor: 'pointer',
               color: 'var(--color-text)',
-              transition: 'all 0.3s'
-            , flexShrink: 0 }}
+              transition: 'all 0.3s',
+              flexShrink: 0,
+              boxShadow: 'var(--glass-shadow)'
+            }}
           >
             {theme === 'dark' ? <i className="ph ph-sun" style={{ fontSize: '1.2rem' }}></i> : <i className="ph ph-moon" style={{ fontSize: '1.2rem' }}></i>}
           </button>

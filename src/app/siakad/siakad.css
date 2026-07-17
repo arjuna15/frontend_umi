@@ -304,26 +304,26 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(255, 255, 255, 0.45);
+  background: var(--glass-bg) !important;
   padding: 8px 8px 8px 24px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: var(--glass-shadow) !important;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   margin-left: auto;
 }
 [data-theme='dark'] .siakad-user-badge {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: var(--glass-bg) !important;
+  border-color: rgba(255, 255, 255, 0.03) !important;
 }
 .siakad-user-badge:hover {
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
   transform: translateY(-2px) scale(1.02);
+  box-shadow: 6px 6px 12px #bebebe, -6px -6px 12px rgba(255, 255, 255, 0.75) !important;
 }
 [data-theme='dark'] .siakad-user-badge:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--glass-bg) !important;
+  box-shadow: 6px 6px 12px #080a0f, -6px -6px 12px rgba(255, 255, 255, 0.04) !important;
 }
 .siakad-avatar {
   width: 48px;
