@@ -156,12 +156,12 @@ export default function DosenBimbinganPage() {
                   width: '100%',
                   padding: '8px 12px 8px 46px',
                   borderRadius: '50px',
-                  border: '1px solid var(--color-border)',
+                  border: '1px solid rgba(255,255,255,0.5)',
                   background: 'var(--glass-bg)',
                   color: 'var(--color-text)',
                   outline: 'none',
                   fontSize: '0.9rem',
-                  boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.15)'
+                  boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff'
                 }}
               />
               <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
@@ -196,7 +196,7 @@ export default function DosenBimbinganPage() {
                     height: '40px',
                     borderRadius: '50%',
                     background: isSelected ? '#4f46e5' : 'var(--glass-bg)',
-                    border: '1px solid var(--color-border)',
+                    border: '1px solid rgba(255,255,255,0.5)',
                     color: isSelected ? 'white' : 'var(--color-text)',
                     display: 'flex',
                     alignItems: 'center',
@@ -344,7 +344,7 @@ export default function DosenBimbinganPage() {
                     flex: 1,
                     padding: '12px 20px',
                     borderRadius: '50px',
-                    border: '1px solid var(--color-border)',
+                    border: '1px solid rgba(255,255,255,0.5)',
                     background: 'var(--color-bg)',
                     color: 'var(--color-text)',
                     outline: 'none',

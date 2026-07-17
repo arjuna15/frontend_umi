@@ -449,7 +449,7 @@ export default function JadwalPage() {
               { label: 'Terkonfigurasi', value: configuredCount, icon: 'ph-check-circle', color: '#10b981' },
               { label: 'Belum Diatur', value: courses.length - configuredCount, icon: 'ph-warning', color: '#f59e0b' },
             ].map((s, i) => (
-              <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', backdropFilter: 'none', borderRadius: '24px', padding: '16px 20px', textAlign: 'center', border: 'var(--glass-border)' }}>
+              <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', backdropFilter: 'none', borderRadius: '24px', padding: '16px 20px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)' }}>
                 <i className={`ph ${s.icon}`} style={{ fontSize: '1.3rem', color: s.color, display: 'block', marginBottom: '4px' }}></i>
                 <p style={{ color: 'white', fontWeight: '800', fontSize: '1.4rem', margin: '0 0 2px 0' }}>{s.value}</p>
                 <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.65rem', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.label}</p>
@@ -488,7 +488,7 @@ export default function JadwalPage() {
 
         {/* Tab 1: Pengaturan Roster */}
         {activeTab === 'pengaturan' && (
-          <div className="siakad-card" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+          <div className="siakad-card" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
             <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(59, 130, 246, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
                 <i className="ph ph-calendar-plus" style={{ color: '#3b82f6', fontSize: '1.1rem' }}></i>
@@ -577,7 +577,7 @@ export default function JadwalPage() {
                           {isEditing ? (
                             <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
                               <button id={`btn-save-roster-${c.id}`} onClick={() => handleSave(c.id)} disabled={saving} className="siakad-btn-primary" style={{ padding: '8px 16px', fontSize: '0.8rem' }}>{saving ? 'Simpan...' : 'Simpan'}</button>
-                              <button id={`btn-cancel-roster-${c.id}`} onClick={handleCancel} style={{ padding: '8px 14px', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '30px', color: 'var(--color-text)', fontSize: '0.8rem', cursor: 'pointer' }}>Batal</button>
+                              <button id={`btn-cancel-roster-${c.id}`} onClick={handleCancel} style={{ padding: '8px 14px', background: 'transparent', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '30px', color: 'var(--color-text)', fontSize: '0.8rem', cursor: 'pointer' }}>Batal</button>
                             </div>
                           ) : (
                             <button id={`btn-edit-roster-${c.id}`} onClick={() => handleEdit(c)} className="siakad-btn-primary" style={{ padding: '8px 16px', fontSize: '0.8rem', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', border: 'none' }}><i className="ph ph-pencil-simple"></i> Edit</button>
@@ -600,10 +600,10 @@ export default function JadwalPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                 <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>{monthsMap[month]} {year}</h3>
                 <div style={{ display: 'flex', gap: '8px' }}>
-                  <button onClick={handlePrevMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <button onClick={handlePrevMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className="ph ph-caret-left"></i>
                   </button>
-                  <button onClick={handleNextMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <button onClick={handleNextMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className="ph ph-caret-right"></i>
                   </button>
                 </div>

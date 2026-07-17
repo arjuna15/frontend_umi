@@ -325,7 +325,7 @@ export default function ChatPage() {
                   const isSent = msg.user_id === currentUserId || msg.is_mine;
                   return (
                     <div key={msg.id || idx} style={{ display: 'flex', justifyContent: isSent ? 'flex-end' : 'flex-start', marginBottom: '4px' }}>
-                      <div style={{ maxWidth: '70%', padding: '10px 14px', borderRadius: isSent ? '16px 16px 4px 16px' : '16px 16px 16px 4px', background: isSent ? 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)' : 'var(--color-surface)', color: isSent ? 'white' : 'var(--color-text)', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                      <div style={{ maxWidth: '70%', padding: '10px 14px', borderRadius: isSent ? '16px 16px 4px 16px' : '16px 16px 16px 4px', background: isSent ? 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)' : 'var(--color-surface)', color: isSent ? 'white' : 'var(--color-text)', boxShadow: 'var(--glass-shadow)' }}>
                         {!isSent && <p style={{ margin: '0 0 4px 0', fontSize: '0.75rem', fontWeight: '700', color: '#3b82f6' }}>{msg.user_name || msg.sender_name || 'User'}</p>}
                         <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.4', wordBreak: 'break-word' }}>{msg.content}</p>
                         <p style={{ margin: '4px 0 0 0', fontSize: '0.68rem', opacity: 0.7, textAlign: 'right' }}>{formatTime(msg.created_at)}</p>

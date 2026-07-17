@@ -271,12 +271,12 @@ export default function DosenPresensiPage() {
                 placeholder="Cari mahasiswa..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ padding: '8px 10px 8px 46px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '220px', maxWidth: '100%', boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.15)' }}
+                style={{ padding: '8px 10px 8px 46px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '220px', maxWidth: '100%', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff' }}
               />
             </div>
           </div>
 
-          <div style={{ overflowX: 'auto', maxHeight: '65vh', overflowY: 'auto', border: '1px solid var(--color-border)', borderRadius: '16px' }}>
+          <div style={{ overflowX: 'auto', maxHeight: '65vh', overflowY: 'auto', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '16px' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
               <thead>
                 <tr style={{ background: 'var(--glass-bg)' }}>
@@ -322,7 +322,7 @@ export default function DosenPresensiPage() {
                           </td>
                           <td style={{ padding: '12px 16px' }}>
                             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '4px' , flexWrap: 'wrap'}}>
-                              <div style={{ display: 'inline-flex', background: 'rgba(0,0,0,0.1)', borderRadius: '50px', padding: '4px', gap: '4px', border: '1px solid var(--color-border)' }}>
+                              <div style={{ display: 'inline-flex', background: 'var(--glass-bg)', borderRadius: '50px', padding: '4px', gap: '4px', border: '1px solid rgba(255,255,255,0.5)' }}>
                                 <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} 
                                   style={{ 
                                     background: status === 'present' ? '#059669' : 'transparent', 

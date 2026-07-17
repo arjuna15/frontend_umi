@@ -298,7 +298,7 @@ export default function DosenElearningPage() {
       </div>
 
       <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-         <div className="siakad-card" style={{ flex: '1 1 300px', padding: '24px', height: 'fit-content', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+         <div className="siakad-card" style={{ flex: '1 1 300px', padding: '24px', height: 'fit-content', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
             <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className="ph ph-books" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
@@ -338,7 +338,7 @@ export default function DosenElearningPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {sessions.map((sess, idx) => (
-                  <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+                  <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
                     <div style={{ flex: '1 1 300px' }}>
                       <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.1rem', fontWeight: '700' }}>Sesi {sess.session}: {sess.title}</h3>
                       <div style={{ display: 'flex', gap: '16px', color: 'var(--color-muted)', fontSize: '0.85rem', flexWrap: 'wrap', alignItems: 'center' }}>
@@ -359,13 +359,13 @@ export default function DosenElearningPage() {
                     <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                       <button 
                         onClick={() => { setUploadSession(sess.session); setShowUploadModal(true); }} 
-                        style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
+                        style={{ background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
                       >
                         <i className="ph ph-upload-simple"></i> Upload
                       </button>
                       <button 
                         onClick={() => { setMeetSession(sess.session); setMeetUrl(sess.meet_link || ''); setShowMeetModal(true); }} 
-                        style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
+                        style={{ background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
                       >
                         <i className="ph ph-video-camera"></i> Link Meet
                       </button>
@@ -375,7 +375,7 @@ export default function DosenElearningPage() {
               </div>
 
               {/* CBT Quizzes Section */}
-              <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+              <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
                   <div>
                     <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -422,7 +422,7 @@ export default function DosenElearningPage() {
                       }
 
                       return (
-                        <div key={i} style={{ border: '1px solid var(--color-border)', borderRadius: '24px', padding: '16px 20px', background: 'rgba(255,255,255,0.02)' }}>
+                        <div key={i} style={{ border: '1px solid rgba(255,255,255,0.5)', borderRadius: '24px', padding: '16px 20px', background: 'var(--glass-bg)' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
                             <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>{quiz.title}</strong>
                             <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
@@ -469,7 +469,7 @@ export default function DosenElearningPage() {
                     <p style={{ margin: '0 0 16px 0' }}>Belum ada Kuis/Ujian yang dibuat untuk kelas ini.</p>
                     <button 
                       onClick={() => router.push('/siakad/dosen/elearning/quiz')}
-                      style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '8px 18px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem' }}
+                      style={{ background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', padding: '8px 18px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem' }}
                     >
                       Buat Kuis Baru
                     </button>
@@ -484,7 +484,7 @@ export default function DosenElearningPage() {
             (() => {
               const selectedCourseData = fullCourses.find(c => c.id === selectedCourse);
               return (
-                <div className="siakad-card" style={{ padding: '24px 0 0 0', marginTop: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+                <div className="siakad-card" style={{ padding: '24px 0 0 0', marginTop: '24px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
                   <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                     <div>
                       <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -503,7 +503,7 @@ export default function DosenElearningPage() {
                   {selectedCourseData?.assignments && selectedCourseData.assignments.length > 0 ? (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                       {selectedCourseData.assignments.map((ass, i) => (
-                        <div key={i} style={{ border: '1px solid var(--color-border)', borderRadius: '24px', padding: '16px 20px', background: 'rgba(255,255,255,0.02)' }}>
+                        <div key={i} style={{ border: '1px solid rgba(255,255,255,0.5)', borderRadius: '24px', padding: '16px 20px', background: 'var(--glass-bg)' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
                             <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>{ass.title}</strong>
                             <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'white', background: '#C41E3A', padding: '4px 12px', borderRadius: '50px' }}>
@@ -527,7 +527,7 @@ export default function DosenElearningPage() {
                                 setGradingValues(initialGrades);
                                 setShowSubmissionsModal(true); 
                               }}
-                              style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '8px 18px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem' }}
+                              style={{ background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', padding: '8px 18px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem' }}
                             >
                               <i className="ph ph-eye"></i> Periksa & Nilai
                             </button>
@@ -555,7 +555,7 @@ export default function DosenElearningPage() {
           onClose={() => setShowUploadModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowUploadModal(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="button" onClick={() => setShowUploadModal(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
               <button type="submit" form="upload-form" disabled={uploading} style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>{uploading ? 'Mengupload...' : 'Upload Materi'}</button>
             </>
           )}
@@ -595,7 +595,7 @@ export default function DosenElearningPage() {
           onClose={() => setShowMeetModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowMeetModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="button" onClick={() => setShowMeetModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
               <button type="submit" form="meet-form" disabled={savingMeet} style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(16, 185, 129, 0.28)' }}>{savingMeet ? 'Menyimpan...' : 'Simpan Link Meet'}</button>
             </>
           )}
@@ -624,7 +624,7 @@ export default function DosenElearningPage() {
           onClose={() => setShowAssignmentModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowAssignmentModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="button" onClick={() => setShowAssignmentModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
               <button type="submit" form="assignment-form" disabled={isCreatingAss} style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(196, 30, 58, 0.28)' }}>{isCreatingAss ? 'Menerbitkan...' : 'Terbitkan Tugas'}</button>
             </>
           )}
@@ -676,7 +676,7 @@ export default function DosenElearningPage() {
           icon="ph-users"
           onClose={() => setShowSubmissionsModal(false)}
           footer={(
-            <button type="button" onClick={() => setShowSubmissionsModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Tutup</button>
+            <button type="button" onClick={() => setShowSubmissionsModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Tutup</button>
           )}
         >
           <div style={{ marginBottom: '16px' }}>
@@ -794,7 +794,7 @@ export default function DosenElearningPage() {
           icon="ph-chart-bar"
           onClose={() => setShowMonitorModal(false)}
           footer={(
-            <button type="button" onClick={() => setShowMonitorModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Tutup</button>
+            <button type="button" onClick={() => setShowMonitorModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Tutup</button>
           )}
         >
           {/* If we have selected a student's answer detail to view */}
@@ -803,7 +803,7 @@ export default function DosenElearningPage() {
               <button 
                 type="button" 
                 onClick={() => setSelectedAttemptDetail(null)} 
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'var(--liquid-bg)', color: 'var(--color-text)', padding: '8px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', cursor: 'pointer', fontWeight: 'bold', marginBottom: '20px' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'var(--liquid-bg)', color: 'var(--color-text)', padding: '8px 16px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.5)', cursor: 'pointer', fontWeight: 'bold', marginBottom: '20px' }}
               >
                 <i className="ph ph-arrow-left"></i> Kembali ke Daftar Mahasiswa
               </button>
@@ -818,12 +818,12 @@ export default function DosenElearningPage() {
                   const isCorrect = q.type !== 'essay' && String(studentAnsVal).toUpperCase() === String(q.correct_answer).toUpperCase();
 
                   return (
-                    <div key={q.id} style={{ padding: '20px', borderRadius: '16px', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)', boxShadow: 'var(--glass-shadow)' }}>
+                    <div key={q.id} style={{ padding: '20px', borderRadius: '16px', background: 'var(--liquid-bg)', border: '1px solid rgba(255,255,255,0.5)', boxShadow: 'var(--glass-shadow)' }}>
                       <p style={{ fontWeight: '700', color: 'var(--color-text)', margin: '0 0 16px 0', fontSize: '0.95rem', lineHeight: '1.5' }}>
                         <span style={{ color: '#3b82f6', marginRight: '6px' }}>{idx + 1}.</span> {q.question}
                       </p>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', fontSize: '0.85rem', flexWrap: 'wrap' }}>
-                        <div style={{ padding: '12px', borderRadius: '10px', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)' }}>
+                        <div style={{ padding: '12px', borderRadius: '10px', background: 'var(--liquid-bg)', border: '1px solid rgba(255,255,255,0.5)' }}>
                           <span style={{ display: 'block', color: 'var(--color-muted)', marginBottom: '6px', fontSize: '0.75rem', fontWeight: '600' }}>Jawaban Mahasiswa:</span>
                           {q.type === 'essay' ? (
                             <p style={{ margin: 0, color: '#b45309', whiteSpace: 'pre-wrap', fontWeight: '700', fontSize: '0.9rem' }}>{studentAnsVal || '(Tidak menjawab)'}</p>
@@ -834,7 +834,7 @@ export default function DosenElearningPage() {
                             </span>
                           )}
                         </div>
-                        <div style={{ padding: '12px', borderRadius: '10px', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)' }}>
+                        <div style={{ padding: '12px', borderRadius: '10px', background: 'var(--liquid-bg)', border: '1px solid rgba(255,255,255,0.5)' }}>
                           <span style={{ display: 'block', color: 'var(--color-muted)', marginBottom: '6px', fontSize: '0.75rem', fontWeight: '600' }}>Kunci Jawaban / Panduan Dosen:</span>
                           <span style={{ fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
                             {q.type === 'essay' ? (q.correct_answer_text || '(Tidak ada panduan)') : q.correct_answer}
@@ -891,7 +891,7 @@ export default function DosenElearningPage() {
                               {att.has_attempted ? (
                                 <span style={{ display: 'inline-block', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold', boxShadow: '0 4px 10px rgba(16,185,129,0.2)' }}>Sudah Mengerjakan</span>
                               ) : (
-                                <span style={{ display: 'inline-block', background: 'var(--liquid-bg)', color: 'var(--color-muted)', border: '1px solid var(--color-border)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold' }}>Belum Mengerjakan</span>
+                                <span style={{ display: 'inline-block', background: 'var(--liquid-bg)', color: 'var(--color-muted)', border: '1px solid rgba(255,255,255,0.5)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold' }}>Belum Mengerjakan</span>
                               )}
                             </td>
                             <td style={{ padding: '14px 8px', fontWeight: 'bold' }}>

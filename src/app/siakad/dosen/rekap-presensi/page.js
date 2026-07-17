@@ -65,7 +65,7 @@ export default function RekapPresensiPage() {
                 { label: 'Berisiko (<75%)', value: atRisk, icon: 'ph-warning-circle', color: '#ef4444' },
                 { label: 'Total Pertemuan', value: selectedCourse.total_meetings || 0, icon: 'ph-calendar', color: '#f59e0b' },
               ].map((s, i) => (
-                <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', backdropFilter: 'none', borderRadius: '14px', padding: '14px 18px', display: 'flex', alignItems: 'center', gap: '10px', border: 'var(--glass-border)' }}>
+                <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', backdropFilter: 'none', borderRadius: '14px', padding: '14px 18px', display: 'flex', alignItems: 'center', gap: '10px', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)' }}>
                   <i className={`ph ${s.icon}`} style={{ fontSize: '1.2rem', color: s.color }}></i>
                   <div>
                     <p style={{ color: 'white', fontWeight: '800', fontSize: '1.3rem', margin: 0, lineHeight: 1 }}>{s.value}</p>
@@ -86,9 +86,9 @@ export default function RekapPresensiPage() {
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start' }}>
           {/* Course Selector */}
-          <div className="siakad-card stagger-1" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+          <div className="siakad-card stagger-1" style={{ padding: '24px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <i className="ph ph-book" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
               </div>
               <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.1rem' }}>Pilih Mata Kuliah</h3>
@@ -108,7 +108,7 @@ export default function RekapPresensiPage() {
           </div>
 
           {/* Table */}
-          <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+          <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
             <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
               <div>
                 <h3 style={{ margin: '0 0 4px 0', color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>{selectedCourse?.name}</h3>
@@ -117,7 +117,7 @@ export default function RekapPresensiPage() {
               <div style={{ position: 'relative' }}>
                 <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
                 <input type="text" placeholder="Cari mahasiswa..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)}
-                  style={{ padding: '10px 10px 10px 46px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none', width: '220px', fontSize: '0.9rem', boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.15)' }} />
+                  style={{ padding: '10px 10px 10px 46px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none', width: '220px', fontSize: '0.9rem', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff' }} />
               </div>
             </div>
             <div style={{ overflowX: 'auto' }}>

@@ -65,7 +65,7 @@ export default function DosenForumPage() {
           <div key={i} style={{ 
             background: 'var(--glass-bg)', backdropFilter: 'none',
             borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
-            border: 'var(--glass-border)', overflow: 'hidden' 
+            border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)', overflow: 'hidden' 
           }}>
             <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
               <div>
@@ -85,7 +85,7 @@ export default function DosenForumPage() {
               {course.forums && course.forums.length > 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   {course.forums.map((forum, j) => (
-                    <div key={j} style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '24px', padding: '20px 24px' }}>
+                    <div key={j} style={{ background: 'var(--color-bg)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '24px', padding: '20px 24px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
                         <div style={{ width: '40px', height: '40px', background: 'rgba(196, 30, 58, 0.1)', color: '#C41E3A', border: '1px solid rgba(196, 30, 58, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' , flexShrink: 0 }}>
                           D
@@ -124,7 +124,7 @@ export default function DosenForumPage() {
                               else window.toast('Gagal mengirim balasan');
                             } catch (err) { window.toast('Error: ' + err.message); }
                           }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
-                             <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, minWidth: 0, padding: '8px 16px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none', fontSize: '0.9rem', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.15)' }} />
+                             <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, minWidth: 0, padding: '8px 16px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none', fontSize: '0.9rem', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff' }} />
                             <button type="submit" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '8px 20px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 4px 10px rgba(196,30,58,0.2)' }}>Kirim</button>
                           </form>
                       </div>
@@ -149,7 +149,7 @@ export default function DosenForumPage() {
               <button
                 type="button"
                 onClick={() => setShowTopicModal(false)}
-                style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}
+                style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}
               >
                 Batal
               </button>

@@ -142,7 +142,7 @@ export default function KrsApprovalPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', alignItems: 'start' }}>
         {/* Left List */}
-        <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+        <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
           <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Bimbingan KRS</h3>
             {pendingCount > 0 && (
@@ -161,12 +161,12 @@ export default function KrsApprovalPage() {
                   width: '100%', 
                   padding: '8px 12px 8px 46px', 
                   borderRadius: '50px', 
-                  border: '1px solid var(--color-border)', 
+                  border: '1px solid rgba(255,255,255,0.5)', 
                   outline: 'none', 
                   background: 'var(--color-bg)', 
                   color: 'var(--color-text)',
                   fontSize: '0.85rem',
-                  boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.15)'
+                  boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff'
                 }} 
               />
             </div>
@@ -232,7 +232,7 @@ export default function KrsApprovalPage() {
         {/* Right Detail */}
         <div>
           {selectedSub ? (
-            <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column' }}>
+            <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)', display: 'flex', flexDirection: 'column' }}>
               {/* Header */}
               <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
@@ -260,7 +260,7 @@ export default function KrsApprovalPage() {
                 <h3 style={{ margin: '0 0 16px 0', fontWeight: '700', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <i className="ph ph-books" style={{ color: '#6366f1' }}></i> Mata Kuliah yang Diambil
                 </h3>
-                <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid var(--color-border)', marginBottom: '24px' }}>
+                <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.5)', marginBottom: '24px' }}>
                   <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                     <thead>
                       <tr style={{ background: 'rgba(0,0,0,0.04)', borderBottom: '1px solid var(--color-border)' }}>
@@ -304,7 +304,7 @@ export default function KrsApprovalPage() {
                         {record.historySubmissions.map((hist, k) => {
                           const hs = STATUS_STYLES[hist.status] || STATUS_STYLES.pending;
                           return (
-                            <div key={k} style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border)', borderRadius: '16px', fontSize: '0.85rem' }}>
+                            <div key={k} style={{ padding: '12px 16px', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '16px', fontSize: '0.85rem' }}>
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                                 <span style={{ fontWeight: '700', color: 'var(--color-text)' }}>Pengajuan ID #{hist.id}</span>
                                 <span style={{ 
@@ -341,7 +341,7 @@ export default function KrsApprovalPage() {
                   <textarea value={notes} onChange={e => setNotes(e.target.value)}
                     placeholder={selectedSub.status === 'pending' ? 'Berikan catatan revisi jika KRS akan ditolak...' : (notes || 'Tidak ada catatan.')}
                     rows="3" disabled={selectedSub.status !== 'pending'}
-                    style={{ width: '100%', padding: '14px 20px', borderRadius: '24px', border: '1px solid var(--color-border)', background: selectedSub.status !== 'pending' ? 'var(--glass-bg)' : 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }}></textarea>
+                    style={{ width: '100%', padding: '14px 20px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)', background: selectedSub.status !== 'pending' ? 'var(--glass-bg)' : 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }}></textarea>
                 </div>
 
                 {/* Action Buttons */}

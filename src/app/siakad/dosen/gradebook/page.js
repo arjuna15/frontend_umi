@@ -391,7 +391,7 @@ export default function DosenGradebookPage() {
         const isPublished = (course.grades && course.grades.length > 0) ? (course.grades[0].is_published || false) : false;
 
         return (
-          <div key={course.id} className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
+          <div key={course.id} className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.5)' }}>
             <div style={{ background: 'var(--glass-bg)', borderBottom: '1px solid var(--color-border)', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
@@ -416,7 +416,7 @@ export default function DosenGradebookPage() {
                     placeholder="Cari mahasiswa..." 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ padding: '10px 10px 10px 46px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '200px', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.15)' }}
+                    style={{ padding: '10px 10px 10px 46px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '200px', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff' }}
                   />
                 </div>
                 
@@ -428,15 +428,15 @@ export default function DosenGradebookPage() {
                   onChange={(e) => handleImportCSV(e, course)}
                 />
                 
-                <button onClick={() => setShowWeightModal(true)} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                <button onClick={() => setShowWeightModal(true)} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
                   <i className="ph ph-sliders"></i> Atur Bobot
                 </button>
 
-                <button onClick={() => fileInputRef.current?.click()} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                <button onClick={() => fileInputRef.current?.click()} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
                   <i className="ph ph-upload-simple"></i> Import CSV
                 </button>
                 
-                <button onClick={() => handleExportCSV(course)} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                <button onClick={() => handleExportCSV(course)} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
                   <i className="ph ph-download-simple"></i> Export CSV
                 </button>
 
@@ -502,7 +502,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.kehadiran || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'kehadiran', e.target.value)}
-                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
+                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
@@ -510,7 +510,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.tugas || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'tugas', e.target.value)}
-                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
+                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
@@ -518,7 +518,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.uts || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'uts', e.target.value)}
-                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
+                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
@@ -526,7 +526,7 @@ export default function DosenGradebookPage() {
                             type="number" min="0" max="100" placeholder="0-100"
                             value={edits.uas || ''}
                             onChange={(e) => handleGradeChange(grade.id, 'uas', e.target.value)}
-                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
+                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
                           />
                         </td>
                         <td style={{ padding: '16px' }}>
@@ -575,7 +575,7 @@ export default function DosenGradebookPage() {
               <button
                 type="button"
                 onClick={() => setShowWeightModal(false)}
-                style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}
+                style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}
               >
                 Batal
               </button>

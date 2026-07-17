@@ -88,7 +88,7 @@ export default function BapPage() {
               { label: 'Mata Kuliah', value: courses.length, icon: 'ph-books', color: '#10b981' },
               { label: 'Maks Pertemuan', value: 16, icon: 'ph-calendar', color: '#6366f1' },
             ].map((s, i) => (
-              <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', backdropFilter: 'none', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: 'var(--glass-border)' }}>
+              <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', backdropFilter: 'none', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)' }}>
                 <i className={`ph ${s.icon}`} style={{ fontSize: '1.5rem', color: s.color, display: 'block', marginBottom: '4px' }}></i>
                 <p style={{ color: 'white', fontWeight: '800', fontSize: '1.4rem', margin: '0 0 2px 0' }}>{s.value}</p>
                 <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.7rem', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.label}</p>
@@ -121,9 +121,9 @@ export default function BapPage() {
             ))}
           </div>
         </div>        {/* Form Card */}
-        <div className="siakad-card stagger-2" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+        <div className="siakad-card stagger-2" style={{ padding: '24px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
               <i className="ph ph-file-text" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Form Pengisian BAP</h3>

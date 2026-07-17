@@ -77,11 +77,11 @@ export default function RosterPage() {
           </div>
           <p style={{ color: 'rgba(255,255,255,0.6)', margin: '0 0 20px 0' }}>Daftar mahasiswa yang terdaftar di setiap kelas yang Anda ampu semester ini.</p>
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-            <div style={{ background: 'var(--glass-bg)', borderRadius: '12px', padding: '12px 20px', backdropFilter: 'none', border: 'var(--glass-border)' }}>
+            <div style={{ background: 'var(--glass-bg)', borderRadius: '12px', padding: '12px 20px', backdropFilter: 'none', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)' }}>
               <p style={{ margin: 0, color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Kelas</p>
               <p style={{ margin: 0, color: 'white', fontSize: '1.5rem', fontWeight: '800' }}>{courses.length}</p>
             </div>
-            <div style={{ background: 'var(--glass-bg)', borderRadius: '12px', padding: '12px 20px', backdropFilter: 'none', border: 'var(--glass-border)' }}>
+            <div style={{ background: 'var(--glass-bg)', borderRadius: '12px', padding: '12px 20px', backdropFilter: 'none', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)' }}>
               <p style={{ margin: 0, color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Mahasiswa</p>
               <p style={{ margin: 0, color: 'white', fontSize: '1.5rem', fontWeight: '800' }}>
                 {courses.reduce((acc, c) => acc + (c.students?.length || 0), 0)}
@@ -101,7 +101,7 @@ export default function RosterPage() {
           {/* ── Left Sidebar: Course Selector ── */}
           <div className="siakad-card stagger-1" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <i className="ph ph-book-open" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
               </div>
               <h3 style={{ color: 'var(--color-text)', margin: 0, fontSize: '1.1rem', fontWeight: '800' }}>Mata Kuliah</h3>
@@ -118,11 +118,11 @@ export default function RosterPage() {
                       textAlign: 'left',
                       background: isActive ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--glass-bg)',
                       color: isActive ? 'white' : 'var(--color-text)',
-                      border: isActive ? '1px solid rgba(196,30,58,0.5)' : '1px solid var(--color-border)',
+                      border: isActive ? '1px solid rgba(196,30,58,0.5)' : '1px solid rgba(255,255,255,0.55)',
                       borderRadius: '12px',
                       cursor: 'pointer',
                       transition: 'all 0.2s ease',
-                      boxShadow: isActive ? '0 4px 14px rgba(196,30,58,0.3)' : 'none',
+                      boxShadow: isActive ? '0 4px 14px rgba(196,30,58,0.3)' : 'var(--glass-shadow)',
                     }}
                   >
                     <div className="siakad-modal-header">
@@ -165,13 +165,13 @@ export default function RosterPage() {
                   style={{
                     padding: '10px 14px 10px 46px',
                     background: 'var(--glass-bg)',
-                    border: 'var(--glass-border)',
-                    borderRadius: '50px',
-                    color: 'var(--color-text)',
-                    width: '240px',
-                    outline: 'none',
-                    fontSize: '0.88rem',
-                    boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.15)',
+                     border: '1px solid rgba(0,0,0,0.03)',
+                     borderRadius: '50px',
+                     color: 'var(--color-text)',
+                     width: '240px',
+                     outline: 'none',
+                     fontSize: '0.88rem',
+                     boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff',
                   }}
                 />
               </div>
@@ -202,11 +202,11 @@ export default function RosterPage() {
                         <td style={{ padding: '16px 20px' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                             <div style={{
-                              width: '38px', height: '38px', borderRadius: '50%',
-                              background: getAvatarGradient(mhs.name),
-                              color: 'white', display: 'flex', alignItems: 'center',
-                              justifyContent: 'center', fontSize: '0.85rem', fontWeight: '700',
-                              flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                               width: '38px', height: '38px', borderRadius: '50%',
+                               background: getAvatarGradient(mhs.name),
+                               color: 'white', display: 'flex', alignItems: 'center',
+                               justifyContent: 'center', fontSize: '0.85rem', fontWeight: '700',
+                               flexShrink: 0, boxShadow: '2px 2px 6px rgba(0,0,0,0.2), -1px -1px 3px rgba(255,255,255,0.1)'
                             }}>
                               {mhs.name?.slice(0, 2).toUpperCase()}
                             </div>

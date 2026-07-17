@@ -253,7 +253,7 @@ export default function ProfilePage() {
                       {user.role}
                     </span>
                     {user.prodi && (
-                      <span style={{ padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold', background: 'var(--glass-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', textTransform: 'uppercase' }}>
+                      <span style={{ padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold', background: 'var(--glass-bg)', color: 'var(--color-text)', border: '1px solid rgba(255,255,255,0.5)', textTransform: 'uppercase' }}>
                         {user.prodi}
                       </span>
                     )}
@@ -266,22 +266,22 @@ export default function ProfilePage() {
                 <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
                   <div style={{ flex: '1 1 200px' }}>
                     <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Email Address</label>
-                    <input type="email" name="email" defaultValue={user.email} placeholder="contoh@kampus.ac.id" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.12)', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                    <input type="email" name="email" defaultValue={user.email} placeholder="contoh@kampus.ac.id" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
                   </div>
                   <div style={{ flex: '1 1 200px' }}>
                     <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Nomor HP</label>
-                    <input type="tel" name="phone" defaultValue={user.phone} placeholder="08xxxxxxxxxx" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.12)', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                    <input type="tel" name="phone" defaultValue={user.phone} placeholder="08xxxxxxxxxx" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
                   </div>
                 </div>
                 
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Alamat Domisili</label>
-                  <textarea name="address" defaultValue={user.address} rows="3" placeholder="Masukkan alamat lengkap..." style={{ width: '100%', padding: '14px 20px', borderRadius: '20px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.12)', resize: 'vertical', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'}></textarea>
+                  <textarea name="address" defaultValue={user.address} rows="3" placeholder="Masukkan alamat lengkap..." style={{ width: '100%', padding: '14px 20px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', resize: 'vertical', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'}></textarea>
                 </div>
                 
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Bio Singkat</label>
-                  <textarea name="bio" defaultValue={user.bio} rows="2" placeholder="Tuliskan sedikit tentang diri Anda..." style={{ width: '100%', padding: '14px 20px', borderRadius: '20px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.12)', resize: 'vertical', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'}></textarea>
+                  <textarea name="bio" defaultValue={user.bio} rows="2" placeholder="Tuliskan sedikit tentang diri Anda..." style={{ width: '100%', padding: '14px 20px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', resize: 'vertical', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'}></textarea>
                 </div>
 
                 <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'flex-end' }}>
@@ -298,7 +298,7 @@ export default function ProfilePage() {
             <div className="fade-in">
               <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)' }}>Keamanan Akun</h2>
               
-              <div style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '20px', borderRadius: '12px', marginBottom: '32px', display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+              <div style={{ background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', padding: '20px', borderRadius: '12px', marginBottom: '32px', display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
                 <i className="ph ph-info" style={{ fontSize: '1.5rem', color: '#C41E3A' }}></i>
                 <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.9rem', lineHeight: '1.5' }}>Pastikan Anda menggunakan kata sandi yang kuat dan tidak digunakan di situs lain. Kombinasikan huruf besar, huruf kecil, angka, dan simbol.</p>
               </div>
@@ -306,15 +306,15 @@ export default function ProfilePage() {
               <form onSubmit={handleUpdatePassword} style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '500px' }}>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Password Saat Ini</label>
-                  <input type="password" name="current_password" required placeholder="••••••••" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.12)', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                  <input type="password" name="current_password" required placeholder="••••••••" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Password Baru</label>
-                  <input type="password" name="password" required minLength="6" placeholder="••••••••" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.12)', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                  <input type="password" name="password" required minLength="6" placeholder="••••••••" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
                 </div>
                 <div>
                   <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Konfirmasi Password Baru</label>
-                  <input type="password" name="confirm" required minLength="6" placeholder="••••••••" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', background: 'transparent', color: 'var(--color-text)', boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.12)', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                  <input type="password" name="confirm" required minLength="6" placeholder="••••••••" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
                 </div>
                 <div style={{ marginTop: '16px' }}>
                   <button type="submit" className="siakad-btn-primary" style={{ padding: '14px 32px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
