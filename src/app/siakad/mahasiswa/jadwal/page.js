@@ -13,6 +13,7 @@ export default function JadwalKalenderPage() {
   const [calendarEvents, setCalendarEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedDay, setSelectedDay] = useState(null);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getToken = () => localStorage.getItem('siakad_token');
@@ -22,7 +23,9 @@ export default function JadwalKalenderPage() {
     if (!token) return router.push('/siakad/login');
 
     const fetchData = async () => {
-      setLoading(true);
+      if (isInitialLoad) {
+        setLoading(true);
+      }
       try {
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth() + 1;
@@ -68,6 +71,9 @@ export default function JadwalKalenderPage() {
         console.error(err);
       } finally {
         setLoading(false);
+        if (isInitialLoad) {
+          setIsInitialLoad(false);
+        }
       }
     };
 
@@ -197,6 +203,33 @@ export default function JadwalKalenderPage() {
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        .mahasiswa-jadwal-wrapper {
+          padding: 24px;
+        }
+        .calendar-responsive-container {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 24px;
+          padding: 16px;
+          align-items: start;
+        }
+        @media (max-width: 768px) {
+          .mahasiswa-jadwal-wrapper {
+            padding: 12px;
+          }
+          .calendar-responsive-container {
+            padding: 8px 0;
+            gap: 16px;
+          }
+        }
+        @media (min-width: 768px) {
+          .calendar-responsive-container {
+            grid-template-columns: 1fr 1fr;
+            padding: 24px;
+          }
+        }
+      `}} />
       <div className="siakad-page-header">
         <div className="siakad-page-header-glow"></div>
         <div className="siakad-page-header-grid"></div>
@@ -207,7 +240,7 @@ export default function JadwalKalenderPage() {
         </div>
       </div>
 
-      <div style={{ padding: '24px' }}>
+      <div className="mahasiswa-jadwal-wrapper">
         {/* Tab Selector */}
         <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' }}>
           <button
@@ -235,7 +268,7 @@ export default function JadwalKalenderPage() {
         </div>
 
         {activeTab === 'kalender' && (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+          <div className="calendar-responsive-container">
             {/* Grid Kalender */}
             <div className="siakad-card" style={{ padding: '24px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
