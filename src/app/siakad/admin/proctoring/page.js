@@ -231,10 +231,12 @@ export default function ProctoringAdminPage() {
                     </div>
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                        <span style={{ fontWeight: '600', color: vc, fontSize: '0.88rem', textTransform: 'capitalize' }}>{(log.type || log.event_type || 'violation').replace(/_/g, ' ')}</span>
+                        <span style={{ fontWeight: '600', color: vc, fontSize: '0.88rem', textTransform: 'capitalize' }}>{(log.event || log.type || log.event_type || 'violation').replace(/_/g, ' ')}</span>
                         <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>{log.created_at ? new Date(log.created_at).toLocaleTimeString('id-ID') : ''}</span>
                       </div>
-                      <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--color-muted)' }}>{log.student_name || log.user_name || 'Mahasiswa'} — {log.description || log.message || '-'}</p>
+                      <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--color-muted)' }}>
+                        <strong>{log.user?.name || log.student_name || 'Mahasiswa'}</strong> ({log.user?.nim_nip || '-'}) — {log.data?.description || log.description || log.message || '-'}
+                      </p>
                     </div>
                   </div>
                 );
