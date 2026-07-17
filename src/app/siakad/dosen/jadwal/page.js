@@ -333,12 +333,24 @@ export default function JadwalPage() {
           color: white;
           box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
+        .dosen-jadwal-wrapper {
+          padding: 24px;
+        }
         .calendar-responsive-container {
           display: grid;
           grid-template-columns: 1fr;
           gap: 24px;
           padding: 16px;
           align-items: start;
+        }
+        @media (max-width: 768px) {
+          .dosen-jadwal-wrapper {
+            padding: 12px;
+          }
+          .calendar-responsive-container {
+            padding: 8px 0;
+            gap: 16px;
+          }
         }
         @media (min-width: 768px) {
           .calendar-responsive-container {
@@ -445,7 +457,7 @@ export default function JadwalPage() {
         </div>
       </div>
 
-      <div style={{ padding: '24px' }}>
+      <div className="dosen-jadwal-wrapper">
         {/* Tab Selector */}
         <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' }}>
           <button
