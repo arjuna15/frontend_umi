@@ -1431,7 +1431,7 @@ textarea::placeholder {
 /* Premium Buttons inside Modals */
 .siakad-modal-content button[type="submit"],
 .siakad-modal-content button.siakad-btn-primary {
-  background: linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%) !important;
+  background: linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%) !important;
   color: #ffffff !important;
   border: none !important;
   padding: 12px 28px !important;
@@ -1441,21 +1441,25 @@ textarea::placeholder {
   display: inline-flex !important;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.3) !important;
+  box-shadow: 3px 3px 8px #d1d9e6, -3px -3px 8px #ffffff !important;
   transition: all 0.2s ease !important;
+}
+
+[data-theme='dark'] .siakad-modal-content button[type="submit"],
+[data-theme='dark'] .siakad-modal-content button.siakad-btn-primary {
+  box-shadow: 3px 3px 8px #090b10, -3px -3px 8px #1b2130 !important;
 }
 
 .siakad-modal-content button[type="submit"]:hover,
 .siakad-modal-content button.siakad-btn-primary:hover {
   transform: translateY(-1px) !important;
-  background: linear-gradient(135deg, rgb(70, 140, 255) 0%, rgb(39, 90, 230) 100%) !important;
-  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.4) !important;
+  background: linear-gradient(135deg, #d42e4a 0%, #ab2c3e 100%) !important;
 }
 
 .siakad-modal-content button[type="submit"]:active,
 .siakad-modal-content button.siakad-btn-primary:active {
   transform: scale(0.97) !important;
-  background: linear-gradient(135deg, rgb(49, 120, 236) 0%, rgb(19, 68, 206) 100%) !important;
+  background: linear-gradient(135deg, #b40e2a 0%, #8b0c1e 100%) !important;
 }
 
 .siakad-modal-content button[type="button"]:not(.siakad-btn-primary) {
@@ -1470,6 +1474,7 @@ textarea::placeholder {
   display: inline-flex !important;
   align-items: center;
   gap: 8px;
+  box-shadow: var(--glass-shadow) !important;
 }
 
 .siakad-modal-content button[type="button"]:not(.siakad-btn-primary):hover {
@@ -1479,6 +1484,11 @@ textarea::placeholder {
 
 .siakad-modal-content button[type="button"]:not(.siakad-btn-primary):active {
   transform: scale(0.97) !important;
+  box-shadow: inset 3px 3px 6px #d1d9e6, inset -3px -3px 6px #ffffff !important;
+}
+
+[data-theme='dark'] .siakad-modal-content button[type="button"]:not(.siakad-btn-primary):active {
+  box-shadow: inset 3px 3px 6px #090b10, inset -3px -3px 6px #1b2130 !important;
 }
 
 /* Staggered form field entry animation */
@@ -1754,7 +1764,7 @@ textarea::placeholder {
 }
 
 .siakad-btn-primary {
-  background: linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%) !important;
+  background: linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%) !important;
   color: #ffffff !important;
   border: none !important;
   padding: 10px 20px !important;
@@ -1764,19 +1774,22 @@ textarea::placeholder {
   display: inline-flex !important;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.3) !important;
+  box-shadow: 3px 3px 8px #d1d9e6, -3px -3px 8px #ffffff !important;
   transition: all 0.2s ease !important;
+}
+
+[data-theme='dark'] .siakad-btn-primary {
+  box-shadow: 3px 3px 8px #090b10, -3px -3px 8px #1b2130 !important;
 }
 
 .siakad-btn-primary:hover {
   transform: translateY(-1px) !important;
-  background: linear-gradient(135deg, rgb(70, 140, 255) 0%, rgb(39, 90, 230) 100%) !important;
-  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.4) !important;
+  background: linear-gradient(135deg, #d42e4a 0%, #ab2c3e 100%) !important;
 }
 
 .siakad-btn-primary:active {
   transform: scale(0.97) !important;
-  background: linear-gradient(135deg, rgb(49, 120, 236) 0%, rgb(19, 68, 206) 100%) !important;
+  background: linear-gradient(135deg, #b40e2a 0%, #8b0c1e 100%) !important;
 }
 
 .siakad-btn-primary:disabled {
