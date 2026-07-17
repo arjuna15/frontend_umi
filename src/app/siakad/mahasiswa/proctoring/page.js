@@ -302,73 +302,166 @@ export default function ProctoringStudentPage() {
             <p style={{ margin: 0, fontSize: '0.95rem' }}>Memuat lembar soal...</p>
           </div>
         ) : quizData !== null ? (
+        ) : quizData !== null ? (
           /* Case C: Quiz loaded */
-          <div className="siakad-card" style={{ padding: '32px', minHeight: '400px' }}>
-            <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '16px', marginBottom: '24px' }}>
-              <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '700', color: 'var(--color-text)' }}>Lembar Soal Ujian</h3>
-              <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}>Jawab seluruh pertanyaan dengan teliti. Pindah tab akan terekam oleh sistem.</p>
+          <div className="siakad-card" style={{ padding: '32px', minHeight: '400px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+              <div>
+                <h3 style={{ margin: 0, fontSize: '1.3rem', fontWeight: '800', color: 'var(--color-text)' }}>Lembar Soal Ujian</h3>
+                <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}>Jawab seluruh pertanyaan dengan teliti. Pindah tab akan terekam oleh sistem.</p>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '6px' }}>
+                  Progress: {Object.keys(answers).filter(k => answers[k] !== '').length} / {quizData.questions?.length || 0} Soal Dijawab
+                </span>
+                <div style={{ width: '150px', height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '50px', overflow: 'hidden' }}>
+                  <div style={{ 
+                    width: `${((Object.keys(answers).filter(k => answers[k] !== '').length) / (quizData.questions?.length || 1)) * 100}%`, 
+                    height: '100%', 
+                    background: 'linear-gradient(90deg, #3b82f6, #10b981)',
+                    borderRadius: '50px',
+                    transition: 'width 0.3s ease'
+                  }}></div>
+                </div>
+              </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
               {quizData.questions?.map((q, i) => (
-                <div key={q.id} style={{ borderBottom: i < quizData.questions.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none', paddingBottom: i < quizData.questions.length - 1 ? '24px' : '0' }}>
-                  <p style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--color-text)', margin: '0 0 16px 0', lineHeight: '1.5' }}>
-                    {i + 1}. {q.question}
+                <div key={q.id} style={{ 
+                  background: 'rgba(255,255,255,0.02)', 
+                  border: '1px solid rgba(255,255,255,0.05)', 
+                  borderRadius: '20px', 
+                  padding: '24px', 
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseOver={e => e.currentTarget.style.border = '1px solid rgba(59,130,246,0.2)'}
+                onMouseOut={e => e.currentTarget.style.border = '1px solid rgba(255,255,255,0.05)'}
+                >
+                  <p style={{ fontSize: '1.05rem', fontWeight: '700', color: 'var(--color-text)', margin: '0 0 20px 0', lineHeight: '1.6', display: 'flex', gap: '8px' }}>
+                    <span style={{ color: '#3b82f6' }}>{i + 1}.</span> 
+                    <span>{q.question}</span>
                   </p>
 
                   {/* Render options based on type */}
                   {(q.question_type === 'multiple_choice' || q.type === 'multiple_choice') && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingLeft: '16px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                       {[
                         { label: q.option_a, key: 'A' },
                         { label: q.option_b, key: 'B' },
                         { label: q.option_c, key: 'C' },
                         { label: q.option_d, key: 'D' }
-                      ].map(opt => (
-                        <label key={opt.key} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', fontSize: '0.92rem', color: answers[q.id] === opt.key ? 'var(--color-text)' : 'var(--color-muted)', padding: '8px 12px', borderRadius: '8px', background: answers[q.id] === opt.key ? 'rgba(59,130,246,0.08)' : 'transparent', border: answers[q.id] === opt.key ? '1px solid rgba(59,130,246,0.2)' : '1px solid transparent', transition: 'all 0.2s' }}>
-                          <input 
-                            type="radio" 
-                            name={`q-${q.id}`} 
-                            value={opt.key} 
-                            checked={answers[q.id] === opt.key} 
-                            onChange={() => setAnswers(prev => ({ ...prev, [q.id]: opt.key }))}
-                            style={{ marginTop: '3px' }} 
-                          />
-                          <span><strong style={{ color: 'var(--color-text)', marginRight: '6px' }}>{opt.key}.</strong> {opt.label}</span>
-                        </label>
-                      ))}
+                      ].map(opt => {
+                        const isSelected = answers[q.id] === opt.key;
+                        return (
+                          <div 
+                            key={opt.key} 
+                            onClick={() => setAnswers(prev => ({ ...prev, [q.id]: opt.key }))}
+                            style={{ 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              gap: '14px', 
+                              cursor: 'pointer', 
+                              fontSize: '0.95rem', 
+                              padding: '14px 20px', 
+                              borderRadius: '14px', 
+                              background: isSelected ? 'linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(29,78,216,0.15) 100%)' : 'rgba(255,255,255,0.01)', 
+                              border: isSelected ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.08)', 
+                              boxShadow: isSelected ? '0 0 14px rgba(59,130,246,0.2)' : 'none',
+                              color: isSelected ? 'var(--color-text)' : 'var(--color-muted)',
+                              transition: 'all 0.2s ease'
+                            }}
+                          >
+                            <div style={{ 
+                              width: '20px', 
+                              height: '20px', 
+                              borderRadius: '50%', 
+                              border: isSelected ? '6px solid #3b82f6' : '2px solid rgba(255,255,255,0.3)', 
+                              background: isSelected ? 'white' : 'transparent',
+                              boxSizing: 'border-box',
+                              transition: 'all 0.2s ease',
+                              flexShrink: 0
+                            }}></div>
+                            <span><strong style={{ color: 'var(--color-text)', marginRight: '6px' }}>{opt.key}.</strong> {opt.label}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
 
                   {(q.question_type === 'true_false' || q.type === 'true_false') && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingLeft: '16px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                       {[
-                        { label: 'Benar', key: 'True' },
-                        { label: 'Salah', key: 'False' }
-                      ].map(opt => (
-                        <label key={opt.key} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', fontSize: '0.92rem', color: answers[q.id] === opt.key ? 'var(--color-text)' : 'var(--color-muted)', padding: '8px 12px', borderRadius: '8px', background: answers[q.id] === opt.key ? 'rgba(59,130,246,0.08)' : 'transparent', border: answers[q.id] === opt.key ? '1px solid rgba(59,130,246,0.2)' : '1px solid transparent', transition: 'all 0.2s' }}>
-                          <input 
-                            type="radio" 
-                            name={`q-${q.id}`} 
-                            value={opt.key} 
-                            checked={answers[q.id] === opt.key} 
-                            onChange={() => setAnswers(prev => ({ ...prev, [q.id]: opt.key }))} 
-                          />
-                          <span>{opt.label}</span>
-                        </label>
-                      ))}
+                        { label: 'Benar (True)', key: 'True', color: '#10b981' },
+                        { label: 'Salah (False)', key: 'False', color: '#ef4444' }
+                      ].map(opt => {
+                        const isSelected = answers[q.id] === opt.key;
+                        return (
+                          <div 
+                            key={opt.key} 
+                            onClick={() => setAnswers(prev => ({ ...prev, [q.id]: opt.key }))}
+                            style={{ 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              gap: '14px', 
+                              cursor: 'pointer', 
+                              fontSize: '0.95rem', 
+                              padding: '14px 20px', 
+                              borderRadius: '14px', 
+                              background: isSelected ? `rgba(${opt.key === 'True' ? '16,185,129' : '239,68,68'}, 0.1)` : 'rgba(255,255,255,0.01)', 
+                              border: isSelected ? `1px solid ${opt.color}` : '1px solid rgba(255,255,255,0.08)', 
+                              boxShadow: isSelected ? `0 0 14px rgba(${opt.key === 'True' ? '16,185,129' : '239,68,68'}, 0.2)` : 'none',
+                              color: isSelected ? 'var(--color-text)' : 'var(--color-muted)',
+                              transition: 'all 0.2s ease'
+                            }}
+                          >
+                            <div style={{ 
+                              width: '20px', 
+                              height: '20px', 
+                              borderRadius: '50%', 
+                              border: isSelected ? `6px solid ${opt.color}` : '2px solid rgba(255,255,255,0.3)', 
+                              background: isSelected ? 'white' : 'transparent',
+                              boxSizing: 'border-box',
+                              transition: 'all 0.2s ease',
+                              flexShrink: 0
+                            }}></div>
+                            <span>{opt.label}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
 
                   {(q.question_type === 'essay' || q.type === 'essay') && (
-                    <div style={{ paddingLeft: '16px' }}>
+                    <div>
                       <textarea 
                         value={answers[q.id] || ''} 
                         onChange={(e) => setAnswers(prev => ({ ...prev, [q.id]: e.target.value }))}
-                        placeholder="Tuliskan jawaban esai Anda di sini..."
-                        style={{ width: '100%', minHeight: '120px', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.2)', color: 'var(--color-text)', fontSize: '0.92rem', fontFamily: 'inherit', resize: 'vertical', outline: 'none' }}
-                        onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
-                        onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+                        placeholder="Tuliskan jawaban esai Anda di sini secara lengkap..."
+                        style={{ 
+                          width: '100%', 
+                          minHeight: '140px', 
+                          padding: '16px', 
+                          borderRadius: '14px', 
+                          border: '1px solid rgba(255,255,255,0.08)', 
+                          background: 'rgba(0,0,0,0.25)', 
+                          color: 'var(--color-text)', 
+                          fontSize: '0.95rem', 
+                          fontFamily: 'inherit', 
+                          resize: 'vertical', 
+                          outline: 'none',
+                          boxSizing: 'border-box',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onFocus={(e) => {
+                          e.target.style.borderColor = '#3b82f6';
+                          e.target.style.boxShadow = '0 0 10px rgba(59,130,246,0.15)';
+                        }}
+                        onBlur={(e) => {
+                          e.target.style.borderColor = 'rgba(255,255,255,0.08)';
+                          e.target.style.boxShadow = 'none';
+                        }}
                       />
                     </div>
                   )}
@@ -376,13 +469,28 @@ export default function ProctoringStudentPage() {
               ))}
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '32px', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '24px' }}>
               <button 
                 onClick={submitQuizAnswers} 
                 disabled={submitting} 
-                style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', padding: '14px 28px', borderRadius: '12px', fontWeight: '700', cursor: 'pointer', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '8px', opacity: submitting ? 0.6 : 1, transition: 'all 0.2s', boxShadow: '0 4px 12px rgba(16,185,129,0.2)' }}
-                onMouseOver={e => !submitting && (e.currentTarget.style.boxShadow = '0 6px 16px rgba(16,185,129,0.3)')}
-                onMouseOut={e => (e.currentTarget.style.boxShadow = '0 4px 12px rgba(16,185,129,0.2)')}
+                style={{ 
+                  background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', 
+                  color: 'white', 
+                  border: 'none', 
+                  padding: '16px 36px', 
+                  borderRadius: '50px', 
+                  fontWeight: '800', 
+                  cursor: submitting ? 'not-allowed' : 'pointer', 
+                  fontSize: '1rem', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: '10px', 
+                  opacity: submitting ? 0.6 : 1, 
+                  transition: 'all 0.2s ease', 
+                  boxShadow: '0 8px 24px rgba(59, 130, 246, 0.3)' 
+                }}
+                onMouseOver={e => !submitting && (e.currentTarget.style.boxShadow = '0 10px 28px rgba(59, 130, 246, 0.45)', e.currentTarget.style.transform = 'translateY(-2px)')}
+                onMouseOut={e => (e.currentTarget.style.boxShadow = '0 8px 24px rgba(59, 130, 246, 0.3)', e.currentTarget.style.transform = 'translateY(0)')}
               >
                 {submitting ? (
                   <>

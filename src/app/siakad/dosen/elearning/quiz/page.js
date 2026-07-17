@@ -299,9 +299,8 @@ export default function DosenQuizCreate() {
 
             {q.type === 'essay' && (
               <div style={{ marginTop: '16px' }}>
-                <label style={{ fontWeight: 600, color: 'var(--color-text)' }}>Kunci Jawaban / Panduan Penilaian</label>
+                <label style={{ fontWeight: 600, color: 'var(--color-text)' }}>Kunci Jawaban / Panduan Penilaian (Opsional)</label>
                 <textarea 
-                  required
                   value={q.correct_answer_text} onChange={e=>handleChange(idx, 'correct_answer_text', e.target.value)}
                   className="siakad-input" 
                   style={{ width: '100%', height: '80px', marginTop: '8px', resize: 'vertical' }} 
