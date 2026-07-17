@@ -94,7 +94,7 @@ export default function DosenDashboard() {
         {/* Jadwal Mengajar Hari Ini */}
         <div className="siakad-card stagger-2" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className="ph ph-clock" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>{lang === 'en' ? "Today's Teaching Schedule" : 'Jadwal Mengajar Hari Ini'}</h3>
@@ -126,7 +126,7 @@ export default function DosenDashboard() {
         {/* Notifikasi & To-Do */}
         <div className="siakad-card stagger-3" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className="ph ph-bell-ringing" style={{ color: '#f59e0b', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Notifikasi & To-Do</h3>
@@ -156,7 +156,7 @@ export default function DosenDashboard() {
         {courses.length > 0 && (
           <div className="siakad-card stagger-4" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <i className="ph ph-books" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
               </div>
               <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Mata Kuliah Diampu</h3>
@@ -168,7 +168,7 @@ export default function DosenDashboard() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
               {courses.map((c, i) => (
                 <div key={i} style={{ padding: '14px 16px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', gap: '12px', alignItems: 'center', transition: 'all 0.2s', borderLeft: '5px solid #C41E3A', borderTop: '1px solid rgba(255,255,255,0.5)', borderRight: '1px solid rgba(0,0,0,0.02)', borderBottom: '1px solid rgba(0,0,0,0.02)', boxShadow: 'var(--glass-shadow)' }}>
-                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <i className="ph ph-chalkboard-teacher" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
                   </div>
                   <div style={{ minWidth: 0, flex: 1 }}>
