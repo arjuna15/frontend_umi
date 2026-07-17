@@ -342,7 +342,7 @@ export default function JadwalPage() {
         }
         @media (min-width: 768px) {
           .calendar-responsive-container {
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 1.4fr 0.6fr;
             padding: 24px;
           }
         }

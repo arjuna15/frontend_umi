@@ -15,6 +15,7 @@ export default function AdminClassesPage() {
     id: '', code: '', name: '', sks: '', dosen_id: '', prasyarat: '', semester: 'Ganjil'
   });
   const [selectedSemester, setSelectedSemester] = useState("Ganjil");
+  const [selectedCampus, setSelectedCampus] = useState('bintaro');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -63,7 +64,12 @@ export default function AdminClassesPage() {
     const token = localStorage.getItem('siakad_token');
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     const form = new FormData(e.target);
-    const body = Object.fromEntries(form.entries());
+    const body = {
+      ...Object.fromEntries(form.entries()),
+      dosen_id: selectedDosen,
+      semester: selectedSemester,
+      campus_location: selectedCampus
+    };
     
     try {
       const res = await fetch(`${apiUrl}/siakad/admin/courses`, {
@@ -79,6 +85,7 @@ export default function AdminClassesPage() {
         e.target.reset();
         setSelectedDosen("");
         setSelectedSemester("Ganjil");
+        setSelectedCampus("bintaro");
         fetchCourses();
       } else {
         window.toast('Failed to create course');
@@ -123,7 +130,8 @@ export default function AdminClassesPage() {
       sks: course.sks,
       dosen_id: course.dosen_id || '',
       prasyarat: course.prasyarat || '',
-      semester: course.semester || 'Ganjil'
+      semester: course.semester || 'Ganjil',
+      campus_location: course.campus_location || 'bintaro'
     });
     setIsEditModalOpen(true);
   };
@@ -200,6 +208,15 @@ export default function AdminClassesPage() {
             />
           </div>
           <div style={{ flex: '1 1 150px' }}>
+            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Lokasi Kampus</label>
+            <CustomSelect
+              name="campus_location"
+              value={selectedCampus}
+              onChange={setSelectedCampus}
+              options={[{value: 'bintaro', label: 'Bintaro'}, {value: 'pasar_minggu', label: 'Pasar Minggu'}]}
+            />
+          </div>
+          <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Prasyarat</label>
             <input name="prasyarat" className="siakad-input" placeholder="Kode MK (Opsional)..." style={{ minWidth: 0, flex: '1 1 120px'}} />
           </div>
@@ -240,6 +257,7 @@ export default function AdminClassesPage() {
                 <th style={{ padding: '16px 24px', fontWeight: '600' }}>Nama Mata Kuliah</th>
                 <th style={{ padding: '16px 24px', fontWeight: '600' }}>SKS</th>
                 <th style={{ padding: '16px 24px', fontWeight: '600' }}>Semester</th>
+                <th style={{ padding: '16px 24px', fontWeight: '600' }}>Lokasi Kampus</th>
                 <th style={{ padding: '16px 24px', fontWeight: '600' }}>Prasyarat</th>
                 <th style={{ padding: '16px 24px', fontWeight: '600', textAlign: 'right' }}>Aksi</th>
               </tr>
@@ -260,7 +278,7 @@ export default function AdminClassesPage() {
                 if (filteredCourses.length === 0) {
                   return (
                     <tr>
-                      <td colSpan="6" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data kelas/mata kuliah</td>
+                      <td colSpan="7" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada data kelas/mata kuliah</td>
                     </tr>
                   );
                 }
@@ -271,6 +289,16 @@ export default function AdminClassesPage() {
                     <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: '500' }}>{course.name}</td>
                     <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.sks} SKS</td>
                     <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.semester || 'Ganjil'}</td>
+                    <td style={{ padding: '16px 24px', fontWeight: '600' }}>
+                      <span style={{ 
+                        background: course.campus_location === 'pasar_minggu' ? 'rgba(236,72,153,0.15)' : 'rgba(59,130,246,0.15)', 
+                        color: course.campus_location === 'pasar_minggu' ? '#ec4899' : '#3b82f6', 
+                        padding: '4px 10px', 
+                        borderRadius: '10px',
+                        fontSize: '0.8rem',
+                        textTransform: 'capitalize'
+                      }}>{course.campus_location === 'pasar_minggu' ? 'Pasar Minggu' : 'Bintaro'}</span>
+                    </td>
                     <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.prasyarat || '-'}</td>
                     <td style={{ padding: '16px 24px', textAlign: 'right' }}>
                       <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
@@ -331,6 +359,14 @@ export default function AdminClassesPage() {
                   value={editFormData.semester}
                   onChange={(val) => setEditFormData({...editFormData, semester: val})}
                   options={[{value: 'Ganjil', label: 'Ganjil'}, {value: 'Genap', label: 'Genap'}]}
+                />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Lokasi Kampus</label>
+                <CustomSelect
+                  value={editFormData.campus_location || 'bintaro'}
+                  onChange={(val) => setEditFormData({...editFormData, campus_location: val})}
+                  options={[{value: 'bintaro', label: 'Bintaro'}, {value: 'pasar_minggu', label: 'Pasar Minggu'}]}
                 />
               </div>
               <div style={{ flex: 1 }}>

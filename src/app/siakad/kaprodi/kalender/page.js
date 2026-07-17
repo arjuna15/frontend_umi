@@ -11,6 +11,7 @@ export default function KaprodiKalenderPage() {
   const router = useRouter();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [loading, setLoading] = useState(true);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [schedules, setSchedules] = useState([]);
   const [overrides, setOverrides] = useState([]);
   const [events, setEvents] = useState([]);
@@ -39,10 +40,12 @@ export default function KaprodiKalenderPage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getToken = () => localStorage.getItem('siakad_token');
 
-  const fetchCalendarData = async () => {
+  const fetchCalendarData = async (showSkeleton = false) => {
     const token = getToken();
     if (!token) return router.push('/siakad/login');
-    setLoading(true);
+    if (showSkeleton) {
+      setLoading(true);
+    }
     try {
       const year = currentDate.getFullYear();
       const month = currentDate.getMonth() + 1;
@@ -78,7 +81,10 @@ export default function KaprodiKalenderPage() {
   };
 
   useEffect(() => {
-    fetchCalendarData().then(() => {
+    fetchCalendarData(isInitialLoad).then(() => {
+      if (isInitialLoad) {
+        setIsInitialLoad(false);
+      }
       const year = currentDate.getFullYear();
       const today = new Date();
       if (today.getFullYear() === year && today.getMonth() === currentDate.getMonth()) {
