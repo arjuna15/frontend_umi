@@ -354,7 +354,7 @@ export default function JadwalPage() {
         }
         @media (min-width: 768px) {
           .calendar-responsive-container {
-            grid-template-columns: 1.4fr 0.6fr;
+            grid-template-columns: 1fr 1fr;
             padding: 24px;
           }
         }
@@ -363,45 +363,16 @@ export default function JadwalPage() {
           width: 100%;
           margin: 0 auto;
           border-radius: 10px;
-          border: 1px solid rgba(128,128,128,0.15);
+          border: 1px solid var(--color-border);
           background: rgba(128,128,128,0.06);
-          backdrop-filter: blur(8px);
           cursor: pointer;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          padding: 8px;
+          padding: 6px;
           position: relative;
-          transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: all 0.15s ease;
           box-sizing: border-box;
-        }
-        .day-cell:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
-          border-color: rgba(59, 130, 246, 0.4);
-          background: rgba(59, 130, 246, 0.05);
-        }
-        .day-cell.selected {
-          background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-          border-color: transparent;
-          box-shadow: 0 0 14px rgba(59, 130, 246, 0.5), inset 0 1px 1px rgba(255,255,255,0.2);
-          transform: translateY(-2px);
-        }
-        .day-cell.today {
-          border: 2px solid #10b981;
-          box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
-          background: rgba(16, 185, 129, 0.08);
-        }
-        .day-cell.today.selected {
-          background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-          border-color: transparent;
-          box-shadow: 0 0 14px rgba(16, 185, 129, 0.5), inset 0 1px 1px rgba(255,255,255,0.2);
-        }
-        .calendar-grid {
-          display: grid;
-          grid-template-columns: repeat(7, 1fr);
-          gap: 8px;
-          width: 100%;
         }
         @media (max-width: 480px) {
           .calendar-grid {
@@ -410,7 +381,7 @@ export default function JadwalPage() {
             margin: 0 auto;
           }
           .day-cell {
-            padding: 4px;
+            padding: 3px;
             border-radius: 6px;
             max-width: 36px;
             height: 36px;
@@ -422,6 +393,12 @@ export default function JadwalPage() {
           .siakad-card {
             padding: 12px !important;
           }
+        }
+        .calendar-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 6px;
+          width: 100%;
         }
         .segmented-control {
           display: flex;
@@ -617,29 +594,9 @@ export default function JadwalPage() {
         {activeTab === 'kalender' && (
           <div className="calendar-responsive-container">
             {/* Grid Kalender */}
-            <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', gap: '12px', flexWrap: 'wrap' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>{monthsMap[month]} {year}</h3>
-                  <button 
-                    onClick={() => setCurrentDate(new Date())} 
-                    style={{ 
-                      padding: '6px 14px', 
-                      borderRadius: '30px', 
-                      background: 'rgba(59,130,246,0.1)', 
-                      border: '1px solid rgba(59,130,246,0.2)', 
-                      color: '#3b82f6', 
-                      fontSize: '0.8rem', 
-                      fontWeight: '700', 
-                      cursor: 'pointer',
-                      transition: 'all 0.2s'
-                    }}
-                    onMouseEnter={e => { e.target.style.background = 'rgba(59,130,246,0.2)' }}
-                    onMouseLeave={e => { e.target.style.background = 'rgba(59,130,246,0.1)' }}
-                  >
-                    Hari Ini
-                  </button>
-                </div>
+            <div className="siakad-card" style={{ padding: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>{monthsMap[month]} {year}</h3>
                 <div style={{ display: 'flex', gap: '8px' }}>
                   <button onClick={handlePrevMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className="ph ph-caret-left"></i>
@@ -665,33 +622,21 @@ export default function JadwalPage() {
                   const agenda = getDayAgenda(item.dateStr);
                   const hasSwap = agenda.some(a => a.status !== 'normal');
                   const hasClass = agenda.length > 0;
-                  const cellClass = [
-                    item.day ? "day-cell" : "",
-                    item.day && isSelected ? "selected" : "",
-                    item.day && isToday ? "today" : ""
-                  ].filter(Boolean).join(" ");
 
                   return (
                     <div
                       key={idx}
                       onClick={() => item.day && setSelectedDay(item.day)}
-                      className={cellClass}
+                      className={item.day ? "day-cell" : ""}
                       style={{
+                        border: item.day ? (isSelected ? '2px solid #3b82f6' : undefined) : 'none',
+                        background: item.day ? (isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(128,128,128,0.2)' : undefined)) : 'transparent',
                         cursor: item.day ? 'pointer' : 'default',
                         pointerEvents: item.day ? 'auto' : 'none',
                         aspectRatio: '1',
-                        border: item.day ? undefined : 'none',
-                        background: item.day ? undefined : 'transparent',
                       }}
                     >
-                      <span style={{ 
-                        fontSize: '0.9rem', 
-                        fontWeight: isToday || isSelected ? '700' : 'normal', 
-                        color: item.day ? (isSelected ? '#ffffff' : (isToday ? '#10b981' : 'var(--color-text)')) : 'transparent',
-                        transition: 'color 0.2s'
-                      }}>
-                        {item.day}
-                      </span>
+                      <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#3b82f6' : 'var(--color-text)') : 'transparent' }}>{item.day}</span>
                       
                       {/* Indicators */}
                       <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
@@ -699,8 +644,7 @@ export default function JadwalPage() {
                           <span style={{
                             width: '6px', height: '6px', borderRadius: '50%',
                             background: hasSwap ? '#f59e0b' : '#3b82f6',
-                            color: hasSwap ? '#f59e0b' : '#3b82f6',
-                            boxShadow: `0 0 8px currentColor`
+                            boxShadow: `0 0 6px ${hasSwap ? '#f59e0b' : '#3b82f6'}`
                           }} />
                         )}
                       </div>
