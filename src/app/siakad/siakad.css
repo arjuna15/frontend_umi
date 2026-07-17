@@ -487,20 +487,52 @@
   background: rgba(255, 255, 255, 0.03);
 }
 
-/* Badges */
+/* Badges - Double Layer Neumorphic Style */
 .siakad-badge {
   padding: 6px 16px !important;
   border-radius: 999px;
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: 800;
   display: inline-flex !important;
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* 120px fits the longest badge text (e.g. 'Belum Dinilai') */
   min-width: 120px !important;
   white-space: nowrap;
   box-sizing: border-box;
+  position: relative;
+  /* Lapisan Dalam: Timbul */
+  box-shadow: 2px 2px 4px #bebebe, -2px -2px 4px #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  z-index: 1;
+  margin: 4px 6px !important;
+}
+
+/* Lapisan Luar: Inset Cekungan */
+.siakad-badge::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 999px;
+  background: var(--liquid-bg) !important;
+  box-shadow: inset 2px 2px 4px #bebebe, inset -2px -2px 4px #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.02) !important;
+  z-index: -1;
+  pointer-events: none;
+}
+
+[data-theme='dark'] .siakad-badge {
+  box-shadow: 2px 2px 4px #080a0f, -2px -2px 4px rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.02) !important;
+}
+
+[data-theme='dark'] .siakad-badge::before {
+  background: var(--liquid-bg) !important;
+  box-shadow: inset 2px 2px 4px #080a0f, inset -2px -2px 4px #1c2231 !important;
+  border: 1px solid rgba(255, 255, 255, 0.01) !important;
 }
 
 /* Inputs & Selects */
