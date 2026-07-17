@@ -803,12 +803,12 @@ export default function DosenElearningPage() {
               <button 
                 type="button" 
                 onClick={() => setSelectedAttemptDetail(null)} 
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(0,0,0,0.04)', color: '#1e293b', padding: '8px 16px', borderRadius: '8px', border: '1px solid rgba(0,0,0,0.1)', cursor: 'pointer', fontWeight: 'bold', marginBottom: '20px' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'var(--liquid-bg)', color: 'var(--color-text)', padding: '8px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', cursor: 'pointer', fontWeight: 'bold', marginBottom: '20px' }}
               >
                 <i className="ph ph-arrow-left"></i> Kembali ke Daftar Mahasiswa
               </button>
-              <h4 style={{ margin: '0 0 4px 0', color: '#0f172a', fontSize: '1.2rem', fontWeight: '800' }}>Lembar Jawaban: {selectedAttemptDetail.name}</h4>
-              <p style={{ margin: '0 0 20px 0', color: '#475569', fontSize: '0.85rem' }}>NIM: {selectedAttemptDetail.nim} • Nilai Ujian: <strong style={{ color: '#15803d', fontSize: '1.15rem', fontWeight: '900' }}>{selectedAttemptDetail.score}</strong></p>
+              <h4 style={{ margin: '0 0 4px 0', color: 'var(--color-text)', fontSize: '1.2rem', fontWeight: '800' }}>Lembar Jawaban: {selectedAttemptDetail.name}</h4>
+              <p style={{ margin: '0 0 20px 0', color: 'var(--color-muted)', fontSize: '0.85rem' }}>NIM: {selectedAttemptDetail.nim} • Nilai Ujian: <strong style={{ color: '#10b981', fontSize: '1.15rem', fontWeight: '900' }}>{selectedAttemptDetail.score}</strong></p>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 {selectedQuizForMonitor.questions?.map((q, idx) => {
@@ -818,25 +818,25 @@ export default function DosenElearningPage() {
                   const isCorrect = q.type !== 'essay' && String(studentAnsVal).toUpperCase() === String(q.correct_answer).toUpperCase();
 
                   return (
-                    <div key={q.id} style={{ padding: '20px', borderRadius: '16px', background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.08)', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
-                      <p style={{ fontWeight: '700', color: '#0f172a', margin: '0 0 16px 0', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                    <div key={q.id} style={{ padding: '20px', borderRadius: '16px', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)', boxShadow: 'var(--glass-shadow)' }}>
+                      <p style={{ fontWeight: '700', color: 'var(--color-text)', margin: '0 0 16px 0', fontSize: '0.95rem', lineHeight: '1.5' }}>
                         <span style={{ color: '#3b82f6', marginRight: '6px' }}>{idx + 1}.</span> {q.question}
                       </p>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', fontSize: '0.85rem', flexWrap: 'wrap' }}>
-                        <div style={{ padding: '12px', borderRadius: '10px', background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.05)' }}>
-                          <span style={{ display: 'block', color: '#475569', marginBottom: '6px', fontSize: '0.75rem', fontWeight: '600' }}>Jawaban Mahasiswa:</span>
+                        <div style={{ padding: '12px', borderRadius: '10px', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)' }}>
+                          <span style={{ display: 'block', color: 'var(--color-muted)', marginBottom: '6px', fontSize: '0.75rem', fontWeight: '600' }}>Jawaban Mahasiswa:</span>
                           {q.type === 'essay' ? (
                             <p style={{ margin: 0, color: '#b45309', whiteSpace: 'pre-wrap', fontWeight: '700', fontSize: '0.9rem' }}>{studentAnsVal || '(Tidak menjawab)'}</p>
                           ) : (
-                            <span style={{ fontWeight: '800', color: isCorrect ? '#15803d' : '#dc2626', fontSize: '0.9rem' }}>
+                            <span style={{ fontWeight: '800', color: isCorrect ? '#10b981' : '#dc2626', fontSize: '0.9rem' }}>
                               {studentAnsVal || '(Tidak menjawab)'} 
                               {studentAnsVal && (isCorrect ? ' (Benar)' : ' (Salah)')}
                             </span>
                           )}
                         </div>
-                        <div style={{ padding: '12px', borderRadius: '10px', background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.05)' }}>
-                          <span style={{ display: 'block', color: '#475569', marginBottom: '6px', fontSize: '0.75rem', fontWeight: '600' }}>Kunci Jawaban / Panduan Dosen:</span>
-                          <span style={{ fontWeight: '700', color: '#1e293b', fontSize: '0.9rem' }}>
+                        <div style={{ padding: '12px', borderRadius: '10px', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)' }}>
+                          <span style={{ display: 'block', color: 'var(--color-muted)', marginBottom: '6px', fontSize: '0.75rem', fontWeight: '600' }}>Kunci Jawaban / Panduan Dosen:</span>
+                          <span style={{ fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
                             {q.type === 'essay' ? (q.correct_answer_text || '(Tidak ada panduan)') : q.correct_answer}
                           </span>
                         </div>
@@ -868,11 +868,11 @@ export default function DosenElearningPage() {
                 <div style={{ overflowX: 'auto' }}>
                   <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
                     <thead>
-                      <tr style={{ borderBottom: '2px solid rgba(0,0,0,0.08)', textAlign: 'left' }}>
-                        <th style={{ padding: '12px 8px', color: '#475569', fontWeight: 'bold' }}>Mahasiswa</th>
-                        <th style={{ padding: '12px 8px', color: '#475569', fontWeight: 'bold' }}>Status</th>
-                        <th style={{ padding: '12px 8px', color: '#475569', fontWeight: 'bold' }}>Nilai</th>
-                        <th style={{ padding: '12px 8px', color: '#475569', fontWeight: 'bold' }}>Aksi</th>
+                      <tr style={{ borderBottom: '2px solid var(--color-border)', textAlign: 'left' }}>
+                        <th style={{ padding: '12px 8px', color: 'var(--color-muted)', fontWeight: 'bold' }}>Mahasiswa</th>
+                        <th style={{ padding: '12px 8px', color: 'var(--color-muted)', fontWeight: 'bold' }}>Status</th>
+                        <th style={{ padding: '12px 8px', color: 'var(--color-muted)', fontWeight: 'bold' }}>Nilai</th>
+                        <th style={{ padding: '12px 8px', color: 'var(--color-muted)', fontWeight: 'bold' }}>Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -882,23 +882,23 @@ export default function DosenElearningPage() {
                           return s.name.toLowerCase().includes(query) || s.nim.toLowerCase().includes(query);
                         })
                         .map((att, idx) => (
-                          <tr key={idx} style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
+                          <tr key={idx} style={{ borderBottom: '1px solid var(--color-border)' }}>
                             <td style={{ padding: '14px 8px' }}>
-                              <div style={{ fontWeight: 'bold', color: '#0f172a' }}>{att.name}</div>
-                              <div style={{ fontSize: '0.75rem', color: '#475569' }}>NIM: {att.nim}</div>
+                              <div style={{ fontWeight: 'bold', color: 'var(--color-text)' }}>{att.name}</div>
+                              <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>NIM: {att.nim}</div>
                             </td>
                             <td style={{ padding: '14px 8px' }}>
                               {att.has_attempted ? (
-                                <span style={{ display: 'inline-block', background: 'linear-gradient(135deg, #15803d 0%, #14532d 100%)', color: 'white', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold', boxShadow: '0 4px 10px rgba(21,128,61,0.2)' }}>Sudah Mengerjakan</span>
+                                <span style={{ display: 'inline-block', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold', boxShadow: '0 4px 10px rgba(16,185,129,0.2)' }}>Sudah Mengerjakan</span>
                               ) : (
-                                <span style={{ display: 'inline-block', background: 'rgba(0,0,0,0.04)', color: '#64748b', border: '1px solid rgba(0,0,0,0.08)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold' }}>Belum Mengerjakan</span>
+                                <span style={{ display: 'inline-block', background: 'var(--liquid-bg)', color: 'var(--color-muted)', border: '1px solid var(--color-border)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold' }}>Belum Mengerjakan</span>
                               )}
                             </td>
                             <td style={{ padding: '14px 8px', fontWeight: 'bold' }}>
                               {att.has_attempted ? (
-                                <span style={{ fontSize: '1.1rem', color: '#15803d', fontWeight: '900' }}>{att.score}</span>
+                                <span style={{ fontSize: '1.1rem', color: '#10b981', fontWeight: '900' }}>{att.score}</span>
                               ) : (
-                                <span style={{ color: '#94a3b8' }}>-</span>
+                                <span style={{ color: 'var(--color-muted)' }}>-</span>
                               )}
                             </td>
                             <td style={{ padding: '14px 8px' }}>
@@ -916,7 +916,7 @@ export default function DosenElearningPage() {
                         ))}
                       {attemptsData.length === 0 && (
                         <tr>
-                          <td colSpan="4" style={{ padding: '24px', textAlign: 'center', color: '#64748b' }}>Tidak ada mahasiswa terdaftar di kelas ini.</td>
+                          <td colSpan="4" style={{ padding: '24px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada mahasiswa terdaftar di kelas ini.</td>
                         </tr>
                       )}
                     </tbody>
