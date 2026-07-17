@@ -131,14 +131,14 @@ export default function RosterPage() {
                         <div style={{ fontWeight: '700', fontSize: '0.9rem', lineHeight: 1.3 }}>{c.name}</div>
                       </div>
                       <span className="siakad-badge" style={{ 
-                        background: isActive ? 'linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 100%) !important' : 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%) !important', 
-                        color: 'white !important', 
+                        background: isActive ? 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%) !important' : 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%) !important', 
+                        color: isActive ? '#C41E3A !important' : 'white !important', 
                         padding: '2px 8px !important', 
                         fontSize: '0.72rem !important', 
                         minWidth: '60px !important',
                         margin: '0 !important',
                         boxShadow: isActive ? '2px 2px 5px rgba(0,0,0,0.1) !important' : '2px 2px 4px rgba(196,30,58,0.2) !important',
-                        border: isActive ? '1px solid rgba(255,255,255,0.4) !important' : '1px solid rgba(196,30,58,0.3) !important'
+                        border: isActive ? '1px solid rgba(255,255,255,0.8) !important' : '1px solid rgba(196,30,58,0.3) !important'
                       }}>
                         {c.sks || '?'} SKS
                       </span>
