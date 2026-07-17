@@ -362,6 +362,12 @@ export default function JadwalPage() {
           transition: all 0.15s ease;
           box-sizing: border-box;
         }
+        .calendar-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 6px;
+          width: 100%;
+        }
         @media (max-width: 480px) {
           .calendar-grid {
             max-width: 290px;
@@ -381,12 +387,6 @@ export default function JadwalPage() {
           .siakad-card {
             padding: 12px !important;
           }
-        }
-        .calendar-grid {
-          display: grid;
-          grid-template-columns: repeat(7, 1fr);
-          gap: 6px;
-          width: 100%;
         }
         .segmented-control {
           display: flex;
@@ -582,7 +582,7 @@ export default function JadwalPage() {
         {activeTab === 'kalender' && (
           <div className="calendar-responsive-container">
             {/* Grid Kalender */}
-            <div className="siakad-card" style={{ padding: '24px' }}>
+            <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                 <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>{monthsMap[month]} {year}</h3>
                 <div style={{ display: 'flex', gap: '8px' }}>
