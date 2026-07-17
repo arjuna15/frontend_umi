@@ -28,15 +28,24 @@ function QuizContent() {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         if (res.ok) {
-          const result = await res.json();
-          setQuizData(result);
-          
-          // Persistent Time Recovery
-          const savedTime = localStorage.getItem(`siakad_quiz_time_${quizId}`);
-          if (savedTime !== null) {
-            setTimeLeft(parseInt(savedTime, 10));
-          } else if (result.duration_minutes) {
-            setTimeLeft(result.duration_minutes * 60);
+          const resultData = await res.json();
+          if (resultData.already_attempted) {
+            setResult({
+              message: 'Anda sudah pernah mengerjakan kuis ini sebelumnya.',
+              score: resultData.score,
+              submitted_at: resultData.submitted_at,
+              already_done: true
+            });
+          } else {
+            setQuizData(resultData);
+            
+            // Persistent Time Recovery
+            const savedTime = localStorage.getItem(`siakad_quiz_time_${quizId}`);
+            if (savedTime !== null) {
+              setTimeLeft(parseInt(savedTime, 10));
+            } else if (resultData.duration_minutes) {
+              setTimeLeft(resultData.duration_minutes * 60);
+            }
           }
         }
       } catch (err) {

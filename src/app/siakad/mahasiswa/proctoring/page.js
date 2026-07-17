@@ -36,7 +36,19 @@ export default function ProctoringStudentPage() {
       });
       if (res.ok) {
         const data = await res.json();
-        setQuizData(data);
+        if (data.already_attempted) {
+          setResult({
+            score: data.score,
+            submitted_at: data.submitted_at,
+            already_done: true
+          });
+          if (streamRef.current) {
+            streamRef.current.getTracks().forEach(track => track.stop());
+            setCameraActive(false);
+          }
+        } else {
+          setQuizData(data);
+        }
       }
     } catch (e) {
       console.error('Failed to load quiz:', e);

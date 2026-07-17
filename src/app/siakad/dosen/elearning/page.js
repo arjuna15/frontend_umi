@@ -40,6 +40,13 @@ export default function DosenElearningPage() {
   const [isSavingGrade, setIsSavingGrade] = useState({});
   const [submissionSearch, setSubmissionSearch] = useState('');
 
+  // Monitor Quiz States
+  const [showMonitorModal, setShowMonitorModal] = useState(false);
+  const [selectedQuizForMonitor, setSelectedQuizForMonitor] = useState(null);
+  const [attemptsData, setAttemptsData] = useState([]);
+  const [loadingAttempts, setLoadingAttempts] = useState(false);
+  const [selectedAttemptDetail, setSelectedAttemptDetail] = useState(null);
+
   const fetchDashboard = async () => {
     const token = localStorage.getItem('siakad_token');
     if (!token) return router.push('/siakad/login');
@@ -160,6 +167,24 @@ export default function DosenElearningPage() {
       }
     } catch (e) {
       console.error(e);
+    }
+  };
+
+  const openMonitorModal = async (quiz) => {
+    setSelectedQuizForMonitor(quiz);
+    setShowMonitorModal(true);
+    setLoadingAttempts(true);
+    setSelectedAttemptDetail(null);
+    try {
+      const res = await fetch(`/api/siakad/dosen/quizzes/${quiz.id}/attempts`);
+      if (res.ok) {
+        const data = await res.json();
+        setAttemptsData(data.attempts || []);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoadingAttempts(false);
     }
   };
 
@@ -417,13 +442,22 @@ export default function DosenElearningPage() {
                               <i className="ph ph-clock" style={{ marginRight: '6px' }}></i>
                               {quiz.duration_minutes} menit
                             </span>
-                            <button
-                              type="button"
-                              onClick={() => handleDeleteQuiz(quiz.id)}
-                              style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: 'none', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', fontWeight: 'bold', transition: 'all 0.2s' }}
-                            >
-                              <i className="ph ph-trash"></i> Hapus
-                            </button>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                              <button
+                                type="button"
+                                onClick={() => openMonitorModal(quiz)}
+                                style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981', border: 'none', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', fontWeight: 'bold', transition: 'all 0.2s' }}
+                              >
+                                <i className="ph ph-chart-bar"></i> Monitor
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => handleDeleteQuiz(quiz.id)}
+                                style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: 'none', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', fontWeight: 'bold', transition: 'all 0.2s' }}
+                              >
+                                <i className="ph ph-trash"></i> Hapus
+                              </button>
+                            </div>
                           </div>
                         </div>
                       );
@@ -751,6 +785,142 @@ export default function DosenElearningPage() {
               </tbody>
             </table>
           </div>
+        </ModalShell>
+      )}
+
+      {showMonitorModal && selectedQuizForMonitor && (
+        <ModalShell
+          title={`Monitor Ujian: ${selectedQuizForMonitor.title}`}
+          icon="ph-chart-bar"
+          onClose={() => setShowMonitorModal(false)}
+          footer={(
+            <button type="button" onClick={() => setShowMonitorModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Tutup</button>
+          )}
+        >
+          {/* If we have selected a student's answer detail to view */}
+          {selectedAttemptDetail ? (
+            <div>
+              <button 
+                type="button" 
+                onClick={() => setSelectedAttemptDetail(null)} 
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.06)', color: 'var(--color-text)', padding: '8px 16px', borderRadius: '8px', border: '1px solid var(--color-border)', cursor: 'pointer', fontWeight: 'bold', marginBottom: '20px' }}
+              >
+                <i className="ph ph-arrow-left"></i> Kembali ke Daftar Mahasiswa
+              </button>
+              <h4 style={{ margin: '0 0 4px 0', color: 'var(--color-text)', fontSize: '1.1rem' }}>Lembar Jawaban: {selectedAttemptDetail.name}</h4>
+              <p style={{ margin: '0 0 20px 0', color: 'var(--color-muted)', fontSize: '0.85rem' }}>NIM: {selectedAttemptDetail.nim} • Nilai Ujian: <strong style={{ color: '#10b981' }}>{selectedAttemptDetail.score}</strong></p>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                {selectedQuizForMonitor.questions?.map((q, idx) => {
+                  // Find student's answer for this question
+                  const studentAnsObj = selectedAttemptDetail.answers?.find(a => a.question_id === q.id);
+                  const studentAnsVal = studentAnsObj ? studentAnsObj.answer : '';
+                  const isCorrect = q.type !== 'essay' && String(studentAnsVal).toUpperCase() === String(q.correct_answer).toUpperCase();
+
+                  return (
+                    <div key={q.id} style={{ padding: '16px', borderRadius: '12px', background: 'rgba(255,255,255,0.02)', border: '1px solid var(--color-border)' }}>
+                      <p style={{ fontWeight: '600', color: 'var(--color-text)', margin: '0 0 12px 0', fontSize: '0.92rem' }}>
+                        {idx + 1}. {q.question}
+                      </p>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', fontSize: '0.85rem' }}>
+                        <div style={{ padding: '10px', borderRadius: '8px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                          <span style={{ display: 'block', color: 'var(--color-muted)', marginBottom: '4px', fontSize: '0.75rem' }}>Jawaban Mahasiswa:</span>
+                          {q.type === 'essay' ? (
+                            <p style={{ margin: 0, color: 'white', whiteSpace: 'pre-wrap', fontWeight: 'bold' }}>{studentAnsVal || '(Tidak menjawab)'}</p>
+                          ) : (
+                            <span style={{ fontWeight: 'bold', color: isCorrect ? '#10b981' : '#ef4444' }}>
+                              {studentAnsVal || '(Tidak menjawab)'} 
+                              {studentAnsVal && (isCorrect ? ' (Benar)' : ' (Salah)')}
+                            </span>
+                          )}
+                        </div>
+                        <div style={{ padding: '10px', borderRadius: '8px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                          <span style={{ display: 'block', color: 'var(--color-muted)', marginBottom: '4px', fontSize: '0.75rem' }}>Kunci Jawaban / Panduan Dosen:</span>
+                          <span style={{ fontWeight: 'bold', color: 'white' }}>
+                            {q.type === 'essay' ? (q.correct_answer_text || '(Tidak ada panduan)') : q.correct_answer}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : (
+            <div>
+              <div style={{ marginBottom: '16px' }}>
+                <input
+                  type="text"
+                  placeholder="Cari nama atau NIM mahasiswa..."
+                  className="siakad-input"
+                  value={submissionSearch}
+                  onChange={e => setSubmissionSearch(e.target.value)}
+                  style={{ width: '100%' }}
+                />
+              </div>
+              
+              {loadingAttempts ? (
+                <div style={{ textAlign: 'center', padding: '40px', color: 'var(--color-muted)' }}>
+                  <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginBottom: '8px' }}></i>
+                  <p>Memuat hasil ujian mahasiswa...</p>
+                </div>
+              ) : (
+                <div style={{ overflowX: 'auto' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+                    <thead>
+                      <tr style={{ borderBottom: '2px solid var(--color-border)', textAlign: 'left' }}>
+                        <th style={{ padding: '10px 8px', color: 'var(--color-muted)' }}>Mahasiswa</th>
+                        <th style={{ padding: '10px 8px', color: 'var(--color-muted)' }}>Status</th>
+                        <th style={{ padding: '10px 8px', color: 'var(--color-muted)' }}>Nilai</th>
+                        <th style={{ padding: '10px 8px', color: 'var(--color-muted)' }}>Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {attemptsData
+                        .filter(s => {
+                          const query = submissionSearch.toLowerCase();
+                          return s.name.toLowerCase().includes(query) || s.nim.toLowerCase().includes(query);
+                        })
+                        .map((att, idx) => (
+                          <tr key={idx} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                            <td style={{ padding: '12px 8px' }}>
+                              <div style={{ fontWeight: 'bold', color: 'var(--color-text)' }}>{att.name}</div>
+                              <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>NIM: {att.nim}</div>
+                            </td>
+                            <td style={{ padding: '12px 8px' }}>
+                              {att.has_attempted ? (
+                                <span style={{ display: 'inline-block', background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>Sudah Mengerjakan</span>
+                              ) : (
+                                <span style={{ display: 'inline-block', background: 'rgba(100,116,139,0.1)', color: '#64748b', padding: '3px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>Belum Mengerjakan</span>
+                              )}
+                            </td>
+                            <td style={{ padding: '12px 8px', fontWeight: 'bold', color: 'var(--color-text)' }}>
+                              {att.has_attempted ? att.score : '-'}
+                            </td>
+                            <td style={{ padding: '12px 8px' }}>
+                              {att.has_attempted ? (
+                                <button
+                                  type="button"
+                                  onClick={() => setSelectedAttemptDetail(att)}
+                                  style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 'bold' }}
+                                >
+                                  Lihat Jawaban
+                                </button>
+                              ) : '-'}
+                            </td>
+                          </tr>
+                        ))}
+                      {attemptsData.length === 0 && (
+                        <tr>
+                          <td colSpan="4" style={{ padding: '20px', textAlign: 'center', color: 'var(--color-muted)' }}>Tidak ada mahasiswa terdaftar di kelas ini.</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          )}
         </ModalShell>
       )}
     </div>
