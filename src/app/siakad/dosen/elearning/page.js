@@ -143,6 +143,26 @@ export default function DosenElearningPage() {
     }
   };
 
+  const handleDeleteQuiz = async (quizId) => {
+    if (!window.toast || !await window.toast.confirm('Yakin ingin menghapus kuis ini? Semua soal di dalamnya juga akan terhapus.')) {
+      if (!confirm('Yakin ingin menghapus kuis ini? Semua soal di dalamnya juga akan terhapus.')) return;
+    }
+
+    try {
+      const res = await fetch(`/api/siakad/dosen/quizzes/${quizId}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        window.toast && window.toast('Kuis berhasil dihapus.');
+        loadSessions(selectedCourse);
+      } else {
+        alert('Gagal menghapus kuis.');
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const handleCreateAssignment = async (e) => {
     e.preventDefault();
     if (!newAssTitle || !newAssDesc || !newAssDeadline) return;
@@ -397,6 +417,13 @@ export default function DosenElearningPage() {
                               <i className="ph ph-clock" style={{ marginRight: '6px' }}></i>
                               {quiz.duration_minutes} menit
                             </span>
+                            <button
+                              type="button"
+                              onClick={() => handleDeleteQuiz(quiz.id)}
+                              style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: 'none', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', fontWeight: 'bold', transition: 'all 0.2s' }}
+                            >
+                              <i className="ph ph-trash"></i> Hapus
+                            </button>
                           </div>
                         </div>
                       );
