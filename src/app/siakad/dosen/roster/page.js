@@ -130,9 +130,18 @@ export default function RosterPage() {
                         <div style={{ fontSize: '0.75rem', opacity: isActive ? 0.8 : 0.6, marginBottom: '3px', fontWeight: '600', letterSpacing: '0.05em' }}>{c.code}</div>
                         <div style={{ fontWeight: '700', fontSize: '0.9rem', lineHeight: 1.3 }}>{c.name}</div>
                       </div>
-                      <div style={{ background: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(196,30,58,0.1)', color: isActive ? 'white' : 'var(--umiba-red)', padding: '2px 8px', borderRadius: '20px', fontSize: '0.72rem', fontWeight: '700', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                      <span className="siakad-badge" style={{ 
+                        background: isActive ? 'linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 100%) !important' : 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%) !important', 
+                        color: 'white !important', 
+                        padding: '2px 8px !important', 
+                        fontSize: '0.72rem !important', 
+                        minWidth: '60px !important',
+                        margin: '0 !important',
+                        boxShadow: isActive ? '2px 2px 5px rgba(0,0,0,0.1) !important' : '2px 2px 4px rgba(196,30,58,0.2) !important',
+                        border: isActive ? '1px solid rgba(255,255,255,0.4) !important' : '1px solid rgba(196,30,58,0.3) !important'
+                      }}>
                         {c.sks || '?'} SKS
-                      </div>
+                      </span>
                     </div>
                     <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.8rem', opacity: isActive ? 0.85 : 0.55 }}>
                       <i className="ph ph-users"></i>
