@@ -77,11 +77,11 @@ export default function RosterPage() {
           </div>
           <p style={{ color: 'rgba(255,255,255,0.6)', margin: '0 0 20px 0' }}>Daftar mahasiswa yang terdaftar di setiap kelas yang Anda ampu semester ini.</p>
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-            <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px 20px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.12)' }}>
+            <div style={{ background: 'var(--glass-bg)', borderRadius: '12px', padding: '12px 20px', backdropFilter: 'none', border: 'var(--glass-border)' }}>
               <p style={{ margin: 0, color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Kelas</p>
               <p style={{ margin: 0, color: 'white', fontSize: '1.5rem', fontWeight: '800' }}>{courses.length}</p>
             </div>
-            <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '12px', padding: '12px 20px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.12)' }}>
+            <div style={{ background: 'var(--glass-bg)', borderRadius: '12px', padding: '12px 20px', backdropFilter: 'none', border: 'var(--glass-border)' }}>
               <p style={{ margin: 0, color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Mahasiswa</p>
               <p style={{ margin: 0, color: 'white', fontSize: '1.5rem', fontWeight: '800' }}>
                 {courses.reduce((acc, c) => acc + (c.students?.length || 0), 0)}
@@ -164,8 +164,8 @@ export default function RosterPage() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   style={{
                     padding: '10px 14px 10px 46px',
-                    background: 'rgba(255,255,255,0.1)',
-                    border: '1px solid rgba(255,255,255,0.2)',
+                    background: 'var(--glass-bg)',
+                    border: 'var(--glass-border)',
                     borderRadius: '50px',
                     color: 'var(--color-text)',
                     width: '240px',

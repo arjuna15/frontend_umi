@@ -198,7 +198,7 @@ function QuizContent() {
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
         {quizData.questions && quizData.questions.length > 0 ? quizData.questions.map((q, idx) => (
-          <div key={q.id} className="siakad-card" style={{ padding: '32px' }}>
+          <div key={q.id} className="siakad-card" style={{ padding: '32px', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)' }}>
             <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' , flexWrap: 'wrap' }}>
               <div style={{ width: '36px', height: '36px', background: 'linear-gradient(135deg, #C41E3A, #9b1c2e)', color: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', flexShrink: 0 }}>
                 {idx + 1}
@@ -210,7 +210,7 @@ function QuizContent() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingLeft: '52px' }}>
               {['a', 'b', 'c', 'd'].map(opt => (
-                <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', border: answers[q.id] === opt ? '2px solid #C41E3A' : '1px solid var(--color-border)', background: answers[q.id] === opt ? 'rgba(196, 30, 58, 0.05)' : 'var(--glass-bg)', borderRadius: '24px', cursor: 'pointer', transition: 'all 0.2s' }}>
+                <label key={opt} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', border: answers[q.id] === opt ? '2px solid #C41E3A' : 'none', background: answers[q.id] === opt ? 'rgba(196, 30, 58, 0.05)' : 'var(--glass-bg)', boxShadow: answers[q.id] === opt ? 'none' : 'inset 2px 2px 5px var(--inset-shadow-dark, rgba(0,0,0,0.05)), inset -2px -2px 5px var(--inset-shadow-light, rgba(255,255,255,0.05))', borderRadius: '24px', cursor: 'pointer', transition: 'all 0.2s' }}>
                   <input 
                     type="radio" 
                     name={`q_${q.id}`} 

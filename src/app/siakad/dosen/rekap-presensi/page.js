@@ -65,7 +65,7 @@ export default function RekapPresensiPage() {
                 { label: 'Berisiko (<75%)', value: atRisk, icon: 'ph-warning-circle', color: '#ef4444' },
                 { label: 'Total Pertemuan', value: selectedCourse.total_meetings || 0, icon: 'ph-calendar', color: '#f59e0b' },
               ].map((s, i) => (
-                <div key={i} style={{ flex: '1 1 90px', background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', borderRadius: '14px', padding: '14px 18px', display: 'flex', alignItems: 'center', gap: '10px', border: '1px solid rgba(255,255,255,0.15)' }}>
+                <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', backdropFilter: 'none', borderRadius: '14px', padding: '14px 18px', display: 'flex', alignItems: 'center', gap: '10px', border: 'var(--glass-border)' }}>
                   <i className={`ph ${s.icon}`} style={{ fontSize: '1.2rem', color: s.color }}></i>
                   <div>
                     <p style={{ color: 'white', fontWeight: '800', fontSize: '1.3rem', margin: 0, lineHeight: 1 }}>{s.value}</p>

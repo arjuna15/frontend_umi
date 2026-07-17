@@ -315,7 +315,7 @@ export default function ProctoringStudentPage() {
           </div>
         ) : quizData !== null ? (
           /* Case C: Quiz loaded */
-          <div className="siakad-card" style={{ padding: '32px', minHeight: '400px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div className="siakad-card" style={{ padding: '32px', minHeight: '400px', display: 'flex', flexDirection: 'column', gap: '24px', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)' }}>
             <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               <div>
                 <h3 style={{ margin: 0, fontSize: '1.3rem', fontWeight: '800', color: 'var(--color-text)' }}>Lembar Soal Ujian</h3>
@@ -323,7 +323,7 @@ export default function ProctoringStudentPage() {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
                 <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '6px' }}>
-                  Progress: {Object.keys(answers).filter(k => answers[k] !== '').length} / {quizData.questions?.length || 0} Soal Dijawab
+                   Progress: {Object.keys(answers).filter(k => answers[k] !== '').length} / {quizData.questions?.length || 0} Soal Dijawab
                 </span>
                 <div style={{ width: '150px', height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '50px', overflow: 'hidden' }}>
                   <div style={{ 
@@ -340,15 +340,15 @@ export default function ProctoringStudentPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
               {quizData.questions?.map((q, i) => (
                 <div key={q.id} style={{ 
-                  background: 'rgba(255,255,255,0.02)', 
-                  border: '1px solid rgba(255,255,255,0.05)', 
+                  background: 'var(--liquid-bg)', 
+                  border: '1px solid var(--color-border)', 
                   borderRadius: '20px', 
                   padding: '24px', 
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                  boxShadow: 'var(--glass-shadow)',
                   transition: 'all 0.3s ease'
                 }}
                 onMouseOver={e => e.currentTarget.style.border = '1px solid rgba(59,130,246,0.2)'}
-                onMouseOut={e => e.currentTarget.style.border = '1px solid rgba(255,255,255,0.05)'}
+                onMouseOut={e => e.currentTarget.style.border = '1px solid var(--color-border)'}
                 >
                   <p style={{ fontSize: '1.05rem', fontWeight: '700', color: 'var(--color-text)', margin: '0 0 20px 0', lineHeight: '1.6', display: 'flex', gap: '8px' }}>
                     <span style={{ color: '#3b82f6' }}>{i + 1}.</span> 
@@ -377,9 +377,9 @@ export default function ProctoringStudentPage() {
                               fontSize: '0.95rem', 
                               padding: '14px 20px', 
                               borderRadius: '14px', 
-                              background: isSelected ? 'linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(29,78,216,0.15) 100%)' : 'rgba(255,255,255,0.01)', 
-                              border: isSelected ? '1px solid #3b82f6' : '1px solid rgba(255,255,255,0.08)', 
-                              boxShadow: isSelected ? '0 0 14px rgba(59,130,246,0.2)' : 'none',
+                              background: isSelected ? 'linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(29,78,216,0.15) 100%)' : 'var(--glass-bg)', 
+                              border: isSelected ? '1px solid #3b82f6' : 'none', 
+                              boxShadow: isSelected ? '0 0 14px rgba(59,130,246,0.2)' : 'inset 2px 2px 5px var(--inset-shadow-dark, rgba(0,0,0,0.05)), inset -2px -2px 5px var(--inset-shadow-light, rgba(255,255,255,0.05))',
                               color: isSelected ? 'var(--color-text)' : 'var(--color-muted)',
                               transition: 'all 0.2s ease'
                             }}
@@ -420,9 +420,9 @@ export default function ProctoringStudentPage() {
                               fontSize: '0.95rem', 
                               padding: '14px 20px', 
                               borderRadius: '14px', 
-                              background: isSelected ? `rgba(${opt.key === 'True' ? '16,185,129' : '239,68,68'}, 0.1)` : 'rgba(255,255,255,0.01)', 
-                              border: isSelected ? `1px solid ${opt.color}` : '1px solid rgba(255,255,255,0.08)', 
-                              boxShadow: isSelected ? `0 0 14px rgba(${opt.key === 'True' ? '16,185,129' : '239,68,68'}, 0.2)` : 'none',
+                              background: isSelected ? `rgba(${opt.key === 'True' ? '16,185,129' : '239,68,68'}, 0.1)` : 'var(--glass-bg)', 
+                              border: isSelected ? `1px solid ${opt.color}` : 'none', 
+                              boxShadow: isSelected ? `0 0 14px rgba(${opt.key === 'True' ? '16,185,129' : '239,68,68'}, 0.2)` : 'inset 2px 2px 5px var(--inset-shadow-dark, rgba(0,0,0,0.05)), inset -2px -2px 5px var(--inset-shadow-light, rgba(255,255,255,0.05))',
                               color: isSelected ? 'var(--color-text)' : 'var(--color-muted)',
                               transition: 'all 0.2s ease'
                             }}
@@ -455,8 +455,9 @@ export default function ProctoringStudentPage() {
                           minHeight: '140px', 
                           padding: '16px', 
                           borderRadius: '14px', 
-                          border: '1px solid rgba(255,255,255,0.08)', 
-                          background: 'rgba(0,0,0,0.25)', 
+                          border: 'none', 
+                          background: 'var(--glass-bg)', 
+                          boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark, rgba(0,0,0,0.05)), inset -2px -2px 5px var(--inset-shadow-light, rgba(255,255,255,0.05))',
                           color: 'var(--color-text)', 
                           fontSize: '0.95rem', 
                           fontFamily: 'inherit', 
@@ -470,8 +471,8 @@ export default function ProctoringStudentPage() {
                           e.target.style.boxShadow = '0 0 10px rgba(59,130,246,0.15)';
                         }}
                         onBlur={(e) => {
-                          e.target.style.borderColor = 'rgba(255,255,255,0.08)';
-                          e.target.style.boxShadow = 'none';
+                          e.target.style.borderColor = 'transparent';
+                          e.target.style.boxShadow = 'inset 2px 2px 5px var(--inset-shadow-dark, rgba(0,0,0,0.05)), inset -2px -2px 5px var(--inset-shadow-light, rgba(255,255,255,0.05))';
                         }}
                       />
                     </div>

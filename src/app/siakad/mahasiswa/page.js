@@ -98,7 +98,7 @@ export default function MahasiswaDashboard() {
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>{getTranslation('welcome', lang)} {data.user.name?.split(' ')[0] || 'Mahasiswa'}!</h1>
               <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>{lang === 'en' ? 'Welcome back to your Academic Portal.' : 'Selamat datang kembali di Portal Akademik Anda.'}</p>
             </div>
-            <div style={{ background: 'var(--color-surface)', border: '1px solid var(--color-border)', padding: '12px 28px', borderRadius: '50px', display: 'flex', alignItems: 'center', gap: '14px', backdropFilter: 'blur(16px)', boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.15)' }}>
+            <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', padding: '12px 28px', borderRadius: '50px', display: 'flex', alignItems: 'center', gap: '14px', boxShadow: 'var(--glass-shadow)', backdropFilter: 'none' }}>
                <div style={{ width: '42px', height: '42px', background: 'rgba(59, 130, 246, 0.18)', color: '#60a5fa', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' , flexShrink: 0, border: '1px solid rgba(59, 130, 246, 0.25)' }}>
                 <i className="ph ph-identification-card" style={{ color: '#60a5fa' }}></i>
               </div>
