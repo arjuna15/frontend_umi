@@ -1353,9 +1353,9 @@
   width: 100%;
   padding: 12px 22px;
   border-radius: 50px;
-  border: 1px solid rgba(0, 0, 0, 0.08) !important;
-  background: rgba(255, 255, 255, 0.70) !important;
-  box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  background: var(--liquid-bg) !important;
+  box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff !important;
   color: var(--color-text) !important;
   font-family: inherit;
   font-size: 0.95rem;
@@ -1379,15 +1379,15 @@
 
 .siakad-input:focus, .siakad-select:focus, .siakad-modal-content input:focus, .siakad-modal-content select:focus, .siakad-modal-content textarea:focus {
   outline: none;
-  background: rgba(255, 255, 255, 0.90) !important;
+  background: var(--liquid-bg) !important;
   border-color: var(--apple-red) !important;
-  box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px rgba(255, 255, 255, 0.6), 0 0 0 3px rgba(196, 30, 58, 0.15) !important;
+  box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff, 0 0 0 3px rgba(196, 30, 58, 0.18) !important;
 }
 
 [data-theme='dark'] .siakad-input, [data-theme='dark'] .siakad-select, [data-theme='dark'] .siakad-modal-content input, [data-theme='dark'] .siakad-modal-content select, [data-theme='dark'] .siakad-modal-content textarea {
-  background: rgba(255, 255, 255, 0.07) !important;
-  border: 1px solid rgba(255, 255, 255, 0.10) !important;
-  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px rgba(255, 255, 255, 0.04) !important;
+  background: var(--liquid-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.03) !important;
+  box-shadow: inset 6px 6px 12px #080a0f, inset -6px -6px 12px #1c2231 !important;
   color: white !important;
 }
 
