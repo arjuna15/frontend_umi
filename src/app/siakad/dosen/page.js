@@ -110,7 +110,7 @@ export default function DosenDashboard() {
                     <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><i className="ph ph-map-pin"></i>{sch.room || 'Belum ada ruang'}</span>
                   </div>
                 </div>
-                <span style={{ padding: '4px 12px', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>
+                <span className="siakad-badge" style={{ fontSize: '0.78rem !important', minWidth: '90px !important' }}>
                   {lang === 'en' ? `Session ${sch.meeting || '?'}` : `Sesi ${sch.meeting || '?'}`}
                 </span>
               </div>
@@ -131,7 +131,7 @@ export default function DosenDashboard() {
             </div>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Notifikasi & To-Do</h3>
             {todos.length > 0 && (
-              <span style={{ marginLeft: 'auto', padding: '2px 8px', background: '#f59e0b', color: 'white', borderRadius: '12px', fontSize: '0.75rem', fontWeight: '700' }}>
+              <span className="siakad-badge" style={{ marginLeft: 'auto', minWidth: '40px !important', padding: '4px 10px !important', background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important' }}>
                 {todos.length}
               </span>
             )}
@@ -160,7 +160,7 @@ export default function DosenDashboard() {
                 <i className="ph ph-books" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
               </div>
               <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Mata Kuliah Diampu</h3>
-              <span style={{ marginLeft: 'auto', padding: '4px 12px', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', border: '1px solid rgba(196, 30, 58, 0.25)', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>
+              <span className="siakad-badge" style={{ marginLeft: 'auto', minWidth: '80px !important' }}>
                 {courses.length} MK
               </span>
             </div>
@@ -174,8 +174,8 @@ export default function DosenDashboard() {
                   <div style={{ minWidth: 0, flex: 1 }}>
                     <p style={{ margin: '0 0 4px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.88rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.name}</p>
                     <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                      <span style={{ padding: '1px 8px', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', borderRadius: '50px', fontSize: '0.7rem', fontWeight: '600' }}>{c.code}</span>
-                      <span style={{ padding: '1px 8px', background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', borderRadius: '50px', fontSize: '0.7rem', fontWeight: '600' }}>{c.sks} SKS</span>
+                      <span className="siakad-badge" style={{ minWidth: '60px !important', padding: '2px 8px !important', fontSize: '0.7rem !important' }}>{c.code}</span>
+                      <span className="siakad-badge" style={{ minWidth: '60px !important', padding: '2px 8px !important', fontSize: '0.7rem !important' }}>{c.sks} SKS</span>
                     </div>
                   </div>
                 </div>

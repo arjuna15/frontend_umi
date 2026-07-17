@@ -240,7 +240,7 @@ export default function RosterPage() {
                           borderBottom: '1px solid rgba(0,0,0,0.03)',
                           boxShadow: 'inset 0 3px 5px #bebebe, inset 0 -3px 5px #ffffff'
                         }}>
-                          <span style={{ background: 'rgba(99,102,241,0.15)', color: '#6366f1', padding: '4px 12px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '600', whiteSpace: 'nowrap' }}>
+                          <span className="siakad-badge" style={{ background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important', minWidth: '130px !important', fontSize: '0.75rem !important' }}>
                             {mhs.prodi || 'Teknik Informatika'}
                           </span>
                         </td>
