@@ -22,11 +22,11 @@
   --gradient-red: linear-gradient(135deg, #B91C1C 0%, #E11D48 100%);
 
   /* Neutrals for Light Mode */
-  --color-bg: #F8FAFC;
-  --color-surface: rgba(255, 255, 255, 0.7);
+  --color-bg: #eef2f7;
+  --color-surface: #eef2f7;
   --color-white: #ffffff;
-  --color-text: #0F172A;
-  --color-muted: #475569;
+  --color-text: #1e293b;
+  --color-muted: #64748b;
   --color-border: rgba(15, 23, 42, 0.12);
 
   /* Typography */
@@ -34,12 +34,10 @@
   --font-heading: 'Outfit', system-ui, sans-serif;
 
   /* Glassmorphism Variables - Apple Liquid Glass */
-  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-bg: #eef2f7;
   --glass-border: 1px solid rgba(255, 255, 255, 0.6);
   --glass-blur: blur(40px) saturate(210%);
-  --glass-shadow: 0 12px 40px rgba(31, 38, 135, 0.04), 
-                  inset 0 1px 0 rgba(255, 255, 255, 0.6), 
-                  inset 0 -1px 0 rgba(0, 0, 0, 0.01);
+  --glass-shadow: 9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff;
 
   /* Spacing */
   --space-1: 4px; --space-2: 8px; --space-3: 16px;
@@ -77,15 +75,15 @@
 /* -------------------- Dark Mode Overrides -------------------- */
 [data-theme='dark'] body {
   --footer-bg: radial-gradient(circle at top right, #1e293b 0%, #0f172a 40%, #020617 80%, #000000 100%);
-  --color-bg: #020617;
-  --color-surface: rgba(15, 23, 42, 0.7);
+  --color-bg: #121620;
+  --color-surface: #121620;
   --color-white: #0f172a; /* Dark surface for white-based elements */
-  --color-text: #F8FAFC;
-  --color-muted: #94A3B8;
+  --color-text: #f1f5f9;
+  --color-muted: #94a3b8;
   --color-border: rgba(255, 255, 255, 0.1);
-  --glass-bg: rgba(15, 23, 42, 0.92);
+  --glass-bg: #121620;
   --glass-border: 1px solid rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --glass-shadow: 9px 9px 18px #090b10, -9px -9px 18px #1b2130;
   --color-background: var(--color-bg);
   --color-background-alt: #0f172a;
   --color-text-muted: var(--color-muted);

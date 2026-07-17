@@ -2,34 +2,30 @@
 
 :root {
   /* Liquid Light Mode Colors & Specs */
-  --liquid-bg: #f5f5f7;
-  --glass-bg: rgba(255, 255, 255, 0.45);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.6);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04), 
-                  inset 0 1px 0 0 rgba(255, 255, 255, 0.6), 
-                  inset 0 -1px 0 0 rgba(0, 0, 0, 0.02);
-  --glass-blur: blur(40px) saturate(210%);
-  --color-text: #1d1d1f;
-  --color-muted: #86868b;
-  --color-border: rgba(0, 0, 0, 0.08);
-  --apple-blue: #B91C1C; /* UMIBA Red as primary brand action color */
-  --apple-red: #B91C1C;
+  --liquid-bg: #eef2f7;
+  --glass-bg: #eef2f7;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.45);
+  --glass-shadow: 9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff;
+  --glass-blur: none;
+  --color-text: #1e293b;
+  --color-muted: #64748b;
+  --color-border: rgba(0, 0, 0, 0.05);
+  --apple-blue: #C41E3A; /* Signature Premium Red */
+  --apple-red: #C41E3A;
 }
 
 [data-theme='dark'] {
   /* Liquid Dark Mode Colors & Specs */
-  --liquid-bg: #000002;
-  --glass-bg: rgba(22, 22, 23, 0.55);
-  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6), 
-                  inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
-                  inset 0 -1px 0 0 rgba(0, 0, 0, 0.5);
-  --glass-blur: blur(50px) saturate(240%);
-  --color-text: #f5f5f7;
-  --color-muted: #86868b;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --apple-blue: #E11D48; /* Bright UMIBA Red for dark mode contrast */
-  --apple-red: #E11D48;
+  --liquid-bg: #121620;
+  --glass-bg: #121620;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.03);
+  --glass-shadow: 9px 9px 18px #090b10, -9px -9px 18px #1b2130;
+  --glass-blur: none;
+  --color-text: #f1f5f9;
+  --color-muted: #94a3b8;
+  --color-border: rgba(255, 255, 255, 0.04);
+  --apple-blue: #ef4444;
+  --apple-red: #ef4444;
 }
 
 /* Core Layout Adjustments */
@@ -377,11 +373,10 @@
 }
 .siakad-card:hover {
   transform: translateY(-4px) scale(1.005);
-  box-shadow: 0 20px 48px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.7);
-  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 12px 12px 24px #cbd5e1, -12px -12px 24px #ffffff;
 }
 [data-theme='dark'] .siakad-card:hover {
-  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 12px 12px 24px #090b10, -12px -12px 24px #1b2130;
 }
 
 /* Animations for Staggering items */
@@ -508,21 +503,26 @@
 /* Inputs & Selects */
 .siakad-input {
   padding: 10px 16px;
-  border: 1px solid #d1d5db;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 50px;
   font-size: 0.95rem;
   outline: none;
   transition: all 0.3s ease;
-  background: var(--color-bg);
+  background: var(--liquid-bg);
   color: var(--color-text);
+  box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff;
 }
 [data-theme='dark'] .siakad-input {
-  background: rgba(30, 41, 59, 0.5); /* or var(--glass-bg) equivalent */
-  border-color: var(--color-border);
+  background: var(--liquid-bg);
+  border-color: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 4px 4px 8px #090b10, inset -4px -4px 8px #1b2130;
 }
 .siakad-input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  border-color: var(--apple-red);
+  box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff, 0 0 0 3px rgba(196, 30, 58, 0.15);
+}
+[data-theme='dark'] .siakad-input:focus {
+  box-shadow: inset 4px 4px 8px #090b10, inset -4px -4px 8px #1b2130, 0 0 0 3px rgba(196, 30, 58, 0.15);
 }
 .siakad-input:disabled {
   background: #f3f4f6;
