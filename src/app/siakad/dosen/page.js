@@ -167,7 +167,7 @@ export default function DosenDashboard() {
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1, maxHeight: '340px', overflowY: 'auto', paddingRight: '4px' }}>
               {courses.map((c, i) => (
-                <div key={i} style={{ padding: '14px 16px', background: 'var(--glass-bg)', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', gap: '12px', alignItems: 'center', transition: 'all 0.2s' }}>
+                <div key={i} style={{ padding: '14px 16px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', gap: '12px', alignItems: 'center', transition: 'all 0.2s', borderLeft: '5px solid #C41E3A', borderTop: '1px solid rgba(255,255,255,0.5)', borderRight: '1px solid rgba(0,0,0,0.02)', borderBottom: '1px solid rgba(0,0,0,0.02)', boxShadow: 'var(--glass-shadow)' }}>
                   <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <i className="ph ph-chalkboard-teacher" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
                   </div>
