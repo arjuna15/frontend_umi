@@ -5,7 +5,7 @@
   --liquid-bg: #eef2f7;
   --glass-bg: #eef2f7;
   --glass-border: 1px solid rgba(255, 255, 255, 0.5);
-  --glass-shadow: 6px 6px 16px rgba(165, 180, 203, 0.5), -6px -6px 16px rgba(255, 255, 255, 0.8);
+  --glass-shadow: 6px 6px 16px #a3b1c6, -6px -6px 16px rgba(255, 255, 255, 0.55);
   --glass-blur: none;
   --color-text: #1e293b;
   --color-muted: #64748b;
@@ -19,7 +19,7 @@
   --liquid-bg: #121620;
   --glass-bg: #121620;
   --glass-border: 1px solid rgba(255, 255, 255, 0.03);
-  --glass-shadow: 6px 6px 16px rgba(0, 0, 0, 0.4), -6px -6px 16px rgba(255, 255, 255, 0.04);
+  --glass-shadow: 6px 6px 16px #080a0f, -6px -6px 16px rgba(255, 255, 255, 0.03);
   --glass-blur: none;
   --color-text: #f1f5f9;
   --color-muted: #94a3b8;
@@ -373,10 +373,10 @@
 }
 .siakad-card:hover {
   transform: translateY(-4px) scale(1.005);
-  box-shadow: 12px 12px 24px #cbd5e1, -12px -12px 24px #ffffff;
+  box-shadow: 12px 12px 24px #a3b1c6, -12px -12px 24px rgba(255, 255, 255, 0.55);
 }
 [data-theme='dark'] .siakad-card:hover {
-  box-shadow: 12px 12px 24px #090b10, -12px -12px 24px #1b2130;
+  box-shadow: 12px 12px 24px #080a0f, -12px -12px 24px rgba(255, 255, 255, 0.03);
 }
 
 /* Animations for Staggering items */
@@ -510,19 +510,19 @@
   transition: all 0.3s ease;
   background: var(--liquid-bg);
   color: var(--color-text);
-  box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff;
+  box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px rgba(255, 255, 255, 0.6);
 }
 [data-theme='dark'] .siakad-input {
   background: var(--liquid-bg);
   border-color: rgba(255, 255, 255, 0.04);
-  box-shadow: inset 4px 4px 8px #090b10, inset -4px -4px 8px #1b2130;
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px rgba(255, 255, 255, 0.04);
 }
 .siakad-input:focus {
   border-color: var(--apple-red);
-  box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff, 0 0 0 3px rgba(196, 30, 58, 0.15);
+  box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px rgba(255, 255, 255, 0.6), 0 0 0 3px rgba(196, 30, 58, 0.15);
 }
 [data-theme='dark'] .siakad-input:focus {
-  box-shadow: inset 4px 4px 8px #090b10, inset -4px -4px 8px #1b2130, 0 0 0 3px rgba(196, 30, 58, 0.15);
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px rgba(255, 255, 255, 0.04), 0 0 0 3px rgba(196, 30, 58, 0.15);
 }
 .siakad-input:disabled {
   background: #f3f4f6;
@@ -1354,7 +1354,7 @@
   border-radius: 50px;
   border: 1px solid rgba(0, 0, 0, 0.08) !important;
   background: rgba(255, 255, 255, 0.70) !important;
-  box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff !important;
+  box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px rgba(255, 255, 255, 0.6) !important;
   color: var(--color-text) !important;
   font-family: inherit;
   font-size: 0.95rem;
@@ -1380,13 +1380,13 @@
   outline: none;
   background: rgba(255, 255, 255, 0.90) !important;
   border-color: var(--apple-red) !important;
-  box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff, 0 0 0 3px rgba(196, 30, 58, 0.15) !important;
+  box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px rgba(255, 255, 255, 0.6), 0 0 0 3px rgba(196, 30, 58, 0.15) !important;
 }
 
 [data-theme='dark'] .siakad-input, [data-theme='dark'] .siakad-select, [data-theme='dark'] .siakad-modal-content input, [data-theme='dark'] .siakad-modal-content select, [data-theme='dark'] .siakad-modal-content textarea {
   background: rgba(255, 255, 255, 0.07) !important;
   border: 1px solid rgba(255, 255, 255, 0.10) !important;
-  box-shadow: inset 4px 4px 8px #090b10, inset -4px -4px 8px #1b2130 !important;
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px rgba(255, 255, 255, 0.04) !important;
   color: white !important;
 }
 
@@ -1397,7 +1397,7 @@
 [data-theme='dark'] .siakad-input:focus, [data-theme='dark'] .siakad-select:focus, [data-theme='dark'] .siakad-modal-content input:focus, [data-theme='dark'] .siakad-modal-content select:focus, [data-theme='dark'] .siakad-modal-content textarea:focus {
   background: rgba(255, 255, 255, 0.12) !important;
   border-color: var(--apple-red) !important;
-  box-shadow: inset 4px 4px 8px #090b10, inset -4px -4px 8px #1b2130, 0 0 0 3px rgba(196, 30, 58, 0.15) !important;
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px rgba(255, 255, 255, 0.04), 0 0 0 3px rgba(196, 30, 58, 0.15) !important;
 }
 
 /* Premium Datepicker UX styling */
@@ -1441,13 +1441,13 @@ textarea::placeholder {
   display: inline-flex !important;
   align-items: center;
   gap: 8px;
-  box-shadow: 3px 3px 8px #d1d9e6, -3px -3px 8px #ffffff !important;
+  box-shadow: 3px 3px 8px #a3b1c6, -3px -3px 8px rgba(255, 255, 255, 0.55) !important;
   transition: all 0.2s ease !important;
 }
 
 [data-theme='dark'] .siakad-modal-content button[type="submit"],
 [data-theme='dark'] .siakad-modal-content button.siakad-btn-primary {
-  box-shadow: 3px 3px 8px #090b10, -3px -3px 8px #1b2130 !important;
+  box-shadow: 3px 3px 8px #080a0f, -3px -3px 8px rgba(255, 255, 255, 0.03) !important;
 }
 
 .siakad-modal-content button[type="submit"]:hover,
@@ -1484,11 +1484,11 @@ textarea::placeholder {
 
 .siakad-modal-content button[type="button"]:not(.siakad-btn-primary):active {
   transform: scale(0.97) !important;
-  box-shadow: inset 3px 3px 6px #d1d9e6, inset -3px -3px 6px #ffffff !important;
+  box-shadow: inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px rgba(255, 255, 255, 0.6) !important;
 }
 
 [data-theme='dark'] .siakad-modal-content button[type="button"]:not(.siakad-btn-primary):active {
-  box-shadow: inset 3px 3px 6px #090b10, inset -3px -3px 6px #1b2130 !important;
+  box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px rgba(255, 255, 255, 0.04) !important;
 }
 
 /* Staggered form field entry animation */
@@ -1774,12 +1774,12 @@ textarea::placeholder {
   display: inline-flex !important;
   align-items: center;
   gap: 8px;
-  box-shadow: 3px 3px 8px #d1d9e6, -3px -3px 8px #ffffff !important;
+  box-shadow: 3px 3px 8px #a3b1c6, -3px -3px 8px rgba(255, 255, 255, 0.55) !important;
   transition: all 0.2s ease !important;
 }
 
 [data-theme='dark'] .siakad-btn-primary {
-  box-shadow: 3px 3px 8px #090b10, -3px -3px 8px #1b2130 !important;
+  box-shadow: 3px 3px 8px #080a0f, -3px -3px 8px rgba(255, 255, 255, 0.03) !important;
 }
 
 .siakad-btn-primary:hover {
