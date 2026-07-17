@@ -149,12 +149,32 @@ export default function ElearningPage() {
                     {activeItem.course.quizzes.map((quiz, j) => (
                       <div key={j} style={{ padding: '16px', border: '1px solid rgba(59,130,246,0.2)', background: 'var(--glass-bg)', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
                         <div>
-                          <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem', display: 'block' }}>{quiz.title}</strong>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', marginBottom: '4px' }}>
+                            <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>{quiz.title}</strong>
+                            {quiz.category === 'uts' && (
+                              <span style={{ background: 'rgba(249, 115, 22, 0.15)', color: '#f97316', border: '1px solid rgba(249, 115, 22, 0.3)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>UTS</span>
+                            )}
+                            {quiz.category === 'uas' && (
+                              <span style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>UAS</span>
+                            )}
+                            {quiz.category === 'kuis' && (
+                              <span style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6', border: '1px solid rgba(59, 130, 246, 0.3)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>Kuis</span>
+                            )}
+                            {(quiz.require_proctoring === true || quiz.require_proctoring === 1) && (
+                              <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>Diawasi AI</span>
+                            )}
+                          </div>
                           <span style={{ fontSize: '0.85rem', color: 'var(--color-muted)' }}>{quiz.duration_minutes} menit • {quiz.questions?.length || 0} soal</span>
                         </div>
-                        <button type="button" onClick={() => router.push(`/siakad/mahasiswa/elearning/quiz?quizId=${quiz.id}`)} style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '8px 18px', borderRadius: '50px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 2px 6px rgba(59, 130, 246, 0.3)' }}>
-                          Kerjakan
-                        </button>
+                        {quiz.require_proctoring === true || quiz.require_proctoring === 1 ? (
+                          <button type="button" onClick={() => router.push('/siakad/mahasiswa/proctoring')} style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', padding: '8px 18px', borderRadius: '50px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 2px 6px rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <i className="ph ph-eye"></i> Ujian Diawasi
+                          </button>
+                        ) : (
+                          <button type="button" onClick={() => router.push(`/siakad/mahasiswa/elearning/quiz?quizId=${quiz.id}`)} style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '8px 18px', borderRadius: '50px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 2px 6px rgba(59, 130, 246, 0.3)' }}>
+                            Kerjakan
+                          </button>
+                        )}
                       </div>
                     ))}
                   </div>

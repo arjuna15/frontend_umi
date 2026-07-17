@@ -13,6 +13,8 @@ export default function DosenQuizCreate() {
     { type: 'multiple_choice', question: '', option_a: '', option_b: '', option_c: '', option_d: '', correct_answer: 'A', correct_answer_text: '' }
   ]);
   const [loading, setLoading] = useState(false);
+  const [category, setCategory] = useState('kuis'); // 'kuis', 'uts', 'uas'
+  const [requireProctoring, setRequireProctoring] = useState(false);
 
   useEffect(() => {
     const fetchDashboard = async () => {
@@ -100,6 +102,8 @@ export default function DosenQuizCreate() {
         course_id: selectedCourseId,
         title,
         duration_minutes: duration,
+        category,
+        require_proctoring: requireProctoring,
         questions: normalizedQuestions
       };
 
@@ -138,7 +142,7 @@ export default function DosenQuizCreate() {
             <div style={{ flex: '1 1 300px' }}>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — DOSEN</p>
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>CBT Engine: Kuis Pilihan Ganda</h1>
-              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Buat kuis otomatis dengan berbagai tipe soal dan durasi.</p>
+              <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Buat kuis otomatis dengan various tipe soal dan durasi.</p>
             </div>
           </div>
         </div>
@@ -150,19 +154,18 @@ export default function DosenQuizCreate() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginBottom: '20px' }}>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Mata Kuliah</label>
-              <select
+              <CustomSelect
                 value={selectedCourseId}
-                onChange={(e) => setSelectedCourseId(e.target.value)}
-                className="siakad-input"
+                onChange={(val) => setSelectedCourseId(val)}
+                options={[
+                  { value: "", label: "Pilih mata kuliah..." },
+                  ...courses.map(course => ({
+                    value: String(course.id),
+                    label: `${course.code ? `${course.code} - ` : ''}${course.name}`
+                  }))
+                ]}
                 style={{ width: '100%' }}
-              >
-                <option value="">Pilih mata kuliah...</option>
-                {courses.map((course) => (
-                  <option key={course.id} value={course.id}>
-                    {course.code ? `${course.code} - ` : ''}{course.name}
-                  </option>
-                ))}
-              </select>
+              />
             </div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
@@ -173,6 +176,33 @@ export default function DosenQuizCreate() {
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Durasi Pengerjaan (Menit)</label>
               <input type="number" required value={duration} onChange={e=>setDuration(e.target.value)} className="siakad-input" style={{ width: '100%' }} placeholder="60" />
+            </div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginTop: '20px' }}>
+            <div>
+              <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kategori Ujian</label>
+              <CustomSelect
+                value={category}
+                onChange={(val) => setCategory(val)}
+                options={[
+                  { value: 'kuis', label: 'Kuis Harian' },
+                  { value: 'uts', label: 'Ujian Tengah Semester (UTS)' },
+                  { value: 'uas', label: 'Ujian Akhir Semester (UAS)' }
+                ]}
+                style={{ width: '100%' }}
+              />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', marginTop: '30px', gap: '10px' }}>
+              <input
+                type="checkbox"
+                id="require-proctoring-check"
+                checked={requireProctoring}
+                onChange={(e) => setRequireProctoring(e.target.checked)}
+                style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+              />
+              <label htmlFor="require-proctoring-check" style={{ fontWeight: 600, cursor: 'pointer', color: 'var(--color-text)' }}>
+                Aktifkan Pengawasan Kamera & Anti-Tab Switch (Proctoring Ujian)
+              </label>
             </div>
           </div>
         </div>
