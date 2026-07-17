@@ -73,13 +73,13 @@ export default function DosenDashboard() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         {[
-          { label: lang === 'en' ? 'Total Courses' : 'Total Mata Kuliah', value: courses.length || 0, icon: 'ph-books', color: '#C41E3A', bg: 'rgba(196, 30, 58, 0.15)' },
-          { label: getTranslation('class_schedule', lang), value: todaySchedules.length, icon: 'ph-calendar-check', color: '#059669', bg: 'rgba(5, 150, 105, 0.15)' },
-          { label: lang === 'en' ? 'Active Notifications' : 'Notifikasi Aktif', value: todos.length, icon: 'ph-bell-ringing', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.15)' },
-          { label: 'Semester', value: data.semester || '-', icon: 'ph-graduation-cap', color: '#C41E3A', bg: 'rgba(196, 30, 58, 0.15)', small: true },
+          { label: lang === 'en' ? 'Total Courses' : 'Total Mata Kuliah', value: courses.length || 0, icon: 'ph-books', color: '#C41E3A', bg: 'var(--glass-bg)' },
+          { label: getTranslation('class_schedule', lang), value: todaySchedules.length, icon: 'ph-calendar-check', color: '#059669', bg: 'var(--glass-bg)' },
+          { label: lang === 'en' ? 'Active Notifications' : 'Notifikasi Aktif', value: todos.length, icon: 'ph-bell-ringing', color: '#f59e0b', bg: 'var(--glass-bg)' },
+          { label: 'Semester', value: data.semester || '-', icon: 'ph-graduation-cap', color: '#C41E3A', bg: 'var(--glass-bg)', small: true },
         ].map((stat, i) => (
           <div key={i} className={`siakad-card stagger-${i + 1}`} style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
-            <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: stat.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className={`ph ${stat.icon}`} style={{ fontSize: '1.5rem', color: stat.color }}></i>
             </div>
             <div style={{ minWidth: 0 }}>
