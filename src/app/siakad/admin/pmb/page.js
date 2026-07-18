@@ -240,7 +240,7 @@ export default function PMBAdminPage() {
                     ) : applicants.map(a => (
                       <tr key={a.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
                         <td style={{ padding: '12px 14px', color: 'var(--color-text)', fontWeight: '700', fontSize: '0.85rem' }}>
-                          <span style={{ fontFamily: 'monospace', background: 'rgba(59,130,246,0.08)', padding: '4px 8px', borderRadius: '6px', border: '1px solid rgba(59,130,246,0.15)', color: '#3b82f6' }}>
+                          <span className="siakad-badge siakad-badge-sm" style={{ fontFamily: 'monospace', color: '#3b82f6' }}>
                             {a.registration_number || '-'}
                           </span>
                         </td>
