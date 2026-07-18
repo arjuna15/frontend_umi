@@ -2330,3 +2330,27 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
   box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px rgba(255, 255, 255, 0.8) !important;
 }
+
+/* Public variables for Neumorphism contrast shadows */
+:root {
+  --inset-shadow-dark: #a3b1c6;
+  --inset-shadow-light: rgba(255, 255, 255, 0.6);
+}
+[data-theme='dark'] {
+  --inset-shadow-dark: #080a0f;
+  --inset-shadow-light: rgba(255, 255, 255, 0.04);
+}
+
+/* Public siakad-badge definition using neumorphic inset */
+.siakad-badge {
+  background: var(--liquid-bg) !important;
+  box-shadow: inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light) !important;
+  border: var(--glass-border) !important;
+  color: var(--color-text) !important;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
