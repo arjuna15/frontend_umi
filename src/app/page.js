@@ -63,19 +63,19 @@ export default function Home() {
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "36px", height: "36px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-certificate" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(255,255,255,0.15)", background: "rgba(185, 28, 28, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-certificate" style={{ color: "#ffffff", fontSize: "1.25rem" }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Dual Certificate</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Ijazah & BNSP</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "36px", height: "36px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-laptop" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(255,255,255,0.15)", background: "rgba(185, 28, 28, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-laptop" style={{ color: "#ffffff", fontSize: "1.25rem" }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Blended Learning</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Online + Offline</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "36px", height: "36px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-users-three" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(255,255,255,0.15)", background: "rgba(185, 28, 28, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-users-three" style={{ color: "#ffffff", fontSize: "1.25rem" }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Career Network</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Jaringan Luas</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "36px", height: "36px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-wallet" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(255,255,255,0.15)", background: "rgba(185, 28, 28, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-wallet" style={{ color: "#ffffff", fontSize: "1.25rem" }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Flexible Tuition</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Bisa Diangsur</span></div>
               </div>
             </div>
