@@ -57,34 +57,34 @@ export default function Home() {
           </div>
           
           {/* Keunggulan Glass Card */}
-          <div style={{ background: 'var(--glass-bg)', border: 'none', borderRadius: '16px', padding: '20px', marginBottom: '16px', boxShadow: 'var(--glass-shadow)' }}>
-            <h3 style={{ color: '#FFFFFF', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: '8px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
+            <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>
               {lang === "en" ? "Why study Master's at UMIBA?" : "Keunggulan Kuliah S2 di UMIBA"}
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(255,255,255,0.15)", background: "rgba(185, 28, 28, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-certificate" style={{ color: "#ffffff", fontSize: "1.25rem" }}></i></div>
-                <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Dual Certificate</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Ijazah & BNSP</span></div>
+                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-certificate" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
+                <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Dual Certificate</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Ijazah & BNSP</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(255,255,255,0.15)", background: "rgba(185, 28, 28, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-laptop" style={{ color: "#ffffff", fontSize: "1.25rem" }}></i></div>
-                <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Blended Learning</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Online + Offline</span></div>
+                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-laptop" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
+                <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Blended Learning</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Online + Offline</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(255,255,255,0.15)", background: "rgba(185, 28, 28, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-users-three" style={{ color: "#ffffff", fontSize: "1.25rem" }}></i></div>
-                <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Career Network</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Jaringan Luas</span></div>
+                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-users-three" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
+                <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Career Network</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Jaringan Luas</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 5px rgba(0,0,0,0.45), inset -2px -2px 5px rgba(255,255,255,0.15)", background: "rgba(185, 28, 28, 0.35)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-wallet" style={{ color: "#ffffff", fontSize: "1.25rem" }}></i></div>
-                <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Flexible Tuition</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Bisa Diangsur</span></div>
+                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-wallet" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
+                <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Flexible Tuition</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Bisa Diangsur</span></div>
               </div>
             </div>
             
-            <div style={{ marginTop: '12px', paddingTop: '10px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-              <span style={{ color: 'white', fontSize: '0.85rem', fontWeight: 'bold', marginRight: '8px', opacity: 0.9 }}>{lang === "en" ? "Concentrations:" : "Konsentrasi:"}</span>
+            <div style={{ marginTop: '16px', paddingTop: '12px', borderTop: '1px solid var(--color-border)' }}>
+              <span style={{ color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: 'bold', marginRight: '8px' }}>{lang === "en" ? "Concentrations:" : "Konsentrasi:"}</span>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
                 {['Manajemen SDM', 'Manajemen Keuangan', 'Manajemen Pemasaran', 'Manajemen Rumah Sakit', 'Manajemen K3'].map(k => (
-                  <span key={k} style={{ color: 'white', background: 'var(--glass-bg)', border: 'none', padding: '3px 10px', borderRadius: '20px', fontSize: '0.75rem' }}>{k}</span>
+                  <span key={k} style={{ color: 'var(--color-text)', background: 'var(--liquid-bg)', border: 'var(--glass-border)', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700' }}>{k}</span>
                 ))}
               </div>
             </div>
