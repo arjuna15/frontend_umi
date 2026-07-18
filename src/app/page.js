@@ -45,8 +45,8 @@ export default function Home() {
       
       {/* SLIDE 1: Magister Manajemen */}
       <div className={`hero-slide hero-content-padding ${currentSlide === 0 ? 'active' : ''}`} style={{ position: 'absolute', inset: 0, opacity: currentSlide === 0 ? 1 : 0, pointerEvents: currentSlide === 0 ? 'auto' : 'none', zIndex: currentSlide === 0 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', background: 'var(--color-bg)' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '40px', alignItems: 'center', width: '100%', position: 'relative', zIndex: 2 }}>
-          <div style={{ maxWidth: '750px', width: '100%', opacity: currentSlide === 0 ? 1 : 0, transform: currentSlide === 0 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', position: 'relative', zIndex: 2, height: '100%' }}>
+          <div style={{ maxWidth: '750px', width: '100%', opacity: currentSlide === 0 ? 1 : 0, transform: currentSlide === 0 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s', zIndex: 3 }}>
             <h1 style={{ color: 'var(--color-text)', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '8px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px' }}>
               {lang === "en" ? "New Student Admission 2026/27" : "Penerimaan Mahasiswa Baru TA. 2026/27"}
             </h1>
@@ -104,16 +104,16 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-            <Image src="/nobg1.png" alt="Student Model 1" width={450} height={550} style={{ objectFit: 'contain', width: '100%', height: 'auto', maxHeight: '550px' }} />
+          <div className="hero-model-container" style={{ position: 'absolute', right: '5%', bottom: 0, height: '90%', display: 'flex', alignItems: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
+            <Image src="/nobg1.png" alt="Student Model 1" width={750} height={900} style={{ objectFit: 'contain', height: '100%', width: 'auto', maxHeight: '100%' }} />
           </div>
         </div>
       </div>
 
       {/* SLIDE 2: KIP-K */}
       <div className={`hero-slide hero-content-padding ${currentSlide === 1 ? 'active' : ''}`} style={{ position: 'absolute', inset: 0, opacity: currentSlide === 1 ? 1 : 0, pointerEvents: currentSlide === 1 ? 'auto' : 'none', zIndex: currentSlide === 1 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', background: 'var(--color-bg)' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '40px', alignItems: 'center', width: '100%', position: 'relative', zIndex: 2 }}>
-          <div style={{ maxWidth: '750px', width: '100%', opacity: currentSlide === 1 ? 1 : 0, transform: currentSlide === 1 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', position: 'relative', zIndex: 2, height: '100%' }}>
+          <div style={{ maxWidth: '750px', width: '100%', opacity: currentSlide === 1 ? 1 : 0, transform: currentSlide === 1 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s', zIndex: 3 }}>
             <div style={{ display: 'flex', gap: '10px', marginBottom: '16px', flexWrap: 'wrap' }}>
               <span className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--color-text)', padding: '6px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '800', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px' }}>
                 TAHUN AKADEMIK 2026/2027
@@ -149,16 +149,16 @@ export default function Home() {
               </div>
             </a>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-            <Image src="/nobg2.png" alt="Student Model 2" width={450} height={550} style={{ objectFit: 'contain', width: '100%', height: 'auto', maxHeight: '550px' }} />
+          <div className="hero-model-container" style={{ position: 'absolute', right: '5%', bottom: 0, height: '90%', display: 'flex', alignItems: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
+            <Image src="/nobg2.png" alt="Student Model 2" width={750} height={900} style={{ objectFit: 'contain', height: '100%', width: 'auto', maxHeight: '100%' }} />
           </div>
         </div>
       </div>
 
       {/* SLIDE 3: Penerimaan Umum S1 S2 */}
       <div className={`hero-slide hero-content-padding ${currentSlide === 2 ? 'active' : ''}`} style={{ position: 'absolute', inset: 0, opacity: currentSlide === 2 ? 1 : 0, pointerEvents: currentSlide === 2 ? 'auto' : 'none', zIndex: currentSlide === 2 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', background: 'var(--color-bg)' }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '40px', alignItems: 'center', width: '100%', position: 'relative', zIndex: 2 }}>
-          <div style={{ maxWidth: '750px', width: '100%', opacity: currentSlide === 2 ? 1 : 0, transform: currentSlide === 2 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
+        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', position: 'relative', zIndex: 2, height: '100%' }}>
+          <div style={{ maxWidth: '750px', width: '100%', opacity: currentSlide === 2 ? 1 : 0, transform: currentSlide === 2 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s', zIndex: 3 }}>
             <span className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--color-text)', padding: '6px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '16px', borderRadius: '30px', letterSpacing: '1px' }}>
               TAHUN AKADEMIK 2026/2027
             </span>
@@ -225,8 +225,8 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-            <Image src="/nobg3.png" alt="Student Model 3" width={450} height={550} style={{ objectFit: 'contain', width: '100%', height: 'auto', maxHeight: '550px' }} />
+          <div className="hero-model-container" style={{ position: 'absolute', right: '5%', bottom: 0, height: '90%', display: 'flex', alignItems: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
+            <Image src="/nobg3.png" alt="Student Model 3" width={750} height={900} style={{ objectFit: 'contain', height: '100%', width: 'auto', maxHeight: '100%' }} />
           </div>
         </div>
       </div>
