@@ -40,7 +40,7 @@ export default function BeritaPage() {
       {/* ░░░ NAVIGATION TABS ░░░ */}
       <div style={{ position: 'sticky', top: '100px', zIndex: '900', marginTop: '24px', marginBottom: '24px' }}>
         <div className="container">
-          <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ padding: '12px', borderRadius: 'var(--radius-full)', display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", padding: '12px', borderRadius: 'var(--radius-full)', display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap' }}>
             <a href="#list-berita" className="btn btn-neu" style={{ padding: '10px 20px', fontSize: '0.9rem' }}>Berita Terbaru</a>
           </div>
         </div>
@@ -55,7 +55,7 @@ export default function BeritaPage() {
             <div className="grid grid-3">
               {newsData.length > 0 ? (
                 newsData.map((item, index) => (
-                  <div key={item.id} className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: `${index * 0.1}s` }}>
+                  <div key={item.id} className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: `${index * 0.1}s` }}>
                     <div style={{ background: 'var(--color-muted)', height: '200px', borderRadius: 'var(--radius-sm)', marginBottom: 'var(--space-3)', overflow: 'hidden' }}>
                       <img src={item.image_url} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={item.title}/>
                     </div>

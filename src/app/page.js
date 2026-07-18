@@ -245,7 +245,7 @@ export default function Home() {
 {/*  ░░░ QUICK STATS STRIP ░░░  */}
 <section style={{ marginTop: '40px', position: 'relative', zIndex: '10' }}>
   <div className="container">
-    <div className="neu-card grid grid-4 fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ textAlign: 'center', padding: 'var(--space-5)' }}>
+    <div className="neu-card grid grid-4 fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", textAlign: 'center', padding: 'var(--space-5)' }}>
       <div>
         <i className="ph ph-duotone ph-users-three" style={{ fontSize: '3rem', color: 'var(--umiba-red)', marginBottom: '12px' }}></i>
         <h2 style={{ margin: '0' }} className="text-gradient">5000+</h2>
@@ -273,9 +273,9 @@ export default function Home() {
 {/*  ░░░ SAMBUTAN REKTOR ░░░  */}
 <section id="sambutan" style={{ padding: 'var(--space-8) 0' }}>
   <div className="container grid grid-2" style={{ alignItems: 'center' }}>
-    <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ padding: '0', overflow: 'hidden', position: 'relative', maxWidth: '400px', margin: '0 auto' }}>
+    <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", padding: '0', overflow: 'hidden', position: 'relative', maxWidth: '400px', margin: '0 auto' }}>
       <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" width={400} height={600} style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block' }} onError={(e)=>{e.target.src='https://picsum.photos/400/600?random=A'}}/>
-      <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ position: 'absolute', bottom: 'var(--space-4)', left: 'var(--space-4)', right: 'var(--space-4)', padding: 'var(--space-3)' }}>
+      <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", position: 'absolute', bottom: 'var(--space-4)', left: 'var(--space-4)', right: 'var(--space-4)', padding: 'var(--space-3)' }}>
         <h3 style={{ margin: '0', fontSize: '1.2rem' }}>{t("home.sambutan_rektor")}</h3>
         <p style={{ margin: '0', fontSize: '0.9rem' }}>{t("home.quote_rektor")}</p>
       </div>
@@ -286,11 +286,11 @@ export default function Home() {
       <p>{t("home.sambutan_p1")}</p>
       <p>{t("home.sambutan_p2")}</p>
       <div className="grid grid-2" style={{ marginTop: 'var(--space-4)' }}>
-        <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ padding: 'var(--space-3)' }}>
+        <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", padding: 'var(--space-3)' }}>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '4px' }}>{t("home.kurikulum_modern")}</h3>
           <p style={{ fontSize: '0.9rem', margin: '0' }}>{t("home.kurikulum_desc")}</p>
         </div>
-        <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ padding: 'var(--space-3)' }}>
+        <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", padding: 'var(--space-3)' }}>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '4px' }}>{t("home.kemitraan_industri")}</h3>
           <p style={{ fontSize: '0.9rem', margin: '0' }}>{t("home.kemitraan_desc")}</p>
         </div>
@@ -326,7 +326,7 @@ export default function Home() {
       </div>
       
       {/*  Card 2  */}
-      <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.1s' }}>
+      <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.1s' }}>
         <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
           <i className="ph ph-duotone ph-scales" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
@@ -341,7 +341,7 @@ export default function Home() {
       </div>
       
       {/*  Card 3  */}
-      <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.2s' }}>
+      <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.2s' }}>
         <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
           <i className="ph ph-duotone ph-laptop" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
@@ -401,7 +401,7 @@ export default function Home() {
     <div className="grid grid-3 scroll-mobile">
       {newsData && newsData.length > 0 ? (
         newsData.map((newsItem, index) => (
-          <div key={newsItem.id} className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: `${index * 0.1}s`, padding: 0, overflow: 'hidden' }}>
+          <div key={newsItem.id} className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: `${index * 0.1}s`, padding: 0, overflow: 'hidden' }}>
             <div style={{ background: 'var(--color-muted)', height: '200px', overflow: 'hidden' }}>
                <Image src={newsItem.image_url} width={400} height={300} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={newsItem.title}/>
             </div>
@@ -429,7 +429,7 @@ export default function Home() {
     </div>
     <div className="grid grid-2" style={{ gap: 'var(--space-6)' }}>
       {/*  Kampus Pasar Minggu  */}
-      <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ padding: 'var(--space-4)' }}>
+      <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", padding: 'var(--space-4)' }}>
         <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)' }}><i className="ph ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_pasar_minggu")}</h3>
         <p style={{ color: 'var(--slate-600)', marginBottom: 'var(--space-4)', lineHeight: '1.5', fontSize: '0.95rem' }}>
           {t("home.alamat_pm")}
@@ -440,7 +440,7 @@ export default function Home() {
       </div>
       
       {/*  Kampus Bintaro  */}
-      <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ padding: 'var(--space-4)' }}>
+      <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", padding: 'var(--space-4)' }}>
         <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)' }}><i className="ph ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_bintaro")}</h3>
         <p style={{ color: 'var(--slate-600)', marginBottom: 'var(--space-4)', lineHeight: '1.5', fontSize: '0.95rem' }}>
           {t("home.alamat_bintaro")}
@@ -456,7 +456,7 @@ export default function Home() {
 {/*  ░░░ PMB CTA ░░░  */}
 <section style={{ padding: 'var(--space-8) 0' }}>
   <div className="container">
-    <div className="neu-card grid grid-2 fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ alignItems: 'center', background: 'var(--glass-bg)' }}>
+    <div className="neu-card grid grid-2 fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", alignItems: 'center', background: 'var(--glass-bg)' }}>
       <div>
         <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.pendaftaran_dibuka")}</span>
         <h2 style={{ marginTop: '8px' }}>{t("home.penerimaan_maba")}</h2>
@@ -487,7 +487,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>UMIBA Gelar Seminar Kebangsaan, Teguhkan Budaya Kampus Berbasis 4 Pilar Kebangsaan</h3>
         </div>
       </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.1s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.1s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/10/serba-serbi_155621_big.webp" alt="Berita 2" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
@@ -496,7 +496,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>IKADIM dan Universitas Mitra Bangsa Teken MoU untuk Tingkatkan Kualitas Tri Dharma Perguruan Tinggi</h3>
         </div>
       </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.2s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.2s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/10/medium_tscom_news_photo_1759914601.jpg" alt="Berita 3" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
@@ -505,7 +505,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>IKADIM dan Universitas Mitra Bangsa Teken MoU untuk Tingkatkan Kualitas Tri Dharma Perguruan Tinggi</h3>
         </div>
       </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.3s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.3s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 4" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
@@ -524,7 +524,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Universitas Mitra Bangsa Gelar Gebyar Kemerdekaan HUT-RI</h3>
         </div>
       </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.1s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.1s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/07/pilarparlemen.jpg" style={{ objectFit: 'contain', background: '#fff', width: '100%', height: 'auto' }} width={800} height={600} alt="Berita 6"/>
         </div>
@@ -533,7 +533,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>BEM UMIBA Desak Pemkot Jakarta Selatan Atasi Penumpukan Sampah di Sekitar Kampus</h3>
         </div>
       </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.2s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.2s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 7" width={300} height={158} style={{ width: '100%', height: 'auto' }} />
         </div>
@@ -542,7 +542,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Kampus UMIBA Terima Kunjungan Kehormatan dari Anggota DPR RI dan Ketua Umum IKADIM, Dr. Jazuli Juwaini, MA</h3>
         </div>
       </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.3s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.3s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 8" width={300} height={158} style={{ width: '100%', height: 'auto' }} />
         </div>
