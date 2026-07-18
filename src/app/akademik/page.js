@@ -31,9 +31,9 @@ export default function Page() {
 <div style="position: sticky; top: 100px; z-index: 900; margin-top: 24px; margin-bottom: 24px;">
   <div class="container">
     <div class="glass" style="padding: 12px; border-radius: var(--radius-full); display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
-      <a href="#manajemen" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Management & Business" : "Manajemen & Bisnis"}</a>
-      <a href="#hukum" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Law" : "Ilmu Hukum"}</a>
-      <a href="#komputer" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "IT & Actuarial" : "TI & Aktuaria"}</a>
+      <a href="#manajemen" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Management & Business" : "Manajemen & Bisnis"}</a>
+      <a href="#hukum" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Law" : "Ilmu Hukum"}</a>
+      <a href="#komputer" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "IT & Actuarial" : "TI & Aktuaria"}</a>
     </div>
   </div>
 </div>
@@ -59,12 +59,12 @@ export default function Page() {
             </div>
           </div>
 
-          <a href="/prodi-manajemen" class="btn btn-glass" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
+          <a href="/prodi-manajemen" class="btn btn-neu" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
         </div>
         <div class="glass glass-card" id="magister" style="display: flex; flex-direction: column;">
           <h3 class="text-red">S2 Magister Manajemen</h3>
           <p>${lang === "en" ? "Postgraduate program to deepen advanced leadership strategies and corporate management for professionals." : "Program pascasarjana untuk mendalami strategi kepemimpinan dan manajemen korporasi tingkat lanjut bagi para profesional."}</p>
-          <a href="/prodi-magister" class="btn btn-glass" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
+          <a href="/prodi-magister" class="btn btn-neu" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
         </div>
       </div>
     </div>
@@ -95,7 +95,7 @@ export default function Page() {
           </div>
         </div>
 
-        <a href="/prodi-hukum" class="btn btn-glass" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
+        <a href="/prodi-hukum" class="btn btn-neu" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
       </div>
     </div>
   </div>
@@ -122,17 +122,17 @@ export default function Page() {
             </div>
           </div>
 
-          <a href="/prodi-komputer" class="btn btn-glass" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
+          <a href="/prodi-komputer" class="btn btn-neu" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
         </div>
         <div class="glass glass-card" id="sistem" style="display: flex; flex-direction: column;">
           <h3 class="text-red">${lang === "en" ? "Bachelor of Information Systems & Technology" : "S1 Sistem &amp; Teknologi Informasi"}</h3>
           <p>${lang === "en" ? "Integrating information technology with business processes to manage enterprise systems." : "Memadukan teknologi informasi dengan proses bisnis untuk mengelola sistem enterprise."}</p>
-          <a href="/prodi-sistem" class="btn btn-glass" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
+          <a href="/prodi-sistem" class="btn btn-neu" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
         </div>
         <div class="glass glass-card" id="aktuaria" style="display: flex; flex-direction: column;">
           <h3 class="text-red">S1 Ilmu Aktuaria</h3>
           <p>${lang === "en" ? "Studying statistics, mathematics, and insurance and financial risk management." : "Mempelajari statistika, matematika, dan manajemen risiko asuransi dan keuangan."}</p>
-          <a href="/prodi-aktuaria" class="btn btn-glass" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
+          <a href="/prodi-aktuaria" class="btn btn-neu" style="width: 100%; margin-top: auto;">${lang === "en" ? "Program Details" : "Detail Program Studi"}</a>
         </div>
       </div>
     </div>

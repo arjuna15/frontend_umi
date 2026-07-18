@@ -331,8 +331,6 @@ export default function PMBRegistrationPage() {
 
   const cardStyle = {
     background: 'var(--color-surface)',
-    backdropFilter: 'blur(20px)',
-    WebkitBackdropFilter: 'blur(20px)',
     borderRadius: '24px',
     padding: '40px',
     border: '1px solid var(--color-border)',

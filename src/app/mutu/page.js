@@ -31,7 +31,7 @@ export default function Page() {
 <div style="position: sticky; top: 100px; z-index: 900; margin-top: 24px; margin-bottom: 24px;">
   <div class="container">
     <div class="glass" style="padding: 12px; border-radius: var(--radius-full); display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
-      <a href="#tentang-lpm" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">Tentang LPM</a>
+      <a href="#tentang-lpm" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">Tentang LPM</a>
     </div>
   </div>
 </div>

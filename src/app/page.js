@@ -51,31 +51,31 @@ export default function Home() {
           <h1 style={{ color: 'white', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '8px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)', letterSpacing: '1px' }}>
             {lang === "en" ? "New Student Admission 2026/27" : "Penerimaan Mahasiswa Baru TA. 2026/27"}
           </h1>
-          <div style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(255, 255, 255, 0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.85rem, 2vw, 1rem)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '1px', borderRadius: '30px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', background: 'var(--glass-bg)', border: 'none', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.85rem, 2vw, 1rem)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '1px', borderRadius: '30px' }}>
             <i className="ph ph-fill ph-student" style={{ marginRight: '8px', fontSize: '1.2rem' }}></i>
             {lang === "en" ? "Master of Management Program" : "Program Studi Magister Manajemen"}
           </div>
           
           {/* Keunggulan Glass Card */}
-          <div style={{ background: 'rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '16px', padding: '20px', marginBottom: '16px', boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}>
+          <div style={{ background: 'var(--glass-bg)', border: 'none', borderRadius: '16px', padding: '20px', marginBottom: '16px', boxShadow: 'var(--glass-shadow)' }}>
             <h3 style={{ color: '#FFFFFF', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: '8px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>
               {lang === "en" ? "Why study Master's at UMIBA?" : "Keunggulan Kuliah S2 di UMIBA"}
             </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph ph-fill ph-certificate" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-fill ph-certificate" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Dual Certificate</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Ijazah & BNSP</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph ph-fill ph-laptop" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-fill ph-laptop" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Blended Learning</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Online + Offline</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph ph-fill ph-users-three" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-fill ph-users-three" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Career Network</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Jaringan Luas</span></div>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: '0 4px 10px rgba(0,0,0,0.2)' }}><i className="ph ph-fill ph-wallet" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
+                <div style={{ background: '#FFFFFF', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-fill ph-wallet" style={{ color: '#B91C1C', fontSize: '1.2rem' }}></i></div>
                 <div style={{ color: 'white' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Flexible Tuition</strong><span style={{ fontSize: '0.75rem', opacity: 0.9 }}>Bisa Diangsur</span></div>
               </div>
             </div>
@@ -84,14 +84,14 @@ export default function Home() {
               <span style={{ color: 'white', fontSize: '0.85rem', fontWeight: 'bold', marginRight: '8px', opacity: 0.9 }}>{lang === "en" ? "Concentrations:" : "Konsentrasi:"}</span>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
                 {['Manajemen SDM', 'Manajemen Keuangan', 'Manajemen Pemasaran', 'Manajemen Rumah Sakit', 'Manajemen K3'].map(k => (
-                  <span key={k} style={{ color: 'white', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '3px 10px', borderRadius: '20px', fontSize: '0.75rem' }}>{k}</span>
+                  <span key={k} style={{ color: 'white', background: 'var(--glass-bg)', border: 'none', padding: '3px 10px', borderRadius: '20px', fontSize: '0.75rem' }}>{k}</span>
                 ))}
               </div>
             </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <a href="/pmb" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 20px rgba(255, 255, 255, 0.3)', transition: 'all 0.3s ease' }}>
+            <a href="/pmb" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', boxShadow: 'var(--glass-shadow)', transition: 'all 0.3s ease' }}>
               {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
             </a>
             <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
@@ -113,7 +113,7 @@ export default function Home() {
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 1 ? 1 : 0, transform: currentSlide === 1 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
           <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', flexWrap: 'wrap' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', background: 'var(--glass-bg)', border: 'none', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px' }}>
               TAHUN AKADEMIK 2026/2027
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', background: 'linear-gradient(135deg, #B91C1C, #E11D48)', color: '#FFFFFF', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px', animation: 'pulse 2s infinite', boxShadow: '0 4px 15px rgba(185, 28, 28, 0.4)' }}>
@@ -129,19 +129,19 @@ export default function Home() {
           </h2>
           
           {/* List Glass Card */}
-          <div style={{ background: 'rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '16px', padding: '20px', marginBottom: '24px', boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}>
+          <div style={{ background: 'var(--glass-bg)', border: 'none', borderRadius: '16px', padding: '20px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
             <h3 style={{ color: 'white', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
               {lang === "en" ? "QUALITY & FREE EDUCATION AT UMIBA" : "KULIAH BERKUALITAS & GRATIS DI UMIBA"}
             </h3>
             <ul style={{ color: 'white', listStyle: 'none', padding: 0, margin: 0, fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', lineHeight: '1.5', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Ter-Akreditasi <b style={{ opacity: 1 }}>BAIK SEKALI</b></span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Kuliah <b style={{ opacity: 1 }}>Tanpa Biaya</b>, Hidup Lebih Tenang</span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Lulusan SMA/SMK/MA <b style={{ opacity: 1 }}>2024, 2025, 2026</b></span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Pendaftaran <b style={{ opacity: 1 }}>Mudah & Transparan</b></span></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Ter-Akreditasi <b style={{ opacity: 1 }}>BAIK SEKALI</b></span></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Kuliah <b style={{ opacity: 1 }}>Tanpa Biaya</b>, Hidup Lebih Tenang</span></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Lulusan SMA/SMK/MA <b style={{ opacity: 1 }}>2024, 2025, 2026</b></span></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Pendaftaran <b style={{ opacity: 1 }}>Mudah & Transparan</b></span></li>
             </ul>
           </div>
 
-          <a href="https://wa.me/62811870114" target="_blank" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '12px', boxShadow: '0 6px 20px rgba(255,255,255,0.3)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
+          <a href="https://wa.me/62811870114" target="_blank" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '12px', boxShadow: 'var(--glass-shadow)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
             <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '2.2rem' }}></i>
             <div style={{ textAlign: 'left' }}>
               <div style={{ fontSize: '0.75rem', fontWeight: '800', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Informasi Pendaftaran</div>
@@ -156,7 +156,7 @@ export default function Home() {
         <div className="hero-overlay-red" style={{ position: 'absolute', inset: 0, zIndex: 1 }}></div>
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 2 ? 1 : 0, transform: currentSlide === 2 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
-          <div style={{ display: 'inline-block', background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.3)', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px', borderRadius: '30px', letterSpacing: '1px' }}>
+          <div style={{ display: 'inline-block', background: 'var(--glass-bg)', border: 'none', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px', borderRadius: '30px', letterSpacing: '1px' }}>
             TAHUN AKADEMIK 2026/2027
           </div>
 
@@ -170,7 +170,7 @@ export default function Home() {
               background: '#FFFFFF', 
               padding: '12px 28px',
               borderRadius: '12px',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
+              boxShadow: 'var(--glass-shadow)',
               margin: 0,
               alignItems: 'center'
             }}>
@@ -195,14 +195,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div style={{ background: 'rgba(255, 255, 255, 0.08)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '16px', padding: '20px', marginBottom: '24px', boxShadow: '0 8px 32px rgba(0,0,0,0.3)' }}>
+          <div style={{ background: 'var(--glass-bg)', border: 'none', borderRadius: '16px', padding: '20px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
             <h3 style={{ color: '#FFFFFF', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
               {lang === "en" ? "Available Study Programs:" : "Program Studi Pilihan:"}
             </h3>
             <div className="prodi-grid">
               {['(S2) Magister Manajemen', '(S1) Manajemen', '(S1) Ilmu Aktuaria', '(S1) Ilmu Komputer', '(S1) Hukum', '(S1) Sistem & Teknologi Informasi'].map((prodi, idx) => (
                 <div key={idx} className="prodi-card">
-                  <div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: '0 2px 6px rgba(0,0,0,0.2)', flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div>
+                  <div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: 'var(--glass-shadow)', flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div>
                   <span style={{ color: 'white', fontWeight: 700 }}>{prodi}</span>
                 </div>
               ))}
@@ -210,7 +210,7 @@ export default function Home() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <a href="/pmb" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', boxShadow: '0 6px 20px rgba(255, 255, 255, 0.3)', transition: 'all 0.3s ease' }}>
+            <a href="/pmb" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', boxShadow: 'var(--glass-shadow)', transition: 'all 0.3s ease' }}>
               {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
             </a>
             <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
@@ -245,7 +245,7 @@ export default function Home() {
 {/*  ░░░ QUICK STATS STRIP ░░░  */}
 <section style={{ marginTop: '40px', position: 'relative', zIndex: '10' }}>
   <div className="container">
-    <div className="glass glass-card grid grid-4 fade-up" style={{ textAlign: 'center', padding: 'var(--space-5)' }}>
+    <div className="neu-card grid grid-4 fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ textAlign: 'center', padding: 'var(--space-5)' }}>
       <div>
         <i className="ph ph-duotone ph-users-three" style={{ fontSize: '3rem', color: 'var(--umiba-red)', marginBottom: '12px' }}></i>
         <h2 style={{ margin: '0' }} className="text-gradient">5000+</h2>
@@ -273,9 +273,9 @@ export default function Home() {
 {/*  ░░░ SAMBUTAN REKTOR ░░░  */}
 <section id="sambutan" style={{ padding: 'var(--space-8) 0' }}>
   <div className="container grid grid-2" style={{ alignItems: 'center' }}>
-    <div className="glass glass-card fade-up" style={{ padding: '0', overflow: 'hidden', position: 'relative', maxWidth: '400px', margin: '0 auto' }}>
+    <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ padding: '0', overflow: 'hidden', position: 'relative', maxWidth: '400px', margin: '0 auto' }}>
       <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" width={400} height={600} style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block' }} onError={(e)=>{e.target.src='https://picsum.photos/400/600?random=A'}}/>
-      <div className="glass" style={{ position: 'absolute', bottom: 'var(--space-4)', left: 'var(--space-4)', right: 'var(--space-4)', padding: 'var(--space-3)' }}>
+      <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ position: 'absolute', bottom: 'var(--space-4)', left: 'var(--space-4)', right: 'var(--space-4)', padding: 'var(--space-3)' }}>
         <h3 style={{ margin: '0', fontSize: '1.2rem' }}>{t("home.sambutan_rektor")}</h3>
         <p style={{ margin: '0', fontSize: '0.9rem' }}>{t("home.quote_rektor")}</p>
       </div>
@@ -286,11 +286,11 @@ export default function Home() {
       <p>{t("home.sambutan_p1")}</p>
       <p>{t("home.sambutan_p2")}</p>
       <div className="grid grid-2" style={{ marginTop: 'var(--space-4)' }}>
-        <div className="glass glass-card" style={{ padding: 'var(--space-3)' }}>
+        <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ padding: 'var(--space-3)' }}>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '4px' }}>{t("home.kurikulum_modern")}</h3>
           <p style={{ fontSize: '0.9rem', margin: '0' }}>{t("home.kurikulum_desc")}</p>
         </div>
-        <div className="glass glass-card" style={{ padding: 'var(--space-3)' }}>
+        <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ padding: 'var(--space-3)' }}>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '4px' }}>{t("home.kemitraan_industri")}</h3>
           <p style={{ fontSize: '0.9rem', margin: '0' }}>{t("home.kemitraan_desc")}</p>
         </div>
@@ -310,7 +310,7 @@ export default function Home() {
     
     <div className="grid grid-3">
       {/*  Card 1  */}
-      <div className="glass glass-card fade-up">
+      <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }}>
         <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
           <i className="ph ph-duotone ph-briefcase" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
@@ -322,11 +322,11 @@ export default function Home() {
           <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Manajemen</li>
           <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S2 Magister Manajemen</li>
         </ul>
-        <a href="/akademik?tab=manajemen" className="btn btn-glass" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
+        <a href="/akademik?tab=manajemen" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
       </div>
       
       {/*  Card 2  */}
-      <div className="glass glass-card fade-up" style={{ transitionDelay: '0.1s' }}>
+      <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.1s' }}>
         <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
           <i className="ph ph-duotone ph-scales" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
@@ -337,11 +337,11 @@ export default function Home() {
         <ul style={{ listStyle: 'none', padding: '0', marginBottom: 'var(--space-4)', color: 'var(--color-muted)' }}>
           <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Hukum</li>
         </ul>
-        <a href="/akademik?tab=hukum" className="btn btn-glass" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
+        <a href="/akademik?tab=hukum" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
       </div>
       
       {/*  Card 3  */}
-      <div className="glass glass-card fade-up" style={{ transitionDelay: '0.2s' }}>
+      <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.2s' }}>
         <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
           <i className="ph ph-duotone ph-laptop" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
@@ -354,7 +354,7 @@ export default function Home() {
           <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Sistem &amp; TI</li>
           <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Aktuaria</li>
         </ul>
-        <a href="/akademik?tab=it" className="btn btn-glass" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
+        <a href="/akademik?tab=it" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
       </div>
     </div>
   </div>
@@ -396,12 +396,12 @@ export default function Home() {
         <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.kabar_kampus")}</span>
         <h2 style={{ marginBottom: '0' }}>{t("home.berita_pengumuman")}</h2>
       </div>
-      <a href="/berita" className="btn btn-glass">{t("home.lihat_semua")}</a>
+      <a href="/berita" className="btn btn-neu">{t("home.lihat_semua")}</a>
     </div>
     <div className="grid grid-3 scroll-mobile">
       {newsData && newsData.length > 0 ? (
         newsData.map((newsItem, index) => (
-          <div key={newsItem.id} className="glass glass-card fade-up" style={{ transitionDelay: `${index * 0.1}s`, padding: 0, overflow: 'hidden' }}>
+          <div key={newsItem.id} className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: `${index * 0.1}s`, padding: 0, overflow: 'hidden' }}>
             <div style={{ background: 'var(--color-muted)', height: '200px', overflow: 'hidden' }}>
                <Image src={newsItem.image_url} width={400} height={300} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={newsItem.title}/>
             </div>
@@ -429,7 +429,7 @@ export default function Home() {
     </div>
     <div className="grid grid-2" style={{ gap: 'var(--space-6)' }}>
       {/*  Kampus Pasar Minggu  */}
-      <div className="glass glass-card" style={{ padding: 'var(--space-4)' }}>
+      <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ padding: 'var(--space-4)' }}>
         <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)' }}><i className="ph ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_pasar_minggu")}</h3>
         <p style={{ color: 'var(--slate-600)', marginBottom: 'var(--space-4)', lineHeight: '1.5', fontSize: '0.95rem' }}>
           {t("home.alamat_pm")}
@@ -440,7 +440,7 @@ export default function Home() {
       </div>
       
       {/*  Kampus Bintaro  */}
-      <div className="glass glass-card" style={{ padding: 'var(--space-4)' }}>
+      <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ padding: 'var(--space-4)' }}>
         <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)' }}><i className="ph ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_bintaro")}</h3>
         <p style={{ color: 'var(--slate-600)', marginBottom: 'var(--space-4)', lineHeight: '1.5', fontSize: '0.95rem' }}>
           {t("home.alamat_bintaro")}
@@ -456,7 +456,7 @@ export default function Home() {
 {/*  ░░░ PMB CTA ░░░  */}
 <section style={{ padding: 'var(--space-8) 0' }}>
   <div className="container">
-    <div className="glass glass-card grid grid-2 fade-up" style={{ alignItems: 'center', background: 'var(--glass-bg)' }}>
+    <div className="neu-card grid grid-2 fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ alignItems: 'center', background: 'var(--glass-bg)' }}>
       <div>
         <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.pendaftaran_dibuka")}</span>
         <h2 style={{ marginTop: '8px' }}>{t("home.penerimaan_maba")}</h2>
@@ -464,7 +464,7 @@ export default function Home() {
       </div>
       <div className="flex-center" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
         <a href="/pmb" className="btn btn-primary">{t("home.daftar_online")}</a>
-        <a href="https://wa.me/62811870114" target="_blank" className="btn btn-glass">{t("home.whatsapp_kami")}</a>
+        <a href="https://wa.me/62811870114" target="_blank" className="btn btn-neu">{t("home.whatsapp_kami")}</a>
       </div>
     </div>
   </div>
@@ -478,7 +478,7 @@ export default function Home() {
       <h2>{t("home.liputan_media")}</h2>
     </div>
     <div className="grid grid-4 scroll-mobile">
-      <div className="glass glass-card media-card fade-up">
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/12/umiba-4pilar-1536x938-1.jpeg" alt="Berita 1" width={1536} height={938} style={{ width: '100%', height: 'auto' }} />
         </div>
@@ -487,7 +487,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>UMIBA Gelar Seminar Kebangsaan, Teguhkan Budaya Kampus Berbasis 4 Pilar Kebangsaan</h3>
         </div>
       </div>
-      <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.1s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.1s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/10/serba-serbi_155621_big.webp" alt="Berita 2" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
@@ -496,7 +496,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>IKADIM dan Universitas Mitra Bangsa Teken MoU untuk Tingkatkan Kualitas Tri Dharma Perguruan Tinggi</h3>
         </div>
       </div>
-      <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.2s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.2s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/10/medium_tscom_news_photo_1759914601.jpg" alt="Berita 3" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
@@ -505,7 +505,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>IKADIM dan Universitas Mitra Bangsa Teken MoU untuk Tingkatkan Kualitas Tri Dharma Perguruan Tinggi</h3>
         </div>
       </div>
-      <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.3s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.3s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 4" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
@@ -515,7 +515,7 @@ export default function Home() {
         </div>
       </div>
       
-      <div className="glass glass-card media-card fade-up">
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 5" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
         </div>
@@ -524,7 +524,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Universitas Mitra Bangsa Gelar Gebyar Kemerdekaan HUT-RI</h3>
         </div>
       </div>
-      <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.1s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.1s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2025/07/pilarparlemen.jpg" style={{ objectFit: 'contain', background: '#fff', width: '100%', height: 'auto' }} width={800} height={600} alt="Berita 6"/>
         </div>
@@ -533,7 +533,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>BEM UMIBA Desak Pemkot Jakarta Selatan Atasi Penumpukan Sampah di Sekitar Kampus</h3>
         </div>
       </div>
-      <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.2s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.2s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 7" width={300} height={158} style={{ width: '100%', height: 'auto' }} />
         </div>
@@ -542,7 +542,7 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Kampus UMIBA Terima Kunjungan Kehormatan dari Anggota DPR RI dan Ketua Umum IKADIM, Dr. Jazuli Juwaini, MA</h3>
         </div>
       </div>
-      <div className="glass glass-card media-card fade-up" style={{ transitionDelay: '0.3s' }}>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }} style={{ transitionDelay: '0.3s' }}>
         <div className="media-img-wrap">
           <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 8" width={300} height={158} style={{ width: '100%', height: 'auto' }} />
         </div>

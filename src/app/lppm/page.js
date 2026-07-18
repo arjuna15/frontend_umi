@@ -31,10 +31,10 @@ export default function Page() {
 <div style="position: sticky; top: 100px; z-index: 900; margin-top: 24px; margin-bottom: 24px;">
   <div class="container">
     <div class="glass" style="padding: 12px; border-radius: var(--radius-full); display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
-      <a href="#tentang" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "About" : "Tentang"}</a>
-      <a href="#penelitian" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Research" : "Penelitian"}</a>
-      <a href="#pengabdian" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Community Service" : "Pengabdian"}</a>
-      <a href="#berita" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "News & Info" : "Berita & Info"}</a>
+      <a href="#tentang" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "About" : "Tentang"}</a>
+      <a href="#penelitian" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Research" : "Penelitian"}</a>
+      <a href="#pengabdian" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Community Service" : "Pengabdian"}</a>
+      <a href="#berita" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "News & Info" : "Berita & Info"}</a>
     </div>
   </div>
 </div>
@@ -88,7 +88,7 @@ export default function Page() {
         </div>
         <h3>${lang === "en" ? "Internal Grants" : "Hibah Internal"}</h3>
         <p style="font-size: 0.95rem;">${lang === "en" ? "Annual funding for permanent lecturers of UMIBA to increase the productivity of SINTA publications." : "Pendanaan tahunan untuk dosen tetap UMIBA guna meningkatkan produktivitas publikasi SINTA."}</p>
-        <a href="#" class="btn btn-glass" style="margin-top: auto; font-size: 0.85rem;">${lang === "en" ? "Download Guidelines" : "Download Panduan"}</a>
+        <a href="#" class="btn btn-neu" style="margin-top: auto; font-size: 0.85rem;">${lang === "en" ? "Download Guidelines" : "Download Panduan"}</a>
       </div>
       <div class="glass glass-card fade-up" style="transition-delay: 0.1s;">
         <div style="background: rgba(185, 28, 28, 0.1); width: 60px; height: 60px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
@@ -96,7 +96,7 @@ export default function Page() {
         </div>
         <h3>${lang === "en" ? "Competitive Grants" : "Hibah Kompetitif"}</h3>
         <p style="font-size: 0.95rem;">${lang === "en" ? "Support for submitting Kemendikbudristek grant proposals and international external funding." : "Dukungan pengajuan proposal hibah Kemendikbudristek dan pendanaan eksternal internasional."}</p>
-        <a href="#" class="btn btn-glass" style="margin-top: auto; font-size: 0.85rem;">${lang === "en" ? "View Schemes" : "Lihat Skema"}</a>
+        <a href="#" class="btn btn-neu" style="margin-top: auto; font-size: 0.85rem;">${lang === "en" ? "View Schemes" : "Lihat Skema"}</a>
       </div>
       <div class="glass glass-card fade-up" style="transition-delay: 0.2s;">
         <div style="background: rgba(185, 28, 28, 0.1); width: 60px; height: 60px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
@@ -104,7 +104,7 @@ export default function Page() {
         </div>
         <h3>${lang === "en" ? "Student Research" : "Riset Mahasiswa"}</h3>
         <p style="font-size: 0.95rem;">${lang === "en" ? "Lecturer-student research collaboration program for final projects and PKM competitions." : "Program kolaborasi riset dosen-mahasiswa untuk tugas akhir dan kompetisi PKM."}</p>
-        <a href="#" class="btn btn-glass" style="margin-top: auto; font-size: 0.85rem;">${lang === "en" ? "Register Program" : "Daftar Program"}</a>
+        <a href="#" class="btn btn-neu" style="margin-top: auto; font-size: 0.85rem;">${lang === "en" ? "Register Program" : "Daftar Program"}</a>
       </div>
     </div>
   </div>
@@ -205,7 +205,7 @@ export default function Page() {
       <p style="max-width: 600px; margin: 0 auto 32px;">${lang === "en" ? "Access all LPPM services from IPR registration, proposal submission, to journal publication in one portal." : "Akses seluruh layanan LPPM mulai dari pendaftaran HKI, pengajuan proposal, hingga publikasi jurnal dalam satu pintu."}</p>
       <div class="flex-center" style="gap: 16px; flex-wrap: wrap;">
         <a href="https://ejurnal.umiba.ac.id/" target="_blank" class="btn btn-primary" style="padding: 16px 32px;">${lang === "en" ? "E-Journal Portal" : "Portal E-Jurnal"}</a>
-        <a href="https://lppm.umiba.ac.id/" target="_blank" class="btn btn-glass" style="padding: 16px 32px;">${lang === "en" ? "Researcher Guidelines" : "Panduan Peneliti"}</a>
+        <a href="https://lppm.umiba.ac.id/" target="_blank" class="btn btn-neu" style="padding: 16px 32px;">${lang === "en" ? "Researcher Guidelines" : "Panduan Peneliti"}</a>
       </div>
     </div>
   </div>

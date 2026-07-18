@@ -31,11 +31,11 @@ export default function Page() {
 <div style="position: sticky; top: 100px; z-index: 900; margin-top: 24px; margin-bottom: 24px;">
   <div class="container">
     <div class="glass" style="padding: 12px; border-radius: var(--radius-full); display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
-      <a href="#sejarah" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "History" : "Sejarah"}</a>
-      <a href="#visi-misi" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Vision & Mission" : "Visi & Misi"}</a>
-      <a href="#tujuan" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Goals" : "Tujuan"}</a>
-      <a href="#sasaran" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Strategy" : "Sasaran & Strategi"}</a>
-      <a href="#struktur" class="btn btn-glass" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Org Structure" : "Struktur Organisasi"}</a>
+      <a href="#sejarah" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "History" : "Sejarah"}</a>
+      <a href="#visi-misi" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Vision & Mission" : "Visi & Misi"}</a>
+      <a href="#tujuan" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Goals" : "Tujuan"}</a>
+      <a href="#sasaran" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Strategy" : "Sasaran & Strategi"}</a>
+      <a href="#struktur" class="btn btn-neu" style="padding: 10px 20px; font-size: 0.9rem;">${lang === "en" ? "Org Structure" : "Struktur Organisasi"}</a>
     </div>
   </div>
 </div>
