@@ -84,7 +84,6 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
-          <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
             <div style={{ position: 'relative', width: '380px', height: '380px', marginRight: '40px', marginTop: '-40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               
               {/* The Masked Container (clips bottom body inside circle shape) */}
@@ -264,8 +263,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
     {/*  Slider Controls  */}
     <button className="hero-arrow prev" aria-label="Previous Slide" onClick={prevSlide}>
@@ -280,6 +277,7 @@ export default function Home() {
       ))}
     </div>
   </div>
+</div>
 </section>
 
 {/*  ░░░ QUICK STATS STRIP ░░░  */}
