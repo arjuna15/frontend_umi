@@ -92,7 +92,7 @@ export default function Home() {
               </div>
 
               {/* The Pop-Out Overlay (uncut head popping out above circle, clipped below middle) */}
-              <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 100px 0px)' }}>
+              <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 200px 0px)' }}>
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                   <Image src="/nobcg1.png" alt="Student Model 1 Popout" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
                 </div>
@@ -155,7 +155,7 @@ export default function Home() {
               </div>
 
               {/* The Pop-Out Overlay (uncut head popping out above circle, clipped below middle) */}
-              <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 100px 0px)' }}>
+              <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 200px 0px)' }}>
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                   <Image src="/nobcg2.png" alt="Student Model 2 Popout" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
                 </div>
@@ -249,7 +249,7 @@ export default function Home() {
               </div>
 
               {/* The Pop-Out Overlay (uncut head popping out above circle, clipped below middle) */}
-              <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 100px 0px)' }}>
+              <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 200px 0px)' }}>
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                   <Image src="/nobcg3.png" alt="Student Model 3 Popout" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
                 </div>
