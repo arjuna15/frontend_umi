@@ -361,7 +361,7 @@ export default function Home() {
 </section>
 
 {/*  ░░░ AKREDITASI ░░░  */}
-<section id="akreditasi" style={{ padding: 'var(--space-8) 0', background: 'var(--color-surface)' }}>
+<section id="akreditasi" style={{ padding: 'var(--space-8) 0', background: "var(--color-bg)" }}>
   <div className="container">
     <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }} className="fade-up">
       <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.kepercayaan_kualitas")}</span>
@@ -412,7 +412,7 @@ export default function Home() {
           </div>
         ))
       ) : (
-        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px', background: 'var(--color-surface)', borderRadius: '16px' }}>
+        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px', background: "var(--color-bg)", borderRadius: '16px' }}>
           <p style={{ color: '#64748b', fontSize: '1.1rem', margin: 0 }}>{t("home.belum_ada_berita")}</p>
         </div>
       )}
@@ -421,7 +421,7 @@ export default function Home() {
 </section>
 
 {/*  ░░░ LOKASI KAMPUS ░░░  */}
-<section id="lokasi" style={{ padding: 'var(--space-8) 0', backgroundColor: 'var(--slate-50)' }}>
+<section id="lokasi" style={{ padding: 'var(--space-8) 0', background: "var(--color-bg)" }}>
   <div className="container fade-up">
     <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}>
       <h2 style={{ fontSize: '2.5rem', marginBottom: '8px' }}>{t("home.lokasi_kampus")}</h2>
@@ -471,7 +471,7 @@ export default function Home() {
 </section>
 
 {/*  ░░░ LIPUTAN MEDIA ░░░  */}
-<section style={{ padding: 'var(--space-8) 0', background: 'var(--color-background)' }}>
+<section style={{ padding: 'var(--space-8) 0', background: "var(--color-bg)" }}>
   <div className="container">
     <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }} className="fade-up">
       <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.kabar_terkini")}</span>
