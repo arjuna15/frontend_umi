@@ -139,7 +139,7 @@ export default function KepegawaianPage() {
         {statCards.map((s, i) => (
           <div key={i} className="siakad-card" style={{ padding: '20px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-              <div style={{ width: '40px', height: '40px', background: s.bg, color: s.color, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}><i className={s.icon}></i></div>
+              <div style={{ width: '40px', height: '40px', borderRadius: '50%', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', background: 'var(--liquid-bg)', color: s.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}><i className={s.icon}></i></div>
               <span style={{ color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '600' }}>{s.label}</span>
             </div>
             <p style={{ margin: 0, fontSize: '2rem', fontWeight: '800', color: 'var(--color-text)' }}>{s.value}</p>
