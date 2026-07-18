@@ -44,178 +44,189 @@ export default function Home() {
     <div id="heroSlides" style={{ position: 'absolute', inset: '0', zIndex: '1' }}>
       
       {/* SLIDE 1: Magister Manajemen */}
-      <div className={`hero-slide hero-content-padding ${currentSlide === 0 ? 'active' : ''}`} style={{ backgroundImage: `url('/1.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 0 ? 1 : 0, pointerEvents: currentSlide === 0 ? 'auto' : 'none', zIndex: currentSlide === 0 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center' }}>
-        <div className="hero-overlay-red" style={{ position: 'absolute', inset: 0, zIndex: 1 }}></div>
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 0 ? 1 : 0, transform: currentSlide === 0 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
-          
-          <h1 style={{ color: 'white', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '8px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)', letterSpacing: '1px' }}>
-            {lang === "en" ? "New Student Admission 2026/27" : "Penerimaan Mahasiswa Baru TA. 2026/27"}
-          </h1>
-          <div className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--color-text)', padding: '6px 20px', fontSize: 'clamp(0.85rem, 2vw, 1rem)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '20px', letterSpacing: '1px', borderRadius: '30px' }}>
-            <i className="ph ph-fill ph-student" style={{ marginRight: '8px', fontSize: '1.2rem', color: 'var(--apple-red)' }}></i>
-            {lang === "en" ? "Master of Management Program" : "Program Studi Magister Manajemen"}
-          </div>
-          
-          {/* Keunggulan Glass Card */}
-          <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
-            <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>
-              {lang === "en" ? "Why study Master's at UMIBA?" : "Keunggulan Kuliah S2 di UMIBA"}
-            </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-certificate" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
-                <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Dual Certificate</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Ijazah & BNSP</span></div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-laptop" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
-                <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Blended Learning</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Online + Offline</span></div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-users-three" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
-                <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Career Network</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Jaringan Luas</span></div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-wallet" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
-                <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Flexible Tuition</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Bisa Diangsur</span></div>
-              </div>
+      <div className={`hero-slide hero-content-padding ${currentSlide === 0 ? 'active' : ''}`} style={{ position: 'absolute', inset: 0, opacity: currentSlide === 0 ? 1 : 0, pointerEvents: currentSlide === 0 ? 'auto' : 'none', zIndex: currentSlide === 0 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', background: 'var(--color-bg)' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '40px', alignItems: 'center', width: '100%', position: 'relative', zIndex: 2 }}>
+          <div style={{ maxWidth: '750px', width: '100%', opacity: currentSlide === 0 ? 1 : 0, transform: currentSlide === 0 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
+            <h1 style={{ color: 'var(--color-text)', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '8px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px' }}>
+              {lang === "en" ? "New Student Admission 2026/27" : "Penerimaan Mahasiswa Baru TA. 2026/27"}
+            </h1>
+            <div className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--color-text)', padding: '6px 20px', fontSize: 'clamp(0.85rem, 2vw, 1rem)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '20px', letterSpacing: '1px', borderRadius: '30px' }}>
+              <i className="ph ph-fill ph-student" style={{ marginRight: '8px', fontSize: '1.2rem', color: 'var(--apple-red)' }}></i>
+              {lang === "en" ? "Master of Management Program" : "Program Studi Magister Manajemen"}
             </div>
             
-            <div style={{ marginTop: '16px', paddingTop: '12px', borderTop: '1px solid var(--color-border)' }}>
-              <span style={{ color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: 'bold', marginRight: '8px' }}>{lang === "en" ? "Concentrations:" : "Konsentrasi:"}</span>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
-                {['Manajemen SDM', 'Manajemen Keuangan', 'Manajemen Pemasaran', 'Manajemen Rumah Sakit', 'Manajemen K3'].map(k => (
-                  <span key={k} style={{ color: 'var(--color-text)', background: 'var(--liquid-bg)', border: 'var(--glass-border)', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700' }}>{k}</span>
-                ))}
+            {/* Keunggulan Glass Card */}
+            <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
+              <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                {lang === "en" ? "Why study Master's at UMIBA?" : "Keunggulan Kuliah S2 di UMIBA"}
+              </h3>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-certificate" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
+                  <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Dual Certificate</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Ijazah & BNSP</span></div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-laptop" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
+                  <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Blended Learning</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Online + Offline</span></div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-users-three" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
+                  <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Career Network</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Jaringan Luas</span></div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ width: "40px", height: "40px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-fill ph-wallet" style={{ color: 'var(--apple-red)', fontSize: '1.25rem' }}></i></div>
+                  <div style={{ color: 'var(--color-text)' }}><strong style={{ display: 'block', fontSize: '0.9rem', fontWeight: '700' }}>Flexible Tuition</strong><span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Bisa Diangsur</span></div>
+                </div>
+              </div>
+              
+              <div style={{ marginTop: '16px', paddingTop: '12px', borderTop: '1px solid var(--color-border)' }}>
+                <span style={{ color: 'var(--color-text)', fontSize: '0.85rem', fontWeight: 'bold', marginRight: '8px' }}>{lang === "en" ? "Concentrations:" : "Konsentrasi:"}</span>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px' }}>
+                  {['Manajemen SDM', 'Manajemen Keuangan', 'Manajemen Pemasaran', 'Manajemen Rumah Sakit', 'Manajemen K3'].map(k => (
+                    <span key={k} style={{ color: 'var(--color-text)', background: 'var(--liquid-bg)', border: 'var(--glass-border)', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700' }}>{k}</span>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <a href="/pmb" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', boxShadow: 'var(--glass-shadow)', transition: 'all 0.3s ease' }}>
-              {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
-            </a>
-            <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
-              <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex' }}>
-                <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
-              </div>
-              <div>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
-                <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', letterSpacing: '1px' }}>0811 870 114</div>
-              </div>
-            </a>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+              <a href="/pmb" className="btn btn-primary" style={{ padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', transition: 'all 0.3s ease' }}>
+                {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
+              </a>
+              <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-text)', textDecoration: 'none' }}>
+                <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'var(--glass-shadow)' }}>
+                  <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
+                </div>
+                <div>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
+                  <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', letterSpacing: '1px' }}>0811 870 114</div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+            <Image src="/nobg1.png" alt="Student Model 1" width={450} height={550} style={{ objectFit: 'contain', width: '100%', height: 'auto', maxHeight: '550px' }} />
           </div>
         </div>
       </div>
 
       {/* SLIDE 2: KIP-K */}
-      <div className={`hero-slide hero-content-padding ${currentSlide === 1 ? 'active' : ''}`} style={{ backgroundImage: `url('/2.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 1 ? 1 : 0, pointerEvents: currentSlide === 1 ? 'auto' : 'none', zIndex: currentSlide === 1 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center' }}>
-        <div className="hero-overlay-red" style={{ position: 'absolute', inset: 0, zIndex: 1 }}></div>
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 1 ? 1 : 0, transform: currentSlide === 1 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>          <div style={{ display: 'flex', gap: '10px', marginBottom: '16px', flexWrap: 'wrap' }}>
-            <span className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--color-text)', padding: '6px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '800', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px' }}>
-              TAHUN AKADEMIK 2026/2027
-            </span>
-            <span className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', border: '1px solid rgba(196, 30, 58, 0.25)', color: 'var(--apple-red)', padding: '6px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '800', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px', animation: 'pulse 2s infinite', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light), 0 0 10px rgba(196, 30, 58, 0.15)' }}>
-              <i className="ph ph-fill ph-warning-circle" style={{ marginRight: '6px', fontSize: '1.1rem' }}></i> KUOTA TERBATAS!
-            </span>
-          </div>
-
-          <h1 style={{ color: 'white', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '4px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
-            {lang === "en" ? "NEW STUDENT ADMISSION" : "PENERIMAAN MAHASISWA BARU"}
-          </h1>
-          <h2 style={{ color: '#FFFFFF', fontSize: 'clamp(1.3rem, 3vw, 2.5rem)', lineHeight: '1.2', marginBottom: '16px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
-             {lang === "en" ? "KIP-K SCHOLARSHIP TRACK" : "JALUR BEASISWA KIP-K"}
-          </h2>
-          <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
-            <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-              {lang === "en" ? "QUALITY & FREE EDUCATION AT UMIBA" : "KULIAH BERKUALITAS & GRATIS DI UMIBA"}
-            </h3>
-            <ul style={{ color: 'var(--color-text)', listStyle: 'none', padding: 0, margin: 0, fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', lineHeight: '1.5', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Ter-Akreditasi <b style={{ fontWeight: '800' }}>BAIK SEKALI</b></span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Kuliah <b style={{ fontWeight: '800' }}>Tanpa Biaya</b>, Hidup Lebih Tenang</span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Lulusan SMA/SMK/MA <b style={{ fontWeight: '800' }}>2024, 2025, 2026</b></span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Pendaftaran <b style={{ fontWeight: '800' }}>Mudah & Transparan</b></span></li>
-            </ul>
-          </div>
-
-          <a href="https://wa.me/62811870114" target="_blank" className="btn btn-neu" style={{ padding: '12px 28px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '12px', textDecoration: 'none', transition: 'all 0.3s ease' }}>
-            <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '2.2rem' }}></i>
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Informasi Pendaftaran</div>
-              <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 900, color: 'var(--color-text)', letterSpacing: '1px', lineHeight: '1' }}>0811 870 114</div>
+      <div className={`hero-slide hero-content-padding ${currentSlide === 1 ? 'active' : ''}`} style={{ position: 'absolute', inset: 0, opacity: currentSlide === 1 ? 1 : 0, pointerEvents: currentSlide === 1 ? 'auto' : 'none', zIndex: currentSlide === 1 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', background: 'var(--color-bg)' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '40px', alignItems: 'center', width: '100%', position: 'relative', zIndex: 2 }}>
+          <div style={{ maxWidth: '750px', width: '100%', opacity: currentSlide === 1 ? 1 : 0, transform: currentSlide === 1 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '16px', flexWrap: 'wrap' }}>
+              <span className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--color-text)', padding: '6px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '800', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px' }}>
+                TAHUN AKADEMIK 2026/2027
+              </span>
+              <span className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', border: '1px solid rgba(196, 30, 58, 0.25)', color: 'var(--apple-red)', padding: '6px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '800', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px', animation: 'pulse 2s infinite', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light), 0 0 10px rgba(196, 30, 58, 0.15)' }}>
+                <i className="ph ph-fill ph-warning-circle" style={{ marginRight: '6px', fontSize: '1.1rem' }}></i> KUOTA TERBATAS!
+              </span>
             </div>
-          </a>
+
+            <h1 style={{ color: 'var(--color-text)', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '4px', fontWeight: 900, textTransform: 'uppercase' }}>
+              {lang === "en" ? "NEW STUDENT ADMISSION" : "PENERIMAAN MAHASISWA BARU"}
+            </h1>
+            <h2 style={{ color: 'var(--apple-red)', fontSize: 'clamp(1.3rem, 3vw, 2.5rem)', lineHeight: '1.2', marginBottom: '16px', fontWeight: 900, textTransform: 'uppercase' }}>
+               {lang === "en" ? "KIP-K SCHOLARSHIP TRACK" : "JALUR BEASISWA KIP-K"}
+            </h2>
+            <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
+              <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                {lang === "en" ? "QUALITY & FREE EDUCATION AT UMIBA" : "KULIAH BERKUALITAS & GRATIS DI UMIBA"}
+              </h3>
+              <ul style={{ color: 'var(--color-text)', listStyle: 'none', padding: 0, margin: 0, fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', lineHeight: '1.5', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Ter-Akreditasi <b style={{ fontWeight: '800' }}>BAIK SEKALI</b></span></li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Kuliah <b style={{ fontWeight: '800' }}>Tanpa Biaya</b>, Hidup Lebih Tenang</span></li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Lulusan SMA/SMK/MA <b style={{ fontWeight: '800' }}>2024, 2025, 2026</b></span></li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Pendaftaran <b style={{ fontWeight: '800' }}>Mudah & Transparan</b></span></li>
+              </ul>
+            </div>
+
+            <a href="https://wa.me/62811870114" target="_blank" className="btn btn-neu" style={{ padding: '12px 28px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '12px', textDecoration: 'none', transition: 'all 0.3s ease' }}>
+              <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '2.2rem' }}></i>
+              <div style={{ textAlign: 'left' }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Informasi Pendaftaran</div>
+                <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 900, color: 'var(--color-text)', letterSpacing: '1px', lineHeight: '1' }}>0811 870 114</div>
+              </div>
+            </a>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+            <Image src="/nobg2.png" alt="Student Model 2" width={450} height={550} style={{ objectFit: 'contain', width: '100%', height: 'auto', maxHeight: '550px' }} />
+          </div>
         </div>
       </div>
 
       {/* SLIDE 3: Penerimaan Umum S1 S2 */}
-      <div className={`hero-slide hero-content-padding ${currentSlide === 2 ? 'active' : ''}`} style={{ backgroundImage: `url('/3.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 2 ? 1 : 0, pointerEvents: currentSlide === 2 ? 'auto' : 'none', zIndex: currentSlide === 2 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center' }}>
-        <div className="hero-overlay-red" style={{ position: 'absolute', inset: 0, zIndex: 1 }}></div>
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 2 ? 1 : 0, transform: currentSlide === 2 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
-          
-          <span className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--color-text)', padding: '6px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '16px', borderRadius: '30px', letterSpacing: '1px' }}>
-            TAHUN AKADEMIK 2026/2027
-          </span>
+      <div className={`hero-slide hero-content-padding ${currentSlide === 2 ? 'active' : ''}`} style={{ position: 'absolute', inset: 0, opacity: currentSlide === 2 ? 1 : 0, pointerEvents: currentSlide === 2 ? 'auto' : 'none', zIndex: currentSlide === 2 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center', background: 'var(--color-bg)' }}>
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '40px', alignItems: 'center', width: '100%', position: 'relative', zIndex: 2 }}>
+          <div style={{ maxWidth: '750px', width: '100%', opacity: currentSlide === 2 ? 1 : 0, transform: currentSlide === 2 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
+            <span className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--color-text)', padding: '6px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '16px', borderRadius: '30px', letterSpacing: '1px' }}>
+              TAHUN AKADEMIK 2026/2027
+            </span>
 
-          <h1 style={{ color: 'white', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '4px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
-            PENERIMAAN MAHASISWA BARU
-          </h1>
-          <div style={{ marginBottom: '24px' }}>
-            <div className="neu-card" style={{ 
-              display: 'inline-flex', 
-              flexDirection: 'column',
-              padding: '12px 28px',
-              borderRadius: '16px',
-              margin: 0,
-              alignItems: 'center'
-            }}>
-              <h2 style={{ 
-                color: 'var(--apple-red)', 
-                fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)', 
-                lineHeight: '1.4', 
-                fontWeight: 900, 
-                textTransform: 'uppercase', 
+            <h1 style={{ color: 'var(--color-text)', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '4px', fontWeight: 900, textTransform: 'uppercase' }}>
+              PENERIMAAN MAHASISWA BARU
+            </h1>
+            <div style={{ marginBottom: '24px' }}>
+              <div className="neu-card" style={{ 
+                display: 'inline-flex', 
+                flexDirection: 'column',
+                padding: '12px 28px',
+                borderRadius: '16px',
                 margin: 0,
+                alignItems: 'center'
               }}>
-                UNIVERSITAS MITRA BANGSA
-              </h2>
-              <div style={{
-                height: '4px',
-                background: 'var(--apple-red)',
-                borderRadius: '2px',
-                marginTop: '4px',
-                width: '100%',
-                animation: 'expandWidth 2s ease-in-out infinite alternate'
-              }}></div>
+                <h2 style={{ 
+                  color: 'var(--apple-red)', 
+                  fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)', 
+                  lineHeight: '1.4', 
+                  fontWeight: 900, 
+                  textTransform: 'uppercase', 
+                  margin: 0,
+                }}>
+                  UNIVERSITAS MITRA BANGSA
+                </h2>
+                <div style={{
+                  height: '4px',
+                  background: 'var(--apple-red)',
+                  borderRadius: '2px',
+                  marginTop: '4px',
+                  width: '100%',
+                  animation: 'expandWidth 2s ease-in-out infinite alternate'
+                }}></div>
+              </div>
             </div>
-          </div>
 
-          <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
-            <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-              {lang === "en" ? "Available Study Programs:" : "Program Studi Pilihan:"}
-            </h3>
-            <div className="prodi-grid">
-              {['(S2) Magister Manajemen', '(S1) Manajemen', '(S1) Ilmu Aktuaria', '(S1) Ilmu Komputer', '(S1) Hukum', '(S1) Sistem & Teknologi Informasi'].map((prodi, idx) => (
-                <div key={idx} className="prodi-card">
-                  <div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div>
-                  <span style={{ color: 'var(--color-text)', fontWeight: 700 }}>{prodi}</span>
+            <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
+              <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                {lang === "en" ? "Available Study Programs:" : "Program Studi Pilihan:"}
+              </h3>
+              <div className="prodi-grid">
+                {['(S2) Magister Manajemen', '(S1) Manajemen', '(S1) Ilmu Aktuaria', '(S1) Ilmu Komputer', '(S1) Hukum', '(S1) Sistem & Teknologi Informasi'].map((prodi, idx) => (
+                  <div key={idx} className="prodi-card">
+                    <div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div>
+                    <span style={{ color: 'var(--color-text)', fontWeight: 700 }}>{prodi}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+              <a href="/pmb" className="btn btn-neu" style={{ padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', transition: 'all 0.3s ease' }}>
+                {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
+              </a>
+              <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-text)', textDecoration: 'none' }}>
+                <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'var(--glass-shadow)' }}>
+                  <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
                 </div>
-              ))}
+                <div style={{ textAlign: 'left' }}>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
+                  <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', color: 'var(--color-text)', letterSpacing: '1px' }}>0811 870 114</div>
+                </div>
+              </a>
             </div>
           </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <a href="/pmb" className="btn btn-neu" style={{ padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', transition: 'all 0.3s ease' }}>
-              {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
-            </a>
-            <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
-              <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex' }}>
-                <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
-              </div>
-              <div style={{ textAlign: 'left' }}>
-                <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)' }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
-                <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', color: 'white', letterSpacing: '1px' }}>0811 870 114</div>
-              </div>
-            </a>
+          <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+            <Image src="/nobg3.png" alt="Student Model 3" width={450} height={550} style={{ objectFit: 'contain', width: '100%', height: 'auto', maxHeight: '550px' }} />
           </div>
         </div>
       </div>
