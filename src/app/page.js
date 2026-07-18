@@ -104,12 +104,12 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
-            <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 1 }}>
+            <div style={{ position: 'relative', width: '380px', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', marginTop: '-40px' }}>
               {/* Neumorphic Avatar Backdrop Circle */}
-              <div className="avatar-circle-bg" style={{ position: 'absolute', width: '380px', height: '380px', borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', bottom: '10%', right: '10%', zIndex: 0 }}></div>
-              <div style={{ position: 'relative', width: '100%', height: '100%', zIndex: 1 }}>
-                <Image src="/nobg1.png" alt="Student Model 1" fill style={{ objectFit: 'contain', objectPosition: 'bottom right' }} priority />
+              <div className="avatar-circle-bg" style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}></div>
+              <div style={{ position: 'absolute', inset: '-20px -20px 0 -20px', zIndex: 1 }}>
+                <Image src="/nobg1.png" alt="Student Model 1" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
               </div>
             </div>
           </div>
@@ -155,12 +155,12 @@ export default function Home() {
               </div>
             </a>
           </div>
-          <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
-            <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 1 }}>
+            <div style={{ position: 'relative', width: '380px', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', marginTop: '-40px' }}>
               {/* Neumorphic Avatar Backdrop Circle */}
-              <div className="avatar-circle-bg" style={{ position: 'absolute', width: '380px', height: '380px', borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', bottom: '10%', right: '10%', zIndex: 0 }}></div>
-              <div style={{ position: 'relative', width: '100%', height: '100%', zIndex: 1 }}>
-                <Image src="/nobg2.png" alt="Student Model 2" fill style={{ objectFit: 'contain', objectPosition: 'bottom right' }} priority />
+              <div className="avatar-circle-bg" style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}></div>
+              <div style={{ position: 'absolute', inset: '-20px -20px 0 -20px', zIndex: 1 }}>
+                <Image src="/nobg2.png" alt="Student Model 2" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
               </div>
             </div>
           </div>
@@ -237,12 +237,12 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
-            <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 1 }}>
+            <div style={{ position: 'relative', width: '380px', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', marginTop: '-40px' }}>
               {/* Neumorphic Avatar Backdrop Circle */}
-              <div className="avatar-circle-bg" style={{ position: 'absolute', width: '380px', height: '380px', borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', bottom: '10%', right: '10%', zIndex: 0 }}></div>
-              <div style={{ position: 'relative', width: '100%', height: '100%', zIndex: 1 }}>
-                <Image src="/nobg3.png" alt="Student Model 3" fill style={{ objectFit: 'contain', objectPosition: 'bottom right' }} priority />
+              <div className="avatar-circle-bg" style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}></div>
+              <div style={{ position: 'absolute', inset: '-20px -20px 0 -20px', zIndex: 1 }}>
+                <Image src="/nobg3.png" alt="Student Model 3" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
               </div>
             </div>
           </div>
