@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function KaprodiStudents() {
@@ -8,11 +8,7 @@ export default function KaprodiStudents() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(() => {
-    fetchData();
-  }, [router]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const token = localStorage.getItem('siakad_token');
       if (!token) {
@@ -34,7 +30,15 @@ export default function KaprodiStudents() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      fetchData();
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [fetchData]);
 
   if (loading) return (
     <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', height: '100%', color: 'var(--color-muted)' }}>
@@ -72,21 +76,23 @@ export default function KaprodiStudents() {
         </div>
       </div>
 
-      <div className="siakad-card stagger-1" style={{ padding: '24px', marginBottom: '24px', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
-        <h2 style={{ margin: '0 0 20px 0', fontSize: '1.2rem', color: 'var(--color-text)' }}>Distribusi Nilai (Keseluruhan Prodi)</h2>
-        <div style={{ display: 'flex', alignItems: 'flex-end', height: '150px', gap: '16px', paddingBottom: '10px', borderBottom: '1px solid var(--color-border)' }}>
-          {Object.keys(dist).map(key => {
-            const count = dist[key];
-            const heightPercentage = total > 0 ? (count / total) * 100 : 0;
-            const color = key === 'A' ? '#059669' : key === 'B' ? '#C41E3A' : key === 'C' ? '#f59e0b' : key === 'Belum' ? 'var(--color-muted)' : '#ef4444';
-            return (
-              <div key={key} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: '8px' }}>
-                <div style={{ color: 'var(--color-text)', fontWeight: 600, fontSize: '0.9rem' }}>{count}</div>
-                <div style={{ width: '40px', background: color, height: `${heightPercentage}%`, minHeight: '4px', borderRadius: '4px 4px 0 0', transition: 'height 0.5s ease' }}></div>
-                <div style={{ color: 'var(--color-muted)', fontSize: '0.8rem', fontWeight: 600 }}>{key}</div>
-              </div>
-            );
-          })}
+      <div className="siakad-card stagger-1" style={{ marginBottom: '30px', padding: '24px' }}>
+        <h3 style={{ margin: '0 0 20px 0', color: 'var(--color-text)', fontWeight: 'bold' }}>Distribusi Nilai (Keseluruhan Prodi)</h3>
+        <div style={{ height: '320px', width: '100%', padding: '20px 16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '20px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', height: '100%', gap: '16px', paddingBottom: '10px' }}>
+            {Object.keys(dist).map(key => {
+              const count = dist[key];
+              const heightPercentage = total > 0 ? (count / total) * 100 : 0;
+              const color = key === 'A' ? '#059669' : key === 'B' ? '#C41E3A' : key === 'C' ? '#f59e0b' : key === 'Belum' ? 'var(--color-muted)' : '#ef4444';
+              return (
+                <div key={key} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', gap: '8px', height: '100%' }}>
+                  <div style={{ color: 'var(--color-text)', fontWeight: 600, fontSize: '0.9rem' }}>{count}</div>
+                  <div style={{ width: '40px', background: color, height: `${heightPercentage}%`, minHeight: '4px', borderRadius: '4px 4px 0 0', transition: 'height 0.5s ease', boxShadow: 'inset 1px 1px 2px rgba(255,255,255,0.35), inset -1px -1px 2px rgba(0,0,0,0.08)' }}></div>
+                  <div style={{ color: 'var(--color-muted)', fontSize: '0.8rem', fontWeight: 600 }}>{key}</div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
