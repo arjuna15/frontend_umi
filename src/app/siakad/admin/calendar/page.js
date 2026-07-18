@@ -557,22 +557,57 @@ export default function AdminCalendarPage() {
             </button>
           </>
         }>
-          <div style={{ marginBottom: '20px', padding: '16px', borderRadius: '16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)' }}>
-            <p style={{ margin: '0 0 12px 0', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', letterSpacing: '0.02em' }}>Cakupan Perubahan</p>
-            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', marginBottom: '10px', fontSize: '0.85rem', color: 'var(--color-text)', padding: '10px 12px', borderRadius: '12px', background: editForm.editMode === 'permanent' ? 'rgba(196,30,58,0.08)' : 'transparent', boxShadow: editForm.editMode === 'permanent' ? 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' : 'none' }}>
-              <input type="radio" name="editMode" checked={editForm.editMode === 'permanent'} onChange={() => setEditForm({ ...editForm, editMode: 'permanent' })} style={{ accentColor: '#C41E3A', marginTop: '3px' }} />
-              <span>
-                <strong style={{ display: 'block', marginBottom: '2px', color: 'var(--color-text)' }}>Permanen</strong>
-                <span style={{ color: 'var(--color-muted)' }}>Berlaku untuk seluruh semester.</span>
-              </span>
-            </label>
-            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--color-text)', padding: '10px 12px', borderRadius: '12px', background: editForm.editMode === 'session' ? 'rgba(245,158,11,0.08)' : 'transparent', boxShadow: editForm.editMode === 'session' ? 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' : 'none' }}>
-              <input type="radio" name="editMode" checked={editForm.editMode === 'session'} onChange={() => setEditForm({ ...editForm, editMode: 'session' })} style={{ accentColor: '#f59e0b', marginTop: '3px' }} />
-              <span>
-                <strong style={{ display: 'block', marginBottom: '2px', color: 'var(--color-text)' }}>Hanya Sesi Ini</strong>
-                <span style={{ color: 'var(--color-muted)' }}>Berlaku untuk tanggal {selectedDateStr || 'ini'} saja.</span>
-              </span>
-            </label>
+          <div style={{ marginBottom: '20px', padding: '6px', borderRadius: '14px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' }}>
+            <div style={{ display: 'flex', gap: '12px', width: '100%' }}>
+              <button
+                type="button"
+                onClick={() => setEditForm({ ...editForm, editMode: 'permanent' })}
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  padding: '10px 14px',
+                  border: 'none',
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  fontSize: '0.85rem',
+                  fontWeight: '800',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  transition: 'all 0.2s',
+                  background: editForm.editMode === 'permanent' ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'transparent',
+                  color: editForm.editMode === 'permanent' ? 'white' : 'var(--color-muted)',
+                  boxShadow: editForm.editMode === 'permanent' ? '2px 2px 5px rgba(196,30,58,0.2)' : 'none',
+                }}
+              >
+                <i className="ph ph-calendar-arrows"></i> Selamanya (Reguler)
+              </button>
+              <button
+                type="button"
+                onClick={() => setEditForm({ ...editForm, editMode: 'session' })}
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  padding: '10px 14px',
+                  border: 'none',
+                  borderRadius: '10px',
+                  cursor: 'pointer',
+                  fontSize: '0.85rem',
+                  fontWeight: '800',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  transition: 'all 0.2s',
+                  background: editForm.editMode === 'session' ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'transparent',
+                  color: editForm.editMode === 'session' ? 'white' : 'var(--color-muted)',
+                  boxShadow: editForm.editMode === 'session' ? '2px 2px 5px rgba(196,30,58,0.2)' : 'none',
+                }}
+              >
+                <i className="ph ph-clock"></i> Hanya Sesi Tanggal ini
+              </button>
+            </div>
           </div>
 
           {editForm.editMode === 'permanent' && (
