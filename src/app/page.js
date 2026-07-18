@@ -104,8 +104,10 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="hero-model-container" style={{ position: 'absolute', right: '5%', bottom: 0, height: '90%', display: 'flex', alignItems: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
-            <Image src="/nobg1.png" alt="Student Model 1" width={750} height={900} style={{ objectFit: 'contain', height: '100%', width: 'auto', maxHeight: '100%' }} />
+          <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
+            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+              <Image src="/nobg1.png" alt="Student Model 1" fill style={{ objectFit: 'contain', objectPosition: 'bottom right' }} priority />
+            </div>
           </div>
         </div>
       </div>
@@ -149,8 +151,10 @@ export default function Home() {
               </div>
             </a>
           </div>
-          <div className="hero-model-container" style={{ position: 'absolute', right: '5%', bottom: 0, height: '90%', display: 'flex', alignItems: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
-            <Image src="/nobg2.png" alt="Student Model 2" width={750} height={900} style={{ objectFit: 'contain', height: '100%', width: 'auto', maxHeight: '100%' }} />
+          <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
+            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+              <Image src="/nobg2.png" alt="Student Model 2" fill style={{ objectFit: 'contain', objectPosition: 'bottom right' }} priority />
+            </div>
           </div>
         </div>
       </div>
@@ -225,8 +229,10 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="hero-model-container" style={{ position: 'absolute', right: '5%', bottom: 0, height: '90%', display: 'flex', alignItems: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
-            <Image src="/nobg3.png" alt="Student Model 3" width={750} height={900} style={{ objectFit: 'contain', height: '100%', width: 'auto', maxHeight: '100%' }} />
+          <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
+            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+              <Image src="/nobg3.png" alt="Student Model 3" fill style={{ objectFit: 'contain', objectPosition: 'bottom right' }} priority />
+            </div>
           </div>
         </div>
       </div>
