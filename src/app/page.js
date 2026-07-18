@@ -76,20 +76,28 @@ export default function Home() {
                 <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'var(--glass-shadow)' }}>
                   <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
                 </div>
-                <div>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
-                  <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', letterSpacing: '1px' }}>0811 870 114</div>
-                </div>
               </a>
             </div>
           </div>
           <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
-            <div style={{ position: 'relative', width: '380px', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', marginTop: '-40px' }}>
-              {/* Neumorphic Avatar Backdrop Circle */}
-              <div className="avatar-circle-bg" style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}></div>
-              <div style={{ position: 'absolute', inset: '-20px -20px 0 -20px', zIndex: 1 }}>
-                <Image src="/nobcg1.png" alt="Student Model 1" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+            <div style={{ position: 'relative', width: '380px', height: '380px', marginRight: '40px', marginTop: '-40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              
+              {/* The Masked Container (clips bottom body inside circle shape) */}
+              <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
+                {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
+                <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
+                <div style={{ position: 'absolute', inset: '-20px -20px 0 -20px', zIndex: 1 }}>
+                  <Image src="/nobcg1.png" alt="Student Model 1 Base" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+                </div>
               </div>
+
+              {/* The Pop-Out Overlay (uncut head popping out above circle, clipped below middle) */}
+              <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 100px 0px)' }}>
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  <Image src="/nobcg1.png" alt="Student Model 1 Popout" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -135,12 +143,24 @@ export default function Home() {
             </a>
           </div>
           <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
-            <div style={{ position: 'relative', width: '380px', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', marginTop: '-40px' }}>
-              {/* Neumorphic Avatar Backdrop Circle */}
-              <div className="avatar-circle-bg" style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}></div>
-              <div style={{ position: 'absolute', inset: '-20px -20px 0 -20px', zIndex: 1 }}>
-                <Image src="/nobcg2.png" alt="Student Model 2" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+            <div style={{ position: 'relative', width: '380px', height: '380px', marginRight: '40px', marginTop: '-40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              
+              {/* The Masked Container (clips bottom body inside circle shape) */}
+              <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
+                {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
+                <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
+                <div style={{ position: 'absolute', inset: '-20px -20px 0 -20px', zIndex: 1 }}>
+                  <Image src="/nobcg2.png" alt="Student Model 2 Base" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+                </div>
               </div>
+
+              {/* The Pop-Out Overlay (uncut head popping out above circle, clipped below middle) */}
+              <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 100px 0px)' }}>
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  <Image src="/nobcg2.png" alt="Student Model 2 Popout" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -217,12 +237,24 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
-            <div style={{ position: 'relative', width: '380px', height: '380px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: '40px', marginTop: '-40px' }}>
-              {/* Neumorphic Avatar Backdrop Circle */}
-              <div className="avatar-circle-bg" style={{ position: 'absolute', inset: 0, borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}></div>
-              <div style={{ position: 'absolute', inset: '-20px -20px 0 -20px', zIndex: 1 }}>
-                <Image src="/nobcg3.png" alt="Student Model 3" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+            <div style={{ position: 'relative', width: '380px', height: '380px', marginRight: '40px', marginTop: '-40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              
+              {/* The Masked Container (clips bottom body inside circle shape) */}
+              <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
+                {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
+                <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
+                <div style={{ position: 'absolute', inset: '-20px -20px 0 -20px', zIndex: 1 }}>
+                  <Image src="/nobcg3.png" alt="Student Model 3 Base" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+                </div>
               </div>
+
+              {/* The Pop-Out Overlay (uncut head popping out above circle, clipped below middle) */}
+              <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 100px 0px)' }}>
+                <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                  <Image src="/nobcg3.png" alt="Student Model 3 Popout" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
