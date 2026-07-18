@@ -238,7 +238,23 @@ export default function ProctoringAdminPage() {
                   <td style={{ padding: '12px 14px', color: 'var(--color-text)', fontWeight: '600' }}>{s.quiz?.title || s.quiz_name || '-'}</td>
                   <td style={{ padding: '12px 14px', color: 'var(--color-muted)' }}>{s.quiz?.course?.dosen?.name || s.teacher_name || '-'}</td>
                   <td style={{ padding: '12px 14px' }}>
-                    <code style={{ background: 'var(--color-surface)', padding: '4px 8px', borderRadius: '6px', fontSize: '0.82rem', color: '#3b82f6', fontWeight: '600', border: '1px solid var(--color-border)' }}>{s.token || '-'}</code>
+                    <span style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                      background: 'var(--liquid-bg)',
+                      color: '#3b82f6',
+                      border: 'var(--inset-border)',
+                      padding: '6px 12px',
+                      borderRadius: '9999px',
+                      fontSize: '0.78rem',
+                      fontWeight: '700',
+                      boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)',
+                      letterSpacing: '0.08em',
+                      fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+                      minWidth: '130px'
+                    }}>{s.token || '-'}</span>
                   </td>
                   <td style={{ padding: '12px 14px' }}>{statusBadge(s.status)}</td>
                   <td style={{ padding: '12px 14px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{s.start_time ? new Date(s.start_time).toLocaleString('id-ID') : '-'}</td>
