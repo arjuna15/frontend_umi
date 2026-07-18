@@ -12,10 +12,10 @@ export default function AdminClassesPage() {
   const [selectedDosen, setSelectedDosen] = useState("");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({
-    id: '', code: '', name: '', sks: '', dosen_id: '', prasyarat: '', semester: 'Ganjil'
+    id: '', code: '', name: '', sks: '', dosen_id: '', prasyarat: '', semester: 'Ganjil', campus_location: 'semua'
   });
   const [selectedSemester, setSelectedSemester] = useState("Ganjil");
-  const [selectedCampus, setSelectedCampus] = useState('bintaro');
+  const [selectedCampus, setSelectedCampus] = useState('semua');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -85,7 +85,7 @@ export default function AdminClassesPage() {
         e.target.reset();
         setSelectedDosen("");
         setSelectedSemester("Ganjil");
-        setSelectedCampus("bintaro");
+        setSelectedCampus("semua");
         fetchCourses();
       } else {
         window.toast('Failed to create course');
@@ -106,6 +106,7 @@ export default function AdminClassesPage() {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
+        window.toast('Course deleted successfully');
         fetchCourses();
       } else {
         window.toast('Failed to delete course');
@@ -128,10 +129,10 @@ export default function AdminClassesPage() {
       code: course.code,
       name: course.name,
       sks: course.sks,
-      dosen_id: course.dosen_id || '',
-      prasyarat: course.prasyarat || '',
-      semester: course.semester || 'Ganjil',
-      campus_location: course.campus_location || 'bintaro'
+      dosen_id: course.dosen_id || "",
+      semester: course.semester || "Ganjil",
+      campus_location: course.campus_location || "semua",
+      prasyarat: course.prasyarat || ""
     });
     setIsEditModalOpen(true);
   };
@@ -179,15 +180,15 @@ export default function AdminClassesPage() {
         <form onSubmit={handleCreateCourse} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Kode Mata Kuliah</label>
-            <input name="code" className="siakad-input" required placeholder="Contoh: CS101..." style={{ minWidth: 0, flex: '1 1 120px'}} />
+            <input name="code" className="siakad-input" required placeholder="Contoh: CS101..." style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', minWidth: 0, flex: '1 1 120px' }} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Mata Kuliah</label>
-            <input name="name" className="siakad-input" required placeholder="Algoritma & Pemrograman..." style={{ minWidth: 0, flex: '1 1 120px'}} />
+            <input name="name" className="siakad-input" required placeholder="Algoritma & Pemrograman..." style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', minWidth: 0, flex: '1 1 120px' }} />
           </div>
           <div style={{ flex: '1 1 120px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jumlah SKS</label>
-            <input type="number" name="sks" className="siakad-input" required min="1" max="6" placeholder="SKS..." style={{ minWidth: 0, flex: '1 1 120px'}} />
+            <input type="number" name="sks" className="siakad-input" required min="1" max="6" placeholder="SKS..." style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', minWidth: 0, flex: '1 1 120px' }} />
           </div>
           <div style={{ flex: '1 1 200px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Dosen Pengampu</label>
@@ -213,16 +214,16 @@ export default function AdminClassesPage() {
               name="campus_location"
               value={selectedCampus}
               onChange={setSelectedCampus}
-              options={[{value: 'bintaro', label: 'Bintaro'}, {value: 'pasar_minggu', label: 'Pasar Minggu'}]}
+              options={[{value: 'semua', label: 'Semua Kampus'}, {value: 'bintaro', label: 'Bintaro'}, {value: 'pasar_minggu', label: 'Pasar Minggu'}]}
             />
           </div>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Prasyarat</label>
-            <input name="prasyarat" className="siakad-input" placeholder="Kode MK (Opsional)..." style={{ minWidth: 0, flex: '1 1 120px'}} />
+            <input name="prasyarat" className="siakad-input" placeholder="Kode MK (Opsional)..." style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', minWidth: 0, flex: '1 1 120px' }} />
           </div>
           <div style={{ flex: '0 0 auto' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'transparent', fontWeight: '600', userSelect: 'none' }}>&nbsp;</label>
-            <button type="submit" className="siakad-btn-primary" style={{ padding: '12px 24px', whiteSpace: 'nowrap' }}>
+            <button type="submit" className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 24px', whiteSpace: 'nowrap' }}>
               <i className="ph ph-plus-circle"></i> Tambah
             </button>
           </div>
@@ -240,17 +241,15 @@ export default function AdminClassesPage() {
               placeholder="Cari kode, nama, semester..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              style={{ 
-                width: '100%', 
+              style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', 
                 paddingLeft: '46px',
-                color: 'var(--color-text)',
-                fontSize: '0.9rem'
-              }} 
+                
+                fontSize: '0.9rem' }} 
             />
           </div>
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <table className="siakad-table" style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
             <thead>
               <tr>
                 <th style={{ padding: '16px 24px', fontWeight: '600' }}>Kode</th>
@@ -290,26 +289,21 @@ export default function AdminClassesPage() {
                     <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.sks} SKS</td>
                     <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.semester || 'Ganjil'}</td>
                     <td style={{ padding: '16px 24px', fontWeight: '600' }}>
-                      <span style={{ 
-                        background: course.campus_location === 'pasar_minggu' ? 'rgba(236,72,153,0.15)' : 'rgba(59,130,246,0.15)', 
-                        color: course.campus_location === 'pasar_minggu' ? '#ec4899' : '#3b82f6', 
-                        padding: '4px 10px', 
-                        borderRadius: '10px',
-                        fontSize: '0.8rem',
-                        textTransform: 'capitalize'
-                      }}>{course.campus_location === 'pasar_minggu' ? 'Pasar Minggu' : 'Bintaro'}</span>
+                      <span className="siakad-badge" style={{ 
+                        color: course.campus_location === 'pasar_minggu' ? '#ec4899' : (course.campus_location === 'bintaro' ? '#3b82f6' : '#10b981')
+                      }}>{course.campus_location === 'pasar_minggu' ? 'Pasar Minggu' : (course.campus_location === 'bintaro' ? 'Bintaro' : 'Semua Kampus')}</span>
                     </td>
                     <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{course.prasyarat || '-'}</td>
                     <td style={{ padding: '16px 24px', textAlign: 'right' }}>
-                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
+                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
                         <button 
                           onClick={() => handleOpenEditModal(course)}
-                          style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                          style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
                           title="Edit Mata Kuliah"
                         ><i className="ph ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
                         <button 
                           onClick={() => handleDeleteCourse(course.id)}
-                          style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                          style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: '#ef4444', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
                           title="Hapus Mata Kuliah"
                         ><i className="ph ph-trash" style={{ fontSize: '1rem' }}></i></button>
                       </div>
@@ -332,16 +326,16 @@ export default function AdminClassesPage() {
           <form onSubmit={handleUpdateCourse}>
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Kode Mata Kuliah</label>
-              <input value={editFormData.code} onChange={(e) => setEditFormData({...editFormData, code: e.target.value})} required className="siakad-input" style={{ width: '100%', color: 'var(--color-text)' }} />
+              <input value={editFormData.code} onChange={(e) => setEditFormData({...editFormData, code: e.target.value})} required className="siakad-input" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }} />
             </div>
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Nama Mata Kuliah</label>
-              <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required className="siakad-input" style={{ width: '100%', color: 'var(--color-text)' }} />
+              <input value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required className="siakad-input" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }} />
             </div>
             <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' , flexWrap: 'wrap' }}>
               <div style={{ flex: 1 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>SKS</label>
-                <input type="number" min="1" max="6" value={editFormData.sks} onChange={(e) => setEditFormData({...editFormData, sks: e.target.value})} required className="siakad-input" style={{ width: '100%', color: 'var(--color-text)' }} />
+                <input type="number" min="1" max="6" value={editFormData.sks} onChange={(e) => setEditFormData({...editFormData, sks: e.target.value})} required className="siakad-input" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }} />
               </div>
               <div style={{ flex: 2 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Dosen Pengampu</label>
@@ -364,19 +358,19 @@ export default function AdminClassesPage() {
               <div style={{ flex: 1 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Lokasi Kampus</label>
                 <CustomSelect
-                  value={editFormData.campus_location || 'bintaro'}
+                  value={editFormData.campus_location || 'semua'}
                   onChange={(val) => setEditFormData({...editFormData, campus_location: val})}
-                  options={[{value: 'bintaro', label: 'Bintaro'}, {value: 'pasar_minggu', label: 'Pasar Minggu'}]}
+                  options={[{value: 'semua', label: 'Semua Kampus'}, {value: 'bintaro', label: 'Bintaro'}, {value: 'pasar_minggu', label: 'Pasar Minggu'}]}
                 />
               </div>
               <div style={{ flex: 1 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Prasyarat</label>
-                <input value={editFormData.prasyarat} onChange={(e) => setEditFormData({...editFormData, prasyarat: e.target.value})} placeholder="Opsional..." className="siakad-input" style={{ width: '100%', color: 'var(--color-text)' }} />
+                <input value={editFormData.prasyarat} onChange={(e) => setEditFormData({...editFormData, prasyarat: e.target.value})} placeholder="Opsional..." className="siakad-input" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }} />
               </div>
             </div>
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', marginTop: '20px' }}>
               <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 24px', border: 'none', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold', transition: 'all 0.2s' }}>Batal</button>
-              <button type="submit" className="siakad-btn-primary" style={{ padding: '12px 24px' }}>Simpan Perubahan</button>
+              <button type="submit" className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 24px' }}>Simpan Perubahan</button>
             </div>
           </form>
         </ModalShell>

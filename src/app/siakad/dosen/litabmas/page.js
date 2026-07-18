@@ -36,10 +36,22 @@ export default function LitabmasDosenPage() {
   };
 
   const statusBadge = (s) => {
-    const colors = { draft: ['#6b7280','rgba(107,114,128,0.1)'], pending: ['#f59e0b','rgba(245,158,11,0.1)'], approved: ['#10b981','rgba(16,185,129,0.1)'], rejected: ['#ef4444','rgba(239,68,68,0.1)'] };
+    const colors = { 
+      draft: { color: '#64748b', border: 'rgba(100,116,139,0.3)' }, 
+      pending: { color: '#d97706', border: 'rgba(217,119,6,0.3)' }, 
+      approved: { color: '#047857', border: 'rgba(4,120,87,0.3)' }, 
+      rejected: { color: '#b91c1c', border: 'rgba(185,28,28,0.3)' } 
+    };
     const c = colors[s] || colors.pending;
     const labels = { draft: 'Draf', pending: 'Menunggu', approved: 'Disetujui', rejected: 'Ditolak' };
-    return <span style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: c[0], background: c[1] }}>{labels[s] || s}</span>;
+    return (
+      <span className="siakad-badge-status" style={{ 
+        color: c.color, 
+        borderColor: c.border 
+      }}>
+        {labels[s] || s}
+      </span>
+    );
   };
 
   const formatCurrency = (val) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(val);
@@ -63,38 +75,80 @@ export default function LitabmasDosenPage() {
             <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Litabmas Dosen</h1>
             <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Ajukan usulan proposal penelitian ilmiah (Penelitian) dan Pengabdian Kepada Masyarakat (Litabmas).</p>
           </div>
-          <button onClick={() => setShowModal(true)} className="siakad-btn-primary" style={{ padding: '12px 24px' }}><i className="ph ph-plus-circle"></i> Ajukan Proposal</button>
+          <button onClick={() => setShowModal(true)} style={{ padding: '12px 24px', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', borderRadius: '50px', cursor: 'pointer', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-plus-circle"></i> Ajukan Proposal</button>
         </div>
       </div>
 
       <div style={{ padding: '24px' }}>
-        {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
+        {message && (
+          <div 
+            className="siakad-badge-status" 
+            style={{ 
+              width: '100%', 
+              padding: '14px 20px', 
+              borderRadius: '16px', 
+              marginBottom: '16px', 
+              background: 'var(--glass-bg)',
+              color: message.type === 'success' ? '#047857' : '#b91c1c', 
+              borderColor: message.type === 'success' ? 'rgba(4,120,87,0.3)' : 'rgba(185,28,28,0.3)',
+              fontWeight: '700',
+              textAlign: 'left',
+              justifyContent: 'flex-start'
+            }}
+          >
+            <i className={message.type === 'success' ? 'ph ph-check-circle' : 'ph ph-x-circle'} style={{ fontSize: '1.2rem', marginRight: '8px', color: message.type === 'success' ? '#047857' : '#b91c1c' }}></i>
+            {message.text}
+          </div>
+        )}
 
-      <div className="siakad-card stagger-2" style={{ padding: '24px' }}>
+      <div className="stagger-2" style={{ padding: '24px', borderRadius: '24px', border: 'var(--glass-border)', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 16px 0' }}>Riwayat Proposal</h2>
-        <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead><tr>{['Judul', 'Tipe', 'Anggaran', 'Status', 'Catatan Reviewer'].map(h => <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase' }}>{h}</th>)}</tr></thead>
-            <tbody>
-              {proposals.length === 0 ? <tr><td colSpan={5} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada proposal.</td></tr> :
-              proposals.map(p => (
-                <tr key={p.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                  <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600', maxWidth: '300px' }}>{p.title}</td>
-                  <td style={{ padding: '14px 16px', color: 'var(--color-muted)', textTransform: 'capitalize' }}>{p.type}</td>
-                  <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{formatCurrency(p.budget)}</td>
-                  <td style={{ padding: '14px 16px' }}>{statusBadge(p.status)}</td>
-                  <td style={{ padding: '14px 16px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{p.reviewer_notes || '-'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {proposals.length === 0 ? (
+            <div style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '16px', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' }}>
+              Belum ada proposal.
+            </div>
+          ) : (
+            proposals.map(p => (
+              <div key={p.id} style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+                padding: '18px 20px',
+                background: 'var(--liquid-bg)',
+                border: 'var(--inset-border)',
+                borderRadius: '16px',
+                boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px' }}>
+                  <div>
+                    <h3 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: '700', color: 'var(--color-text)' }}>{p.title}</h3>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--color-muted)', textTransform: 'uppercase', fontWeight: '600' }}>Tipe: {p.type}</span>
+                  </div>
+                  <div>{statusBadge(p.status)}</div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '8px', flexWrap: 'wrap', gap: '8px' }}>
+                  <div>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>Anggaran: </span>
+                    <span style={{ fontSize: '0.9rem', fontWeight: '700', color: 'var(--color-text)' }}>{formatCurrency(p.budget)}</span>
+                  </div>
+                  {p.reviewer_notes && (
+                    <div style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>
+                      <strong>Reviewer:</strong> {p.reviewer_notes}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
       {showModal && (
         <ModalShell title="Ajukan Proposal" subtitle="Litabmas" icon="ph-projector-screen" onClose={() => setShowModal(false)}
-          footer={<><button onClick={() => setShowModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button onClick={handleSubmit} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Ajukan'}</button></>}>
+          footer={<><button onClick={() => setShowModal(false)} className="btn" style={{ padding: '10px 20px', border: 'var(--glass-border)', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', borderRadius: '50px' }}>Batal</button>
+            <button onClick={handleSubmit} disabled={saving} style={{ padding: '10px 24px', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', borderRadius: '50px', cursor: 'pointer', fontWeight: '800', boxShadow: 'var(--glass-shadow)' }}>{saving ? 'Menyimpan...' : 'Ajukan'}</button></>}>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tipe</label>
             <CustomSelect
               value={form.type}
@@ -105,11 +159,11 @@ export default function LitabmasDosenPage() {
               ]}
             /></div>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Judul</label>
-            <input className="siakad-input" value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Judul proposal..." /></div>
+            <input className="siakad-input" value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Judul proposal..." style={{ width: '100%', boxSizing: 'border-box' }} /></div>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Abstrak</label>
-            <textarea className="siakad-input" value={form.abstract} onChange={e => setForm({...form, abstract: e.target.value})} placeholder="Abstrak penelitian/pengabdian..." rows={4} style={{ resize: 'vertical' }} /></div>
+            <textarea className="siakad-input" value={form.abstract} onChange={e => setForm({...form, abstract: e.target.value})} placeholder="Abstrak penelitian/pengabdian..." rows={4} style={{ resize: 'vertical', width: '100%', boxSizing: 'border-box', borderRadius: '16px' }} /></div>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Pagu Anggaran (Rp)</label>
-            <input className="siakad-input" type="number" value={form.budget} onChange={e => setForm({...form, budget: e.target.value})} placeholder="Contoh: 15000000" /></div>
+            <input className="siakad-input" type="number" value={form.budget} onChange={e => setForm({...form, budget: e.target.value})} placeholder="Contoh: 15000000" style={{ width: '100%', boxSizing: 'border-box' }} /></div>
         </ModalShell>
       )}
       </div>

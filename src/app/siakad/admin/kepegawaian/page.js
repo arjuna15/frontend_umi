@@ -32,7 +32,7 @@ export default function KepegawaianPage() {
         fetch(`${apiUrl}/siakad/hrd/stats`, { headers: { 'Authorization': `Bearer ${token}` } }),
         fetch(`${apiUrl}/siakad/hrd/attendance`, { headers: { 'Authorization': `Bearer ${token}` } })
       ]);
-      if (empRes.ok) { const d = await empRes.json(); setEmployees(d.data || d.employees || []); }
+      if (empRes.ok) { const d = await empRes.json(); setEmployees(d.data?.data || d.data || d.employees || []); }
       if (statsRes.ok) {
         const sd = await statsRes.json(); const s = sd.data || sd.stats || sd;
         setStats({ total: s.total || 0, pns: s.pns || 0, kontrak: s.kontrak || 0, honorer: s.honorer || 0, hadir_hari_ini: s.hadir_hari_ini || s.present_today || 0 });
@@ -77,9 +77,9 @@ export default function KepegawaianPage() {
 
   useEffect(() => { if (!getToken()) router.push('/siakad/login'); else fetchData(); }, []);
 
-  const statusBadge = (s) => { const c = s === 'active' ? '#10b981' : s === 'retired' ? '#f59e0b' : '#ef4444'; const l = s === 'active' ? 'Aktif' : s === 'retired' ? 'Pensiun' : 'Nonaktif'; return <span style={{ background: `${c}20`, color: c, padding: '4px 12px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: '600' }}>{l}</span>; };
-  const typeBadge = (t) => { const c = t === 'PNS' ? '#3b82f6' : t === 'Kontrak' ? '#8b5cf6' : '#f59e0b'; return <span style={{ background: `${c}20`, color: c, padding: '4px 12px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: '600' }}>{t}</span>; };
-  const attBadge = (s) => { const c = s === 'hadir' ? '#10b981' : s === 'izin' ? '#3b82f6' : s === 'sakit' ? '#f59e0b' : '#ef4444'; return <span style={{ background: `${c}20`, color: c, padding: '4px 12px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: '600' }}>{s?.charAt(0).toUpperCase() + s?.slice(1)}</span>; };
+  const statusBadge = (s) => { const c = s === 'active' ? '#10b981' : s === 'retired' ? '#f59e0b' : '#ef4444'; const l = s === 'active' ? 'Aktif' : s === 'retired' ? 'Pensiun' : 'Nonaktif'; return <span className="siakad-badge-status" style={{ color: c, borderColor: `${c}33`, minWidth: '110px' }}>{l}</span>; };
+  const typeBadge = (t) => { const c = t === 'PNS' ? '#3b82f6' : t === 'Kontrak' ? '#8b5cf6' : '#f59e0b'; return <span className="siakad-badge-status" style={{ color: c, borderColor: `${c}33`, minWidth: '110px' }}>{t}</span>; };
+  const attBadge = (s) => { const c = s === 'hadir' ? '#10b981' : s === 'izin' ? '#3b82f6' : s === 'sakit' ? '#f59e0b' : '#ef4444'; return <span className="siakad-badge-status" style={{ color: c, borderColor: `${c}33`, minWidth: '110px' }}>{s?.charAt(0).toUpperCase() + s?.slice(1)}</span>; };
 
   if (loading) return (<div style={{ padding: '24px' }}><h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat ...</h1><div className="siakad-card" style={{ padding: '24px', height: '200px' }}></div></div>);
 
@@ -148,33 +148,49 @@ export default function KepegawaianPage() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '24px', marginBottom: '32px' }}>
-        <div className="siakad-card" style={{ padding: '24px' }}>
-          <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Distribusi Tipe Pegawai</h3>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '32px', justifyContent: 'center' }}>
-            <div style={{ width: '160px', height: '160px', borderRadius: '50%', background: `conic-gradient(${pieGradient})`, position: 'relative', flexShrink: 0 }}>
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80px', height: '80px', borderRadius: '50%', background: 'var(--color-card)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', borderRadius: '24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '20px', flexWrap: 'wrap' }}>
+            <div>
+              <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Statistik HRD</p>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>Distribusi Tipe Pegawai</h3>
+            </div>
+            <span className="siakad-badge-status" style={{ color: '#3b82f6', borderColor: 'rgba(59,130,246,0.3)', minWidth: '120px' }}>
+              {pieTotal} Pegawai
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '28px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div style={{ width: '160px', height: '160px', borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: `conic-gradient(${pieGradient})`, position: 'relative', flexShrink: 0 }}>
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '80px', height: '80px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                 <span style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)' }}>{pieTotal}</span>
                 <span style={{ fontSize: '0.65rem', color: 'var(--color-muted)' }}>Total</span>
               </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ display: 'grid', gap: '10px', minWidth: '220px', flex: '1 1 220px' }}>
               {pieData.map((d, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <div style={{ width: '12px', height: '12px', borderRadius: '3px', background: d.color, flexShrink: 0 }}></div>
-                  <span style={{ fontSize: '0.82rem', color: 'var(--color-muted)' }}>{d.label}</span>
-                  <span style={{ fontSize: '0.82rem', fontWeight: '600', color: 'var(--color-text)', marginLeft: 'auto' }}>{d.value}</span>
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 12px', background: 'var(--liquid-bg)', borderRadius: '12px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
+                  <div style={{ width: '12px', height: '12px', borderRadius: '3px', background: d.color, flexShrink: 0, boxShadow: '0 0 0 3px rgba(255,255,255,0.08)' }} />
+                  <span style={{ fontSize: '0.82rem', color: 'var(--color-muted)', fontWeight: '600' }}>{d.label}</span>
+                  <span style={{ fontSize: '0.82rem', fontWeight: '800', color: 'var(--color-text)', marginLeft: 'auto' }}>{d.value}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <div className="siakad-card" style={{ padding: '24px' }}>
-          <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Pegawai per Departemen</h3>
-          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '12px', height: '180px', paddingTop: '10px' }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', borderRadius: '24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '20px', flexWrap: 'wrap' }}>
+            <div>
+              <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Statistik HRD</p>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>Pegawai per Departemen</h3>
+            </div>
+            <span className="siakad-badge-status" style={{ color: '#8b5cf6', borderColor: 'rgba(139,92,246,0.3)', minWidth: '120px' }}>
+              {stats.total} Total
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '12px', minHeight: '220px', paddingTop: '10px' }}>
             {deptData.map((d, i) => (
               <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '6px' }}>{d.count}</span>
-                <div style={{ width: '100%', maxWidth: '50px', height: `${(d.count / maxDeptCount) * 100}%`, minHeight: '10px', background: 'linear-gradient(180deg, #3b82f6 0%, #8b5cf6 100%)', borderRadius: '8px 8px 4px 4px', transition: 'height 0.5s ease' }}></div>
+                <span style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--color-text)', marginBottom: '6px' }}>{d.count}</span>
+                <div style={{ width: '100%', maxWidth: '50px', height: `${(d.count / maxDeptCount) * 100}%`, minHeight: '10px', background: 'linear-gradient(180deg, #3b82f6 0%, #8b5cf6 100%)', borderRadius: '12px 12px 4px 4px', transition: 'height 0.5s ease', boxShadow: '0 8px 18px rgba(59,130,246,0.18)' }}></div>
                 <span style={{ fontSize: '0.68rem', color: 'var(--color-muted)', marginTop: '8px', fontWeight: '600', textAlign: 'center' }}>{d.dept}</span>
               </div>
             ))}
@@ -183,9 +199,9 @@ export default function KepegawaianPage() {
       </div>
 
       <div className="siakad-card" style={{ padding: '24px' }}>
-        <div style={{ display: 'flex', gap: '4px', marginBottom: '24px', background: 'var(--color-bg)', borderRadius: '12px', padding: '4px' }}>
+        <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
           {tabs.map(t => (
-            <button key={t.key} id={`tab-${t.key}`} onClick={() => setTab(t.key)} style={{ flex: 1, padding: '10px 16px', border: 'none', borderRadius: '10px', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', background: tab === t.key ? 'var(--color-card)' : 'transparent', color: tab === t.key ? 'var(--color-text)' : 'var(--color-muted)', boxShadow: tab === t.key ? '0 2px 8px rgba(0,0,0,0.08)' : 'none', transition: 'all 0.2s' }}>
+            <button key={t.key} type="button" id={`tab-${t.key}`} onClick={() => setTab(t.key)} className={tab === t.key ? 'active' : ''} style={{ background: tab === t.key ? 'var(--liquid-bg)' : 'var(--glass-bg)', color: tab === t.key ? 'var(--apple-red)' : 'var(--color-muted)', border: 'var(--glass-border)', boxShadow: tab === t.key ? 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)' : 'var(--glass-shadow)', padding: '12px 18px', borderRadius: '999px', cursor: 'pointer', fontWeight: '700', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', transition: 'all 0.2s', flex: '0 1 auto' }}>
               <i className={t.icon}></i> {t.label}
             </button>
           ))}

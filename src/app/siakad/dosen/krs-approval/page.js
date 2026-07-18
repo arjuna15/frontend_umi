@@ -12,9 +12,9 @@ export default function KrsApprovalPage() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const STATUS_STYLES = {
-    pending:  { label: 'Menunggu', bg: 'rgba(245,158,11,0.15)', color: '#f59e0b', border: 'rgba(245,158,11,0.3)' },
-    approved: { label: 'Disetujui', bg: 'rgba(16,185,129,0.15)', color: '#10b981', border: 'rgba(16,185,129,0.3)' },
-    rejected: { label: 'Ditolak', bg: 'rgba(239,68,68,0.15)', color: '#ef4444', border: 'rgba(239,68,68,0.3)' },
+    pending:  { label: 'Menunggu', bg: 'rgba(217,119,6,0.15)', color: '#d97706', border: 'rgba(217,119,6,0.3)' },
+    approved: { label: 'Disetujui', bg: 'rgba(4,120,87,0.15)', color: '#047857', border: 'rgba(4,120,87,0.3)' },
+    rejected: { label: 'Ditolak', bg: 'rgba(185,28,28,0.15)', color: '#b91c1c', border: 'rgba(185,28,28,0.3)' },
   };
 
   useEffect(() => {
@@ -130,10 +130,23 @@ export default function KrsApprovalPage() {
               { label: 'Menunggu', value: pendingCount, icon: 'ph-clock', color: '#f59e0b' },
               { label: 'Disetujui', value: submissions.filter(s=>s.status==='approved').length, icon: 'ph-check-circle', color: '#10b981' },
             ].map((s, i) => (
-              <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', backdropFilter: 'none', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: pendingCount > 0 && s.icon === 'ph-clock' ? '1px solid rgba(245,158,11,0.5)' : 'var(--glass-border)' }}>
-                <i className={`ph ${s.icon}`} style={{ fontSize: '1.3rem', color: s.color, display: 'block', marginBottom: '4px' }}></i>
-                <p style={{ color: 'white', fontWeight: '800', fontSize: '1.5rem', margin: '0 0 2px 0' }}>{s.value}</p>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.65rem', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.label}</p>
+              <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', borderRadius: '16px', padding: '16px 20px', textAlign: 'center', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+                  <div style={{
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '50%',
+                    background: 'var(--glass-bg)',
+                    boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    <i className={`ph ${s.icon}`} style={{ fontSize: '1.2rem', color: s.color }}></i>
+                  </div>
+                </div>
+                <p style={{ color: 'var(--color-text)', fontWeight: '800', fontSize: '1.5rem', margin: '0 0 2px 0' }}>{s.value}</p>
+                <p style={{ color: 'var(--color-muted)', fontSize: '0.65rem', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.label}</p>
               </div>
             ))}
           </div>
@@ -142,11 +155,11 @@ export default function KrsApprovalPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', alignItems: 'start' }}>
         {/* Left List */}
-        <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
+        <div className="stagger-1" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: 'var(--glass-border)', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)' }}>
           <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Bimbingan KRS</h3>
             {pendingCount > 0 && (
-              <span style={{ padding: '3px 10px', background: '#f59e0b', color: 'white', borderRadius: '999px', fontSize: '0.75rem', fontWeight: '800' }}>{pendingCount}</span>
+              <span className="siakad-badge" style={{ color: '#C41E3A', padding: '2px 8px', minWidth: '24px', justifyContent: 'center' }}>{pendingCount}</span>
             )}
           </div>
           <div style={{ padding: '12px 24px 6px 24px', borderBottom: '1px solid var(--color-border)' }}>
@@ -159,19 +172,19 @@ export default function KrsApprovalPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{ 
                   width: '100%', 
-                  padding: '8px 12px 8px 46px', 
+                  padding: '10px 12px 10px 46px', 
                   borderRadius: '50px', 
-                  border: '1px solid rgba(255,255,255,0.5)', 
+                  border: 'var(--inset-border)', 
                   outline: 'none', 
-                  background: 'var(--color-bg)', 
+                  background: 'var(--liquid-bg)', 
                   color: 'var(--color-text)',
                   fontSize: '0.85rem',
-                  boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff'
+                  boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)'
                 }} 
               />
             </div>
           </div>
-          <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '60vh', overflowY: 'auto' }}>
+          <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '60vh', overflowY: 'auto' }}>
             {(() => {
               const filteredStudents = sortedStudents.filter(std => {
                 const query = searchQuery.toLowerCase().trim();
@@ -190,36 +203,39 @@ export default function KrsApprovalPage() {
                     Mahasiswa tidak ditemukan.
                   </div>
                 );
-              }
-
-              return filteredStudents.map((std, i) => {
+              }              return filteredStudents.map((std, i) => {
                 const sub = std.activeSubmission;
                 const st = STATUS_STYLES[sub.status] || STATUS_STYLES.pending;
                 const isActive = selectedSub?.mahasiswa?.nim === std.nim;
                 
                 return (
                   <button key={std.nim} onClick={() => { setSelectedSub(sub); setNotes(sub.notes || ''); }}
-                    style={{ padding: '14px 16px', textAlign: 'left', background: isActive ? 'linear-gradient(135deg, rgba(196,30,58,0.1), rgba(99,102,241,0.1))' : 'var(--glass-bg)', border: `1px solid ${isActive ? 'rgba(196,30,58,0.4)' : 'var(--color-border)'}`, borderRadius: '24px', cursor: 'pointer', transition: 'all 0.2s', width: '100%' }}>
+                    className={isActive ? 'active' : ''}
+                    style={{ padding: '14px 16px', textAlign: 'left', background: 'var(--glass-bg)', border: isActive ? '1.5px solid var(--apple-blue)' : 'var(--glass-border)', boxShadow: isActive ? 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' : 'var(--glass-shadow)', borderRadius: '24px', cursor: 'pointer', transition: 'all 0.2s', width: '100%' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'rgba(99,102,241,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366f1', fontWeight: '800', flexShrink: 0 }}>
+                      <div style={{ 
+                        width: '38px', 
+                        height: '38px', 
+                        borderRadius: '50%', 
+                        background: 'rgba(0, 0, 0, 0.04)', 
+                        boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)',
+                        border: 'var(--inset-border)',
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center', 
+                        color: 'var(--apple-blue)', 
+                        fontWeight: '800', 
+                        flexShrink: 0 
+                      }}>
                         {(std.mahasiswa?.name || '?').charAt(0)}
                       </div>
                       <div style={{ minWidth: 0, flex: 1 }}>
                         <p style={{ margin: '0 0 2px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{std.mahasiswa?.name || 'Mahasiswa'}</p>
                         <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--color-muted)' }}>NIM: {std.nim}</p>
                       </div>
-                      <span style={{ 
-                        padding: '4px 10px', 
-                        background: st.bg, 
+                      <span className="siakad-badge-status" style={{ 
                         color: st.color, 
-                        border: `1px solid ${st.border}`, 
-                        borderRadius: '50px', 
-                        fontSize: '0.7rem', 
-                        fontWeight: '700', 
-                        whiteSpace: 'nowrap',
-                        minWidth: '95px',
-                        textAlign: 'center',
-                        display: 'inline-block'
+                        borderColor: st.border
                       }}>{st.label}</span>
                     </div>
                   </button>
@@ -228,11 +244,11 @@ export default function KrsApprovalPage() {
             })()}
           </div>
         </div>
-
-        {/* Right Detail */}
+ 
+         {/* Right Detail */}
         <div>
           {selectedSub ? (
-            <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)', display: 'flex', flexDirection: 'column' }}>
+            <div className="stagger-2" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: 'var(--glass-border)', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)', display: 'flex', flexDirection: 'column' }}>
               {/* Header */}
               <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                 <div>
@@ -241,52 +257,53 @@ export default function KrsApprovalPage() {
                 </div>
                 {(() => {
                   const st = STATUS_STYLES[selectedSub.status] || STATUS_STYLES.pending;
-                  return <span style={{ 
-                    padding: '8px 16px', 
-                    background: st.bg, 
+                  return <span className="siakad-badge-status" style={{ 
                     color: st.color, 
-                    border: `1px solid ${st.border}`, 
-                    borderRadius: '999px', 
-                    fontWeight: '800', 
-                    fontSize: '0.85rem',
-                    minWidth: '100px',
-                    textAlign: 'center'
+                    borderColor: st.border
                   }}>{st.label}</span>;
                 })()}
               </div>
-
-              <div style={{ padding: '28px' }}>
+ 
+               <div style={{ padding: '28px' }}>
                 {/* Course Table */}
                 <h3 style={{ margin: '0 0 16px 0', fontWeight: '700', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <i className="ph ph-books" style={{ color: '#6366f1' }}></i> Mata Kuliah yang Diambil
                 </h3>
-                <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.5)', marginBottom: '24px' }}>
-                  <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                    <thead>
-                      <tr style={{ background: 'rgba(0,0,0,0.04)', borderBottom: '1px solid var(--color-border)' }}>
-                        {['Kode', 'Mata Kuliah', 'SKS'].map(h => (
-                          <th key={h} style={{ padding: '12px 16px', fontWeight: '700', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-muted)' }}>{h}</th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {(selectedSub.courses || []).map((c, i) => (
-                        <tr key={c.id || i} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                          <td style={{ padding: '12px 16px' }}><span style={{ padding: '4px 12px', background: 'rgba(99,102,241,0.1)', color: '#6366f1', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>{c.code}</span></td>
-                          <td style={{ padding: '12px 16px', fontWeight: '600', color: 'var(--color-text)' }}>{c.name}</td>
-                          <td style={{ padding: '12px 16px' }}><span style={{ display: 'inline-block', whiteSpace: 'nowrap', padding: '4px 12px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700' }}>{c.sks} SKS</span></td>
-                        </tr>
-                      ))}
-                      <tr style={{ background: 'rgba(0,0,0,0.02)' }}>
-                        <td colSpan="2" style={{ padding: '12px 16px', fontWeight: '700', color: 'var(--color-text)', textAlign: 'right' }}>Total SKS:</td>
-                        <td style={{ padding: '12px 16px' }}>
-                          <span style={{ padding: '6px 14px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', borderRadius: '50px', fontWeight: '800', fontSize: '1rem' }}>
-                            {(selectedSub.courses || []).reduce((acc, c) => acc + (parseInt(c.sks) || 0), 0)} SKS
-                          </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+                  {(selectedSub.courses || []).map((c, i) => (
+                    <div key={c.id || i} style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '14px 20px',
+                      background: 'var(--liquid-bg)',
+                      border: 'var(--inset-border)',
+                      borderRadius: '16px',
+                      boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)'
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <span className="siakad-badge" style={{ background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important', color: 'white !important', padding: '2px 10px !important', fontSize: '0.75rem !important', fontWeight: '700 !important' }}>{c.code}</span>
+                        <span style={{ fontWeight: '600', color: 'var(--color-text)' }}>{c.name}</span>
+                      </div>
+                      <span className="siakad-badge" style={{ background: 'var(--glass-bg)', color: '#10b981 !important', padding: '2px 10px !important', fontSize: '0.75rem !important', fontWeight: '700 !important', border: '1px solid rgba(16,185,129,0.15)', boxShadow: 'inset 1px 1px 3px rgba(0,0,0,0.1), 1px 1px 2px rgba(255,255,255,0.8)' }}>{c.sks} SKS</span>
+                    </div>
+                  ))}
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    padding: '14px 20px',
+                    marginTop: '4px',
+                    background: 'var(--glass-bg)',
+                    border: 'var(--glass-border)',
+                    borderRadius: '16px',
+                    boxShadow: 'var(--glass-shadow)'
+                  }}>
+                    <span style={{ fontWeight: '700', color: 'var(--color-text)' }}>Total SKS:</span>
+                    <span className="siakad-badge" style={{ background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important', color: 'white !important', padding: '4px 14px !important', fontWeight: '800 !important', fontSize: '0.9rem !important' }}>
+                      {(selectedSub.courses || []).reduce((acc, c) => acc + (parseInt(c.sks) || 0), 0)} SKS
+                    </span>
+                  </div>
                 </div>
 
                 {/* History Log Section */}
@@ -304,19 +321,16 @@ export default function KrsApprovalPage() {
                         {record.historySubmissions.map((hist, k) => {
                           const hs = STATUS_STYLES[hist.status] || STATUS_STYLES.pending;
                           return (
-                            <div key={k} style={{ padding: '12px 16px', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '16px', fontSize: '0.85rem' }}>
+                            <div key={k} style={{ padding: '12px 16px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', borderRadius: '16px', fontSize: '0.85rem' }}>
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                                 <span style={{ fontWeight: '700', color: 'var(--color-text)' }}>Pengajuan ID #{hist.id}</span>
-                                <span style={{ 
-                                  padding: '2px 8px', 
-                                  background: hs.bg, 
-                                  color: hs.color, 
-                                  border: `1px solid ${hs.border}`, 
-                                  borderRadius: '50px', 
-                                  fontSize: '0.7rem', 
-                                  fontWeight: '700',
-                                  minWidth: '80px',
-                                  textAlign: 'center'
+                                <span className="siakad-badge" style={{ 
+                                  background: `linear-gradient(135deg, ${hs.color} 0%, ${hs.color} 100%) !important`, 
+                                  color: 'white !important', 
+                                  padding: '2px 8px !important', 
+                                  fontSize: '0.7rem !important', 
+                                  fontWeight: '800 !important',
+                                  minWidth: '80px !important'
                                 }}>{hs.label}</span>
                               </div>
                               {hist.notes && (
@@ -331,8 +345,8 @@ export default function KrsApprovalPage() {
                     </div>
                   );
                 })()}
-
-                {/* Notes */}
+ 
+                 {/* Notes */}
                 <div style={{ marginBottom: '24px' }}>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
                     <i className="ph ph-note-pencil" style={{ color: '#f59e0b' }}></i> Catatan Dosen Wali
@@ -341,24 +355,43 @@ export default function KrsApprovalPage() {
                   <textarea value={notes} onChange={e => setNotes(e.target.value)}
                     placeholder={selectedSub.status === 'pending' ? 'Berikan catatan revisi jika KRS akan ditolak...' : (notes || 'Tidak ada catatan.')}
                     rows="3" disabled={selectedSub.status !== 'pending'}
-                    style={{ width: '100%', padding: '14px 20px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)', background: selectedSub.status !== 'pending' ? 'var(--glass-bg)' : 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }}></textarea>
+                    style={{ width: '100%', padding: '14px 20px', borderRadius: '24px', border: 'var(--inset-border)', background: 'var(--liquid-bg)', color: 'var(--color-text)', fontSize: '0.95rem', outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' }}></textarea>
                 </div>
-
-                {/* Action Buttons */}
-                {selectedSub.status === 'pending' && (
-                  <div style={{ display: 'flex', gap: '12px' }}>
-                    <button onClick={() => handleAction('approved')} disabled={processing}
-                      style={{ flex: 1, padding: '14px', background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', borderRadius: '50px', border: 'none', cursor: processing ? 'not-allowed' : 'pointer', fontWeight: '800', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 8px 20px rgba(16,185,129,0.3)', transition: 'all 0.2s' }}>
-                      <i className="ph ph-check-circle" style={{ fontSize: '1.2rem' }}></i> Setujui KRS
-                    </button>
-                    <button onClick={() => handleAction('rejected')} disabled={processing || !notes.trim()}
-                      style={{ flex: 1, padding: '14px', background: (!notes.trim() || processing) ? 'var(--color-border)' : 'linear-gradient(135deg, #ef4444, #dc2626)', color: (!notes.trim() || processing) ? 'var(--color-muted)' : 'white', borderRadius: '50px', border: 'none', cursor: (!notes.trim() || processing) ? 'not-allowed' : 'pointer', fontWeight: '800', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: (!notes.trim() || processing) ? 'none' : '0 8px 20px rgba(239,68,68,0.3)', transition: 'all 0.2s' }}
-                      title={!notes.trim() ? 'Isi catatan terlebih dahulu untuk menolak KRS' : ''}>
-                      <i className="ph ph-x-circle" style={{ fontSize: '1.2rem' }}></i>
-                      {!notes.trim() ? 'Isi Catatan Dulu' : 'Tolak & Minta Revisi'}
-                    </button>
-                  </div>
-                )}
+ 
+                 {/* Action Buttons */}
+                 {selectedSub.status === 'pending' && (
+                   <div style={{ display: 'flex', gap: '16px' }}>
+                     <button 
+                       onClick={() => handleAction('approved')} 
+                       disabled={processing}
+                       className="siakad-btn-success"
+                       style={{ 
+                         flex: 1, 
+                         padding: '14px',
+                         justifyContent: 'center'
+                       }}
+                     >
+                       <i className="ph ph-check-circle" style={{ fontSize: '1.2rem' }}></i> Setujui KRS
+                     </button>
+                     <button 
+                       onClick={() => handleAction('rejected')} 
+                       disabled={processing || !notes.trim()}
+                       className="siakad-btn-primary"
+                       style={{ 
+                         flex: 1, 
+                         padding: '14px',
+                         justifyContent: 'center',
+                         background: (!notes.trim() || processing) ? 'var(--color-border) !important' : undefined, 
+                         color: (!notes.trim() || processing) ? 'var(--color-muted) !important' : undefined,
+                         boxShadow: (!notes.trim() || processing) ? 'none !important' : undefined
+                       }}
+                       title={!notes.trim() ? 'Isi catatan terlebih dahulu untuk menolak KRS' : ''}
+                     >
+                       <i className="ph ph-x-circle" style={{ fontSize: '1.2rem' }}></i>
+                       {!notes.trim() ? 'Isi Catatan Dulu' : 'Tolak & Minta Revisi'}
+                     </button>
+                   </div>
+                 )}
               </div>
             </div>
           ) : (

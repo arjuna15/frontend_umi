@@ -131,12 +131,29 @@ export default function DosenQuizCreate() {
 
   return (
     <div className="fade-in" style={{ paddingBottom: '40px' }}>
-            <div style={{ marginBottom: '32px' }}>
+      <div style={{ marginBottom: '32px' }}>
         <div className="siakad-page-header">
         <div className="siakad-page-header-glow"></div>
         <div className="siakad-page-header-grid"></div>
           <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <button type="button" onClick={() => router.back()} style={{ background: 'rgba(196, 30, 58, 0.15)', border: '1px solid rgba(196, 30, 58, 0.3)', padding: '12px 20px', borderRadius: '50px', cursor: 'pointer', color: '#C41E3A', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.3s', fontWeight: 'bold' }}>
+            <button 
+              type="button" 
+              onClick={() => router.back()} 
+              style={{ 
+                background: 'var(--glass-bg)', 
+                border: 'var(--glass-border)', 
+                padding: '12px 24px', 
+                borderRadius: '50px', 
+                cursor: 'pointer', 
+                color: 'var(--apple-red)', 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '8px', 
+                transition: 'all 0.3s', 
+                fontWeight: 'bold',
+                boxShadow: 'var(--glass-shadow)' 
+              }}
+            >
               <i className="ph ph-arrow-left"></i> Kembali
             </button>
             <div style={{ flex: '1 1 300px' }}>
@@ -149,8 +166,8 @@ export default function DosenQuizCreate() {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="siakad-card stagger-1" style={{ padding: '24px', marginBottom: '24px' }}>
-          <h3 style={{ margin: '0 0 16px 0' }}>Pengaturan Kuis</h3>
+        <div className="siakad-card stagger-1" style={{ padding: '24px', marginBottom: '24px', borderRadius: '24px' }}>
+          <h3 style={{ margin: '0 0 16px 0', fontWeight: '800', color: 'var(--color-text)' }}>Pengaturan Kuis</h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', marginBottom: '20px' }}>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Mata Kuliah</label>
@@ -192,15 +209,41 @@ export default function DosenQuizCreate() {
                 style={{ width: '100%' }}
               />
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', marginTop: '30px', gap: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', marginTop: '30px', gap: '12px' }}>
               <input
                 type="checkbox"
                 id="require-proctoring-check"
                 checked={requireProctoring}
                 onChange={(e) => setRequireProctoring(e.target.checked)}
-                style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+                style={{ display: 'none' }}
               />
-              <label htmlFor="require-proctoring-check" style={{ fontWeight: 600, cursor: 'pointer', color: 'var(--color-text)' }}>
+              <div 
+                onClick={() => setRequireProctoring(!requireProctoring)}
+                style={{ 
+                  width: '54px', 
+                  height: '28px', 
+                  borderRadius: '50px', 
+                  background: 'var(--glass-bg)', 
+                  boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)',
+                  border: 'var(--inset-border)',
+                  position: 'relative',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                <div style={{ 
+                  width: '20px', 
+                  height: '20px', 
+                  borderRadius: '50%', 
+                  background: requireProctoring ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--color-muted)', 
+                  boxShadow: requireProctoring ? '0 2px 5px rgba(196,30,58,0.4)' : '0 2px 5px rgba(0,0,0,0.2)',
+                  position: 'absolute',
+                  top: '3px',
+                  left: requireProctoring ? '29px' : '4px',
+                  transition: 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+                }}></div>
+              </div>
+              <label htmlFor="require-proctoring-check" style={{ fontWeight: 600, cursor: 'pointer', color: 'var(--color-text)', fontSize: '0.9rem' }}>
                 Aktifkan Pengawasan Kamera & Anti-Tab Switch (Proctoring Ujian)
               </label>
             </div>
@@ -208,10 +251,10 @@ export default function DosenQuizCreate() {
         </div>
 
         {questions.map((q, idx) => (
-          <div key={idx} className={`stagger-${(idx % 5) + 2}`} style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '16px', marginBottom: '24px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)', border: '1px solid var(--color-border)', position: 'relative', zIndex: 50 - idx }}>
-            <div className="siakad-modal-header">
+          <div key={idx} className={`siakad-card stagger-${(idx % 5) + 2}`} style={{ padding: '24px', borderRadius: '24px', marginBottom: '24px', position: 'relative', zIndex: 50 - idx }}>
+            <div className="siakad-modal-header" style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '16px', marginBottom: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <h3 style={{ margin: '0', color: 'var(--color-text)' }}>Soal {idx + 1}</h3>
+                <h3 style={{ margin: '0', color: 'var(--color-text)', fontWeight: '800' }}>Soal {idx + 1}</h3>
                 <CustomSelect
                   value={q.type}
                   onChange={(val) => handleChange(idx, 'type', val)}
@@ -224,7 +267,18 @@ export default function DosenQuizCreate() {
                 />
               </div>
               {questions.length > 1 && (
-                <button type="button" onClick={() => removeQuestion(idx)} style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}>Hapus Soal</button>
+                <button 
+                  type="button" 
+                  onClick={() => removeQuestion(idx)} 
+                  className="siakad-btn-primary" 
+                  style={{ 
+                    padding: '8px 16px', 
+                    borderRadius: '50px',
+                    fontSize: '0.85rem' 
+                  }}
+                >
+                  Hapus Soal
+                </button>
               )}
             </div>
             
@@ -232,7 +286,7 @@ export default function DosenQuizCreate() {
               required
               value={q.question} onChange={e=>handleChange(idx, 'question', e.target.value)}
               className="siakad-input" 
-              style={{ width: '100%', height: '80px', marginBottom: '16px', resize: 'vertical' }} 
+              style={{ width: '100%', height: '100px', marginBottom: '16px', resize: 'vertical' }} 
               placeholder="Tuliskan pertanyaan di sini..."
             ></textarea>
             
@@ -240,19 +294,19 @@ export default function DosenQuizCreate() {
               <>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
                   <div>
-                    <label>Opsi A</label>
+                    <label style={{ fontWeight: '600', fontSize: '0.85rem' }}>Opsi A</label>
                     <input required type="text" value={q.option_a} onChange={e=>handleChange(idx, 'option_a', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
                   </div>
                   <div>
-                    <label>Opsi B</label>
+                    <label style={{ fontWeight: '600', fontSize: '0.85rem' }}>Opsi B</label>
                     <input required type="text" value={q.option_b} onChange={e=>handleChange(idx, 'option_b', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
                   </div>
                   <div>
-                    <label>Opsi C</label>
+                    <label style={{ fontWeight: '600', fontSize: '0.85rem' }}>Opsi C</label>
                     <input required type="text" value={q.option_c} onChange={e=>handleChange(idx, 'option_c', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
                   </div>
                   <div>
-                    <label>Opsi D</label>
+                    <label style={{ fontWeight: '600', fontSize: '0.85rem' }}>Opsi D</label>
                     <input required type="text" value={q.option_d} onChange={e=>handleChange(idx, 'option_d', e.target.value)} className="siakad-input" style={{ width: '100%', marginTop: '4px' }} />
                   </div>
                 </div>
@@ -282,14 +336,36 @@ export default function DosenQuizCreate() {
                   <button 
                     type="button" 
                     onClick={() => handleChange(idx, 'correct_answer', 'True')}
-                    style={{ flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: q.correct_answer === 'True' ? '#10b981' : 'var(--glass-bg)', color: q.correct_answer === 'True' ? 'white' : 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer' }}
+                    style={{ 
+                      flex: 1, 
+                      padding: '12px', 
+                      borderRadius: '50px', 
+                      border: q.correct_answer === 'True' ? 'none' : 'var(--glass-border)', 
+                      background: q.correct_answer === 'True' ? 'linear-gradient(135deg, #047857 0%, #065f46 100%)' : 'var(--glass-bg)', 
+                      color: q.correct_answer === 'True' ? 'white' : 'var(--color-text)', 
+                      fontWeight: 'bold', 
+                      cursor: 'pointer',
+                      boxShadow: q.correct_answer === 'True' ? '3px 3px 6px rgba(4,120,87,0.3)' : 'var(--glass-shadow)',
+                      transition: 'all 0.2s'
+                    }}
                   >
                     Benar (True)
                   </button>
                   <button 
                     type="button" 
                     onClick={() => handleChange(idx, 'correct_answer', 'False')}
-                    style={{ flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: q.correct_answer === 'False' ? '#ef4444' : 'var(--glass-bg)', color: q.correct_answer === 'False' ? 'white' : 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer' }}
+                    style={{ 
+                      flex: 1, 
+                      padding: '12px', 
+                      borderRadius: '50px', 
+                      border: q.correct_answer === 'False' ? 'none' : 'var(--glass-border)', 
+                      background: q.correct_answer === 'False' ? 'linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)' : 'var(--glass-bg)', 
+                      color: q.correct_answer === 'False' ? 'white' : 'var(--color-text)', 
+                      fontWeight: 'bold', 
+                      cursor: 'pointer',
+                      boxShadow: q.correct_answer === 'False' ? '3px 3px 6px rgba(185,28,28,0.3)' : 'var(--glass-shadow)',
+                      transition: 'all 0.2s'
+                    }}
                   >
                     Salah (False)
                   </button>
@@ -303,7 +379,7 @@ export default function DosenQuizCreate() {
                 <textarea 
                   value={q.correct_answer_text} onChange={e=>handleChange(idx, 'correct_answer_text', e.target.value)}
                   className="siakad-input" 
-                  style={{ width: '100%', height: '80px', marginTop: '8px', resize: 'vertical' }} 
+                  style={{ width: '100%', height: '100px', marginTop: '8px', resize: 'vertical' }} 
                   placeholder="Tuliskan kunci jawaban esai atau poin-poin yang diharapkan..."
                 ></textarea>
               </div>
@@ -312,10 +388,34 @@ export default function DosenQuizCreate() {
         ))}
 
         <div style={{ display: 'flex', gap: '16px' , flexWrap: 'wrap' }}>
-          <button type="button" onClick={addQuestion} style={{ flex: 1, background: 'var(--glass-bg)', color: 'var(--color-text)', border: '2px dashed var(--color-border)', padding: '12px 24px', borderRadius: '50px', cursor: 'pointer', fontWeight: 600 }}>
+          <button 
+            type="button" 
+            onClick={addQuestion} 
+            style={{ 
+              flex: 1, 
+              background: 'var(--glass-bg)', 
+              color: 'var(--color-text)', 
+              border: 'var(--glass-border)', 
+              padding: '12px 24px', 
+              borderRadius: '50px', 
+              cursor: 'pointer', 
+              fontWeight: 'bold',
+              boxShadow: 'var(--glass-shadow)',
+              transition: 'all 0.2s'
+            }}
+          >
             <i className="ph ph-plus"></i> Tambah Soal
           </button>
-          <button type="submit" disabled={loading} style={{ flex: 1, background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '50px', cursor: loading ? 'not-allowed' : 'pointer', fontWeight: 800, fontSize: '1rem', boxShadow: '0 8px 20px rgba(37,99,235,0.3)' }}>
+          <button 
+            type="submit" 
+            disabled={loading} 
+            className="siakad-btn-primary"
+            style={{ 
+              flex: 1, 
+              padding: '12px 24px',
+              justifyContent: 'center'
+            }}
+          >
             {loading ? 'Menyimpan...' : 'Terbitkan Kuis Sekarang'}
           </button>
         </div>

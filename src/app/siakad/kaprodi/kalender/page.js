@@ -292,8 +292,9 @@ export default function KaprodiKalenderPage() {
           aspect-ratio: 1;
           width: 100%;
           border-radius: 10px;
-          border: 1px solid var(--color-border);
-          background: rgba(128,128,128,0.06);
+          border: var(--inset-border);
+          background: var(--liquid-bg);
+          box-shadow: inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light);
           cursor: pointer;
           display: flex;
           flex-direction: column;
@@ -320,8 +321,9 @@ export default function KaprodiKalenderPage() {
         }
         .segmented-control {
           display: flex;
-          background: rgba(255,255,255,0.05);
-          border: 1px solid var(--color-border);
+          background: var(--liquid-bg);
+          border: var(--inset-border);
+          box-shadow: inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light);
           border-radius: 12px;
           padding: 4px;
           gap: 4px;
@@ -344,9 +346,9 @@ export default function KaprodiKalenderPage() {
           gap: 6px;
         }
         .segment-btn.active {
-          background: var(--color-primary, #3b82f6);
+          background: linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%);
           color: white;
-          box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+          box-shadow: 0 4px 12px rgba(196, 30, 58, 0.3);
         }
       `}} />
       <div className="siakad-page-header">
@@ -361,14 +363,14 @@ export default function KaprodiKalenderPage() {
 
       <div className="calendar-responsive-container">
         {/* Kalender Bulanan */}
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column' }}>
+        <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>{monthsMap[month]} {year}</h3>
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <button onClick={handlePrevMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <button onClick={handlePrevMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <i className="ph ph-caret-left"></i>
               </button>
-              <button onClick={handleNextMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <button onClick={handleNextMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <i className="ph ph-caret-right"></i>
               </button>
             </div>
@@ -394,20 +396,27 @@ export default function KaprodiKalenderPage() {
                   onClick={() => item.day && setSelectedDay(item.day)}
                   className={item.day ? "day-cell" : ""}
                   style={{
-                    border: item.day ? (isSelected ? '2px solid #3b82f6' : undefined) : 'none',
-                    background: item.day ? (isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(128,128,128,0.2)' : undefined)) : 'transparent',
+                    border: item.day ? (isSelected ? '1px solid #C41E3A' : (isToday ? '1px solid #f59e0b' : 'var(--glass-border)')) : 'none',
+                    background: item.day ? (isSelected ? 'var(--liquid-bg)' : 'var(--glass-bg)') : 'transparent',
+                    boxShadow: item.day ? (isSelected ? 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' : 'var(--glass-shadow)') : 'none',
                     cursor: item.day ? 'pointer' : 'default',
                     pointerEvents: item.day ? 'auto' : 'none',
                     aspectRatio: '1',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    padding: '8px',
+                    transition: 'all 0.2s ease-in-out'
                   }}
                 >
-                  <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#3b82f6' : 'var(--color-text)') : 'transparent' }}>{item.day}</span>
-                  <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
+                  <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#C41E3A' : 'var(--color-text)') : 'transparent' }}>{item.day}</span>
+                  <div style={{ display: 'flex', gap: '4px', justifyContent: 'center', alignItems: 'center' }}>
                     {item.day && hasClass && (
                       <span style={{
                         width: '6px', height: '6px', borderRadius: '50%',
-                        background: hasSwap ? '#f59e0b' : '#3b82f6',
-                        boxShadow: `0 0 6px ${hasSwap ? '#f59e0b' : '#3b82f6'}`
+                        background: hasSwap ? '#f59e0b' : '#C41E3A',
+                        boxShadow: `0 0 6px ${hasSwap ? '#f59e0b' : '#C41E3A'}`
                       }} />
                     )}
                   </div>
@@ -418,8 +427,8 @@ export default function KaprodiKalenderPage() {
         </div>
 
         {/* Panel Detail Harian */}
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid var(--color-border)', paddingBottom: '12px' }}>
+        <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid var(--color-border)', paddingBottom: '12px', flexWrap: 'wrap', gap: '12px' }}>
             <div>
               <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', fontWeight: '600' }}>AGENDA HARIAN PRODI</p>
               <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: '2px 0 0 0' }}>
@@ -433,8 +442,7 @@ export default function KaprodiKalenderPage() {
                   setSwapForm({ ...swapForm, date: selectedDateStr });
                   setShowSwapModal(true);
                 }} 
-                className="siakad-btn-primary" 
-                style={{ padding: '8px 16px', fontSize: '0.8rem' }}
+                style={{ padding: '8px 16px', fontSize: '0.8rem', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}
               >
                 <i className="ph ph-shuffle"></i> Swap Kelas
               </button>
@@ -455,16 +463,17 @@ export default function KaprodiKalenderPage() {
                   borderRadius: '16px', 
                   background: 'var(--glass-bg)', 
                   borderLeft: `4px solid ${getBadgeStyle(agenda.status).text}`,
-                  borderTop: '1px solid var(--color-border)',
-                  borderRight: '1px solid var(--color-border)',
-                  borderBottom: '1px solid var(--color-border)'
+                  borderTop: 'var(--glass-border)',
+                  borderRight: 'var(--glass-border)',
+                  borderBottom: 'var(--glass-border)',
+                  boxShadow: 'var(--glass-shadow)'
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
                   {(() => {
                     const badge = getBadgeStyle(agenda.status);
                     return (
-                      <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: badge.bg, color: badge.text }}>
+                      <span className="siakad-badge" style={{ color: badge.text }}>
                         {badge.label}
                       </span>
                     );
@@ -489,8 +498,9 @@ export default function KaprodiKalenderPage() {
                         setShowEditModal(true);
                       }}
                       style={{
-                        background: 'rgba(255,255,255,0.05)',
-                        border: '1px solid rgba(255,255,255,0.1)',
+                        background: 'var(--glass-bg)',
+                        border: 'var(--glass-border)',
+                        boxShadow: 'var(--glass-shadow)',
                         borderRadius: '50%',
                         width: '28px', height: '28px',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -517,15 +527,15 @@ export default function KaprodiKalenderPage() {
       {showSwapModal && (
         <ModalShell title="Swap Penukaran Jadwal" icon="ph-shuffle" onClose={() => setShowSwapModal(false)} footer={
           <>
-            <button onClick={() => setShowSwapModal(false)} style={{ padding: '10px 20px', border: 'none', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button onClick={handleSaveSwap} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
+            <button onClick={() => setShowSwapModal(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700, boxShadow: 'var(--glass-shadow)' }}>Batal</button>
+            <button onClick={handleSaveSwap} disabled={saving} style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>
               {saving ? 'Menyimpan...' : 'Terapkan Swap'}
             </button>
           </>
         }>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tanggal Penukaran</label>
-            <input type="text" className="siakad-input" value={swapForm.date} disabled />
+            <input type="text" className="siakad-input" value={swapForm.date} disabled style={{ width: '100%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
           </div>
 
           <div style={{ marginBottom: '16px' }}>
@@ -562,7 +572,7 @@ export default function KaprodiKalenderPage() {
               onChange={(e) => setSwapForm({ ...swapForm, notes: e.target.value })}
               placeholder="Contoh: Pertemuan diganti karena tanggal merah"
               rows={3}
-              style={{ resize: 'vertical' }}
+              style={{ width: '100%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', padding: '10px 16px', borderRadius: '16px', outline: 'none', resize: 'vertical' }}
             />
           </div>
         </ModalShell>
@@ -571,8 +581,8 @@ export default function KaprodiKalenderPage() {
       {showEditModal && (
         <ModalShell title={editForm.editMode === 'session' ? `Ubah Jadwal Sesi ${selectedDateStr}` : 'Ubah Jadwal Kuliah Permanen'} icon="ph-calendar" onClose={() => setShowEditModal(false)} footer={
           <>
-            <button onClick={() => setShowEditModal(false)} style={{ padding: '10px 20px', border: 'none', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button onClick={handleSaveSchedule} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
+            <button onClick={() => setShowEditModal(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700, boxShadow: 'var(--glass-shadow)' }}>Batal</button>
+            <button onClick={handleSaveSchedule} disabled={saving} style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>
               {saving ? 'Menyimpan...' : (editForm.editMode === 'session' ? 'Terapkan untuk Sesi Ini' : 'Simpan Permanen')}
             </button>
           </>
@@ -625,7 +635,7 @@ export default function KaprodiKalenderPage() {
           </div>
           )}
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px', alignItems: 'start' }}>
             <div>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jam Mulai</label>
               <CustomTimePicker

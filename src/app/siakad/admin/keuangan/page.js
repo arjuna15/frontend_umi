@@ -219,7 +219,7 @@ export default function AdminKeuangan() {
             <button 
               onClick={() => openModal()}
               className="siakad-btn-primary"
-              style={{ padding: '12px 24px' }}
+              style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 24px' }}
             >
               <i className="ph ph-plus-circle"></i> Tambah Tagihan
             </button>
@@ -228,8 +228,8 @@ export default function AdminKeuangan() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px', marginBottom: '24px' }}>
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' , flexWrap: 'wrap'}}>
-          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' , flexWrap: 'wrap' }}>
+          <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '48px', height: '48px', borderRadius: '12px',   display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
             <i className="ph ph-coins"></i>
           </div>
           <div>
@@ -237,8 +237,8 @@ export default function AdminKeuangan() {
             <h3 style={{ margin: 0, fontSize: '1.2rem' }}>{formatRupiah(billings.filter(b => b.status === 'Lunas').reduce((acc, b) => acc + parseFloat(b.amount || 0), 0))}</h3>
           </div>
         </div>
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' , flexWrap: 'wrap'}}>
-          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' , flexWrap: 'wrap' }}>
+          <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '48px', height: '48px', borderRadius: '12px',   display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
             <i className="ph ph-warning-circle"></i>
           </div>
           <div>
@@ -253,7 +253,7 @@ export default function AdminKeuangan() {
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Tagihan Keuangan</h3>
           <div style={{ position: 'relative', width: '300px' }}>
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
-            <input type="text" className="siakad-input" placeholder="Cari nama mahasiswa, deskripsi, status..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', paddingLeft: '46px', color: 'var(--color-text)', fontSize: '0.9rem' }} />
+            <input type="text" className="siakad-input" placeholder="Cari nama mahasiswa, deskripsi, status..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', paddingLeft: '46px',  fontSize: '0.9rem' }} />
           </div>
         </div>
 
@@ -261,7 +261,7 @@ export default function AdminKeuangan() {
           <div style={{ textAlign: 'center', padding: '40px', color: 'var(--color-text)' }}>Memuat data keuangan...</div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
-            <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
+            <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
               <thead>
                 <tr>
                   <th style={{ padding: '16px', fontWeight: '600' }}>MAHASISWA</th>
@@ -358,7 +358,7 @@ export default function AdminKeuangan() {
               >
                 Batal
               </button>
-              <button type="submit" form="single-billing-form" className="siakad-btn-primary" style={{ minWidth: '180px' }}>
+              <button type="submit" form="single-billing-form" className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', minWidth: '180px' }}>
                 {isEdit ? 'Simpan Perubahan' : 'Buat Tagihan'}
               </button>
             </>
@@ -388,7 +388,7 @@ export default function AdminKeuangan() {
                   required
                   placeholder="Contoh: UKT semester berjalan"
                   className="siakad-input"
-                  style={{ width: '100%', color: 'var(--color-text)' }}
+                  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }}
                 />
               </div>
 
@@ -401,7 +401,7 @@ export default function AdminKeuangan() {
                   required
                   placeholder="4500000"
                   className="siakad-input"
-                  style={{ width: '100%', color: 'var(--color-text)' }}
+                  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }}
                 />
               </div>
 
@@ -450,7 +450,7 @@ export default function AdminKeuangan() {
               >
                 Batal
               </button>
-              <button type="submit" form="bulk-billing-form" className="siakad-btn-primary" style={{ minWidth: '180px' }}>
+              <button type="submit" form="bulk-billing-form" className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', minWidth: '180px' }}>
                 Simpan & Kirim
               </button>
             </>

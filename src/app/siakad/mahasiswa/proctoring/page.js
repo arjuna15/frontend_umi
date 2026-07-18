@@ -215,8 +215,8 @@ export default function ProctoringStudentPage() {
         </div>
 
         {message.text && (
-          <div style={{ padding: '16px 20px', borderRadius: '12px', marginBottom: '24px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', border: `1px solid ${message.type === 'success' ? '#10b981' : '#ef4444'}`, color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.4rem' }}></i>
+          <div style={{ padding: '14px 20px', borderRadius: '50px', marginBottom: '24px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '700', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.2rem' }}></i>
             {message.text}
           </div>
         )}
@@ -260,9 +260,9 @@ export default function ProctoringStudentPage() {
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 4px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>UJIAN BERLANGSUNG</p>
             <h1 style={{ color: 'white', fontSize: '1.6rem', fontWeight: '800', margin: 0 }}>{session?.quiz_name || session?.title || 'Sesi Ujian'}</h1>
           </div>
-          <div style={{ background: timeLeft <= 300 ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.1)', padding: '12px 24px', borderRadius: '14px', backdropFilter: 'blur(10px)', border: `1px solid ${timeLeft <= 300 ? 'rgba(239,68,68,0.4)' : 'rgba(255,255,255,0.15)'}` }}>
-            <p style={{ margin: '0 0 2px 0', fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Sisa Waktu</p>
-            <p style={{ margin: 0, fontSize: '1.6rem', fontWeight: '800', color: timeLeft <= 300 ? '#ef4444' : 'white', fontFamily: 'monospace' }}>{formatTimer(timeLeft)}</p>
+          <div style={{ background: 'var(--liquid-bg)', padding: '12px 24px', borderRadius: '14px', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: timeLeft <= 300 ? '#ef4444' : 'var(--color-text)' }}>
+            <p style={{ margin: '0 0 2px 0', fontSize: '0.7rem', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Sisa Waktu</p>
+            <p style={{ margin: 0, fontSize: '1.6rem', fontWeight: '800', color: timeLeft <= 300 ? '#ef4444' : 'var(--color-text)', fontFamily: 'monospace' }}>{formatTimer(timeLeft)}</p>
           </div>
         </div>
       </div>
@@ -272,7 +272,7 @@ export default function ProctoringStudentPage() {
         {result !== null ? (
           /* Case A: Result is available */
           <div className="siakad-card" style={{ padding: '32px', minHeight: '400px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-            <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px', color: '#10b981' }}>
+            <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'var(--liquid-bg)', border: 'var(--inset-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px', color: '#10b981', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
               <i className="ph ph-check" style={{ fontSize: '3rem' }}></i>
             </div>
             <h3 style={{ margin: '0 0 8px 0', fontSize: '1.6rem', fontWeight: '800', color: 'var(--color-text)' }}>Ujian Selesai Dikirim</h3>
@@ -281,18 +281,18 @@ export default function ProctoringStudentPage() {
             </p>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', width: '100%', maxWidth: '400px', marginBottom: '24px' }}>
-              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', padding: '16px' }}>
+              <div style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '12px', padding: '16px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                 <span style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-muted)', marginBottom: '4px' }}>Nilai Anda</span>
                 <span style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)' }}>{result.score}</span>
               </div>
-              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '12px', padding: '16px' }}>
+              <div style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '12px', padding: '16px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                 <span style={{ display: 'block', fontSize: '0.8rem', color: 'var(--color-muted)', marginBottom: '4px' }}>Benar / Total</span>
                 <span style={{ fontSize: '1.4rem', fontWeight: '800', color: '#10b981' }}>{result.correct_count} <span style={{ fontSize: '1rem', color: 'var(--color-muted)' }}>/ {result.total_questions}</span></span>
               </div>
             </div>
 
             {(result.has_essay || result.essay_count > 0 || quizData?.questions?.some(q => q.type === 'essay' || q.question_type === 'essay')) && (
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.2)', color: '#f59e0b', padding: '10px 16px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: '600', marginBottom: '24px' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--glass-bg)', border: 'var(--glass-border)', color: '#f59e0b', padding: '10px 16px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: '600', marginBottom: '24px', boxShadow: 'var(--glass-shadow)', borderLeft: '4px solid #f59e0b' }}>
                 <i className="ph ph-info"></i>
                 <span>Menunggu Penilaian Esai oleh Dosen</span>
               </div>
@@ -300,9 +300,7 @@ export default function ProctoringStudentPage() {
 
             <button 
               onClick={() => router.push('/siakad/mahasiswa/elearning')} 
-              style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', color: 'var(--color-text)', padding: '12px 24px', borderRadius: '10px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px' }}
-              onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.12)'}
-              onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+              style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', color: 'var(--color-text)', padding: '12px 24px', borderRadius: '50px', fontWeight: '800', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: 'var(--glass-shadow)' }}
             >
               <i className="ph ph-arrow-left"></i> Kembali ke E-Learning
             </button>
@@ -316,7 +314,7 @@ export default function ProctoringStudentPage() {
         ) : quizData !== null ? (
           /* Case C: Quiz loaded */
           <div className="siakad-card" style={{ padding: '32px', minHeight: '400px', display: 'flex', flexDirection: 'column', gap: '24px', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)' }}>
-            <div style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+            <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               <div>
                 <h3 style={{ margin: 0, fontSize: '1.3rem', fontWeight: '800', color: 'var(--color-text)' }}>Lembar Soal Ujian</h3>
                 <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}>Jawab seluruh pertanyaan dengan teliti. Pindah tab akan terekam oleh sistem.</p>
@@ -324,8 +322,8 @@ export default function ProctoringStudentPage() {
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
                 <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '6px' }}>
                    Progress: {Object.keys(answers).filter(k => answers[k] !== '').length} / {quizData.questions?.length || 0} Soal Dijawab
-                </span>
-                <div style={{ width: '150px', height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '50px', overflow: 'hidden' }}>
+                 </span>
+                <div style={{ width: '150px', height: '8px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '50px', overflow: 'hidden', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)' }}>
                   <div style={{ 
                     width: `${((Object.keys(answers).filter(k => answers[k] !== '').length) / (quizData.questions?.length || 1)) * 100}%`, 
                     height: '100%', 
@@ -481,7 +479,7 @@ export default function ProctoringStudentPage() {
               ))}
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '16px', borderTop: 'var(--glass-border)', paddingTop: '24px' }}>
               <button 
                 onClick={submitQuizAnswers} 
                 disabled={submitting} 
@@ -552,10 +550,10 @@ export default function ProctoringStudentPage() {
             {violations.length === 0 ? (
               <p style={{ color: 'var(--color-muted)', fontSize: '0.82rem', margin: 0, textAlign: 'center', padding: '12px 0' }}>Tidak ada pelanggaran</p>
             ) : (
-              <div style={{ maxHeight: '200px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ maxHeight: '200px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {violations.map((v, i) => (
-                  <div key={i} style={{ padding: '8px 10px', borderRadius: '8px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.15)', fontSize: '0.78rem' }}>
-                    <span style={{ color: '#ef4444', fontWeight: '600' }}>{(v.type || '').replace(/_/g, ' ')}</span>
+                  <div key={i} style={{ padding: '10px 14px', borderRadius: '12px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', fontSize: '0.78rem', borderLeft: '4px solid #ef4444' }}>
+                    <span style={{ color: '#ef4444', fontWeight: '800' }}>{(v.type || '').replace(/_/g, ' ')}</span>
                     <p style={{ margin: '2px 0 0', color: 'var(--color-muted)', fontSize: '0.72rem' }}>{new Date(v.timestamp).toLocaleTimeString('id-ID')}</p>
                   </div>
                 ))}

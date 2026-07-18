@@ -114,7 +114,7 @@ export default function MahasiswaDashboard() {
       {/* Statistik Atas */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ width: '50px', height: '50px', background: '#0f172a', color: 'white', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
+          <div style={{ width: '50px', height: '50px', background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: 'var(--apple-blue)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
             <i className="ph ph-student"></i>
           </div>
           <div>
@@ -123,7 +123,7 @@ export default function MahasiswaDashboard() {
           </div>
         </div>
         <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ width: '50px', height: '50px', background: 'rgba(196,30,58,0.1)', color: '#C41E3A', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
+          <div style={{ width: '50px', height: '50px', background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: '#C41E3A', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
             <i className="ph ph-books"></i>
           </div>
           <div>
@@ -132,7 +132,7 @@ export default function MahasiswaDashboard() {
           </div>
         </div>
         <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ width: '50px', height: '50px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
+          <div style={{ width: '50px', height: '50px', background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: '#10b981', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
             <i className="ph ph-chart-line-up"></i>
           </div>
           <div>
@@ -144,12 +144,12 @@ export default function MahasiswaDashboard() {
 
       {/* Grid Utama (Jadwal & Deadline) */}
       {dashboardExt && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '32px', alignItems: 'start' }}>
           
           {/* Jadwal Kuliah Hari Ini */}
           <div className="siakad-card" style={{ padding: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <div style={{ background: '#0f172a', color: 'white', padding: '10px', borderRadius: '12px' }}>
+              <div style={{ background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: 'var(--color-text)', padding: '10px', borderRadius: '12px' }}>
                 <i className="ph ph-calendar-check" style={{ fontSize: '1.4rem' }}></i>
               </div>
               <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{getTranslation('class_schedule', lang)}</h2>
@@ -158,9 +158,9 @@ export default function MahasiswaDashboard() {
             {dashboardExt.schedule_today?.length > 0 ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {dashboardExt.schedule_today.map((schedule, idx) => (
-                  <div key={idx} style={{ padding: '16px', background: 'var(--glass-bg)', borderLeft: '4px solid #1e1b4b', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+                  <div key={idx} style={{ padding: '16px', background: 'var(--glass-bg)', borderLeft: '4px solid var(--apple-blue)', borderTop: 'var(--glass-border)', borderRight: 'var(--glass-border)', borderBottom: 'var(--glass-border)', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', boxShadow: 'var(--glass-shadow)' }}>
                     <div>
-                      <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', color: 'var(--color-text)' }}>{schedule.course}</h4>
+                      <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{schedule.course}</h4>
                       <div style={{ display: 'flex', gap: '12px', fontSize: '0.85rem', color: 'var(--color-text)' }}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><i className="ph ph-clock"></i> {schedule.time}</span>
                         <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><i className="ph ph-map-pin"></i> {schedule.room}</span>
@@ -177,7 +177,7 @@ export default function MahasiswaDashboard() {
           {/* Upcoming Deadlines (To-Do List) */}
           <div className="siakad-card" style={{ padding: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <div style={{ background: 'rgba(196,30,58,0.1)', color: '#C41E3A', padding: '10px', borderRadius: '12px' }}>
+              <div style={{ background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: '#C41E3A', padding: '10px', borderRadius: '12px' }}>
                 <i className="ph ph-warning-circle" style={{ fontSize: '1.4rem' }}></i>
               </div>
               <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{lang === 'en' ? 'Timeline & Deadlines' : 'Timeline & Deadline'}</h2>
@@ -185,17 +185,44 @@ export default function MahasiswaDashboard() {
 
             {dashboardExt.upcoming_deadlines?.length > 0 ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                {dashboardExt.upcoming_deadlines.map((deadline, idx) => (
-                  <div key={idx} onClick={() => router.push(deadline.target_url || '#')} style={{ padding: '16px', background: Math.ceil(deadline.due_in_days) <= 1 ? 'rgba(239, 68, 68, 0.1)' : 'rgba(245, 158, 11, 0.1)', border: `1px solid ${Math.ceil(deadline.due_in_days) <= 1 ? 'rgba(239, 68, 68, 0.3)' : 'rgba(245, 158, 11, 0.3)'}`, borderRadius: '12px', cursor: 'pointer', transition: 'transform 0.2s', ':hover': { transform: 'scale(1.02)' } }}>
-                    <div className="siakad-modal-header">
-                      <h4 style={{ margin: 0, fontSize: '1rem', color: 'var(--color-text)', fontWeight: '700' }}>{deadline.title}</h4>
-                      <span style={{ fontSize: '0.75rem', fontWeight: 'bold', padding: '4px 8px', borderRadius: '999px', background: Math.ceil(deadline.due_in_days) <= 1 ? '#ef4444' : '#f59e0b', color: 'white' }}>
-                        H-{Math.ceil(deadline.due_in_days)}
-                      </span>
+                {dashboardExt.upcoming_deadlines.map((deadline, idx) => {
+                  const isUrgent = Math.ceil(deadline.due_in_days) <= 1;
+                  return (
+                    <div 
+                      key={idx} 
+                      onClick={() => router.push(deadline.target_url || '#')} 
+                      style={{ 
+                        padding: '16px', 
+                        background: 'var(--glass-bg)', 
+                        borderLeft: `4px solid ${isUrgent ? '#ef4444' : '#f59e0b'}`, 
+                        borderTop: 'var(--glass-border)',
+                        borderRight: 'var(--glass-border)',
+                        borderBottom: 'var(--glass-border)',
+                        borderRadius: '12px', 
+                        cursor: 'pointer', 
+                        transition: 'all 0.2s', 
+                        boxShadow: 'var(--glass-shadow)'
+                      }}
+                    >
+                      <div className="siakad-modal-header" style={{ marginBottom: '8px' }}>
+                        <h4 style={{ margin: 0, fontSize: '1rem', color: 'var(--color-text)', fontWeight: '700' }}>{deadline.title}</h4>
+                        <span style={{ 
+                          fontSize: '0.72rem', 
+                          fontWeight: '800', 
+                          padding: '4px 10px', 
+                          borderRadius: '50px', 
+                          background: 'var(--liquid-bg)', 
+                          border: isUrgent ? '1px solid rgba(239,68,68,0.3)' : '1px solid rgba(245,158,11,0.3)',
+                          color: isUrgent ? '#ef4444' : '#f59e0b',
+                          boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)'
+                        }}>
+                          H-{Math.ceil(deadline.due_in_days)}
+                        </span>
+                      </div>
+                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-book-open" style={{ marginRight: '6px' }}></i> {deadline.course}</p>
                     </div>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-text)' }}><i className="ph ph-book-open"></i> {deadline.course}</p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ) : (
               <p style={{ color: 'var(--color-muted)', fontSize: '0.95rem', margin: 0, fontStyle: 'italic' }}>Tidak ada tenggat waktu dalam waktu dekat.</p>
@@ -207,10 +234,10 @@ export default function MahasiswaDashboard() {
 
       {/* Kartu Hasil Studi (KHS) Summary */}
       <div id="khs-print-section" className="siakad-card" style={{ padding: '24px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '16px' }} className="no-print">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', gap: '16px' }} className="no-print">
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 4px 0' }}>Kartu Hasil Studi (KHS)</h2>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-            <button onClick={() => window.print()} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 24px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
+            <button onClick={() => window.print()} style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', padding: '10px 24px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: 'var(--glass-shadow)' }}>
               <i className="ph ph-printer"></i> Print View
             </button>
             <button 
@@ -223,36 +250,79 @@ export default function MahasiswaDashboard() {
         </div>
         
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table">
+          <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 10px', textAlign: 'left' }}>
             <thead>
               <tr>
-                <th>Kode MK</th>
-                <th>Mata Kuliah</th>
-                <th>Semester</th>
-                <th>SKS</th>
-                <th>Nilai</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Kode MK</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Mata Kuliah</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Semester</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>SKS</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Nilai</th>
               </tr>
             </thead>
             <tbody>
               {Array.isArray(data.krs) && data.krs.map((item, i) => (
                 <tr key={i}>
-                  <td>{item.course?.code}</td>
-                  <td>{item.course?.name}</td>
-                  <td style={{ color: 'var(--color-muted)' }}>{item.course?.semester}</td>
-                  <td>{item.course?.sks}</td>
-                  <td>
-                    <span className="siakad-badge" style={{
-                      background: item.grade?.startsWith('A') ? 'rgba(16, 185, 129, 0.15)' : 
-                                 item.grade?.startsWith('B') ? 'rgba(59, 130, 246, 0.15)' : 
-                                 item.grade?.startsWith('C') ? 'rgba(245, 158, 11, 0.15)' : 
-                                 item.grade?.startsWith('D') ? 'rgba(239, 68, 68, 0.15)' : 
-                                 item.grade ? 'rgba(239, 68, 68, 0.15)' : 'var(--glass-bg)',
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderLeft: 'var(--inset-border)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    borderRadius: '16px 0 0 16px',
+                    boxShadow: 'inset 3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                    fontWeight: 'bold',
+                    color: 'var(--color-text)'
+                  }}>{item.course?.code}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                    color: 'var(--color-text)',
+                    fontWeight: '600'
+                  }}>{item.course?.name}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                    color: 'var(--color-muted)' 
+                  }}>{item.course?.semester}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                    fontWeight: 'bold',
+                    color: 'var(--color-text)'
+                  }}>{item.course?.sks} SKS</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderRight: 'var(--inset-border)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    borderRadius: '0 16px 16px 0',
+                    boxShadow: 'inset -3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                  }}>
+                    <span style={{
+                      display: 'inline-block',
+                      padding: '4px 14px',
+                      borderRadius: '50px',
+                      background: 'var(--glass-bg)',
+                      border: 'var(--glass-border)',
+                      boxShadow: 'var(--glass-shadow)',
                       color: item.grade?.startsWith('A') ? '#10b981' : 
                              item.grade?.startsWith('B') ? '#3b82f6' : 
                              item.grade?.startsWith('C') ? '#f59e0b' : 
                              item.grade?.startsWith('D') ? '#ef4444' : 
                              item.grade ? '#ef4444' : 'var(--color-muted)',
-                      fontWeight: 'bold',
+                      fontWeight: '800',
+                      fontSize: '0.82rem'
                     }}>
                       {item.grade || 'Menunggu'}
                     </span>

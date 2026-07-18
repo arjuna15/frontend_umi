@@ -118,7 +118,7 @@ export default function AdminBackupPage() {
               onClick={handleGenerateBackup} 
               disabled={isGenerating || isRestoring}
               className="siakad-btn-primary"
-              style={{ padding: '12px 24px', cursor: (isGenerating || isRestoring) ? 'not-allowed' : 'pointer', opacity: (isGenerating || isRestoring) ? 0.7 : 1 }}
+              style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 24px', cursor: (isGenerating || isRestoring) ? 'not-allowed' : 'pointer', opacity: (isGenerating || isRestoring) ? 0.7 : 1 }}
             >
               {isGenerating ? (
                 <><i className="ph ph-spinner ph-spin" style={{ fontSize: '1.2rem' }}></i> Memproses Backup...</>
@@ -131,8 +131,8 @@ export default function AdminBackupPage() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px', marginBottom: '24px' }}>
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '48px', height: '48px', borderRadius: '12px',   display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
             <i className="ph ph-clock-counter-clockwise"></i>
           </div>
           <div>
@@ -140,8 +140,8 @@ export default function AdminBackupPage() {
             <h3 style={{ margin: 0, fontSize: '1.2rem' }}>Harian (02:00)</h3>
           </div>
         </div>
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '48px', height: '48px', borderRadius: '12px',   display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' , flexShrink: 0 }}>
             <i className="ph ph-hard-drives"></i>
           </div>
           <div>
@@ -151,7 +151,7 @@ export default function AdminBackupPage() {
         </div>
       </div>
 
-      <div className="siakad-card" style={{ padding: '24px' }}>
+      <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px' }}>
         <h3 style={{ margin: '0 0 20px 0', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <i className="ph ph-files"></i> Riwayat Backup
         </h3>
@@ -167,7 +167,7 @@ export default function AdminBackupPage() {
         )}
 
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
             <thead>
               <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
                 <th style={{ padding: '16px' }}>Nama File</th>
@@ -187,14 +187,14 @@ export default function AdminBackupPage() {
                   <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{formatDate(b.date)}</td>
                   <td style={{ padding: '16px' }}>{b.size}</td>
                   <td style={{ padding: '16px' }}>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', padding: '4px 10px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold' }}>
+                    <span className="siakad-badge-status" style={{ color: '#10b981', borderColor: 'rgba(16, 185, 129, 0.3)', gap: '6px' }}>
                       <i className="ph ph-check-circle"></i> {b.status}
                     </span>
                   </td>
                   <td style={{ padding: '16px' }}>
                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
-                      <a href={b.download_url} download style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', flexShrink: 0, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} title="Download">
-                        <i className="ph ph-download-simple"></i>
+                      <a href={b.download_url} download style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: '#3b82f6', padding: '8px 10px', borderRadius: '8px', cursor: 'pointer', flexShrink: 0, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }} title="Download">
+                        <i className="ph ph-download-simple" style={{ fontSize: '1.05rem' }}></i>
                       </a>
                       <button onClick={() => handleRestore(b.name)} disabled={isRestoring} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#f59e0b', padding: '6px 12px', borderRadius: '6px', cursor: isRestoring ? 'not-allowed' : 'pointer', opacity: isRestoring ? 0.5 : 1, flexShrink: 0 }} title="Restore">
                         <i className="ph ph-arrow-counter-clockwise"></i>

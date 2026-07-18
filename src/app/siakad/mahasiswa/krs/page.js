@@ -159,34 +159,34 @@ export default function KRSPage() {
       </div>
 
       {!krsOpen && (
-        <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px', boxShadow: 'var(--glass-shadow)', borderLeft: '4px solid #ef4444' }}>
           <i className="ph ph-warning-circle" style={{ color: '#ef4444', fontSize: '1.5rem' }}></i>
           <div>
             <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '1rem', fontWeight: 'bold' }}>Periode Pengisian KRS Ditutup</p>
-            <p style={{ margin: '4px 0 0 0', color: 'var(--color-text)', fontSize: '0.9rem' }}>Saat ini Anda tidak dapat mengisi atau mengubah KRS. Silakan hubungi Admin atau Kaprodi jika ada pertanyaan.</p>
+            <p style={{ margin: '4px 0 0 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>Saat ini Anda tidak dapat mengisi atau mengubah KRS. Silakan hubungi Admin atau Kaprodi jika ada pertanyaan.</p>
           </div>
         </div>
       )}
 
       {billingError && (
-        <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: '12px', padding: '18px 22px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '14px', borderLeft: '4px solid #ef4444' }}>
+        <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '12px', padding: '18px 22px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '14px', borderLeft: '4px solid #ef4444', boxShadow: 'var(--glass-shadow)' }}>
           <i className="ph ph-warning-octagon" style={{ color: '#ef4444', fontSize: '1.8rem' }}></i>
           <div>
             <p style={{ margin: 0, color: '#ef4444', fontSize: '1rem', fontWeight: 'bold' }}>Akses KRS Terkunci</p>
-            <p style={{ margin: '4px 0 0 0', color: 'var(--color-text)', fontSize: '0.9rem' }}>{billingError}</p>
+            <p style={{ margin: '4px 0 0 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>{billingError}</p>
           </div>
         </div>
       )}
 
       {submission?.status === 'approved' && (
-        <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
+        <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', boxShadow: 'var(--glass-shadow)', borderLeft: '4px solid #10b981' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <i className="ph ph-check-circle" style={{ color: '#10b981', fontSize: '1.5rem' }}></i>
             <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>KRS Anda untuk Semester {currentSemester} telah <strong>DISETUJUI</strong> oleh Kaprodi/Dosen Wali. Selamat belajar!</p>
           </div>
           <button 
             onClick={() => window.open('/api/siakad/export/krs', '_blank')}
-            style={{ background: '#10b981', border: 'none', padding: '10px 24px', borderRadius: '50px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 6px -1px rgba(16, 185, 129, 0.2)' }}
+            style={{ background: '#10b981', border: 'none', padding: '10px 24px', borderRadius: '50px', color: 'white', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: '0 4px 10px rgba(16,185,129,0.25)' }}
           >
             <i className="ph ph-file-pdf"></i> Unduh KRS Resmi (PDF)
           </button>
@@ -194,18 +194,18 @@ export default function KRSPage() {
       )}
 
       {submission?.status === 'pending' && (
-        <div style={{ background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px', boxShadow: 'var(--glass-shadow)', borderLeft: '4px solid #f59e0b' }}>
           <i className="ph ph-clock-circle" style={{ color: '#f59e0b', fontSize: '1.5rem' }}></i>
           <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>KRS Anda sedang <strong>MENUNGGU PERSETUJUAN</strong> Kaprodi/Dosen Wali.</p>
         </div>
       )}
       
       {submission?.status === 'rejected' && krsOpen && (
-        <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px', boxShadow: 'var(--glass-shadow)', borderLeft: '4px solid #ef4444' }}>
           <i className="ph ph-warning-octagon" style={{ color: '#ef4444', fontSize: '1.5rem' }}></i>
           <div>
             <p style={{ margin: 0, color: '#ef4444', fontSize: '1rem', fontWeight: 'bold' }}>KRS Anda DITOLAK</p>
-            <p style={{ margin: '4px 0 0 0', color: 'var(--color-text)', fontSize: '0.9rem' }}>
+            <p style={{ margin: '4px 0 0 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>
               Alasan: {submission?.rejection_reason || 'Silakan konsultasi dengan Dosen Wali dan susun ulang KRS Anda.'}
             </p>
           </div>
@@ -213,7 +213,7 @@ export default function KRSPage() {
       )}
 
       {!submission?.status && krsOpen && (
-        <div style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.3)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '12px', padding: '16px 20px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px', boxShadow: 'var(--glass-shadow)', borderLeft: '4px solid #3b82f6' }}>
           <i className="ph ph-info" style={{ color: '#3b82f6', fontSize: '1.5rem' }}></i>
           <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.9rem' }}>
             {lang === 'en' ? 'Please select the courses you want to take this semester.' : 'Silakan pilih mata kuliah yang ingin diambil semester ini.'}
@@ -224,7 +224,7 @@ export default function KRSPage() {
       {krsOpen && (
         <div className="siakad-card" style={{ padding: '24px' }}>
 
-        <div className="siakad-modal-header">
+        <div className="siakad-modal-header" style={{ marginBottom: '16px' }}>
           <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{lang === 'en' ? 'Available Course List' : 'Daftar Mata Kuliah Tersedia'}</h2>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
             <div style={{ position: 'relative', width: '250px' }}>
@@ -243,7 +243,7 @@ export default function KRSPage() {
                 }} 
               />
             </div>
-            <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--color-border)', padding: '10px 20px', borderRadius: '50px', fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--color-muted)', whiteSpace: 'nowrap' }}>
+            <div style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', padding: '10px 20px', borderRadius: '50px', fontSize: '0.9rem', fontWeight: 'bold', color: 'var(--color-muted)', whiteSpace: 'nowrap', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
               Total: {totalSKS} SKS
             </div>
             {(!submission?.status || submission?.status === 'rejected') && (
@@ -266,14 +266,14 @@ export default function KRSPage() {
         </div>
         
         <div style={{ overflowX: 'auto', maxWidth: '100%', paddingBottom: '10px' }}>
-          <table className="siakad-table">
+          <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 10px', textAlign: 'left' }}>
             <thead>
               <tr>
-                <th style={{ width: '50px' }}>{lang === 'en' ? 'Select' : 'Pilih'}</th>
-                <th>{getTranslation('subject_code', lang)}</th>
-                <th>{getTranslation('subject_name', lang)}</th>
-                <th>{getTranslation('lecturer', lang)}</th>
-                <th>{getTranslation('sks', lang)}</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase', width: '60px' }}>{lang === 'en' ? 'Select' : 'Pilih'}</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>{getTranslation('subject_code', lang)}</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>{getTranslation('subject_name', lang)}</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>{getTranslation('lecturer', lang)}</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>{getTranslation('sks', lang)}</th>
               </tr>
             </thead>
             <tbody>
@@ -303,26 +303,70 @@ export default function KRSPage() {
                   return (
                     <tr 
                       key={course.id} 
-                      onClick={() => toggleCourse(course.id)}
+                      onClick={() => !isLocked && toggleCourse(course.id)}
                       style={{ 
-                        background: isSelected ? 'rgba(59,130,246,0.05)' : 'transparent',
                         cursor: isLocked ? 'default' : 'pointer',
                       }}
                     >
-                      <td>
+                      <td style={{ 
+                        padding: '14px 20px', 
+                        background: 'var(--liquid-bg)',
+                        borderLeft: 'var(--inset-border)',
+                        borderTop: 'var(--inset-border)',
+                        borderBottom: 'var(--inset-border)',
+                        borderRadius: '16px 0 0 16px',
+                        boxShadow: 'inset 3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                      }}>
                         <div style={{ 
-                          width: '20px', height: '20px', border: `2px solid ${isSelected ? '#0f172a' : 'var(--color-border)'}`, 
-                          borderRadius: '4px', background: isSelected ? '#0f172a' : 'transparent',
+                          width: '20px', height: '20px', 
+                          border: isSelected ? '1px solid #C41E3A' : 'var(--inset-border)', 
+                          borderRadius: '6px', 
+                          background: isSelected ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'var(--glass-bg)',
+                          boxShadow: isSelected ? '0 3px 8px rgba(196,30,58,0.2)' : 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)',
                           display: 'flex', alignItems: 'center', justifyContent: 'center',
-                          opacity: isLocked ? 0.6 : 1
+                          opacity: isLocked ? 0.6 : 1,
+                          transition: 'all 0.2s'
                         }}>
                           {isSelected && <i className="ph ph-check" style={{ color: 'white', fontSize: '0.8rem', fontWeight: 'bold' }}></i>}
                         </div>
                       </td>
-                      <td style={{ fontWeight: 'bold' }}>{course.code}</td>
-                      <td style={{ fontWeight: '600' }}>{course.name}</td>
-                      <td style={{ color: 'var(--color-muted)' }}>{course.dosen?.name || 'Belum Ditentukan'}</td>
-                      <td style={{ color: 'var(--color-muted)', fontWeight: '600' }}>{course.sks}</td>
+                      <td style={{ 
+                        padding: '14px 20px', 
+                        background: 'var(--liquid-bg)',
+                        borderTop: 'var(--inset-border)',
+                        borderBottom: 'var(--inset-border)',
+                        boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                        fontWeight: 'bold',
+                        color: 'var(--color-text)'
+                      }}>{course.code}</td>
+                      <td style={{ 
+                        padding: '14px 20px', 
+                        background: 'var(--liquid-bg)',
+                        borderTop: 'var(--inset-border)',
+                        borderBottom: 'var(--inset-border)',
+                        boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                        color: 'var(--color-text)',
+                        fontWeight: '600'
+                      }}>{course.name}</td>
+                      <td style={{ 
+                        padding: '14px 20px', 
+                        background: 'var(--liquid-bg)',
+                        borderTop: 'var(--inset-border)',
+                        borderBottom: 'var(--inset-border)',
+                        boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                        color: 'var(--color-muted)' 
+                      }}>{course.dosen?.name || 'Belum Ditentukan'}</td>
+                      <td style={{ 
+                        padding: '14px 20px', 
+                        background: 'var(--liquid-bg)',
+                        borderRight: 'var(--inset-border)',
+                        borderTop: 'var(--inset-border)',
+                        borderBottom: 'var(--inset-border)',
+                        borderRadius: '0 16px 16px 0',
+                        boxShadow: 'inset -3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                        color: 'var(--color-text)',
+                        fontWeight: '600'
+                      }}>{course.sks} SKS</td>
                     </tr>
                   );
                 });

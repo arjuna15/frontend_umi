@@ -85,7 +85,7 @@ export default function PerpustakaanPage() {
   if (loading) return (
     <div style={{ padding: '24px' }}>
       <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat Perpustakaan...</h1>
-      <div className="siakad-card" style={{ padding: '24px', height: '200px' }}></div>
+      <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', height: '200px' }}></div>
     </div>
   );
 
@@ -109,19 +109,35 @@ export default function PerpustakaanPage() {
       </div>
 
       {message.text && (
-        <div style={{ padding: '16px 20px', borderRadius: '12px', marginBottom: '24px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', border: `1px solid ${message.type === 'success' ? '#10b981' : '#ef4444'}`, color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.4rem' }}></i>
+        <div style={{ padding: '14px 20px', borderRadius: '50px', marginBottom: '24px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '700', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.2rem' }}></i>
           {message.text}
         </div>
       )}
 
       {/* Connection Status + Config */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '24px', marginBottom: '32px' }}>
-        <div className="siakad-card" style={{ padding: '24px' }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px' }}>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Status Koneksi sLimS</h3>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-            <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: connected ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-              <div style={{ width: '16px', height: '16px', borderRadius: '50%', background: connected ? '#10b981' : '#ef4444', boxShadow: `0 0 12px ${connected ? '#10b981' : '#ef4444'}60` }}></div>
+            <div style={{
+              width: '56px',
+              height: '56px',
+              borderRadius: '50%',
+              boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)',
+              background: 'var(--liquid-bg)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative'
+            }}>
+              <div style={{
+                width: '16px',
+                height: '16px',
+                borderRadius: '50%',
+                boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)',
+                background: connected ? '#10b981' : '#ef4444'
+              }}></div>
             </div>
             <div>
               <p style={{ margin: '0 0 2px', fontWeight: '700', fontSize: '1.1rem', color: connected ? '#10b981' : '#ef4444' }}>{connected ? 'Terhubung' : 'Tidak Terhubung'}</p>
@@ -147,9 +163,9 @@ export default function PerpustakaanPage() {
         {/* Quick Stats */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
           {statCards.map((s, i) => (
-            <div key={i} className="siakad-card" style={{ padding: '20px' }}>
+            <div key={i} className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '20px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                <div style={{ width: '40px', height: '40px', background: s.bg, color: s.color, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>
+                <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '40px', height: '40px',   borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>
                   <i className={s.icon}></i>
                 </div>
                 <span style={{ color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '600' }}>{s.label}</span>
@@ -161,12 +177,12 @@ export default function PerpustakaanPage() {
       </div>
 
       {/* Search Catalog */}
-      <div className="siakad-card" style={{ padding: '24px' }}>
+      <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Pencarian Katalog</h2>
         <div style={{ display: 'flex', gap: '10px', marginBottom: '24px' }}>
           <div style={{ position: 'relative', flex: 1 }}>
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
-            <input id="input-search-catalog" type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} onKeyDown={e => e.key === 'Enter' && searchCatalog()} placeholder="Cari judul buku, penulis, ISBN..." style={{ width: '100%', padding: '12px 14px 12px 40px', fontSize: '0.95rem', borderRadius: '30px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', boxSizing: 'border-box' }} />
+            <input id="input-search-catalog" type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} onKeyDown={e => e.key === 'Enter' && searchCatalog()} placeholder="Cari judul buku, penulis, ISBN..." style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', padding: '12px 14px 12px 40px', fontSize: '0.95rem', borderRadius: '30px',    boxSizing: 'border-box' }} />
           </div>
           <button id="btn-search-catalog" onClick={searchCatalog} disabled={searching} className="btn" style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '30px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
             <i className="ph ph-magnifying-glass"></i> {searching ? 'Mencari...' : 'Cari'}
@@ -181,7 +197,7 @@ export default function PerpustakaanPage() {
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '16px' }}>
             {books.map((b, i) => (
-              <div key={i} className="siakad-card" style={{ padding: '20px', border: '1px solid var(--color-border)' }}>
+              <div key={i} className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '20px', border: '1px solid var(--color-border)' }}>
                 <div style={{ display: 'flex', gap: '14px' }}>
                   <div style={{ width: '50px', height: '68px', background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <i className="ph ph-book" style={{ color: 'white', fontSize: '1.4rem' }}></i>
@@ -207,8 +223,8 @@ export default function PerpustakaanPage() {
       {showConfigModal && (
         <ModalShell title="Konfigurasi sLimS" onClose={() => setShowConfigModal(false)} footer={
           <>
-            <button id="btn-cancel-config" onClick={() => setShowConfigModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button id="btn-save-config" onClick={saveConfig} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Simpan Konfigurasi'}</button>
+            <button id="btn-cancel-config" onClick={() => setShowConfigModal(false)} className="btn" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', padding: '10px 20px',   cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+            <button id="btn-save-config" onClick={saveConfig} disabled={saving} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Simpan Konfigurasi'}</button>
           </>
         }>
           {[
@@ -217,7 +233,7 @@ export default function PerpustakaanPage() {
           ].map(f => (
             <div key={f.key} style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-              <input id={`input-config-${f.key}`} type="text" value={configForm[f.key]} onChange={e => setConfigForm({ ...configForm, [f.key]: e.target.value })} placeholder={f.placeholder} style={{ width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)', fontFamily: 'monospace' }} />
+              <input id={`input-config-${f.key}`} type="text" value={configForm[f.key]} onChange={e => setConfigForm({ ...configForm, [f.key]: e.target.value })} placeholder={f.placeholder} style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', padding: '10px 14px', fontSize: '0.9rem', boxSizing: 'border-box',  fontFamily: 'monospace' }} />
             </div>
           ))}
         </ModalShell>

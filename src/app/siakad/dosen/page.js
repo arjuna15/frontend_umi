@@ -79,7 +79,7 @@ export default function DosenDashboard() {
           { label: 'Semester', value: data.semester || '-', icon: 'ph-graduation-cap', color: '#C41E3A', bg: 'var(--glass-bg)', small: true },
         ].map((stat, i) => (
           <div key={i} className={`siakad-card stagger-${i + 1}`} style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
-            <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className={`ph ${stat.icon}`} style={{ fontSize: '1.5rem', color: stat.color }}></i>
             </div>
             <div style={{ minWidth: 0 }}>
@@ -94,7 +94,7 @@ export default function DosenDashboard() {
         {/* Jadwal Mengajar Hari Ini */}
         <div className="siakad-card stagger-2" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className="ph ph-clock" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>{lang === 'en' ? "Today's Teaching Schedule" : 'Jadwal Mengajar Hari Ini'}</h3>
@@ -102,7 +102,7 @@ export default function DosenDashboard() {
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
             {todaySchedules.length > 0 ? todaySchedules.map((sch, i) => (
-              <div key={i} style={{ padding: '16px 20px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', borderLeft: '5px solid #C41E3A', borderTop: '1px solid rgba(255,255,255,0.5)', borderRight: '1px solid rgba(0,0,0,0.02)', borderBottom: '1px solid rgba(0,0,0,0.02)', boxShadow: 'var(--glass-shadow)' }}>
+              <div key={i} style={{ padding: '16px 20px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', borderLeft: '5px solid #C41E3A', borderTop: 'var(--glass-border)', borderRight: '1px solid rgba(0,0,0,0.02)', borderBottom: '1px solid rgba(0,0,0,0.02)', boxShadow: 'var(--glass-shadow)' }}>
                 <div>
                   <p style={{ margin: '0 0 4px 0', fontWeight: '700', color: 'var(--color-text)', fontSize: '0.95rem' }}>{sch.course}</p>
                   <div style={{ display: 'flex', gap: '12px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>
@@ -126,7 +126,7 @@ export default function DosenDashboard() {
         {/* Notifikasi & To-Do */}
         <div className="siakad-card stagger-3" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
               <i className="ph ph-bell-ringing" style={{ color: '#f59e0b', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Notifikasi & To-Do</h3>
@@ -139,7 +139,7 @@ export default function DosenDashboard() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
             {todos.length > 0 ? todos.map((todo, i) => (
-              <div key={i} style={{ padding: '14px 20px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '12px', borderLeft: '5px solid #f59e0b', borderTop: '1px solid rgba(255,255,255,0.5)', borderRight: '1px solid rgba(0,0,0,0.02)', borderBottom: '1px solid rgba(0,0,0,0.02)', boxShadow: 'var(--glass-shadow)' }}>
+              <div key={i} style={{ padding: '14px 20px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '12px', borderLeft: '5px solid #f59e0b', borderTop: 'var(--glass-border)', borderRight: '1px solid rgba(0,0,0,0.02)', borderBottom: '1px solid rgba(0,0,0,0.02)', boxShadow: 'var(--glass-shadow)' }}>
                 <i className="ph ph-warning-circle" style={{ color: '#f59e0b', fontSize: '1.1rem', flexShrink: 0 }}></i>
                 <span style={{ fontSize: '0.9rem', color: 'var(--color-text)' }}>{todo}</span>
               </div>
@@ -156,7 +156,7 @@ export default function DosenDashboard() {
         {courses.length > 0 && (
           <div className="siakad-card stagger-4" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <i className="ph ph-books" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
               </div>
               <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Mata Kuliah Diampu</h3>
@@ -167,8 +167,8 @@ export default function DosenDashboard() {
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1 }}>
               {courses.map((c, i) => (
-                <div key={i} style={{ padding: '14px 16px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', gap: '12px', alignItems: 'center', transition: 'all 0.2s', borderLeft: '5px solid #C41E3A', borderTop: '1px solid rgba(255,255,255,0.5)', borderRight: '1px solid rgba(0,0,0,0.02)', borderBottom: '1px solid rgba(0,0,0,0.02)', boxShadow: 'var(--glass-shadow)' }}>
-                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <div key={i} style={{ padding: '14px 16px', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', gap: '12px', alignItems: 'center', transition: 'all 0.2s', borderLeft: '5px solid #C41E3A', borderTop: 'var(--glass-border)', borderRight: '1px solid rgba(0,0,0,0.02)', borderBottom: '1px solid rgba(0,0,0,0.02)', boxShadow: 'var(--glass-shadow)' }}>
+                  <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <i className="ph ph-chalkboard-teacher" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
                   </div>
                   <div style={{ minWidth: 0, flex: 1 }}>

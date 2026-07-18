@@ -11,15 +11,17 @@ async function handleProxy(req, context, method) {
     const apiUrl = process.env.BACKEND_API_URL || (process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000/api' : 'https://backend.bikinwebdikitaaja.com/api');
     const backendUrl = `${apiUrl}/siakad/${route}${searchParams ? '?' + searchParams : ''}`;
     
-    const headers = {};
+    const headers = {
+      'Accept': 'application/json',
+    };
     // Try cookie first, then fall back to Authorization header from browser request
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
-    } else {
-      const authHeader = req.headers.get('authorization');
-      if (authHeader) {
-        headers['Authorization'] = authHeader;
-      }
+    }
+    // Always check the header too — if cookie token fails, use header token
+    const authHeader = req.headers.get('authorization');
+    if (!headers['Authorization'] && authHeader) {
+      headers['Authorization'] = authHeader;
     }
     
     const portalHeader = req.headers.get('x-siakad-portal');

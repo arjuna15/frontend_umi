@@ -62,21 +62,17 @@ export default function DosenForumPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
         {data.jadwal.map((course, i) => (
-          <div key={i} style={{ 
-            background: 'var(--glass-bg)', backdropFilter: 'none',
-            borderRadius: '16px', boxShadow: 'var(--glass-shadow)', 
-            border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)', overflow: 'hidden' 
-          }}>
-            <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+          <div key={i} className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden' }}>
+            <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
               <div>
-                <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
-                <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>{course.code}</span>
+                <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: '800' }}>{course.name}</h3>
+                <span className="siakad-badge-status" style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.8rem', color: 'var(--color-muted)', borderColor: 'var(--color-border)', background: 'transparent' }}>{course.code}</span>
               </div>
               <button onClick={() => {
                 setActiveCourseId(course.id);
                 setTopicForm({ title: '', content: '' });
                 setShowTopicModal(true);
-              }} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '8px 20px', borderRadius: '50px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(196, 30, 58, 0.3)' }}>
+              }} className="siakad-btn-primary" style={{ padding: '8px 20px', borderRadius: '50px' }}>
                 <i className="ph ph-plus"></i> Buat Topik Baru
               </button>
             </div>
@@ -85,9 +81,22 @@ export default function DosenForumPage() {
               {course.forums && course.forums.length > 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   {course.forums.map((forum, j) => (
-                    <div key={j} style={{ background: 'var(--color-bg)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '24px', padding: '20px 24px' }}>
+                    <div key={j} className="siakad-card" style={{ background: 'var(--glass-bg)', borderRadius: '24px', padding: '20px 24px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                        <div style={{ width: '40px', height: '40px', background: 'rgba(196, 30, 58, 0.1)', color: '#C41E3A', border: '1px solid rgba(196, 30, 58, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' , flexShrink: 0 }}>
+                        <div style={{ 
+                          width: '40px', 
+                          height: '40px', 
+                          borderRadius: '50%', 
+                          background: 'rgba(0, 0, 0, 0.04)', 
+                          boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)',
+                          border: 'var(--inset-border)',
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'center', 
+                          color: 'var(--apple-blue)', 
+                          fontWeight: '800', 
+                          flexShrink: 0 
+                        }}>
                           D
                         </div>
                         <div>
@@ -100,33 +109,33 @@ export default function DosenForumPage() {
                       </p>
                       
                       {/* Replies */}
-                      <div style={{ background: 'var(--color-bg)', borderRadius: '8px', padding: '16px', borderLeft: '4px solid #C41E3A' }}>
-                        <h4 style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Balasan ({forum.replies?.length || 0})</h4>
+                      <div style={{ background: 'var(--color-bg)', borderRadius: '16px', padding: '16px', borderLeft: '4px solid var(--apple-blue)' }}>
+                        <h4 style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '800' }}>Balasan ({forum.replies?.length || 0})</h4>
                         {forum.replies && forum.replies.map((reply, k) => (
-                          <div key={k} style={{ marginBottom: k === forum.replies.length - 1 ? 0 : '12px', paddingBottom: k === forum.replies.length - 1 ? 0 : '12px', borderBottom: k === forum.replies.length - 1 ? 'none' : '1px solid #e5e7eb' }}>
+                          <div key={k} style={{ marginBottom: k === forum.replies.length - 1 ? 0 : '12px', paddingBottom: k === forum.replies.length - 1 ? 0 : '12px', borderBottom: k === forum.replies.length - 1 ? 'none' : '1px solid var(--color-border)' }}>
                             <strong style={{ fontSize: '0.85rem', color: 'var(--color-text)', display: 'block' }}>{reply.user_id === data.user.id ? 'Anda' : 'Mahasiswa'}</strong>
                             <p style={{ margin: '4px 0 0 0', fontSize: '0.9rem', color: 'var(--color-muted)' }}>{reply.content}</p>
                           </div>
                         ))}
                            <form onSubmit={async (e) => {
-                            e.preventDefault();
-                            const content = e.target.content.value;
-                            if (!content.trim()) return;
-                            const token = localStorage.getItem('siakad_token');
-                            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-                            try {
-                              const res = await fetch(`${apiUrl}/siakad/forum/${forum.id}/reply`, {
-                                method: 'POST',
-                                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ content })
-                              });
-                              if (res.ok) window.location.reload();
-                              else window.toast('Gagal mengirim balasan');
-                            } catch (err) { window.toast('Error: ' + err.message); }
-                          }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
-                             <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, minWidth: 0, padding: '8px 16px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none', fontSize: '0.9rem', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff' }} />
-                            <button type="submit" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '8px 20px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 4px 10px rgba(196,30,58,0.2)' }}>Kirim</button>
-                          </form>
+                             e.preventDefault();
+                             const content = e.target.content.value;
+                             if (!content.trim()) return;
+                             const token = localStorage.getItem('siakad_token');
+                             const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+                             try {
+                               const res = await fetch(`${apiUrl}/siakad/forum/${forum.id}/reply`, {
+                                 method: 'POST',
+                                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                                 body: JSON.stringify({ content })
+                               });
+                               if (res.ok) window.location.reload();
+                               else window.toast('Gagal mengirim balasan');
+                             } catch (err) { window.toast('Error: ' + err.message); }
+                           }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
+                             <input name="content" type="text" placeholder="Tulis balasan..." className="siakad-input" style={{ flex: 1, minWidth: 0 }} />
+                             <button type="submit" className="siakad-btn-primary" style={{ padding: '8px 20px', borderRadius: '50px' }}>Kirim</button>
+                           </form>
                       </div>
                     </div>
                   ))}

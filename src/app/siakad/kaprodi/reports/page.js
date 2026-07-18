@@ -77,8 +77,8 @@ export default function KaprodiReports() {
         </div>
       </div>
 
-      <div className="siakad-card stagger-1" style={{ padding: '40px', textAlign: 'center', margin: '0 auto' }}>
-        <div style={{ width: '80px', height: '80px', background: 'rgba(196, 30, 58, 0.15)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto', flexShrink: 0 }}>
+      <div className="siakad-card stagger-1" style={{ padding: '40px', textAlign: 'center', margin: '0 auto', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
+        <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'var(--liquid-bg)', border: 'var(--inset-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px auto', flexShrink: 0, boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: '#C41E3A' }}>
           <i className="ph ph-file-xls" style={{ fontSize: '3rem', color: '#C41E3A' }}></i>
         </div>
 
@@ -90,7 +90,7 @@ export default function KaprodiReports() {
         {loading ? (
           <p style={{ color: 'var(--color-muted)' }}>Memuat data laporan...</p>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '32px', textAlign: 'left' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '32px', textAlign: 'left', alignItems: 'start' }}>
             {[
               { id: 'all', title: 'Semua Data', desc: 'Ekspor seluruh data akademik' },
               { id: 'std2', title: 'Standar 2: Tata Pamong', desc: 'Ringkasan tata pamong' },
@@ -102,8 +102,10 @@ export default function KaprodiReports() {
                 key={std.id}
                 onClick={() => setSelectedStandard(std.id)}
                 style={{
-                  padding: '16px', borderRadius: '16px', border: `2px solid ${selectedStandard === std.id ? '#C41E3A' : 'var(--color-border)'}`,
-                  background: selectedStandard === std.id ? 'rgba(196, 30, 58, 0.05)' : 'var(--color-bg)',
+                  padding: '16px', borderRadius: '16px',
+                  border: selectedStandard === std.id ? '2px solid #C41E3A' : 'var(--glass-border)',
+                  background: selectedStandard === std.id ? 'rgba(196, 30, 58, 0.15)' : 'var(--glass-bg)',
+                  boxShadow: selectedStandard === std.id ? 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' : 'var(--glass-shadow)',
                   cursor: 'pointer', transition: 'all 0.2s'
                 }}
               >

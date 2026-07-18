@@ -132,24 +132,24 @@ export default function AdminRuanganPage() {
               <h1 style={{ fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Manajemen Ruangan</h1>
               <p style={{ margin: 0 }}>Kelola daftar ruangan kelas dan laboratorium untuk perkuliahan.</p>
             </div>
-            <button onClick={openAddModal} className="siakad-btn-primary" style={{ padding: '12px 24px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            <button onClick={openAddModal} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 24px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
               <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Tambah Ruangan
             </button>
           </div>
         </div>
       </div>
 
-      <div className="siakad-card" style={{ padding: '0px', overflow: 'hidden' }}>
+      <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '0px', overflow: 'hidden' }}>
         <div style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Ruangan</h3>
           <div style={{ position: 'relative', width: '300px' }}>
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
-            <input type="text" className="siakad-input" placeholder="Cari nama ruangan, kode, tipe..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', paddingLeft: '46px', color: 'var(--color-text)', fontSize: '0.9rem' }} />
+            <input type="text" className="siakad-input" placeholder="Cari nama ruangan, kode, tipe..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', paddingLeft: '46px',  fontSize: '0.9rem' }} />
           </div>
         </div>
 
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
             <thead>
               <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
                 <th style={{ padding: '16px' }}>Nama Ruangan</th>
@@ -187,31 +187,20 @@ export default function AdminRuanganPage() {
                     <td style={{ padding: '16px', color: 'var(--color-muted)' }}>{r.building}</td>
                     <td style={{ padding: '16px' }}>{r.capacity} Kursi</td>
                     <td style={{ padding: '16px' }}>
-                      <span style={{ 
-                        background: r.type === 'Laboratorium' ? '#10b981' : '#8b5cf6', 
-                        color: 'white', 
-                        padding: '6px 12px', 
-                        borderRadius: '999px', 
-                        fontSize: '0.8rem', 
-                        fontWeight: 'bold',
-                        display: 'inline-block',
+                      <span className="siakad-badge" style={{ 
+                        color: r.type === 'Laboratorium' ? '#10b981' : '#8b5cf6',
                         width: '130px',
-                        textAlign: 'center'
+                        justifyContent: 'center'
                       }}>{r.type}</span>
                     </td>
                     <td style={{ padding: '16px', fontWeight: '600' }}>
-                      <span style={{ 
-                        background: r.campus_location === 'pasar_minggu' ? 'rgba(236,72,153,0.15)' : 'rgba(59,130,246,0.15)', 
-                        color: r.campus_location === 'pasar_minggu' ? '#ec4899' : '#3b82f6', 
-                        padding: '4px 10px', 
-                        borderRadius: '10px',
-                        fontSize: '0.8rem',
-                        textTransform: 'capitalize'
+                      <span className="siakad-badge" style={{ 
+                        color: r.campus_location === 'pasar_minggu' ? '#ec4899' : '#3b82f6'
                       }}>{r.campus_location === 'pasar_minggu' ? 'Pasar Minggu' : 'Bintaro'}</span>
                     </td>
                     <td style={{ padding: '16px', textAlign: 'right' }}>
-                      <button onClick={() => { setEditFormData(r); setIsEditModalOpen(true); }} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#3b82f6', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer', marginRight: '8px' }}><i className="ph ph-pencil-simple"></i></button>
-                      <button onClick={() => handleDelete(r.id)} style={{ background: 'transparent', border: '1px solid var(--color-border)', color: '#ef4444', padding: '6px 12px', borderRadius: '6px', cursor: 'pointer' }}><i className="ph ph-trash"></i></button>
+                      <button onClick={() => { setEditFormData(r); setIsEditModalOpen(true); }} style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: '#3b82f6', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginRight: '8px' }}><i className="ph ph-pencil-simple"></i></button>
+                      <button onClick={() => handleDelete(r.id)} style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: '#ef4444', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}><i className="ph ph-trash"></i></button>
                     </td>
                   </tr>
                 ));
@@ -229,22 +218,22 @@ export default function AdminRuanganPage() {
           footer={(
             <>
               <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700, transition: 'all 0.2s' }}>Batal</button>
-              <button type="submit" form="ruangan-form" className="siakad-btn-primary" style={{ padding: '12px 20px', fontWeight: 700 }}>Simpan</button>
+              <button type="submit" form="ruangan-form" className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 20px', fontWeight: 700 }}>Simpan</button>
             </>
           )}
         >
           <form id="ruangan-form" onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Nama Ruangan</label>
-              <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Ruang Kuliah 401" />
+              <input type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }} placeholder="Contoh: Ruang Kuliah 401" />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kode / Gedung</label>
-              <input type="text" required value={editFormData.building} onChange={e=>setEditFormData({...editFormData, building: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: R-401" />
+              <input type="text" required value={editFormData.building} onChange={e=>setEditFormData({...editFormData, building: e.target.value})} className="siakad-input" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }} placeholder="Contoh: R-401" />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kapasitas (Kursi)</label>
-              <input type="number" required value={editFormData.capacity} onChange={e=>setEditFormData({...editFormData, capacity: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
+              <input type="number" required value={editFormData.capacity} onChange={e=>setEditFormData({...editFormData, capacity: e.target.value})} className="siakad-input" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }} />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Tipe Ruangan</label>

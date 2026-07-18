@@ -91,10 +91,8 @@ export default function SuratAdministrasiPage() {
             </button>
           </div>
         </div>
-      </div>
-
-      <div className="siakad-card" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
-        <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+      </div>      <div className="siakad-card" style={{ padding: '24px', overflow: 'hidden' }}>
+        <div style={{ paddingBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)', marginBottom: '16px' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Pengajuan Surat</h3>
           <div style={{ position: 'relative', width: '300px' }}>
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
@@ -114,13 +112,13 @@ export default function SuratAdministrasiPage() {
           </div>
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 10px', textAlign: 'left' }}>
             <thead>
-              <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
-                <th style={{ padding: '16px 24px' }}>Tanggal</th>
-                <th style={{ padding: '16px 24px' }}>Jenis Pengajuan</th>
-                <th style={{ padding: '16px 24px' }}>Status</th>
-                <th style={{ padding: '16px 24px' }}>Catatan</th>
+              <tr>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Tanggal</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Jenis Pengajuan</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Status</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Catatan</th>
               </tr>
             </thead>
             <tbody>
@@ -144,18 +142,56 @@ export default function SuratAdministrasiPage() {
                 }
 
                 return filteredRequests.map(req => (
-                  <tr key={req.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                    <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{formatDate(req.date)}</td>
-                    <td style={{ padding: '16px 24px', fontWeight: 'bold' }}>{req.type}</td>
-                    <td style={{ padding: '16px 24px' }}>
-                      <span className="siakad-badge" style={{ 
-                        background: req.status === 'Selesai' ? 'rgba(16, 185, 129, 0.1)' : req.status === 'Diproses' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(245, 158, 11, 0.1)',
-                        color: req.status === 'Selesai' ? '#10b981' : req.status === 'Diproses' ? '#3b82f6' : '#f59e0b'
+                  <tr key={req.id}>
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderLeft: 'var(--inset-border)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      borderRadius: '16px 0 0 16px',
+                      boxShadow: 'inset 3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                      color: 'var(--color-muted)' 
+                    }}>{formatDate(req.date)}</td>
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                      fontWeight: 'bold',
+                      color: 'var(--color-text)'
+                    }}>{req.type}</td>
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                    }}>
+                      <span style={{ 
+                        background: 'var(--glass-bg)',
+                        border: 'var(--glass-border)',
+                        boxShadow: 'var(--glass-shadow)',
+                        color: req.status === 'Selesai' ? '#10b981' : req.status === 'Diproses' ? '#3b82f6' : '#f59e0b',
+                        padding: '4px 14px',
+                        borderRadius: '50px',
+                        fontSize: '0.8rem',
+                        fontWeight: '800'
                       }}>
                         {req.status}
                       </span>
                     </td>
-                    <td style={{ padding: '16px 24px', color: 'var(--color-muted)' }}>{req.note}</td>
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderRight: 'var(--inset-border)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      borderRadius: '0 16px 16px 0',
+                      boxShadow: 'inset -3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                      color: 'var(--color-muted)' 
+                    }}>{req.note || '-'}</td>
                   </tr>
                 ));
               })()}
@@ -171,8 +207,8 @@ export default function SuratAdministrasiPage() {
           onClose={() => setShowRequestModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowRequestModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-              <button type="submit" form="request-form" style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan & Kirim</button>
+              <button type="button" onClick={() => setShowRequestModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700, boxShadow: 'var(--glass-shadow)' }}>Batal</button>
+              <button type="submit" form="request-form" className="siakad-btn-primary" style={{ padding: '12px 24px', borderRadius: '50px' }}>Simpan & Kirim</button>
             </>
           )}
         >

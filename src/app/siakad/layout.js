@@ -317,6 +317,7 @@ export default function SiakadLayout({ children }) {
     else if (labelLower.includes('transkrip') || labelLower.includes('rapor') || labelLower.includes('gradebook')) key = 'gradebook';
     else if (labelLower.includes('krs') && !labelLower.includes('setuju')) key = 'krs';
     else if (labelLower.includes('persetujuan krs') || labelLower.includes('approve')) key = 'krs_approval';
+    else if (labelLower.includes('rekap presensi') || labelLower.includes('rekapitulasi')) key = 'rekap_presensi';
     else if (labelLower.includes('presensi') || labelLower.includes('kehadiran')) key = 'presensi';
     else if (labelLower.includes('elearning') || labelLower.includes('kuis') || labelLower.includes('elearning')) key = 'elearning';
     else if (labelLower.includes('proctoring') || labelLower.includes('ujian')) key = 'proctoring';
@@ -365,7 +366,7 @@ export default function SiakadLayout({ children }) {
       <aside className="siakad-sidebar">
         <div className="siakad-sidebar-header">
           <div className="siakad-sidebar-logo">
-            <img src="/icon.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+            <img src="/icon.png" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <div>
             <h2 style={{ fontSize: '1.5rem', fontWeight: '800', margin: 0, letterSpacing: '1px', color: 'var(--color-text)', lineHeight: '1.2' }}>SIAKAD</h2>
@@ -431,7 +432,7 @@ export default function SiakadLayout({ children }) {
 
         <div className="siakad-user-profile">
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, cursor: 'pointer', overflow: 'hidden' }} onClick={() => router.push('/siakad/profile')}>
-            <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', flexShrink: 0 }}>
+            <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: 'var(--apple-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem', flexShrink: 0 }}>
               {effectiveRole ? effectiveRole.charAt(0).toUpperCase() : 'U'}
             </div>
             <div style={{ overflow: 'hidden', flex: 1 }}>
@@ -465,8 +466,8 @@ export default function SiakadLayout({ children }) {
       <main className="siakad-main">
         {/* Sleek Glass Header */}
         <header className="siakad-header" style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '16px' }}>
-                   {/* Language Switcher */}
-          <div style={{ display: 'flex', background: 'var(--glass-bg)', padding: '4px 6px', borderRadius: '30px', border: '1px solid rgba(255,255,255,0.55)', alignItems: 'center', fontSize: '0.8rem', fontWeight: 'bold', boxShadow: 'var(--glass-shadow)' }}>
+          {/* Language Switcher */}
+          <div style={{ display: 'flex', background: 'var(--glass-bg)', padding: '4px 6px', borderRadius: '30px', border: 'var(--glass-border)', alignItems: 'center', fontSize: '0.8rem', fontWeight: 'bold', boxShadow: 'var(--glass-shadow)' }}>
             <button 
               onClick={() => changeLanguage('id')} 
               style={{
@@ -478,7 +479,7 @@ export default function SiakadLayout({ children }) {
                 color: 'var(--color-text)',
                 transition: 'all 0.2s',
                 opacity: lang === 'id' ? 1 : 0.5,
-                boxShadow: lang === 'id' ? 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff' : 'none'
+                boxShadow: lang === 'id' ? 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' : 'none'
               }}
               title="Bahasa Indonesia"
             >
@@ -496,7 +497,7 @@ export default function SiakadLayout({ children }) {
                 color: 'var(--color-text)',
                 transition: 'all 0.2s',
                 opacity: lang === 'en' ? 1 : 0.5,
-                boxShadow: lang === 'en' ? 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff' : 'none'
+                boxShadow: lang === 'en' ? 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' : 'none'
               }}
               title="English"
             >
@@ -510,7 +511,7 @@ export default function SiakadLayout({ children }) {
               title="Notifikasi"
               style={{
                 background: 'var(--glass-bg)',
-                border: '1px solid rgba(255,255,255,0.55)',
+                border: 'var(--glass-border)',
                 borderRadius: '50%',
                 width: '40px', height: '40px',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -624,7 +625,7 @@ export default function SiakadLayout({ children }) {
             title="Toggle Dark Mode"
             style={{
               background: 'var(--glass-bg)',
-              border: '1px solid rgba(255,255,255,0.55)',
+              border: 'var(--glass-border)',
               borderRadius: '50%',
               width: '40px', height: '40px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -640,10 +641,10 @@ export default function SiakadLayout({ children }) {
 
           <Link href="/siakad/profile" className="siakad-user-badge" style={{ textDecoration: 'none', margin: 0 }} title="Pengaturan Profil">
             <div style={{ textAlign: 'right', marginRight: '4px' }}>
-              <div style={{ fontSize: '0.95rem', fontWeight: '800', color: 'var(--color-text)', lineHeight: '1.2' }}>Portal Akademik</div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--color-text)', fontWeight: '500', marginTop: '2px' }}>Tahun Ajaran 2026/2027</div>
+              <div style={{ fontSize: '0.95rem', fontWeight: '800', color: 'var(--color-text)', lineHeight: '1.2', textTransform: 'none', letterSpacing: '0' }}>Portal Akademik</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)', fontWeight: '500', marginTop: '2px' }}>Tahun Ajaran 2026/2027</div>
             </div>
-            <div className="siakad-avatar">
+            <div className="siakad-avatar" style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: '1px solid var(--color-border)', boxShadow: 'var(--glass-shadow)' }}>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256">
                 <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"></path>
               </svg>

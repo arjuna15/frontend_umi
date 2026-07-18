@@ -74,11 +74,9 @@ export default function KaprodiDashboard() {
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>Overview dan metrik utama Program Studi Anda.</p>
         </div>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '30px' }}>
-        <div className="siakad-card stagger-1" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', border: '1px solid var(--color-border)', borderRadius: '24px' }}>
-          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+      </div>      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '30px' }}>
+        <div className="siakad-card stagger-1" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--liquid-bg)', border: 'var(--inset-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
             <i className="ph ph-books" style={{ fontSize: '1.5rem', color: '#C41E3A' }}></i>
           </div>
           <div>
@@ -87,8 +85,8 @@ export default function KaprodiDashboard() {
           </div>
         </div>
 
-        <div className="siakad-card stagger-2" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', border: '1px solid var(--color-border)', borderRadius: '24px' }}>
-          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(5, 150, 105, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+        <div className="siakad-card stagger-2" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--liquid-bg)', border: 'var(--inset-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
             <i className="ph ph-student" style={{ fontSize: '1.5rem', color: '#059669' }}></i>
           </div>
           <div>
@@ -97,8 +95,8 @@ export default function KaprodiDashboard() {
           </div>
         </div>
 
-        <div className="siakad-card stagger-3" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px', border: '1px solid var(--color-border)', borderRadius: '24px' }}>
-          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+        <div className="siakad-card stagger-3" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--liquid-bg)', border: 'var(--inset-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
             <i className="ph ph-chalkboard-teacher" style={{ fontSize: '1.5rem', color: '#f59e0b' }}></i>
           </div>
           <div>
@@ -109,8 +107,8 @@ export default function KaprodiDashboard() {
       </div>
 
       <div className="siakad-card stagger-4" style={{ marginBottom: '30px', padding: '24px' }}>
-        <h3 style={{ margin: '0 0 20px 0', color: 'var(--color-text)' }}>Persentase Kehadiran Dosen (Bulan Ini)</h3>
-        <div style={{ height: '300px', width: '100%' }}>
+        <h3 style={{ margin: '0 0 20px 0', color: 'var(--color-text)', fontWeight: 'bold' }}>Persentase Kehadiran Dosen (Bulan Ini)</h3>
+        <div style={{ height: '320px', width: '100%', padding: '20px 16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '20px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
           {pieData.length > 0 ? (
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -150,7 +148,7 @@ export default function KaprodiDashboard() {
           <i className="ph ph-bell-ringing" style={{ color: '#ef4444' }}></i> Peringatan Sistem
         </h3>
         {warningText ? (
-          <div style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid #fecaca', borderRadius: '12px', padding: '16px', color: 'var(--color-text)', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+          <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.15)', borderRadius: '12px', padding: '16px', color: 'var(--color-text)', display: 'flex', alignItems: 'flex-start', gap: '12px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
             <i className="ph ph-warning-circle" style={{ fontSize: '1.5rem', marginTop: '2px', color: '#ef4444' }}></i>
             <div>
               <strong style={{ display: 'block', marginBottom: '4px', color: '#ef4444' }}>Peringatan dari Backend</strong>
@@ -158,7 +156,7 @@ export default function KaprodiDashboard() {
             </div>
           </div>
         ) : (
-          <div style={{ background: 'rgba(16, 185, 129, 0.1)', border: '1px solid #bbf7d0', borderRadius: '12px', padding: '16px', color: 'var(--color-text)', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+          <div style={{ background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.15)', borderRadius: '12px', padding: '16px', color: 'var(--color-text)', display: 'flex', alignItems: 'flex-start', gap: '12px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
             <i className="ph ph-check-circle" style={{ fontSize: '1.5rem', marginTop: '2px', color: '#10b981' }}></i>
             <div>
               <strong style={{ display: 'block', marginBottom: '4px', color: '#10b981' }}>Belum Ada Peringatan</strong>

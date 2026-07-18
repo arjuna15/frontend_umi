@@ -162,7 +162,7 @@ export default function EdomMahasiswaPage() {
               style={{ width: '100%' }}
             />
           ) : (
-            <div style={{ padding: '14px', background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', color: '#ef4444', borderRadius: '12px', fontSize: '0.9rem', fontWeight: '600' }}>
+            <div style={{ padding: '14px', background: 'var(--glass-bg)', border: 'var(--glass-border)', color: '#ef4444', borderRadius: '12px', fontSize: '0.9rem', fontWeight: '600', boxShadow: 'var(--glass-shadow)', borderLeft: '4px solid #ef4444' }}>
               Anda belum memiliki KRS yang disetujui untuk mengisi kuesioner evaluasi dosen.
             </div>
           )}
@@ -170,20 +170,50 @@ export default function EdomMahasiswaPage() {
 
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Kuesioner Penilaian</h2>
         {questions.map((q, qi) => (
-          <div key={q.id} style={{ marginBottom: '24px', padding: '20px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+          <div key={q.id} style={{ marginBottom: '24px', padding: '20px', borderRadius: '16px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
               <p style={{ color: 'var(--color-text)', fontWeight: '600', margin: 0, flex: 1 }}><span style={{ color: 'var(--color-muted)', marginRight: '8px' }}>{qi + 1}.</span>{q.question}</p>
-              <span style={{ display: 'inline-block', minWidth: '100px', textAlign: 'center', padding: '4px 10px', borderRadius: '50px', fontSize: '0.7rem', fontWeight: '700', background: 'rgba(59,130,246,0.1)', color: '#3b82f6', whiteSpace: 'nowrap' }}>{q.category}</span>
+              <span style={{ 
+                display: 'inline-block', 
+                width: '180px', 
+                textAlign: 'center', 
+                padding: '6px 12px', 
+                borderRadius: '50px', 
+                fontSize: '0.72rem', 
+                fontWeight: '800', 
+                background: 'var(--liquid-bg)', 
+                border: '1px solid rgba(59,130,246,0.3)',
+                color: '#3b82f6', 
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)'
+              }}>{q.category}</span>
             </div>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
               {[1,2,3,4,5].map(score => {
                 const isSelected = form.answers.find(a => a.question_id === q.id)?.score === score;
                 return (
-                  <button key={score} onClick={() => setScore(q.id, score)} style={{
-                    width: '48px', height: '48px', borderRadius: '50px', border: isSelected ? '2px solid #3b82f6' : '1px solid var(--color-border)',
-                    background: isSelected ? 'rgba(59,130,246,0.2)' : 'rgba(255,255,255,0.05)', color: isSelected ? '#3b82f6' : 'var(--color-muted)',
-                    fontSize: '1.1rem', fontWeight: '700', cursor: 'pointer', transition: 'all 0.2s'
-                  }}>{score}</button>
+                  <button 
+                    key={score} 
+                    type="button"
+                    onClick={() => setScore(q.id, score)} 
+                    style={{
+                      width: '44px', 
+                      height: '44px', 
+                      borderRadius: '50%', 
+                      border: isSelected ? '1px solid #3b82f6' : 'var(--glass-border)',
+                      background: isSelected ? 'var(--liquid-bg)' : 'var(--glass-bg)', 
+                      color: isSelected ? '#3b82f6' : 'var(--color-text)',
+                      boxShadow: isSelected ? 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' : 'var(--glass-shadow)',
+                      fontSize: '1.05rem', 
+                      fontWeight: '800', 
+                      cursor: 'pointer', 
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    {score}
+                  </button>
                 );
               })}
               <span style={{ alignSelf: 'center', fontSize: '0.75rem', color: 'var(--color-muted)', marginLeft: '8px' }}>1 = Sangat Kurang, 5 = Sangat Baik</span>

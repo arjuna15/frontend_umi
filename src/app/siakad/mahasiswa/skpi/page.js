@@ -40,9 +40,22 @@ export default function SkpiMahasiswaPage() {
   };
 
   const statusBadge = (s) => {
-    const colors = { pending: ['#f59e0b','rgba(245,158,11,0.1)'], approved: ['#10b981','rgba(16,185,129,0.1)'], rejected: ['#ef4444','rgba(239,68,68,0.1)'] };
+    const colors = { pending: '#f59e0b', approved: '#10b981', rejected: '#ef4444' };
     const c = colors[s] || colors.pending;
-    return <span style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: c[0], background: c[1] }}>{s === 'pending' ? 'Menunggu' : s === 'approved' ? 'Disetujui' : 'Ditolak'}</span>;
+    return (
+      <span style={{ 
+        padding: '4px 12px', 
+        borderRadius: '50px', 
+        fontSize: '0.72rem', 
+        fontWeight: '800', 
+        color: c, 
+        background: 'var(--glass-bg)', 
+        border: 'var(--glass-border)',
+        boxShadow: 'var(--glass-shadow)'
+      }}>
+        {s === 'pending' ? 'Menunggu' : s === 'approved' ? 'Disetujui' : 'Ditolak'}
+      </span>
+    );
   };
 
   if (loading) return (
@@ -76,21 +89,55 @@ export default function SkpiMahasiswaPage() {
       <div className="siakad-card stagger-2" style={{ padding: '24px' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 16px 0' }}>Riwayat Prestasi</h2>
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 10px', textAlign: 'left' }}>
             <thead><tr>
               {['Nama Prestasi', 'Kategori', 'Tingkat', 'Status'].map(h => (
-                <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{h}</th>
+                <th key={h} style={{ padding: '8px 20px', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{h}</th>
               ))}
             </tr></thead>
             <tbody>
               {prestasis.length === 0 ? (
                 <tr><td colSpan={4} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada data prestasi.</td></tr>
               ) : prestasis.map(p => (
-                <tr key={p.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                  <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{p.name}</td>
-                  <td style={{ padding: '14px 16px', color: 'var(--color-muted)', textTransform: 'capitalize' }}>{p.category}</td>
-                  <td style={{ padding: '14px 16px', color: 'var(--color-muted)', textTransform: 'capitalize' }}>{p.level}</td>
-                  <td style={{ padding: '14px 16px' }}>{statusBadge(p.status)}</td>
+                <tr key={p.id}>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderLeft: 'var(--inset-border)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    borderRadius: '16px 0 0 16px',
+                    boxShadow: 'inset 3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                    fontWeight: 'bold',
+                    color: 'var(--color-text)'
+                  }}>{p.name}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                    color: 'var(--color-muted)', 
+                    textTransform: 'capitalize' 
+                  }}>{p.category}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                    color: 'var(--color-muted)', 
+                    textTransform: 'capitalize' 
+                  }}>{p.level}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderRight: 'var(--inset-border)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    borderRadius: '0 16px 16px 0',
+                    boxShadow: 'inset -3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                  }}>{statusBadge(p.status)}</td>
                 </tr>
               ))}
             </tbody>
@@ -100,7 +147,7 @@ export default function SkpiMahasiswaPage() {
 
       {showModal && (
         <ModalShell title="Tambah Prestasi" subtitle="SKPI & Prestasi" icon="ph-certificate" onClose={() => setShowModal(false)}
-          footer={<><button onClick={() => setShowModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+          footer={<><button onClick={() => setShowModal(false)} style={{ padding: '10px 22px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold', borderRadius: '50px', boxShadow: 'var(--glass-shadow)' }}>Batal</button>
             <button onClick={handleSubmit} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Simpan'}</button></>}>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Prestasi</label>

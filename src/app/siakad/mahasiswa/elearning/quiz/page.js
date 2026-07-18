@@ -187,7 +187,7 @@ function QuizContent() {
       </div>
 
       {/* Sticky Header with Timer */}
-      <div style={{ position: 'sticky', top: '16px', background: 'var(--color-bg)', padding: '16px 24px', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '32px', zIndex: 10, border: '1px solid var(--color-border)' }}>
+      <div style={{ position: 'sticky', top: '16px', background: 'var(--glass-bg)', padding: '16px 24px', borderRadius: '16px', boxShadow: 'var(--glass-shadow)', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '32px', zIndex: 10, border: 'var(--glass-border)' }}>
         <div style={{ background: isWarningTime ? 'rgba(239,68,68,0.1)' : 'rgba(16,185,129,0.1)', border: `1px solid ${isWarningTime ? '#ef4444' : '#10b981'}`, padding: '10px 20px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <i className="ph ph-timer" style={{ fontSize: '1.5rem', color: isWarningTime ? '#ef4444' : '#10b981' }}></i>
           <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: isWarningTime ? '#ef4444' : '#166534', fontVariantNumeric: 'tabular-nums' }}>

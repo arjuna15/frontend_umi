@@ -45,10 +45,9 @@ export default function WisudaAdminPage() {
   };
 
   const statusBadge = (s) => {
-    const colors = { pending: ['#f59e0b','rgba(245,158,11,0.1)'], verified: ['#10b981','rgba(16,185,129,0.1)'], confirmed: ['#10b981','rgba(16,185,129,0.1)'], rejected: ['#ef4444','rgba(239,68,68,0.1)'] };
-    const c = colors[s] || colors.pending;
+    const color = s === 'verified' || s === 'confirmed' ? '#10b981' : s === 'rejected' ? '#ef4444' : '#f59e0b';
     const labels = { pending: 'Menunggu', verified: 'Terverifikasi', confirmed: 'Dikonfirmasi', rejected: 'Ditolak' };
-    return <span style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: c[0], background: c[1] }}>{labels[s] || s}</span>;
+    return <span className="siakad-badge" style={{ color }}>{labels[s] || s}</span>;
   };
 
   if (loading) return (
@@ -77,7 +76,7 @@ export default function WisudaAdminPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '16px', marginBottom: '24px' }}>
         {[{ label: 'Total Yudisium', val: yudisiums.length, color: '#3b82f6' }, { label: 'Menunggu', val: yudisiums.filter(y=>y.status==='pending').length, color: '#f59e0b' }, { label: 'Terverifikasi', val: yudisiums.filter(y=>y.status==='verified').length, color: '#10b981' }, { label: 'Total Wisuda', val: wisudas.length, color: '#8b5cf6' }].map((s,i) => (
-          <div key={i} className={`siakad-card stagger-${i+2}`} style={{ padding: '20px', textAlign: 'center' }}>
+          <div key={i} className={`stagger-${i+2}`} style={{ padding: '20px', textAlign: 'center', borderRadius: '20px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
             <p style={{ fontSize: '2rem', fontWeight: '800', color: s.color, margin: '0 0 4px 0' }}>{s.val}</p>
             <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', margin: 0, fontWeight: '600' }}>{s.label}</p>
           </div>
@@ -87,7 +86,7 @@ export default function WisudaAdminPage() {
       <div className="siakad-card stagger-3" style={{ padding: '24px', marginBottom: '24px' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 16px 0' }}>Daftar Yudisium</h2>
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
             <thead><tr>{['Mahasiswa', 'Judul Skripsi', 'IPK', 'Status', 'Aksi'].map(h => <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase' }}>{h}</th>)}</tr></thead>
             <tbody>
               {yudisiums.length === 0 ? <tr><td colSpan={5} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada data.</td></tr> :
@@ -114,7 +113,7 @@ export default function WisudaAdminPage() {
         <div className="siakad-card stagger-4" style={{ padding: '24px' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 16px 0' }}>Daftar Wisuda</h2>
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
               <thead><tr>{['Mahasiswa', 'Toga', 'No. Kursi', 'Status', 'Aksi'].map(h => <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase' }}>{h}</th>)}</tr></thead>
               <tbody>{wisudas.map(w => (
                 <tr key={w.id} style={{ borderBottom: '1px solid var(--color-border)' }}>

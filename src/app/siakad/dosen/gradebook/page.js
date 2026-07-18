@@ -227,7 +227,8 @@ export default function DosenGradebookPage() {
 
   const handlePublishGrades = async (courseId, currentPublishStatus) => {
     setPublishing(true);
-    const token = getToken();
+    const token = localStorage.getItem('siakad_token');
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
     try {
       const res = await fetch(`${apiUrl}/siakad/dosen/gradebook/publish`, {
         method: 'POST',
@@ -364,12 +365,14 @@ export default function DosenGradebookPage() {
         {data.jadwal.map(course => (
           <button 
             key={course.id}
+            className={activeCourseId === course.id ? 'active' : ''}
             onClick={() => { setActiveCourseId(course.id); setSearchTerm(''); }}
             style={{
               padding: '10px 20px', borderRadius: '999px', fontWeight: 'bold', whiteSpace: 'nowrap',
-              background: activeCourseId === course.id ? 'var(--umiba-red)' : 'var(--glass-bg)',
+              background: activeCourseId === course.id ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'var(--glass-bg)',
               color: activeCourseId === course.id ? 'white' : 'var(--color-text)',
-              border: activeCourseId === course.id ? 'none' : '1px solid var(--color-border)',
+              border: activeCourseId === course.id ? 'none' : 'var(--glass-border)',
+              boxShadow: 'var(--glass-shadow)',
               cursor: 'pointer', transition: 'all 0.2s'
             }}
           >
@@ -391,16 +394,14 @@ export default function DosenGradebookPage() {
         const isPublished = (course.grades && course.grades.length > 0) ? (course.grades[0].is_published || false) : false;
 
         return (
-          <div key={course.id} className="siakad-card stagger-1" style={{ padding: '0', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.5)' }}>
+          <div key={course.id} className="stagger-1" style={{ padding: '0', overflow: 'hidden', border: 'var(--glass-border)', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)', borderRadius: '24px' }}>
             <div style={{ background: 'var(--glass-bg)', borderBottom: '1px solid var(--color-border)', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-                  <h2 style={{ color: 'var(--color-text)', margin: 0, fontSize: '1.25rem' }}>{course.name}</h2>
-                  <span style={{ 
-                    padding: '4px 10px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 'bold',
-                    background: isPublished ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)',
-                    color: isPublished ? '#10b981' : '#f59e0b',
-                    border: `1px solid ${isPublished ? 'rgba(16,185,129,0.3)' : 'rgba(245,158,11,0.3)'}`
+                  <h2 style={{ color: 'var(--color-text)', margin: 0, fontSize: '1.25rem', fontWeight: '800' }}>{course.name}</h2>
+                  <span className="siakad-badge-status" style={{ 
+                    color: isPublished ? '#047857' : '#d97706',
+                    borderColor: isPublished ? 'rgba(4,120,87,0.3)' : 'rgba(217,119,6,0.3)'
                   }}>
                     {isPublished ? 'Terpublikasi' : 'Draf'}
                   </span>
@@ -416,7 +417,7 @@ export default function DosenGradebookPage() {
                     placeholder="Cari mahasiswa..." 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ padding: '10px 10px 10px 46px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '200px', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff' }}
+                    style={{ padding: '10px 10px 10px 46px', borderRadius: '50px', border: 'var(--inset-border)', background: 'var(--liquid-bg)', color: 'var(--color-text)', width: '200px', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', outline: 'none' }}
                   />
                 </div>
                 
@@ -428,44 +429,44 @@ export default function DosenGradebookPage() {
                   onChange={(e) => handleImportCSV(e, course)}
                 />
                 
-                <button onClick={() => setShowWeightModal(true)} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                <button onClick={() => setShowWeightModal(true)} style={{ padding: '10px 18px', background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'var(--glass-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', boxShadow: 'var(--glass-shadow)' }}>
                   <i className="ph ph-sliders"></i> Atur Bobot
                 </button>
-
-                <button onClick={() => fileInputRef.current?.click()} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+ 
+                <button onClick={() => fileInputRef.current?.click()} style={{ padding: '10px 18px', background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'var(--glass-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', boxShadow: 'var(--glass-shadow)' }}>
                   <i className="ph ph-upload-simple"></i> Import CSV
                 </button>
                 
-                <button onClick={() => handleExportCSV(course)} style={{ padding: '10px 18px', background: 'var(--color-bg)', color: 'var(--color-text)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold' }}>
+                <button onClick={() => handleExportCSV(course)} style={{ padding: '10px 18px', background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'var(--glass-border)', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', boxShadow: 'var(--glass-shadow)' }}>
                   <i className="ph ph-download-simple"></i> Export CSV
                 </button>
-
+ 
                 <button 
                   onClick={() => handlePublishGrades(course.id, isPublished)}
                   disabled={publishing}
+                  className={isPublished ? "siakad-btn-success" : "siakad-btn-primary"}
                   style={{
-                    background: isPublished ? 'rgba(239, 68, 68, 0.15)' : 'rgba(59, 130, 246, 0.15)',
-                    color: isPublished ? '#ef4444' : '#3b82f6',
-                    border: `1px solid ${isPublished ? 'rgba(239,68,68,0.3)' : 'rgba(59,130,246,0.3)'}`,
                     padding: '10px 20px', 
-                    borderRadius: '50px', cursor: publishing ? 'not-allowed' : 'pointer', fontWeight: 'bold',
-                    display: 'flex', alignItems: 'center', gap: '8px',
-                    transition: 'all 0.2s'
+                    borderRadius: '50px !important',
+                    opacity: publishing ? 0.5 : 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px'
                   }}
                 >
-                  <i className={publishing ? "ph-spinner ph-spin" : isPublished ? "ph ph-eye-slash" : "ph ph-eye"}></i> 
-                  {publishing ? 'Memproses...' : isPublished ? 'Tarik Publikasi' : 'Publikasikan Nilai'}
+                  <i className={publishing ? "ph ph-spinner ph-spin" : isPublished ? "ph ph-eye-slash" : "ph ph-eye"}></i> 
+                  {publishing ? 'Memproses...' : isPublished ? 'Tarik Publikasi' : 'Publikasikan'}
                 </button>
 
                 <button 
                   onClick={() => handleSaveGrades(course.id)}
                   disabled={savingGrades}
                   style={{
-                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', padding: '10px 24px', 
+                    background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '10px 24px', 
                     borderRadius: '50px', cursor: savingGrades ? 'not-allowed' : 'pointer', fontWeight: 'bold',
                     display: 'flex', alignItems: 'center', gap: '8px',
                     transition: 'all 0.2s',
-                    boxShadow: '0 8px 20px rgba(16,185,129,0.3)'
+                    boxShadow: 'var(--glass-shadow)'
                   }}
                 >
                   <i className={savingGrades ? "ph-spinner ph-spin" : "ph-floppy-disk"}></i> {savingGrades ? 'Menyimpan...' : 'Simpan Nilai'}
@@ -473,89 +474,105 @@ export default function DosenGradebookPage() {
               </div>
             </div>
             
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', minWidth: '800px' }}>
-                <thead>
-                  <tr style={{ background: 'rgba(0,0,0,0.05)', color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '1px solid var(--color-border)' }}>
-                    <th style={{ padding: '16px 24px', fontWeight: 'bold' }}>Mahasiswa</th>
-                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Kehadiran ({formatScoreValue(getCourseWeights(course).attendance_weight)}%)</th>
-                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>Tugas ({formatScoreValue(getCourseWeights(course).assignment_weight)}%)</th>
-                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UTS ({formatScoreValue(getCourseWeights(course).uts_weight)}%)</th>
-                    <th style={{ padding: '16px', fontWeight: 'bold', width: '120px' }}>UAS ({formatScoreValue(getCourseWeights(course).uas_weight)}%)</th>
-                    <th style={{ padding: '16px', fontWeight: 'bold', width: '100px' }}>Nilai Akhir</th>
-                    <th style={{ padding: '16px 24px', fontWeight: 'bold', width: '100px' }}>Grade</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredGrades.map((grade, idx) => {
-                    const edits = editedGrades[grade.id] || {};
-                    const isPassed = parseFloat(edits.score) >= 60;
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '24px' }}>
+              {filteredGrades.map((grade) => {
+                const edits = editedGrades[grade.id] || {};
+                const isPassed = parseFloat(edits.score) >= 60;
+                
+                return (
+                  <div key={grade.id} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '16px 24px',
+                    background: 'var(--liquid-bg)',
+                    border: 'var(--inset-border)',
+                    borderRadius: '20px',
+                    boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)',
+                    flexWrap: 'wrap',
+                    gap: '16px'
+                  }}>
+                    <div style={{ minWidth: '200px', flex: '1 1 auto' }}>
+                      <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--color-text)' }}>{grade.mahasiswa?.name}</p>
+                      <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{grade.mahasiswa?.nim_nip || grade.mahasiswa?.nim}</p>
+                    </div>
                     
-                    return (
-                      <tr key={grade.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                        <td style={{ padding: '16px 24px' }}>
-                          <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--color-text)' }}>{grade.mahasiswa?.name}</p>
-                          <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{grade.mahasiswa?.nim_nip || grade.mahasiswa?.nim}</p>
-                        </td>
-                        <td style={{ padding: '16px' }}>
-                          <input 
-                            type="number" min="0" max="100" placeholder="0-100"
-                            value={edits.kehadiran || ''}
-                            onChange={(e) => handleGradeChange(grade.id, 'kehadiran', e.target.value)}
-                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
-                          />
-                        </td>
-                        <td style={{ padding: '16px' }}>
-                          <input 
-                            type="number" min="0" max="100" placeholder="0-100"
-                            value={edits.tugas || ''}
-                            onChange={(e) => handleGradeChange(grade.id, 'tugas', e.target.value)}
-                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
-                          />
-                        </td>
-                        <td style={{ padding: '16px' }}>
-                          <input 
-                            type="number" min="0" max="100" placeholder="0-100"
-                            value={edits.uts || ''}
-                            onChange={(e) => handleGradeChange(grade.id, 'uts', e.target.value)}
-                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
-                          />
-                        </td>
-                        <td style={{ padding: '16px' }}>
-                          <input 
-                            type="number" min="0" max="100" placeholder="0-100"
-                            value={edits.uas || ''}
-                            onChange={(e) => handleGradeChange(grade.id, 'uas', e.target.value)}
-                            style={{ width: '100%', padding: '10px 14px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', transition: 'border 0.2s', fontWeight: '500', textAlign: 'center', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}
-                          />
-                        </td>
-                        <td style={{ padding: '16px' }}>
-                          <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{formatScoreValue(edits.score)}</div>
-                        </td>
-                        <td style={{ padding: '16px 24px' }}>
-                          <div style={{ 
-                            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                            width: '40px', height: '40px', borderRadius: '50%', fontWeight: 'bold', fontSize: '1.2rem',
-                            background: edits.grade ? (isPassed ? '#dcfce7' : '#fee2e2') : 'rgba(255,255,255,0.05)',
-                            color: edits.grade ? (isPassed ? '#166534' : '#991b1b') : 'var(--color-muted)',
-                            border: `1px solid ${edits.grade ? (isPassed ? '#86efac' : '#f87171') : 'var(--color-border)'}`
-                          }}>
-                            {edits.grade || '-'}
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                  {filteredGrades.length === 0 && (
-                    <tr>
-                      <td colSpan="7" style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>
-                        <i className="ph ph-users-slash" style={{ fontSize: '3rem', color: 'var(--color-muted)', margin: '0 auto 10px', display: 'block' }}></i>
-                        {searchTerm ? 'Mahasiswa tidak ditemukan.' : 'Belum ada mahasiswa yang terdaftar di kelas ini'}
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+                    <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                      {/* Kehadiran */}
+                      <div style={{ width: '90px' }}>
+                        <label style={{ display: 'block', fontSize: '0.7rem', color: 'var(--color-muted)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '4px', textAlign: 'center' }}>Hadir</label>
+                        <input 
+                          type="number" min="0" max="100" placeholder="0-100"
+                          value={edits.kehadiran || ''}
+                          onChange={(e) => handleGradeChange(grade.id, 'kehadiran', e.target.value)}
+                          style={{ width: '100%', padding: '8px 10px', borderRadius: '50px', border: 'var(--inset-border)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', fontWeight: '600', textAlign: 'center', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', boxSizing: 'border-box' }}
+                        />
+                      </div>
+                      {/* Tugas */}
+                      <div style={{ width: '90px' }}>
+                        <label style={{ display: 'block', fontSize: '0.7rem', color: 'var(--color-muted)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '4px', textAlign: 'center' }}>Tugas</label>
+                        <input 
+                          type="number" min="0" max="100" placeholder="0-100"
+                          value={edits.tugas || ''}
+                          onChange={(e) => handleGradeChange(grade.id, 'tugas', e.target.value)}
+                          style={{ width: '100%', padding: '8px 10px', borderRadius: '50px', border: 'var(--inset-border)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', fontWeight: '600', textAlign: 'center', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', boxSizing: 'border-box' }}
+                        />
+                      </div>
+                      {/* UTS */}
+                      <div style={{ width: '90px' }}>
+                        <label style={{ display: 'block', fontSize: '0.7rem', color: 'var(--color-muted)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '4px', textAlign: 'center' }}>UTS</label>
+                        <input 
+                          type="number" min="0" max="100" placeholder="0-100"
+                          value={edits.uts || ''}
+                          onChange={(e) => handleGradeChange(grade.id, 'uts', e.target.value)}
+                          style={{ width: '100%', padding: '8px 10px', borderRadius: '50px', border: 'var(--inset-border)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', fontWeight: '600', textAlign: 'center', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', boxSizing: 'border-box' }}
+                        />
+                      </div>
+                      {/* UAS */}
+                      <div style={{ width: '90px' }}>
+                        <label style={{ display: 'block', fontSize: '0.7rem', color: 'var(--color-muted)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '4px', textAlign: 'center' }}>UAS</label>
+                        <input 
+                          type="number" min="0" max="100" placeholder="0-100"
+                          value={edits.uas || ''}
+                          onChange={(e) => handleGradeChange(grade.id, 'uas', e.target.value)}
+                          style={{ width: '100%', padding: '8px 10px', borderRadius: '50px', border: 'var(--inset-border)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', fontWeight: '600', textAlign: 'center', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', boxSizing: 'border-box' }}
+                        />
+                      </div>
+                      
+                      {/* Nilai Akhir */}
+                      <div style={{ textAlign: 'center', minWidth: '70px', padding: '0 10px' }}>
+                        <span style={{ display: 'block', fontSize: '0.65rem', color: 'var(--color-muted)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '4px' }}>Akhir</span>
+                        <span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{formatScoreValue(edits.score)}</span>
+                      </div>
+                      
+                      {/* Grade */}
+                      <div style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center', 
+                        width: '40px', 
+                        height: '40px', 
+                        borderRadius: '50%', 
+                        fontWeight: '800', 
+                        fontSize: '1rem', 
+                        background: 'rgba(0, 0, 0, 0.04)', 
+                        color: edits.grade ? (isPassed ? '#047857' : '#b91c1c') : 'var(--color-muted)', 
+                        boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', 
+                        border: 'var(--inset-border)',
+                        marginLeft: '10px' 
+                      }}>
+                        {edits.grade || '-'}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+              {filteredGrades.length === 0 && (
+                <div style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '16px', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' }}>
+                  <i className="ph ph-users-slash" style={{ fontSize: '3rem', color: 'var(--color-muted)', margin: '0 auto 10px', display: 'block' }}></i>
+                  {searchTerm ? 'Mahasiswa tidak ditemukan.' : 'Belum ada mahasiswa yang terdaftar di kelas ini'}
+                </div>
+              )}
             </div>
           </div>
         );
@@ -575,7 +592,7 @@ export default function DosenGradebookPage() {
               <button
                 type="button"
                 onClick={() => setShowWeightModal(false)}
-                style={{ padding: '12px 20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}
+                style={{ padding: '12px 20px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}
               >
                 Batal
               </button>
@@ -611,7 +628,7 @@ export default function DosenGradebookPage() {
                     setWeightSaving(false);
                   }
                 }}
-                style={{ padding: '12px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, opacity: weightSaving ? 0.7 : 1 }}
+                style={{ padding: '12px 20px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, opacity: weightSaving ? 0.7 : 1, boxShadow: 'var(--glass-shadow)' }}
                 disabled={weightSaving}
               >
                 {weightSaving ? 'Menyimpan...' : 'Simpan Bobot'}
@@ -636,7 +653,7 @@ export default function DosenGradebookPage() {
                   value={weightForm[key]}
                   onChange={(e) => setWeightForm(prev => ({ ...prev, [key]: e.target.value }))}
                   className="siakad-input"
-                  style={{ width: '100%' }}
+                  style={{ width: '100%', boxSizing: 'border-box' }}
                 />
               </div>
             ))}

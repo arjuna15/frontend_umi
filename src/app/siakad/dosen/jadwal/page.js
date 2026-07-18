@@ -449,10 +449,12 @@ export default function JadwalPage() {
               { label: 'Terkonfigurasi', value: configuredCount, icon: 'ph-check-circle', color: '#10b981' },
               { label: 'Belum Diatur', value: courses.length - configuredCount, icon: 'ph-warning', color: '#f59e0b' },
             ].map((s, i) => (
-              <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', backdropFilter: 'none', borderRadius: '24px', padding: '16px 20px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.55)', boxShadow: 'var(--glass-shadow)' }}>
-                <i className={`ph ${s.icon}`} style={{ fontSize: '1.3rem', color: s.color, display: 'block', marginBottom: '4px' }}></i>
-                <p style={{ color: 'white', fontWeight: '800', fontSize: '1.4rem', margin: '0 0 2px 0' }}>{s.value}</p>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.65rem', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.label}</p>
+              <div key={i} style={{ flex: '1 1 90px', background: 'var(--glass-bg)', backdropFilter: 'none', borderRadius: '24px', padding: '16px 20px', textAlign: 'center', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
+                <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 10px auto' }}>
+                  <i className={`ph ${s.icon}`} style={{ fontSize: '1.2rem', color: s.color }}></i>
+                </div>
+                <p style={{ color: 'var(--color-text)', fontWeight: '800', fontSize: '1.4rem', margin: '0 0 2px 0' }}>{s.value}</p>
+                <p style={{ color: 'var(--color-muted)', fontSize: '0.65rem', margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{s.label}</p>
               </div>
             ))}
           </div>
@@ -461,26 +463,30 @@ export default function JadwalPage() {
 
       <div className="dosen-jadwal-wrapper">
         {/* Tab Selector */}
-        <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' }}>
+        <div style={{ display: 'flex', gap: '16px', marginBottom: '28px', paddingBottom: '4px' }}>
           <button
             onClick={() => setActiveTab('pengaturan')}
+            className={activeTab === 'pengaturan' ? 'active' : ''}
             style={{
-              background: activeTab === 'pengaturan' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
-              color: activeTab === 'pengaturan' ? '#3b82f6' : 'var(--color-muted)',
-              border: activeTab === 'pengaturan' ? '2px solid #3b82f6' : '1px solid var(--color-border)',
-              padding: '10px 22px', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer',
-              transition: 'all 0.2s'
+              background: 'var(--glass-bg)',
+              color: activeTab === 'pengaturan' ? '#C41E3A' : 'var(--color-muted)',
+              border: 'var(--glass-border)',
+              boxShadow: activeTab === 'pengaturan' ? 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' : 'var(--glass-shadow)',
+              padding: '12px 24px', borderRadius: '50px', fontWeight: '800', fontSize: '0.88rem', cursor: 'pointer',
+              transition: 'all 0.25s ease'
             }}>
             <i className="ph ph-sliders" style={{ marginRight: '8px' }}></i> Pengaturan Roster
           </button>
           <button
             onClick={() => setActiveTab('kalender')}
+            className={activeTab === 'kalender' ? 'active' : ''}
             style={{
-              background: activeTab === 'kalender' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
-              color: activeTab === 'kalender' ? '#3b82f6' : 'var(--color-muted)',
-              border: activeTab === 'kalender' ? '2px solid #3b82f6' : '1px solid var(--color-border)',
-              padding: '10px 22px', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer',
-              transition: 'all 0.2s'
+              background: 'var(--glass-bg)',
+              color: activeTab === 'kalender' ? '#C41E3A' : 'var(--color-muted)',
+              border: 'var(--glass-border)',
+              boxShadow: activeTab === 'kalender' ? 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' : 'var(--glass-shadow)',
+              padding: '12px 24px', borderRadius: '50px', fontWeight: '800', fontSize: '0.88rem', cursor: 'pointer',
+              transition: 'all 0.25s ease'
             }}>
             <i className="ph ph-calendar" style={{ marginRight: '8px' }}></i> Kalender Mengajar
           </button>
@@ -488,19 +494,19 @@ export default function JadwalPage() {
 
         {/* Tab 1: Pengaturan Roster */}
         {activeTab === 'pengaturan' && (
-          <div className="siakad-card" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
+          <div className="siakad-card" style={{ padding: '24px 0 0 0', borderRadius: '24px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
             <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(59, 130, 246, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' , flexShrink: 0 }}>
                 <i className="ph ph-calendar-plus" style={{ color: '#3b82f6', fontSize: '1.1rem' }}></i>
               </div>
               <h3 style={{ margin: 0, color: 'var(--color-text)', fontWeight: '800', fontSize: '1.2rem' }}>Daftar Mata Kuliah & Jadwal</h3>
             </div>
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+            <div style={{ overflowX: 'auto', padding: '0 24px 24px 24px' }}>
+              <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
                 <thead>
-                  <tr style={{ background: 'rgba(0,0,0,0.04)', borderBottom: '2px solid var(--color-border)' }}>
+                  <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
                     {['Mata Kuliah', 'SKS', 'Hari', 'Jam', 'Ruang', 'Frekuensi', 'Aksi'].map((h, i) => (
-                      <th key={i} style={{ padding: '16px 20px', fontWeight: '700', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-muted)', whiteSpace: 'nowrap', textAlign: i === 6 ? 'center' : 'left' }}>{h}</th>
+                      <th key={i} style={{ padding: '8px 20px', fontWeight: '700', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--color-muted)', whiteSpace: 'nowrap', textAlign: i === 6 ? 'center' : 'left' }}>{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -509,13 +515,39 @@ export default function JadwalPage() {
                     const isEditing = editingId === c.id;
                     const col = DAY_COLORS[c.hari] || { bg: 'rgba(255,255,255,0.05)', color: 'var(--color-text)', border: 'var(--color-border)' };
                     return (
-                      <tr key={c.id} style={{ borderBottom: '1px solid var(--color-border)', transition: 'background 0.2s' }}>
-                        <td style={{ padding: '16px 20px', fontWeight: '700', color: 'var(--color-text)' }}>
+                      <tr key={c.id}>
+                        <td style={{ 
+                          padding: '16px 20px', 
+                          color: 'var(--color-text)',
+                          background: 'var(--liquid-bg)',
+                          borderLeft: 'var(--inset-border)',
+                          borderTop: 'var(--inset-border)',
+                          borderBottom: 'var(--inset-border)',
+                          borderRadius: '16px 0 0 16px',
+                          boxShadow: 'inset 3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                        }}>
                           {c.course_name || c.name || '-'}
                           <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--color-muted)', fontWeight: 'normal', marginTop: '2px' }}>ID: {c.code || c.id}</span>
                         </td>
-                        <td style={{ padding: '16px 20px', color: 'var(--color-text)' }}>{c.sks || 3} SKS</td>
-                        <td style={{ padding: '16px 20px' }}>
+                        <td style={{ 
+                          padding: '16px 20px', 
+                          color: 'var(--color-text)',
+                          background: 'var(--liquid-bg)',
+                          borderTop: 'var(--inset-border)',
+                          borderBottom: 'var(--inset-border)',
+                          boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                        }}>
+                          <span className="siakad-badge-status" style={{ color: '#4f46e5', borderColor: 'rgba(79, 70, 229, 0.3)', padding: '2px 8px', minWidth: '60px', display: 'inline-block', textAlign: 'center' }}>
+                            {c.sks || 3} SKS
+                          </span>
+                        </td>
+                        <td style={{ 
+                          padding: '16px 20px',
+                          background: 'var(--liquid-bg)',
+                          borderTop: 'var(--inset-border)',
+                          borderBottom: 'var(--inset-border)',
+                          boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                        }}>
                           {isEditing ? (
                             <CustomSelect
                               value={formData.day}
@@ -526,11 +558,19 @@ export default function JadwalPage() {
                             />
                           ) : (
                             c.hari ? (
-                              <span style={{ display: 'inline-block', padding: '4px 12px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: '700', background: col.bg, color: col.color, border: `1px solid ${col.border}` }}>{c.hari}</span>
+                              <span className="siakad-badge-status" style={{ color: col.color || '#C41E3A', borderColor: col.color ? 'rgba(196, 30, 58, 0.3)' : 'rgba(196, 30, 58, 0.15)', padding: '2px 8px', minWidth: '85px', display: 'inline-block', textAlign: 'center' }}>
+                                {c.hari}
+                              </span>
                             ) : <span style={{ color: 'var(--color-muted)', fontSize: '0.85rem' }}>Belum diatur</span>
                           )}
                         </td>
-                        <td style={{ padding: '16px 20px' }}>
+                        <td style={{ 
+                          padding: '16px 20px',
+                          background: 'var(--liquid-bg)',
+                          borderTop: 'var(--inset-border)',
+                          borderBottom: 'var(--inset-border)',
+                          boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                        }}>
                           {isEditing ? (
                             <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                               <CustomTimePicker value={formData.start_time} onChange={(val) => setFormData({ ...formData, start_time: val })} />
@@ -541,7 +581,13 @@ export default function JadwalPage() {
                             c.jam_mulai ? <span style={{ fontFamily: 'monospace', color: 'var(--color-text)', fontSize: '0.9rem' }}>{c.jam_mulai} - {c.jam_selesai || ''}</span> : '-'
                           )}
                         </td>
-                        <td style={{ padding: '16px 20px' }}>
+                        <td style={{ 
+                          padding: '16px 20px',
+                          background: 'var(--liquid-bg)',
+                          borderTop: 'var(--inset-border)',
+                          borderBottom: 'var(--inset-border)',
+                          boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                        }}>
                           {isEditing ? (
                             <CustomSelect
                               value={formData.room}
@@ -554,7 +600,13 @@ export default function JadwalPage() {
                             c.ruangan || c.ruang || '-'
                           )}
                         </td>
-                        <td style={{ padding: '16px 20px' }}>
+                        <td style={{ 
+                          padding: '16px 20px',
+                          background: 'var(--liquid-bg)',
+                          borderTop: 'var(--inset-border)',
+                          borderBottom: 'var(--inset-border)',
+                          boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                        }}>
                           {isEditing ? (
                             <CustomSelect
                               value={formData.frequency}
@@ -573,15 +625,73 @@ export default function JadwalPage() {
                             </span>
                           )}
                         </td>
-                        <td style={{ padding: '16px 20px', textAlign: 'center' }}>
+                        <td style={{ 
+                          padding: '16px 20px',
+                          background: 'var(--liquid-bg)',
+                          borderRight: 'var(--inset-border)',
+                          borderTop: 'var(--inset-border)',
+                          borderBottom: 'var(--inset-border)',
+                          borderRadius: '0 16px 16px 0',
+                          boxShadow: 'inset -3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                          textAlign: 'center'
+                        }}>
                           {isEditing ? (
-                            <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
-                              <button id={`btn-save-roster-${c.id}`} onClick={() => handleSave(c.id)} disabled={saving} className="siakad-btn-primary" style={{ padding: '8px 16px', fontSize: '0.8rem' }}>{saving ? 'Simpan...' : 'Simpan'}</button>
-                              <button id={`btn-cancel-roster-${c.id}`} onClick={handleCancel} style={{ padding: '8px 14px', background: 'transparent', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '30px', color: 'var(--color-text)', fontSize: '0.8rem', cursor: 'pointer' }}>Batal</button>
-                            </div>
-                          ) : (
-                            <button id={`btn-edit-roster-${c.id}`} onClick={() => handleEdit(c)} className="siakad-btn-primary" style={{ padding: '8px 16px', fontSize: '0.8rem', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', border: 'none' }}><i className="ph ph-pencil-simple"></i> Edit</button>
-                          )}
+                             <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
+                               <button 
+                                 id={`btn-save-roster-${c.id}`} 
+                                 onClick={() => handleSave(c.id)} 
+                                 disabled={saving} 
+                                 className="siakad-btn-primary" 
+                                 style={{ 
+                                   padding: '8px 16px', 
+                                   fontSize: '0.8rem',
+                                   fontWeight: '800',
+                                   borderRadius: '12px',
+                                   boxShadow: '2px 2px 4px rgba(196,30,58,0.2)'
+                                 }}
+                               >
+                                 {saving ? 'Simpan...' : 'Simpan'}
+                               </button>
+                               <button 
+                                 id={`btn-cancel-roster-${c.id}`} 
+                                 onClick={handleCancel} 
+                                 style={{ 
+                                   padding: '8px 14px', 
+                                   background: 'var(--glass-bg)', 
+                                   border: 'var(--glass-border)', 
+                                   borderRadius: '12px', 
+                                   color: 'var(--color-text)', 
+                                   fontSize: '0.8rem', 
+                                   cursor: 'pointer',
+                                   fontWeight: '800',
+                                   boxShadow: 'var(--glass-shadow)'
+                                 }}
+                               >
+                                 Batal
+                               </button>
+                             </div>
+                           ) : (
+                             <button 
+                               id={`btn-edit-roster-${c.id}`} 
+                               onClick={() => handleEdit(c)} 
+                               style={{ 
+                                 padding: '8px 16px', 
+                                 fontSize: '0.8rem', 
+                                 background: 'var(--glass-bg)', 
+                                 color: '#C41E3A', 
+                                 border: 'var(--glass-border)', 
+                                 borderRadius: '12px',
+                                 boxShadow: 'var(--glass-shadow)',
+                                 cursor: 'pointer',
+                                 fontWeight: '800',
+                                 display: 'inline-flex',
+                                 alignItems: 'center',
+                                 gap: '6px'
+                               }}
+                             >
+                               <i className="ph ph-pencil-simple"></i> Edit
+                             </button>
+                           )}
                         </td>
                       </tr>
                     );
@@ -612,44 +722,47 @@ export default function JadwalPage() {
               {/* Days Header */}
               <div className="calendar-grid" style={{ textAlign: 'center', marginBottom: '8px' }}>
                 {['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'].map(d => (
-                  <span key={d} style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--color-muted)', textTransform: 'uppercase' }}>{d}</span>
+                  <span key={d} style={{ color: 'var(--color-muted)', fontSize: '0.8rem', fontWeight: '700' }}>{d}</span>
                 ))}
               </div>
 
-              {/* Grid Tanggal */}
+              {/* Days Grid */}
               <div className="calendar-grid">
                 {daysGrid.map((item, idx) => {
-                  const isToday = new Date().toDateString() === new Date(item.dateStr).toDateString();
                   const isSelected = selectedDay === item.day;
-                  const agenda = getDayAgenda(item.dateStr);
-                  const hasSwap = agenda.some(a => a.status !== 'normal');
-                  const hasClass = agenda.length > 0;
+                  const isToday = new Date().toDateString() === new Date(item.dateStr).toDateString();
+                  const agenda = item.day ? getDayAgenda(item.dateStr) : [];
+                  const hasAgenda = agenda.length > 0;
 
                   return (
                     <div
                       key={idx}
                       onClick={() => item.day && setSelectedDay(item.day)}
-                      className={item.day ? "day-cell" : ""}
                       style={{
-                        border: item.day ? (isSelected ? '2px solid #3b82f6' : undefined) : 'none',
-                        background: item.day ? (isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(128,128,128,0.2)' : undefined)) : 'transparent',
-                        cursor: item.day ? 'pointer' : 'default',
-                        pointerEvents: item.day ? 'auto' : 'none',
+                        background: item.day ? (isSelected ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--glass-bg)') : 'transparent',
+                        color: isSelected ? 'white' : 'var(--color-text)',
+                        border: item.day ? (isSelected ? '1px solid rgba(196,30,58,0.5)' : (isToday ? '3px solid #C41E3A' : '1px solid var(--color-border)')) : 'none',
+                        borderRadius: '12px',
                         aspectRatio: '1',
+                        cursor: item.day ? 'pointer' : 'default',
+                        position: 'relative',
+                        opacity: item.day ? 1 : 0.25,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        padding: '6px',
+                        transition: 'all 0.2s',
+                        boxShadow: item.day ? (isSelected ? '0 4px 14px rgba(196,30,58,0.3)' : 'var(--glass-shadow)') : 'none',
+                        pointerEvents: item.day ? 'auto' : 'none'
                       }}
                     >
-                      <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#3b82f6' : 'var(--color-text)') : 'transparent' }}>{item.day}</span>
-                      
-                      {/* Indicators */}
-                      <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
-                        {item.day && hasClass && (
-                          <span style={{
-                            width: '6px', height: '6px', borderRadius: '50%',
-                            background: hasSwap ? '#f59e0b' : '#3b82f6',
-                            boxShadow: `0 0 6px ${hasSwap ? '#f59e0b' : '#3b82f6'}`
-                          }} />
-                        )}
-                      </div>
+                      <span style={{ fontWeight: '700', fontSize: '0.9rem', color: item.day ? (isSelected ? 'white' : 'var(--color-text)') : 'transparent' }}>{item.day}</span>
+                      {item.day && hasAgenda && (
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: getBadgeStyle(agenda[0].status).text }}></span>
+                        </div>
+                      )}
                     </div>
                   );
                 })}
@@ -679,13 +792,14 @@ export default function JadwalPage() {
                       borderRadius: '16px', 
                       background: 'var(--glass-bg)', 
                       borderLeft: `4px solid ${getBadgeStyle(agenda.status).text}`,
-                      borderTop: '1px solid var(--color-border)',
-                      borderRight: '1px solid var(--color-border)',
-                      borderBottom: '1px solid var(--color-border)'
+                      borderTop: '1px solid rgba(255,255,255,0.55)',
+                      borderRight: '1px solid rgba(0,0,0,0.02)',
+                      borderBottom: '1px solid rgba(0,0,0,0.02)',
+                      boxShadow: 'var(--glass-shadow)'
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
-                      <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: getBadgeStyle(agenda.status).bg, color: getBadgeStyle(agenda.status).text }}>
+                      <span className="siakad-badge" style={{ background: `linear-gradient(135deg, ${getBadgeStyle(agenda.status).text} 0%, ${getBadgeStyle(agenda.status).text} 100%) !important`, color: 'white !important', padding: '2px 8px !important', minWidth: '85px !important', fontSize: '0.7rem !important' }}>
                         {getBadgeStyle(agenda.status).label}
                       </span>
                     </div>
@@ -708,12 +822,13 @@ export default function JadwalPage() {
                             setShowEditModal(true);
                           }}
                           style={{
-                            background: 'rgba(255,255,255,0.05)',
-                            border: '1px solid rgba(255,255,255,0.1)',
+                            background: 'var(--glass-bg)',
+                            border: 'var(--glass-border)',
                             borderRadius: '50%',
-                            width: '28px', height: '28px',
+                            width: '32px', height: '32px',
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
                             color: 'var(--color-text)', cursor: 'pointer',
+                            boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)',
                             transition: 'all 0.2s'
                           }}
                           title="Ubah Jadwal"
@@ -735,25 +850,83 @@ export default function JadwalPage() {
 
       {showEditModal && (
         <ModalShell title={editForm.editMode === 'session' ? `Ubah Jadwal Sesi ${selectedDateStr}` : 'Ubah Jadwal Mengajar'} icon="ph-calendar" onClose={() => setShowEditModal(false)} footer={
-          <>
-            <button onClick={() => setShowEditModal(false)} style={{ padding: '10px 20px', border: 'none', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button onClick={handleSaveFromCalendar} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
-              {saving ? 'Menyimpan...' : (editForm.editMode === 'session' ? 'Terapkan untuk Sesi Ini' : 'Simpan Permanen')}
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', width: '100%' }}>
+            <button 
+              onClick={() => setShowEditModal(false)} 
+              style={{ 
+                padding: '10px 20px', 
+                border: 'var(--glass-border)', 
+                background: 'var(--glass-bg)', 
+                color: 'var(--color-text)', 
+                cursor: 'pointer', 
+                fontWeight: '800',
+                borderRadius: '50px',
+                boxShadow: 'var(--glass-shadow)',
+                fontSize: '0.85rem'
+              }}
+            >
+              Batal
             </button>
-          </>
+            <button 
+              onClick={handleSaveFromCalendar} 
+              disabled={saving} 
+              className="siakad-btn-primary" 
+              style={{ 
+                padding: '10px 24px',
+                fontSize: '0.85rem',
+                fontWeight: '800',
+                borderRadius: '50px',
+                boxShadow: '2px 2px 5px rgba(196,30,58,0.2)'
+              }}
+            >
+              {saving ? 'Menyimpan...' : (editForm.editMode === 'session' ? 'Terapkan Sesi Ini' : 'Simpan Permanen')}
+            </button>
+          </div>
         }>
-          <div className="segmented-control">
+          <div style={{ display: 'flex', gap: '12px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)', borderRadius: '14px', padding: '6px', marginBottom: '20px' }}>
             <button
               type="button"
-              className={`segment-btn ${editForm.editMode === 'permanent' ? 'active' : ''}`}
               onClick={() => setEditForm({ ...editForm, editMode: 'permanent' })}
+              style={{
+                flex: 1,
+                padding: '10px 14px',
+                border: 'none',
+                borderRadius: '10px',
+                cursor: 'pointer',
+                fontSize: '0.85rem',
+                fontWeight: '800',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                transition: 'all 0.2s',
+                background: editForm.editMode === 'permanent' ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'transparent',
+                color: editForm.editMode === 'permanent' ? 'white' : 'var(--color-muted)',
+                boxShadow: editForm.editMode === 'permanent' ? '2px 2px 5px rgba(196,30,58,0.2)' : 'none',
+              }}
             >
               <i className="ph ph-calendar-arrows"></i> Selamanya (Reguler)
             </button>
             <button
               type="button"
-              className={`segment-btn ${editForm.editMode === 'session' ? 'active' : ''}`}
               onClick={() => setEditForm({ ...editForm, editMode: 'session' })}
+              style={{
+                flex: 1,
+                padding: '10px 14px',
+                border: 'none',
+                borderRadius: '10px',
+                cursor: 'pointer',
+                fontSize: '0.85rem',
+                fontWeight: '800',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '6px',
+                transition: 'all 0.2s',
+                background: editForm.editMode === 'session' ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'transparent',
+                color: editForm.editMode === 'session' ? 'white' : 'var(--color-muted)',
+                boxShadow: editForm.editMode === 'session' ? '2px 2px 5px rgba(196,30,58,0.2)' : 'none',
+              }}
             >
               <i className="ph ph-clock"></i> Hanya Sesi Tanggal ini
             </button>

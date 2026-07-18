@@ -242,13 +242,14 @@ export default function JadwalKalenderPage() {
 
       <div className="mahasiswa-jadwal-wrapper">
         {/* Tab Selector */}
-        <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' }}>
+        <div style={{ display: 'inline-flex', gap: '4px', marginBottom: '24px', background: 'var(--liquid-bg)', padding: '6px', borderRadius: '50px', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
           <button
             onClick={() => setActiveTab('kalender')}
             style={{
-              background: activeTab === 'kalender' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+              background: activeTab === 'kalender' ? 'var(--glass-bg)' : 'transparent',
               color: activeTab === 'kalender' ? '#3b82f6' : 'var(--color-muted)',
-              border: activeTab === 'kalender' ? '2px solid #3b82f6' : '1px solid var(--color-border)',
+              border: activeTab === 'kalender' ? 'var(--glass-border)' : 'none',
+              boxShadow: activeTab === 'kalender' ? 'var(--glass-shadow)' : 'none',
               padding: '10px 22px', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer',
               transition: 'all 0.2s'
             }}>
@@ -257,9 +258,10 @@ export default function JadwalKalenderPage() {
           <button
             onClick={() => setActiveTab('kegiatan')}
             style={{
-              background: activeTab === 'kegiatan' ? 'rgba(59, 130, 246, 0.15)' : 'transparent',
+              background: activeTab === 'kegiatan' ? 'var(--glass-bg)' : 'transparent',
               color: activeTab === 'kegiatan' ? '#3b82f6' : 'var(--color-muted)',
-              border: activeTab === 'kegiatan' ? '2px solid #3b82f6' : '1px solid var(--color-border)',
+              border: activeTab === 'kegiatan' ? 'var(--glass-border)' : 'none',
+              boxShadow: activeTab === 'kegiatan' ? 'var(--glass-shadow)' : 'none',
               padding: '10px 22px', borderRadius: '50px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer',
               transition: 'all 0.2s'
             }}>
@@ -274,10 +276,10 @@ export default function JadwalKalenderPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                 <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>{monthsMap[month]} {year}</h3>
                 <div style={{ display: 'flex', gap: '8px' }}>
-                  <button onClick={handlePrevMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <button onClick={handlePrevMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--glass-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'var(--glass-shadow)' }}>
                     <i className="ph ph-caret-left"></i>
                   </button>
-                  <button onClick={handleNextMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <button onClick={handleNextMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: 'var(--glass-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'var(--glass-shadow)' }}>
                     <i className="ph ph-caret-right"></i>
                   </button>
                 </div>
@@ -306,8 +308,9 @@ export default function JadwalKalenderPage() {
                       style={{
                         aspectRatio: '1',
                         borderRadius: '12px',
-                        border: isSelected ? '2px solid #3b82f6' : '1px solid var(--color-border)',
-                        background: isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(128,128,128,0.2)' : 'rgba(128,128,128,0.06)'),
+                        border: isSelected ? '1px solid #3b82f6' : (isToday ? '1px solid var(--apple-blue)' : 'var(--glass-border)'),
+                        background: isSelected ? 'var(--liquid-bg)' : 'var(--glass-bg)',
+                        boxShadow: isSelected ? 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' : 'var(--glass-shadow)',
                         cursor: item.day ? 'pointer' : 'default',
                         display: 'flex',
                         flexDirection: 'column',
@@ -317,7 +320,7 @@ export default function JadwalKalenderPage() {
                         transition: 'all 0.15s ease'
                       }}
                     >
-                      <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#3b82f6' : 'var(--color-text)') : 'transparent' }}>{item.day}</span>
+                      <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#3b82f6' : (isToday ? 'var(--apple-blue)' : 'var(--color-text)')) : 'transparent' }}>{item.day}</span>
                       
                       {/* Indicators */}
                       <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
@@ -342,11 +345,9 @@ export default function JadwalKalenderPage() {
                 <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: '2px 0 0 0' }}>
                   {selectedDay ? `${selectedDay} ${monthsMap[month]} ${year}` : 'Pilih Tanggal'}
                 </h3>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1, overflowY: 'auto' }}>
+              </div>              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1, overflowY: 'auto' }}>
                 {selectedDayAgenda.length === 0 ? (
-                  <div style={{ textAlign: 'center', padding: '40px', color: 'var(--color-muted)' }}>
+                  <div style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', padding: '32px 24px', borderRadius: '16px', textAlign: 'center', color: 'var(--color-muted)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                     <i className="ph ph-calendar-blank" style={{ fontSize: '3rem', opacity: 0.3, marginBottom: '8px', display: 'block' }}></i>
                     Tidak ada jadwal kuliah untuk hari ini.
                   </div>
@@ -358,21 +359,35 @@ export default function JadwalKalenderPage() {
                       borderRadius: '16px', 
                       background: 'var(--glass-bg)', 
                       borderLeft: `4px solid ${agenda.type === 'swap' ? '#f59e0b' : '#3b82f6'}`,
-                      borderTop: '1px solid var(--color-border)',
-                      borderRight: '1px solid var(--color-border)',
-                      borderBottom: '1px solid var(--color-border)'
+                      borderTop: 'var(--glass-border)',
+                      borderRight: 'var(--glass-border)',
+                      borderBottom: 'var(--glass-border)',
+                      boxShadow: 'var(--glass-shadow)'
                     }}
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
-                      <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: agenda.type === 'swap' ? 'rgba(245,158,11,0.15)' : 'rgba(59,130,246,0.15)', color: agenda.type === 'swap' ? '#f59e0b' : '#3b82f6' }}>
+                      <span style={{ 
+                        fontSize: '0.72rem', 
+                        fontWeight: '800', 
+                        padding: '4px 10px', 
+                        borderRadius: '50px', 
+                        background: 'var(--liquid-bg)', 
+                        border: agenda.type === 'swap' ? '1px solid rgba(245,158,11,0.3)' : '1px solid rgba(59,130,246,0.3)',
+                        color: agenda.type === 'swap' ? '#f59e0b' : '#3b82f6',
+                        boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)'
+                      }}>
                         {agenda.type === 'swap' ? 'Jadwal Pengganti (Swap)' : 'Jadwal Reguler'}
                       </span>
                       <span style={{ fontSize: '0.82rem', fontFamily: 'monospace', color: 'var(--color-text)', fontWeight: 'bold' }}>{agenda.time}</span>
                     </div>
                     <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)' }}>{agenda.title}</h4>
-                    <p style={{ margin: '0 0 4px 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-user"></i> {agenda.lecturer}</p>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-door"></i> Ruang {agenda.room}</p>
-                    {agenda.notes && <p style={{ margin: '6px 0 0 0', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', fontSize: '0.8rem', color: '#f59e0b' }}><strong>Catatan:</strong> {agenda.notes}</p>}
+                    <p style={{ margin: '0 0 4px 0', fontSize: '0.85rem', color: 'var(--color-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <i className="ph ph-user" style={{ color: 'var(--apple-blue)' }}></i> {agenda.lecturer}
+                    </p>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <i className="ph ph-door" style={{ color: 'var(--apple-blue)' }}></i> {agenda.room && String(agenda.room).toLowerCase().startsWith('ruang') ? agenda.room : `Ruang ${agenda.room}`}
+                    </p>
+                    {agenda.notes && <p style={{ margin: '8px 0 0 0', padding: '10px 14px', background: 'var(--liquid-bg)', borderRadius: '10px', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', fontSize: '0.8rem', color: '#f59e0b', fontWeight: '600' }}><strong>Catatan:</strong> {agenda.notes}</p>}
                   </div>
                 ))}
               </div>
@@ -384,7 +399,7 @@ export default function JadwalKalenderPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {calendarEvents.length > 0 ? calendarEvents.map((item, i) => (
               <div key={i} className="siakad-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px' }}>
-                <div style={{ background: 'var(--glass-bg)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <div style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', flexShrink: 0 }}>
                   {getEventIcon(item.type)}
                 </div>
                 <div style={{ flex: 1 }}>

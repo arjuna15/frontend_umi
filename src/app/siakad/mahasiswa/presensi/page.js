@@ -132,7 +132,7 @@ export default function MahasiswaPresensi() {
   };
 
   if (loading || !data) return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-muted)' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '300px', color: 'var(--color-muted)' }}>
       <i className="ph ph-spinner ph-spin" style={{ fontSize: '2rem', marginRight: '10px' }}></i> Memuat modul presensi...
     </div>
   );
@@ -149,6 +149,7 @@ export default function MahasiswaPresensi() {
         </div>
       </div>
 
+      <div style={{ padding: '24px' }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
         {data.map((course, idx) => {
           const percentage = Math.round((course.attended / course.total_meetings) * 100);
@@ -166,7 +167,7 @@ export default function MahasiswaPresensi() {
                   <span style={{ color: 'var(--color-text)', fontWeight: '600' }}>Kehadiran: {course.attended}/{course.total_meetings}</span>
                   <span style={{ fontWeight: 'bold', color: isSafe ? '#10b981' : '#ef4444' }}>{percentage}%</span>
                 </div>
-                <div style={{ height: '8px', background: 'var(--glass-bg)', borderRadius: '999px', overflow: 'hidden' }}>
+                <div style={{ height: '10px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '999px', overflow: 'hidden', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                   <div style={{ height: '100%', width: `${percentage}%`, background: isSafe ? '#10b981' : '#ef4444', borderRadius: '999px', transition: 'width 0.5s ease' }}></div>
                 </div>
                 {!isSafe && (
@@ -175,24 +176,25 @@ export default function MahasiswaPresensi() {
               </div>
               
               {course.active_session ? (
-                <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
+                <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', padding: '16px', borderRadius: '12px', textAlign: 'center', boxShadow: 'var(--glass-shadow)', borderLeft: '4px solid #10b981' }}>
                   <p style={{ margin: '0 0 12px 0', fontSize: '0.95rem', color: 'var(--color-text)', fontWeight: '600' }}>Sesi Absen Pertemuan ke-{course.active_session.meeting} Dibuka! ({course.active_session.mode})</p>
                   <button 
                     onClick={() => handleAttend(course.active_session)}
                     disabled={submitting}
-                    style={{ background: '#10b981', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '50px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%', boxShadow: '0 4px 10px rgba(16,185,129,0.3)' }}
+                    style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '50px', fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer', width: '100%', boxShadow: '0 4px 10px rgba(16,185,129,0.2)' }}
                   >
                     {submitting ? 'Mencatat...' : 'KLIK UNTUK HADIR'}
                   </button>
                 </div>
               ) : (
-                <div style={{ background: 'var(--glass-bg)', border: '1px dashed var(--color-border)', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
+                <div style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', padding: '16px', borderRadius: '12px', textAlign: 'center', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                   <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--color-text)' }}>Tidak ada sesi absen yang aktif saat ini.</p>
                 </div>
               )}
             </div>
           );
         })}
+      </div>
       </div>
     </div>
   );

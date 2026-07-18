@@ -203,13 +203,18 @@ export default function KaprodiKurikulumPage() {
       </div>
 
       {/* Tab buttons */}
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
         {[{ key: 'kurikulum', label: 'Struktur Kurikulum', icon: 'ph-list-bullets' }, { key: 'obe', label: 'OBE & CPL Mapping', icon: 'ph-graph' }].map(t => (
-          <button id={`kurikulum-tab-${t.key}`} key={t.key} onClick={() => setActiveTab(t.key)} style={{
-            padding: '10px 20px', borderRadius: '50px', border: activeTab === t.key ? '2px solid #C41E3A' : '1px solid var(--color-border)',
-            background: activeTab === t.key ? 'rgba(196,30,58,0.15)' : 'transparent', color: activeTab === t.key ? '#C41E3A' : 'var(--color-muted)',
-            fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '6px'
-          }}>
+          <button id={`kurikulum-tab-${t.key}`} key={t.key} onClick={() => setActiveTab(t.key)}
+            className={activeTab === t.key ? 'active' : ''}
+            style={{
+              padding: '10px 20px', borderRadius: '50px',
+              border: activeTab === t.key ? '2px solid #C41E3A' : 'var(--glass-border)',
+              background: activeTab === t.key ? 'rgba(196,30,58,0.15)' : 'var(--glass-bg)',
+              color: activeTab === t.key ? '#C41E3A' : 'var(--color-muted)',
+              boxShadow: activeTab === t.key ? 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' : 'var(--glass-shadow)',
+              fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '6px'
+            }}>
             <i className={`ph ${t.icon}`} style={{ fontSize: '1rem' }}></i> {t.label}
           </button>
         ))}
@@ -218,22 +223,22 @@ export default function KaprodiKurikulumPage() {
       {/* Kurikulum Tab */}
       {activeTab === 'kurikulum' && (
         <>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '24px' }}>
-            <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '24px', alignItems: 'start' }}>
+            <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
               <p style={{ margin: '0 0 8px 0', color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Mata Kuliah</p>
               <h2 style={{ margin: 0, fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)' }}>{courses.length}</h2>
             </div>
-            <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+            <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
               <p style={{ margin: '0 0 8px 0', color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total SKS Kurikulum</p>
               <h2 style={{ margin: 0, fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)' }}>{courses.reduce((acc, c) => acc + parseInt(c.sks), 0)} SKS</h2>
             </div>
           </div>
 
-          <div className="siakad-card" style={{ padding: '24px' }}>
+          <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
             <div style={{ overflowX: 'auto' }}>
-              <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
+              <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
                 <thead>
-                  <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
+                  <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
                     <th style={{ padding: '16px' }}>Semester</th>
                     <th style={{ padding: '16px' }}>Kode</th>
                     <th style={{ padding: '16px' }}>Mata Kuliah</th>
@@ -255,9 +260,9 @@ export default function KaprodiKurikulumPage() {
                         <span className="siakad-badge" style={{ background: c.type === 'Wajib' ? 'rgba(196, 30, 58, 0.15)' : 'rgba(245, 158, 11, 0.15)', color: c.type === 'Wajib' ? '#C41E3A' : '#f59e0b', borderRadius: '50px', padding: '4px 12px' }}>{c.type}</span>
                       </td>
                       <td style={{ padding: '16px' }}>
-                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
-                          <button id={`btn-edit-mk-${c.id}`} onClick={() => { setEditFormData(c); setIsEditModalOpen(true); }} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#3b82f6', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-pencil-simple"></i></button>
-                          <button id={`btn-delete-mk-${c.id}`} onClick={() => handleDelete(c.id)} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: '#ef4444', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-trash"></i></button>
+                        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'nowrap', alignItems: 'center' }}>
+                          <button id={`btn-edit-mk-${c.id}`} onClick={() => { setEditFormData(c); setIsEditModalOpen(true); }} style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: '#3b82f6', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-pencil-simple"></i></button>
+                          <button id={`btn-delete-mk-${c.id}`} onClick={() => handleDelete(c.id)} style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: '#ef4444', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}><i className="ph ph-trash"></i></button>
                         </div>
                       </td>
                     </tr>
@@ -271,11 +276,11 @@ export default function KaprodiKurikulumPage() {
 
       {/* OBE Tab — Outcome-Based Education Mapping */}
       {activeTab === 'obe' && (
-        <div style={{ display: 'grid', gap: '24px' }}>
+        <div style={{ display: 'grid', gap: '24px', alignItems: 'start' }}>
           {/* CPL Section */}
-          <div className="siakad-card" style={{ padding: '24px' }}>
+          <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-              <div style={{ background: 'rgba(16,185,129,0.15)', padding: '8px', borderRadius: '10px', color: '#10b981', display: 'flex' }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'var(--liquid-bg)', border: 'var(--inset-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: '#10b981' }}>
                 <i className="ph ph-target" style={{ fontSize: '1.3rem' }}></i>
               </div>
               <div>
@@ -283,9 +288,9 @@ export default function KaprodiKurikulumPage() {
                 <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', margin: 0 }}>Program Learning Outcomes yang ditetapkan untuk prodi</p>
               </div>
             </div>
-            <div style={{ display: 'grid', gap: '12px' }}>
+            <div style={{ display: 'grid', gap: '12px', alignItems: 'start' }}>
               {cplData.map((cpl, i) => (
-                <div key={cpl.code} style={{ padding: '14px 18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)', display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+                <div key={cpl.code} style={{ padding: '14px 18px', borderRadius: '14px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
                   <span style={{ background: 'rgba(16,185,129,0.15)', color: '#10b981', padding: '4px 12px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: '800', whiteSpace: 'nowrap', marginTop: '2px' }}>{cpl.code}</span>
                   <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '0.9rem', lineHeight: '1.5' }}>{cpl.description}</p>
                 </div>
@@ -294,9 +299,9 @@ export default function KaprodiKurikulumPage() {
           </div>
 
           {/* CPMK Section */}
-          <div className="siakad-card" style={{ padding: '24px' }}>
+          <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-              <div style={{ background: 'rgba(59,130,246,0.15)', padding: '8px', borderRadius: '10px', color: '#3b82f6', display: 'flex' }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'var(--liquid-bg)', border: 'var(--inset-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: '#3b82f6' }}>
                 <i className="ph ph-book-open" style={{ fontSize: '1.3rem' }}></i>
               </div>
               <div>
@@ -304,14 +309,14 @@ export default function KaprodiKurikulumPage() {
                 <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', margin: 0 }}>Course Learning Outcomes yang dipetakan ke CPL</p>
               </div>
             </div>
-            <div style={{ display: 'grid', gap: '12px' }}>
+            <div style={{ display: 'grid', gap: '12px', alignItems: 'start' }}>
               {cpmkData.map((cpmk) => (
-                <div key={cpmk.code} style={{ padding: '14px 18px', borderRadius: '14px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}>
+                <div key={cpmk.code} style={{ padding: '14px 18px', borderRadius: '14px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                   <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', marginBottom: '8px', flexWrap: 'wrap' }}>
                     <span style={{ background: 'rgba(59,130,246,0.15)', color: '#3b82f6', padding: '4px 12px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: '800', whiteSpace: 'nowrap' }}>{cpmk.code}</span>
                     <p style={{ color: 'var(--color-text)', margin: 0, fontSize: '0.9rem', flex: 1 }}>{cpmk.description}</p>
                   </div>
-                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginLeft: '0' }}>
+                  <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginLeft: '0', alignItems: 'center' }}>
                     {cpmk.cpl.map(c => (
                       <span key={c} style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '2px 10px', borderRadius: '12px', fontSize: '0.72rem', fontWeight: '700', border: '1px solid rgba(16,185,129,0.25)' }}>{c}</span>
                     ))}
@@ -322,9 +327,9 @@ export default function KaprodiKurikulumPage() {
           </div>
 
           {/* Matrix Visualization */}
-          <div className="siakad-card" style={{ padding: '24px' }}>
+          <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
-              <div style={{ background: 'rgba(139,92,246,0.15)', padding: '8px', borderRadius: '10px', color: '#8b5cf6', display: 'flex' }}>
+              <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'var(--liquid-bg)', border: 'var(--inset-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: '#8b5cf6' }}>
                 <i className="ph ph-grid-four" style={{ fontSize: '1.3rem' }}></i>
               </div>
               <div>
@@ -334,7 +339,7 @@ export default function KaprodiKurikulumPage() {
             </div>
 
             {/* Legend */}
-            <div style={{ display: 'flex', gap: '16px', marginBottom: '16px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '16px', marginBottom: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
               {Object.entries(strengthColors).map(([label, styles]) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--color-muted)' }}>
                   <div style={{ width: '20px', height: '20px', borderRadius: '6px', background: styles.bg, border: `1px solid ${styles.border}`, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -344,13 +349,13 @@ export default function KaprodiKurikulumPage() {
                 </div>
               ))}
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', color: 'var(--color-muted)' }}>
-                <div style={{ width: '20px', height: '20px', borderRadius: '6px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}></div>
+                <div style={{ width: '20px', height: '20px', borderRadius: '6px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 1px 1px 2px var(--inset-shadow-dark)' }}></div>
                 Tidak ada
               </div>
             </div>
 
             <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '700px' }}>
+              <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px', minWidth: '700px' }}>
                 <thead>
                   <tr>
                     <th style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase', minWidth: '200px' }}>Mata Kuliah</th>
@@ -385,7 +390,7 @@ export default function KaprodiKurikulumPage() {
                             ) : (
                               <div style={{
                                 width: '42px', height: '42px', borderRadius: '10px', margin: '0 auto',
-                                background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)'
+                                background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)'
                               }}></div>
                             )}
                           </td>
@@ -398,14 +403,14 @@ export default function KaprodiKurikulumPage() {
             </div>
 
             {/* CPL coverage summary */}
-            <div style={{ marginTop: '20px', padding: '16px 20px', borderRadius: '16px', background: 'rgba(139,92,246,0.06)', border: '1px solid rgba(139,92,246,0.15)' }}>
+            <div style={{ marginTop: '20px', padding: '16px 20px', borderRadius: '16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' }}>
               <p style={{ fontSize: '0.82rem', fontWeight: '700', color: '#8b5cf6', margin: '0 0 12px 0' }}>Ringkasan Cakupan CPL</p>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
                 {cplData.map(cpl => {
                   const count = matrixCourses.filter(c => c.mapping[cpl.code]).length;
                   const pct = Math.round((count / matrixCourses.length) * 100);
                   return (
-                    <div key={cpl.code} style={{ flex: '1 1 100px', textAlign: 'center', padding: '10px', borderRadius: '12px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}>
+                    <div key={cpl.code} style={{ flex: '1 1 100px', textAlign: 'center', padding: '10px', borderRadius: '12px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                       <p style={{ fontSize: '0.72rem', fontWeight: '800', color: '#10b981', margin: '0 0 4px 0' }}>{cpl.code}</p>
                       <p style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 2px 0' }}>{count}</p>
                       <p style={{ fontSize: '0.68rem', color: 'var(--color-muted)', margin: 0 }}>{pct}% MK</p>
@@ -425,7 +430,7 @@ export default function KaprodiKurikulumPage() {
           onClose={() => setIsEditModalOpen(false)}
           footer={(
             <>
-              <button id="btn-cancel-mk" type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button id="btn-cancel-mk" type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700, boxShadow: 'var(--glass-shadow)' }}>Batal</button>
               <button id="btn-save-mk" type="submit" form="kurikulum-form" style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>Simpan</button>
             </>
           )}
@@ -433,15 +438,15 @@ export default function KaprodiKurikulumPage() {
           <form id="kurikulum-form" onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Kode MK</label>
-              <input id="mk-code" type="text" required value={editFormData.code} onChange={e=>setEditFormData({...editFormData, code: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: IF101" />
+              <input id="mk-code" type="text" required value={editFormData.code} onChange={e=>setEditFormData({...editFormData, code: e.target.value})} className="siakad-input" style={{ width: '100%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} placeholder="Contoh: IF101" />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Nama Mata Kuliah</label>
-              <input id="mk-name" type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%' }} placeholder="Contoh: Pemrograman Dasar" />
+              <input id="mk-name" type="text" required value={editFormData.name} onChange={e=>setEditFormData({...editFormData, name: e.target.value})} className="siakad-input" style={{ width: '100%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} placeholder="Contoh: Pemrograman Dasar" />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>SKS</label>
-              <input id="mk-sks" type="number" required value={editFormData.sks} onChange={e=>setEditFormData({...editFormData, sks: e.target.value})} className="siakad-input" style={{ width: '100%' }} />
+              <input id="mk-sks" type="number" required value={editFormData.sks} onChange={e=>setEditFormData({...editFormData, sks: e.target.value})} className="siakad-input" style={{ width: '100%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
             </div>
           </form>
         </ModalShell>

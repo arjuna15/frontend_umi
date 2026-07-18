@@ -105,7 +105,7 @@ export default function AdminSuratPage() {
       {/* Stats Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         <div className="siakad-card stagger-1" style={{ padding: '20px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
+          <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
             <i className="ph ph-envelope"></i>
           </div>
           <div>
@@ -115,7 +115,7 @@ export default function AdminSuratPage() {
         </div>
 
         <div className="siakad-card stagger-2" style={{ padding: '20px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
+          <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
             <i className="ph ph-clock"></i>
           </div>
           <div>
@@ -125,7 +125,7 @@ export default function AdminSuratPage() {
         </div>
 
         <div className="siakad-card stagger-3" style={{ padding: '20px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
+          <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
             <i className="ph ph-spinner-gap"></i>
           </div>
           <div>
@@ -135,7 +135,7 @@ export default function AdminSuratPage() {
         </div>
 
         <div className="siakad-card stagger-4" style={{ padding: '20px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
+          <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
             <i className="ph ph-check-circle"></i>
           </div>
           <div>
@@ -159,14 +159,14 @@ export default function AdminSuratPage() {
               placeholder="Cari nama, NIM, tipe surat..." 
               value={searchQuery} 
               onChange={(e) => setSearchQuery(e.target.value)} 
-              style={{ width: '100%', paddingLeft: '46px', color: 'var(--color-text)', fontSize: '0.9rem' }} 
+              style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', paddingLeft: '46px',  fontSize: '0.9rem' }} 
             />
           </div>
         </div>
 
         {/* Table Body */}
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
             <thead>
               <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
                 <th style={{ padding: '16px' }}>Tanggal</th>
@@ -210,14 +210,8 @@ export default function AdminSuratPage() {
                     </td>
                     <td style={{ padding: '16px', color: 'var(--color-text)', fontWeight: '500' }}>{l.type}</td>
                     <td style={{ padding: '16px' }}>
-                      <span style={{ 
-                        background: l.status === 'Selesai' ? 'rgba(16, 185, 129, 0.1)' : l.status === 'Diproses' ? 'rgba(59, 130, 246, 0.1)' : 'rgba(245, 158, 11, 0.1)', 
-                        color: l.status === 'Selesai' ? '#10b981' : l.status === 'Diproses' ? '#3b82f6' : '#f59e0b', 
-                        padding: '6px 12px', 
-                        borderRadius: '999px', 
-                        fontSize: '0.8rem', 
-                        fontWeight: 'bold',
-                        display: 'inline-block'
+                      <span className="siakad-badge" style={{ 
+                        color: l.status === 'Selesai' ? '#10b981' : l.status === 'Diproses' ? '#3b82f6' : '#f59e0b'
                       }}>{l.status}</span>
                     </td>
                     <td style={{ padding: '16px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>
@@ -248,18 +242,18 @@ export default function AdminSuratPage() {
           footer={(
             <>
               <button type="button" onClick={() => setIsModalOpen(false)} style={{ padding: '12px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700, transition: 'all 0.2s' }}>Batal</button>
-              <button type="submit" form="status-form" className="siakad-btn-primary" style={{ padding: '12px 20px', fontWeight: 700 }}>Simpan Perubahan</button>
+              <button type="submit" form="status-form" className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 20px', fontWeight: 700 }}>Simpan Perubahan</button>
             </>
           )}
         >
           <form id="status-form" onSubmit={handleSaveStatus} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Mahasiswa</label>
-              <input type="text" disabled value={`${selectedLetter?.mahasiswa?.name} (${selectedLetter?.mahasiswa?.nim_nip})`} className="siakad-input" style={{ width: '100%', opacity: 0.7, cursor: 'not-allowed' }} />
+              <input type="text" disabled value={`${selectedLetter?.mahasiswa?.name} (${selectedLetter?.mahasiswa?.nim_nip})`} className="siakad-input" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', opacity: 0.7, cursor: 'not-allowed' }} />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Jenis Surat</label>
-              <input type="text" disabled value={selectedLetter?.type} className="siakad-input" style={{ width: '100%', opacity: 0.7, cursor: 'not-allowed' }} />
+              <input type="text" disabled value={selectedLetter?.type} className="siakad-input" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', opacity: 0.7, cursor: 'not-allowed' }} />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600 }}>Ubah Status Surat</label>
@@ -279,7 +273,7 @@ export default function AdminSuratPage() {
                 value={formData.note} 
                 onChange={e=>setFormData({...formData, note: e.target.value})} 
                 className="siakad-input" 
-                style={{ width: '100%', minHeight: '100px', resize: 'vertical' }} 
+                style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', minHeight: '100px', resize: 'vertical' }} 
                 placeholder="Masukkan keterangan (misal: 'Silakan ambil di loket' atau 'Ditolak karena berkas kurang')"
               />
             </div>

@@ -186,7 +186,7 @@ export default function BeasiswaPage() {
         ].map((s, i) => (
           <div key={i} className="siakad-card" style={{ padding: '20px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-              <div style={{ width: '40px', height: '40px', background: s.bg, color: s.color, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>
+              <div style={{ width: '40px', height: '40px', borderRadius: '50%', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', background: 'var(--liquid-bg)', color: s.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>
                 <i className={s.icon}></i>
               </div>
               <span style={{ color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '600' }}>{s.label}</span>
@@ -202,9 +202,8 @@ export default function BeasiswaPage() {
           { key: 'penerima', label: 'Data Penerima Beasiswa', icon: 'ph ph-users-four' },
           { key: 'master', label: 'Kategori / Master Beasiswa', icon: 'ph ph-folder-open' }
         ].map(t => (
-          <button id={`tab-${t.key}`} key={t.key} onClick={() => setActiveTab(t.key)} style={{
-            padding: '10px 20px', borderRadius: '50px', border: activeTab === t.key ? '2px solid #3b82f6' : '1px solid var(--color-border)',
-            background: activeTab === t.key ? 'rgba(59,130,246,0.15)' : 'transparent', color: activeTab === t.key ? '#3b82f6' : 'var(--color-muted)',
+          <button type="button" id={`tab-${t.key}`} key={t.key} onClick={() => setActiveTab(t.key)} className={activeTab === t.key ? 'active' : ''} style={{
+            background: activeTab === t.key ? 'var(--liquid-bg)' : 'var(--glass-bg)', color: activeTab === t.key ? 'var(--apple-red)' : 'var(--color-muted)', border: 'var(--glass-border)', boxShadow: activeTab === t.key ? 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)' : 'var(--glass-shadow)', padding: '10px 20px', borderRadius: '50px', outline: 'none',
             fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px'
           }}><i className={t.icon}></i>{t.label}</button>
         ))}
@@ -243,7 +242,7 @@ export default function BeasiswaPage() {
                     <td style={{ padding: '14px 16px', color: 'var(--color-text)' }}>{s.start_semester}</td>
                     <td style={{ padding: '14px 16px', color: 'var(--color-muted)' }}>{s.end_semester || 'Aktif'}</td>
                     <td style={{ padding: '14px 16px' }}>
-                      <span style={{ background: `${getStatusColor(s.status)}20`, color: getStatusColor(s.status), padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700' }}>
+                      <span className="siakad-badge siakad-badge-sm" style={{ color: getStatusColor(s.status), textTransform: 'capitalize' }}>
                         {getStatusLabel(s.status)}
                       </span>
                     </td>

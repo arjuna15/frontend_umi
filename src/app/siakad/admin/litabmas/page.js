@@ -32,10 +32,9 @@ export default function LitabmasAdminPage() {
   };
 
   const statusBadge = (s) => {
-    const colors = { draft: ['#6b7280','rgba(107,114,128,0.1)'], pending: ['#f59e0b','rgba(245,158,11,0.1)'], approved: ['#10b981','rgba(16,185,129,0.1)'], rejected: ['#ef4444','rgba(239,68,68,0.1)'] };
-    const c = colors[s] || colors.pending;
+    const color = s === 'approved' ? '#10b981' : s === 'rejected' ? '#ef4444' : s === 'draft' ? 'var(--color-muted)' : '#f59e0b';
     const labels = { draft: 'Draf', pending: 'Menunggu', approved: 'Disetujui', rejected: 'Ditolak' };
-    return <span style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: c[0], background: c[1] }}>{labels[s] || s}</span>;
+    return <span className="siakad-badge" style={{ color }}>{labels[s] || s}</span>;
   };
 
   const formatCurrency = (val) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(val);
@@ -75,7 +74,7 @@ export default function LitabmasAdminPage() {
       <div className="siakad-card stagger-3" style={{ padding: '24px' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 16px 0' }}>Daftar Proposal</h2>
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
             <thead><tr>{['Dosen', 'Judul', 'Tipe', 'Anggaran', 'Status', 'Aksi'].map(h => <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase' }}>{h}</th>)}</tr></thead>
             <tbody>
               {proposals.length === 0 ? <tr><td colSpan={6} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada proposal.</td></tr> :

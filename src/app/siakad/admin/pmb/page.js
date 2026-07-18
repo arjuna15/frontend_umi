@@ -128,7 +128,7 @@ export default function PMBAdminPage() {
   const statusBadge = (status) => {
     const colors = { open: '#10b981', closed: '#ef4444', upcoming: '#f59e0b', pending: '#f59e0b', verified: '#3b82f6', accepted: '#10b981', rejected: '#ef4444' };
     const c = colors[status] || '#94a3b8';
-    return <span style={{ background: `${c}20`, color: c, padding: '4px 12px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: '600', textTransform: 'capitalize' }}>{status}</span>;
+    return <span className="siakad-badge siakad-badge-sm" style={{ color: c, textTransform: 'capitalize' }}>{status}</span>;
   };
 
   if (loading) return (
@@ -159,8 +159,8 @@ export default function PMBAdminPage() {
       </div>
 
       {message.text && (
-        <div style={{ padding: '16px 20px', borderRadius: '12px', marginBottom: '24px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', border: `1px solid ${message.type === 'success' ? '#10b981' : '#ef4444'}`, color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.4rem' }}></i>
+        <div style={{ padding: '14px 20px', borderRadius: '50px', marginBottom: '24px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '700', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.2rem' }}></i>
           {message.text}
         </div>
       )}
@@ -170,7 +170,7 @@ export default function PMBAdminPage() {
         {statCards.map((s, i) => (
           <div key={i} className="siakad-card" style={{ padding: '18px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-              <div style={{ width: '36px', height: '36px', background: s.bg, color: s.color, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', background: 'var(--liquid-bg)', color: s.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '18px' }}>
                 <i className={s.icon}></i>
               </div>
               <span style={{ color: 'var(--color-muted)', fontSize: '0.82rem', fontWeight: '600' }}>{s.label}</span>
@@ -194,7 +194,7 @@ export default function PMBAdminPage() {
             {periods.length === 0 ? (
               <p style={{ textAlign: 'center', color: 'var(--color-muted)', padding: '24px 0' }}>Belum ada periode PMB.</p>
             ) : periods.map(p => (
-              <div key={p.id} onClick={() => viewApplicants(p)} style={{ padding: '14px 16px', borderRadius: '12px', background: selectedPeriod?.id === p.id ? 'rgba(59,130,246,0.1)' : 'var(--color-surface)', border: selectedPeriod?.id === p.id ? '1px solid rgba(59,130,246,0.3)' : '1px solid var(--color-border)', cursor: 'pointer', transition: 'all 0.2s ease' }}>
+              <div key={p.id} onClick={() => viewApplicants(p)} style={{ padding: '14px 16px', borderRadius: '12px', background: selectedPeriod?.id === p.id ? 'var(--liquid-bg)' : 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: selectedPeriod?.id === p.id ? 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' : '3px 3px 6px var(--inset-shadow-dark), -3px -3px 6px var(--inset-shadow-light)', cursor: 'pointer', transition: 'all 0.2s ease' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                   <h4 style={{ margin: 0, fontSize: '0.95rem', fontWeight: '700', color: 'var(--color-text)' }}>{p.name || p.academic_year || '-'}</h4>
                   {statusBadge(p.status)}

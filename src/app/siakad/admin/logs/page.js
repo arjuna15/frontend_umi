@@ -73,7 +73,7 @@ export default function AdminLogsPage() {
         </div>
       </div>
 
-      <div className="siakad-card" style={{ padding: '24px' }}>
+      <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px' }}>
         <div style={{ marginBottom: '20px', display: 'flex', gap: '16px', alignItems: 'center' , flexWrap: 'wrap' }}>
           <div style={{ flex: 1, position: 'relative' }}>
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
@@ -83,13 +83,13 @@ export default function AdminLogsPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="siakad-input"
-              style={{ width: '100%', paddingLeft: '46px' }}
+              style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', paddingLeft: '46px' }}
             />
           </div>
         </div>
 
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
             <thead>
               <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
                 <th style={{ padding: '16px' }}>Waktu</th>

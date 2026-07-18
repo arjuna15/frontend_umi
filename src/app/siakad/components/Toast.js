@@ -58,22 +58,21 @@ export function ConfirmModal() {
     <div className="siakad-modal-overlay">
       <div style={{
         position: 'relative',
-        background: 'var(--color-bg)',
-        border: '1px solid var(--color-border)',
+        background: 'var(--glass-bg)',
+        border: 'var(--glass-border)',
         borderRadius: '24px',
         padding: '32px 28px',
         maxWidth: '450px',
         width: 'min(100%, 450px)',
         maxHeight: 'calc(100dvh - 48px)',
         overflowY: 'auto',
-        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+        boxShadow: 'var(--glass-shadow)',
         animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
         textAlign: 'center',
         overflowX: 'hidden'
       }}>
-        <div style={{ position: 'absolute', top: '-42px', left: '-42px', width: '132px', height: '132px', background: 'radial-gradient(circle, rgba(245,158,11,0.2) 0%, rgba(245,158,11,0) 70%)', borderRadius: '50%', zIndex: 0, flexShrink: 0 }}></div>
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ width: '72px', height: '72px', background: 'rgba(245, 158, 11, 0.1)', border: '2px solid rgba(245, 158, 11, 0.3)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px', flexShrink: 0 }}>
+          <div style={{ width: '72px', height: '72px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', flexShrink: 0 }}>
             <i className="ph ph-warning-circle" style={{ fontSize: '3rem', color: '#f59e0b' }}></i>
           </div>
           <h3 style={{ margin: '0 0 10px 0', color: 'var(--color-text)', fontSize: '1.35rem', fontWeight: 'bold' }}>Perhatian!</h3>
@@ -81,17 +80,14 @@ export function ConfirmModal() {
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <button 
               onClick={() => { modal.resolve(false); setModal(null); }}
-              style={{ padding: '14px 20px', borderRadius: '12px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', flex: '1 1 160px', transition: 'all 0.2s' }}
-              onMouseEnter={(e) => e.target.style.background = 'var(--glass-bg)'}
-              onMouseLeave={(e) => e.target.style.background = 'transparent'}
+              style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', flex: '1 1 160px', transition: 'all 0.2s', boxShadow: 'var(--glass-shadow)' }}
             >
               Batal
             </button>
             <button 
               onClick={() => { modal.resolve(true); setModal(null); }}
-              style={{ padding: '14px 20px', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', color: 'white', fontWeight: 'bold', cursor: 'pointer', flex: '1 1 160px', boxShadow: '0 10px 15px -3px rgba(245, 158, 11, 0.3)', transition: 'all 0.2s' }}
-              onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
-              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+              className="siakad-btn-primary"
+              style={{ padding: '12px 24px', borderRadius: '50px', flex: '1 1 160px' }}
             >
               Ya, Lanjutkan
             </button>
@@ -126,23 +122,22 @@ export function PromptModal() {
     <div className="siakad-modal-overlay">
       <div style={{
         position: 'relative',
-        background: 'var(--color-bg)',
-        border: '1px solid var(--color-border)',
+        background: 'var(--glass-bg)',
+        border: 'var(--glass-border)',
         borderRadius: '24px',
         padding: '0',
         maxWidth: '500px',
         width: 'min(100%, 500px)',
         maxHeight: 'calc(100dvh - 48px)',
         overflowY: 'auto',
-        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+        boxShadow: 'var(--glass-shadow)',
         animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
         textAlign: 'left',
         overflowX: 'hidden'
       }}>
-        <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #c026d3 100%)', padding: '24px 32px', position: 'relative' }}>
-          <div style={{ position: 'absolute', top: '-10px', right: '-10px', width: '100px', height: '100px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%', flexShrink: 0 }}></div>
-          <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px', color: 'white' }}>
-            <i className="ph ph-note-pencil" style={{ fontSize: '1.6rem', color: 'white' }}></i> {modal.message}
+        <div style={{ background: 'var(--liquid-bg)', borderBottom: '1px solid var(--color-border)', padding: '24px 32px', position: 'relative' }}>
+          <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-text)' }}>
+            <i className="ph ph-note-pencil" style={{ fontSize: '1.5rem', color: 'var(--apple-blue)' }}></i> {modal.message}
           </h3>
         </div>
         <div style={{ padding: '32px' }}>
@@ -151,6 +146,7 @@ export function PromptModal() {
             <input 
               autoFocus
               type="text"
+              className="siakad-input"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => {
@@ -159,25 +155,20 @@ export function PromptModal() {
                   setModal(null);
                 }
               }}
-              style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.05)' }}
-              onFocus={(e) => { e.target.style.borderColor = '#4f46e5'; e.target.style.boxShadow = '0 0 0 4px rgba(79, 70, 229, 0.1)'; }}
-              onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.02)'; }}
+              style={{ width: '100%' }}
             />
           </div>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
             <button 
               onClick={() => { modal.resolve(null); setModal(null); }}
-              style={{ padding: '12px 24px', borderRadius: '10px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s' }}
-              onMouseEnter={(e) => e.target.style.background = 'var(--glass-bg)'}
-              onMouseLeave={(e) => e.target.style.background = 'transparent'}
+              style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s', boxShadow: 'var(--glass-shadow)' }}
             >
               Batal
             </button>
             <button 
               onClick={() => { modal.resolve(inputValue); setModal(null); }}
-              style={{ padding: '12px 32px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)', color: 'white', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 10px 15px -3px rgba(79, 70, 229, 0.3)', transition: 'all 0.2s' }}
-              onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
-              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+              className="siakad-btn-primary"
+              style={{ padding: '12px 32px', borderRadius: '50px' }}
             >
               Kirim
             </button>
@@ -208,23 +199,22 @@ export function FormModal() {
     <div className="siakad-modal-overlay">
       <div style={{
         position: 'relative',
-        background: 'var(--color-bg)',
-        border: '1px solid var(--color-border)',
+        background: 'var(--glass-bg)',
+        border: 'var(--glass-border)',
         borderRadius: '24px',
         padding: '0',
         maxWidth: '550px',
         width: 'min(100%, 550px)',
         maxHeight: 'calc(100dvh - 48px)',
         overflowY: 'auto',
-        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+        boxShadow: 'var(--glass-shadow)',
         animation: 'zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
         textAlign: 'left',
         overflowX: 'hidden'
       }}>
-        <div style={{ background: 'linear-gradient(135deg, #4f46e5 0%, #2563eb 100%)', padding: '24px 32px', position: 'relative' }}>
-          <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '120px', height: '120px', background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%', flexShrink: 0 }}></div>
-          <h3 style={{ margin: 0, fontSize: '1.4rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px', color: 'white' }}>
-            <i className="ph ph-pencil-simple-line" style={{ fontSize: '1.6rem', color: 'white' }}></i> {modal.title}
+        <div style={{ background: 'var(--liquid-bg)', borderBottom: '1px solid var(--color-border)', padding: '24px 32px', position: 'relative' }}>
+          <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-text)' }}>
+            <i className="ph ph-pencil-simple-line" style={{ fontSize: '1.5rem', color: 'var(--apple-blue)' }}></i> {modal.title}
           </h3>
         </div>
         <div style={{ padding: '32px' }}>
@@ -236,21 +226,19 @@ export function FormModal() {
                   <textarea
                     autoFocus={f.autoFocus}
                     rows="4"
+                    className="siakad-input"
                     value={formData[f.name]}
                     onChange={(e) => setFormData({...formData, [f.name]: e.target.value})}
-                    style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', resize: 'vertical', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.05)' }}
-                    onFocus={(e) => { e.target.style.borderColor = '#4f46e5'; e.target.style.boxShadow = '0 0 0 4px rgba(79, 70, 229, 0.1)'; }}
-                    onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.05)'; }}
+                    style={{ width: '100%', resize: 'vertical' }}
                   />
                 ) : (
                   <input 
                     autoFocus={f.autoFocus}
                     type="text"
+                    className="siakad-input"
                     value={formData[f.name]}
                     onChange={(e) => setFormData({...formData, [f.name]: e.target.value})}
-                    style={{ width: '100%', padding: '16px', borderRadius: '12px', border: '2px solid var(--color-border)', outline: 'none', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '1.05rem', transition: 'all 0.3s', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.05)' }}
-                    onFocus={(e) => { e.target.style.borderColor = '#4f46e5'; e.target.style.boxShadow = '0 0 0 4px rgba(79, 70, 229, 0.1)'; }}
-                    onBlur={(e) => { e.target.style.borderColor = 'var(--color-border)'; e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.05)'; }}
+                    style={{ width: '100%' }}
                   />
                 )}
               </div>
@@ -259,17 +247,14 @@ export function FormModal() {
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'flex-end', borderTop: '1px solid var(--color-border)', paddingTop: '24px', flexWrap: 'wrap' }}>
             <button 
               onClick={() => { modal.resolve(null); setModal(null); }}
-              style={{ padding: '12px 24px', borderRadius: '10px', border: '2px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s' }}
-              onMouseEnter={(e) => e.target.style.background = 'var(--glass-bg)'}
-              onMouseLeave={(e) => e.target.style.background = 'transparent'}
+              style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s', boxShadow: 'var(--glass-shadow)' }}
             >
               Batal
             </button>
             <button 
               onClick={() => { modal.resolve(formData); setModal(null); }}
-              style={{ padding: '12px 32px', borderRadius: '10px', border: 'none', background: 'linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)', color: 'white', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 10px 15px -3px rgba(79, 70, 229, 0.3)', transition: 'all 0.2s' }}
-              onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
-              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+              className="siakad-btn-primary"
+              style={{ padding: '12px 32px', borderRadius: '50px' }}
             >
               Simpan & Kirim
             </button>

@@ -58,11 +58,11 @@ export default function KaprodiMonitoring() {
       </div>
 
 
-      <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
+      <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', overflow: 'hidden', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
         <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Kelas & BAP</h3>
           <div style={{ position: 'relative', width: '300px' }}>
-            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem', zIndex: 10 }}></i>
             <input 
               className="siakad-input"
               type="text" 
@@ -73,21 +73,26 @@ export default function KaprodiMonitoring() {
                 width: '100%', 
                 paddingLeft: '46px', 
                 color: 'var(--color-text)',
-                fontSize: '0.9rem'
+                fontSize: '0.9rem',
+                boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)',
+                background: 'var(--liquid-bg)',
+                border: 'var(--inset-border)',
+                borderRadius: '50px',
+                outline: 'none'
               }} 
             />
           </div>
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ minWidth: '800px' }}>
+          <table className="siakad-table" style={{ minWidth: '800px', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
           <thead>
-            <tr>
-              <th>Mata Kuliah</th>
-              <th>Dosen Pengampu</th>
-              <th>Total Pertemuan</th>
-              <th>Materi Uploaded</th>
-              <th>Status BAP</th>
-              <th style={{ textAlign: 'center' }}>Aksi</th>
+            <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
+              <th style={{ padding: '16px' }}>Mata Kuliah</th>
+              <th style={{ padding: '16px' }}>Dosen Pengampu</th>
+              <th style={{ padding: '16px' }}>Total Pertemuan</th>
+              <th style={{ padding: '16px' }}>Materi Uploaded</th>
+              <th style={{ padding: '16px' }}>Status BAP</th>
+              <th style={{ padding: '16px', textAlign: 'center' }}>Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -111,22 +116,22 @@ export default function KaprodiMonitoring() {
               }
 
               return filteredCourses.map(course => (
-                <tr key={course.id}>
-                  <td style={{ fontWeight: 600 }}>{course.name} <br/><small style={{ color: 'var(--color-muted)', fontWeight: 'normal' }}>{course.code}</small></td>
-                  <td>{course.dosen ? course.dosen.name : <span style={{ color: '#ef4444' }}>Belum di-assign</span>}</td>
-                  <td>
+                <tr key={course.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                  <td style={{ padding: '16px', fontWeight: 600 }}>{course.name} <br/><small style={{ color: 'var(--color-muted)', fontWeight: 'normal' }}>{course.code}</small></td>
+                  <td style={{ padding: '16px' }}>{course.dosen ? course.dosen.name : <span style={{ color: '#ef4444' }}>Belum di-assign</span>}</td>
+                  <td style={{ padding: '16px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' , flexWrap: 'wrap'}}>
                       <i className="ph ph-users" style={{ color: 'var(--color-text)' }}></i>
                       {course.attendances?.length || 0} / 14 Sesi
                     </div>
                   </td>
-                  <td>
+                  <td style={{ padding: '16px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' , flexWrap: 'wrap'}}>
                       <i className="ph ph-file-pdf" style={{ color: '#ef4444' }}></i>
                       {course.materials?.length || 0} Dokumen
                     </div>
                   </td>
-                  <td>
+                  <td style={{ padding: '16px' }}>
                     {course.materials?.length >= 2 ? (
                       <span className="siakad-badge" style={{ background: 'rgba(5, 150, 105, 0.15)', color: '#059669', borderRadius: '50px', padding: '4px 12px' }}>Lancar</span>
                     ) : course.materials?.length > 0 ? (
@@ -135,7 +140,7 @@ export default function KaprodiMonitoring() {
                       <span className="siakad-badge" style={{ background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A', borderRadius: '50px', padding: '4px 12px' }}>Kosong</span>
                     )}
                   </td>
-                  <td style={{ textAlign: 'center' }}>
+                  <td style={{ padding: '16px', textAlign: 'center' }}>
                     <button 
                       onClick={() => setSelectedCourse(course)}
                       style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '8px 18px', borderRadius: '50px', cursor: 'pointer', fontWeight: 700, fontSize: '0.85rem', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}
@@ -156,7 +161,7 @@ export default function KaprodiMonitoring() {
           title={`Detail BAP: ${selectedCourse.name}`}
           subtitle={`Dosen: ${selectedCourse.dosen?.name || '-'}`}
           icon="ph-chalkboard-teacher"
-          iconBg="linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)"
+          iconBg="linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)"
           onClose={() => setSelectedCourse(null)}
           maxWidth="600px"
         >
@@ -167,9 +172,9 @@ export default function KaprodiMonitoring() {
                 Belum ada sesi perkuliahan / presensi yang dicatat.
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'start' }}>
                 {selectedCourse.attendances.map((att, idx) => (
-                  <div key={idx} style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: '12px', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div key={idx} style={{ width: '100%', background: 'var(--glass-bg)', padding: '16px', borderRadius: '12px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
                       <div style={{ fontWeight: 600, color: 'var(--color-text)', marginBottom: '4px' }}>Pertemuan ke-{idx + 1}</div>
                       <div style={{ color: 'var(--color-muted)', fontSize: '0.85rem' }}>Tanggal: {new Date(att.created_at || Date.now()).toLocaleDateString('id-ID')}</div>

@@ -212,7 +212,7 @@ export default function AdminUsersPage() {
             <p style={{ margin: 0 }}>Kelola data admin, dosen, dan mahasiswa di sistem SIAKAD.</p>
           </div>
           <div>
-            <button onClick={() => window.toast?.('Silakan pilih file CSV...')} className="siakad-btn-primary" style={{ padding: '12px 22px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+            <button onClick={() => window.toast?.('Silakan pilih file CSV...')} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 22px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
               <i className="ph ph-upload-simple"></i> Import CSV
             </button>
           </div>
@@ -224,15 +224,15 @@ export default function AdminUsersPage() {
         <form onSubmit={handleCreateUser} style={{ display: 'flex', gap: '16px', alignItems: 'flex-end', flexWrap: 'wrap' }}>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Lengkap</label>
-            <input name="name" className="siakad-input" required placeholder="Masukkan nama..." style={{ minWidth: 0, flex: '1 1 120px'}} />
+            <input name="name" className="siakad-input" required placeholder="Masukkan nama..." style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', minWidth: 0, flex: '1 1 120px' }} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>NIM / NIP</label>
-            <input name="nim_nip" className="siakad-input" required placeholder="Masukkan NIM/NIP..." style={{ minWidth: 0, flex: '1 1 120px'}} />
+            <input name="nim_nip" className="siakad-input" required placeholder="Masukkan NIM/NIP..." style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', minWidth: 0, flex: '1 1 120px' }} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Password</label>
-            <input type="password" name="password" className="siakad-input" required placeholder="Min. 6 karakter..." style={{ minWidth: 0, flex: '1 1 120px'}} />
+            <input type="password" name="password" className="siakad-input" required placeholder="Min. 6 karakter..." style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', minWidth: 0, flex: '1 1 120px' }} />
           </div>
           <div style={{ flex: '1 1 150px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600' }}>Role</label>
@@ -261,7 +261,7 @@ export default function AdminUsersPage() {
           </div>
           <div style={{ flex: '0 0 auto' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'transparent', fontWeight: '600', userSelect: 'none' }}>&nbsp;</label>
-            <button type="submit" className="siakad-btn-primary" style={{ padding: '12px 24px', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
+            <button type="submit" className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 24px', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
               <i className="ph ph-plus-circle"></i> Tambah
             </button>
           </div>
@@ -279,17 +279,15 @@ export default function AdminUsersPage() {
               placeholder="Cari nama, NIM/NIP, prodi..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              style={{ 
-                width: '100%', 
+              style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', 
                 paddingLeft: '46px', 
-                color: 'var(--color-text)',
-                fontSize: '0.9rem'
-              }} 
+                
+                fontSize: '0.9rem' }} 
             />
           </div>
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <table className="siakad-table" style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
             <thead>
               <tr>
                 <th style={{ padding: '16px 24px', fontWeight: '600' }}>Nama</th>
@@ -324,32 +322,27 @@ export default function AdminUsersPage() {
                     <td style={{ padding: '16px 24px', color: 'var(--color-text)', fontWeight: '500' }}>{user.name}</td>
                     <td style={{ padding: '16px 24px', color: 'var(--color-muted)', fontSize: '0.95rem' }}>{user.nim_nip}</td>
                     <td style={{ padding: '16px 24px' }}>
-                      <span style={{ 
-                        padding: '6px 12px', borderRadius: '999px', fontSize: '0.8rem', fontWeight: 'bold',
-                        background: user.role === 'admin' ? '#fee2e2' : user.role === 'dosen' ? '#e0e7ff' : user.role === 'kaprodi' ? '#ccfbf1' : '#dcfce7',
-                        color: user.role === 'admin' ? '#991b1b' : user.role === 'dosen' ? '#3730a3' : user.role === 'kaprodi' ? '#115e59' : '#166534',
-                        display: 'inline-block',
+                      <span className="siakad-badge" style={{ 
                         width: '110px',
-                        textAlign: 'center'
-                      }}>
-                        {user.role.toUpperCase()}
-                      </span>
+                        justifyContent: 'center',
+                        color: user.role === 'admin' ? '#ef4444' : user.role === 'dosen' ? '#3b82f6' : user.role === 'kaprodi' ? '#10b981' : '#059669'
+                      }}>{user.role.toUpperCase()}</span>
                     </td>
                     <td style={{ padding: '16px 24px', textAlign: 'right' }}>
-                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' , flexWrap: 'wrap'}}>
+                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
                         <button 
                           onClick={() => handleResetPassword(user)}
-                          style={{ background: 'var(--glass-bg)', color: '#f59e0b', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                          style={{ background: 'var(--glass-bg)', color: '#f59e0b', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
                           title="Reset Password"
                         ><i className="ph ph-key" style={{ fontSize: '1rem' }}></i></button>
                         <button 
                           onClick={() => handleOpenEditModal(user)}
-                          style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                          style={{ background: 'var(--glass-bg)', color: 'var(--color-text)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
                           title="Edit Pengguna"
                         ><i className="ph ph-pencil-simple" style={{ fontSize: '1rem' }}></i></button>
                         <button 
                           onClick={() => handleDeleteUser(user.id)}
-                          style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'none', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', transition: 'all 0.2s' }}
+                          style={{ background: 'var(--glass-bg)', color: '#ef4444', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', width: '32px', height: '32px', borderRadius: '50%', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
                           title="Hapus Pengguna"
                         ><i className="ph ph-trash" style={{ fontSize: '1rem' }}></i></button>
                       </div>
@@ -370,18 +363,18 @@ export default function AdminUsersPage() {
           footer={(
             <>
               <button type="button" onClick={() => setIsEditModalOpen(false)} style={{ padding: '12px 20px', border: 'none', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 700, transition: 'all 0.2s' }}>Batal</button>
-              <button type="button" onClick={handleUpdateUser} className="siakad-btn-primary" style={{ padding: '12px 20px', fontWeight: 700 }}>Simpan Perubahan</button>
+              <button type="button" onClick={handleUpdateUser} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 20px', fontWeight: 700 }}>Simpan Perubahan</button>
             </>
           )}
         >
           <form id="user-edit-form" onSubmit={handleUpdateUser}>
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Nama Lengkap</label>
-              <input className="siakad-input" value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required style={{ width: '100%' }} />
+              <input className="siakad-input" value={editFormData.name} onChange={(e) => setEditFormData({...editFormData, name: e.target.value})} required style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }} />
             </div>
             <div style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>NIM / NIP</label>
-              <input className="siakad-input" value={editFormData.nim_nip} onChange={(e) => setEditFormData({...editFormData, nim_nip: e.target.value})} required style={{ width: '100%' }} />
+              <input className="siakad-input" value={editFormData.nim_nip} onChange={(e) => setEditFormData({...editFormData, nim_nip: e.target.value})} required style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }} />
             </div>
             <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' , flexWrap: 'wrap' }}>
               <div style={{ flex: 1 }}>
@@ -409,7 +402,7 @@ export default function AdminUsersPage() {
             </div>
             <div style={{ marginBottom: '24px' }}>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Password Baru (Opsional)</label>
-              <input className="siakad-input" type="password" value={editFormData.password} onChange={(e) => setEditFormData({...editFormData, password: e.target.value})} placeholder="Biarkan kosong jika tidak ingin mengubah..." style={{ width: '100%' }} />
+              <input className="siakad-input" type="password" value={editFormData.password} onChange={(e) => setEditFormData({...editFormData, password: e.target.value})} placeholder="Biarkan kosong jika tidak ingin mengubah..." style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%' }} />
             </div>
           </form>
         </ModalShell>
@@ -424,7 +417,7 @@ export default function AdminUsersPage() {
           footer={
             <>
               <button onClick={() => setResetPasswordUser(null)} style={{ padding: '12px 24px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold', transition: 'all 0.2s' }}>Batal</button>
-              <button onClick={submitResetPassword} disabled={!resetPasswordValue.trim()} className="siakad-btn-primary" style={{ padding: '12px 24px' }}>Simpan Password</button>
+              <button onClick={submitResetPassword} disabled={!resetPasswordValue.trim()} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 24px' }}>Simpan Password</button>
             </>
           }
         >
@@ -440,7 +433,7 @@ export default function AdminUsersPage() {
               onChange={(e) => setResetPasswordValue(e.target.value)} 
               placeholder="Masukkan password baru..." 
               required 
-              style={{ width: '100%', color: 'var(--color-text)', fontSize: '0.9rem' }} 
+              style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%',  fontSize: '0.9rem' }} 
             />
           </div>
         </ModalShell>

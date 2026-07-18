@@ -4,6 +4,7 @@ export const translations = {
     gradebook: "Rapor & Transkrip",
     krs: "Kartu Rencana Studi",
     presensi: "Kehadiran & Presensi",
+    rekap_presensi: "Rekap Presensi",
     elearning: "E-Learning Kelas",
     proctoring: "Ujian Online",
     bimbingan: "Bimbingan Akademik",

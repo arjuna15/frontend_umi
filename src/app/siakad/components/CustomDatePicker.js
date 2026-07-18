@@ -245,17 +245,17 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
           width: '90%',
           maxWidth: '680px',
           zIndex: 9999999,
-          background: 'var(--color-surface)',
-          border: '1px solid var(--color-border)',
+          background: 'var(--glass-bg)',
+          border: 'var(--glass-border)',
           borderRadius: '24px',
-          boxShadow: '0 24px 64px rgba(0, 0, 0, 0.5)',
+          boxShadow: 'var(--glass-shadow)',
           overflowX: 'hidden',
           overflowY: 'auto',
           maxHeight: '90vh',
           padding: '24px',
           animation: 'csModalIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
-          backdropFilter: 'blur(30px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(30px) saturate(180%)',
+          backdropFilter: 'none',
+          WebkitBackdropFilter: 'none',
         }}
       >
         <style>{`
@@ -273,11 +273,13 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
             transform: scale(1.05);
           }
           .siakad-datepicker-nav-btn:hover {
-            background: var(--glass-bg) !important;
-            color: var(--color-text) !important;
+            background: rgba(196, 30, 58, 0.1) !important;
+            color: #C41E3A !important;
+            transform: scale(1.03);
           }
           .siakad-datepicker-year-item:hover {
-            background: var(--glass-bg) !important;
+            background: rgba(196, 30, 58, 0.1) !important;
+            color: #C41E3A !important;
           }
         `}</style>
 
@@ -287,7 +289,7 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
             type="button" 
             onClick={handlePrevMonth} 
             className="siakad-datepicker-nav-btn"
-            style={{ width: '36px', height: '36px', border: '1px solid var(--color-border)', borderRadius: '10px', background: 'transparent', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.15s' }}
+            style={{ width: '36px', height: '36px', border: 'var(--glass-border)', borderRadius: '10px', background: 'var(--glass-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.15s', boxShadow: 'var(--glass-shadow)' }}
           >
             <i className="ph ph-caret-left" style={{ fontSize: '1.2rem' }} />
           </button>
@@ -319,7 +321,7 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
             type="button" 
             onClick={handleNextMonth} 
             className="siakad-datepicker-nav-btn"
-            style={{ width: '36px', height: '36px', border: '1px solid var(--color-border)', borderRadius: '10px', background: 'transparent', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.15s' }}
+            style={{ width: '36px', height: '36px', border: 'var(--glass-border)', borderRadius: '10px', background: 'var(--glass-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.15s', boxShadow: 'var(--glass-shadow)' }}
           >
             <i className="ph ph-caret-right" style={{ fontSize: '1.2rem' }} />
           </button>
@@ -401,15 +403,16 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
               setIsOpen(false);
             }}
             style={{
-              background: 'transparent',
-              border: '1px solid var(--color-border)',
+              background: 'var(--glass-bg)',
+              border: 'var(--glass-border)',
               color: 'var(--color-text)',
               fontSize: '0.8rem',
-              fontWeight: '700',
+              fontWeight: '800',
               cursor: 'pointer',
               padding: '8px 16px',
               borderRadius: '50px',
               transition: 'all 0.2s',
+              boxShadow: 'var(--glass-shadow)'
             }}
             className="siakad-datepicker-nav-btn"
           >
@@ -454,8 +457,8 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
           justifyContent: 'space-between',
           padding: '12px 22px',
           borderRadius: '50px',
-          border: '1px solid var(--color-border)',
-          background: 'var(--color-bg)',
+          border: isOpen ? '1px solid #C41E3A' : 'var(--inset-border)',
+          background: 'var(--glass-bg)',
           color: value ? 'var(--color-text)' : 'var(--color-muted)',
           fontSize: '0.95rem',
           fontWeight: value ? '500' : 'normal',
@@ -463,8 +466,7 @@ export default function CustomDatePicker({ name, value, onChange, placeholder = 
           textAlign: 'left',
           outline: 'none',
           transition: 'all 0.2s ease-out',
-          boxShadow: isOpen ? '0 0 0 3px rgba(196, 30, 58, 0.15), inset 0 3px 8px rgba(0, 0, 0, 0.12)' : 'inset 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(0, 0, 0, 0.04)',
-          borderColor: isOpen ? '#C41E3A' : 'var(--color-border)',
+          boxShadow: isOpen ? '0 0 0 3px rgba(196, 30, 58, 0.15), inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' : 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)',
         }}
       >
         <span>{value ? formatDisplayDate(value) : placeholder}</span>

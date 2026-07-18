@@ -52,20 +52,8 @@ export default function KaprodiKrs() {
         setAvailableCourses(availData);
         
         const allKrs = Array.isArray(krsData) ? krsData : [];
-        setSubmissions(allKrs.filter(k => k.status === 'Pending'));
-        
-        // Mocking history or fetching it if backend supports
-        try {
-          const histRes = await fetch(`${apiUrl}/siakad/krs`, { headers: { 'Authorization': `Bearer ${token}` } });
-          if(histRes.ok) {
-            const histData = await histRes.json();
-            setHistory(Array.isArray(histData) ? histData : []);
-          } else {
-            setHistory(allKrs);
-          }
-        } catch(e) {
-          setHistory(allKrs);
-        }
+        setSubmissions(allKrs.filter(k => String(k.status).toLowerCase() === 'pending'));
+        setHistory(allKrs.filter(k => String(k.status).toLowerCase() !== 'pending'));
       } else {
         router.push('/siakad/login');
       }
@@ -147,20 +135,24 @@ export default function KaprodiKrs() {
         </div>
       </div>
       
-      <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' , flexWrap: 'wrap' }}>
-        <button onClick={() => setActiveTab('pending')} style={{ background: activeTab === 'pending' ? 'rgba(196, 30, 58, 0.15)' : 'transparent', color: activeTab === 'pending' ? '#C41E3A' : 'var(--color-muted)', border: 'none', padding: '10px 24px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' , flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+        <button onClick={() => setActiveTab('pending')}
+          className={activeTab === 'pending' ? 'active' : ''}
+          style={{ background: activeTab === 'pending' ? 'rgba(196, 30, 58, 0.15)' : 'var(--glass-bg)', color: activeTab === 'pending' ? '#C41E3A' : 'var(--color-muted)', border: activeTab === 'pending' ? '2px solid #C41E3A' : 'var(--glass-border)', padding: '10px 24px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', flexWrap: 'wrap', boxShadow: activeTab === 'pending' ? 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' : 'var(--glass-shadow)' }}>
           <i className="ph ph-clock"></i> Menunggu Persetujuan ({submissions.length})
         </button>
-        <button onClick={() => setActiveTab('history')} style={{ background: activeTab === 'history' ? 'rgba(196, 30, 58, 0.15)' : 'transparent', color: activeTab === 'history' ? '#C41E3A' : 'var(--color-muted)', border: 'none', padding: '10px 24px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' , flexWrap: 'wrap' }}>
+        <button onClick={() => setActiveTab('history')}
+          className={activeTab === 'history' ? 'active' : ''}
+          style={{ background: activeTab === 'history' ? 'rgba(196, 30, 58, 0.15)' : 'var(--glass-bg)', color: activeTab === 'history' ? '#C41E3A' : 'var(--color-muted)', border: activeTab === 'history' ? '2px solid #C41E3A' : 'var(--glass-border)', padding: '10px 24px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', flexWrap: 'wrap', boxShadow: activeTab === 'history' ? 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' : 'var(--glass-shadow)' }}>
           <i className="ph ph-clock-counter-clockwise"></i> Riwayat KRS Mahasiswa ({history.length})
         </button>
-      </div>      <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
+      </div>      <div className="siakad-card stagger-1" style={{ padding: '24px 0 0 0', overflow: 'hidden', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
         <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>
             {activeTab === 'pending' ? 'Daftar Pengajuan Pending' : 'Riwayat Pengajuan'}
           </h3>
           <div style={{ position: 'relative', width: '300px' }}>
-            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem', zIndex: 10 }}></i>
             <input 
               className="siakad-input"
               type="text" 
@@ -171,20 +163,25 @@ export default function KaprodiKrs() {
                 width: '100%', 
                 paddingLeft: '46px', 
                 color: 'var(--color-text)',
-                fontSize: '0.9rem'
+                fontSize: '0.9rem',
+                boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)',
+                background: 'var(--liquid-bg)',
+                border: 'var(--inset-border)',
+                borderRadius: '50px',
+                outline: 'none'
               }} 
             />
           </div>
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ minWidth: '800px' }}>
+          <table className="siakad-table" style={{ minWidth: '800px', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
           <thead>
-            <tr>
-              <th>Mahasiswa</th>
-              <th>Semester</th>
-              <th>Jml Mata Kuliah</th>
-              <th>Status</th>
-              <th style={{ textAlign: 'center' }}>Aksi</th>
+            <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
+              <th style={{ padding: '16px' }}>Mahasiswa</th>
+              <th style={{ padding: '16px' }}>Semester</th>
+              <th style={{ padding: '16px' }}>Jml Mata Kuliah</th>
+              <th style={{ padding: '16px' }}>Status</th>
+              <th style={{ padding: '16px', textAlign: 'center' }}>Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -228,13 +225,13 @@ export default function KaprodiKrs() {
               }
 
               return (activeTab === 'pending' ? filteredSubmissions : filteredHistory).map(sub => (
-                <tr key={sub.id}>
-                  <td style={{ fontWeight: 500, color: 'var(--color-text)' }}>
+                <tr key={sub.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                  <td style={{ padding: '16px', fontWeight: 500, color: 'var(--color-text)' }}>
                     {sub.mahasiswa?.name} <br/>
                     <small style={{ color: 'var(--color-muted)' }}>{sub.mahasiswa?.nim_nip}</small>
                   </td>
-                  <td>{sub.semester}</td>
-                  <td>
+                  <td style={{ padding: '16px' }}>{sub.semester}</td>
+                  <td style={{ padding: '16px' }}>
                     {(() => {
                       const cIds = sub.course_ids ? (typeof sub.course_ids === 'string' ? JSON.parse(sub.course_ids) : sub.course_ids) : [];
                       const cCodes = cIds.map(id => availableCourses.find(c => c.id === parseInt(id))?.code).filter(Boolean).join(', ');
@@ -246,7 +243,7 @@ export default function KaprodiKrs() {
                       );
                     })()}
                   </td>
-                  <td>
+                  <td style={{ padding: '16px' }}>
                     <span className="siakad-badge" style={{ 
                       background: sub.status === 'Approved' ? '#dcfce7' : sub.status === 'Rejected' ? '#fee2e2' : '#fef3c7', 
                       color: sub.status === 'Approved' ? '#166534' : sub.status === 'Rejected' ? '#991b1b' : '#b45309' 
@@ -259,26 +256,26 @@ export default function KaprodiKrs() {
                       </div>
                     )}
                   </td>
-                  <td style={{ textAlign: 'center' }}>
+                  <td style={{ padding: '16px', textAlign: 'center' }}>
                     {sub.status === 'Pending' ? (
-                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' , flexWrap: 'wrap'}}>
+                      <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' , flexWrap: 'wrap', alignItems: 'center' }}>
                         <button 
                           onClick={() => approveKrs(sub.id)}
                           style={{ 
-                            background: '#059669', color: 'white', border: 'none', 
+                            background: 'var(--glass-bg)', color: '#059669', border: 'var(--glass-border)', 
                             padding: '8px 18px', borderRadius: '50px', cursor: 'pointer',
-                            fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px'
-                          , flexWrap: 'wrap', boxShadow: '0 4px 12px rgba(5,150,105,0.25)'}}
+                            fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px',
+                            flexWrap: 'wrap', boxShadow: 'var(--glass-shadow)' }}
                         >
                           <i className="ph ph-check-circle"></i> Setujui
                         </button>
                         <button 
                           onClick={() => openRejectModal(sub.id)}
                           style={{ 
-                            background: '#ef4444', color: 'white', border: 'none', 
+                            background: 'var(--glass-bg)', color: '#ef4444', border: 'var(--glass-border)', 
                             padding: '8px 18px', borderRadius: '50px', cursor: 'pointer',
-                            fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px'
-                          , flexWrap: 'wrap', boxShadow: '0 4px 12px rgba(239,68,68,0.25)'}}
+                            fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px',
+                            flexWrap: 'wrap', boxShadow: 'var(--glass-shadow)' }}
                         >
                           <i className="ph ph-x-circle"></i> Tolak
                         </button>
@@ -302,13 +299,13 @@ export default function KaprodiKrs() {
           onClose={() => setIsRejectModalOpen(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setIsRejectModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="button" onClick={() => setIsRejectModalOpen(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700, boxShadow: 'var(--glass-shadow)' }}>Batal</button>
               <button type="submit" form="krs-reject-form" style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>Konfirmasi Tolak KRS</button>
             </>
           )}
         >
-          <form id="krs-reject-form" onSubmit={submitReject} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <div>
+          <form id="krs-reject-form" onSubmit={submitReject} style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'start' }}>
+            <div style={{ width: '100%' }}>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--color-text)' }}>Alasan Penolakan <span style={{ color: '#ef4444' }}>*</span></label>
               <textarea 
                 value={rejectReason} 
@@ -316,7 +313,7 @@ export default function KaprodiKrs() {
                 placeholder="Berikan alasan spesifik agar mahasiswa bisa memperbaikinya (misal: SKS melebihi batas IPS, Prasyarat belum lulus, dll)..."
                 required
                 rows={4}
-                style={{ width: '100%', padding: '12px', borderRadius: '16px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', resize: 'vertical' }}
+                style={{ width: '100%', padding: '12px', borderRadius: '16px', border: 'var(--inset-border)', background: 'var(--liquid-bg)', color: 'var(--color-text)', resize: 'vertical', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', outline: 'none' }}
               />
             </div>
           </form>

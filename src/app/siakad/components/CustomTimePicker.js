@@ -91,15 +91,15 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
         left: coords.left,
         width: coords.width,
         zIndex: 9999999,
-        background: 'var(--color-bg)',
-        border: '1px solid var(--color-border)',
+        background: 'var(--glass-bg)',
+        border: 'var(--glass-border)',
         borderRadius: '16px',
-        boxShadow: '0 10px 30px -10px rgba(0,0,0,0.3)',
+        boxShadow: 'var(--glass-shadow)',
         overflow: 'hidden',
         padding: '12px',
         animation: 'csDropIn 0.15s ease-out',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
+        backdropFilter: 'none',
+        WebkitBackdropFilter: 'none',
       }}
     >
       <style>{`
@@ -111,12 +111,12 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
           width: 4px;
         }
         .siakad-time-scroll-col::-webkit-scrollbar-thumb {
-          background: var(--color-border);
+          background: rgba(0, 0, 0, 0.05);
           border-radius: 4px;
         }
         .siakad-time-item:hover {
-          background: var(--glass-bg);
-          color: #ef4444 !important;
+          background: rgba(196, 30, 58, 0.1) !important;
+          color: #C41E3A !important;
         }
       `}</style>
 
@@ -242,8 +242,8 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
           justifyContent: 'space-between',
           padding: '12px 22px',
           borderRadius: '50px',
-          border: '1px solid var(--color-border)',
-          background: 'var(--color-bg)',
+          border: isOpen ? '1px solid #C41E3A' : 'var(--inset-border)',
+          background: 'var(--glass-bg)',
           color: value ? 'var(--color-text)' : 'var(--color-muted)',
           fontSize: '0.95rem',
           fontWeight: value ? '500' : 'normal',
@@ -251,8 +251,7 @@ export default function CustomTimePicker({ name, value, onChange, placeholder = 
           textAlign: 'left',
           outline: 'none',
           transition: 'all 0.2s ease-out',
-          boxShadow: isOpen ? '0 0 0 3px rgba(196, 30, 58, 0.15), inset 0 3px 8px rgba(0, 0, 0, 0.12)' : 'inset 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(0, 0, 0, 0.04)',
-          borderColor: isOpen ? '#C41E3A' : 'var(--color-border)',
+          boxShadow: isOpen ? '0 0 0 3px rgba(196, 30, 58, 0.15), inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' : 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)',
         }}
       >
         <span>{value ? `${value}` : placeholder}</span>

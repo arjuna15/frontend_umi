@@ -60,11 +60,11 @@ export default function KaprodiEdom() {
         </div>
       </div>
 
-      <div className="siakad-card stagger-1" style={{ padding: '24px', marginBottom: '24px' }}>
+      <div className="siakad-card stagger-1" style={{ padding: '24px', marginBottom: '24px', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
         <h2 style={{ margin: '0 0 20px 0', fontSize: '1.2rem', color: 'var(--color-text)' }}>Ringkasan Evaluasi Prodi</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px' }}>
-          <div style={{ flex: '1 1 200px', display: 'flex', alignItems: 'center', gap: '16px', background: 'var(--glass-bg)', padding: '20px', borderRadius: '16px', border: '1px solid var(--color-border)' }}>
-            <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem' , flexShrink: 0 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px', alignItems: 'start' }}>
+          <div style={{ flex: '1 1 200px', display: 'flex', alignItems: 'center', gap: '16px', background: 'var(--glass-bg)', padding: '20px', borderRadius: '16px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
+            <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'var(--liquid-bg)', border: 'var(--inset-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', flexShrink: 0, boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: '#f59e0b' }}>
               <i className="ph ph-star-fill"></i>
             </div>
             <div>
@@ -72,12 +72,12 @@ export default function KaprodiEdom() {
               <h3 style={{ margin: 0, fontSize: '1.8rem', color: 'var(--color-text)' }}>{avg} <span style={{ fontSize: '1rem', color: 'var(--color-muted)' }}>/ 5.0</span></h3>
             </div>
           </div>
-          <div style={{ flex: '2 1 400px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px' }}>
+          <div style={{ flex: '2 1 400px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px', alignItems: 'start' }}>
             {Object.entries(aspects).map(([key, val]) => (
-              <div key={key} style={{ background: 'var(--glass-bg)', padding: '16px', borderRadius: '12px', border: '1px solid var(--color-border)' }}>
+              <div key={key} style={{ background: 'var(--glass-bg)', padding: '16px', borderRadius: '12px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                 <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem', textTransform: 'capitalize', fontWeight: 600 }}>{key}</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
-                  <div style={{ flex: 1, height: '8px', background: 'var(--color-bg)', borderRadius: '4px', overflow: 'hidden' }}>
+                  <div style={{ flex: 1, height: '8px', background: 'var(--liquid-bg)', borderRadius: '4px', overflow: 'hidden', boxShadow: 'inset 1px 1px 2px var(--inset-shadow-dark), inset -1px -1px 2px var(--inset-shadow-light)' }}>
                     <div style={{ height: '100%', width: `${(val / 5) * 100}%`, background: 'linear-gradient(to right, #C41E3A, #9b1c2e)', borderRadius: '4px' }}></div>
                   </div>
                   <span style={{ fontSize: '0.9rem', fontWeight: 'bold' }}>{val}</span>
@@ -91,21 +91,21 @@ export default function KaprodiEdom() {
       <h3 style={{ margin: '0 0 16px 0', fontSize: '1.2rem', color: 'var(--color-text)' }}>Detail Masukan Mahasiswa</h3>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
         {edoms.length === 0 ? (
-          <div className="siakad-card" style={{ padding: '30px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada data evaluasi.</div>
+          <div className="siakad-card" style={{ padding: '30px', textAlign: 'center', color: 'var(--color-muted)', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>Belum ada data evaluasi.</div>
         ) : (
           edoms.map((edom, index) => (
-            <div key={edom.id} className={`siakad-card stagger-${(index % 5) + 1}`} style={{ padding: '24px' }}>
-              <div className="siakad-modal-header">
+            <div key={edom.id} className={`siakad-card stagger-${(index % 5) + 1}`} style={{ padding: '24px', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div className="siakad-modal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '16px' }}>
                 <div>
                   <h3 style={{ margin: '0 0 4px 0', fontSize: '1.2rem', color: 'var(--color-text)' }}>{edom.dosen?.name}</h3>
                   <span style={{ fontSize: '0.9rem', color: 'var(--color-muted)' }}>{edom.course?.name}</span>
                 </div>
-                <div style={{ background: 'var(--glass-bg)', padding: '6px 14px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px', border: '1px solid var(--color-border)' }}>
+                <div style={{ background: 'var(--glass-bg)', padding: '6px 14px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '4px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', flexShrink: 0 }}>
                   <i className="ph ph-star-fill" style={{ color: '#f59e0b' }}></i> {edom.score} / 5
                 </div>
               </div>
               
-              <div style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: '16px', border: '1px solid var(--color-border)' }}>
+              <div style={{ background: 'var(--liquid-bg)', padding: '16px', borderRadius: '16px', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}>
                 <p style={{ margin: 0, fontStyle: 'italic', color: 'var(--color-muted)', fontSize: '0.95rem' }}>
                   "{edom.comment}"
                 </p>

@@ -329,14 +329,14 @@ export default function AdminCalendarPage() {
 
       <div className="calendar-responsive-container">
         {/* Kalender Bulanan */}
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column' }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
             <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>{monthsMap[month]} {year}</h3>
             <div style={{ display: 'flex', gap: '8px' }}>
-              <button onClick={handlePrevMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <button type="button" onClick={handlePrevMonth} style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '36px', height: '36px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <i className="ph ph-caret-left"></i>
               </button>
-              <button onClick={handleNextMonth} style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', color: 'var(--color-text)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <button type="button" onClick={handleNextMonth} style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '36px', height: '36px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <i className="ph ph-caret-right"></i>
               </button>
             </div>
@@ -364,14 +364,21 @@ export default function AdminCalendarPage() {
                   onClick={() => item.day && setSelectedDay(item.day)}
                   className={item.day ? "day-cell" : ""}
                   style={{
-                    border: item.day ? (isSelected ? '2px solid #3b82f6' : undefined) : 'none',
-                    background: item.day ? (isSelected ? 'rgba(59,130,246,0.1)' : (isToday ? 'rgba(128,128,128,0.2)' : undefined)) : 'transparent',
+                    border: item.day ? (isSelected ? '1px solid #C41E3A' : (isToday ? '1px solid #f59e0b' : 'var(--glass-border)')) : 'none',
+                    background: item.day ? (isSelected ? 'var(--liquid-bg)' : 'var(--glass-bg)') : 'transparent',
+                    boxShadow: item.day ? (isSelected ? 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' : 'var(--glass-shadow)') : 'none',
                     cursor: item.day ? 'pointer' : 'default',
                     pointerEvents: item.day ? 'auto' : 'none',
                     aspectRatio: '1',
+                    borderRadius: '12px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    padding: '8px',
+                    transition: 'all 0.2s ease-in-out'
                   }}
                 >
-                  <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#3b82f6' : 'var(--color-text)') : 'transparent' }}>{item.day}</span>
+                  <span style={{ fontSize: '0.9rem', fontWeight: isToday || isSelected ? '700' : 'normal', color: item.day ? (isSelected ? '#C41E3A' : 'var(--color-text)') : 'transparent' }}>{item.day}</span>
                   
                   {/* Indicators */}
                   <div style={{ display: 'flex', gap: '4px', justifyContent: 'center' }}>
@@ -390,7 +397,7 @@ export default function AdminCalendarPage() {
         </div>
 
         {/* Panel Detail Harian */}
-        <div className="siakad-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column' }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', display: 'flex', flexDirection: 'column' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid var(--color-border)', paddingBottom: '12px' }}>
             <div>
               <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--color-muted)', fontWeight: '600' }}>AGENDA HARIAN</p>
@@ -406,7 +413,7 @@ export default function AdminCalendarPage() {
                   setShowSwapModal(true);
                 }} 
                 className="siakad-btn-primary" 
-                style={{ padding: '8px 16px', fontSize: '0.8rem' }}
+                style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '8px 16px', fontSize: '0.8rem' }}
               >
                 <i className="ph ph-shuffle"></i> Swap Kelas
               </button>
@@ -419,24 +426,26 @@ export default function AdminCalendarPage() {
                 <i className="ph ph-calendar-blank" style={{ fontSize: '3rem', opacity: 0.3, marginBottom: '8px', display: 'block' }}></i>
                 Belum ada jadwal kuliah terdaftar di hari ini.
               </div>
-            ) : selectedDayAgenda.map((agenda, index) => (
-              <div 
-                key={index} 
-                style={{ 
-                  padding: '16px', 
-                  borderRadius: '16px', 
-                  background: 'var(--glass-bg)', 
-                  borderLeft: `4px solid ${getBadgeStyle(agenda.status).text}`,
-                  borderTop: '1px solid var(--color-border)',
-                  borderRight: '1px solid var(--color-border)',
-                  borderBottom: '1px solid var(--color-border)'
-                }}
-              >
+            ) : selectedDayAgenda.map((agenda, index) => {
+              const badge = getBadgeStyle(agenda.status);
+              return (
+                <div 
+                  key={index} 
+                  style={{ 
+                    padding: '16px', 
+                    borderRadius: '16px', 
+                    background: 'var(--glass-bg)', 
+                    border: 'var(--glass-border)',
+                    boxShadow: 'var(--glass-shadow)',
+                    borderLeft: `5px solid ${badge.text}`,
+                    transition: 'all 0.2s'
+                  }}
+                >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '8px' }}>
                   {(() => {
                     const badge = getBadgeStyle(agenda.status);
                     return (
-                      <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '2px 8px', borderRadius: '10px', background: badge.bg, color: badge.text }}>
+                      <span className="siakad-badge" style={{ color: badge.text }}>
                         {badge.label}
                       </span>
                     );
@@ -460,13 +469,13 @@ export default function AdminCalendarPage() {
                         setShowEditModal(true);
                       }}
                       style={{
-                        background: 'rgba(255,255,255,0.05)',
-                        border: '1px solid rgba(255,255,255,0.1)',
+                        background: 'var(--glass-bg)',
+                        border: 'var(--glass-border)',
+                        boxShadow: 'var(--glass-shadow)',
                         borderRadius: '50%',
                         width: '28px', height: '28px',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        color: 'var(--color-text)', cursor: 'pointer',
-                        transition: 'all 0.2s'
+                        color: 'var(--color-text)', cursor: 'pointer'
                       }}
                       title="Ubah Jadwal Permanen"
                     >
@@ -478,7 +487,8 @@ export default function AdminCalendarPage() {
                 <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}><i className="ph ph-door"></i> Ruang {agenda.room}</p>
                 {agenda.notes && <p style={{ margin: '6px 0 0 0', padding: '6px 10px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', fontSize: '0.8rem', color: '#f59e0b' }}><strong>Info:</strong> {agenda.notes}</p>}
               </div>
-            ))}
+            );
+          })}
           </div>
         </div>
       </div>
@@ -488,14 +498,14 @@ export default function AdminCalendarPage() {
         <ModalShell title="Swap Penukaran Jadwal" icon="ph-shuffle" onClose={() => setShowSwapModal(false)} footer={
           <>
             <button onClick={() => setShowSwapModal(false)} style={{ padding: '10px 20px', border: 'none', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button onClick={handleSaveSwap} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
+            <button onClick={handleSaveSwap} disabled={saving} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 24px' }}>
               {saving ? 'Menyimpan...' : 'Terapkan Swap'}
             </button>
           </>
         }>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tanggal Penukaran</label>
-            <input type="text" className="siakad-input" value={swapForm.date} disabled />
+            <input type="text" className="siakad-input" value={swapForm.date} disabled  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
           </div>
 
           <div style={{ marginBottom: '16px' }}>
@@ -506,7 +516,7 @@ export default function AdminCalendarPage() {
               placeholder="-- Pilih Kelas Asli --"
               options={schedules.map(s => ({
                 value: s.id,
-                label: `${s.course_name || s.course?.name || 'Kuliah'} (${s.start_time} - Ruang ${s.room_name || s.room?.name || '-'})`
+                label: `${s.name || s.course_name || s.course?.name || 'Kuliah'} (${s.jam_mulai || s.start_time || '-'} - Ruang ${s.ruang || s.room_name || s.room?.name || '-'})`
               }))}
             />
           </div>
@@ -519,7 +529,7 @@ export default function AdminCalendarPage() {
               placeholder="-- Pilih Kelas Pengganti --"
               options={schedules.map(s => ({
                 value: s.id,
-                label: `${s.course_name || s.course?.name || 'Kuliah'} (${s.start_time} - Ruang ${s.room_name || s.room?.name || '-'})`
+                label: `${s.name || s.course_name || s.course?.name || 'Kuliah'} (${s.jam_mulai || s.start_time || '-'} - Ruang ${s.ruang || s.room_name || s.room?.name || '-'})`
               }))}
             />
           </div>
@@ -542,7 +552,7 @@ export default function AdminCalendarPage() {
         <ModalShell title={editForm.editMode === 'session' ? `Ubah Jadwal Sesi ${selectedDateStr}` : 'Ubah Jadwal Kuliah Permanen'} icon="ph-calendar" onClose={() => setShowEditModal(false)} footer={
           <>
             <button onClick={() => setShowEditModal(false)} style={{ padding: '10px 20px', border: 'none', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button onClick={handleSaveSchedule} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
+            <button onClick={handleSaveSchedule} disabled={saving} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 24px' }}>
               {saving ? 'Menyimpan...' : (editForm.editMode === 'session' ? 'Terapkan untuk Sesi Ini' : 'Simpan Permanen')}
             </button>
           </>
@@ -588,7 +598,7 @@ export default function AdminCalendarPage() {
                 value={editForm.jamMulai} 
                 onChange={(e) => setEditForm({ ...editForm, jamMulai: e.target.value })} 
                 placeholder="Contoh: 08:00" 
-              />
+               style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
             </div>
             <div>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jam Selesai</label>
@@ -598,7 +608,7 @@ export default function AdminCalendarPage() {
                 value={editForm.jamSelesai} 
                 onChange={(e) => setEditForm({ ...editForm, jamSelesai: e.target.value })} 
                 placeholder="Contoh: 10:30" 
-              />
+               style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
             </div>
           </div>
 

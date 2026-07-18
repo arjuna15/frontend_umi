@@ -51,10 +51,23 @@ export default function WisudaMahasiswaPage() {
   };
 
   const statusBadge = (s) => {
-    const colors = { pending: ['#f59e0b','rgba(245,158,11,0.1)'], verified: ['#10b981','rgba(16,185,129,0.1)'], confirmed: ['#10b981','rgba(16,185,129,0.1)'], rejected: ['#ef4444','rgba(239,68,68,0.1)'] };
+    const colors = { pending: '#f59e0b', verified: '#10b981', confirmed: '#10b981', rejected: '#ef4444' };
     const c = colors[s] || colors.pending;
     const labels = { pending: 'Menunggu', verified: 'Terverifikasi', confirmed: 'Dikonfirmasi', rejected: 'Ditolak' };
-    return <span style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: c[0], background: c[1] }}>{labels[s] || s}</span>;
+    return (
+      <span style={{ 
+        padding: '4px 12px', 
+        borderRadius: '50px', 
+        fontSize: '0.72rem', 
+        fontWeight: '800', 
+        color: c, 
+        background: 'var(--glass-bg)', 
+        border: 'var(--glass-border)',
+        boxShadow: 'var(--glass-shadow)'
+      }}>
+        {labels[s] || s}
+      </span>
+    );
   };
 
   if (loading) return (
@@ -91,17 +104,56 @@ export default function WisudaMahasiswaPage() {
       <div className="siakad-card stagger-2" style={{ padding: '24px', marginBottom: '24px' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 16px 0' }}>Riwayat Yudisium</h2>
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead><tr>{['Judul Skripsi', 'IPK', 'Bebas Keuangan', 'Bebas Perpus', 'Status'].map(h => <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase' }}>{h}</th>)}</tr></thead>
+          <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 10px', textAlign: 'left' }}>
+            <thead><tr>{['Judul Skripsi', 'IPK', 'Bebas Keuangan', 'Bebas Perpus', 'Status'].map(h => <th key={h} style={{ padding: '8px 20px', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', textTransform: 'uppercase' }}>{h}</th>)}</tr></thead>
             <tbody>
               {yudisiums.length === 0 ? <tr><td colSpan={5} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada pengajuan yudisium.</td></tr> :
               yudisiums.map(y => (
-                <tr key={y.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                  <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600', maxWidth: '300px' }}>{y.thesis_title}</td>
-                  <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '700' }}>{y.gpa}</td>
-                  <td style={{ padding: '14px 16px' }}>{y.is_free_billing ? <i className="ph ph-check-circle" style={{color:'#10b981',fontSize:'1.2rem'}}></i> : <i className="ph ph-x-circle" style={{color:'#ef4444',fontSize:'1.2rem'}}></i>}</td>
-                  <td style={{ padding: '14px 16px' }}>{y.is_free_library ? <i className="ph ph-check-circle" style={{color:'#10b981',fontSize:'1.2rem'}}></i> : <i className="ph ph-x-circle" style={{color:'#ef4444',fontSize:'1.2rem'}}></i>}</td>
-                  <td style={{ padding: '14px 16px' }}>{statusBadge(y.status)}</td>
+                <tr key={y.id}>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderLeft: 'var(--inset-border)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    borderRadius: '16px 0 0 16px',
+                    boxShadow: 'inset 3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                    fontWeight: 'bold',
+                    color: 'var(--color-text)',
+                    maxWidth: '300px'
+                  }}>{y.thesis_title}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                    color: 'var(--color-text)', 
+                    fontWeight: '700' 
+                  }}>{y.gpa}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                  }}>{y.is_free_billing ? <i className="ph ph-check-circle" style={{color:'#10b981',fontSize:'1.2rem'}}></i> : <i className="ph ph-x-circle" style={{color:'#ef4444',fontSize:'1.2rem'}}></i>}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                  }}>{y.is_free_library ? <i className="ph ph-check-circle" style={{color:'#10b981',fontSize:'1.2rem'}}></i> : <i className="ph ph-x-circle" style={{color:'#ef4444',fontSize:'1.2rem'}}></i>}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderRight: 'var(--inset-border)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    borderRadius: '0 16px 16px 0',
+                    boxShadow: 'inset -3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                  }}>{statusBadge(y.status)}</td>
                 </tr>
               ))}
             </tbody>
@@ -113,13 +165,38 @@ export default function WisudaMahasiswaPage() {
         <div className="siakad-card stagger-3" style={{ padding: '24px' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 16px 0' }}>Pendaftaran Wisuda</h2>
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-              <thead><tr>{['Ukuran Toga', 'No. Kursi', 'Status'].map(h => <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase' }}>{h}</th>)}</tr></thead>
+            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 10px', textAlign: 'left' }}>
+              <thead><tr>{['Ukuran Toga', 'No. Kursi', 'Status'].map(h => <th key={h} style={{ padding: '8px 20px', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', textTransform: 'uppercase' }}>{h}</th>)}</tr></thead>
               <tbody>{wisudas.map(w => (
-                <tr key={w.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                  <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{w.toga_size}</td>
-                  <td style={{ padding: '14px 16px', color: 'var(--color-text)' }}>{w.seat_number || '-'}</td>
-                  <td style={{ padding: '14px 16px' }}>{statusBadge(w.status)}</td>
+                <tr key={w.id}>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderLeft: 'var(--inset-border)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    borderRadius: '16px 0 0 16px',
+                    boxShadow: 'inset 3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                    fontWeight: 'bold',
+                    color: 'var(--color-text)'
+                  }}>{w.toga_size}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                    color: 'var(--color-text)' 
+                  }}>{w.seat_number || '-'}</td>
+                  <td style={{ 
+                    padding: '14px 20px', 
+                    background: 'var(--liquid-bg)',
+                    borderRight: 'var(--inset-border)',
+                    borderTop: 'var(--inset-border)',
+                    borderBottom: 'var(--inset-border)',
+                    borderRadius: '0 16px 16px 0',
+                    boxShadow: 'inset -3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                  }}>{statusBadge(w.status)}</td>
                 </tr>
               ))}</tbody>
             </table>
@@ -129,18 +206,16 @@ export default function WisudaMahasiswaPage() {
 
       {showYudModal && (
         <ModalShell title="Pengajuan Yudisium" subtitle="Wisuda & Yudisium" icon="ph-graduation-cap" onClose={() => setShowYudModal(false)}
-          footer={<><button onClick={() => setShowYudModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+          footer={<><button onClick={() => setShowYudModal(false)} style={{ padding: '10px 22px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold', borderRadius: '50px', boxShadow: 'var(--glass-shadow)' }}>Batal</button>
             <button onClick={submitYudisium} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Ajukan'}</button></>}>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Judul Skripsi</label>
             <textarea className="siakad-input" value={yudForm.thesis_title} onChange={e => setYudForm({...yudForm, thesis_title: e.target.value})} placeholder="Masukkan judul skripsi..." rows={3} style={{ resize: 'vertical' }} /></div>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>IPK Terakhir</label>
             <input className="siakad-input" type="number" step="0.01" min="0" max="4" value={yudForm.gpa} onChange={e => setYudForm({...yudForm, gpa: e.target.value})} placeholder="Contoh: 3.75" /></div>
         </ModalShell>
-      )}
-
-      {showWisModal && (
+      )}      {showWisModal && (
         <ModalShell title="Pendaftaran Wisuda" subtitle="Wisuda & Yudisium" icon="ph-confetti" onClose={() => setShowWisModal(false)}
-          footer={<><button onClick={() => setShowWisModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+          footer={<><button onClick={() => setShowWisModal(false)} style={{ padding: '10px 22px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold', borderRadius: '50px', boxShadow: 'var(--glass-shadow)' }}>Batal</button>
             <button onClick={submitWisuda} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Daftar Wisuda'}</button></>}>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Ukuran Toga</label>
             <CustomSelect

@@ -88,7 +88,7 @@ export default function ElearningPage() {
             onClick={() => setSelectedCourseId(null)} 
             style={{ 
               background: 'var(--glass-bg)', 
-              border: '1px solid var(--color-border)', 
+              border: 'var(--glass-border)', 
               padding: '10px 18px', 
               borderRadius: '12px', 
               color: 'var(--color-text)', 
@@ -98,7 +98,8 @@ export default function ElearningPage() {
               alignItems: 'center', 
               gap: '8px', 
               marginBottom: '20px', 
-              transition: 'all 0.3s' 
+              transition: 'all 0.3s',
+              boxShadow: 'var(--glass-shadow)'
             }}
             className="btn-back-hover"
           >
@@ -111,7 +112,7 @@ export default function ElearningPage() {
                 <i className="ph ph-laptop"></i>
               </div>
               <h3 style={{ margin: 0, fontSize: '1.4rem', color: 'var(--color-text)', fontWeight: '800', letterSpacing: '-0.02em' }}>{activeItem.course?.name}</h3>
-              <span style={{ display: 'inline-block', marginTop: '8px', fontSize: '0.85rem', color: 'var(--color-text)', fontWeight: '600', padding: '4px 12px', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', borderRadius: '999px' }}>{activeItem.course?.code} • {activeItem.course?.sks} SKS</span>
+              <span style={{ display: 'inline-block', marginTop: '8px', fontSize: '0.85rem', color: 'var(--color-text)', fontWeight: '800', padding: '4px 12px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '999px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>{activeItem.course?.code} • {activeItem.course?.sks} SKS</span>
             </div>
             
             <div style={{ padding: '32px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
@@ -119,16 +120,16 @@ export default function ElearningPage() {
               {/* Materials Section */}
               <div>
                 <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: 'var(--color-text)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'var(--glass-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--color-border)' , flexShrink: 0 }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'var(--liquid-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', flexShrink: 0 }}>
                     <i className="ph ph-folder-open"></i>
                   </div>
                   Materi Perkuliahan
                 </h4>
                 {activeItem.course?.materials && activeItem.course.materials.length > 0 ? (
-                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     {activeItem.course.materials.map((mat, j) => (
                       <li key={j}>
-                        <a href="#" onClick={(e) => handleDownload(e, mat.id, mat.title)} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 16px', background: 'var(--glass-bg)', border: '1px solid var(--color-border)', borderRadius: '8px', textDecoration: 'none', color: 'var(--color-text)', fontSize: '0.9rem', transition: 'background 0.2s' }}>
+                        <a href="#" onClick={(e) => handleDownload(e, mat.id, mat.title)} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 18px', background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '12px', textDecoration: 'none', color: 'var(--color-text)', fontSize: '0.9rem', transition: 'all 0.2s', boxShadow: 'var(--glass-shadow)' }}>
                           <i className="ph ph-file-pdf" style={{ fontSize: '1.2rem', color: '#ef4444' }}></i> {mat.title}
                         </a>
                       </li>
@@ -141,27 +142,30 @@ export default function ElearningPage() {
 
               {/* Quizzes Section */}
               <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <i className="ph ph-puzzle-piece" style={{ color: '#3b82f6' }}></i> Kuis & Ujian
+                <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: 'var(--color-text)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'var(--liquid-bg)', color: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', flexShrink: 0 }}>
+                    <i className="ph ph-puzzle-piece"></i>
+                  </div>
+                  Kuis & Ujian
                 </h4>
                 {activeItem.course?.quizzes && activeItem.course.quizzes.length > 0 ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {activeItem.course.quizzes.map((quiz, j) => (
-                      <div key={j} style={{ padding: '16px', border: '1px solid rgba(59,130,246,0.2)', background: 'var(--glass-bg)', borderRadius: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                      <div key={j} style={{ padding: '16px', border: 'var(--glass-border)', background: 'var(--glass-bg)', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap', boxShadow: 'var(--glass-shadow)' }}>
                         <div>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap', marginBottom: '4px' }}>
-                            <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>{quiz.title}</strong>
+                            <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem', marginRight: '6px' }}>{quiz.title}</strong>
                             {quiz.category === 'uts' && (
-                              <span style={{ background: 'rgba(249, 115, 22, 0.15)', color: '#f97316', border: '1px solid rgba(249, 115, 22, 0.3)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>UTS</span>
+                              <span style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', padding: '4px 10px', borderRadius: '50px', fontSize: '0.72rem', fontWeight: '800', color: '#f97316', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)' }}>UTS</span>
                             )}
                             {quiz.category === 'uas' && (
-                              <span style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>UAS</span>
+                              <span style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', padding: '4px 10px', borderRadius: '50px', fontSize: '0.72rem', fontWeight: '800', color: '#ef4444', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)' }}>UAS</span>
                             )}
                             {quiz.category === 'kuis' && (
-                              <span style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6', border: '1px solid rgba(59, 130, 246, 0.3)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>Kuis</span>
+                              <span style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', padding: '4px 10px', borderRadius: '50px', fontSize: '0.72rem', fontWeight: '800', color: '#3b82f6', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)' }}>Kuis</span>
                             )}
                             {(quiz.require_proctoring === true || quiz.require_proctoring === 1) && (
-                              <span style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 'bold' }}>Diawasi AI</span>
+                              <span style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', padding: '4px 10px', borderRadius: '50px', fontSize: '0.72rem', fontWeight: '800', color: '#10b981', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)' }}>Diawasi AI</span>
                             )}
                           </div>
                           <span style={{ fontSize: '0.85rem', color: 'var(--color-muted)' }}>{quiz.duration_minutes} menit • {quiz.questions?.length || 0} soal</span>
@@ -171,15 +175,15 @@ export default function ElearningPage() {
                             <i className="ph ph-eye"></i> Ujian Diawasi
                           </button>
                         ) : (
-                          <button type="button" onClick={() => router.push(`/siakad/mahasiswa/elearning/quiz?quizId=${quiz.id}`)} style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '8px 18px', borderRadius: '50px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 2px 6px rgba(59, 130, 246, 0.3)' }}>
-                            Kerjakan
+                          <button type="button" onClick={() => router.push(`/siakad/mahasiswa/elearning/quiz?quizId=${quiz.id}`)} className="siakad-btn-primary" style={{ padding: '8px 18px', borderRadius: '50px', fontSize: '0.85rem' }}>
+                            Kerjakan Kuis
                           </button>
                         )}
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div style={{ background: 'var(--glass-bg)', padding: '24px', borderRadius: '12px', textAlign: 'center', border: '1px dashed var(--color-border)' }}>
+                  <div style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', padding: '24px', borderRadius: '12px', textAlign: 'center', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                     <i className="ph ph-confetti" style={{ fontSize: '2.5rem', color: '#3b82f6', marginBottom: '8px' }}></i>
                     <p style={{ margin: 0, fontWeight: 'bold', color: 'var(--color-text)' }}>Belum ada kuis aktif.</p>
                     <p style={{ margin: '4px 0 0 0', fontSize: '0.85rem', color: 'var(--color-muted)' }}>Dosen belum menerbitkan kuis untuk kelas ini.</p>
@@ -189,23 +193,26 @@ export default function ElearningPage() {
 
               {/* Assignments Section */}
               <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 'bold', color: 'var(--color-text)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <i className="ph ph-clipboard-text" style={{ color: '#C41E3A' }}></i> Tugas & Kuis
+                <h4 style={{ fontSize: '1.05rem', fontWeight: '800', color: 'var(--color-text)', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'var(--liquid-bg)', color: '#C41E3A', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', flexShrink: 0 }}>
+                    <i className="ph ph-clipboard-text"></i>
+                  </div>
+                  Tugas & Proyek
                 </h4>
                 {activeItem.course?.assignments && activeItem.course.assignments.length > 0 ? (
-                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     {activeItem.course.assignments.map((ass, j) => {
                       const submission = ass.submissions?.find(s => s.mahasiswa_id === data.user.id);
                       return (
-                        <li key={j} style={{ padding: '16px', border: '1px solid rgba(196,30,58,0.2)', background: 'var(--glass-bg)', borderRadius: '8px' }}>
-                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-                            <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem', flex: '1 1 100%' }}>{ass.title}</strong>
-                            <span style={{ background: '#0f172a', color: 'white', padding: '4px 12px', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 'bold', display: 'inline-block' }}>Deadline: {ass.deadline}</span>
+                        <li key={j} style={{ padding: '18px 24px', border: 'var(--glass-border)', background: 'var(--glass-bg)', borderRadius: '16px', boxShadow: 'var(--glass-shadow)', borderLeft: '4px solid var(--apple-blue)' }}>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                            <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>{ass.title}</strong>
+                            <span style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', padding: '4px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', display: 'inline-block', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)' }}>Deadline: {ass.deadline}</span>
                           </div>
-                          <p style={{ margin: '0 0 12px 0', fontSize: '0.9rem', color: 'var(--color-text)' }}>{ass.description}</p>
+                          <p style={{ margin: '0 0 12px 0', fontSize: '0.9rem', color: 'var(--color-muted)' }}>{ass.description}</p>
                           
                           {submission ? (
-                            <div style={{ padding: '8px 12px', background: 'rgba(16,185,129,0.1)', color: '#10b981', borderRadius: '6px', fontSize: '0.85rem', fontWeight: 'bold', border: '1px solid rgba(16,185,129,0.3)' }}>
+                            <div style={{ padding: '12px 16px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: '#10b981', borderRadius: '12px', fontSize: '0.85rem', fontWeight: 'bold', borderLeft: '4px solid #10b981' }}>
                               <i className="ph ph-check-circle"></i> Tugas sudah dikumpulkan. Nilai: {submission.grade || 'Belum dinilai'}
                             </div>
                           ) : (
@@ -299,17 +306,17 @@ export default function ElearningPage() {
                   
                   {/* Summary of content */}
                   <div style={{ display: 'flex', gap: '16px' }}>
-                    <div style={{ flex: 1, textAlign: 'center', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '12px' }}>
+                    <div style={{ flex: 1, textAlign: 'center', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '12px', padding: '12px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                       <i className="ph ph-folder" style={{ fontSize: '1.2rem', color: 'var(--color-text)', display: 'block', marginBottom: '4px' }}></i>
                       <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', display: 'block' }}>Materi</span>
                       <strong style={{ fontSize: '1.1rem', color: 'var(--color-text)' }}>{materialCount}</strong>
                     </div>
-                    <div style={{ flex: 1, textAlign: 'center', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '12px' }}>
+                    <div style={{ flex: 1, textAlign: 'center', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '12px', padding: '12px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                       <i className="ph ph-puzzle-piece" style={{ fontSize: '1.2rem', color: '#3b82f6', display: 'block', marginBottom: '4px' }}></i>
                       <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', display: 'block' }}>Kuis</span>
                       <strong style={{ fontSize: '1.1rem', color: 'var(--color-text)' }}>{quizCount}</strong>
                     </div>
-                    <div style={{ flex: 1, textAlign: 'center', background: 'var(--liquid-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '12px' }}>
+                    <div style={{ flex: 1, textAlign: 'center', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '12px', padding: '12px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                       <i className="ph ph-clipboard-text" style={{ fontSize: '1.2rem', color: '#C41E3A', display: 'block', marginBottom: '4px' }}></i>
                       <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)', display: 'block' }}>Tugas</span>
                       <strong style={{ fontSize: '1.1rem', color: 'var(--color-text)' }}>{assignmentCount}</strong>

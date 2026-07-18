@@ -84,14 +84,14 @@ export default function PPGManagementPage() {
 
   const statusBadge = (status) => {
     const map = { registered: ['#f59e0b', 'Terdaftar'], active: ['#3b82f6', 'Aktif'], completed: ['#10b981', 'Selesai'], dropped: ['#ef4444', 'Drop Out'] };
-    const [c, l] = map[status] || ['#94a3b8', status];
-    return <span style={{ background: `${c}20`, color: c, padding: '4px 12px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: '600' }}>{l}</span>;
+    const [c, l] = map[status] || ['var(--color-muted)', status];
+    return <span className="siakad-badge" style={{ color: c }}>{l}</span>;
   };
 
   if (loading) return (
     <div style={{ padding: '24px' }}>
       <h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat PPG...</h1>
-      <div className="siakad-card" style={{ padding: '24px', height: '200px' }}></div>
+      <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', height: '200px' }}></div>
     </div>
   );
 
@@ -122,8 +122,8 @@ export default function PPGManagementPage() {
       </div>
 
       {message.text && (
-        <div style={{ padding: '16px 20px', borderRadius: '12px', marginBottom: '24px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', border: `1px solid ${message.type === 'success' ? '#10b981' : '#ef4444'}`, color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.4rem' }}></i>
+        <div style={{ padding: '14px 20px', borderRadius: '50px', marginBottom: '24px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '700', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.2rem' }}></i>
           {message.text}
         </div>
       )}
@@ -131,9 +131,9 @@ export default function PPGManagementPage() {
       {/* Stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         {statCards.map((s, i) => (
-          <div key={i} className="siakad-card" style={{ padding: '20px' }}>
+          <div key={i} className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '20px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-              <div style={{ width: '40px', height: '40px', background: s.bg, color: s.color, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>
+              <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '40px', height: '40px',   borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>
                 <i className={s.icon}></i>
               </div>
               <span style={{ color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '600' }}>{s.label}</span>
@@ -144,12 +144,34 @@ export default function PPGManagementPage() {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '4px', marginBottom: '24px', background: 'var(--color-card)', borderRadius: '14px', padding: '4px', border: '1px solid var(--color-border)' }}>
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
         {tabs.map(t => (
-          <button key={t.key} id={`tab-${t.key}`} onClick={() => { setActiveTab(t.key); if (t.key === 'aktivitas' && selectedParticipant) fetchActivities(selectedParticipant.id); }}
-            style={{ flex: 1, padding: '12px 16px', borderRadius: '10px', border: 'none', cursor: 'pointer', fontWeight: '700', fontSize: '0.9rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', transition: 'all 0.2s',
-              background: activeTab === t.key ? 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)' : 'transparent',
-              color: activeTab === t.key ? 'white' : 'var(--color-muted)' }}>
+          <button
+            key={t.key}
+            type="button"
+            id={`tab-${t.key}`}
+            onClick={() => { setActiveTab(t.key); if (t.key === 'aktivitas' && selectedParticipant) fetchActivities(selectedParticipant.id); }}
+            className={activeTab === t.key ? 'active' : ''}
+            style={{
+              background: activeTab === t.key ? 'var(--liquid-bg)' : 'var(--glass-bg)',
+              color: activeTab === t.key ? 'var(--apple-red)' : 'var(--color-muted)',
+              border: 'var(--glass-border)',
+              boxShadow: activeTab === t.key
+                ? 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)'
+                : 'var(--glass-shadow)',
+              padding: '12px 18px',
+              borderRadius: '999px',
+              cursor: 'pointer',
+              fontWeight: '700',
+              fontSize: '0.9rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              transition: 'all 0.2s',
+              flex: '0 1 auto'
+            }}
+          >
             <i className={t.icon}></i> {t.label}
           </button>
         ))}
@@ -157,7 +179,7 @@ export default function PPGManagementPage() {
 
       {/* Peserta Tab */}
       {activeTab === 'peserta' && (
-        <div className="siakad-card" style={{ padding: '24px' }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
             <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Data Peserta PPG</h2>
             <button id="btn-add-ppg" onClick={() => setShowAddModal(true)} className="btn" style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '30px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -165,7 +187,7 @@ export default function PPGManagementPage() {
             </button>
           </div>
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
               <thead>
                 <tr>
                   {['Nama', 'NIP', 'Sekolah Asal', 'Bidang Studi', 'Angkatan', 'Status', 'Aksi'].map(h => (
@@ -197,7 +219,7 @@ export default function PPGManagementPage() {
 
       {/* Aktivitas Tab */}
       {activeTab === 'aktivitas' && (
-        <div className="siakad-card" style={{ padding: '24px' }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Timeline Aktivitas</h2>
           {!selectedParticipant ? (
             <div style={{ textAlign: 'center', padding: '40px', color: 'var(--color-muted)' }}>
@@ -233,25 +255,77 @@ export default function PPGManagementPage() {
 
       {/* Statistik Tab */}
       {activeTab === 'statistik' && (
-        <div className="siakad-card" style={{ padding: '24px' }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px' }}>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Peserta per Angkatan</h3>
-          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '12px', height: '200px', paddingTop: '10px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px' }}>
             {batchData.map((b, i) => (
-              <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '6px' }}>{b.count}</span>
-                <div style={{ width: '100%', maxWidth: '50px', height: `${(b.count / maxBatchCount) * 100}%`, minHeight: '10px', background: 'linear-gradient(180deg, #3b82f6 0%, #8b5cf6 100%)', borderRadius: '8px 8px 4px 4px', transition: 'height 0.5s ease' }}></div>
-                <span style={{ fontSize: '0.72rem', color: 'var(--color-muted)', marginTop: '8px', fontWeight: '600', textAlign: 'center' }}>{b.batch}</span>
+              <div
+                key={i}
+                className="siakad-card"
+                style={{
+                  background: 'var(--glass-bg)',
+                  border: 'var(--glass-border)',
+                  boxShadow: 'var(--glass-shadow)',
+                  padding: '18px',
+                  borderRadius: '20px'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '14px' }}>
+                  <div>
+                    <p style={{ margin: '0 0 4px 0', fontSize: '0.78rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Angkatan</p>
+                    <h4 style={{ margin: 0, color: 'var(--color-text)', fontSize: '1rem', fontWeight: '800' }}>{b.batch}</h4>
+                  </div>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#3b82f6', fontWeight: '800', flexShrink: 0 }}>
+                    {b.count}
+                  </div>
+                </div>
+                <div style={{ height: '10px', borderRadius: '999px', background: 'var(--liquid-bg)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', overflow: 'hidden', marginBottom: '10px' }}>
+                  <div style={{ width: `${(b.count / maxBatchCount) * 100}%`, height: '100%', background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)', borderRadius: '999px', transition: 'width 0.5s ease' }} />
+                </div>
+                <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>{b.count} peserta terdaftar</p>
               </div>
             ))}
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginTop: '32px' }}>
-            <div style={{ padding: '20px', background: 'rgba(59,130,246,0.05)', borderRadius: '12px', textAlign: 'center' }}>
-              <p style={{ fontSize: '2rem', fontWeight: '800', color: '#3b82f6', margin: '0 0 4px' }}>{stats.total > 0 ? Math.round((stats.completed / stats.total) * 100) : 0}%</p>
-              <p style={{ color: 'var(--color-muted)', fontSize: '0.85rem', margin: 0 }}>Tingkat Kelulusan</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', marginTop: '32px' }}>
+            <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '20px', borderRadius: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6' }}>
+                  <i className="ph ph-certificate"></i>
+                </div>
+                <div style={{ minWidth: 0 }}>
+                  <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Statistik PPG</p>
+                  <h4 style={{ margin: 0, color: 'var(--color-text)', fontSize: '1rem', fontWeight: '800' }}>Tingkat Kelulusan</h4>
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
+                <div>
+                  <p style={{ fontSize: '2rem', fontWeight: '800', color: '#3b82f6', margin: '0 0 4px' }}>{stats.total > 0 ? Math.round((stats.completed / stats.total) * 100) : 0}%</p>
+                  <p style={{ color: 'var(--color-muted)', fontSize: '0.85rem', margin: 0 }}>Peserta yang telah menyelesaikan program</p>
+                </div>
+                <span className="siakad-badge-status" style={{ color: '#3b82f6', borderColor: 'rgba(59,130,246,0.3)', minWidth: '150px', gap: '6px' }}>
+                  <i className="ph ph-trend-up"></i> Lulus
+                </span>
+              </div>
             </div>
-            <div style={{ padding: '20px', background: 'rgba(239,68,68,0.05)', borderRadius: '12px', textAlign: 'center' }}>
-              <p style={{ fontSize: '2rem', fontWeight: '800', color: '#ef4444', margin: '0 0 4px' }}>{stats.total > 0 ? Math.round((stats.dropped / stats.total) * 100) : 0}%</p>
-              <p style={{ color: 'var(--color-muted)', fontSize: '0.85rem', margin: 0 }}>Tingkat Drop Out</p>
+            <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '20px', borderRadius: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'var(--liquid-bg)', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#ef4444' }}>
+                  <i className="ph ph-user-minus"></i>
+                </div>
+                <div style={{ minWidth: 0 }}>
+                  <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Statistik PPG</p>
+                  <h4 style={{ margin: 0, color: 'var(--color-text)', fontSize: '1rem', fontWeight: '800' }}>Tingkat Drop Out</h4>
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
+                <div>
+                  <p style={{ fontSize: '2rem', fontWeight: '800', color: '#ef4444', margin: '0 0 4px' }}>{stats.total > 0 ? Math.round((stats.dropped / stats.total) * 100) : 0}%</p>
+                  <p style={{ color: 'var(--color-muted)', fontSize: '0.85rem', margin: 0 }}>Peserta yang berhenti/keluar dari program</p>
+                </div>
+                <span className="siakad-badge-status" style={{ color: '#ef4444', borderColor: 'rgba(239,68,68,0.3)', minWidth: '150px', gap: '6px' }}>
+                  <i className="ph ph-x-circle"></i> Drop Out
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -261,8 +335,8 @@ export default function PPGManagementPage() {
       {showAddModal && (
         <ModalShell title="Daftarkan Peserta PPG" onClose={() => setShowAddModal(false)} footer={
           <>
-            <button id="btn-cancel-ppg" onClick={() => setShowAddModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button id="btn-confirm-ppg" onClick={addParticipant} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Daftarkan'}</button>
+            <button id="btn-cancel-ppg" onClick={() => setShowAddModal(false)} className="btn" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', padding: '10px 20px',   cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+            <button id="btn-confirm-ppg" onClick={addParticipant} disabled={saving} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Daftarkan'}</button>
           </>
         }>
           {[
@@ -274,7 +348,7 @@ export default function PPGManagementPage() {
           ].map(f => (
             <div key={f.key} style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-              <input id={`input-ppg-${f.key}`} className="siakad-input" type={f.type} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder} />
+              <input id={`input-ppg-${f.key}`} className="siakad-input" type={f.type} value={formData[f.key]} onChange={e => setFormData({ ...formData, [f.key]: e.target.value })} placeholder={f.placeholder}  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
             </div>
           ))}
           <div style={{ marginBottom: '16px' }}>
@@ -288,8 +362,8 @@ export default function PPGManagementPage() {
       {showActivityModal && (
         <ModalShell title="Tambah Aktivitas" onClose={() => setShowActivityModal(false)} footer={
           <>
-            <button id="btn-cancel-activity" onClick={() => setShowActivityModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button id="btn-confirm-activity" onClick={addActivity} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Simpan'}</button>
+            <button id="btn-cancel-activity" onClick={() => setShowActivityModal(false)} className="btn" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', padding: '10px 20px',   cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+            <button id="btn-confirm-activity" onClick={addActivity} disabled={saving} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Simpan'}</button>
           </>
         }>
           <div style={{ marginBottom: '16px' }}>
@@ -311,7 +385,7 @@ export default function PPGManagementPage() {
           ].map(f => (
             <div key={f.key} style={{ marginBottom: '16px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>{f.label}</label>
-              <input id={`input-activity-${f.key}`} className="siakad-input" type={f.type} value={activityData[f.key]} onChange={e => setActivityData({ ...activityData, [f.key]: e.target.value })} placeholder={f.placeholder} />
+              <input id={`input-activity-${f.key}`} className="siakad-input" type={f.type} value={activityData[f.key]} onChange={e => setActivityData({ ...activityData, [f.key]: e.target.value })} placeholder={f.placeholder}  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
             </div>
           ))}
           <div style={{ marginBottom: '16px' }}>
@@ -320,11 +394,11 @@ export default function PPGManagementPage() {
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nilai</label>
-            <input id="input-activity-score" className="siakad-input" type="number" value={activityData.score} onChange={e => setActivityData({ ...activityData, score: e.target.value })} placeholder="0-100" />
+            <input id="input-activity-score" className="siakad-input" type="number" value={activityData.score} onChange={e => setActivityData({ ...activityData, score: e.target.value })} placeholder="0-100"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Catatan</label>
-            <textarea id="input-activity-notes" className="siakad-input" value={activityData.notes} onChange={e => setActivityData({ ...activityData, notes: e.target.value })} placeholder="Catatan tambahan..." rows={3} style={{ resize: 'vertical' }} />
+            <textarea id="input-activity-notes" className="siakad-input" value={activityData.notes} onChange={e => setActivityData({ ...activityData, notes: e.target.value })} placeholder="Catatan tambahan..." rows={3} style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', resize: 'vertical' }} />
           </div>
         </ModalShell>
       )}

@@ -72,7 +72,7 @@ export default function KaprodiStudents() {
         </div>
       </div>
 
-      <div className="siakad-card stagger-1" style={{ padding: '24px', marginBottom: '24px' }}>
+      <div className="siakad-card stagger-1" style={{ padding: '24px', marginBottom: '24px', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
         <h2 style={{ margin: '0 0 20px 0', fontSize: '1.2rem', color: 'var(--color-text)' }}>Distribusi Nilai (Keseluruhan Prodi)</h2>
         <div style={{ display: 'flex', alignItems: 'flex-end', height: '150px', gap: '16px', paddingBottom: '10px', borderBottom: '1px solid var(--color-border)' }}>
           {Object.keys(dist).map(key => {
@@ -90,11 +90,11 @@ export default function KaprodiStudents() {
         </div>
       </div>
 
-      <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', overflow: 'hidden' }}>
+      <div className="siakad-card stagger-2" style={{ padding: '24px 0 0 0', overflow: 'hidden', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
         <div style={{ padding: '0 24px 16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Rekapitulasi Nilai Mahasiswa</h3>
           <div style={{ position: 'relative', width: '300px' }}>
-            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem', zIndex: 10 }}></i>
             <input 
               className="siakad-input"
               type="text" 
@@ -105,15 +105,20 @@ export default function KaprodiStudents() {
                 width: '100%', 
                 paddingLeft: '46px', 
                 color: 'var(--color-text)',
-                fontSize: '0.9rem'
+                fontSize: '0.9rem',
+                boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)',
+                background: 'var(--liquid-bg)',
+                border: 'var(--inset-border)',
+                borderRadius: '50px',
+                outline: 'none'
               }} 
             />
           </div>
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ minWidth: '800px', width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+          <table className="siakad-table" style={{ minWidth: '800px', width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
           <thead>
-            <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
+            <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
               <th style={{ padding: '16px 24px' }}>Mahasiswa</th>
               <th style={{ padding: '16px 24px' }}>Mata Kuliah</th>
               <th style={{ padding: '16px 24px' }}>Skor Akhir</th>

@@ -145,24 +145,41 @@ export default function KaprodiPlotting() {
       </div>
 
 
-      <div className="siakad-card stagger-1" style={{ padding: '0px', overflow: 'hidden' }}>
+      <div className="siakad-card stagger-1" style={{ padding: '0px', overflow: 'hidden', borderRadius: '24px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
         <div style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Plotting Mata Kuliah</h3>
           <div style={{ position: 'relative', width: '300px' }}>
-            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
-            <input type="text" className="siakad-input" placeholder="Cari mata kuliah, kode, dosen..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', paddingLeft: '46px', color: 'var(--color-text)', fontSize: '0.9rem' }} />
+            <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem', zIndex: 10 }}></i>
+            <input 
+              type="text" 
+              className="siakad-input" 
+              placeholder="Cari mata kuliah, kode, dosen..." 
+              value={searchQuery} 
+              onChange={(e) => setSearchQuery(e.target.value)} 
+              style={{ 
+                width: '100%', 
+                paddingLeft: '46px', 
+                color: 'var(--color-text)', 
+                fontSize: '0.9rem',
+                boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)',
+                background: 'var(--liquid-bg)',
+                border: 'var(--inset-border)',
+                borderRadius: '50px',
+                outline: 'none'
+              }} 
+            />
           </div>
         </div>
 
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table" style={{ minWidth: '1000px' }}>
+          <table className="siakad-table" style={{ minWidth: '1000px', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
           <thead>
-            <tr>
-              <th>Mata Kuliah</th>
-              <th>Dosen Pengampu</th>
-              <th>Jadwal & Ruangan</th>
-              <th style={{ width: '220px' }}>Ganti/Assign Dosen</th>
-              <th style={{ width: '150px', textAlign: 'center' }}>Aksi</th>
+            <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
+              <th style={{ padding: '16px' }}>Mata Kuliah</th>
+              <th style={{ padding: '16px' }}>Dosen Pengampu</th>
+              <th style={{ padding: '16px' }}>Jadwal & Ruangan</th>
+              <th style={{ width: '220px', padding: '16px' }}>Ganti/Assign Dosen</th>
+              <th style={{ width: '150px', textAlign: 'center', padding: '16px' }}>Aksi</th>
             </tr>
           </thead>
           <tbody>
@@ -187,19 +204,19 @@ export default function KaprodiPlotting() {
               }
 
               return filtered.map(course => (
-                <tr key={course.id}>
-                  <td>
+                <tr key={course.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
+                  <td style={{ padding: '16px' }}>
                     <div style={{ fontWeight: 600, color: 'var(--color-text)' }}>{course.name}</div>
                     <div style={{ color: 'var(--color-muted)', fontSize: '0.85rem', marginTop: '4px' }}>{course.code} • {course.sks} SKS</div>
                   </td>
-                  <td>
+                  <td style={{ padding: '16px' }}>
                     {course.dosen ? (
                       <span style={{ fontWeight: 500, color: 'var(--color-text)' }}>{course.dosen.name}</span>
                     ) : (
                       <span className="siakad-badge" style={{ background: 'rgba(196, 30, 58, 0.15)', color: '#C41E3A' }}>Kosong</span>
                     )}
                   </td>
-                  <td>
+                  <td style={{ padding: '16px' }}>
                     {course.hari && course.ruang ? (
                       <div>
                         <div style={{ fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>
@@ -215,7 +232,7 @@ export default function KaprodiPlotting() {
                       </span>
                     )}
                   </td>
-                  <td>
+                  <td style={{ padding: '16px' }}>
                     <CustomSelect
                       disabled={assigningId === course.id}
                       onChange={(val) => handleAssign(course.id, val)}
@@ -224,7 +241,7 @@ export default function KaprodiPlotting() {
                       style={{ minWidth: '180px' }}
                     />
                   </td>
-                  <td style={{ textAlign: 'center' }}>
+                  <td style={{ padding: '16px', textAlign: 'center' }}>
                     <button onClick={() => openScheduleModal(course)} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '8px 18px', borderRadius: '50px', fontWeight: '700', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', margin: '0 auto' , flexWrap: 'wrap', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>
                       <i className="ph ph-calendar-edit"></i> Atur Jadwal
                     </button>
@@ -244,12 +261,12 @@ export default function KaprodiPlotting() {
           onClose={() => setShowScheduleModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowScheduleModal(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="button" onClick={() => setShowScheduleModal(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700, boxShadow: 'var(--glass-shadow)' }}>Batal</button>
               <button type="submit" form="plotting-form" style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', cursor: 'pointer', fontWeight: 700, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>Simpan Jadwal</button>
             </>
           )}
         >
-          <div style={{ marginBottom: '24px', padding: '16px', background: 'var(--glass-bg)', borderRadius: '16px', borderLeft: '4px solid #C41E3A', border: '1px solid var(--color-border)' }}>
+          <div style={{ marginBottom: '24px', padding: '16px', background: 'var(--glass-bg)', borderRadius: '16px', borderLeft: '4px solid #C41E3A', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
             <h4 style={{ margin: '0 0 4px 0', color: 'var(--color-text)' }}>{selectedCourse.name}</h4>
             <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>{selectedCourse.code} • {selectedCourse.sks} SKS</p>
           </div>
@@ -265,7 +282,7 @@ export default function KaprodiPlotting() {
               />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', position: 'relative', zIndex: 20 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', position: 'relative', zIndex: 20, alignItems: 'start' }}>
               <div style={{ position: 'relative', zIndex: 21 }}>
                 <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.9rem', color: 'var(--color-text)', fontWeight: '600' }}>Jam Mulai</label>
                 <CustomTimePicker 

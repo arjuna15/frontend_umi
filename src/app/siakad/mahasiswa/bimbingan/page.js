@@ -127,11 +127,11 @@ export default function BimbinganAkademikPage() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-        <div style={{ background: 'var(--color-bg)', borderRadius: '16px', border: '1px solid var(--color-border)', padding: '24px' }}>
+        <div style={{ background: 'var(--glass-bg)', borderRadius: '16px', border: 'var(--glass-border)', padding: '24px', boxShadow: 'var(--glass-shadow)' }}>
           <h3 style={{ margin: '0 0 16px 0', color: 'var(--color-text)', fontSize: '1.2rem', fontWeight: 'bold' }}>Profil Dosen Wali</h3>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-            <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: '#4f46e5', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold', flexShrink: 0 }}>
+            <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'var(--apple-blue)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 'bold', flexShrink: 0, boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
               {(advisorName || '-').split(' ').slice(0, 2).map((part) => part[0]).join('').toUpperCase() || '--'}
             </div>
             <div>
@@ -143,7 +143,16 @@ export default function BimbinganAkademikPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <div className="siakad-modal-header">
               <span style={{ color: 'var(--color-muted)' }}>Status KRS</span>
-              <span style={{ color: krsStatusColor, fontWeight: 'bold' }}>{krsStatusLabel}</span>
+              <span style={{ 
+                color: krsStatusColor, 
+                fontWeight: '800', 
+                fontSize: '0.75rem',
+                padding: '4px 12px',
+                borderRadius: '50px',
+                background: 'var(--liquid-bg)',
+                border: 'var(--inset-border)',
+                boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)'
+              }}>{krsStatusLabel}</span>
             </div>
             <div className="siakad-modal-header">
               <span style={{ color: 'var(--color-muted)' }}>Batas Persetujuan</span>
@@ -156,7 +165,7 @@ export default function BimbinganAkademikPage() {
           </div>
         </div>
 
-        <div style={{ background: 'var(--color-bg)', borderRadius: '16px', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column', height: '500px' }}>
+        <div style={{ background: 'var(--glass-bg)', borderRadius: '16px', border: 'var(--glass-border)', display: 'flex', flexDirection: 'column', height: '500px', boxShadow: 'var(--glass-shadow)' }}>
           <div style={{ padding: '16px 24px', borderBottom: '1px solid var(--color-border)', background: 'var(--glass-bg)' }}>
             <h3 style={{ margin: 0, color: 'var(--color-text)', fontSize: '1.1rem', fontWeight: 'bold' }}>Ruang Konsultasi</h3>
           </div>
@@ -165,10 +174,11 @@ export default function BimbinganAkademikPage() {
             {messages.length > 0 ? messages.map((chat, i) => (
               <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: chat.sender === 'mahasiswa' ? 'flex-end' : 'flex-start' }}>
                 <div style={{
-                  background: chat.sender === 'mahasiswa' ? '#4f46e5' : 'var(--glass-bg)',
+                  background: chat.sender === 'mahasiswa' ? 'var(--apple-blue)' : 'var(--liquid-bg)',
                   color: chat.sender === 'mahasiswa' ? 'white' : 'var(--color-text)',
-                  padding: '12px 16px', borderRadius: '12px', maxWidth: '80%',
-                  border: chat.sender === 'mahasiswa' ? 'none' : '1px solid var(--color-border)'
+                  padding: '12px 16px', borderRadius: '16px', maxWidth: '80%',
+                  border: chat.sender === 'mahasiswa' ? 'none' : 'var(--inset-border)',
+                  boxShadow: chat.sender === 'mahasiswa' ? '0 4px 10px rgba(196,30,58,0.2)' : 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)'
                 }}>
                   {chat.text}
                 </div>
@@ -216,9 +226,10 @@ export default function BimbinganAkademikPage() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Tulis pesan ke Dosen Wali..."
-              style={{ flex: 1, padding: '12px 20px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', outline: 'none' }}
+              className="siakad-input"
+              style={{ flex: 1, outline: 'none' }}
             />
-            <button type="submit" style={{ background: '#4f46e5', color: 'white', border: 'none', padding: '0 24px', borderRadius: '50px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 10px rgba(79,70,229,0.3)' }}>
+            <button type="submit" className="siakad-btn-primary" style={{ padding: '0 24px', borderRadius: '50px' }}>
               Kirim
             </button>
           </form>

@@ -64,45 +64,45 @@ export default function AdminDashboard() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         <div className="siakad-card stagger-1" style={{ 
-          padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' 
+          padding: '24px', display: 'flex', alignItems: 'center', gap: '20px' 
         }}>
-          <div style={{ width: '50px', height: '50px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
+          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--liquid-bg)', border: 'var(--inset-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6', fontSize: '1.5rem', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
             <i className="ph ph-users"></i>
           </div>
           <div>
-            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>Total Pengguna</p>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{data.users_count}</h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Pengguna</p>
+            <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>{data.users_count}</h3>
           </div>
         </div>
         
         <div className="siakad-card stagger-2" style={{ 
-          padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' 
+          padding: '24px', display: 'flex', alignItems: 'center', gap: '20px' 
         }}>
-          <div style={{ width: '50px', height: '50px', background: 'rgba(16, 185, 129, 0.1)', color: '#10b981', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' , flexShrink: 0 }}>
+          <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'var(--liquid-bg)', border: 'var(--inset-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#10b981', fontSize: '1.5rem', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
             <i className="ph ph-chalkboard"></i>
           </div>
           <div>
-            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0' }}>Total Kelas Aktif</p>
-            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>{data.courses?.length || 0}</h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 4px 0', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Total Kelas Aktif</p>
+            <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>{data.courses?.length || 0}</h3>
           </div>
         </div>
       </div>
 
       <div className="siakad-card stagger-3" style={{ marginBottom: '32px', padding: '24px' }}>
         <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Distribusi Mahasiswa per Prodi</h2>
-        <div style={{ height: '300px', width: '100%' }}>
+        <div style={{ height: '320px', width: '100%', padding: '20px 16px 10px 16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '20px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
-              <XAxis dataKey="name" stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)' }} axisLine={false} tickLine={false} />
-              <YAxis stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)' }} axisLine={false} tickLine={false} />
+              <XAxis dataKey="name" stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)', fontSize: '0.8rem' }} axisLine={false} tickLine={false} />
+              <YAxis stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)', fontSize: '0.8rem' }} axisLine={false} tickLine={false} />
               <Tooltip 
-                contentStyle={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }}
-                cursor={{ fill: 'var(--color-border)', opacity: 0.4 }}
+                contentStyle={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '12px', color: 'var(--color-text)', boxShadow: 'var(--glass-shadow)' }}
+                cursor={{ fill: 'var(--color-border)', opacity: 0.15 }}
               />
               <Bar dataKey="users" radius={[8, 8, 0, 0]}>
                 {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#3b82f6' : '#C41E3A'} />
+                  <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#C41E3A' : '#f59e0b'} />
                 ))}
               </Bar>
             </BarChart>

@@ -158,52 +158,50 @@ export default function DosenPresensiPage() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
+      </div>      <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px' }}>
         {data.jadwal.map((course, i) => (
-          <div key={i} className={`siakad-card stagger-${(i % 5) + 1}`}>
+          <div key={i} className={`stagger-${(i % 5) + 1}`} style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', borderRadius: '24px', overflow: 'hidden' }}>
             <div style={{ background: 'var(--glass-bg)', padding: '24px 32px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', right: '-20px', top: '-20px', fontSize: '10rem', color: 'rgba(16, 185, 129, 0.03)', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
                 <i className="ph ph-calendar-check"></i>
               </div>
               <div style={{ zIndex: 1, flex: '1 1 200px' }}>
-                <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#059669', fontWeight: '800' }}>{course.name}</h3>
-                <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: 'var(--color-text)', fontWeight: '600', padding: '4px 12px', background: 'var(--glass-bg)', borderRadius: '999px' }}>{course.code} • {course.sks} SKS</span>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', color: 'var(--color-text)', fontWeight: '800' }}>{course.name}</h3>
+                <span style={{ display: 'inline-block', marginTop: '6px', fontSize: '0.85rem', color: 'var(--color-text)', fontWeight: '600', padding: '4px 12px', background: 'var(--liquid-bg)', borderRadius: '999px', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark)' }}>{course.code} • {course.sks} SKS</span>
               </div>
-              <button onClick={() => { setSelectedCourseId(course.id); setShowSessionModal(true); }} style={{ zIndex: 1, flexShrink: 0, background: 'linear-gradient(135deg, #059669 0%, #047857 100%)', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '50px', fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 8px 20px rgba(4, 120, 87, 0.3)', display: 'flex', alignItems: 'center', gap: '8px' , flexWrap: 'wrap'}}>
+              <button onClick={() => { setSelectedCourseId(course.id); setShowSessionModal(true); }} style={{ zIndex: 1, flexShrink: 0, background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '50px', fontSize: '0.9rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: 'var(--glass-shadow)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <i className="ph ph-plus-circle" style={{ fontSize: '1.2rem' }}></i> Buka Sesi Baru
               </button>
             </div>
 
             <div style={{ padding: '32px' }}>
               {course.attendances && course.attendances.length > 0 ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' , flexWrap: 'wrap'}}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                   {course.attendances.map((att, j) => (
-                    <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', padding: '20px', background: 'var(--glass-bg)', border: '1px solid rgba(229, 231, 235, 0.8)', borderRadius: '24px', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
+                    <div key={j} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', padding: '20px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '20px', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' }}>
                       <div style={{ flex: '1 1 150px' }}>
                         <strong style={{ color: 'var(--color-text)', display: 'block', marginBottom: '8px', fontSize: '1.1rem', fontWeight: '800' }}>Pertemuan ke-{att.meeting_number}</strong>
-                        <span style={{ fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' , flexWrap: 'wrap'}}>
+                        <span style={{ fontSize: '0.9rem', color: 'var(--color-muted)', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px' }}>
                           <i className="ph ph-calendar-blank"></i> {att.date}
                         </span>
                       </div>
-                      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' , flexWrap: 'wrap' }}>
-                        <div className="siakad-badge" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: '50px' }}>
+                      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+                        <div className="siakad-badge-status" style={{ color: '#047857', borderColor: 'rgba(4,120,87,0.3)' }}>
                           {att.records?.filter(r => r.status === 'present').length || 0} Hadir
                         </div>
-                        <div className="siakad-badge" style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '50px' }}>
+                        <div className="siakad-badge-status" style={{ color: '#d97706', borderColor: 'rgba(217,119,6,0.3)' }}>
                           {att.records?.filter(r => r.status === 'excused').length || 0} Izin
                         </div>
-                        <div className="siakad-badge" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '50px' }}>
+                        <div className="siakad-badge-status" style={{ color: '#b91c1c', borderColor: 'rgba(185,28,28,0.3)' }}>
                           {att.records?.filter(r => r.status === 'absent').length || 0} Alpa
                         </div>
-                        <button onClick={() => { setSelectedAttendance(att); setSelectedCourseId(course.id); setSearchTerm(''); setShowDetailModal(true); }} style={{ background: 'var(--color-bg)', border: '1px solid #d1d5db', padding: '8px 18px', borderRadius: '50px', fontSize: '0.9rem', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>Input & Detail</button>
+                        <button onClick={() => { setSelectedAttendance(att); setSelectedCourseId(course.id); setSearchTerm(''); setShowDetailModal(true); }} style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '8px 18px', borderRadius: '50px', fontSize: '0.9rem', cursor: 'pointer', color: 'var(--color-text)', fontWeight: 'bold' }}>Input & Detail</button>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p style={{ color: 'var(--color-muted)', fontSize: '0.95rem', margin: 0, fontStyle: 'italic', padding: '16px', background: 'var(--glass-bg)', borderRadius: '12px', border: '1px dashed #d1d5db', textAlign: 'center' }}>Belum ada sesi absensi untuk kelas ini.</p>
+                <p style={{ color: 'var(--color-muted)', fontSize: '0.95rem', margin: 0, fontStyle: 'italic', padding: '16px', background: 'var(--liquid-bg)', borderRadius: '12px', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)', textAlign: 'center' }}>Belum ada sesi absensi untuk kelas ini.</p>
               )}
             </div>
           </div>
@@ -223,7 +221,7 @@ export default function DosenPresensiPage() {
           <form onSubmit={handleCreateSession} style={{ display: 'flex', flexDirection: 'column', gap: '20px', flexWrap: 'wrap' }}>
             <div>
               <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Pertemuan Ke-</label>
-              <input type="number" required min="1" max="16" value={meetingNumber} onChange={e => setMeetingNumber(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: '1px solid #cbd5e1', outline: 'none', fontSize: '1rem' }} placeholder="Contoh: 1" />
+              <input type="number" required min="1" max="16" value={meetingNumber} onChange={e => setMeetingNumber(e.target.value)} style={{ width: '100%', padding: '12px 16px', borderRadius: '12px', border: 'var(--inset-border)', background: 'var(--liquid-bg)', color: 'var(--color-text)', outline: 'none', fontSize: '1rem', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)', boxSizing: 'border-box' }} placeholder="Contoh: 1" />
             </div>
             <div>
               <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '600', color: 'var(--color-text)', marginBottom: '8px' }}>Tanggal Pertemuan</label>
@@ -243,8 +241,8 @@ export default function DosenPresensiPage() {
               />
             </div>
             <div style={{ display: 'flex', gap: '12px', marginTop: '12px', flexWrap: 'wrap' }}>
-              <button type="button" onClick={() => setShowSessionModal(false)} style={{ flex: 1, padding: '14px', borderRadius: '12px', background: 'var(--glass-bg)', color: 'var(--color-text)', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>Batal</button>
-              <button type="submit" style={{ flex: 1, padding: '14px', borderRadius: '12px', background: '#10b981', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', boxShadow: '0 4px 15px rgba(16,185,129,0.3)' }}>Buat Sesi</button>
+              <button type="button" onClick={() => setShowSessionModal(false)} style={{ flex: 1, padding: '14px', borderRadius: '50px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer' }}>Batal</button>
+              <button type="submit" style={{ flex: 1, padding: '14px', borderRadius: '50px', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', boxShadow: 'var(--glass-shadow)' }}>Buat Sesi</button>
             </div>
           </form>
         </ModalShell>
@@ -271,95 +269,95 @@ export default function DosenPresensiPage() {
                 placeholder="Cari mahasiswa..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ padding: '8px 10px 8px 46px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'var(--color-bg)', color: 'var(--color-text)', width: '220px', maxWidth: '100%', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff' }}
+                style={{ padding: '10px 10px 10px 46px', borderRadius: '50px', border: 'var(--inset-border)', background: 'var(--liquid-bg)', color: 'var(--color-text)', width: '220px', maxWidth: '100%', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', outline: 'none' }}
               />
             </div>
           </div>
 
-          <div style={{ overflowX: 'auto', maxHeight: '65vh', overflowY: 'auto', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '16px' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-              <thead>
-                <tr style={{ background: 'var(--glass-bg)' }}>
-                  <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem' }}>Mahasiswa</th>
-                  <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem', textAlign: 'center' }}>Status</th>
-                  <th style={{ padding: '12px 16px', borderBottom: '2px solid #e2e8f0', color: 'var(--color-text)', fontSize: '0.85rem', textAlign: 'right' }}>Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                {(() => {
-                  const course = data.jadwal.find(c => c.id === selectedCourseId);
-                  if (!course || !course.grades) return <tr><td colSpan="3">Data tidak ditemukan.</td></tr>;
-                  
-                  const filteredGrades = course.grades.filter(g => {
-                    const query = searchTerm.toLowerCase();
-                    const name = g.mahasiswa?.name?.toLowerCase() || '';
-                    const nim = g.mahasiswa?.nim_nip?.toLowerCase() || g.mahasiswa?.nim?.toLowerCase() || '';
-                    return name.includes(query) || nim.includes(query);
-                  });
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: '60vh', overflowY: 'auto', padding: '4px' }}>
+            {(() => {
+              const course = data.jadwal.find(c => c.id === selectedCourseId);
+              if (!course || !course.grades) return <div style={{ color: 'var(--color-muted)', textAlign: 'center', padding: '20px' }}>Data tidak ditemukan.</div>;
+              
+              const filteredGrades = course.grades.filter(g => {
+                const query = searchTerm.toLowerCase();
+                const name = g.mahasiswa?.name?.toLowerCase() || '';
+                const nim = g.mahasiswa?.nim_nip?.toLowerCase() || g.mahasiswa?.nim?.toLowerCase() || '';
+                return name.includes(query) || nim.includes(query);
+              });
 
-                    if (filteredGrades.length === 0) {
-                      return <tr><td colSpan="3" style={{ textAlign: 'center', padding: '20px', color: 'var(--color-muted)' }}>Mahasiswa tidak ditemukan.</td></tr>;
-                    }
-                    
-                    return filteredGrades.map(grade => {
-                      const mhs = grade.mahasiswa;
-                      const record = selectedAttendance.records?.find(r => r.mahasiswa_id === mhs.id);
-                      const status = record ? record.status : 'absent';
-                      return (
-                        <tr key={mhs.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
-                          <td style={{ padding: '12px 16px' }}>
-                            <div style={{ fontWeight: '700', color: 'var(--color-text)' }}>{mhs.name}</div>
-                            <div style={{ fontSize: '0.8rem', color: 'var(--color-text)' }}>{mhs.nim_nip}</div>
-                          </td>
-                          <td style={{ padding: '12px 16px', textAlign: 'center' }}>
-                            {status === 'present' ? (
-                              <span style={{ background: '#059669', color: 'white', padding: '6px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 6px rgba(5,150,105,0.3)' }}>Hadir</span>
-                            ) : status === 'excused' ? (
-                              <span style={{ background: '#f59e0b', color: 'white', padding: '6px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 6px rgba(245,158,11,0.3)' }}>Izin</span>
-                            ) : (
-                              <span style={{ background: '#ef4444', color: 'white', padding: '6px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', boxShadow: '0 2px 6px rgba(239,68,68,0.3)' }}>Alpa</span>
-                            )}
-                          </td>
-                          <td style={{ padding: '12px 16px' }}>
-                            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '4px' , flexWrap: 'wrap'}}>
-                              <div style={{ display: 'inline-flex', background: 'var(--glass-bg)', borderRadius: '50px', padding: '4px', gap: '4px', border: '1px solid rgba(255,255,255,0.5)' }}>
-                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} 
-                                  style={{ 
-                                    background: status === 'present' ? '#059669' : 'transparent', 
-                                    color: status === 'present' ? 'white' : 'var(--color-muted)', 
-                                    border: 'none', padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', 
-                                    boxShadow: status === 'present' ? '0 2px 6px rgba(5,150,105,0.3)' : 'none',
-                                    transition: 'all 0.15s'
-                                  }}>H</button>
-                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'excused')} 
-                                  style={{ 
-                                    background: status === 'excused' ? '#f59e0b' : 'transparent', 
-                                    color: status === 'excused' ? 'white' : 'var(--color-muted)', 
-                                    border: 'none', padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', 
-                                    boxShadow: status === 'excused' ? '0 2px 6px rgba(245,158,11,0.3)' : 'none',
-                                    transition: 'all 0.15s'
-                                  }}>I</button>
-                                <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'absent')} 
-                                  style={{ 
-                                    background: status === 'absent' ? '#ef4444' : 'transparent', 
-                                    color: status === 'absent' ? 'white' : 'var(--color-muted)', 
-                                    border: 'none', padding: '6px 14px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', 
-                                    boxShadow: status === 'absent' ? '0 2px 6px rgba(239,68,68,0.3)' : 'none',
-                                    transition: 'all 0.15s'
-                                  }}>A</button>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    });
-                  })()}
-                </tbody>
-              </table>
-            </div>
+              if (filteredGrades.length === 0) {
+                return <div style={{ textAlign: 'center', padding: '20px', color: 'var(--color-muted)' }}>Mahasiswa tidak ditemukan.</div>;
+              }
+              
+              return filteredGrades.map(grade => {
+                const mhs = grade.mahasiswa;
+                const record = selectedAttendance.records?.find(r => r.mahasiswa_id === mhs.id);
+                const status = record ? record.status : 'absent';
+                return (
+                  <div key={mhs.id} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '12px 20px',
+                    background: 'var(--liquid-bg)',
+                    border: 'var(--inset-border)',
+                    borderRadius: '16px',
+                    boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)',
+                    gap: '12px',
+                    flexWrap: 'wrap'
+                  }}>
+                    <div>
+                      <div style={{ fontWeight: '700', color: 'var(--color-text)' }}>{mhs.name}</div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>{mhs.nim_nip}</div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+                      <div>
+                        {status === 'present' ? (
+                          <span className="siakad-badge-status" style={{ color: '#047857', borderColor: 'rgba(4,120,87,0.3)', width: '70px', display: 'inline-block', textAlign: 'center' }}>Hadir</span>
+                        ) : status === 'excused' ? (
+                          <span className="siakad-badge-status" style={{ color: '#d97706', borderColor: 'rgba(217,119,6,0.3)', width: '70px', display: 'inline-block', textAlign: 'center' }}>Izin</span>
+                        ) : (
+                          <span className="siakad-badge-status" style={{ color: '#b91c1c', borderColor: 'rgba(185,28,28,0.3)', width: '70px', display: 'inline-block', textAlign: 'center' }}>Alpa</span>
+                        )}
+                      </div>
+                      <div style={{ display: 'inline-flex', background: 'var(--glass-bg)', borderRadius: '50px', padding: '4px', gap: '4px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
+                        <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'present')} 
+                          className={`siakad-attendance-btn ${status === 'present' ? 'active' : ''}`}
+                          style={{ 
+                            background: status === 'present' ? 'linear-gradient(135deg, #047857 0%, #065f46 100%)' : 'transparent', 
+                            color: status === 'present' ? 'white' : 'var(--color-muted)', 
+                            border: 'none', padding: '6px 0', width: '36px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', 
+                            transition: 'all 0.15s',
+                            textAlign: 'center'
+                          }}>H</button>
+                        <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'excused')} 
+                          className={`siakad-attendance-btn ${status === 'excused' ? 'active' : ''}`}
+                          style={{ 
+                            background: status === 'excused' ? 'linear-gradient(135deg, #d97706 0%, #b45309 100%)' : 'transparent', 
+                            color: status === 'excused' ? 'white' : 'var(--color-muted)', 
+                            border: 'none', padding: '6px 0', width: '36px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', 
+                            transition: 'all 0.15s',
+                            textAlign: 'center'
+                          }}>I</button>
+                        <button onClick={() => handleUpdateRecord(selectedAttendance.id, mhs.id, 'absent')} 
+                          className={`siakad-attendance-btn ${status === 'absent' ? 'active' : ''}`}
+                          style={{ 
+                            background: status === 'absent' ? 'linear-gradient(135deg, #b91c1c 0%, #991b1b 100%)' : 'transparent', 
+                            color: status === 'absent' ? 'white' : 'var(--color-muted)', 
+                            border: 'none', padding: '6px 0', width: '36px', borderRadius: '50px', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', 
+                            transition: 'all 0.15s',
+                            textAlign: 'center'
+                          }}>A</button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              });
+            })()}
+          </div>
         </ModalShell>
       )}
-
     </div>
   );
 }

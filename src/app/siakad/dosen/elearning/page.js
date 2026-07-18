@@ -283,24 +283,48 @@ export default function DosenElearningPage() {
             <div style={{ flex: '1 1 300px' }}>
               <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', margin: '0 0 8px 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>SIAKAD — DOSEN</p>
               <h1 style={{ margin: '0 0 8px 0', color: 'white', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '2.2rem', fontWeight: '800', letterSpacing: '-0.03em' }}>
-                Manajemen Sesi E-Learning <i className="ph ph-books" style={{ color: 'white' }}></i>
+                Manajemen Sesi E-Learning 
+                <span style={{ 
+                  display: 'inline-flex', 
+                  width: '42px', 
+                  height: '42px', 
+                  borderRadius: '50%', 
+                  background: 'rgba(0, 0, 0, 0.04)', 
+                  boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)',
+                  border: 'var(--inset-border)',
+                  alignItems: 'center', 
+                  justifyContent: 'center'
+                }}>
+                  <i className="ph ph-books" style={{ color: 'var(--apple-blue)', fontSize: '1.25rem' }}></i>
+                </span>
               </h1>
               <p style={{ margin: 0, color: 'rgba(255,255,255,0.6)' }}>Kelola materi pembelajaran, absensi, dan kuis untuk 14 sesi pertemuan.</p>
             </div>
              <button 
               onClick={() => router.push('/siakad/dosen/elearning/quiz')}
-              style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', padding: '10px 24px', borderRadius: '50px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', flexShrink: 0, boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}
+              className="siakad-btn-primary"
             >
               <i className="ph ph-plus-circle"></i> Buat Kuis / Ujian (CBT)
             </button>
           </div>
         </div>
       </div>
-
-      <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-         <div className="siakad-card" style={{ flex: '1 1 300px', padding: '24px', height: 'fit-content', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
+ 
+       <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+         <div className="siakad-card" style={{ flex: '1 1 300px', padding: '24px', height: 'fit-content', borderRadius: '24px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(196, 30, 58, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <div style={{ 
+               width: '36px', 
+               height: '36px', 
+               borderRadius: '50%', 
+               background: 'rgba(0, 0, 0, 0.04)', 
+               boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)',
+               border: 'var(--inset-border)',
+               display: 'flex', 
+               alignItems: 'center', 
+               justifyContent: 'center', 
+               flexShrink: 0 
+             }}>
               <i className="ph ph-books" style={{ color: '#C41E3A', fontSize: '1.1rem' }}></i>
             </div>
             <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: '800' }}>Mata Kuliah Saya</h3>
@@ -313,10 +337,10 @@ export default function DosenElearningPage() {
                 style={{ 
                   padding: '14px', borderRadius: '24px', cursor: 'pointer',
                   background: selectedCourse === course.id ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--glass-bg)',
-                  border: selectedCourse === course.id ? '1px solid rgba(196,30,58,0.5)' : '1px solid var(--color-border)',
+                  border: selectedCourse === course.id ? 'none' : 'var(--glass-border)',
                   color: selectedCourse === course.id ? 'white' : 'var(--color-text)',
                   fontWeight: '600',
-                  boxShadow: selectedCourse === course.id ? '0 4px 14px rgba(196,30,58,0.3)' : 'none',
+                  boxShadow: selectedCourse === course.id ? '0 4px 12px rgba(196, 30, 58, 0.4)' : 'var(--glass-shadow)',
                   transition: 'all 0.2s'
                 }}
               >
@@ -326,8 +350,8 @@ export default function DosenElearningPage() {
             {courses.length === 0 && <div style={{ color: 'var(--color-muted)', fontSize: '0.9rem' }}>Tidak ada kelas aktif</div>}
           </div>
         </div>
-
-        {/* Sessions Content */}
+ 
+         {/* Sessions Content */}
         <div style={{ flex: '2 1 500px', minWidth: 0 }}>
           {!selectedCourse ? (
             <div className="siakad-card" style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>
@@ -338,19 +362,19 @@ export default function DosenElearningPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {sessions.map((sess, idx) => (
-                  <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
+                  <div key={idx} className={`siakad-card stagger-${(idx % 5) + 1}`} style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderRadius: '24px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                     <div style={{ flex: '1 1 300px' }}>
                       <h3 style={{ margin: '0 0 8px 0', color: 'var(--color-text)', fontSize: '1.1rem', fontWeight: '700' }}>Sesi {sess.session}: {sess.title}</h3>
                       <div style={{ display: 'flex', gap: '16px', color: 'var(--color-muted)', fontSize: '0.85rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                        <span style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(196, 30, 58, 0.1)', color: '#C41E3A', padding: '4px 12px', borderRadius: '50px', fontWeight: '600' }}>
-                          <i className="ph ph-file-pdf"></i> {sess.material_count} Materi Terupload
+                        <span className="siakad-badge-status" style={{ color: '#C41E3A', borderColor: 'rgba(196, 30, 58, 0.25)', padding: '2px 8px', fontSize: '0.7rem' }}>
+                          <i className="ph ph-file-pdf" style={{ marginRight: '4px' }}></i> {sess.material_count} Materi Terupload
                         </span>
                         {sess.meet_link ? (
-                          <a href={sess.meet_link} target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(16,185,129,0.1)', color: '#10b981', padding: '4px 12px', borderRadius: '50px', fontWeight: '600', textDecoration: 'none' }}>
-                            <i className="ph ph-video-camera"></i> Link Active Meet
+                          <a href={sess.meet_link} target="_blank" rel="noreferrer" className="siakad-badge-status" style={{ color: '#10b981', borderColor: 'rgba(16, 185, 129, 0.25)', padding: '2px 8px', fontSize: '0.7rem', textDecoration: 'none' }}>
+                            <i className="ph ph-video-camera" style={{ marginRight: '4px' }}></i> Link Active Meet
                           </a>
                         ) : (
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-muted)' }}>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-muted)', fontSize: '0.75rem' }}>
                             <i className="ph ph-video-camera-slash"></i> Belum ada link meet
                           </span>
                         )}
@@ -359,13 +383,13 @@ export default function DosenElearningPage() {
                     <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                       <button 
                         onClick={() => { setUploadSession(sess.session); setShowUploadModal(true); }} 
-                        style={{ background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
+                        style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', boxShadow: 'var(--glass-shadow)', transition: 'all 0.2s' }}
                       >
                         <i className="ph ph-upload-simple"></i> Upload
                       </button>
                       <button 
                         onClick={() => { setMeetSession(sess.session); setMeetUrl(sess.meet_link || ''); setShowMeetModal(true); }} 
-                        style={{ background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', transition: 'all 0.2s' }}
+                        style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', padding: '10px 18px', borderRadius: '50px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--color-text)', fontWeight: '600', boxShadow: 'var(--glass-shadow)', transition: 'all 0.2s' }}
                       >
                         <i className="ph ph-video-camera"></i> Link Meet
                       </button>
@@ -375,7 +399,7 @@ export default function DosenElearningPage() {
               </div>
 
               {/* CBT Quizzes Section */}
-              <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
+              <div className="siakad-card" style={{ padding: '24px', borderRadius: '24px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
                   <div>
                     <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -387,7 +411,7 @@ export default function DosenElearningPage() {
                   </div>
                   <button 
                     onClick={() => router.push('/siakad/dosen/elearning/quiz')}
-                    style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', padding: '8px 18px', borderRadius: '50px', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: 'bold', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}
+                    className="siakad-btn-primary"
                   >
                     <i className="ph ph-plus-circle"></i> Buat Kuis / Ujian
                   </button>
@@ -403,32 +427,32 @@ export default function DosenElearningPage() {
                       let categoryBadge = null;
                       if (quiz.category === 'uts') {
                         categoryBadge = (
-                          <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#f97316', background: 'rgba(249, 115, 22, 0.1)', border: '1px solid rgba(249, 115, 22, 0.3)', padding: '2px 10px', borderRadius: '50px' }}>
+                          <span className="siakad-badge-status" style={{ color: '#f97316', borderColor: 'rgba(249, 115, 22, 0.3)', padding: '2px 10px', fontSize: '0.75rem' }}>
                             UTS
                           </span>
                         );
                       } else if (quiz.category === 'uas') {
                         categoryBadge = (
-                          <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#ef4444', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', padding: '2px 10px', borderRadius: '50px' }}>
+                          <span className="siakad-badge-status" style={{ color: '#ef4444', borderColor: 'rgba(239, 68, 68, 0.3)', padding: '2px 10px', fontSize: '0.75rem' }}>
                             UAS
                           </span>
                         );
                       } else {
                         categoryBadge = (
-                          <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#3b82f6', background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', padding: '2px 10px', borderRadius: '50px' }}>
+                          <span className="siakad-badge-status" style={{ color: '#3b82f6', borderColor: 'rgba(59, 130, 246, 0.3)', padding: '2px 10px', fontSize: '0.75rem' }}>
                             Kuis
                           </span>
                         );
                       }
 
                       return (
-                        <div key={i} style={{ border: '1px solid rgba(255,255,255,0.5)', borderRadius: '24px', padding: '16px 20px', background: 'var(--glass-bg)' }}>
+                        <div key={i} className="siakad-card" style={{ border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', borderRadius: '24px', padding: '16px 20px', background: 'var(--glass-bg)' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
                             <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>{quiz.title}</strong>
                             <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
                               {categoryBadge}
                               {(quiz.require_proctoring === true || quiz.require_proctoring === 1) && (
-                                <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#10b981', background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', padding: '2px 10px', borderRadius: '50px' }}>
+                                <span className="siakad-badge-status" style={{ color: '#10b981', borderColor: 'rgba(16, 185, 129, 0.3)', padding: '2px 10px', fontSize: '0.75rem' }}>
                                   Diawasi AI
                                 </span>
                               )}
@@ -446,14 +470,16 @@ export default function DosenElearningPage() {
                               <button
                                 type="button"
                                 onClick={() => openMonitorModal(quiz)}
-                                style={{ background: 'rgba(16,185,129,0.1)', color: '#10b981', border: 'none', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', fontWeight: 'bold', transition: 'all 0.2s' }}
+                                className="siakad-btn-success"
+                                style={{ padding: '6px 14px', borderRadius: '8px !important', fontSize: '0.8rem' }}
                               >
                                 <i className="ph ph-chart-bar"></i> Monitor
                               </button>
                               <button
                                 type="button"
                                 onClick={() => handleDeleteQuiz(quiz.id)}
-                                style={{ background: 'rgba(239,68,68,0.1)', color: '#ef4444', border: 'none', padding: '6px 14px', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', fontWeight: 'bold', transition: 'all 0.2s' }}
+                                className="siakad-btn-primary"
+                                style={{ padding: '6px 14px', borderRadius: '8px !important', fontSize: '0.8rem' }}
                               >
                                 <i className="ph ph-trash"></i> Hapus
                               </button>
@@ -469,7 +495,7 @@ export default function DosenElearningPage() {
                     <p style={{ margin: '0 0 16px 0' }}>Belum ada Kuis/Ujian yang dibuat untuk kelas ini.</p>
                     <button 
                       onClick={() => router.push('/siakad/dosen/elearning/quiz')}
-                      style={{ background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', padding: '8px 18px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem' }}
+                      style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', padding: '8px 18px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', boxShadow: 'var(--glass-shadow)' }}
                     >
                       Buat Kuis Baru
                     </button>
@@ -479,12 +505,12 @@ export default function DosenElearningPage() {
             </div>
           )}
 
-          {/* Assignments Card Section (Pindahkan ke dalam kolom kanan agar tidak keluar layout/nabrak) */}
+          {/* Assignments Card Section */}
           {selectedCourse && (
             (() => {
               const selectedCourseData = fullCourses.find(c => c.id === selectedCourse);
               return (
-                <div className="siakad-card" style={{ padding: '24px 0 0 0', marginTop: '24px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.5)' }}>
+                <div className="siakad-card" style={{ padding: '24px 0 0 0', marginTop: '24px', borderRadius: '24px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                   <div style={{ padding: '0 24px 20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                     <div>
                       <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -494,19 +520,19 @@ export default function DosenElearningPage() {
                     </div>
                     <button 
                       onClick={() => setShowAssignmentModal(true)}
-                      style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '10px 24px', borderRadius: '50px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}
+                      className="siakad-btn-primary"
                     >
                       <i className="ph ph-plus-circle"></i> Buat Tugas Baru
                     </button>
                   </div>
 
                   {selectedCourseData?.assignments && selectedCourseData.assignments.length > 0 ? (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '24px' }}>
                       {selectedCourseData.assignments.map((ass, i) => (
-                        <div key={i} style={{ border: '1px solid rgba(255,255,255,0.5)', borderRadius: '24px', padding: '16px 20px', background: 'var(--glass-bg)' }}>
+                        <div key={i} className="siakad-card" style={{ border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', borderRadius: '24px', padding: '16px 20px', background: 'var(--glass-bg)' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '8px' }}>
                             <strong style={{ color: 'var(--color-text)', fontSize: '0.95rem' }}>{ass.title}</strong>
-                            <span style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'white', background: '#C41E3A', padding: '4px 12px', borderRadius: '50px' }}>
+                            <span className="siakad-badge-status" style={{ color: '#C41E3A', borderColor: 'rgba(196, 30, 58, 0.3)', padding: '2px 10px', fontSize: '0.75rem' }}>
                               Deadline: {ass.deadline}
                             </span>
                           </div>
@@ -527,7 +553,7 @@ export default function DosenElearningPage() {
                                 setGradingValues(initialGrades);
                                 setShowSubmissionsModal(true); 
                               }}
-                              style={{ background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', padding: '8px 18px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem' }}
+                              style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', padding: '8px 18px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', boxShadow: 'var(--glass-shadow)' }}
                             >
                               <i className="ph ph-eye"></i> Periksa & Nilai
                             </button>
@@ -555,7 +581,7 @@ export default function DosenElearningPage() {
           onClose={() => setShowUploadModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowUploadModal(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="button" onClick={() => setShowUploadModal(false)} style={{ padding: '10px 20px', borderRadius: '50px', border: 'var(--glass-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
               <button type="submit" form="upload-form" disabled={uploading} style={{ padding: '10px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)' }}>{uploading ? 'Mengupload...' : 'Upload Materi'}</button>
             </>
           )}
@@ -595,7 +621,7 @@ export default function DosenElearningPage() {
           onClose={() => setShowMeetModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowMeetModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="button" onClick={() => setShowMeetModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
               <button type="submit" form="meet-form" disabled={savingMeet} style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(16, 185, 129, 0.28)' }}>{savingMeet ? 'Menyimpan...' : 'Simpan Link Meet'}</button>
             </>
           )}
@@ -624,7 +650,7 @@ export default function DosenElearningPage() {
           onClose={() => setShowAssignmentModal(false)}
           footer={(
             <>
-              <button type="button" onClick={() => setShowAssignmentModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
+              <button type="button" onClick={() => setShowAssignmentModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
               <button type="submit" form="assignment-form" disabled={isCreatingAss} style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', fontWeight: 700, cursor: 'pointer', boxShadow: '0 12px 24px rgba(196, 30, 58, 0.28)' }}>{isCreatingAss ? 'Menerbitkan...' : 'Terbitkan Tugas'}</button>
             </>
           )}
@@ -794,7 +820,7 @@ export default function DosenElearningPage() {
           icon="ph-chart-bar"
           onClose={() => setShowMonitorModal(false)}
           footer={(
-            <button type="button" onClick={() => setShowMonitorModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Tutup</button>
+            <button type="button" onClick={() => setShowMonitorModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Tutup</button>
           )}
         >
           {/* If we have selected a student's answer detail to view */}
@@ -803,7 +829,7 @@ export default function DosenElearningPage() {
               <button 
                 type="button" 
                 onClick={() => setSelectedAttemptDetail(null)} 
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'var(--liquid-bg)', color: 'var(--color-text)', padding: '8px 16px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.5)', cursor: 'pointer', fontWeight: 'bold', marginBottom: '20px' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'var(--glass-bg)', color: 'var(--color-text)', padding: '8px 16px', borderRadius: '8px', border: 'var(--glass-border)', cursor: 'pointer', fontWeight: 'bold', marginBottom: '20px', boxShadow: 'var(--glass-shadow)' }}
               >
                 <i className="ph ph-arrow-left"></i> Kembali ke Daftar Mahasiswa
               </button>
@@ -818,12 +844,12 @@ export default function DosenElearningPage() {
                   const isCorrect = q.type !== 'essay' && String(studentAnsVal).toUpperCase() === String(q.correct_answer).toUpperCase();
 
                   return (
-                    <div key={q.id} style={{ padding: '20px', borderRadius: '16px', background: 'var(--liquid-bg)', border: '1px solid rgba(255,255,255,0.5)', boxShadow: 'var(--glass-shadow)' }}>
+                    <div key={q.id} style={{ padding: '20px', borderRadius: '16px', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                       <p style={{ fontWeight: '700', color: 'var(--color-text)', margin: '0 0 16px 0', fontSize: '0.95rem', lineHeight: '1.5' }}>
                         <span style={{ color: '#3b82f6', marginRight: '6px' }}>{idx + 1}.</span> {q.question}
                       </p>
                       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', fontSize: '0.85rem', flexWrap: 'wrap' }}>
-                        <div style={{ padding: '12px', borderRadius: '10px', background: 'var(--liquid-bg)', border: '1px solid rgba(255,255,255,0.5)' }}>
+                        <div style={{ padding: '12px', borderRadius: '10px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                           <span style={{ display: 'block', color: 'var(--color-muted)', marginBottom: '6px', fontSize: '0.75rem', fontWeight: '600' }}>Jawaban Mahasiswa:</span>
                           {q.type === 'essay' ? (
                             <p style={{ margin: 0, color: '#b45309', whiteSpace: 'pre-wrap', fontWeight: '700', fontSize: '0.9rem' }}>{studentAnsVal || '(Tidak menjawab)'}</p>
@@ -834,7 +860,7 @@ export default function DosenElearningPage() {
                             </span>
                           )}
                         </div>
-                        <div style={{ padding: '12px', borderRadius: '10px', background: 'var(--liquid-bg)', border: '1px solid rgba(255,255,255,0.5)' }}>
+                        <div style={{ padding: '12px', borderRadius: '10px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                           <span style={{ display: 'block', color: 'var(--color-muted)', marginBottom: '6px', fontSize: '0.75rem', fontWeight: '600' }}>Kunci Jawaban / Panduan Dosen:</span>
                           <span style={{ fontWeight: '700', color: 'var(--color-text)', fontSize: '0.9rem' }}>
                             {q.type === 'essay' ? (q.correct_answer_text || '(Tidak ada panduan)') : q.correct_answer}
@@ -866,13 +892,13 @@ export default function DosenElearningPage() {
                 </div>
               ) : (
                 <div style={{ overflowX: 'auto' }}>
-                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
+                  <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px', textAlign: 'left' }}>
                     <thead>
-                      <tr style={{ borderBottom: '2px solid var(--color-border)', textAlign: 'left' }}>
-                        <th style={{ padding: '12px 8px', color: 'var(--color-muted)', fontWeight: 'bold' }}>Mahasiswa</th>
-                        <th style={{ padding: '12px 8px', color: 'var(--color-muted)', fontWeight: 'bold' }}>Status</th>
-                        <th style={{ padding: '12px 8px', color: 'var(--color-muted)', fontWeight: 'bold' }}>Nilai</th>
-                        <th style={{ padding: '12px 8px', color: 'var(--color-muted)', fontWeight: 'bold' }}>Aksi</th>
+                      <tr>
+                        <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Mahasiswa</th>
+                        <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Status</th>
+                        <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Nilai</th>
+                        <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -882,26 +908,55 @@ export default function DosenElearningPage() {
                           return s.name.toLowerCase().includes(query) || s.nim.toLowerCase().includes(query);
                         })
                         .map((att, idx) => (
-                          <tr key={idx} style={{ borderBottom: '1px solid var(--color-border)' }}>
-                            <td style={{ padding: '14px 8px' }}>
+                          <tr key={idx}>
+                            <td style={{ 
+                              padding: '14px 20px', 
+                              background: 'var(--liquid-bg)',
+                              borderLeft: 'var(--inset-border)',
+                              borderTop: 'var(--inset-border)',
+                              borderBottom: 'var(--inset-border)',
+                              borderRadius: '16px 0 0 16px',
+                              boxShadow: 'inset 3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                            }}>
                               <div style={{ fontWeight: 'bold', color: 'var(--color-text)' }}>{att.name}</div>
                               <div style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>NIM: {att.nim}</div>
                             </td>
-                            <td style={{ padding: '14px 8px' }}>
+                            <td style={{ 
+                              padding: '14px 20px',
+                              background: 'var(--liquid-bg)',
+                              borderTop: 'var(--inset-border)',
+                              borderBottom: 'var(--inset-border)',
+                              boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                            }}>
                               {att.has_attempted ? (
                                 <span style={{ display: 'inline-block', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold', boxShadow: '0 4px 10px rgba(16,185,129,0.2)' }}>Sudah Mengerjakan</span>
                               ) : (
-                                <span style={{ display: 'inline-block', background: 'var(--liquid-bg)', color: 'var(--color-muted)', border: '1px solid rgba(255,255,255,0.5)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold' }}>Belum Mengerjakan</span>
+                                <span style={{ display: 'inline-block', background: 'var(--liquid-bg)', color: 'var(--color-muted)', border: 'var(--glass-border)', padding: '6px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 'bold' }}>Belum Mengerjakan</span>
                               )}
                             </td>
-                            <td style={{ padding: '14px 8px', fontWeight: 'bold' }}>
+                            <td style={{ 
+                              padding: '14px 20px',
+                              background: 'var(--liquid-bg)',
+                              borderTop: 'var(--inset-border)',
+                              borderBottom: 'var(--inset-border)',
+                              boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                              fontWeight: 'bold' 
+                            }}>
                               {att.has_attempted ? (
                                 <span style={{ fontSize: '1.1rem', color: '#10b981', fontWeight: '900' }}>{att.score}</span>
                               ) : (
                                 <span style={{ color: 'var(--color-muted)' }}>-</span>
                               )}
                             </td>
-                            <td style={{ padding: '14px 8px' }}>
+                            <td style={{ 
+                              padding: '14px 20px',
+                              background: 'var(--liquid-bg)',
+                              borderRight: 'var(--inset-border)',
+                              borderTop: 'var(--inset-border)',
+                              borderBottom: 'var(--inset-border)',
+                              borderRadius: '0 16px 16px 0',
+                              boxShadow: 'inset -3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                            }}>
                               {att.has_attempted ? (
                                 <button
                                   type="button"

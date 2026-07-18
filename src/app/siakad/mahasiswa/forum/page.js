@@ -97,57 +97,70 @@ export default function MahasiswaForumPage() {
           return filteredCourses.map((item, i) => {
             const course = item.course;
             return (
-              <div key={i} className="siakad-card" style={{ overflow: 'hidden' }}>
-                <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
+              <div key={i} className="siakad-card" style={{ padding: '0', overflow: 'hidden' }}>
+                <div style={{ background: 'var(--glass-bg)', padding: '20px 24px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
                   <div>
-                    <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{course.name}</h3>
-                  <span style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>{course.code}</span>
+                    <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: '800' }}>{course.name}</h3>
+                    <span className="siakad-badge-status" style={{ display: 'inline-block', marginTop: '4px', fontSize: '0.8rem', color: 'var(--color-muted)', borderColor: 'var(--color-border)', background: 'transparent' }}>{course.code}</span>
+                  </div>
+                  <button onClick={() => { setActiveCourseId(course.id); setTopicForm({ title: '', content: '' }); setShowTopicModal(true); }} className="siakad-btn-primary" style={{ padding: '8px 20px', borderRadius: '50px !important' }}>
+                    <i className="ph ph-plus"></i> Buat Topik Baru
+                  </button>
                 </div>
-                <button onClick={() => { setActiveCourseId(course.id); setTopicForm({ title: '', content: '' }); setShowTopicModal(true); }} style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', padding: '8px 20px', borderRadius: '50px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.3)' }}>
-                  <i className="ph ph-plus"></i> Buat Topik Baru
-                </button>
-              </div>
-              
-              <div style={{ padding: '24px' }}>
-                {course.forums && course.forums.length > 0 ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    {course.forums.map((forum, j) => (
-                      <div key={j} style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '20px' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                          <div style={{ width: '40px', height: '40px', background: 'rgba(15,23,42,0.1)', color: '#0f172a', border: '1px solid rgba(15,23,42,0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' , flexShrink: 0 }}>
-                            <i className="ph ph-user"></i>
-                          </div>
-                          <div>
-                            <strong style={{ display: 'block', color: 'var(--color-text)' }}>{forum.title}</strong>
-                            <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Diposting oleh Dosen • {new Date(forum.created_at).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })}</span>
-                          </div>
-                        </div>
-                        <p style={{ margin: '0 0 16px 0', color: 'var(--color-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>
-                          {forum.content}
-                        </p>
-                        
-                        {/* Replies */}
-                        <div style={{ background: 'var(--color-bg)', borderRadius: '8px', padding: '16px', borderLeft: '4px solid #C41E3A' }}>
-                          <h4 style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Balasan ({forum.replies?.length || 0})</h4>
-                          {forum.replies && forum.replies.map((reply, k) => (
-                            <div key={k} style={{ marginBottom: k === forum.replies.length - 1 ? 0 : '12px', paddingBottom: k === forum.replies.length - 1 ? 0 : '12px', borderBottom: k === forum.replies.length - 1 ? 'none' : '1px solid var(--color-border)' }}>
-                              <div className="siakad-modal-header">
-                                <strong style={{ fontSize: '0.85rem', color: 'var(--color-text)', display: 'block' }}>
-                                  {reply.user_id === data.user.id ? 'Anda' : (reply.user_id === course.dosen_id ? 'Dosen' : 'Mahasiswa Lain')}
-                                </strong>
-                                <span style={{ fontSize: '0.7rem', color: 'var(--color-muted)' }}>{new Date(reply.created_at).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })}</span>
-                              </div>
-                              <p style={{ margin: '4px 0 0 0', fontSize: '0.9rem', color: 'var(--color-muted)' }}>{reply.content}</p>
+                
+                <div style={{ padding: '24px' }}>
+                  {course.forums && course.forums.length > 0 ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      {course.forums.map((forum, j) => (
+                        <div key={j} className="siakad-card" style={{ background: 'var(--glass-bg)', borderRadius: '24px', padding: '20px 24px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                            <div style={{ 
+                              width: '40px', 
+                              height: '40px', 
+                              borderRadius: '50%', 
+                              background: 'rgba(0, 0, 0, 0.04)', 
+                              boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)',
+                              border: 'var(--inset-border)',
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'center', 
+                              color: 'var(--apple-blue)', 
+                              fontWeight: '800', 
+                              flexShrink: 0 
+                            }}>
+                              M
                             </div>
-                          ))}
-                          <form onSubmit={async (e) => {
-                            e.preventDefault();
-                            const content = e.target.content.value;
-                            if (!content.trim()) return;
-                            const token = localStorage.getItem('siakad_token');
-                            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
-                            try {
-                              const res = await fetch(`${apiUrl}/siakad/forum/${forum.id}/reply`, {
+                            <div>
+                              <strong style={{ display: 'block', color: 'var(--color-text)' }}>{forum.title}</strong>
+                              <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>Diposting oleh Dosen • {new Date(forum.created_at).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })}</span>
+                            </div>
+                          </div>
+                          <p style={{ margin: '0 0 16px 0', color: 'var(--color-muted)', fontSize: '0.95rem', lineHeight: '1.5' }}>
+                            {forum.content}
+                          </p>
+                          
+                          {/* Replies */}
+                          <div style={{ background: 'var(--liquid-bg)', borderRadius: '16px', padding: '16px', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)', borderLeft: '4px solid var(--apple-blue)' }}>
+                            <h4 style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: '0 0 12px 0', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '800' }}>Balasan ({forum.replies?.length || 0})</h4>
+                            {forum.replies && forum.replies.map((reply, k) => (
+                              <div key={k} style={{ marginBottom: k === forum.replies.length - 1 ? 0 : '12px', paddingBottom: k === forum.replies.length - 1 ? 0 : '12px', borderBottom: k === forum.replies.length - 1 ? 'none' : '1px solid var(--color-border)' }}>
+                                <div className="siakad-modal-header">
+                                  <strong style={{ fontSize: '0.85rem', color: 'var(--color-text)', display: 'block' }}>
+                                    {reply.user_id === data.user.id ? 'Anda' : (reply.user_id === course.dosen_id ? 'Dosen' : 'Mahasiswa Lain')}
+                                  </strong>
+                                  <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>{new Date(reply.created_at).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })}</span>
+                                </div>
+                                <p style={{ margin: '4px 0 0 0', fontSize: '0.9rem', color: 'var(--color-muted)' }}>{reply.content}</p>
+                              </div>
+                            ))}
+                            <form onSubmit={async (e) => {
+                              e.preventDefault();
+                              const content = e.target.content.value;
+                              if (!content.trim()) return;
+                              const token = localStorage.getItem('siakad_token');
+                              const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+                              try {
+                                const res = await fetch(`${apiUrl}/siakad/forum/${forum.id}/reply`, {
                                 method: 'POST',
                                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                                   body: JSON.stringify({ content })
@@ -156,8 +169,8 @@ export default function MahasiswaForumPage() {
                                 else window.toast('Gagal mengirim balasan');
                               } catch (err) { window.toast('Error: ' + err.message); }
                             }} style={{ marginTop: '16px', display: 'flex', gap: '8px' }}>
-                              <input name="content" type="text" placeholder="Tulis balasan..." style={{ flex: 1, minWidth: 0, padding: '8px 16px', borderRadius: '50px', border: '1px solid var(--color-border)', outline: 'none', fontSize: '0.9rem', background: 'var(--color-bg)', color: 'var(--color-text)' }} />
-                              <button type="submit" style={{ background: '#C41E3A', color: 'white', border: 'none', padding: '8px 20px', borderRadius: '50px', cursor: 'pointer', fontWeight: 'bold', boxShadow: '0 2px 6px rgba(196, 30, 58, 0.3)' }}>Kirim</button>
+                              <input name="content" type="text" placeholder="Tulis balasan..." className="siakad-input" style={{ flex: 1, minWidth: 0 }} />
+                              <button type="submit" className="siakad-btn-primary" style={{ padding: '8px 20px', borderRadius: '50px' }}>Kirim</button>
                             </form>
                           </div>
                         </div>
@@ -180,8 +193,8 @@ export default function MahasiswaForumPage() {
             onClose={() => setShowTopicModal(false)}
             footer={(
               <>
-                <button type="button" onClick={() => setShowTopicModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700 }}>Batal</button>
-                <button type="submit" form="topic-form" style={{ padding: '12px 24px', borderRadius: '50px', border: 'none', background: 'linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)', color: 'white', cursor: 'pointer', fontWeight: 700 }}>Simpan & Kirim</button>
+                <button type="button" onClick={() => setShowTopicModal(false)} style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 700, boxShadow: 'var(--glass-shadow)' }}>Batal</button>
+                <button type="submit" form="topic-form" className="siakad-btn-primary" style={{ padding: '12px 24px', borderRadius: '50px' }}>Simpan & Kirim</button>
               </>
             )}
           >

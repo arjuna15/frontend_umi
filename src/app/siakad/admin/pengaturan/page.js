@@ -256,9 +256,8 @@ export default function AdminPengaturan() {
           { key: 'api', label: 'Open API Management', icon: 'ph-key' },
           { key: 'esign', label: 'Integrasi e-Sign', icon: 'ph-signature' }
         ].map(t => (
-          <button id={`settings-tab-${t.key}`} key={t.key} onClick={() => setActiveTab(t.key)} style={{
-            padding: '10px 20px', borderRadius: '50px', border: activeTab === t.key ? '2px solid #3b82f6' : '1px solid var(--color-border)',
-            background: activeTab === t.key ? 'rgba(59,130,246,0.15)' : 'transparent', color: activeTab === t.key ? '#3b82f6' : 'var(--color-muted)',
+          <button type="button" id={`settings-tab-${t.key}`} key={t.key} onClick={() => setActiveTab(t.key)} className={activeTab === t.key ? 'active' : ''} style={{
+            background: activeTab === t.key ? 'var(--liquid-bg)' : 'var(--glass-bg)', color: activeTab === t.key ? 'var(--apple-red)' : 'var(--color-muted)', border: 'var(--glass-border)', boxShadow: activeTab === t.key ? 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)' : 'var(--glass-shadow)', padding: '10px 20px', borderRadius: '50px', outline: 'none',
             fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px'
           }}>
             <i className={`ph ${t.icon}`} style={{ fontSize: '1rem' }}></i> {t.label}
@@ -271,7 +270,7 @@ export default function AdminPengaturan() {
           {/* Section 1: Periode Akademik */}
           <div style={{ marginBottom: '32px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px', flexWrap: 'wrap' }}>
-              <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', background: 'var(--liquid-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
                 <i className="ph ph-calendar-blank" style={{ fontSize: '1.2rem' }}></i>
               </div>
               <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>
@@ -303,7 +302,7 @@ export default function AdminPengaturan() {
           {/* Section 2: Kontrol Sistem Akademik */}
           <div style={{ marginBottom: '40px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px', flexWrap: 'wrap' }}>
-              <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', background: 'var(--liquid-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
                 <i className="ph ph-sliders-horizontal" style={{ fontSize: '1.2rem' }}></i>
               </div>
               <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>
@@ -317,8 +316,8 @@ export default function AdminPengaturan() {
                   <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Pengisian KRS Online</div>
                   <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Buka akses bagi mahasiswa untuk mulai memilih mata kuliah semester ini.</div>
                 </div>
-                <div onClick={() => setKrsOpen(!krsOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: krsOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
-                  <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: krsOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
+                <div onClick={() => setKrsOpen(!krsOpen)} style={{ width: '54px', height: '28px', borderRadius: '50px', background: 'var(--glass-bg)', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', border: 'var(--inset-border)', position: 'relative', cursor: 'pointer', transition: 'all 0.3s ease', flexShrink: 0 }}>
+                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: krsOpen ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--color-muted)', boxShadow: krsOpen ? '0 2px 5px rgba(196,30,58,0.4)' : '0 2px 5px rgba(0,0,0,0.2)', position: 'absolute', top: '3px', left: krsOpen ? '29px' : '3px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
                 </div>
               </div>
 
@@ -327,8 +326,8 @@ export default function AdminPengaturan() {
                   <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Akses Cetak KHS</div>
                   <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Izinkan mahasiswa melihat dan mencetak Kartu Hasil Studi (KHS).</div>
                 </div>
-                <div onClick={() => setKhsOpen(!khsOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: khsOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
-                  <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: khsOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
+                <div onClick={() => setKhsOpen(!khsOpen)} style={{ width: '54px', height: '28px', borderRadius: '50px', background: 'var(--glass-bg)', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', border: 'var(--inset-border)', position: 'relative', cursor: 'pointer', transition: 'all 0.3s ease', flexShrink: 0 }}>
+                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: khsOpen ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--color-muted)', boxShadow: khsOpen ? '0 2px 5px rgba(196,30,58,0.4)' : '0 2px 5px rgba(0,0,0,0.2)', position: 'absolute', top: '3px', left: khsOpen ? '29px' : '3px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
                 </div>
               </div>
 
@@ -337,8 +336,11 @@ export default function AdminPengaturan() {
                   <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Input Nilai Dosen</div>
                   <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Buka portal bagi dosen untuk memasukkan dan mengubah nilai mahasiswa.</div>
                 </div>
-                <div onClick={() => setNilaiOpen(!nilaiOpen)} style={{ width: '64px', height: '36px', borderRadius: '20px', background: nilaiOpen ? '#10b981' : '#e5e7eb', position: 'relative', cursor: 'pointer', transition: 'background 0.3s ease' }}>
-                  <div style={{ width: '28px', height: '28px', background: 'var(--color-bg)', borderRadius: '50%', position: 'absolute', top: '4px', left: nilaiOpen ? '32px' : '4px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
+                <div
+                  onClick={() => setNilaiOpen(!nilaiOpen)}
+                  style={{ width: '54px', height: '28px', borderRadius: '50px', background: 'var(--glass-bg)', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', border: 'var(--inset-border)', position: 'relative', cursor: 'pointer', transition: 'all 0.3s ease', flexShrink: 0 }}
+                >
+                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: nilaiOpen ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--color-muted)', boxShadow: nilaiOpen ? '0 2px 5px rgba(196,30,58,0.4)' : '0 2px 5px rgba(0,0,0,0.2)', position: 'absolute', top: '3px', left: nilaiOpen ? '29px' : '3px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
                 </div>
               </div>
             </div>
@@ -347,7 +349,7 @@ export default function AdminPengaturan() {
           {/* Section 3: Geofencing Kampus */}
           <div style={{ marginBottom: '40px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px', borderBottom: '2px solid var(--color-border)', paddingBottom: '12px', flexWrap: 'wrap' }}>
-              <div style={{ background: 'var(--glass-bg)', padding: '8px', borderRadius: '10px', color: 'var(--color-text)', display: 'flex' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', background: 'var(--liquid-bg)', color: 'var(--color-text)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>
                 <i className="ph ph-map-pin" style={{ fontSize: '1.2rem' }}></i>
               </div>
               <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>
@@ -359,11 +361,11 @@ export default function AdminPengaturan() {
             <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
               <div>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Kampus Bintaro (Lat, Lng)</label>
-                <input type="text" defaultValue={coordBintaro} key={`bintaro-${coordBintaro}`} id="coordBintaro" style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem' }} />
+                <input type="text" defaultValue={coordBintaro} key={`bintaro-${coordBintaro}`} id="coordBintaro" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', padding: '10px 12px', borderRadius: '8px',    fontSize: '0.95rem' }} />
               </div>
               <div>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Kampus Ps. Minggu (Lat, Lng)</label>
-                <input type="text" defaultValue={coordPasarMinggu} key={`pm-${coordPasarMinggu}`} id="coordPasarMinggu" style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid var(--color-border)', background: 'var(--color-bg)', color: 'var(--color-text)', fontSize: '0.95rem' }} />
+                <input type="text" defaultValue={coordPasarMinggu} key={`pm-${coordPasarMinggu}`} id="coordPasarMinggu" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', padding: '10px 12px', borderRadius: '8px',    fontSize: '0.95rem' }} />
               </div>
             </div>
           </div>
@@ -383,13 +385,13 @@ export default function AdminPengaturan() {
               <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 4px 0' }}>Open API Token Management</h3>
               <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: 0 }}>Kelola token pihak ketiga untuk integrasi data SIAKAD dengan aman.</p>
             </div>
-            <button id="btn-add-token" onClick={() => setShowApiModal(true)} className="siakad-btn-primary" style={{ padding: '10px 20px' }}>
+            <button id="btn-add-token" onClick={() => setShowApiModal(true)} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 20px' }}>
               <i className="ph ph-plus"></i> Generate Token Baru
             </button>
           </div>
 
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
               <thead>
                 <tr style={{ borderBottom: '2px solid var(--color-border)' }}>
                   {['Nama Aplikasi', 'API Token', 'Rate Limit', 'Status', 'Terakhir Digunakan', 'Aksi'].map(h => (
@@ -412,7 +414,7 @@ export default function AdminPengaturan() {
                     </td>
                     <td style={{ padding: '14px 16px', color: 'var(--color-text)' }}>{t.rate_limit || 1000} req/jam</td>
                     <td style={{ padding: '14px 16px' }}>
-                      <span style={{ padding: '4px 10px', borderRadius: '20px', fontSize: '0.72rem', fontWeight: 'bold', background: t.is_active ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)', color: t.is_active ? '#10b981' : '#ef4444' }}>
+                      <span className="siakad-badge siakad-badge-sm" style={{ color: t.is_active ? '#10b981' : '#ef4444' }}>
                         {t.is_active ? 'Aktif' : 'Non-aktif'}
                       </span>
                     </td>
@@ -461,21 +463,21 @@ export default function AdminPengaturan() {
 
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Base URL Endpoint</label>
-              <input type="text" className="siakad-input" value={esignConfig.base_url || ''} onChange={(e) => setEsignConfig({ ...esignConfig, base_url: e.target.value })} placeholder="https://api.esign.provider.id/v1" />
+              <input type="text" className="siakad-input" value={esignConfig.base_url || ''} onChange={(e) => setEsignConfig({ ...esignConfig, base_url: e.target.value })} placeholder="https://api.esign.provider.id/v1"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
             </div>
 
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>API Key / Client ID</label>
-              <input type="text" className="siakad-input" value={esignConfig.api_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, api_key: e.target.value })} placeholder="Masukkan API Key" />
+              <input type="text" className="siakad-input" value={esignConfig.api_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, api_key: e.target.value })} placeholder="Masukkan API Key"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
             </div>
 
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Secret Key</label>
-              <input type="password" className="siakad-input" value={esignConfig.secret_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, secret_key: e.target.value })} placeholder="•••••••••••••••••••••••••••••" />
+              <input type="password" className="siakad-input" value={esignConfig.secret_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, secret_key: e.target.value })} placeholder="•••••••••••••••••••••••••••••"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
             </div>
 
             <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: '10px' }}>
-              <button id="btn-save-esign" onClick={saveEsign} className="siakad-btn-primary" style={{ padding: '12px 24px' }}>
+              <button id="btn-save-esign" onClick={saveEsign} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '12px 24px' }}>
                 Simpan Konfigurasi
               </button>
               <button id="btn-test-esign" onClick={testEsign} disabled={testingEsign} style={{ padding: '12px 20px', background: 'transparent', border: '1px solid var(--color-border)', borderRadius: '30px', color: 'var(--color-text)', cursor: 'pointer', fontWeight: 'bold' }}>
@@ -492,7 +494,7 @@ export default function AdminPengaturan() {
       {isConfirmModalOpen && (
         <div className="siakad-modal-overlay">
           <div className="siakad-modal-content">
-            <div style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', margin: '0 auto 20px auto' }}>
+            <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', margin: '0 auto 20px auto' }}>
               <i className="ph ph-warning-circle"></i>
             </div>
             <h2 style={{ fontSize: '1.25rem', margin: '0 0 12px 0' }}>Konfirmasi Perubahan</h2>
@@ -509,19 +511,19 @@ export default function AdminPengaturan() {
       {showApiModal && (
         <ModalShell title="Generate API Token Baru" subtitle="Akses Aplikasi Pihak Ketiga" icon="ph-key" onClose={() => setShowApiModal(false)} footer={
           <>
-            <button id="btn-cancel-token" onClick={() => setShowApiModal(false)} style={{ padding: '10px 20px', border: 'none', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button id="btn-confirm-token" onClick={createApiToken} disabled={generatingToken} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
+            <button id="btn-cancel-token" onClick={() => setShowApiModal(false)} style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', padding: '10px 20px',    cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+            <button id="btn-confirm-token" onClick={createApiToken} disabled={generatingToken} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 24px' }}>
               {generatingToken ? 'Generating...' : 'Generate Token'}
             </button>
           </>
         }>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Aplikasi / Client</label>
-            <input type="text" className="siakad-input" value={apiForm.name} onChange={(e) => setApiForm({ ...apiForm, name: e.target.value })} placeholder="Contoh: Mobile App UMIBA, Web Portal Partner" />
+            <input type="text" className="siakad-input" value={apiForm.name} onChange={(e) => setApiForm({ ...apiForm, name: e.target.value })} placeholder="Contoh: Mobile App UMIBA, Web Portal Partner"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Rate Limit (Requests per jam)</label>
-            <input type="number" className="siakad-input" value={apiForm.rate_limit} onChange={(e) => setApiForm({ ...apiForm, rate_limit: e.target.value })} placeholder="1000" />
+            <input type="number" className="siakad-input" value={apiForm.rate_limit} onChange={(e) => setApiForm({ ...apiForm, rate_limit: e.target.value })} placeholder="1000"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Masa Berlaku Hingga</label>

@@ -75,11 +75,11 @@ export default function RPLPage() {
 
   const statusBadge = (s) => {
     const map = { pending: ['#f59e0b', 'Menunggu'], review: ['#3b82f6', 'Dalam Review'], approved: ['#10b981', 'Disetujui'], rejected: ['#ef4444', 'Ditolak'] };
-    const [c, l] = map[s] || ['#94a3b8', s];
-    return <span style={{ background: `${c}20`, color: c, padding: '4px 12px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: '600' }}>{l}</span>;
+    const [c, l] = map[s] || ['var(--color-muted)', s];
+    return <span className="siakad-badge-status" style={{ color: c, borderColor: `${c}33`, minWidth: '130px' }}>{l}</span>;
   };
 
-  if (loading) return (<div style={{ padding: '24px' }}><h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat ...</h1><div className="siakad-card" style={{ padding: '24px', height: '200px' }}></div></div>);
+  if (loading) return (<div style={{ padding: '24px' }}><h1 style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 24px 0' }}>Memuat ...</h1><div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', height: '200px' }}></div></div>);
 
   const statCards = [
     { label: 'Total Pengajuan', value: stats.total, icon: 'ph ph-files', color: '#3b82f6', bg: 'rgba(59,130,246,0.1)' },
@@ -107,17 +107,17 @@ export default function RPLPage() {
       </div>
 
       {message.text && (
-        <div style={{ padding: '16px 20px', borderRadius: '12px', marginBottom: '24px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', border: `1px solid ${message.type === 'success' ? '#10b981' : '#ef4444'}`, color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.4rem' }}></i>
+        <div style={{ padding: '14px 20px', borderRadius: '50px', marginBottom: '24px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '700', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.2rem' }}></i>
           {message.text}
         </div>
       )}
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '32px' }}>
         {statCards.map((s, i) => (
-          <div key={i} className="siakad-card" style={{ padding: '20px' }}>
+          <div key={i} className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '20px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-              <div style={{ width: '40px', height: '40px', background: s.bg, color: s.color, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}><i className={s.icon}></i></div>
+              <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '40px', height: '40px',   borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}><i className={s.icon}></i></div>
               <span style={{ color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '600' }}>{s.label}</span>
             </div>
             <p style={{ margin: 0, fontSize: '2rem', fontWeight: '800', color: 'var(--color-text)' }}>{s.value}</p>
@@ -126,23 +126,33 @@ export default function RPLPage() {
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '24px', marginBottom: '32px' }}>
-        <div className="siakad-card" style={{ padding: '24px' }}>
-          <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Pengajuan per Bulan</h3>
-          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '12px', height: '180px', paddingTop: '10px' }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', borderRadius: '24px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '20px', flexWrap: 'wrap' }}>
+            <div>
+              <p style={{ margin: '0 0 4px 0', color: 'var(--color-muted)', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Statistik RPL</p>
+              <h3 style={{ fontSize: '1.1rem', fontWeight: '800', color: 'var(--color-text)', margin: 0 }}>Pengajuan per Bulan</h3>
+            </div>
+            <span className="siakad-badge-status" style={{ color: '#3b82f6', borderColor: 'rgba(59,130,246,0.3)', minWidth: '120px' }}>
+              {stats.total} Pengajuan
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'end', gap: '12px', minHeight: '220px', paddingTop: '10px' }}>
             {monthData.map((m, i) => (
               <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%' }}>
-                <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--color-text)', marginBottom: '6px' }}>{m.count}</span>
-                <div style={{ width: '100%', maxWidth: '50px', height: `${(m.count / maxMonthCount) * 100}%`, minHeight: '10px', background: 'linear-gradient(180deg, #3b82f6 0%, #8b5cf6 100%)', borderRadius: '8px 8px 4px 4px', transition: 'height 0.5s ease' }}></div>
-                <span style={{ fontSize: '0.72rem', color: 'var(--color-muted)', marginTop: '8px', fontWeight: '600' }}>{m.month}</span>
+                <div style={{ width: '100%', maxWidth: '58px', minHeight: '10px', height: `${(m.count / maxMonthCount) * 100}%`, background: 'linear-gradient(180deg, #3b82f6 0%, #8b5cf6 100%)', borderRadius: '12px 12px 6px 6px', boxShadow: '0 8px 18px rgba(59,130,246,0.18)', transition: 'height 0.5s ease' }}></div>
+                <div style={{ marginTop: '10px', textAlign: 'center' }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minWidth: '36px', padding: '2px 8px', borderRadius: '999px', background: 'var(--liquid-bg)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: 'var(--color-text)', fontSize: '0.75rem', fontWeight: '800', marginBottom: '6px' }}>{m.count}</span>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--color-muted)', fontWeight: '600' }}>{m.month}</div>
+                </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="siakad-card" style={{ padding: '24px' }}>
+        <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px' }}>
           <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Tingkat Persetujuan</h3>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '180px', gap: '16px' }}>
-            <div style={{ position: 'relative', width: '140px', height: '140px' }}>
+            <div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', position: 'relative', width: '140px', height: '140px' }}>
               <svg width="140" height="140" viewBox="0 0 140 140">
                 <circle cx="70" cy="70" r="58" fill="none" stroke="var(--color-border)" strokeWidth="12" />
                 <circle cx="70" cy="70" r="58" fill="none" stroke="#10b981" strokeWidth="12" strokeDasharray={`${(approvalRate / 100) * 364.4} 364.4`} strokeLinecap="round" transform="rotate(-90 70 70)" style={{ transition: 'stroke-dasharray 0.8s ease' }} />
@@ -152,20 +162,20 @@ export default function RPLPage() {
               </div>
             </div>
             <div style={{ display: 'flex', gap: '20px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10b981' }}></div><span style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>Disetujui</span></div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444' }}></div><span style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>Ditolak</span></div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '10px', height: '10px', borderRadius: '50%' }}></div><span style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>Disetujui</span></div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ borderRadius: '50%', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', width: '10px', height: '10px', borderRadius: '50%' }}></div><span style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>Ditolak</span></div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="siakad-card" style={{ padding: '24px' }}>
+      <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Daftar Pengajuan RPL</h2>
-          <input id="search-rpl" className="siakad-input" type="text" placeholder="Cari nama atau institusi..." value={search} onChange={e => setSearch(e.target.value)} style={{ width: '280px' }} />
+          <input id="search-rpl" className="siakad-input" type="text" placeholder="Cari nama atau institusi..." value={search} onChange={e => setSearch(e.target.value)} style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '280px' }} />
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
             <thead><tr>
               {['Nama', 'Institusi Asal', 'Prodi Tujuan', 'Pengalaman', 'SKS Diakui', 'Status', 'Aksi'].map(h => (
                 <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.8rem', fontWeight: '700', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', borderBottom: '2px solid var(--color-border)' }}>{h}</th>
@@ -199,7 +209,7 @@ export default function RPLPage() {
 
       {showDetail && selected && (
         <ModalShell title="Detail Pengajuan RPL" onClose={() => { setShowDetail(false); setSelected(null); }} footer={
-          <button id="btn-close-detail" onClick={() => { setShowDetail(false); setSelected(null); }} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>Tutup</button>
+          <button id="btn-close-detail" onClick={() => { setShowDetail(false); setSelected(null); }} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 24px' }}>Tutup</button>
         }>
           <div style={{ display: 'grid', gap: '14px' }}>
             {[
@@ -233,8 +243,8 @@ export default function RPLPage() {
 
       {showReview && selected && (
         <ModalShell title="Review Pengajuan" onClose={() => setShowReview(false)} footer={<>
-          <button id="btn-cancel-review" onClick={() => setShowReview(false)} style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-          <button id="btn-submit-review" onClick={submitReview} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Memproses...' : 'Simpan Review'}</button>
+          <button id="btn-cancel-review" onClick={() => setShowReview(false)} style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', padding: '10px 20px',   cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+          <button id="btn-submit-review" onClick={submitReview} disabled={saving} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 24px' }}>{saving ? 'Memproses...' : 'Simpan Review'}</button>
         </>}>
           <div style={{ marginBottom: '16px', padding: '14px', background: 'var(--color-bg)', borderRadius: '10px' }}>
             <p style={{ margin: '0 0 4px', fontSize: '0.85rem', color: 'var(--color-muted)' }}>Pemohon</p>
@@ -253,11 +263,11 @@ export default function RPLPage() {
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Jumlah SKS Diakui</label>
-            <input id="input-rpl-credits" className="siakad-input" type="number" value={reviewData.credits_recognized} onChange={e => setReviewData({ ...reviewData, credits_recognized: e.target.value })} placeholder="Jumlah SKS" />
+            <input id="input-rpl-credits" className="siakad-input" type="number" value={reviewData.credits_recognized} onChange={e => setReviewData({ ...reviewData, credits_recognized: e.target.value })} placeholder="Jumlah SKS"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
           </div>
           <div>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Catatan Reviewer</label>
-            <textarea id="input-rpl-notes" className="siakad-input" value={reviewData.reviewer_notes} onChange={e => setReviewData({ ...reviewData, reviewer_notes: e.target.value })} placeholder="Catatan review..." rows={3} style={{ resize: 'vertical' }} />
+            <textarea id="input-rpl-notes" className="siakad-input" value={reviewData.reviewer_notes} onChange={e => setReviewData({ ...reviewData, reviewer_notes: e.target.value })} placeholder="Catatan review..." rows={3} style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', resize: 'vertical' }} />
           </div>
         </ModalShell>
       )}

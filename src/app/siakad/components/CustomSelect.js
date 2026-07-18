@@ -82,15 +82,15 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
         left: `${coords.left}px`,
         width: `${coords.width}px`,
         zIndex: 9999999,
-        background: 'var(--color-surface)',
-        border: '1px solid var(--color-border)',
+        background: 'var(--glass-bg)',
+        border: 'var(--glass-border)',
         borderRadius: '20px',
-        boxShadow: '0 16px 40px rgba(0, 0, 0, 0.35)',
+        boxShadow: 'var(--glass-shadow)',
         maxHeight: '220px', // slightly taller to accommodate search bar
         overflowY: 'auto',
         padding: '8px',
-        backdropFilter: 'blur(30px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(30px) saturate(180%)',
+        backdropFilter: 'none',
+        WebkitBackdropFilter: 'none',
         animation: 'csSelectFadeIn 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
       }}
     >
@@ -116,11 +116,11 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
           font-weight: 500;
         }
         .siakad-select-option:hover {
-          background: rgba(59, 130, 246, 0.15) !important;
-          color: #3b82f6 !important;
+          background: rgba(196, 30, 58, 0.1) !important;
+          color: #C41E3A !important;
         }
         .siakad-select-option.active {
-          background: linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%) !important;
+          background: linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%) !important;
           color: white !important;
         }
       `}</style>
@@ -131,10 +131,10 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
           style={{ 
             position: 'sticky', 
             top: '-8px', 
-            background: 'var(--color-surface)', 
+            background: 'var(--glass-bg)', 
             padding: '4px 0 10px 0', 
             zIndex: 10,
-            borderBottom: '1px solid var(--color-border)',
+            borderBottom: '1px solid rgba(0, 0, 0, 0.03)',
             marginBottom: '6px'
           }}
           onClick={(e) => e.stopPropagation()}
@@ -162,19 +162,20 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
                 padding: '8px 12px 8px 36px',
                 fontSize: '0.85rem',
                 borderRadius: '50px',
-                border: '1px solid var(--color-border)',
-                background: 'var(--color-bg)',
+                border: 'var(--inset-border)',
+                background: 'var(--liquid-bg)',
                 color: 'var(--color-text)',
                 outline: 'none',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)'
               }}
               autoFocus
             />
           </div>
         </div>
       )}
-
-      {filteredOptions.length === 0 ? (
+ 
+       {filteredOptions.length === 0 ? (
         <div style={{ padding: '20px 10px', textAlign: 'center', color: 'var(--color-muted)', fontSize: '0.85rem' }}>
           Tidak ada hasil pencarian.
         </div>
@@ -187,21 +188,23 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
               type="button"
               className={`siakad-select-option ${isActive ? 'active' : ''}`}
               onClick={() => handleSelectOption(opt.value)}
+              style={{ overflow: 'hidden' }}
             >
-              <span>{opt.label}</span>
-              {isActive && <i className="ph ph-check" style={{ color: 'white' }}></i>}
+              <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginRight: '8px' }}>{opt.label}</span>
+              {isActive && <i className="ph ph-check" style={{ color: 'white', flexShrink: 0 }}></i>}
             </button>
           );
         })
       )}
     </div>
   );
-
-  return (
+ 
+   return (
     <div style={{ position: 'relative', ...style }}>
       <button
         ref={triggerRef}
         type="button"
+        className="siakad-custom-select-trigger"
         onClick={handleToggle}
         disabled={disabled}
         style={{
@@ -211,8 +214,8 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
           justifyContent: 'space-between',
           padding: '12px 22px',
           borderRadius: '50px',
-          border: '1px solid var(--color-border)',
-          background: 'var(--color-bg)',
+          border: isOpen ? '1px solid #C41E3A' : 'var(--inset-border)',
+          background: 'var(--glass-bg)',
           color: value ? 'var(--color-text)' : 'var(--color-muted)',
           fontSize: '0.95rem',
           fontWeight: value ? '600' : 'normal',
@@ -220,12 +223,12 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
           textAlign: 'left',
           outline: 'none',
           transition: 'all 0.2s ease-out',
-          boxShadow: isOpen ? '0 0 0 3px rgba(59, 130, 246, 0.15), inset 0 3px 8px rgba(0, 0, 0, 0.12)' : 'inset 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(0, 0, 0, 0.04)',
-          borderColor: isOpen ? '#3b82f6' : 'var(--color-border)',
+          boxShadow: isOpen ? '0 0 0 3px rgba(196, 30, 58, 0.15), inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' : 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)',
+          overflow: 'hidden'
         }}
       >
-        <span>{selectedOption ? selectedOption.label : placeholder}</span>
-        <i className="ph-bold ph-caret-down" style={{ fontSize: '1rem', color: isOpen ? '#3b82f6' : 'var(--color-muted)', transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'none' }} />
+        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginRight: '8px' }}>{selectedOption ? selectedOption.label : placeholder}</span>
+        <i className="ph-bold ph-caret-down" style={{ fontSize: '1rem', color: isOpen ? '#3b82f6' : 'var(--color-muted)', transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'none', flexShrink: 0 }} />
       </button>
 
       {mounted && (() => {

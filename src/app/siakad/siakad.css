@@ -4,8 +4,11 @@
   /* Liquid Light Mode Colors & Specs */
   --liquid-bg: #e0e0e0;
   --glass-bg: #e0e0e0;
-  --glass-border: 1px solid rgba(255, 255, 255, 0.5);
-  --glass-shadow: 4px 4px 8px #bebebe, -4px -4px 8px rgba(255, 255, 255, 0.7);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.55);
+  --glass-shadow: 6px 6px 16px #a3b1c6, -6px -6px 16px rgba(255, 255, 255, 0.55);
+  --inset-shadow-dark: #bebebe;
+  --inset-shadow-light: #ffffff;
+  --inset-border: 1px solid rgba(0, 0, 0, 0.03);
   --glass-blur: none;
   --color-text: #1e293b;
   --color-muted: #64748b;
@@ -19,7 +22,10 @@
   --liquid-bg: #121620;
   --glass-bg: #121620;
   --glass-border: 1px solid rgba(255, 255, 255, 0.03);
-  --glass-shadow: 4px 4px 8px #080a0f, -4px -4px 8px rgba(255, 255, 255, 0.03);
+  --glass-shadow: 6px 6px 16px #05070a, -6px -6px 16px rgba(255, 255, 255, 0.05);
+  --inset-shadow-dark: #040507;
+  --inset-shadow-light: #202637;
+  --inset-border: 1px solid rgba(255, 255, 255, 0.03);
   --glass-blur: none;
   --color-text: #f1f5f9;
   --color-muted: #94a3b8;
@@ -122,18 +128,15 @@
 .siakad-sidebar-logo {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, var(--apple-red) 0%, #ff6b6b 100%);
+  background: var(--glass-bg);
+  border: var(--glass-border);
   border-radius: 14px;
   padding: 8px;
-  box-shadow: 0 8px 24px rgba(255, 59, 48, 0.3);
-  animation: pulseLogo 3s infinite alternate;
+  box-shadow: var(--glass-shadow);
   display: flex;
   align-items: center;
   justify-content: center;
-}
-@keyframes pulseLogo {
-  0% { box-shadow: 0 8px 20px rgba(255, 59, 48, 0.2); }
-  100% { box-shadow: 0 12px 28px rgba(255, 59, 48, 0.4); }
+  transition: all 0.3s;
 }
 
 .siakad-nav {
@@ -224,31 +227,33 @@
 .siakad-user-profile {
   margin: 0 16px 20px 16px;
   padding: 14px;
-  background: rgba(255, 255, 255, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: var(--glass-bg);
+  border: var(--glass-border);
   border-radius: 20px;
   display: flex;
   align-items: center;
   gap: 12px;
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
+  box-shadow: var(--glass-shadow);
 }
 .siakad-user-profile:hover {
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--glass-bg);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+  box-shadow: 12px 12px 24px #cbd5e1, -12px -12px 24px #ffffff;
 }
 [data-theme='dark'] .siakad-user-profile {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.05);
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
 }
 [data-theme='dark'] .siakad-user-profile:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--glass-bg);
+  box-shadow: 12px 12px 24px #05070a, -12px -12px 24px rgba(255, 255, 255, 0.05);
 }
 .btn-logout-icon {
-  background: rgba(255, 59, 48, 0.1);
+  background: var(--glass-bg);
   color: var(--apple-red);
-  border: none;
+  border: var(--glass-border);
   width: 36px;
   height: 36px;
   border-radius: 12px;
@@ -257,14 +262,17 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-  flex-shrink: 0;
-  margin-left: auto;
+  box-shadow: var(--glass-shadow);
 }
 .btn-logout-icon:hover {
-  background: var(--apple-red);
-  color: white;
   transform: scale(1.05);
-  transform: scale(1.05);
+  box-shadow: 4px 4px 8px #cbd5e1, -4px -4px 8px #ffffff;
+}
+.btn-logout-icon:active {
+  box-shadow: inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light);
+}
+[data-theme='dark'] .btn-logout-icon:hover {
+  box-shadow: 4px 4px 8px #05070a, -4px -4px 8px rgba(255, 255, 255, 0.05);
 }
 
 /* Top Header */
@@ -533,6 +541,56 @@
   background: var(--liquid-bg) !important;
   box-shadow: inset 2px 2px 4px #080a0f, inset -2px -2px 4px #1c2231 !important;
   border: 1px solid rgba(255, 255, 255, 0.01) !important;
+}
+
+.siakad-badge.sks-badge-active {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%) !important;
+  color: #C41E3A !important;
+  border: 1px solid rgba(255,255,255,0.8) !important;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1) !important;
+}
+
+.siakad-badge.siakad-badge-wide {
+  min-width: 170px !important;
+}
+
+.siakad-badge.siakad-badge-sm {
+  min-width: 90px !important;
+}
+
+/* Premium Neumorphic Status Badges */
+.siakad-badge-status {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-width: 95px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  background: var(--glass-bg);
+  box-shadow: inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light);
+  border: var(--inset-border);
+  transition: all 0.2s ease;
+}
+
+/* Red Indicator Badge (e.g. Total pending count) */
+.siakad-badge-red {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%);
+  color: white;
+  font-weight: 800;
+  font-size: 0.75rem;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  box-shadow: 2px 2px 5px var(--inset-shadow-dark), -2px -2px 5px var(--inset-shadow-light);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Inputs & Selects */
@@ -1387,9 +1445,9 @@
   width: 100%;
   padding: 12px 22px;
   border-radius: 50px;
-  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  border: var(--inset-border) !important;
   background: var(--liquid-bg) !important;
-  box-shadow: inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff !important;
+  box-shadow: inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light) !important;
   color: var(--color-text) !important;
   font-family: inherit;
   font-size: 0.95rem;
@@ -1415,13 +1473,13 @@
   outline: none;
   background: var(--liquid-bg) !important;
   border-color: var(--apple-red) !important;
-  box-shadow: inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff, 0 0 0 3px rgba(196, 30, 58, 0.18) !important;
+  box-shadow: inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light), 0 0 0 3px rgba(196, 30, 58, 0.18) !important;
 }
 
 [data-theme='dark'] .siakad-input, [data-theme='dark'] .siakad-select, [data-theme='dark'] .siakad-modal-content input, [data-theme='dark'] .siakad-modal-content select, [data-theme='dark'] .siakad-modal-content textarea {
   background: var(--liquid-bg) !important;
-  border: 1px solid rgba(255, 255, 255, 0.03) !important;
-  box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1c2231 !important;
+  border: var(--inset-border) !important;
+  box-shadow: inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light) !important;
   color: white !important;
 }
 
@@ -1430,9 +1488,9 @@
 }
 
 [data-theme='dark'] .siakad-input:focus, [data-theme='dark'] .siakad-select:focus, [data-theme='dark'] .siakad-modal-content input:focus, [data-theme='dark'] .siakad-modal-content select:focus, [data-theme='dark'] .siakad-modal-content textarea:focus {
-  background: rgba(255, 255, 255, 0.12) !important;
+  background: var(--liquid-bg) !important;
   border-color: var(--apple-red) !important;
-  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px rgba(255, 255, 255, 0.04), 0 0 0 3px rgba(196, 30, 58, 0.15) !important;
+  box-shadow: inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light), 0 0 0 3px rgba(196, 30, 58, 0.15) !important;
 }
 
 /* Premium Datepicker UX styling */
@@ -1770,45 +1828,43 @@ textarea::placeholder {
   width: 100%;
   padding: 8px 12px;
   font-size: 0.85rem;
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-  background: var(--glass-bg);
+  border-radius: 12px;
+  border: var(--inset-border);
+  background: var(--liquid-bg);
   color: var(--color-text);
   box-sizing: border-box;
+  box-shadow: inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light);
 }
 
 .siakad-file-input::file-selector-button {
   background: var(--glass-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  padding: 4px 8px;
+  border: var(--glass-border);
+  border-radius: 50px;
+  padding: 6px 16px;
   color: var(--color-text);
-  font-weight: 600;
+  font-weight: 800;
   cursor: pointer;
-  margin-right: 8px;
+  margin-right: 12px;
   transition: all 0.3s;
+  box-shadow: var(--glass-shadow);
 }
 
 .siakad-file-input::file-selector-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-[data-theme='light'] .siakad-file-input::file-selector-button:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--liquid-bg);
 }
 
 .siakad-btn-primary {
   background: linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%) !important;
   color: #ffffff !important;
   border: none !important;
-  padding: 10px 20px !important;
-  border-radius: 30px !important;
+  padding: 12px 24px !important;
+  border-radius: 50px !important;
   font-weight: bold !important;
   cursor: pointer;
   display: inline-flex !important;
   align-items: center;
   gap: 8px;
-  box-shadow: 3px 3px 8px #a3b1c6, -3px -3px 8px rgba(255, 255, 255, 0.55) !important;
+  box-shadow: 3px 3px 8px var(--inset-shadow-dark), -3px -3px 8px var(--inset-shadow-light) !important;
   transition: all 0.2s ease !important;
 }
 
@@ -1833,6 +1889,39 @@ textarea::placeholder {
   box-shadow: none !important;
 }
 
+/* Success Button (Green Neumorphic) */
+.siakad-btn-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 12px 24px !important;
+  border-radius: 50px !important;
+  font-weight: bold !important;
+  cursor: pointer;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 3px 3px 8px var(--inset-shadow-dark), -3px -3px 8px var(--inset-shadow-light) !important;
+  transition: all 0.2s ease !important;
+}
+
+.siakad-btn-success:hover {
+  transform: translateY(-1px) !important;
+  background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+}
+
+.siakad-btn-success:active {
+  transform: scale(0.97) !important;
+  background: linear-gradient(135deg, #047857 0%, #065f46 100%) !important;
+}
+
+.siakad-btn-success:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
 /* Beautiful Options styling for select dropdowns */
 .siakad-select option, .siakad-modal-content select option {
   background-color: var(--color-surface, #ffffff) !important;
@@ -1843,4 +1932,134 @@ textarea::placeholder {
 [data-theme='dark'] .siakad-select option, [data-theme='dark'] .siakad-modal-content select option {
   background-color: #1e1e24 !important;
   color: #ffffff !important;
+}
+
+/* ====== GLOBAL NEUMORPHIC TABLES OVERRIDES ====== */
+.siakad-container table, 
+table {
+  border-collapse: separate !important;
+  border-spacing: 0 12px !important; /* Creates neat gaps between rows like float cards */
+  width: 100% !important;
+  background: transparent !important;
+}
+
+.siakad-container table thead tr,
+table thead tr {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.siakad-container table th,
+table th {
+  background: var(--glass-bg) !important;
+  border: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+  color: var(--color-text) !important;
+  padding: 14px 18px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.05em !important;
+}
+
+.siakad-container table th:first-child,
+table th:first-child {
+  border-top-left-radius: 50px !important;
+  border-bottom-left-radius: 50px !important;
+}
+
+.siakad-container table th:last-child,
+table th:last-child {
+  border-top-right-radius: 50px !important;
+  border-bottom-right-radius: 50px !important;
+}
+
+.siakad-container table tbody tr,
+table tbody tr {
+  background: var(--liquid-bg) !important;
+  box-shadow: inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light) !important;
+  transition: all 0.25s ease-in-out !important;
+}
+
+.siakad-container table tbody tr:hover,
+table tbody tr:hover {
+  transform: scale(1.001) !important;
+}
+
+.siakad-container table td,
+table td {
+  padding: 16px 18px !important;
+  border-top: var(--inset-border) !important;
+  border-bottom: var(--inset-border) !important;
+  color: var(--color-text) !important;
+  background: transparent !important;
+}
+
+.siakad-container table td:not(:last-child),
+table td:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.65) !important;
+}
+
+.siakad-container table td:not(:first-child),
+table td:not(:first-child) {
+  border-left: 1px solid var(--color-border) !important;
+}
+
+[data-theme='dark'] .siakad-container table td:not(:last-child),
+[data-theme='dark'] table td:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.02) !important;
+}
+
+[data-theme='dark'] .siakad-container table td:not(:first-child),
+[data-theme='dark'] table td:not(:first-child) {
+  border-left: 1px solid rgba(0, 0, 0, 0.3) !important;
+}
+
+.siakad-container table td:first-child,
+table td:first-child {
+  border-left: var(--inset-border) !important;
+  border-top-left-radius: 16px !important;
+  border-bottom-left-radius: 16px !important;
+}
+
+.siakad-container table td:last-child,
+table td:last-child {
+  border-right: var(--inset-border) !important;
+  border-top-right-radius: 16px !important;
+  border-bottom-right-radius: 16px !important;
+}
+
+/* ====== GLOBAL NEUMORPHIC BUTTONS & BADGES ====== */
+.btn, 
+button:not(.siakad-btn-primary):not(.siakad-btn-success):not(.aurora-checkbox):not(.siakad-header button):not(.siakad-sidebar button):not(.btn-logout-icon):not(.siakad-custom-select-trigger):not(.siakad-select-option):not(.siakad-attendance-btn):not(.active) {
+  background: var(--glass-bg) !important;
+  border: var(--glass-border) !important;
+  color: var(--color-text) !important;
+  box-shadow: var(--glass-shadow) !important;
+  transition: all 0.2s ease-in-out !important;
+  cursor: pointer !important;
+  border-radius: 50px !important;
+}
+
+.btn:active, 
+button:not(.siakad-btn-primary):not(.siakad-btn-success):not(.aurora-checkbox):not(.siakad-header button):not(.siakad-sidebar button):not(.btn-logout-icon):not(.siakad-custom-select-trigger):not(.siakad-select-option):not(.siakad-attendance-btn):not(.active):active {
+  box-shadow: inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light) !important;
+  transform: translateY(1px) !important;
+}
+
+.siakad-badge, 
+.badge,
+[class*="-badge"] {
+  background: var(--liquid-bg) !important;
+  border: var(--inset-border) !important;
+  box-shadow: inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light) !important;
+  padding: 6px 14px !important;
+  border-radius: 50px !important;
+  font-weight: 800 !important;
+  font-size: 0.72rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
 }

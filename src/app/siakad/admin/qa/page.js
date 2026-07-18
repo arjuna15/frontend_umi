@@ -125,11 +125,11 @@ export default function QualityAssurancePage() {
       </div>
 
       <div style={{ padding: '24px' }}>
-        {message && <div style={{ padding: '12px 20px', borderRadius: '12px', marginBottom: '16px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600' }}>{message.text}</div>}
+        {message && <div style={{ padding: '14px 20px', borderRadius: '50px', marginBottom: '16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '700', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '10px' }}><i className={message.type === 'success' ? 'ph-fill ph-check-circle' : 'ph-fill ph-warning-circle'} style={{ fontSize: '1.2rem' }}></i>{message.text}</div>}
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '16px', marginBottom: '24px' }}>
         {[{ label: 'Total Mahasiswa', val: summary.total_mahasiswa || 0, icon: 'ph-student', color: '#3b82f6' }, { label: 'Total Dosen', val: summary.total_dosen || 0, icon: 'ph-chalkboard-teacher', color: '#8b5cf6' }, { label: 'Total Alumni', val: summary.total_alumni || 0, icon: 'ph-users', color: '#10b981' }, { label: 'Dokumen SPMI', val: docs.length, icon: 'ph-files', color: '#f59e0b' }].map((s,i) => (
-          <div key={i} className={`siakad-card stagger-${i+2}`} style={{ padding: '20px', textAlign: 'center' }}>
+          <div key={i} className={`stagger-${i+2}`} style={{ padding: '20px', textAlign: 'center', borderRadius: '20px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
             <i className={`ph ${s.icon}`} style={{ fontSize: '1.5rem', color: s.color, marginBottom: '8px', display: 'block' }}></i>
             <p style={{ fontSize: '1.8rem', fontWeight: '800', color: s.color, margin: '0 0 4px 0' }}>{s.val}</p>
             <p style={{ fontSize: '0.75rem', color: 'var(--color-muted)', margin: 0, fontWeight: '600' }}>{s.label}</p>
@@ -139,11 +139,28 @@ export default function QualityAssurancePage() {
 
       <div style={{ display: 'flex', gap: '8px', marginBottom: '24px', flexWrap: 'wrap' }}>
         {[{ key: 'iku', label: 'Dashboard IKU' }, { key: 'spmi', label: 'Dokumen SPMI' }, { key: 'spme', label: 'Dokumen SPME' }, { key: 'kuesioner', label: 'Kuesioner Layanan' }].map(t => (
-          <button id={`qa-tab-${t.key}`} key={t.key} onClick={() => setActiveTab(t.key)} style={{
-            padding: '10px 20px', borderRadius: '50px', border: activeTab === t.key ? '2px solid #3b82f6' : '1px solid var(--color-border)',
-            background: activeTab === t.key ? 'rgba(59,130,246,0.15)' : 'transparent', color: activeTab === t.key ? '#3b82f6' : 'var(--color-muted)',
-            fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s'
-          }}>{t.label}</button>
+          <button 
+            id={`qa-tab-${t.key}`} 
+            key={t.key} 
+            onClick={() => setActiveTab(t.key)} 
+            className={activeTab === t.key ? 'active' : ''}
+            style={{
+              padding: '10px 20px', 
+              borderRadius: '50px', 
+              border: activeTab === t.key ? '1px solid var(--color-border)' : '1px solid var(--color-border)',
+              background: activeTab === t.key ? 'var(--liquid-bg)' : 'var(--glass-bg)', 
+              color: activeTab === t.key ? 'var(--apple-red)' : 'var(--color-muted)',
+              fontWeight: '700', 
+              fontSize: '0.85rem', 
+              cursor: 'pointer', 
+              transition: 'all 0.2s',
+              boxShadow: activeTab === t.key 
+                ? 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' 
+                : 'var(--glass-shadow)'
+            }}
+          >
+            {t.label}
+          </button>
         ))}
       </div>
 
@@ -155,7 +172,7 @@ export default function QualityAssurancePage() {
               const pct = Math.min((item.actual / item.target) * 100, 100);
               const color = pct >= 80 ? '#10b981' : pct >= 50 ? '#f59e0b' : '#ef4444';
               return (
-                <div key={item.id} style={{ padding: '16px 20px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}>
+                <div key={item.id} style={{ padding: '16px 20px', borderRadius: '16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
                     <p style={{ color: 'var(--color-text)', fontWeight: '600', margin: 0, fontSize: '0.9rem', flex: 1 }}>
                       <span style={{ color: 'var(--color-muted)', marginRight: '8px', fontWeight: '800' }}>IKU {i + 1}</span>{item.name}
@@ -165,7 +182,7 @@ export default function QualityAssurancePage() {
                       <span style={{ fontSize: '1rem', fontWeight: '800', color }}>{item.actual}{item.unit}</span>
                     </div>
                   </div>
-                  <div style={{ height: '10px', borderRadius: '10px', background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+                  <div style={{ height: '10px', borderRadius: '10px', background: 'var(--liquid-bg)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', overflow: 'hidden' }}>
                     <div style={{ height: '100%', width: `${pct}%`, borderRadius: '10px', background: `linear-gradient(90deg, ${color}, ${color}cc)`, transition: 'width 1s cubic-bezier(0.25,1,0.5,1)' }}></div>
                   </div>
                 </div>
@@ -179,17 +196,17 @@ export default function QualityAssurancePage() {
         <div className="siakad-card stagger-3" style={{ padding: '24px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
             <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Dokumen SPMI</h2>
-            <button id="btn-add-spmi" onClick={() => setShowModal(true)} className="siakad-btn-primary" style={{ padding: '10px 20px' }}><i className="ph ph-plus"></i> Tambah Dokumen</button>
+            <button id="btn-add-spmi" onClick={() => setShowModal(true)} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 20px' }}><i className="ph ph-plus"></i> Tambah Dokumen</button>
           </div>
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
               <thead><tr>{['Judul', 'Kategori', 'Tahun Akademik', 'Tanggal'].map(h => <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase' }}>{h}</th>)}</tr></thead>
               <tbody>
                 {docs.length === 0 ? <tr><td colSpan={4} style={{ padding: '40px', textAlign: 'center', color: 'var(--color-muted)' }}>Belum ada dokumen SPMI.</td></tr> :
                 docs.map(d => (
                   <tr key={d.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
                     <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{d.title}</td>
-                    <td style={{ padding: '14px 16px' }}><span style={{ display: 'inline-block', minWidth: '110px', textAlign: 'center', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: catColors[d.category] || '#3b82f6', background: `${catColors[d.category] || '#3b82f6'}18`, textTransform: 'capitalize' }}>{d.category}</span></td>
+                    <td style={{ padding: '14px 16px' }}><span className="siakad-badge siakad-badge-sm" style={{ color: catColors[d.category] || '#3b82f6', textTransform: 'capitalize' }}>{d.category}</span></td>
                     <td style={{ padding: '14px 16px', color: 'var(--color-muted)' }}>{d.academic_year}</td>
                     <td style={{ padding: '14px 16px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{new Date(d.created_at).toLocaleDateString('id-ID')}</td>
                   </tr>
@@ -208,7 +225,7 @@ export default function QualityAssurancePage() {
               <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 4px 0' }}>Dokumen SPME</h2>
               <p style={{ fontSize: '0.85rem', color: 'var(--color-muted)', margin: 0 }}>Sistem Penjaminan Mutu Eksternal — Dokumen akreditasi & sertifikasi</p>
             </div>
-            <button id="btn-add-spme" onClick={() => setShowSpmeModal(true)} className="siakad-btn-primary" style={{ padding: '10px 20px' }}><i className="ph ph-plus"></i> Tambah Dokumen</button>
+            <button id="btn-add-spme" onClick={() => setShowSpmeModal(true)} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 20px' }}><i className="ph ph-plus"></i> Tambah Dokumen</button>
           </div>
 
           {/* SPME summary cards */}
@@ -219,7 +236,7 @@ export default function QualityAssurancePage() {
               { label: 'Submitted', val: (Array.isArray(spmeDocs) ? spmeDocs : []).filter(d => d.status === 'submitted').length, color: '#f59e0b', icon: 'ph-clock' },
               { label: 'Draft', val: (Array.isArray(spmeDocs) ? spmeDocs : []).filter(d => d.status === 'draft').length, color: '#6b7280', icon: 'ph-pencil-simple' },
             ].map((s, i) => (
-              <div key={i} style={{ padding: '16px', borderRadius: '16px', background: `${s.color}10`, border: `1px solid ${s.color}30`, textAlign: 'center' }}>
+              <div key={i} style={{ padding: '16px', borderRadius: '16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', textAlign: 'center' }}>
                 <i className={`ph ${s.icon}`} style={{ fontSize: '1.2rem', color: s.color, marginBottom: '6px', display: 'block' }}></i>
                 <p style={{ fontSize: '1.5rem', fontWeight: '800', color: s.color, margin: '0 0 2px 0' }}>{s.val}</p>
                 <p style={{ fontSize: '0.72rem', color: 'var(--color-muted)', margin: 0, fontWeight: '600' }}>{s.label}</p>
@@ -228,7 +245,7 @@ export default function QualityAssurancePage() {
           </div>
 
           <div style={{ overflowX: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
               <thead>
                 <tr>
                   {['Nama Dokumen', 'Kategori', 'Status', 'Tahun', 'Tanggal Upload'].map(h => (
@@ -243,12 +260,12 @@ export default function QualityAssurancePage() {
                   <tr key={d.id} style={{ borderBottom: '1px solid var(--color-border)' }}>
                     <td style={{ padding: '14px 16px', color: 'var(--color-text)', fontWeight: '600' }}>{d.name || d.nama}</td>
                     <td style={{ padding: '14px 16px' }}>
-                      <span style={{ display: 'inline-block', minWidth: '110px', textAlign: 'center', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: spmeKategoriColors[d.category || d.kategori] || '#3b82f6', background: `${spmeKategoriColors[d.category || d.kategori] || '#3b82f6'}18` }}>
+                      <span className="siakad-badge siakad-badge-wide" style={{ color: spmeKategoriColors[d.category || d.kategori] || '#3b82f6' }}>
                         {spmeKategoriLabels[d.category || d.kategori] || d.category || d.kategori}
                       </span>
                     </td>
                     <td style={{ padding: '14px 16px' }}>
-                      <span style={{ display: 'inline-block', minWidth: '90px', textAlign: 'center', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: spmeStatusColors[d.status] || '#6b7280', background: `${spmeStatusColors[d.status] || '#6b7280'}18`, textTransform: 'capitalize' }}>
+                      <span className="siakad-badge siakad-badge-sm" style={{ color: spmeStatusColors[d.status] || 'var(--color-muted)', textTransform: 'capitalize' }}>
                         {d.status}
                       </span>
                     </td>
@@ -278,10 +295,11 @@ export default function QualityAssurancePage() {
               { key: 'sarana', label: 'Sarana Prasarana', icon: 'ph-buildings' },
               { key: 'perpustakaan', label: 'Perpustakaan', icon: 'ph-books' },
             ].map(c => (
-              <button id={`kuesioner-cat-${c.key}`} key={c.key} onClick={() => setKuesionerCategory(c.key)} style={{
-                padding: '8px 16px', borderRadius: '50px', border: kuesionerCategory === c.key ? '2px solid #8b5cf6' : '1px solid var(--color-border)',
-                background: kuesionerCategory === c.key ? 'rgba(139,92,246,0.15)' : 'transparent', color: kuesionerCategory === c.key ? '#8b5cf6' : 'var(--color-muted)',
-                fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '6px'
+              <button type="button" id={`kuesioner-cat-${c.key}`} key={c.key} onClick={() => setKuesionerCategory(c.key)} style={{
+                padding: '10px 20px', borderRadius: '50px', border: 'var(--inset-border)',
+                background: kuesionerCategory === c.key ? 'var(--liquid-bg)' : 'var(--glass-bg)', color: kuesionerCategory === c.key ? 'var(--apple-red)' : 'var(--color-muted)',
+                fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px',
+                boxShadow: kuesionerCategory === c.key ? 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' : '3px 3px 6px var(--inset-shadow-dark), -3px -3px 6px var(--inset-shadow-light)'
               }}>
                 <i className={`ph ${c.icon}`} style={{ fontSize: '1rem' }}></i> {c.label}
               </button>
@@ -303,11 +321,11 @@ export default function QualityAssurancePage() {
             const totalResp = items.reduce((a, b) => a + b.responden, 0);
             return (
               <div style={{ display: 'flex', gap: '16px', marginBottom: '24px', flexWrap: 'wrap' }}>
-                <div style={{ padding: '16px 24px', borderRadius: '16px', background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.2)', flex: '1 1 200px' }}>
+                <div style={{ padding: '16px 24px', borderRadius: '16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', flex: '1 1 200px' }}>
                   <p style={{ fontSize: '0.78rem', color: 'var(--color-muted)', margin: '0 0 4px 0', fontWeight: '600', textTransform: 'uppercase' }}>Rata-rata Kepuasan</p>
                   <p style={{ fontSize: '2rem', fontWeight: '800', color: getRatingColor(parseFloat(avg)), margin: 0 }}>{avg} <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--color-muted)' }}>/ 5.00</span></p>
                 </div>
-                <div style={{ padding: '16px 24px', borderRadius: '16px', background: 'rgba(59,130,246,0.08)', border: '1px solid rgba(59,130,246,0.2)', flex: '1 1 200px' }}>
+                <div style={{ padding: '16px 24px', borderRadius: '16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', flex: '1 1 200px' }}>
                   <p style={{ fontSize: '0.78rem', color: 'var(--color-muted)', margin: '0 0 4px 0', fontWeight: '600', textTransform: 'uppercase' }}>Total Responden</p>
                   <p style={{ fontSize: '2rem', fontWeight: '800', color: '#3b82f6', margin: 0 }}>{totalResp}</p>
                 </div>
@@ -324,7 +342,7 @@ export default function QualityAssurancePage() {
                 const pct = (item.rating / 5) * 100;
                 const color = getRatingColor(item.rating);
                 return (
-                  <div key={i} style={{ padding: '16px 20px', borderRadius: '16px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)' }}>
+                  <div key={i} style={{ padding: '16px 20px', borderRadius: '16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
                       <p style={{ color: 'var(--color-text)', fontWeight: '600', margin: 0, fontSize: '0.9rem', flex: 1 }}>{item.aspek || item.aspect}</p>
                       <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
@@ -332,7 +350,7 @@ export default function QualityAssurancePage() {
                         <span style={{ fontSize: '1.1rem', fontWeight: '800', color, minWidth: '40px', textAlign: 'right' }}>{parseFloat(item.rating).toFixed(1)}</span>
                       </div>
                     </div>
-                    <div style={{ height: '10px', borderRadius: '10px', background: 'rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+                    <div style={{ height: '10px', borderRadius: '10px', background: 'var(--liquid-bg)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', overflow: 'hidden' }}>
                       <div style={{ height: '100%', width: `${pct}%`, borderRadius: '10px', background: `linear-gradient(90deg, ${color}, ${color}cc)`, transition: 'width 1s cubic-bezier(0.25,1,0.5,1)' }}></div>
                     </div>
                   </div>
@@ -361,10 +379,10 @@ export default function QualityAssurancePage() {
       {/* SPMI Upload Modal */}
       {showModal && (
         <ModalShell title="Tambah Dokumen SPMI" subtitle="Penjaminan Mutu" icon="ph-shield-check" onClose={() => setShowModal(false)}
-          footer={<><button id="btn-cancel-spmi" onClick={() => setShowModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button id="btn-save-spmi" onClick={uploadDoc} disabled={saving} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Simpan'}</button></>}>
+          footer={<><button id="btn-cancel-spmi" onClick={() => setShowModal(false)} className="btn" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', padding: '10px 20px',   cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+            <button id="btn-save-spmi" onClick={uploadDoc} disabled={saving} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 24px' }}>{saving ? 'Menyimpan...' : 'Simpan'}</button></>}>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Judul Dokumen</label>
-            <input id="spmi-title" className="siakad-input" value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Contoh: Standar Pendidikan 2025" /></div>
+            <input id="spmi-title" className="siakad-input" value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Contoh: Standar Pendidikan 2025"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} /></div>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Kategori</label>
             <CustomSelect
               value={form.category}
@@ -377,18 +395,18 @@ export default function QualityAssurancePage() {
               ]}
             /></div>
           <div style={{ marginBottom: '16px' }}><label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tahun Akademik</label>
-            <input id="spmi-year" className="siakad-input" value={form.academic_year} onChange={e => setForm({...form, academic_year: e.target.value})} placeholder="2025/2026" /></div>
+            <input id="spmi-year" className="siakad-input" value={form.academic_year} onChange={e => setForm({...form, academic_year: e.target.value})} placeholder="2025/2026"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} /></div>
         </ModalShell>
       )}
 
       {/* SPME Upload Modal */}
       {showSpmeModal && (
         <ModalShell title="Tambah Dokumen SPME" subtitle="Penjaminan Mutu Eksternal" icon="ph-globe" onClose={() => setShowSpmeModal(false)}
-          footer={<><button id="btn-cancel-spme" onClick={() => setShowSpmeModal(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600' }}>Batal</button>
-            <button id="btn-save-spme" onClick={addSpmeDoc} disabled={!spmeForm.nama} className="siakad-btn-primary" style={{ padding: '10px 24px', opacity: !spmeForm.nama ? 0.5 : 1 }}>Simpan</button></>}>
+          footer={<><button id="btn-cancel-spme" onClick={() => setShowSpmeModal(false)} className="btn" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', padding: '10px 20px',   cursor: 'pointer', fontWeight: '600' }}>Batal</button>
+            <button id="btn-save-spme" onClick={addSpmeDoc} disabled={!spmeForm.nama} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 24px', opacity: !spmeForm.nama ? 0.5 : 1 }}>Simpan</button></>}>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Dokumen</label>
-            <input id="spme-nama" className="siakad-input" value={spmeForm.nama} onChange={e => setSpmeForm({...spmeForm, nama: e.target.value})} placeholder="Contoh: Borang Akreditasi Prodi Informatika" />
+            <input id="spme-nama" className="siakad-input" value={spmeForm.nama} onChange={e => setSpmeForm({...spmeForm, nama: e.target.value})} placeholder="Contoh: Borang Akreditasi Prodi Informatika"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Kategori</label>
@@ -416,7 +434,7 @@ export default function QualityAssurancePage() {
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Tahun</label>
-            <input id="spme-tahun" className="siakad-input" type="number" value={spmeForm.tahun} onChange={e => setSpmeForm({...spmeForm, tahun: e.target.value})} placeholder="2025" />
+            <input id="spme-tahun" className="siakad-input" type="number" value={spmeForm.tahun} onChange={e => setSpmeForm({...spmeForm, tahun: e.target.value})} placeholder="2025"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
           </div>
         </ModalShell>
       )}

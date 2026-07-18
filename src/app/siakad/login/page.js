@@ -12,6 +12,7 @@ export default function SiakadLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [showPortalModal, setShowPortalModal] = useState(false);
   const [pendingUser, setPendingUser] = useState(null);
+  const [rememberMe, setRememberMe] = useState(false);
 
   useEffect(() => {
     // Paksa tema kembali ke light mode saat masuk halaman login agar teks tidak tidak kelihatan
@@ -90,7 +91,7 @@ export default function SiakadLogin() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: #f5f5f7; /* Apple style liquid background */
+          background: #eef2f7; /* Soft slate neumorphic baseline */
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Outfit', sans-serif;
           position: relative;
           overflow: hidden;
@@ -102,7 +103,7 @@ export default function SiakadLogin() {
         .aurora-blob {
           position: absolute;
           filter: blur(120px);
-          opacity: 0.65;
+          opacity: 0.45;
           border-radius: 50%;
           mix-blend-mode: multiply;
           animation: floatBlob 25s infinite alternate cubic-bezier(0.33, 1, 0.68, 1);
@@ -111,17 +112,17 @@ export default function SiakadLogin() {
         }
         .blob-1 {
           top: -20%; left: -5%; width: 65vw; height: 65vw;
-          background: radial-gradient(circle, rgba(255, 59, 48, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+          background: radial-gradient(circle, rgba(196, 30, 58, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
           animation-delay: 0s;
         }
         .blob-2 {
           bottom: -25%; right: -5%; width: 75vw; height: 75vw;
-          background: radial-gradient(circle, rgba(0, 113, 227, 0.35) 0%, rgba(255, 255, 255, 0) 70%);
+          background: radial-gradient(circle, rgba(0, 113, 227, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
           animation-delay: -6s;
         }
         .blob-3 {
           top: 35%; left: 30%; width: 45vw; height: 45vw;
-          background: radial-gradient(circle, rgba(175, 82, 222, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+          background: radial-gradient(circle, rgba(175, 82, 222, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
           animation-delay: -12s;
         }
 
@@ -154,12 +155,10 @@ export default function SiakadLogin() {
           width: 100%;
           max-width: 1000px;
           min-height: 580px;
-          background: var(--glass-bg);
-          backdrop-filter: blur(40px) saturate(210%);
-          -webkit-backdrop-filter: blur(40px) saturate(210%);
-          border: 1px solid rgba(255, 255, 255, 0.6);
+          background: #eef2f7;
+          border: 1px solid rgba(255, 255, 255, 0.45);
           border-radius: 28px;
-          box-shadow: var(--glass-shadow);
+          box-shadow: 9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff;
           display: flex;
           position: relative;
           z-index: 10;
@@ -283,17 +282,18 @@ export default function SiakadLogin() {
           width: 18px;
           height: 18px;
           border-radius: 5px;
-          background: rgba(255, 255, 255, 0.6);
-          border: 1px solid rgba(0, 0, 0, 0.12);
+          background: #eef2f7;
+          border: 1px solid rgba(0, 0, 0, 0.06);
           display: flex;
           align-items: center;
           justify-content: center;
           transition: all 0.2s;
+          box-shadow: inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff;
         }
         input:checked + .aurora-checkbox {
-          background: #B91C1C;
-          border-color: #B91C1C;
-          box-shadow: 0 0 8px rgba(185, 28, 28, 0.3);
+          background: #C41E3A;
+          border-color: #C41E3A;
+          box-shadow: 0 0 8px rgba(196, 30, 58, 0.3);
         }
 
         .aurora-btn {
@@ -302,25 +302,25 @@ export default function SiakadLogin() {
           max-width: 380px;
           margin: 0 auto;
           padding: 16px;
-          border-radius: 14px;
+          border-radius: 50px;
           border: none;
-          background: linear-gradient(135deg, #B91C1C, #1d1d1f);
+          background: linear-gradient(135deg, #C41E3A, #9b1c2e);
           color: white;
           font-size: 1rem;
-          font-weight: 700;
+          font-weight: 800;
           cursor: pointer;
-          box-shadow: 0 8px 24px rgba(185, 28, 28, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          box-shadow: 3px 3px 8px #a3b1c6, -3px -3px 8px rgba(255, 255, 255, 0.6);
           transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
           letter-spacing: 0.05em;
           text-transform: uppercase;
         }
         .aurora-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 0 12px 32px rgba(185, 28, 28, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+          box-shadow: 6px 6px 12px #a3b1c6, -6px -6px 12px rgba(255, 255, 255, 0.6);
         }
         .aurora-btn:active {
           transform: translateY(1px);
-          box-shadow: 0 4px 12px rgba(185, 28, 28, 0.2);
+          box-shadow: inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px rgba(255, 255, 255, 0.6);
         }
         .aurora-btn:disabled {
           background: #86868b;
@@ -339,8 +339,8 @@ export default function SiakadLogin() {
           align-items: center;
           text-align: center;
           padding: 40px;
-          background: rgba(255, 255, 255, 0.2);
-          border-left: 1px solid rgba(255, 255, 255, 0.4);
+          background: #eef2f7;
+          border-left: 1px solid rgba(255, 255, 255, 0.45);
           overflow: hidden;
         }
 
@@ -348,13 +348,13 @@ export default function SiakadLogin() {
         .neon-ring {
           position: absolute;
           border-radius: 50%;
-          border: 1px solid rgba(255, 255, 255, 0.15);
+          border: 1px solid rgba(255, 255, 255, 0.4);
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
           pointer-events: none;
         }
-        .neon-ring-1 { width: 280px; height: 280px; border-top-color: rgba(255, 59, 48, 0.25); animation: spin 12s linear infinite; }
+        .neon-ring-1 { width: 280px; height: 280px; border-top-color: rgba(196, 30, 58, 0.25); animation: spin 12s linear infinite; }
         .neon-ring-2 { width: 400px; height: 400px; border-right-color: rgba(0, 113, 227, 0.25); animation: spin 18s linear infinite reverse; }
         .neon-ring-3 { width: 520px; height: 520px; border-bottom-color: rgba(175, 82, 222, 0.2); animation: spin 24s linear infinite; }
 
@@ -365,13 +365,11 @@ export default function SiakadLogin() {
         .aurora-visual-content {
           z-index: 10;
           position: relative;
-          background: rgba(255, 255, 255, 0.4);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
+          background: #eef2f7;
           padding: 40px 32px;
           border-radius: 24px;
-          border: 1px solid rgba(255, 255, 255, 0.5);
-          box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+          border: 1px solid rgba(255, 255, 255, 0.45);
+          box-shadow: 9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff;
           max-width: 380px;
         }
         
@@ -381,6 +379,12 @@ export default function SiakadLogin() {
           align-items: center;
           margin-bottom: 24px;
           position: relative;
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          background: #eef2f7;
+          border: 1px solid rgba(255, 255, 255, 0.45);
+          box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff;
         }
 
         .aurora-visual-content h2 {
@@ -441,26 +445,25 @@ export default function SiakadLogin() {
         }
         .siakad-login-modal {
           width: min(100%, 450px);
-          background: rgba(255, 255, 255, 0.7);
-          backdrop-filter: blur(30px) saturate(190%);
-          -webkit-backdrop-filter: blur(30px) saturate(190%);
-          border: 1px solid rgba(255, 255, 255, 0.6);
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+          background: #eef2f7;
+          border: 1px solid rgba(255, 255, 255, 0.45);
+          box-shadow: 9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff;
           border-radius: 24px;
-          padding: 28px;
+          padding: 32px 28px;
           color: #1d1d1f;
           text-align: center;
         }
         .siakad-login-modal-icon {
           width: 60px;
           height: 60px;
-          border-radius: 16px;
+          border-radius: 50%;
           margin: 0 auto 16px;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(0, 113, 227, 0.1);
-          border: 1px solid rgba(0, 113, 227, 0.2);
+          background: #eef2f7;
+          border: 1px solid rgba(255, 255, 255, 0.45);
+          box-shadow: inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff;
         }
         .siakad-login-modal h3 {
           margin: 0 0 8px 0;
@@ -477,28 +480,35 @@ export default function SiakadLogin() {
         .siakad-login-modal-actions {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 12px;
+          gap: 16px;
         }
         .siakad-login-modal-btn {
           border: none;
-          border-radius: 12px;
-          padding: 12px 16px;
-          font-weight: 700;
+          border-radius: 50px;
+          padding: 12px 20px;
+          font-weight: 800;
           cursor: pointer;
-          transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+          transition: all 0.2s ease;
         }
         .siakad-login-modal-btn:hover {
-          transform: translateY(-1px);
+          transform: translateY(-2px);
         }
         .siakad-login-modal-btn.secondary {
-          background: rgba(0, 0, 0, 0.05);
+          background: #eef2f7;
           color: #1d1d1f;
-          border: 1px solid rgba(0, 0, 0, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.45);
+          box-shadow: 3px 3px 8px #a3b1c6, -3px -3px 8px rgba(255, 255, 255, 0.6);
+        }
+        .siakad-login-modal-btn.secondary:hover {
+          box-shadow: 6px 6px 12px #a3b1c6, -6px -6px 12px rgba(255, 255, 255, 0.6);
         }
         .siakad-login-modal-btn.primary {
-          background: linear-gradient(135deg, #0071e3 0%, #30a3ff 100%);
+          background: linear-gradient(135deg, #C41E3A, #9b1c2e);
           color: white;
-          box-shadow: 0 10px 20px rgba(0, 113, 227, 0.2);
+          box-shadow: 3px 3px 8px #a3b1c6, -3px -3px 8px rgba(255, 255, 255, 0.6);
+        }
+        .siakad-login-modal-btn.primary:hover {
+          box-shadow: 6px 6px 12px #a3b1c6, -6px -6px 12px rgba(255, 255, 255, 0.6);
         }
         @media (max-width: 480px) {
           .siakad-login-modal {
@@ -577,9 +587,21 @@ export default function SiakadLogin() {
 
             <div className="aurora-options">
               <label className="aurora-checkbox-wrapper">
-                <input type="checkbox" style={{ display: 'none' }} />
-                <div className="aurora-checkbox">
-                  <i className="ph ph-check" style={{ color: 'white', fontSize: '14px', fontWeight: 'bold' }}></i>
+                <input 
+                  type="checkbox" 
+                  checked={rememberMe} 
+                  onChange={e => setRememberMe(e.target.checked)} 
+                  style={{ display: 'none' }} 
+                />
+                <div 
+                  className="aurora-checkbox"
+                  style={{
+                    background: rememberMe ? '#C41E3A' : '#eef2f7',
+                    borderColor: rememberMe ? '#C41E3A' : 'rgba(0,0,0,0.06)',
+                    boxShadow: rememberMe ? '0 0 8px rgba(196, 30, 58, 0.3)' : 'inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff'
+                  }}
+                >
+                  {rememberMe && <i className="ph ph-check" style={{ color: 'white', fontSize: '11px', fontWeight: 'bold' }}></i>}
                 </div>
                 Ingat saya
               </label>
@@ -603,7 +625,7 @@ export default function SiakadLogin() {
 
           <div className="aurora-visual-content">
             <div className="logo-container">
-              <Image src="/icon.png" width={80} height={80} alt="Logo UMIBA" style={{ filter: 'drop-shadow(0px 10px 20px rgba(0,0,0,0.5))' }} />
+              <Image src="/icon.png" width={80} height={80} alt="Logo UMIBA" style={{ opacity: 0.95 }} />
             </div>
             <h2>SIAKAD UMIBA</h2>
             <p>Sistem Informasi Akademik Digital terdepan Universitas Mitra Bangsa.</p>

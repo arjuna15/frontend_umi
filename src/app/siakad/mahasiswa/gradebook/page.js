@@ -101,11 +101,9 @@ export default function MahasiswaGradebook() {
           <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>{getTranslation('gradebook', lang)}</h1>
           <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0 }}>{lang === 'en' ? 'Detail academic evaluation this semester, from homework to final exams.' : 'Detail evaluasi akademik semester ini, dari tugas harian hingga UAS.'}</p>
         </div>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '32px' }}>
+      </div>      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '32px' }}>
         <div className="siakad-card" style={{ padding: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '16px' }}>
-          <div style={{ width: '80px', height: '80px', background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', border: '1px solid rgba(245, 158, 11, 0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(245, 158, 11, 0.1)' , flexShrink: 0 }}>
+          <div style={{ width: '80px', height: '80px', background: 'var(--glass-bg)', color: '#f59e0b', border: 'var(--inset-border)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', flexShrink: 0 }}>
             <i className="ph ph-medal"></i>
           </div>
           <div>
@@ -115,7 +113,7 @@ export default function MahasiswaGradebook() {
         </div>
         
         <div className="siakad-card" style={{ padding: '32px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: '16px' }}>
-          <div style={{ width: '80px', height: '80px', background: 'rgba(15, 23, 42, 0.1)', color: '#0f172a', border: '1px solid rgba(15, 23, 42, 0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: '0 8px 16px rgba(15, 23, 42, 0.1)' , flexShrink: 0 }}>
+          <div style={{ width: '80px', height: '80px', background: 'var(--glass-bg)', color: 'var(--apple-blue)', border: 'var(--inset-border)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', flexShrink: 0 }}>
             <i className="ph ph-books"></i>
           </div>
           <div>
@@ -125,8 +123,8 @@ export default function MahasiswaGradebook() {
         </div>
       </div>
 
-      <div className="siakad-card" style={{ overflow: 'hidden' }}>
-        <div style={{ padding: '20px 24px', borderBottom: '1px solid var(--color-border)', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+      <div className="siakad-card" style={{ overflow: 'hidden', padding: '24px' }}>
+        <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', marginBottom: '16px' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>{lang === 'en' ? 'Course Grades Detail' : 'Rincian Nilai Mata Kuliah'}</h3>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap', flex: '1 1 100%' }}>
             <CustomSelect 
@@ -143,23 +141,23 @@ export default function MahasiswaGradebook() {
               onChange={e => setSearch(e.target.value)}
               style={{ flex: '1 1 150px', minWidth: 0, color: 'var(--color-text)' }}
             />
-            <button onClick={() => window.print()} style={{ background: 'var(--glass-bg)', border: '1px solid var(--color-border)', padding: '10px 24px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s' }}>
+            <button onClick={() => window.print()} style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', padding: '10px 24px', borderRadius: '50px', color: 'var(--color-text)', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: 'var(--glass-shadow)' }}>
               <i className="ph ph-printer"></i> {lang === 'en' ? 'Print Transcript' : 'Cetak Transkrip'}
             </button>
           </div>
         </div>
         <div style={{ overflowX: 'auto' }}>
-          <table className="siakad-table">
+          <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 10px', textAlign: 'left' }}>
             <thead>
               <tr>
-                <th>{getTranslation('subject_name', lang)}</th>
-                <th style={{ textAlign: 'center' }}>{getTranslation('sks', lang)}</th>
-                <th style={{ textAlign: 'center' }}>{lang === 'en' ? 'Assignment' : 'Tugas'}</th>
-                <th style={{ textAlign: 'center' }}>{lang === 'en' ? 'Quiz' : 'Kuis'}</th>
-                <th style={{ textAlign: 'center' }}>UTS</th>
-                <th style={{ textAlign: 'center' }}>UAS</th>
-                <th style={{ textAlign: 'center' }}>{lang === 'en' ? 'Score' : 'Angka'}</th>
-                <th style={{ textAlign: 'center' }}>{lang === 'en' ? 'Grade' : 'Mutu'}</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>{getTranslation('subject_name', lang)}</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase', textAlign: 'center' }}>{getTranslation('sks', lang)}</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase', textAlign: 'center' }}>{lang === 'en' ? 'Assignment' : 'Tugas'}</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase', textAlign: 'center' }}>{lang === 'en' ? 'Quiz' : 'Kuis'}</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase', textAlign: 'center' }}>UTS</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase', textAlign: 'center' }}>UAS</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase', textAlign: 'center' }}>{lang === 'en' ? 'Score' : 'Angka'}</th>
+                <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase', textAlign: 'center' }}>{lang === 'en' ? 'Grade' : 'Mutu'}</th>
               </tr>
             </thead>
             <tbody>
@@ -174,33 +172,100 @@ export default function MahasiswaGradebook() {
                 }
                 return filteredData.map((item, idx) => (
                   <tr key={idx}>
-                    <td style={{ fontWeight: '600' }}>{item.course_name}</td>
-                    <td style={{ textAlign: 'center' }}>{item.sks}</td>
-                    <td style={{ textAlign: 'center' }}>{formatValueWithWeight(item.tugas, item.assignment_weight)}</td>
-                    <td style={{ textAlign: 'center' }}>{formatValueWithWeight(item.kuis, item.attendance_weight)}</td>
-                    <td style={{ textAlign: 'center' }}>{formatValueWithWeight(item.uts, item.uts_weight)}</td>
-                    <td style={{ textAlign: 'center' }}>{formatValueWithWeight(item.uas, item.uas_weight)}</td>
-                    <td style={{ textAlign: 'center', fontWeight: 'bold' }}>{item.akhir}</td>
-                    <td style={{ textAlign: 'center' }}>
-                    <span className="siakad-badge" style={{
-                      background: item.huruf?.startsWith('A') ? 'rgba(16, 185, 129, 0.15)' : 
-                                 item.huruf?.startsWith('B') ? 'rgba(59, 130, 246, 0.15)' : 
-                                 item.huruf?.startsWith('C') ? 'rgba(245, 158, 11, 0.15)' : 
-                                 item.huruf?.startsWith('D') ? 'rgba(239, 68, 68, 0.15)' : 
-                                 item.huruf ? 'rgba(239, 68, 68, 0.15)' : 'var(--glass-bg)',
-                      color: item.huruf?.startsWith('A') ? '#10b981' : 
-                             item.huruf?.startsWith('B') ? '#3b82f6' : 
-                             item.huruf?.startsWith('C') ? '#f59e0b' : 
-                             item.huruf?.startsWith('D') ? '#ef4444' : 
-                             item.huruf ? '#ef4444' : 'var(--color-muted)',
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderLeft: 'var(--inset-border)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      borderRadius: '16px 0 0 16px',
+                      boxShadow: 'inset 3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
                       fontWeight: 'bold',
-                      fontSize: '1rem',
-                      padding: '4px 16px'
+                      color: 'var(--color-text)'
+                    }}>{item.course_name}</td>
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                      textAlign: 'center',
+                      color: 'var(--color-text)'
+                    }}>{item.sks}</td>
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                      textAlign: 'center',
+                      color: 'var(--color-text)'
+                    }}>{formatValueWithWeight(item.tugas, item.assignment_weight)}</td>
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                      textAlign: 'center',
+                      color: 'var(--color-text)'
+                    }}>{formatValueWithWeight(item.kuis, item.attendance_weight)}</td>
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                      textAlign: 'center',
+                      color: 'var(--color-text)'
+                    }}>{formatValueWithWeight(item.uts, item.uts_weight)}</td>
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                      textAlign: 'center',
+                      color: 'var(--color-text)'
+                    }}>{formatValueWithWeight(item.uas, item.uas_weight)}</td>
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                      textAlign: 'center', 
+                      fontWeight: 'bold',
+                      color: 'var(--color-text)'
+                    }}>{item.akhir}</td>
+                    <td style={{ 
+                      padding: '14px 20px', 
+                      background: 'var(--liquid-bg)',
+                      borderRight: 'var(--inset-border)',
+                      borderTop: 'var(--inset-border)',
+                      borderBottom: 'var(--inset-border)',
+                      borderRadius: '0 16px 16px 0',
+                      boxShadow: 'inset -3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                      textAlign: 'center'
                     }}>
-                      {item.huruf}
-                    </span>
-                  </td>
-                </tr>
+                      <span style={{
+                        background: 'var(--glass-bg)',
+                        border: 'var(--glass-border)',
+                        boxShadow: 'var(--glass-shadow)',
+                        color: item.huruf?.startsWith('A') ? '#10b981' : 
+                               item.huruf?.startsWith('B') ? '#3b82f6' : 
+                               item.huruf?.startsWith('C') ? '#f59e0b' : 
+                               item.huruf?.startsWith('D') ? '#ef4444' : 
+                               item.huruf ? '#ef4444' : 'var(--color-muted)',
+                        fontWeight: '800',
+                        fontSize: '0.82rem',
+                        padding: '4px 14px',
+                        borderRadius: '50px'
+                      }}>
+                        {item.huruf}
+                      </span>
+                    </td>
+                  </tr>
                 ));
               })()}
             </tbody>

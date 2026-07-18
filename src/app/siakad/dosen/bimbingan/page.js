@@ -141,7 +141,7 @@ export default function DosenBimbinganPage() {
       <div style={{ display: 'grid', gridTemplateColumns: '350px 1fr', gap: '24px', flex: 1, minHeight: 0 }}>
         
         {/* Left Pane: Student List */}
-        <div className="siakad-card" style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0, padding: 0 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0, padding: 0, background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', borderRadius: '24px' }}>
           
           {/* List Header & Search */}
           <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--color-border)', flexShrink: 0 }}>
@@ -154,14 +154,14 @@ export default function DosenBimbinganPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '8px 12px 8px 46px',
+                  padding: '10px 12px 10px 46px',
                   borderRadius: '50px',
-                  border: '1px solid rgba(255,255,255,0.5)',
-                  background: 'var(--glass-bg)',
+                  border: 'var(--inset-border)',
+                  background: 'var(--liquid-bg)',
                   color: 'var(--color-text)',
                   outline: 'none',
                   fontSize: '0.9rem',
-                  boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff'
+                  boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)'
                 }}
               />
               <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
@@ -169,7 +169,7 @@ export default function DosenBimbinganPage() {
           </div>
 
           {/* Scrollable list */}
-          <div style={{ flex: 1, overflowY: 'auto', padding: '8px' }}>
+          <div style={{ flex: 1, overflowY: 'auto', padding: '12px' }}>
             {filteredStudents.length > 0 ? filteredStudents.map((student) => {
               const isSelected = selectedStudent?.id === student.id;
               return (
@@ -180,31 +180,31 @@ export default function DosenBimbinganPage() {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '12px',
-                    padding: '12px',
-                    borderRadius: '12px',
+                    padding: '14px 16px',
+                    borderRadius: '16px',
                     cursor: 'pointer',
-                    background: isSelected ? 'rgba(79, 70, 229, 0.15)' : 'transparent',
-                    border: isSelected ? '1px solid rgba(79, 70, 229, 0.3)' : '1px solid transparent',
+                    background: 'var(--glass-bg)',
+                    border: isSelected ? '1.5px solid var(--apple-blue)' : 'var(--glass-border)',
+                    boxShadow: isSelected ? 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' : 'var(--glass-shadow)',
                     transition: 'all 0.2s',
-                    marginBottom: '4px'
+                    marginBottom: '10px'
                   }}
-                  className="student-item-hover"
                 >
                   {/* Initials avatar */}
                   <div style={{
                     width: '40px',
                     height: '40px',
                     borderRadius: '50%',
-                    background: isSelected ? '#4f46e5' : 'var(--glass-bg)',
-                    border: '1px solid rgba(255,255,255,0.5)',
-                    color: isSelected ? 'white' : 'var(--color-text)',
+                    background: 'var(--glass-bg)',
+                    border: 'var(--glass-border)',
+                    boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)',
+                    color: isSelected ? 'var(--apple-blue)' : 'var(--color-text)',
                     display: 'flex',
                     alignItems: 'center',
-                    justify: 'center',
+                    justifyContent: 'center',
                     fontWeight: 'bold',
                     fontSize: '0.95rem',
-                    flexShrink: 0,
-                    justifyContent: 'center'
+                    flexShrink: 0
                   }}>
                     {(student.name || '-').split(' ').slice(0, 2).map(n => n[0]).join('').toUpperCase()}
                   </div>
@@ -217,7 +217,7 @@ export default function DosenBimbinganPage() {
                       </h4>
                       {student.unread_count > 0 && (
                         <span style={{
-                          background: '#f59e0b',
+                          background: 'var(--apple-blue)',
                           color: 'white',
                           borderRadius: '999px',
                           padding: '2px 6px',
@@ -255,7 +255,7 @@ export default function DosenBimbinganPage() {
         </div>
 
         {/* Right Pane: Chat Area */}
-        <div className="siakad-card" style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0, padding: 0 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', minHeight: 0, padding: 0, background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', borderRadius: '24px' }}>
           {selectedStudent ? (
             <>
               {/* Chat Header */}
@@ -272,8 +272,10 @@ export default function DosenBimbinganPage() {
                   width: '44px',
                   height: '44px',
                   borderRadius: '50%',
-                  background: '#4f46e5',
-                  color: 'white',
+                  background: 'var(--glass-bg)',
+                  border: 'var(--glass-border)',
+                  boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)',
+                  color: 'var(--apple-blue)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -300,12 +302,13 @@ export default function DosenBimbinganPage() {
                     return (
                       <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: isFromMe ? 'flex-end' : 'flex-start' }}>
                         <div style={{
-                          background: isFromMe ? '#4f46e5' : 'var(--glass-bg)',
+                          background: isFromMe ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'var(--glass-bg)',
                           color: isFromMe ? 'white' : 'var(--color-text)',
                           padding: '12px 16px',
                           borderRadius: '12px',
                           maxWidth: '70%',
-                          border: isFromMe ? 'none' : '1px solid var(--color-border)',
+                          border: isFromMe ? 'none' : 'var(--glass-border)',
+                          boxShadow: isFromMe ? 'var(--glass-shadow)' : 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)',
                           wordBreak: 'break-word'
                         }}>
                           {chat.text}
@@ -344,11 +347,12 @@ export default function DosenBimbinganPage() {
                     flex: 1,
                     padding: '12px 20px',
                     borderRadius: '50px',
-                    border: '1px solid rgba(255,255,255,0.5)',
-                    background: 'var(--color-bg)',
+                    border: 'var(--inset-border)',
+                    background: 'var(--liquid-bg)',
                     color: 'var(--color-text)',
                     outline: 'none',
-                    fontSize: '0.92rem'
+                    fontSize: '0.92rem',
+                    boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)'
                   }}
                 />
                 <button
@@ -357,7 +361,7 @@ export default function DosenBimbinganPage() {
                   style={{
                     padding: '12px 24px',
                     borderRadius: '50px',
-                    background: '#4f46e5',
+                    background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)',
                     color: 'white',
                     border: 'none',
                     fontWeight: 'bold',
@@ -365,6 +369,7 @@ export default function DosenBimbinganPage() {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '8px',
+                    boxShadow: (!messageText.trim() || sending) ? 'none' : 'var(--glass-shadow)',
                     opacity: (!messageText.trim() || sending) ? 0.6 : 1,
                     transition: 'all 0.2s'
                   }}
@@ -385,11 +390,13 @@ export default function DosenBimbinganPage() {
                 width: '80px',
                 height: '80px',
                 borderRadius: '50%',
-                background: 'rgba(79, 70, 229, 0.08)',
+                background: 'var(--glass-bg)',
+                border: 'var(--glass-border)',
+                boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#4f46e5'
+                color: 'var(--apple-blue)'
               }}>
                 <i className="ph ph-chats-teardrop" style={{ fontSize: '3rem' }}></i>
               </div>

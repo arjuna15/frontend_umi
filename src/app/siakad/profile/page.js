@@ -183,13 +183,15 @@ export default function ProfilePage() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', '@media(minWidth: 768px)': { flexDirection: 'row' } }}>
         
         {/* Left Sidebar: Vertical Tabs */}
-        <div style={{ flex: '0 0 250px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ flex: '0 0 250px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <button 
             onClick={() => setActiveTab('pribadi')}
+            className={activeTab === 'pribadi' ? 'siakad-btn-primary' : ''}
             style={{ 
-              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '50px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
-              background: activeTab === 'pribadi' ? '#C41E3A' : 'transparent',
-              color: activeTab === 'pribadi' ? 'white' : 'var(--color-muted)'
+              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 24px', borderRadius: '50px', border: activeTab === 'pribadi' ? 'none' : 'var(--glass-border)', cursor: 'pointer', transition: 'all 0.2s', fontSize: '0.95rem', fontWeight: 'bold',
+              background: activeTab === 'pribadi' ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'var(--glass-bg)',
+              color: activeTab === 'pribadi' ? 'white' : 'var(--color-text)',
+              boxShadow: activeTab === 'pribadi' ? '0 4px 12px rgba(196,30,58,0.3)' : 'var(--glass-shadow)'
             }}
           >
             <i className="ph ph-identification-card" style={{ fontSize: '1.2rem' }}></i> Informasi Pribadi
@@ -197,10 +199,12 @@ export default function ProfilePage() {
           
           <button 
             onClick={() => setActiveTab('keamanan')}
+            className={activeTab === 'keamanan' ? 'siakad-btn-primary' : ''}
             style={{ 
-              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '50px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
-              background: activeTab === 'keamanan' ? '#C41E3A' : 'transparent',
-              color: activeTab === 'keamanan' ? 'white' : 'var(--color-muted)'
+              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 24px', borderRadius: '50px', border: activeTab === 'keamanan' ? 'none' : 'var(--glass-border)', cursor: 'pointer', transition: 'all 0.2s', fontSize: '0.95rem', fontWeight: 'bold',
+              background: activeTab === 'keamanan' ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'var(--glass-bg)',
+              color: activeTab === 'keamanan' ? 'white' : 'var(--color-text)',
+              boxShadow: activeTab === 'keamanan' ? '0 4px 12px rgba(196,30,58,0.3)' : 'var(--glass-shadow)'
             }}
           >
             <i className="ph ph-shield-check" style={{ fontSize: '1.2rem' }}></i> Keamanan
@@ -208,10 +212,12 @@ export default function ProfilePage() {
           
           <button 
             onClick={() => setActiveTab('preferensi')}
+            className={activeTab === 'preferensi' ? 'siakad-btn-primary' : ''}
             style={{ 
-              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 20px', borderRadius: '50px', border: 'none', cursor: 'pointer', transition: 'all 0.3s', fontSize: '0.95rem', fontWeight: '600',
-              background: activeTab === 'preferensi' ? '#C41E3A' : 'transparent',
-              color: activeTab === 'preferensi' ? 'white' : 'var(--color-muted)'
+              display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 24px', borderRadius: '50px', border: activeTab === 'preferensi' ? 'none' : 'var(--glass-border)', cursor: 'pointer', transition: 'all 0.2s', fontSize: '0.95rem', fontWeight: 'bold',
+              background: activeTab === 'preferensi' ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'var(--glass-bg)',
+              color: activeTab === 'preferensi' ? 'white' : 'var(--color-text)',
+              boxShadow: activeTab === 'preferensi' ? '0 4px 12px rgba(196,30,58,0.3)' : 'var(--glass-shadow)'
             }}
           >
             <i className="ph ph-sliders" style={{ fontSize: '1.2rem' }}></i> Preferensi Sistem
@@ -224,21 +230,24 @@ export default function ProfilePage() {
           {/* Tab 1: Informasi Pribadi */}
           {activeTab === 'pribadi' && (
             <div className="fade-in">
-              <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)' }}>Informasi Pribadi</h2>
+              <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)', fontWeight: '800' }}>Informasi Pribadi</h2>
               
               {/* Profile Overview (Horizontal) */}
-              <div className="profile-overview-card">
+              <div className="profile-overview-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', borderRadius: '24px', display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '24px' }}>
                 <div style={{ position: 'relative', width: '90px', height: '90px', flexShrink: 0 }}>
                   {user.avatar_url ? (
-                    <img src={user.avatar_url} alt="Profile" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--color-bg)', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }} />
+                    <div style={{ width: '100%', height: '100%', borderRadius: '50%', padding: '3px', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)' }}>
+                      <img src={user.avatar_url} alt="Profile" style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                    </div>
                   ) : (
-                    <div style={{ width: '100%', height: '100%', borderRadius: '50%', background: 'linear-gradient(135deg, #C41E3A 0%, #9f1239 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
+                    <div style={{ width: '100%', height: '100%', borderRadius: '50%', background: 'linear-gradient(135deg, #C41E3A 0%, #9f1239 100%)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', boxShadow: 'var(--glass-shadow)' }}>
                       <i className="ph ph-user-circle"></i>
                     </div>
                   )}
                   <button 
                     onClick={() => fileInputRef.current.click()}
-                    style={{ position: 'absolute', bottom: -5, right: -5, width: '32px', height: '32px', borderRadius: '50%', background: '#C41E3A', color: 'white', border: '3px solid var(--color-bg)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 4px rgba(0,0,0,0.1)' , flexShrink: 0 }}
+                    className="siakad-btn-primary"
+                    style={{ position: 'absolute', bottom: -5, right: -5, width: '32px', height: '32px', borderRadius: '50%', padding: '0', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, borderRadius: '50px !important' }}
                     title="Ganti Foto Profil"
                   >
                     <i className="ph ph-camera" style={{ fontSize: '1rem' }}></i>
@@ -246,14 +255,14 @@ export default function ProfilePage() {
                   <input type="file" ref={fileInputRef} onChange={handleAvatarUpload} accept="image/*" style={{ display: 'none' }} />
                 </div>
                 <div>
-                  <h3 style={{ margin: '0 0 4px 0', fontSize: '1.3rem', color: 'var(--color-text)' }}>{user.name}</h3>
-                  <p style={{ margin: '0 0 12px 0', color: 'var(--color-muted)', fontSize: '0.9rem' }}>NIM/NIP: {user.nim_nip}</p>
-                  <div className="profile-badges">
-                    <span style={{ padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold', background: user.role === 'admin' ? '#fee2e2' : user.role === 'dosen' ? '#e0e7ff' : '#dcfce7', color: user.role === 'admin' ? '#991b1b' : user.role === 'dosen' ? '#3730a3' : '#166534', textTransform: 'uppercase' }}>
+                  <h3 style={{ margin: '0 0 4px 0', fontSize: '1.3rem', color: 'var(--color-text)', fontWeight: '800' }}>{user.name}</h3>
+                  <p style={{ margin: '0 0 12px 0', color: 'var(--color-muted)', fontSize: '0.9rem', fontWeight: '600' }}>NIM/NIP: {user.nim_nip}</p>
+                  <div className="profile-badges" style={{ display: 'flex', gap: '8px' }}>
+                    <span className="siakad-badge-status" style={{ color: '#047857', borderColor: 'rgba(4,120,87,0.3)', textTransform: 'uppercase' }}>
                       {user.role}
                     </span>
                     {user.prodi && (
-                      <span style={{ padding: '4px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 'bold', background: 'var(--glass-bg)', color: 'var(--color-text)', border: '1px solid rgba(255,255,255,0.5)', textTransform: 'uppercase' }}>
+                      <span className="siakad-badge-status" style={{ color: 'var(--color-text)', borderColor: 'var(--color-border)', textTransform: 'uppercase' }}>
                         {user.prodi}
                       </span>
                     )}
@@ -265,27 +274,27 @@ export default function ProfilePage() {
               <form onSubmit={handleUpdateProfile} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
                   <div style={{ flex: '1 1 200px' }}>
-                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Email Address</label>
-                    <input type="email" name="email" defaultValue={user.email} placeholder="contoh@kampus.ac.id" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Email Address</label>
+                    <input type="email" name="email" defaultValue={user.email} placeholder="contoh@kampus.ac.id" className="siakad-input" style={{ width: '100%' }} />
                   </div>
                   <div style={{ flex: '1 1 200px' }}>
-                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Nomor HP</label>
-                    <input type="tel" name="phone" defaultValue={user.phone} placeholder="08xxxxxxxxxx" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                    <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Nomor HP</label>
+                    <input type="tel" name="phone" defaultValue={user.phone} placeholder="08xxxxxxxxxx" className="siakad-input" style={{ width: '100%' }} />
                   </div>
                 </div>
                 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Alamat Domisili</label>
-                  <textarea name="address" defaultValue={user.address} rows="3" placeholder="Masukkan alamat lengkap..." style={{ width: '100%', padding: '14px 20px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', resize: 'vertical', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'}></textarea>
+                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Alamat Domisili</label>
+                  <textarea name="address" defaultValue={user.address} rows="3" placeholder="Masukkan alamat lengkap..." className="siakad-input" style={{ width: '100%', borderRadius: '20px', resize: 'vertical' }}></textarea>
                 </div>
                 
                 <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Bio Singkat</label>
-                  <textarea name="bio" defaultValue={user.bio} rows="2" placeholder="Tuliskan sedikit tentang diri Anda..." style={{ width: '100%', padding: '14px 20px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', resize: 'vertical', transition: 'border 0.3s' }} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'}></textarea>
+                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Bio Singkat</label>
+                  <textarea name="bio" defaultValue={user.bio} rows="2" placeholder="Tuliskan sedikit tentang diri Anda..." className="siakad-input" style={{ width: '100%', borderRadius: '20px', resize: 'vertical' }}></textarea>
                 </div>
 
-                <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'flex-end' }}>
-                  <button type="submit" className="siakad-btn-primary" style={{ padding: '14px 32px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ marginTop: '8px', display: 'flex', justifyContent: 'flex-end' }}>
+                  <button type="submit" className="siakad-btn-primary" style={{ padding: '14px 32px', borderRadius: '50px !important' }}>
                     Simpan Perubahan
                   </button>
                 </div>
@@ -296,78 +305,110 @@ export default function ProfilePage() {
           {/* Tab 2: Keamanan */}
           {activeTab === 'keamanan' && (
             <div className="fade-in">
-              <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)' }}>Keamanan Akun</h2>
+              <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)', fontWeight: '800' }}>Keamanan Akun</h2>
               
-              <div style={{ background: 'var(--glass-bg)', border: '1px solid rgba(255,255,255,0.5)', padding: '20px', borderRadius: '12px', marginBottom: '32px', display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-                <i className="ph ph-info" style={{ fontSize: '1.5rem', color: '#C41E3A' }}></i>
-                <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.9rem', lineHeight: '1.5' }}>Pastikan Anda menggunakan kata sandi yang kuat dan tidak digunakan di situs lain. Kombinasikan huruf besar, huruf kecil, angka, dan simbol.</p>
+              <div className="siakad-card" style={{ padding: '20px', borderRadius: '16px', marginBottom: '32px', display: 'flex', gap: '16px', alignItems: 'flex-start', border: 'rgba(185, 28, 28, 0.2)', background: 'var(--glass-bg)' }}>
+                <i className="ph ph-info" style={{ fontSize: '1.5rem', color: '#b91c1c' }}></i>
+                <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.9rem', lineHeight: '1.5', fontWeight: '600' }}>Pastikan Anda menggunakan kata sandi yang kuat dan tidak digunakan di situs lain. Kombinasikan huruf besar, huruf kecil, angka, dan simbol.</p>
               </div>
-
+ 
               <form onSubmit={handleUpdatePassword} style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '500px' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Password Saat Ini</label>
-                  <input type="password" name="current_password" required placeholder="••••••••" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Password Saat Ini</label>
+                  <input type="password" name="current_password" required placeholder="••••••••" className="siakad-input" style={{ width: '100%' }} />
                 </div>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Password Baru</label>
-                  <input type="password" name="password" required minLength="6" placeholder="••••••••" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Password Baru</label>
+                  <input type="password" name="password" required minLength="6" placeholder="••••••••" className="siakad-input" style={{ width: '100%' }} />
                 </div>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600', textTransform: 'uppercase' }}>Konfirmasi Password Baru</label>
-                  <input type="password" name="confirm" required minLength="6" placeholder="••••••••" style={{ width: '100%', padding: '14px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.5)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', boxShadow: 'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff', transition: 'border 0.3s' , minWidth: 0, flex: '1 1 120px'}} onFocus={(e) => e.target.style.borderColor = '#C41E3A'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
+                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '700', textTransform: 'uppercase' }}>Konfirmasi Password Baru</label>
+                  <input type="password" name="confirm" required minLength="6" placeholder="••••••••" className="siakad-input" style={{ width: '100%' }} />
                 </div>
-                <div style={{ marginTop: '16px' }}>
-                  <button type="submit" className="siakad-btn-primary" style={{ padding: '14px 32px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ marginTop: '8px' }}>
+                  <button type="submit" className="siakad-btn-primary" style={{ padding: '14px 32px', borderRadius: '50px !important' }}>
                     Perbarui Password
                   </button>
                 </div>
               </form>
             </div>
           )}
-
+ 
           {/* Tab 3: Preferensi */}
           {activeTab === 'preferensi' && (
             <div className="fade-in">
-              <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)' }}>Preferensi Sistem</h2>
+              <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)', fontWeight: '800' }}>Preferensi Sistem</h2>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 
-                <div className="siakad-modal-header">
+                <div className="siakad-modal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--color-border)', paddingBottom: '16px' }}>
                   <div>
-                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', color: 'var(--color-text)' }}>Notifikasi Email</h4>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Terima pembaruan penting dan jadwal di email Anda.</p>
+                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', color: 'var(--color-text)', fontWeight: '800' }}>Notifikasi Email</h4>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Terima pembaruan penting dan jadwal di email Anda.</p>
                   </div>
-                  <label style={{ position: 'relative', display: 'inline-block', width: '50px', height: '26px', flexShrink: 0, cursor: 'pointer' }}>
-                    <input 
-                      type="checkbox" 
-                      checked={!!user.email_notifications} 
-                      onChange={() => handlePreferenceToggle('email_notifications')}
-                      style={{ opacity: 0, width: 0, height: 0 }} 
-                    />
-                    <span style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: user.email_notifications ? '#C41E3A' : 'var(--color-border)', transition: '.4s', borderRadius: '34px' }}>
-                      <span style={{ position: 'absolute', content: '""', height: '20px', width: '20px', left: '3px', bottom: '3px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', transform: user.email_notifications ? 'translateX(24px)' : 'translateX(0)', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}></span>
-                    </span>
-                  </label>
+                  <div 
+                    onClick={() => handlePreferenceToggle('email_notifications')}
+                    style={{ 
+                      width: '54px', 
+                      height: '28px', 
+                      borderRadius: '50px', 
+                      background: 'var(--glass-bg)', 
+                      boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)',
+                      border: 'var(--inset-border)',
+                      position: 'relative',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      flexShrink: 0
+                    }}
+                  >
+                    <div style={{ 
+                      width: '20px', 
+                      height: '20px', 
+                      borderRadius: '50%', 
+                      background: user.email_notifications ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--color-muted)', 
+                      boxShadow: user.email_notifications ? '0 2px 5px rgba(196,30,58,0.4)' : '0 2px 5px rgba(0,0,0,0.2)',
+                      position: 'absolute',
+                      top: '3px',
+                      left: user.email_notifications ? '29px' : '4px',
+                      transition: 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+                    }}></div>
+                  </div>
                 </div>
-
-                <div className="siakad-modal-header">
+ 
+                <div className="siakad-modal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div>
-                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', color: 'var(--color-text)' }}>Visibilitas Publik</h4>
-                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)' }}>Izinkan pengguna lain melihat nomor HP dan email Anda.</p>
+                    <h4 style={{ margin: '0 0 6px 0', fontSize: '1rem', color: 'var(--color-text)', fontWeight: '800' }}>Visibilitas Publik</h4>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Izinkan pengguna lain melihat nomor HP dan email Anda.</p>
                   </div>
-                  <label style={{ position: 'relative', display: 'inline-block', width: '50px', height: '26px', flexShrink: 0, cursor: 'pointer' }}>
-                    <input 
-                      type="checkbox" 
-                      checked={!!user.public_visibility} 
-                      onChange={() => handlePreferenceToggle('public_visibility')}
-                      style={{ opacity: 0, width: 0, height: 0 }} 
-                    />
-                    <span style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: user.public_visibility ? '#C41E3A' : 'var(--color-border)', transition: '.4s', borderRadius: '34px' }}>
-                      <span style={{ position: 'absolute', content: '""', height: '20px', width: '20px', left: '3px', bottom: '3px', backgroundColor: 'white', transition: '.4s', borderRadius: '50%', transform: user.public_visibility ? 'translateX(24px)' : 'translateX(0)', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}></span>
-                    </span>
-                  </label>
+                  <div 
+                    onClick={() => handlePreferenceToggle('public_visibility')}
+                    style={{ 
+                      width: '54px', 
+                      height: '28px', 
+                      borderRadius: '50px', 
+                      background: 'var(--glass-bg)', 
+                      boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)',
+                      border: 'var(--inset-border)',
+                      position: 'relative',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      flexShrink: 0
+                    }}
+                  >
+                    <div style={{ 
+                      width: '20px', 
+                      height: '20px', 
+                      borderRadius: '50%', 
+                      background: user.public_visibility ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--color-muted)', 
+                      boxShadow: user.public_visibility ? '0 2px 5px rgba(196,30,58,0.4)' : '0 2px 5px rgba(0,0,0,0.2)',
+                      position: 'absolute',
+                      top: '3px',
+                      left: user.public_visibility ? '29px' : '4px',
+                      transition: 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+                    }}></div>
+                  </div>
                 </div>
-
+ 
               </div>
             </div>
           )}

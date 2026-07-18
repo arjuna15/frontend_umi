@@ -255,13 +255,35 @@ export default function ChatPage() {
           <div style={{ padding: '16px', borderBottom: '1px solid var(--color-border)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
               <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--color-text)', flex: 1 }}>Percakapan</h3>
-              <button id="btn-create-room" onClick={() => setShowCreateRoom(true)} style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', width: '36px', height: '36px', borderRadius: '10px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem' }}>
+              <button 
+                id="btn-create-room" 
+                onClick={() => setShowCreateRoom(true)} 
+                className="siakad-btn-success" 
+                style={{ 
+                  width: '36px', 
+                  height: '36px', 
+                  borderRadius: '50% !important', 
+                  padding: 0,
+                  justifyContent: 'center', 
+                  fontSize: '1.1rem' 
+                }}
+              >
                 <i className="ph ph-plus"></i>
               </button>
             </div>
             <div style={{ position: 'relative' }}>
-              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1rem' }}></i>
-              <input id="input-search-rooms" type="text" placeholder="Cari percakapan..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px 12px 10px 46px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+              <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1rem', zIndex: 1 }}></i>
+              <input 
+                id="input-search-rooms" 
+                type="text" 
+                placeholder="Cari percakapan..." 
+                value={searchQuery} 
+                onChange={e => setSearchQuery(e.target.value)} 
+                className="siakad-input"
+                style={{ 
+                  paddingLeft: '46px' 
+                }} 
+              />
             </div>
           </div>
           <div style={{ flex: 1, overflowY: 'auto' }}>
@@ -271,8 +293,22 @@ export default function ChatPage() {
                 <p style={{ margin: 0 }}>Belum ada percakapan</p>
               </div>
             ) : filteredRooms.map(room => (
-              <div key={room.id} id={`room-${room.id}`} onClick={() => selectRoom(room)} style={{ padding: '14px 16px', cursor: 'pointer', borderBottom: '1px solid var(--color-border)', background: selectedRoom?.id === room.id ? 'rgba(59, 130, 246, 0.1)' : 'transparent', borderLeft: selectedRoom?.id === room.id ? '3px solid #3b82f6' : '3px solid transparent', transition: 'all 0.2s ease', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '1.1rem', flexShrink: 0 }}>
+              <div key={room.id} id={`room-${room.id}`} onClick={() => selectRoom(room)} style={{ padding: '14px 16px', cursor: 'pointer', borderBottom: '1px solid var(--color-border)', background: selectedRoom?.id === room.id ? 'rgba(0, 0, 0, 0.02)' : 'transparent', borderLeft: selectedRoom?.id === room.id ? '3px solid var(--apple-blue)' : '3px solid transparent', transition: 'all 0.2s ease', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ 
+                  width: '44px', 
+                  height: '44px', 
+                  borderRadius: '50%', 
+                  background: 'rgba(0, 0, 0, 0.04)', 
+                  boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)',
+                  border: 'var(--inset-border)',
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  color: 'var(--apple-blue)', 
+                  fontWeight: '800', 
+                  fontSize: '1.1rem', 
+                  flexShrink: 0 
+                }}>
                   {(room.name || 'R').charAt(0).toUpperCase()}
                 </div>
                 <div style={{ flex: 1, overflow: 'hidden' }}>
@@ -285,7 +321,7 @@ export default function ChatPage() {
                       {room.last_message ? `${room.last_message.user ? `${room.last_message.user}: ` : ''}${room.last_message.content}` : 'Belum ada pesan'}
                     </p>
                     {room.unread_count > 0 && (
-                      <span style={{ background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)', color: 'white', borderRadius: '10px', padding: '2px 8px', fontSize: '0.7rem', fontWeight: 'bold', flexShrink: 0 }}>{room.unread_count}</span>
+                      <span className="siakad-badge" style={{ width: '20px', height: '20px', fontSize: '0.65rem', color: '#C41E3A', padding: 0, justifyContent: 'center' }}>{room.unread_count}</span>
                     )}
                   </div>
                 </div>
@@ -306,7 +342,19 @@ export default function ChatPage() {
             <>
               {/* Chat Header */}
               <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
+                <div style={{ 
+                  width: '40px', 
+                  height: '40px', 
+                  borderRadius: '50%', 
+                  background: 'rgba(0, 0, 0, 0.04)', 
+                  boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)',
+                  border: 'var(--inset-border)',
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  color: 'var(--apple-blue)', 
+                  fontWeight: '800' 
+                }}>
                   {(selectedRoom.name || 'R').charAt(0).toUpperCase()}
                 </div>
                 <div style={{ flex: 1 }}>
@@ -325,10 +373,10 @@ export default function ChatPage() {
                   const isSent = msg.user_id === currentUserId || msg.is_mine;
                   return (
                     <div key={msg.id || idx} style={{ display: 'flex', justifyContent: isSent ? 'flex-end' : 'flex-start', marginBottom: '4px' }}>
-                      <div style={{ maxWidth: '70%', padding: '10px 14px', borderRadius: isSent ? '16px 16px 4px 16px' : '16px 16px 16px 4px', background: isSent ? 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)' : 'var(--color-surface)', color: isSent ? 'white' : 'var(--color-text)', boxShadow: 'var(--glass-shadow)' }}>
-                        {!isSent && <p style={{ margin: '0 0 4px 0', fontSize: '0.75rem', fontWeight: '700', color: '#3b82f6' }}>{msg.user_name || msg.sender_name || 'User'}</p>}
-                        <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.4', wordBreak: 'break-word' }}>{msg.content}</p>
-                        <p style={{ margin: '4px 0 0 0', fontSize: '0.68rem', opacity: 0.7, textAlign: 'right' }}>{formatTime(msg.created_at)}</p>
+                      <div style={{ maxWidth: '70%', padding: '10px 14px', borderRadius: isSent ? '16px 16px 4px 16px' : '16px 16px 16px 4px', background: isSent ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'var(--glass-bg)', border: 'var(--glass-border)', color: isSent ? '#ffffff' : 'var(--color-text)', boxShadow: 'var(--glass-shadow)' }}>
+                        {!isSent && <p style={{ margin: '0 0 4px 0', fontSize: '0.75rem', fontWeight: '700', color: 'var(--apple-blue)' }}>{msg.user_name || msg.sender_name || 'User'}</p>}
+                        <p style={{ margin: 0, fontSize: '0.9rem', lineHeight: '1.4', wordBreak: 'break-word', color: isSent ? '#ffffff' : 'var(--color-text)' }}>{msg.content}</p>
+                        <p style={{ margin: '4px 0 0 0', fontSize: '0.68rem', opacity: 0.7, textAlign: 'right', color: isSent ? 'rgba(255,255,255,0.8)' : 'var(--color-muted)' }}>{formatTime(msg.created_at)}</p>
                       </div>
                     </div>
                   );
@@ -338,8 +386,29 @@ export default function ChatPage() {
 
               {/* Message Input */}
               <div style={{ padding: '14px 20px', borderTop: '1px solid var(--color-border)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <input id="input-message" type="text" placeholder="Ketik pesan..." value={newMessage} onChange={e => setNewMessage(e.target.value)} onKeyDown={handleKeyPress} style={{ flex: 1, padding: '12px 16px', fontSize: '0.9rem', color: 'var(--color-text)' }} />
-                <button id="btn-send-message" onClick={sendMessage} disabled={sendingMessage || !newMessage.trim()} style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', width: '44px', height: '44px', borderRadius: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', opacity: (!newMessage.trim() || sendingMessage) ? 0.5 : 1, transition: 'opacity 0.2s ease' }}>
+                <input 
+                  id="input-message" 
+                  type="text" 
+                  placeholder="Ketik pesan..." 
+                  value={newMessage} 
+                  onChange={e => setNewMessage(e.target.value)} 
+                  onKeyDown={handleKeyPress} 
+                  className="siakad-input" 
+                />
+                <button 
+                  id="btn-send-message" 
+                  onClick={sendMessage} 
+                  disabled={sendingMessage || !newMessage.trim()} 
+                  className="siakad-btn-primary"
+                  style={{ 
+                    width: '44px', 
+                    height: '44px', 
+                    borderRadius: '50% !important', 
+                    padding: 0,
+                    justifyContent: 'center', 
+                    opacity: (!newMessage.trim() || sendingMessage) ? 0.5 : 1 
+                  }}
+                >
                   <i className={sendingMessage ? "ph ph-spinner" : "ph ph-paper-plane-tilt"} style={sendingMessage ? { animation: 'pwaSpin 1s linear infinite' } : {}}></i>
                 </button>
               </div>
@@ -358,8 +427,24 @@ export default function ChatPage() {
           maxWidth="440px"
           footer={
             <>
-              <button id="btn-cancel-room" onClick={() => setShowCreateRoom(false)} className="btn" style={{ padding: '10px 20px', border: 'none', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Batal</button>
-              <button id="btn-confirm-create-room" onClick={createRoom} disabled={creatingRoom || !newRoomName.trim()} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>
+              <button 
+                id="btn-cancel-room" 
+                onClick={() => setShowCreateRoom(false)} 
+                style={{ 
+                  padding: '12px 24px', 
+                  background: 'var(--glass-bg)', 
+                  color: 'var(--color-text)', 
+                  border: 'var(--glass-border)', 
+                  borderRadius: '50px',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  boxShadow: 'var(--glass-shadow)',
+                  transition: 'all 0.2s'
+                }}
+              >
+                Batal
+              </button>
+              <button id="btn-confirm-create-room" onClick={createRoom} disabled={creatingRoom || !newRoomName.trim()} className="siakad-btn-primary" style={{ padding: '12px 24px' }}>
                 {creatingRoom ? 'Membuat...' : 'Buat Room'}
               </button>
             </>
@@ -367,7 +452,14 @@ export default function ChatPage() {
         >
           <div style={{ marginBottom: '8px' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Nama Ruang Obrolan</label>
-            <input id="input-room-name" type="text" value={newRoomName} onChange={e => setNewRoomName(e.target.value)} placeholder="Masukkan nama room..." style={{ width: '100%', padding: '12px 16px', fontSize: '0.9rem', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+            <input 
+              id="input-room-name" 
+              type="text" 
+              value={newRoomName} 
+              onChange={e => setNewRoomName(e.target.value)} 
+              placeholder="Masukkan nama room..." 
+              className="siakad-input" 
+            />
           </div>
         </ModalShell>
       )}

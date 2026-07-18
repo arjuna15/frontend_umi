@@ -70,8 +70,8 @@ export default function KeuanganPage() {
         </div>
       </div>
 
-      <div className="siakad-card" style={{ padding: '0px', overflow: 'hidden' }}>
-        <div style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)' }}>
+      <div className="siakad-card" style={{ padding: '24px', overflow: 'hidden' }}>
+        <div style={{ paddingBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', borderBottom: '1px solid var(--color-border)', marginBottom: '16px' }}>
           <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--color-text)', fontWeight: 'bold' }}>Daftar Tagihan Anda</h3>
           <div style={{ position: 'relative', width: '300px' }}>
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.1rem' }}></i>
@@ -81,14 +81,14 @@ export default function KeuanganPage() {
         
         {data.billings && data.billings.length > 0 ? (
           <div style={{ overflowX: 'auto' }}>
-            <table className="siakad-table" style={{ width: '100%', minWidth: '800px', borderCollapse: 'collapse', textAlign: 'left' }}>
+            <table style={{ width: '100%', minWidth: '800px', borderCollapse: 'separate', borderSpacing: '0 10px', textAlign: 'left' }}>
               <thead>
-                <tr style={{ background: 'var(--glass-bg)', color: 'var(--color-muted)', borderBottom: '1px solid var(--color-border)', textTransform: 'uppercase', fontSize: '0.85rem', letterSpacing: '0.05em' }}>
-                  <th style={{ padding: '16px' }}>Deskripsi Tagihan</th>
-                  <th style={{ padding: '16px' }}>Jatuh Tempo</th>
-                  <th style={{ padding: '16px' }}>Nominal (Rp)</th>
-                  <th style={{ padding: '16px' }}>Status</th>
-                  <th style={{ padding: '16px' }}>Aksi</th>
+                <tr>
+                  <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Deskripsi Tagihan</th>
+                  <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Jatuh Tempo</th>
+                  <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Nominal (Rp)</th>
+                  <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Status</th>
+                  <th style={{ padding: '8px 20px', color: 'var(--color-muted)', fontWeight: 'bold', fontSize: '0.8rem', textTransform: 'uppercase' }}>Aksi</th>
                 </tr>
               </thead>
               <tbody>
@@ -111,19 +111,64 @@ export default function KeuanganPage() {
                   }
 
                   return filtered.map((bill, i) => (
-                    <tr key={i} style={{ borderBottom: '1px solid var(--color-border)', transition: 'all 0.2s' }} onMouseEnter={(e)=>e.currentTarget.style.background='var(--glass-bg)'} onMouseLeave={(e)=>e.currentTarget.style.background='transparent'}>
-                      <td style={{ padding: '16px', fontWeight: '500', color: 'var(--color-text)' }}>{bill.description}</td>
-                      <td style={{ padding: '16px' }}>{bill.due_date}</td>
-                      <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{new Intl.NumberFormat('id-ID').format(bill.amount)}</td>
-                      <td style={{ padding: '16px' }}>
-                        <span className="siakad-badge" style={{
-                          background: bill.status === 'Lunas' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)',
-                          color: bill.status === 'Lunas' ? '#10b981' : '#ef4444'
+                    <tr key={i}>
+                      <td style={{ 
+                        padding: '14px 20px', 
+                        background: 'var(--liquid-bg)',
+                        borderLeft: 'var(--inset-border)',
+                        borderTop: 'var(--inset-border)',
+                        borderBottom: 'var(--inset-border)',
+                        borderRadius: '16px 0 0 16px',
+                        boxShadow: 'inset 3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                        fontWeight: 'bold', 
+                        color: 'var(--color-text)' 
+                      }}>{bill.description}</td>
+                      <td style={{ 
+                        padding: '14px 20px', 
+                        background: 'var(--liquid-bg)',
+                        borderTop: 'var(--inset-border)',
+                        borderBottom: 'var(--inset-border)',
+                        boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                        color: 'var(--color-muted)' 
+                      }}>{bill.due_date}</td>
+                      <td style={{ 
+                        padding: '14px 20px', 
+                        background: 'var(--liquid-bg)',
+                        borderTop: 'var(--inset-border)',
+                        borderBottom: 'var(--inset-border)',
+                        boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)',
+                        fontWeight: 'bold', 
+                        color: 'var(--color-text)' 
+                      }}>{new Intl.NumberFormat('id-ID').format(bill.amount)}</td>
+                      <td style={{ 
+                        padding: '14px 20px', 
+                        background: 'var(--liquid-bg)',
+                        borderTop: 'var(--inset-border)',
+                        borderBottom: 'var(--inset-border)',
+                        boxShadow: 'inset 0 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                      }}>
+                        <span style={{
+                          background: 'var(--glass-bg)',
+                          border: 'var(--glass-border)',
+                          boxShadow: 'var(--glass-shadow)',
+                          color: bill.status === 'Lunas' ? '#10b981' : '#ef4444',
+                          padding: '4px 14px',
+                          borderRadius: '50px',
+                          fontSize: '0.8rem',
+                          fontWeight: '800'
                         }}>
                           {bill.status}
                         </span>
                       </td>
-                      <td style={{ padding: '16px' }}>
+                      <td style={{ 
+                        padding: '14px 20px', 
+                        background: 'var(--liquid-bg)',
+                        borderRight: 'var(--inset-border)',
+                        borderTop: 'var(--inset-border)',
+                        borderBottom: 'var(--inset-border)',
+                        borderRadius: '0 16px 16px 0',
+                        boxShadow: 'inset -3px 3px 5px var(--inset-shadow-dark), inset 0 -3px 5px var(--inset-shadow-light)'
+                      }}>
                         <div style={{ display: 'flex', gap: '8px' }}>
                           {bill.status !== 'Lunas' ? (
                             <button onClick={() => handlePay(bill.id)} style={{ padding: '8px 18px', background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', borderRadius: '50px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px', boxShadow: '0 2px 6px rgba(16, 185, 129, 0.3)' }}>

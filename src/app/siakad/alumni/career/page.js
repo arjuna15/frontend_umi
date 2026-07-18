@@ -101,8 +101,8 @@ export default function AlumniCareerPage() {
       </div>
 
       {message.text && (
-        <div style={{ padding: '16px 20px', borderRadius: '12px', marginBottom: '24px', background: message.type === 'success' ? 'rgba(16,185,129,0.1)' : 'rgba(239,68,68,0.1)', border: `1px solid ${message.type === 'success' ? '#10b981' : '#ef4444'}`, color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.4rem' }}></i>
+        <div style={{ padding: '14px 20px', borderRadius: '50px', marginBottom: '24px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', color: message.type === 'success' ? '#10b981' : '#ef4444', fontWeight: '700', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <i className={message.type === 'success' ? "ph-fill ph-check-circle" : "ph-fill ph-warning-circle"} style={{ fontSize: '1.2rem' }}></i>
           {message.text}
         </div>
       )}
@@ -112,7 +112,7 @@ export default function AlumniCareerPage() {
         {statCards.map((s, i) => (
           <div key={i} className="siakad-card" style={{ padding: '20px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-              <div style={{ width: '40px', height: '40px', background: s.bg, color: s.color, borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>
+              <div style={{ width: '40px', height: '40px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: s.color, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                 <i className={s.icon}></i>
               </div>
               <span style={{ color: 'var(--color-muted)', fontSize: '0.85rem', fontWeight: '600' }}>{s.label}</span>
@@ -156,8 +156,8 @@ export default function AlumniCareerPage() {
               <div key={j.id} className="siakad-card" style={{ padding: '24px', cursor: 'pointer', transition: 'all 0.2s', border: isExpanded ? '1px solid rgba(59,130,246,0.3)' : '1px solid transparent' }} onClick={() => setExpandedJob(isExpanded ? null : j.id)}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px', flexWrap: 'wrap' }}>
                   <div style={{ display: 'flex', gap: '16px', flex: 1 }}>
-                    <div style={{ width: '52px', height: '52px', background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <i className="ph ph-briefcase" style={{ color: 'white', fontSize: '1.4rem' }}></i>
+                    <div style={{ width: '52px', height: '52px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, color: '#3b82f6', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
+                      <i className="ph ph-briefcase" style={{ fontSize: '1.4rem' }}></i>
                     </div>
                     <div>
                       <h3 style={{ margin: '0 0 4px', fontSize: '1.1rem', fontWeight: '700', color: 'var(--color-text)' }}>{j.position || j.title || '-'}</h3>
@@ -171,7 +171,7 @@ export default function AlumniCareerPage() {
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
                     {typeBadge(j.employment_type || j.type)}
-                    {isApplied && <span style={{ background: 'rgba(16,185,129,0.15)', color: '#10b981', padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700' }}>✓ Sudah Dilamar</span>}
+                    {isApplied && <span style={{ background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: '#10b981', padding: '4px 14px', borderRadius: '50px', fontSize: '0.75rem', fontWeight: '800', boxShadow: 'inset 1px 1px 3px var(--inset-shadow-dark), inset -1px -1px 3px var(--inset-shadow-light)' }}>✓ Sudah Dilamar</span>}
                   </div>
                 </div>
 
@@ -190,7 +190,7 @@ export default function AlumniCareerPage() {
                       </div>
                     )}
                     {!isApplied && (
-                      <button id={`btn-apply-${j.id}`} onClick={() => { setSelectedJob(j); setShowApplyModal(true); }} className="btn" style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '12px 28px', borderRadius: '30px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
+                      <button id={`btn-apply-${j.id}`} onClick={() => { setSelectedJob(j); setShowApplyModal(true); }} className="siakad-btn-primary" style={{ padding: '12px 28px' }}>
                         <i className="ph ph-paper-plane-tilt"></i> Lamar Sekarang
                       </button>
                     )}
@@ -210,14 +210,14 @@ export default function AlumniCareerPage() {
             <button id="btn-confirm-apply" onClick={applyJob} disabled={applying} className="siakad-btn-primary" style={{ padding: '10px 24px' }}>{applying ? 'Mengirim...' : 'Kirim Lamaran'}</button>
           </>
         }>
-          <div style={{ padding: '12px 16px', background: 'rgba(59,130,246,0.05)', borderRadius: '10px', marginBottom: '20px', border: '1px solid rgba(59,130,246,0.15)' }}>
+          <div style={{ padding: '12px 16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '12px', marginBottom: '20px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
             <span style={{ fontWeight: '700', color: 'var(--color-text)' }}>{selectedJob?.company || selectedJob?.company_name}</span>
             <span style={{ color: 'var(--color-muted)', margin: '0 8px' }}>•</span>
             <span style={{ color: 'var(--color-muted)', fontSize: '0.88rem' }}>{selectedJob?.location || '-'}</span>
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Upload Resume (PDF)</label>
-            <input id="input-resume-file" className="siakad-input" type="file" accept=".pdf,.doc,.docx" onChange={e => setResumeFile(e.target.files[0] || null)} />
+            <input id="input-resume-file" className="siakad-file-input" type="file" accept=".pdf,.doc,.docx" onChange={e => setResumeFile(e.target.files[0] || null)} />
           </div>
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.85rem', color: 'var(--color-muted)', fontWeight: '600' }}>Cover Letter</label>

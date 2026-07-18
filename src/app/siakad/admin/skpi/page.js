@@ -32,9 +32,9 @@ export default function SkpiAdminPage() {
   };
 
   const statusBadge = (s) => {
-    const colors = { pending: ['#f59e0b','rgba(245,158,11,0.1)'], approved: ['#10b981','rgba(16,185,129,0.1)'], rejected: ['#ef4444','rgba(239,68,68,0.1)'] };
-    const c = colors[s] || colors.pending;
-    return <span style={{ padding: '4px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', color: c[0], background: c[1] }}>{s === 'pending' ? 'Menunggu' : s === 'approved' ? 'Disetujui' : 'Ditolak'}</span>;
+    const color = s === 'approved' ? '#10b981' : s === 'rejected' ? '#ef4444' : '#f59e0b';
+    const text = s === 'pending' ? 'Menunggu' : s === 'approved' ? 'Disetujui' : 'Ditolak';
+    return <span className="siakad-badge" style={{ color }}>{text}</span>;
   };
 
   if (loading) return (
@@ -63,7 +63,7 @@ export default function SkpiAdminPage() {
       <div className="siakad-card stagger-2" style={{ padding: '24px' }}>
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 16px 0' }}>Daftar Pengajuan Prestasi</h2>
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
             <thead><tr>
               {['Mahasiswa', 'Nama Prestasi', 'Kategori', 'Tingkat', 'Status', 'Aksi'].map(h => (
                 <th key={h} style={{ padding: '12px 16px', textAlign: 'left', fontSize: '0.78rem', fontWeight: '700', color: 'var(--color-muted)', borderBottom: '2px solid var(--color-border)', textTransform: 'uppercase' }}>{h}</th>
