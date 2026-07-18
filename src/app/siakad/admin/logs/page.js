@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function AdminLogsPage() {
@@ -8,11 +8,7 @@ export default function AdminLogsPage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    fetchLogs();
-  }, []);
-
-  const fetchLogs = async () => {
+  const fetchLogs = useCallback(async () => {
     const token = localStorage.getItem('siakad_token');
     if (!token) return router.push('/siakad/login');
 
@@ -37,7 +33,14 @@ export default function AdminLogsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [router]);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      fetchLogs();
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [fetchLogs]);
 
   const filteredLogs = logs.filter(log => 
     log.action.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -105,15 +108,19 @@ export default function AdminLogsPage() {
                   <td style={{ padding: '16px', fontWeight: 'bold', color: 'var(--color-text)' }}>{log.user}</td>
                   <td style={{ padding: '16px' }}>
                     <span style={{ 
-                      display: 'inline-block', 
-                      background: 'var(--glass-bg)', 
+                      display: 'inline-flex', 
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '6px',
+                      background: 'var(--liquid-bg)', 
                       padding: '6px 12px', 
-                      borderRadius: '8px', 
-                      fontSize: '0.85rem', 
-                      fontWeight: 600, 
-                      border: '1px solid var(--color-border)',
+                      borderRadius: '9999px', 
+                      fontSize: '0.78rem', 
+                      fontWeight: 700, 
+                      border: 'var(--inset-border)',
                       minWidth: '150px',
-                      textAlign: 'center'
+                      textAlign: 'center',
+                      boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)'
                     }}>
                       {log.action}
                     </span>

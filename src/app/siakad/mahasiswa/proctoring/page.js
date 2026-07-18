@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function ProctoringStudentPage() {
@@ -76,7 +76,7 @@ export default function ProctoringStudentPage() {
       // Calculate remaining time
       if (sessObj.end_time || data.data?.end_time || data.session?.end_time) {
         const end = new Date(sessObj.end_time || data.data?.end_time || data.session?.end_time).getTime();
-        const now = Date.now();
+        const now = new Date().getTime();
         setTimeLeft(Math.max(0, Math.floor((end - now) / 1000)));
       } else {
         setTimeLeft(3600); // default 1 hour
@@ -109,7 +109,7 @@ export default function ProctoringStudentPage() {
     }
   };
 
-  const logViolation = async (type, description) => {
+  const logViolation = useCallback(async (type, description) => {
     const v = { type, description, timestamp: new Date().toISOString() };
     setViolations(prev => [...prev, v]);
     try {
@@ -119,7 +119,7 @@ export default function ProctoringStudentPage() {
         body: JSON.stringify({ token: token.trim(), event_type: type, description })
       });
     } catch (e) { console.error('Failed to log violation:', e); }
-  };
+  }, [apiUrl, token]);
 
   const submitQuizAnswers = async () => {
     if (!quizData) return;
@@ -169,11 +169,13 @@ export default function ProctoringStudentPage() {
     };
     document.addEventListener('visibilitychange', handleVisibility);
     return () => document.removeEventListener('visibilitychange', handleVisibility);
-  }, [joined, token]);
+  }, [joined, token, logViolation]);
 
   // Timer countdown
+  const shouldRunTimer = timeLeft !== null && timeLeft > 0;
+
   useEffect(() => {
-    if (timeLeft === null || timeLeft <= 0) return;
+    if (!shouldRunTimer) return;
     timerRef.current = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) { clearInterval(timerRef.current); return 0; }
@@ -181,7 +183,7 @@ export default function ProctoringStudentPage() {
       });
     }, 1000);
     return () => clearInterval(timerRef.current);
-  }, [timeLeft !== null]);
+  }, [shouldRunTimer]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -292,7 +294,7 @@ export default function ProctoringStudentPage() {
             </div>
 
             {(result.has_essay || result.essay_count > 0 || quizData?.questions?.some(q => q.type === 'essay' || q.question_type === 'essay')) && (
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--glass-bg)', border: 'var(--glass-border)', color: '#f59e0b', padding: '10px 16px', borderRadius: '10px', fontSize: '0.85rem', fontWeight: '600', marginBottom: '24px', boxShadow: 'var(--glass-shadow)', borderLeft: '4px solid #f59e0b' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: '#f59e0b', padding: '10px 16px', borderRadius: '9999px', fontSize: '0.85rem', fontWeight: '700', marginBottom: '24px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                 <i className="ph ph-info"></i>
                 <span>Menunggu Penilaian Esai oleh Dosen</span>
               </div>

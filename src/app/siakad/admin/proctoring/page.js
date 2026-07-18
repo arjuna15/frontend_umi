@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import ModalShell from '../../components/ModalShell';
 import CustomSelect from '../../components/CustomSelect';
@@ -20,7 +20,7 @@ export default function ProctoringAdminPage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
   const getToken = () => localStorage.getItem('siakad_token');
 
-  const fetchSessions = async () => {
+  const fetchSessions = useCallback(async () => {
     const token = getToken();
     if (!token) return router.push('/siakad/login');
     try {
@@ -39,7 +39,7 @@ export default function ProctoringAdminPage() {
       console.error(e);
       setMessage({ text: 'Gagal memuat data proctoring.', type: 'error' });
     } finally { setLoading(false); }
-  };
+  }, [router, apiUrl]);
 
   const generateToken = async () => {
     setGeneratingToken(true);
@@ -84,7 +84,7 @@ export default function ProctoringAdminPage() {
     } catch (e) { setLogs([]); }
   };
 
-  const fetchAvailableQuizzes = async () => {
+  const fetchAvailableQuizzes = useCallback(async () => {
     const token = getToken();
     if (!token) return;
     try {
@@ -101,17 +101,47 @@ export default function ProctoringAdminPage() {
     } catch (e) {
       console.error(e);
     }
-  };
+  }, [apiUrl]);
 
   useEffect(() => {
-    fetchSessions();
-    fetchAvailableQuizzes();
-  }, [router]);
+    const frame = requestAnimationFrame(() => {
+      fetchSessions();
+      fetchAvailableQuizzes();
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [fetchSessions, fetchAvailableQuizzes]);
 
   const statusBadge = (status) => {
-    const colors = { active: '#10b981', running: '#10b981', pending: '#f59e0b', waiting: '#f59e0b', completed: '#3b82f6', ended: '#94a3b8' };
-    const c = colors[status] || '#94a3b8';
-    return <span style={{ background: `${c}20`, color: c, padding: '4px 12px', borderRadius: '20px', fontSize: '0.78rem', fontWeight: '600', textTransform: 'capitalize' }}>{status}</span>;
+    const config = {
+      active: { color: '#10b981', bg: 'rgba(16,185,129,0.1)' },
+      running: { color: '#10b981', bg: 'rgba(16,185,129,0.1)' },
+      pending: { color: '#f59e0b', bg: 'rgba(245,158,11,0.1)' },
+      waiting: { color: '#f59e0b', bg: 'rgba(245,158,11,0.1)' },
+      completed: { color: '#3b82f6', bg: 'rgba(59,130,246,0.1)' },
+      ended: { color: '#94a3b8', bg: 'rgba(148,163,184,0.12)' }
+    };
+    const c = config[status] || config.ended;
+    return (
+      <span style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '6px',
+        padding: '6px 12px',
+        borderRadius: '9999px',
+        fontSize: '0.78rem',
+        fontWeight: '700',
+        textTransform: 'capitalize',
+        color: c.color,
+        background: 'var(--liquid-bg)',
+        border: 'var(--inset-border)',
+        boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)',
+        minWidth: '92px',
+        justifyContent: 'center'
+      }}>
+        <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: c.color, boxShadow: `0 0 0 3px ${c.bg}` }}></span>
+        {status}
+      </span>
+    );
   };
 
   const violationIcon = (type) => {
@@ -214,7 +244,7 @@ export default function ProctoringAdminPage() {
                   <td style={{ padding: '12px 14px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{s.start_time ? new Date(s.start_time).toLocaleString('id-ID') : '-'}</td>
                   <td style={{ padding: '12px 14px', color: 'var(--color-muted)', fontSize: '0.85rem' }}>{s.end_time ? new Date(s.end_time).toLocaleString('id-ID') : '-'}</td>
                   <td style={{ padding: '12px 14px' }}>
-                    <button id={`btn-logs-${s.id}`} onClick={() => viewLogs(s)} style={{ background: 'rgba(139,92,246,0.1)', color: '#8b5cf6', border: 'none', padding: '4px 10px', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '600' }}>
+                    <button id={`btn-logs-${s.id}`} onClick={() => viewLogs(s)} style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'var(--liquid-bg)', color: '#8b5cf6', border: 'var(--inset-border)', padding: '6px 12px', borderRadius: '9999px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: '700', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                       {s.logs_count || s.log_count || s.violations_count || 0} <i className="ph ph-eye"></i>
                     </button>
                   </td>
@@ -247,7 +277,7 @@ export default function ProctoringAdminPage() {
           icon="ph-shield-warning"
           onClose={() => setShowLogs(null)}
           footer={
-            <button id="btn-close-logs" onClick={() => setShowLogs(null)} className="btn" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', padding: '10px 20px', borderRadius: '10px',    cursor: 'pointer', fontWeight: '600', transition: 'all 0.2s' }}>Tutup</button>
+            <button id="btn-close-logs" onClick={() => setShowLogs(null)} className="btn" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', color: 'var(--color-text)', padding: '10px 20px', borderRadius: '9999px', cursor: 'pointer', fontWeight: '700', transition: 'all 0.2s' }}>Tutup</button>
           }
         >
           {logs.length === 0 ? (
@@ -260,7 +290,7 @@ export default function ProctoringAdminPage() {
               {logs.map((log, idx) => {
                 const vc = violationColor(log.type || log.event_type);
                 return (
-                  <div key={log.id || idx} style={{ display: 'flex', gap: '12px', padding: '12px', borderRadius: '10px', background: 'var(--color-surface)', border: '1px solid var(--color-border)' }}>
+                  <div key={log.id || idx} style={{ display: 'flex', gap: '12px', padding: '12px', borderRadius: '14px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                     <div style={{
                       width: '36px',
                       height: '36px',
@@ -278,7 +308,7 @@ export default function ProctoringAdminPage() {
                     </div>
                     <div style={{ flex: 1 }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                        <span style={{ fontWeight: '600', color: vc, fontSize: '0.88rem', textTransform: 'capitalize' }}>{(log.event || log.type || log.event_type || 'violation').replace(/_/g, ' ')}</span>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '5px 10px', borderRadius: '9999px', fontWeight: '700', color: vc, fontSize: '0.78rem', textTransform: 'capitalize', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>{(log.event || log.type || log.event_type || 'violation').replace(/_/g, ' ')}</span>
                         <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>{log.created_at ? new Date(log.created_at).toLocaleTimeString('id-ID') : ''}</span>
                       </div>
                       <p style={{ margin: 0, fontSize: '0.82rem', color: 'var(--color-muted)' }}>
