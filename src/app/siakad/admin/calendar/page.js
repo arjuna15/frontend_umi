@@ -557,15 +557,21 @@ export default function AdminCalendarPage() {
             </button>
           </>
         }>
-          <div style={{ marginBottom: '20px', padding: '14px', borderRadius: '14px', background: 'rgba(59,130,246,0.06)', border: '1px solid rgba(59,130,246,0.15)' }}>
-            <p style={{ margin: '0 0 10px 0', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)' }}>Cakupan Perubahan</p>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--color-text)' }}>
-              <input type="radio" name="editMode" checked={editForm.editMode === 'permanent'} onChange={() => setEditForm({ ...editForm, editMode: 'permanent' })} style={{ accentColor: '#3b82f6' }} />
-              Ubah permanen untuk seluruh semester
+          <div style={{ marginBottom: '20px', padding: '16px', borderRadius: '16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)' }}>
+            <p style={{ margin: '0 0 12px 0', fontSize: '0.85rem', fontWeight: '700', color: 'var(--color-text)', letterSpacing: '0.02em' }}>Cakupan Perubahan</p>
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', marginBottom: '10px', fontSize: '0.85rem', color: 'var(--color-text)', padding: '10px 12px', borderRadius: '12px', background: editForm.editMode === 'permanent' ? 'rgba(196,30,58,0.08)' : 'transparent', boxShadow: editForm.editMode === 'permanent' ? 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' : 'none' }}>
+              <input type="radio" name="editMode" checked={editForm.editMode === 'permanent'} onChange={() => setEditForm({ ...editForm, editMode: 'permanent' })} style={{ accentColor: '#C41E3A', marginTop: '3px' }} />
+              <span>
+                <strong style={{ display: 'block', marginBottom: '2px', color: 'var(--color-text)' }}>Permanen</strong>
+                <span style={{ color: 'var(--color-muted)' }}>Berlaku untuk seluruh semester.</span>
+              </span>
             </label>
-            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--color-text)' }}>
-              <input type="radio" name="editMode" checked={editForm.editMode === 'session'} onChange={() => setEditForm({ ...editForm, editMode: 'session' })} style={{ accentColor: '#f59e0b' }} />
-              Hanya ubah untuk sesi tanggal {selectedDateStr || 'ini'} saja
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--color-text)', padding: '10px 12px', borderRadius: '12px', background: editForm.editMode === 'session' ? 'rgba(245,158,11,0.08)' : 'transparent', boxShadow: editForm.editMode === 'session' ? 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' : 'none' }}>
+              <input type="radio" name="editMode" checked={editForm.editMode === 'session'} onChange={() => setEditForm({ ...editForm, editMode: 'session' })} style={{ accentColor: '#f59e0b', marginTop: '3px' }} />
+              <span>
+                <strong style={{ display: 'block', marginBottom: '2px', color: 'var(--color-text)' }}>Hanya Sesi Ini</strong>
+                <span style={{ color: 'var(--color-muted)' }}>Berlaku untuk tanggal {selectedDateStr || 'ini'} saja.</span>
+              </span>
             </label>
           </div>
 
