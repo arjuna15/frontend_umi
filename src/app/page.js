@@ -127,25 +127,23 @@ export default function Home() {
           <h2 style={{ color: '#FFFFFF', fontSize: 'clamp(1.3rem, 3vw, 2.5rem)', lineHeight: '1.2', marginBottom: '16px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
             {lang === "en" ? "KIP-K SCHOLARSHIP TRACK" : "JALUR BEASISWA KIP-K"}
           </h2>
-          
-          {/* List Glass Card */}
-          <div style={{ background: 'var(--glass-bg)', border: 'none', borderRadius: '16px', padding: '20px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
-            <h3 style={{ color: 'white', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
+            <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
               {lang === "en" ? "QUALITY & FREE EDUCATION AT UMIBA" : "KULIAH BERKUALITAS & GRATIS DI UMIBA"}
             </h3>
-            <ul style={{ color: 'white', listStyle: 'none', padding: 0, margin: 0, fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', lineHeight: '1.5', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Ter-Akreditasi <b style={{ opacity: 1 }}>BAIK SEKALI</b></span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Kuliah <b style={{ opacity: 1 }}>Tanpa Biaya</b>, Hidup Lebih Tenang</span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Lulusan SMA/SMK/MA <b style={{ opacity: 1 }}>2024, 2025, 2026</b></span></li>
-              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ background: '#FFFFFF', borderRadius: '50%', padding: '4px', display: 'flex', boxShadow: 'var(--glass-shadow)' }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div> <span style={{ opacity: 0.9 }}>Pendaftaran <b style={{ opacity: 1 }}>Mudah & Transparan</b></span></li>
+            <ul style={{ color: 'var(--color-text)', listStyle: 'none', padding: 0, margin: 0, fontSize: 'clamp(0.85rem, 2vw, 0.95rem)', lineHeight: '1.5', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Ter-Akreditasi <b style={{ fontWeight: '800' }}>BAIK SEKALI</b></span></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Kuliah <b style={{ fontWeight: '800' }}>Tanpa Biaya</b>, Hidup Lebih Tenang</span></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Lulusan SMA/SMK/MA <b style={{ fontWeight: '800' }}>2024, 2025, 2026</b></span></li>
+              <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: 'center', justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div> <span style={{ color: 'var(--color-text)' }}>Pendaftaran <b style={{ fontWeight: '800' }}>Mudah & Transparan</b></span></li>
             </ul>
           </div>
 
-          <a href="https://wa.me/62811870114" target="_blank" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '12px', boxShadow: 'var(--glass-shadow)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
+          <a href="https://wa.me/62811870114" target="_blank" className="btn btn-neu" style={{ padding: '12px 28px', borderRadius: '50px', display: 'inline-flex', alignItems: 'center', gap: '12px', textDecoration: 'none', transition: 'all 0.3s ease' }}>
             <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '2.2rem' }}></i>
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: '800', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '0.5px' }}>Informasi Pendaftaran</div>
-              <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 900, letterSpacing: '1px', lineHeight: '1' }}>0811 870 114</div>
+              <div style={{ fontSize: '0.75rem', fontWeight: '800', color: 'var(--color-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Informasi Pendaftaran</div>
+              <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 900, color: 'var(--color-text)', letterSpacing: '1px', lineHeight: '1' }}>0811 870 114</div>
             </div>
           </a>
         </div>
@@ -156,7 +154,7 @@ export default function Home() {
         <div className="hero-overlay-red" style={{ position: 'absolute', inset: 0, zIndex: 1 }}></div>
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 2 ? 1 : 0, transform: currentSlide === 2 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
-          <div style={{ display: 'inline-block', background: 'var(--glass-bg)', border: 'none', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px', borderRadius: '30px', letterSpacing: '1px' }}>
+          <div style={{ display: 'inline-block', background: 'var(--glass-bg)', border: 'var(--glass-border)', color: 'var(--color-text)', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px', borderRadius: '30px', letterSpacing: '1px', boxShadow: 'var(--glass-shadow)' }}>
             TAHUN AKADEMIK 2026/2027
           </div>
 
@@ -164,18 +162,16 @@ export default function Home() {
             PENERIMAAN MAHASISWA BARU
           </h1>
           <div style={{ marginBottom: '24px' }}>
-            <div style={{ 
+            <div className="neu-card" style={{ 
               display: 'inline-flex', 
               flexDirection: 'column',
-              background: '#FFFFFF', 
               padding: '12px 28px',
-              borderRadius: '12px',
-              boxShadow: 'var(--glass-shadow)',
+              borderRadius: '16px',
               margin: 0,
               alignItems: 'center'
             }}>
               <h2 style={{ 
-                color: '#B91C1C', 
+                color: 'var(--apple-red)', 
                 fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)', 
                 lineHeight: '1.4', 
                 fontWeight: 900, 
@@ -186,7 +182,7 @@ export default function Home() {
               </h2>
               <div style={{
                 height: '4px',
-                background: '#B91C1C',
+                background: 'var(--apple-red)',
                 borderRadius: '2px',
                 marginTop: '4px',
                 width: '100%',
@@ -195,22 +191,22 @@ export default function Home() {
             </div>
           </div>
 
-          <div style={{ background: 'var(--glass-bg)', border: 'none', borderRadius: '16px', padding: '20px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
-            <h3 style={{ color: '#FFFFFF', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.3)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
+            <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
               {lang === "en" ? "Available Study Programs:" : "Program Studi Pilihan:"}
             </h3>
             <div className="prodi-grid">
               {['(S2) Magister Manajemen', '(S1) Manajemen', '(S1) Ilmu Aktuaria', '(S1) Ilmu Komputer', '(S1) Hukum', '(S1) Sistem & Teknologi Informasi'].map((prodi, idx) => (
                 <div key={idx} className="prodi-card">
-                  <div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: '#B91C1C', fontSize: '0.9rem' }}></i></div>
-                  <span style={{ color: 'white', fontWeight: 700 }}>{prodi}</span>
+                  <div style={{ width: "24px", height: "24px", borderRadius: "50%", boxShadow: "inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)", background: "var(--liquid-bg)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><i className="ph ph-bold ph-check" style={{ color: 'var(--apple-red)', fontSize: '0.9rem' }}></i></div>
+                  <span style={{ color: 'var(--color-text)', fontWeight: 700 }}>{prodi}</span>
                 </div>
               ))}
             </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <a href="/pmb" className="btn" style={{ background: '#FFFFFF', color: '#B91C1C', padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', boxShadow: 'var(--glass-shadow)', transition: 'all 0.3s ease' }}>
+            <a href="/pmb" className="btn btn-neu" style={{ padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', transition: 'all 0.3s ease' }}>
               {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
             </a>
             <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'white', textDecoration: 'none' }}>
@@ -218,8 +214,8 @@ export default function Home() {
                 <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
               </div>
               <div style={{ textAlign: 'left' }}>
-                <div style={{ fontSize: '0.8rem', opacity: 0.9 }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
-                <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', letterSpacing: '1px' }}>0811 870 114</div>
+                <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.8)' }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
+                <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', color: 'white', letterSpacing: '1px' }}>0811 870 114</div>
               </div>
             </a>
           </div>
