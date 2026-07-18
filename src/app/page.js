@@ -51,8 +51,8 @@ export default function Home() {
           <h1 style={{ color: 'white', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '8px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)', letterSpacing: '1px' }}>
             {lang === "en" ? "New Student Admission 2026/27" : "Penerimaan Mahasiswa Baru TA. 2026/27"}
           </h1>
-          <div style={{ display: 'inline-flex', alignItems: 'center', background: 'var(--glass-bg)', border: 'none', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.85rem, 2vw, 1rem)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px', letterSpacing: '1px', borderRadius: '30px' }}>
-            <i className="ph ph-fill ph-student" style={{ marginRight: '8px', fontSize: '1.2rem' }}></i>
+          <div className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--color-text)', padding: '6px 20px', fontSize: 'clamp(0.85rem, 2vw, 1rem)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '20px', letterSpacing: '1px', borderRadius: '30px' }}>
+            <i className="ph ph-fill ph-student" style={{ marginRight: '8px', fontSize: '1.2rem', color: 'var(--apple-red)' }}></i>
             {lang === "en" ? "Master of Management Program" : "Program Studi Magister Manajemen"}
           </div>
           
@@ -110,13 +110,11 @@ export default function Home() {
       {/* SLIDE 2: KIP-K */}
       <div className={`hero-slide hero-content-padding ${currentSlide === 1 ? 'active' : ''}`} style={{ backgroundImage: `url('/2.jpeg')`, position: 'absolute', inset: 0, opacity: currentSlide === 1 ? 1 : 0, pointerEvents: currentSlide === 1 ? 'auto' : 'none', zIndex: currentSlide === 1 ? 10 : 1, transition: 'opacity 0.8s ease-in-out', display: 'flex', alignItems: 'center' }}>
         <div className="hero-overlay-red" style={{ position: 'absolute', inset: 0, zIndex: 1 }}></div>
-        <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 1 ? 1 : 0, transform: currentSlide === 1 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
-          
-          <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', flexWrap: 'wrap' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', background: 'var(--glass-bg)', border: 'none', color: 'white', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px' }}>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 1 ? 1 : 0, transform: currentSlide === 1 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>          <div style={{ display: 'flex', gap: '10px', marginBottom: '16px', flexWrap: 'wrap' }}>
+            <span className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--color-text)', padding: '6px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '800', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px' }}>
               TAHUN AKADEMIK 2026/2027
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', background: 'linear-gradient(135deg, #B91C1C, #E11D48)', color: '#FFFFFF', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px', animation: 'pulse 2s infinite', boxShadow: '0 4px 15px rgba(185, 28, 28, 0.4)' }}>
+            <span className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', border: '1px solid rgba(196, 30, 58, 0.25)', color: 'var(--apple-red)', padding: '6px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '800', textTransform: 'uppercase', borderRadius: '30px', letterSpacing: '1px', animation: 'pulse 2s infinite', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light), 0 0 10px rgba(196, 30, 58, 0.15)' }}>
               <i className="ph ph-fill ph-warning-circle" style={{ marginRight: '6px', fontSize: '1.1rem' }}></i> KUOTA TERBATAS!
             </span>
           </div>
@@ -125,7 +123,7 @@ export default function Home() {
             {lang === "en" ? "NEW STUDENT ADMISSION" : "PENERIMAAN MAHASISWA BARU"}
           </h1>
           <h2 style={{ color: '#FFFFFF', fontSize: 'clamp(1.3rem, 3vw, 2.5rem)', lineHeight: '1.2', marginBottom: '16px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
-            {lang === "en" ? "KIP-K SCHOLARSHIP TRACK" : "JALUR BEASISWA KIP-K"}
+             {lang === "en" ? "KIP-K SCHOLARSHIP TRACK" : "JALUR BEASISWA KIP-K"}
           </h2>
           <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
             <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
@@ -154,9 +152,9 @@ export default function Home() {
         <div className="hero-overlay-red" style={{ position: 'absolute', inset: 0, zIndex: 1 }}></div>
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '750px', width: '100%', opacity: currentSlide === 2 ? 1 : 0, transform: currentSlide === 2 ? 'translateY(0)' : 'translateY(30px)', transition: 'all 0.8s ease 0.3s' }}>
           
-          <div style={{ display: 'inline-block', background: 'var(--glass-bg)', border: 'var(--glass-border)', color: 'var(--color-text)', padding: '4px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px', borderRadius: '30px', letterSpacing: '1px', boxShadow: 'var(--glass-shadow)' }}>
+          <span className="siakad-badge" style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--color-text)', padding: '6px 16px', fontSize: 'clamp(0.8rem, 2vw, 0.95rem)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '16px', borderRadius: '30px', letterSpacing: '1px' }}>
             TAHUN AKADEMIK 2026/2027
-          </div>
+          </span>
 
           <h1 style={{ color: 'white', fontSize: 'clamp(1.5rem, 3.5vw, 3rem)', lineHeight: '1.2', marginBottom: '4px', fontWeight: 900, textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.5)' }}>
             PENERIMAAN MAHASISWA BARU
