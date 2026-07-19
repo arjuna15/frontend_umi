@@ -1643,27 +1643,19 @@ body.dark-mode .hero-arrow:hover {
 
 /* -------------------- Background Motifs & Ambient Orbs -------------------- */
 body {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-  background-size: 30px 30px;
-  background-position: center top;
+  background-image: none;
 }
 
 body.dark-mode {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image: none;
 }
 
   .droplet-bg {
     background-color: var(--color-bg);
-    background-image: linear-gradient(currentColor 1px, transparent 1px),
-                      linear-gradient(90deg, currentColor 1px, transparent 1px);
-    background-size: 30px 30px;
-    background-position: center top;
-    color: rgba(0,0,0,0.03);
+    background-image: none;
   }
   body.dark-mode .droplet-bg {
-    color: rgba(255,255,255,0.03);
+    background-image: none;
   }
 
 
