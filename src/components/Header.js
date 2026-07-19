@@ -117,7 +117,7 @@ export default function Header() {
         {/* Kanan: Search & Sosmed */}
         <div className="top-banner-right" style={{ display: 'flex', alignItems: 'center', gap: '24px', flexShrink: 0 }}>
           <div className="search-bar" style={{ position: 'relative', display: 'flex', alignItems: 'center', width: '100%', zIndex: 99999 }}>
-            <form onSubmit={(e) => { e.preventDefault(); if (searchQuery.trim() && filteredResults.length > 0) router.push(filteredResults[0].url); }} style={{ display: 'flex', width: '100%', alignItems: 'center', padding: '6px 16px', background: '#B91C1C', borderRadius: '20px', boxShadow: 'inset 3px 3px 6px #7F1D1D, inset -3px -3px 6px #F87171', border: 'none' }}>
+            <form onSubmit={(e) => { e.preventDefault(); if (searchQuery.trim() && filteredResults.length > 0) router.push(filteredResults[0].url); }} style={{ display: 'flex', width: '100%', alignItems: 'center', padding: '6px 16px', background: '#B91C1C', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.2)' }}>
               <i className="ph-bold ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.8)', marginRight: '8px' }}></i>
               <input type="text" placeholder="Cari..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '100%', color: '#ffffff' }} />
               {searchQuery && (
