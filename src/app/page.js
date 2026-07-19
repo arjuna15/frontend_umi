@@ -492,7 +492,7 @@ export default function Home() {
     </div>
     <div className="grid grid-3 scroll-mobile">
       {newsData && newsData.length > 0 ? (
-        newsData.map((newsItem, index) => (
+        newsData.slice(0, 6).map((newsItem, index) => (
           <div key={newsItem.id} className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", transitionDelay: `${index * 0.1}s`, padding: '16px', overflow: 'hidden' }}>
             <div style={{ borderRadius: '16px', height: '200px', overflow: 'hidden' }}>
                <img src={newsItem.image_url} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} alt={newsItem.title}/>
