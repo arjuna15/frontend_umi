@@ -106,8 +106,8 @@ export default function Header() {
              </div>
            </div>
            <a href="/pmb" className="btn-daftar-top" style={{ 
-             background: '#ffffff', color: '#B91C1C', padding: '6px 16px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '800', marginLeft: 'auto', transition: 'all 0.3s', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0
-           }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}>
+             background: '#ffffff', color: '#B91C1C', padding: '6px 16px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '800', marginLeft: 'auto', transition: 'all 0.3s', textDecoration: 'none', whiteSpace: 'nowrap', flexShrink: 0, boxShadow: '3px 3px 6px #7F1D1D, -3px -3px 6px #F87171'
+           }} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.boxShadow='4px 4px 8px #7F1D1D, -4px -4px 8px #F87171';}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='3px 3px 6px #7F1D1D, -3px -3px 6px #F87171';}}>
              <span className="d-none-mobile">DAFTAR SEKARANG</span>
              <span className="d-none-desktop">DAFTAR</span>
              <i className="ph-bold ph-arrow-right" style={{ marginLeft: '4px' }}></i>
