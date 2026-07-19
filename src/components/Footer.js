@@ -67,9 +67,11 @@ export default function Footer() {
               <h4 style={{ color: 'white', fontSize: '1.1rem', marginBottom: '24px', fontWeight: '800' }}>{lang === "en" ? "Subscribe Info" : "Berlangganan Info"}</h4>
               
               {/* Newsletter - inset neumorphic on dark */}
-              <div style={{ display: 'flex', background: 'rgba(255,255,255,0.08)', borderRadius: '16px', overflow: 'hidden', marginBottom: '24px', boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.3), inset -2px -2px 5px rgba(255,255,255,0.05)' }}>
-                <input type="email" placeholder={lang === "en" ? "Enter Email Address" : "Masukkan Alamat Email"} style={{ flex: 1, background: 'transparent', border: 'none', padding: '14px 16px', color: 'white', fontSize: '0.9rem', outline: 'none' }} />
-                <button aria-label="Subscribe" style={{ background: 'white', color: 'var(--umiba-red)', border: 'none', padding: '0 20px', cursor: 'pointer', fontWeight: 'bold', borderRadius: '0 16px 16px 0', transition: 'all 0.3s ease' }}><i className="ph-bold ph-paper-plane-right"></i></button>
+              <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', alignItems: 'center' }}>
+                <div style={{ flex: 1, background: 'rgba(0,0,0,0.2)', borderRadius: '16px', boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.06)', padding: '2px' }}>
+                  <input type="email" placeholder={lang === "en" ? "Enter Email Address" : "Masukkan Alamat Email"} style={{ width: '100%', background: 'transparent', border: 'none', padding: '14px 18px', color: 'white', fontSize: '0.9rem', outline: 'none', borderRadius: '14px', boxSizing: 'border-box' }} />
+                </div>
+                <button aria-label="Subscribe" style={{ background: 'white', color: 'var(--umiba-red)', border: 'none', width: '48px', height: '48px', borderRadius: '50%', cursor: 'pointer', fontWeight: 'bold', transition: 'all 0.3s ease', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}><i className="ph-bold ph-paper-plane-right" style={{ fontSize: '1.1rem' }}></i></button>
               </div>
 
               {/* Stats - inset neumorphic on dark */}
