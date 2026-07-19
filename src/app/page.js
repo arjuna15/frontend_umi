@@ -293,7 +293,7 @@ export default function Home() {
 </section>
 
 {/*  ░░░ QUICK STATS STRIP ░░░  */}
-<section style={{ marginTop: '40px', position: 'relative', zIndex: '10' }}>
+<section style={{ padding: '40px 0', position: 'relative', zIndex: '10' }}>
   <div className="container">
     <div className="neu-card grid grid-4 fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 4px 4px 8px #cbd5e1, inset -4px -4px 8px #ffffff", border: "none", borderRadius: "24px", textAlign: 'center', padding: 'var(--space-5)' }}>
       <div>
@@ -362,51 +362,51 @@ export default function Home() {
     
     <div className="grid grid-3">
       {/*  Card 1  */}
-      <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }}>
-        <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
+      <div className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "24px", padding: '24px', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ background: 'var(--color-surface)', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
           <i className="ph ph-duotone ph-briefcase" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
-        <div style={{ minHeight: '240px' }}>
-          <h3 style={{ fontSize: '1.4rem' }}>{t("home.fak_manajemen")}</h3>
-          <p>{t("home.fak_manajemen_desc")}</p>
+        <div style={{ minHeight: '220px' }}>
+          <h3 style={{ fontSize: '1.4rem', fontWeight: 800 }}>{t("home.fak_manajemen")}</h3>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', lineHeight: '1.6' }}>{t("home.fak_manajemen_desc")}</p>
         </div>
         <ul style={{ listStyle: 'none', padding: '0', marginBottom: 'var(--space-4)', color: 'var(--color-muted)' }}>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Manajemen</li>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S2 Magister Manajemen</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Manajemen</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S2 Magister Manajemen</li>
         </ul>
-        <a href="/akademik?tab=manajemen" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
+        <a href="/akademik?tab=manajemen" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto', borderRadius: '12px' }}>{t("home.lihat_fakultas")}</a>
       </div>
       
       {/*  Card 2  */}
-      <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.1s' }}>
-        <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
+      <div className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "24px", padding: '24px', display: 'flex', flexDirection: 'column', transitionDelay: '0.1s' }}>
+        <div style={{ background: 'var(--color-surface)', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
           <i className="ph ph-duotone ph-scales" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
-        <div style={{ minHeight: '240px' }}>
-          <h3 style={{ fontSize: '1.4rem' }}>{t("home.fak_hukum")}</h3>
-          <p>{t("home.fak_hukum_desc")}</p>
+        <div style={{ minHeight: '220px' }}>
+          <h3 style={{ fontSize: '1.4rem', fontWeight: 800 }}>{t("home.fak_hukum")}</h3>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', lineHeight: '1.6' }}>{t("home.fak_hukum_desc")}</p>
         </div>
         <ul style={{ listStyle: 'none', padding: '0', marginBottom: 'var(--space-4)', color: 'var(--color-muted)' }}>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Hukum</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Hukum</li>
         </ul>
-        <a href="/akademik?tab=hukum" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
+        <a href="/akademik?tab=hukum" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto', borderRadius: '12px' }}>{t("home.lihat_fakultas")}</a>
       </div>
       
       {/*  Card 3  */}
-      <div className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.2s' }}>
-        <div style={{ background: 'var(--umiba-red-alpha)', width: '64px', height: '64px', borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
+      <div className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "24px", padding: '24px', display: 'flex', flexDirection: 'column', transitionDelay: '0.2s' }}>
+        <div style={{ background: 'var(--color-surface)', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
           <i className="ph ph-duotone ph-laptop" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
-        <div style={{ minHeight: '240px' }}>
-          <h3 style={{ fontSize: '1.4rem' }}>{t("home.fak_ti")}</h3>
-          <p>{t("home.fak_ti_desc")}</p>
+        <div style={{ minHeight: '220px' }}>
+          <h3 style={{ fontSize: '1.4rem', fontWeight: 800 }}>{t("home.fak_ti")}</h3>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', lineHeight: '1.6' }}>{t("home.fak_ti_desc")}</p>
         </div>
         <ul style={{ listStyle: 'none', padding: '0', marginBottom: 'var(--space-4)', color: 'var(--color-muted)' }}>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Komputer</li>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Sistem &amp; TI</li>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Aktuaria</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Komputer</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Sistem &amp; TI</li>
+          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Aktuaria</li>
         </ul>
-        <a href="/akademik?tab=it" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto' }}>{t("home.lihat_fakultas")}</a>
+        <a href="/akademik?tab=it" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto', borderRadius: '12px' }}>{t("home.lihat_fakultas")}</a>
       </div>
     </div>
   </div>
