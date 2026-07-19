@@ -119,7 +119,7 @@ export default function Header() {
           <div className="search-bar" style={{ position: 'relative', display: 'flex', alignItems: 'center', width: '100%', zIndex: 99999 }}>
             <form onSubmit={(e) => { e.preventDefault(); if (searchQuery.trim() && filteredResults.length > 0) router.push(filteredResults[0].url); }} style={{ display: 'flex', width: '100%', alignItems: 'center', padding: '6px 16px', background: '#B91C1C', borderRadius: '20px', boxShadow: 'inset 3px 3px 6px #7F1D1D, inset -3px -3px 6px #F87171', border: 'none' }}>
               <i className="ph-bold ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.8)', marginRight: '8px' }}></i>
-              <input type="text" placeholder="Cari..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '100%', color: '#ffffff', boxShadow: 'none' }} />
+              <input type="text" placeholder="Cari..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '100%', color: '#ffffff', boxShadow: 'none !important', padding: 0, borderRadius: 0 }} />
               {searchQuery && (
                 <i className="ph-bold ph-x" onClick={() => setSearchQuery('')} style={{ color: 'rgba(255,255,255,0.8)', cursor: 'pointer', marginLeft: '8px', fontSize: '0.8rem' }}></i>
               )}
