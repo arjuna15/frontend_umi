@@ -295,7 +295,7 @@ export default function Home() {
 {/*  ░░░ QUICK STATS STRIP ░░░  */}
 <section style={{ marginTop: '40px', position: 'relative', zIndex: '10' }}>
   <div className="container">
-    <div className="neu-card grid grid-4 fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", textAlign: 'center', padding: 'var(--space-5)' }}>
+    <div className="neu-card grid grid-4 fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 4px 4px 8px #cbd5e1, inset -4px -4px 8px #ffffff", border: "none", borderRadius: "24px", textAlign: 'center', padding: 'var(--space-5)' }}>
       <div>
         <i className="ph ph-duotone ph-users-three" style={{ fontSize: '3rem', color: 'var(--umiba-red)', marginBottom: '12px' }}></i>
         <h2 style={{ margin: '0' }} className="text-gradient">5000+</h2>

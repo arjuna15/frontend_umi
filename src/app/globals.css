@@ -202,6 +202,10 @@ body.dark-mode .hero-glass-container {
   background: rgba(15, 23, 42, 0.7);
 }
 
+body.dark-mode .neu-card[style*="boxShadow: \"inset"] {
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+}
+
 body.dark-mode div[style*="position: sticky"] .glass {
   background: rgba(15, 23, 42, 0.9) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
