@@ -26,8 +26,8 @@ export default function Home() {
       { id: 6, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/3-2.png' }
     ]);
 
-    // const slideInterval = setInterval(nextSlide, 5000);
-    // return () => clearInterval(slideInterval);
+    const slideInterval = setInterval(nextSlide, 5000);
+    return () => clearInterval(slideInterval);
   }, []);
 
   const slideBg = ['/1.jpeg', '/2.jpeg', '/3.jpeg'];
