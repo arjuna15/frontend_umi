@@ -53,7 +53,7 @@ export default function PortalGateway() {
   return (
     <>
       <section 
-        className="portal-section" 
+        className="portal-section public-neu-page" 
         style={{ 
           position: 'relative', 
           minHeight: 'calc(100vh - 80px)', 

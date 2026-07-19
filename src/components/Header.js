@@ -17,6 +17,36 @@ const mockSearchData = [
 ];
 
 export default function Header() {
+  const featureCardStyle = {
+    background: 'var(--color-surface)',
+    borderRadius: 'var(--radius-lg)',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    minHeight: '280px',
+    padding: '24px',
+    boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff',
+  };
+  const featureLogoStyle = {
+    width: '92px',
+    height: '92px',
+    objectFit: 'contain',
+    marginBottom: '16px',
+    filter: 'brightness(2.15) saturate(1.75) contrast(1.2) drop-shadow(0 0 10px rgba(255,255,255,0.2))',
+  };
+  const featureLogoCardStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '16px',
+    background: 'var(--color-surface)',
+    borderRadius: 'var(--radius-md)',
+    boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff',
+  };
+
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const { lang, changeLang, t } = useLanguage();
@@ -186,20 +216,11 @@ export default function Header() {
         <div className="mega-menu profile-mega grid-3 align-center" style={{ gap: '32px' }}>
           {/* Rector Featured Card */}
           <div style={{
-            background: 'rgba(185, 28, 28, 0.03)',
-            borderRadius: 'var(--radius-lg)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            textAlign: 'center',
-            minHeight: '280px',
-            padding: '24px',
-            boxShadow: 'inset 3px 3px 6px rgba(185, 28, 28, 0.15), inset -3px -3px 6px rgba(255, 255, 255, 0.9)',
+            ...featureCardStyle,
             marginTop: '-8px',
             marginBottom: '-8px'
           }}>
-            <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', marginBottom: '16px', border: '3px solid white', boxShadow: '3px 3px 6px rgba(185, 28, 28, 0.15), -3px -3px 6px rgba(255, 255, 255, 0.9)' }} />
+            <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', marginBottom: '16px', border: '3px solid white', boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.15), inset -3px -3px 6px rgba(255,255,255,0.9)' }} />
             <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: '800', color: 'var(--umiba-red)', whiteSpace: 'normal', wordWrap: 'break-word' }}>Sri Wahyuningsih, SE., MM</h4>
             <p style={{ margin: '0 0 16px 0', fontSize: '0.8rem', color: 'var(--color-text-muted)', fontWeight: '500', whiteSpace: 'normal', wordWrap: 'break-word' }}>Rektor Universitas Mitra Bangsa</p>
             <a href="/profil#sambutan" style={{
@@ -276,8 +297,8 @@ export default function Header() {
         <a href="#" className="nav-link" onClick={handleDropdownClick}>{t("nav.portal")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
         <div className="mega-menu portal-mega grid-3 align-right" style={{ gap: '24px' }}>
           {/* UMIBA Featured Column */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px', background: 'rgba(185, 28, 28, 0.03)', borderRadius: 'var(--radius-md)', boxShadow: 'inset 3px 3px 6px rgba(185, 28, 28, 0.15), inset -3px -3px 6px rgba(255, 255, 255, 0.9)' }}>
-            <img src="/erasebg-transformed.png" alt="UMIBA Logo" style={{ width: '90px', marginBottom: '16px', filter: 'drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.15))' }} onError={(e)=>{e.target.src='https://via.placeholder.com/90x90/B91C1C/fff?text=U'}}/>
+          <div style={featureLogoCardStyle}>
+            <img src="/erasebg-transformed.png" alt="UMIBA Logo" style={featureLogoStyle} onError={(e)=>{e.target.src='https://via.placeholder.com/90x90/B91C1C/fff?text=U'}}/>
             <h4 style={{ color: 'var(--umiba-red)', fontSize: '0.9rem', fontWeight: 'bold', margin: '0', textAlign: 'center', textTransform: 'uppercase' }}>Portal Sivitas<br/>Akademika</h4>
           </div>
           <div>
@@ -296,8 +317,8 @@ export default function Header() {
         <a href="/informasi" className={`nav-link ${pathname?.startsWith("/informasi") || pathname?.startsWith("/berita") || pathname?.startsWith("/dokumen") ? "active" : ""}`} onClick={handleDropdownClick}>{t("nav.informasi")} <i className="ph-bold ph-caret-down dropdown-icon"></i></a>
         <div className="mega-menu info-mega grid-3 align-right" style={{ gap: '24px' }}>
           {/* UMIBA Featured Column */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '16px', background: 'rgba(185, 28, 28, 0.03)', borderRadius: 'var(--radius-md)', boxShadow: 'inset 3px 3px 6px rgba(185, 28, 28, 0.15), inset -3px -3px 6px rgba(255, 255, 255, 0.9)' }}>
-            <img src="/erasebg-transformed.png" alt="UMIBA Logo" style={{ width: '90px', marginBottom: '16px', filter: 'drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.15))' }} onError={(e)=>{e.target.src='https://via.placeholder.com/90x90/B91C1C/fff?text=U'}}/>
+          <div style={featureLogoCardStyle}>
+            <img src="/erasebg-transformed.png" alt="UMIBA Logo" style={featureLogoStyle} onError={(e)=>{e.target.src='https://via.placeholder.com/90x90/B91C1C/fff?text=U'}}/>
             <h4 style={{ color: 'var(--umiba-red)', fontSize: '0.9rem', fontWeight: 'bold', margin: '0', textAlign: 'center', textTransform: 'uppercase' }}>Pusat Informasi<br/>& Layanan</h4>
           </div>
           <div>
@@ -333,7 +354,7 @@ export default function Header() {
         <a href="#" className={`lang-btn ${lang === 'id' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); changeLang('id'); }}>ID</a>
         <a href="#" className={`lang-btn ${lang === 'en' ? 'active' : ''}`} onClick={(e) => { e.preventDefault(); changeLang('en'); }}>EN</a>
       </div>
-      <a href="/pmb" className="btn btn-primary d-none-mobile">{t('nav.daftar_sekarang')}</a>
+      <a href="/pmb" className="btn btn-neu d-none-mobile">{t('nav.daftar_sekarang')}</a>
       <button className="theme-toggle" aria-label="Toggle Theme" onClick={toggleTheme}>
         <i className={`ph-bold ${theme === 'light' ? 'ph-moon' : 'ph-sun'}`}></i>
       </button>

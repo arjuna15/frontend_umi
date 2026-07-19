@@ -56,7 +56,7 @@ export default function Home() {
             </div>
             
             {/* Keunggulan Glass Card */}
-            <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
+            <div style={{ background: 'var(--color-surface)', border: 'none', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
               <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px' }}>
                 {lang === "en" ? "MM UMIBA ADVANTAGES:" : "KEUNGGULAN MM UMIBA:"}
               </h3>
@@ -73,7 +73,7 @@ export default function Home() {
                 {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
               </a>
               <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-text)', textDecoration: 'none' }}>
-                <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'var(--glass-shadow)' }}>
+                <div style={{ background: 'var(--color-surface)', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
                   <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
                 </div>
                 <div>
@@ -132,7 +132,7 @@ export default function Home() {
             <h2 style={{ color: 'var(--apple-red)', fontSize: 'clamp(1.3rem, 3vw, 2.5rem)', lineHeight: '1.2', marginBottom: '16px', fontWeight: 900, textTransform: 'uppercase' }}>
                {lang === "en" ? "KIP-K SCHOLARSHIP TRACK" : "JALUR BEASISWA KIP-K"}
             </h2>
-            <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
+            <div style={{ background: 'var(--color-surface)', border: 'none', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
               <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
                 {lang === "en" ? "QUALITY & FREE EDUCATION AT UMIBA" : "KULIAH BERKUALITAS & GRATIS DI UMIBA"}
               </h3>
@@ -217,7 +217,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'var(--glass-shadow)' }}>
+            <div style={{ background: 'var(--color-surface)', border: 'none', borderRadius: '24px', padding: '24px', marginBottom: '24px', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
               <h3 style={{ color: 'var(--color-text)', fontSize: 'clamp(0.95rem, 2vw, 1.1rem)', fontWeight: '800', marginBottom: '16px', borderBottom: '1px solid var(--color-border)', paddingBottom: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
                 {lang === "en" ? "Available Study Programs:" : "Program Studi Pilihan:"}
               </h3>
@@ -236,7 +236,7 @@ export default function Home() {
                 {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
               </a>
               <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-text)', textDecoration: 'none' }}>
-                <div style={{ background: 'white', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'var(--glass-shadow)' }}>
+                <div style={{ background: 'var(--color-surface)', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
                   <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
                 </div>
                 <div style={{ textAlign: 'left' }}>
@@ -324,10 +324,10 @@ export default function Home() {
 <section id="sambutan" style={{ padding: '40px 0' }}>
   <div className="container grid grid-2" style={{ alignItems: 'center' }}>
     <div className="fade-up" style={{ position: 'relative', maxWidth: '400px', margin: '0 auto', width: '100%' }}>
-      <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff' }}>
+      <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
         <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block' }}/>
       </div>
-      <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", position: 'absolute', bottom: '24px', left: '24px', right: '24px', padding: 'var(--space-3)' }}>
+      <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "16px", position: 'absolute', bottom: '24px', left: '24px', right: '24px', padding: 'var(--space-3)' }}>
         <h3 style={{ margin: '0 0 4px 0', fontSize: '1.1rem', fontWeight: 800 }}>{t("home.sambutan_rektor")}</h3>
         <p style={{ margin: '0', fontSize: '0.85rem', color: 'var(--color-text-muted)', fontStyle: 'italic' }}>{t("home.quote_rektor")}</p>
       </div>
@@ -338,11 +338,11 @@ export default function Home() {
       <p style={{ lineHeight: '1.7', color: 'var(--color-text)', marginBottom: '16px' }}>{t("home.sambutan_p1")}</p>
       <p style={{ lineHeight: '1.7', color: 'var(--color-text)', marginBottom: '24px' }}>{t("home.sambutan_p2")}</p>
       <div className="grid grid-2" style={{ gap: '20px' }}>
-        <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "20px", padding: '20px' }}>
+        <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "20px", padding: '20px' }}>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', fontWeight: 800 }}>{t("home.kurikulum_modern")}</h3>
           <p style={{ fontSize: '0.85rem', margin: '0', color: 'var(--color-text-muted)', lineHeight: '1.5' }}>{t("home.kurikulum_desc")}</p>
         </div>
-        <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "20px", padding: '20px' }}>
+        <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "20px", padding: '20px' }}>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', fontWeight: 800 }}>{t("home.kemitraan_industri")}</h3>
           <p style={{ fontSize: '0.85rem', margin: '0', color: 'var(--color-text-muted)', lineHeight: '1.5' }}>{t("home.kemitraan_desc")}</p>
         </div>
@@ -362,7 +362,7 @@ export default function Home() {
     
     <div className="grid grid-3">
       {/*  Card 1  */}
-      <div className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "24px", padding: '24px', display: 'flex', flexDirection: 'column' }}>
+      <div className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '24px', display: 'flex', flexDirection: 'column' }}>
         <div style={{ background: 'var(--color-surface)', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
           <i className="ph ph-duotone ph-briefcase" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
@@ -388,7 +388,7 @@ export default function Home() {
       </div>
       
       {/*  Card 2  */}
-      <div className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "24px", padding: '24px', display: 'flex', flexDirection: 'column', transitionDelay: '0.1s' }}>
+      <div className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '24px', display: 'flex', flexDirection: 'column', transitionDelay: '0.1s' }}>
         <div style={{ background: 'var(--color-surface)', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
           <i className="ph ph-duotone ph-scales" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
@@ -408,7 +408,7 @@ export default function Home() {
       </div>
       
       {/*  Card 3  */}
-      <div className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "24px", padding: '24px', display: 'flex', flexDirection: 'column', transitionDelay: '0.2s' }}>
+      <div className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '24px', display: 'flex', flexDirection: 'column', transitionDelay: '0.2s' }}>
         <div style={{ background: 'var(--color-surface)', width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 'var(--space-4)', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
           <i className="ph ph-duotone ph-laptop" style={{ fontSize: '2.2rem', color: 'var(--umiba-red)' }}></i>
         </div>
@@ -556,7 +556,7 @@ export default function Home() {
         <p style={{ color: 'var(--color-text-muted)', margin: 0 }}>{t("home.penerimaan_desc")}</p>
       </div>
       <div className="flex-center" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
-        <a href="/pmb" className="btn btn-primary" style={{ borderRadius: '12px' }}>{t("home.daftar_online")}</a>
+        <a href="/pmb" className="btn btn-neu" style={{ borderRadius: '12px' }}>{t("home.daftar_online")}</a>
         <a href="https://wa.me/62811870114" target="_blank" className="btn btn-neu" style={{ borderRadius: '12px' }}>{t("home.whatsapp_kami")}</a>
       </div>
     </div>

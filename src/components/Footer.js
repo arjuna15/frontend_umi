@@ -15,17 +15,26 @@ export default function Footer() {
                 {/* Logo Circle - inset neumorphic on dark */}
                 <div style={{ position: 'relative', zIndex: '1' }}>
                   <div style={{
-                    background: 'rgba(255,255,255,0.1)',
+                    background: 'rgba(0,0,0,0.2)',
                     borderRadius: '50%',
                     padding: '8px',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    width: '100px',
-                    height: '100px',
-                    boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.3), inset -3px -3px 6px rgba(255,255,255,0.08)'
+                    width: '108px',
+                    height: '108px',
+                    boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.06)'
                   }}>
-                    <img src="/erasebg-transformed.png" alt="Logo UMIBA" style={{ width: '84px', height: '84px', objectFit: 'contain' }} />
+                    <img
+                      src="/erasebg-transformed.png"
+                      alt="Logo UMIBA"
+                      style={{
+                        width: '92px',
+                        height: '92px',
+                        objectFit: 'contain',
+                        filter: 'brightness(2.2) saturate(1.8) contrast(1.25) drop-shadow(0 0 10px rgba(255,255,255,0.18))',
+                      }}
+                    />
                   </div>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -69,18 +78,18 @@ export default function Footer() {
               {/* Newsletter - inset neumorphic on dark */}
               <div style={{ display: 'flex', gap: '10px', marginBottom: '24px', alignItems: 'center' }}>
                 <div style={{ flex: 1, background: 'rgba(0,0,0,0.2)', borderRadius: '16px', boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.06)', padding: '2px' }}>
-                  <input type="email" placeholder={lang === "en" ? "Enter Email Address" : "Masukkan Alamat Email"} style={{ width: '100%', background: 'transparent', border: 'none', padding: '14px 18px', color: 'white', fontSize: '0.9rem', outline: 'none', borderRadius: '14px', boxSizing: 'border-box' }} />
+                  <input type="email" className="footer-email-input" placeholder={lang === "en" ? "Enter Email Address" : "Masukkan Alamat Email"} />
                 </div>
                 <button aria-label="Subscribe" style={{ background: 'white', color: 'var(--umiba-red)', border: 'none', width: '48px', height: '48px', borderRadius: '50%', cursor: 'pointer', fontWeight: 'bold', transition: 'all 0.3s ease', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}><i className="ph-bold ph-paper-plane-right" style={{ fontSize: '1.1rem' }}></i></button>
               </div>
 
               {/* Stats - inset neumorphic on dark */}
               <div style={{ display: 'flex', gap: '16px', marginTop: '24px' }}>
-                <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '16px', padding: '16px 20px', boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.3), inset -2px -2px 5px rgba(255,255,255,0.05)', flex: 1, textAlign: 'center' }}>
+                <div style={{ background: 'rgba(0,0,0,0.2)', borderRadius: '16px', padding: '16px 20px', boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.06)', flex: 1, textAlign: 'center' }}>
                   <div style={{ color: 'white', fontSize: '1.4rem', fontWeight: 800, marginBottom: '2px' }}>5000+</div>
                   <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem' }}>{lang === "en" ? "Active Students" : "Mahasiswa Aktif"}</div>
                 </div>
-                <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: '16px', padding: '16px 20px', boxShadow: 'inset 2px 2px 5px rgba(0,0,0,0.3), inset -2px -2px 5px rgba(255,255,255,0.05)', flex: 1, textAlign: 'center' }}>
+                <div style={{ background: 'rgba(0,0,0,0.2)', borderRadius: '16px', padding: '16px 20px', boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.06)', flex: 1, textAlign: 'center' }}>
                   <div style={{ color: 'white', fontSize: '1.3rem', fontWeight: 800, marginBottom: '2px' }}>BAIK SEKALI</div>
                   <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem' }}>{lang === "en" ? "Accreditation" : "Akreditasi Kampus"}</div>
                 </div>
@@ -88,10 +97,10 @@ export default function Footer() {
 
               {/* Social Icons - inset neumorphic on dark */}
               <div style={{ display: 'flex', gap: '12px', marginTop: '24px' }}>
-                <a href="#" className="travhub-social" aria-label="Facebook" style={{ background: 'rgba(255,255,255,0.08)', boxShadow: 'inset 2px 2px 4px rgba(0,0,0,0.3), inset -2px -2px 4px rgba(255,255,255,0.05)', width: '40px', height: '40px', borderRadius: '50%' }}><i className="ph-fill ph-facebook-logo"></i></a>
-                <a href="#" className="travhub-social" aria-label="Twitter" style={{ background: 'rgba(255,255,255,0.08)', boxShadow: 'inset 2px 2px 4px rgba(0,0,0,0.3), inset -2px -2px 4px rgba(255,255,255,0.05)', width: '40px', height: '40px', borderRadius: '50%' }}><i className="ph-fill ph-twitter-logo"></i></a>
-                <a href="#" className="travhub-social" aria-label="LinkedIn" style={{ background: 'rgba(255,255,255,0.08)', boxShadow: 'inset 2px 2px 4px rgba(0,0,0,0.3), inset -2px -2px 4px rgba(255,255,255,0.05)', width: '40px', height: '40px', borderRadius: '50%' }}><i className="ph-fill ph-linkedin-logo"></i></a>
-                <a href="#" className="travhub-social" aria-label="Instagram" style={{ background: 'rgba(255,255,255,0.08)', boxShadow: 'inset 2px 2px 4px rgba(0,0,0,0.3), inset -2px -2px 4px rgba(255,255,255,0.05)', width: '40px', height: '40px', borderRadius: '50%' }}><i className="ph-fill ph-instagram-logo"></i></a>
+                <a href="#" className="travhub-social" aria-label="Facebook" style={{ background: 'rgba(255,255,255,0.08)', boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.06)', width: '40px', height: '40px', borderRadius: '50%' }}><i className="ph-fill ph-facebook-logo"></i></a>
+                <a href="#" className="travhub-social" aria-label="Twitter" style={{ background: 'rgba(255,255,255,0.08)', boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.06)', width: '40px', height: '40px', borderRadius: '50%' }}><i className="ph-fill ph-twitter-logo"></i></a>
+                <a href="#" className="travhub-social" aria-label="LinkedIn" style={{ background: 'rgba(255,255,255,0.08)', boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.06)', width: '40px', height: '40px', borderRadius: '50%' }}><i className="ph-fill ph-linkedin-logo"></i></a>
+                <a href="#" className="travhub-social" aria-label="Instagram" style={{ background: 'rgba(255,255,255,0.08)', boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.4), inset -3px -3px 6px rgba(255,255,255,0.06)', width: '40px', height: '40px', borderRadius: '50%' }}><i className="ph-fill ph-instagram-logo"></i></a>
               </div>
             </div>
 

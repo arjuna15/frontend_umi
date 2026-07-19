@@ -213,17 +213,16 @@ export default function Page() {
 
   
   return (
-    <div>
-      <section className="hero hero-sub" style={{ background: `url('${dynamicHeroBg || heroBg}') center/cover`, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', color: 'white', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: '-20px', background: 'linear-gradient(to bottom, rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9))', backdropFilter: 'blur(12px) saturate(150%)', WebkitBackdropFilter: 'blur(12px) saturate(150%)', zIndex: 1 }}></div>
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+    <div className="public-neu-page lppm-neu-page">
+      <section className="hero hero-sub public-neu-hero">
+        <div className="container">
           <div className="fade-up">
             <span style={{ background: 'var(--umiba-red)', color: 'white', padding: '6px 16px', borderRadius: 'var(--radius-full)', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '24px', display: 'inline-block' }}>UMIBA</span>
             <h1 style={{ color: 'white', marginBottom: '16px' }}>{heroTitle}</h1>
           </div>
         </div>
       </section>
-      <div dangerouslySetInnerHTML={{ __html: dynamicHtml || mainHtml }} />
+      <div className="public-neu-content" dangerouslySetInnerHTML={{ __html: dynamicHtml || mainHtml }} />
     </div>
   );
 }

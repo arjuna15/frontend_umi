@@ -1966,6 +1966,30 @@ header .btn-primary:hover {
   color: #991b1b;
 }
 
+/* Footer Email Input - neumorphic override */
+.footer-email-input {
+  width: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 14px 18px !important;
+  color: white !important;
+  font-size: 0.9rem !important;
+  outline: none !important;
+  border-radius: 14px !important;
+  box-sizing: border-box !important;
+  box-shadow: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+.footer-email-input::placeholder {
+  color: rgba(255,255,255,0.4) !important;
+}
+.footer-email-input:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 /* Stats */
 .travhub-stat-number {
   color: white; /* Changed from red to white since background is red */
@@ -2333,6 +2357,26 @@ header .btn-primary:hover {
   box-shadow: 6px 6px 12px #bebebe, -6px -6px 12px rgba(255, 255, 255, 0.8);
 }
 
+.profil-neu-card {
+  background: linear-gradient(145deg, #f5f7fa 0%, #e2e8f0 100%);
+  border: none;
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 18px 18px 36px rgba(171, 183, 199, 0.78), -18px -18px 36px rgba(255, 255, 255, 0.98), inset 1px 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all var(--duration) var(--ease);
+}
+
+.profil-neu-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 22px 22px 40px rgba(167, 179, 194, 0.82), -22px -22px 40px rgba(255, 255, 255, 1), inset 1px 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+[data-theme='dark'] .profil-neu-card {
+  background: linear-gradient(145deg, #121722 0%, #0b0f16 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 16px 16px 32px #090b10, -16px -16px 32px #1b2230, inset 1px 1px 0 rgba(255, 255, 255, 0.05);
+}
+
 .btn-neu {
   background: var(--glass-bg);
   color: var(--umiba-red-dark);
@@ -2387,4 +2431,85 @@ input:focus, textarea:focus, select:focus {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+
+/* Profile page: same neumorphic language as home, scoped to this route. */
+.profil-page { background: var(--color-bg); }
+.profil-hero { min-height: 330px !important; padding-top: 140px !important; background: var(--color-surface) !important; color: var(--color-text) !important; box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px rgba(255, 255, 255, 0.78); }
+.profil-hero h1 { color: var(--color-text) !important; text-shadow: none; }
+.profil-content .glass, .profil-content .glass-card, .profil-content .profil-neu-card { background: var(--color-surface) !important; border: none !important; border-radius: var(--radius-lg) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: var(--glass-shadow) !important; }
+.profil-content .profil-neu-card:hover, .profil-content .glass-card:hover { box-shadow: 6px 6px 12px #bebebe, -6px -6px 12px rgba(255, 255, 255, 0.8) !important; }
+.profil-content .btn-neu, .profil-content .btn-glass { background: var(--color-surface) !important; border: none !important; box-shadow: var(--glass-shadow) !important; }
+.profil-content .btn-neu:active, .profil-content .btn-glass:active { box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px rgba(255, 255, 255, 0.7) !important; }
+[data-theme=dark] .profil-hero { background: var(--color-surface) !important; box-shadow: inset 8px 8px 16px #080a0f, inset -8px -8px 16px rgba(255, 255, 255, 0.03); }
+
+.profil-content section { background: transparent !important; }
+
+
+/* Shared neumorphism for public information routes. */
+.public-neu-page { background: var(--color-bg); }
+.public-neu-hero { min-height: 330px !important; padding-top: 140px !important; background: var(--color-surface) !important; color: var(--color-text) !important; box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px rgba(255, 255, 255, 0.78); }
+.public-neu-hero h1 { color: var(--color-text) !important; text-shadow: none !important; }
+.public-neu-content section { background: transparent !important; }
+.public-neu-content .glass, .public-neu-content .glass-card { background: var(--color-surface) !important; border: none !important; border-radius: var(--radius-lg) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: var(--glass-shadow) !important; }
+.public-neu-content .glass-card:hover { box-shadow: 6px 6px 12px #bebebe, -6px -6px 12px rgba(255, 255, 255, 0.8) !important; }
+.public-neu-content .btn-neu, .public-neu-content .btn-glass, .public-neu-content .btn-primary { background: var(--color-surface) !important; color: var(--umiba-red-dark) !important; border: none !important; box-shadow: var(--glass-shadow) !important; }
+.public-neu-content .btn-neu:active, .public-neu-content .btn-glass:active, .public-neu-content .btn-primary:active { box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px rgba(255, 255, 255, 0.7) !important; }
+.portal-section { background: var(--color-bg) !important; }
+.portal-section > div:first-child, .portal-section > .hero-overlay-red { display: none !important; }
+.portal-section h1, .portal-section p { color: var(--color-text) !important; text-shadow: none !important; }
+.portal-section .portal-card { background: var(--color-surface) !important; border: none !important; border-radius: var(--radius-lg) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; box-shadow: var(--glass-shadow) !important; }
+.portal-section .portal-card:hover { box-shadow: 6px 6px 12px #bebebe, -6px -6px 12px rgba(255, 255, 255, 0.8) !important; }
+.portal-section .portal-btn { background: var(--color-surface) !important; color: var(--umiba-red-dark) !important; box-shadow: var(--glass-shadow) !important; }
+[data-theme=dark] .public-neu-hero { background: var(--color-surface) !important; box-shadow: inset 8px 8px 16px #080a0f, inset -8px -8px 16px rgba(255, 255, 255, 0.03); }
+
+
+/* Academic program cards sit inside their faculty cards, so they use an inset surface. */
+.akademik-neu-page .public-neu-content .glass-card .glass-card {
+  background: var(--color-surface) !important;
+  box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px rgba(255, 255, 255, 0.78) !important;
+}
+.akademik-neu-page .public-neu-content .glass-card .glass-card:hover {
+  transform: none !important;
+  box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px rgba(255, 255, 255, 0.82) !important;
+}
+[data-theme=dark] .akademik-neu-page .public-neu-content .glass-card .glass-card {
+  box-shadow: inset 5px 5px 10px #080a0f, inset -5px -5px 10px rgba(255, 255, 255, 0.03) !important;
+}
+
+.akademik-neu-page .public-neu-content .glass-card div[style*="background: var(--color-border)"] {
+  background: var(--color-surface) !important;
+  border: none !important;
+  box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px rgba(255, 255, 255, 0.72) !important;
+}
+[data-theme=dark] .akademik-neu-page .public-neu-content .glass-card div[style*="background: var(--color-border)"] {
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px rgba(255, 255, 255, 0.03) !important;
+}
+
+
+/* LPPM feature icon wells use an inset treatment. */
+.lppm-neu-page .public-neu-content div[style*="background: rgba(185, 28, 28, 0.1)"] {
+  background: var(--color-surface) !important;
+  border: none !important;
+  box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px rgba(255, 255, 255, 0.76) !important;
+}
+[data-theme=dark] .lppm-neu-page .public-neu-content div[style*="background: rgba(185, 28, 28, 0.1)"] {
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px rgba(255, 255, 255, 0.03) !important;
+}
+
+.lppm-neu-page .public-neu-content .glass-card > i {
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px !important;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px rgba(255, 255, 255, 0.76);
+}
+[data-theme=dark] .lppm-neu-page .public-neu-content .glass-card > i {
+  background: var(--color-surface);
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px rgba(255, 255, 255, 0.03);
 }
