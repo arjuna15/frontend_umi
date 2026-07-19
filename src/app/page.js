@@ -324,7 +324,7 @@ export default function Home() {
 <section id="sambutan" style={{ padding: 'var(--space-8) 0' }}>
   <div className="container grid grid-2" style={{ alignItems: 'center' }}>
     <div className="fade-up" style={{ position: 'relative', maxWidth: '400px', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" width={400} height={600} style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block', borderRadius: '24px' }}/>
+      <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block', borderRadius: '24px' }}/>
       <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", marginTop: '20px', width: '100%', padding: 'var(--space-3)', textAlign: 'center' }}>
         <h3 style={{ margin: '0 0 4px 0', fontSize: '1.1rem', fontWeight: 800 }}>{t("home.sambutan_rektor")}</h3>
         <p style={{ margin: '0', fontSize: '0.85rem', color: 'var(--color-text-muted)', fontStyle: 'italic' }}>{t("home.quote_rektor")}</p>

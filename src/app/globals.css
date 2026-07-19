@@ -308,27 +308,7 @@ body {
 
 /* -------------------- Background Blobs (Essential for Glassmorphism) -------------------- */
 body::before, body::after {
-  content: '';
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(120px);
-  z-index: -1;
-  opacity: 0.6;
-  pointer-events: none;
-}
-body::before {
-  width: 60vw;
-  height: 60vw;
-  background: radial-gradient(circle, rgba(225, 29, 72, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-  top: -20vw;
-  left: -10vw;
-}
-body::after {
-  width: 70vw;
-  height: 70vw;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
-  bottom: -30vw;
-  right: -20vw;
+  display: none !important;
 }
 
 /* -------------------- Layout Utilities -------------------- */
