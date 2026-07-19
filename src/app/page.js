@@ -625,24 +625,6 @@ export default function Home() {
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0', fontWeight: 800 }}>BEM UMIBA Desak Pemkot Jakarta Selatan Atasi Penumpukan Sampah di Sekitar Kampus</h3>
         </div>
       </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '16px', transitionDelay: '0.2s' }}>
-        <div className="media-img-wrap" style={{ borderRadius: '16px', overflow: 'hidden' }}>
-          <img src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 7" style={{ width: '100%', height: 'auto', display: 'block' }} />
-        </div>
-        <div className="media-content" style={{ marginTop: '12px' }}>
-          <div className="media-source" style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginBottom: '8px' }}><i className="ph ph-fill ph-newspaper"></i> kompaskampus.id</div>
-          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0', fontWeight: 800 }}>Kampus UMIBA Terima Kunjungan Kehormatan dari Anggota DPR RI dan Ketua Umum IKADIM, Dr. Jazuli Juwaini, MA</h3>
-        </div>
-      </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '16px', transitionDelay: '0.3s' }}>
-        <div className="media-img-wrap" style={{ borderRadius: '16px', overflow: 'hidden' }}>
-          <img src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 8" style={{ width: '100%', height: 'auto', display: 'block' }} />
-        </div>
-        <div className="media-content" style={{ marginTop: '12px' }}>
-          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> newsdetik.co</div>
-          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Kampus UMIBA Terima Kunjungan Kehormatan dari Anggota DPR RI dan Ketua Umum IKADIM, Dr. Jazuli Juwaini, MA</h3>
-        </div>
-      </div>
     </div>
   </div>
 </section>
