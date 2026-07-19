@@ -116,54 +116,54 @@ export default function Header() {
 
         {/* Kanan: Search & Sosmed */}
         <div className="top-banner-right" style={{ display: 'flex', alignItems: 'center', gap: '24px', flexShrink: 0 }}>
-           <div className="search-bar" style={{ position: 'relative', display: 'flex', alignItems: 'center', width: '100%', zIndex: 99999 }}>
-             <form onSubmit={(e) => { e.preventDefault(); if (searchQuery.trim() && filteredResults.length > 0) router.push(filteredResults[0].url); }} style={{ display: 'flex', width: '100%', alignItems: 'center', padding: '6px 16px', background: 'rgba(255,255,255,0.15)', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)' }}>
-               <i className="ph-bold ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.8)', marginRight: '8px' }}></i>
-               <input type="text" placeholder="Cari..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '100%', color: '#ffffff' }} />
-               {searchQuery && (
-                 <i className="ph-bold ph-x" onClick={() => setSearchQuery('')} style={{ color: 'rgba(255,255,255,0.8)', cursor: 'pointer', marginLeft: '8px', fontSize: '0.8rem' }}></i>
-               )}
-             </form>
-             {searchQuery.trim() !== '' && (
-               <div style={{ position: 'absolute', top: '40px', left: 0, width: '280px', maxWidth: 'calc(100vw - 32px)', background: '#ffffff', borderRadius: '12px', padding: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)', zIndex: 99999, display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                 {filteredResults.length > 0 ? (
-                   <>
-                     {filteredResults.slice(0, 2).map((item, idx) => (
-                       <a key={idx} href={item.url} onClick={() => setSearchQuery('')} style={{ padding: '8px 12px', borderRadius: '8px', color: '#1f2937', textDecoration: 'none', display: 'flex', flexDirection: 'column', transition: 'background 0.2s' }} onMouseOver={e=>e.currentTarget.style.background='rgba(0,0,0,0.05)'} onMouseOut={e=>e.currentTarget.style.background='transparent'}>
-                         <span style={{ fontSize: '0.85rem', fontWeight: '700' }}>{item.title}</span>
-                         <span style={{ fontSize: '0.7rem', color: '#B91C1C', fontWeight: '600' }}>{item.type}</span>
-                       </a>
-                     ))}
-                     {filteredResults.length > 2 && (
-                       <a href={`/berita?q=${encodeURIComponent(searchQuery)}`} onClick={() => setSearchQuery('')} style={{ padding: '8px', textAlign: 'center', fontSize: '0.75rem', color: '#B91C1C', fontWeight: '700', textDecoration: 'none', borderTop: '1px solid #e5e7eb', marginTop: '4px' }} onMouseOver={e=>e.currentTarget.style.textDecoration='underline'} onMouseOut={e=>e.currentTarget.style.textDecoration='none'}>
-                         Lihat {filteredResults.length - 2} hasil lainnya...
-                       </a>
-                     )}
-                   </>
-                 ) : (
-                   <div style={{ padding: '24px 16px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                     <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(185,28,28,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#B91C1C', marginBottom: '4px' }}>
-                       <i className="ph-fill ph-magnifying-glass-minus" style={{ fontSize: '1.5rem' }}></i>
-                     </div>
-                     <span style={{ color: '#1f2937', fontSize: '0.9rem', fontWeight: '700' }}>
-                       Duh, nggak ketemu nih!
-                     </span>
-                     <span style={{ color: '#6b7280', fontSize: '0.75rem', lineHeight: '1.4' }}>
-                       Pencarian untuk <strong>&quot;{searchQuery}&quot;</strong> tidak ada hasilnya. Coba cek ejaan atau gunakan kata kunci lain.
-                     </span>
-                   </div>
-                 )}
-               </div>
-             )}
-           </div>
-           <div className="top-divider" style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.3)' }}></div>
+          <div className="search-bar" style={{ position: 'relative', display: 'flex', alignItems: 'center', width: '100%', zIndex: 99999 }}>
+            <form onSubmit={(e) => { e.preventDefault(); if (searchQuery.trim() && filteredResults.length > 0) router.push(filteredResults[0].url); }} style={{ display: 'flex', width: '100%', alignItems: 'center', padding: '6px 16px', background: '#B91C1C', borderRadius: '20px', boxShadow: '3px 3px 6px #7F1D1D, -3px -3px 6px #F87171', border: 'none' }}>
+              <i className="ph-bold ph-magnifying-glass" style={{ color: '#ffffff', marginRight: '8px' }}></i>
+              <input type="text" placeholder="Cari..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '100%', color: '#ffffff' }} />
+              {searchQuery && (
+                <i className="ph-bold ph-x" onClick={() => setSearchQuery('')} style={{ color: '#ffffff', cursor: 'pointer', marginLeft: '8px', fontSize: '0.8rem' }}></i>
+              )}
+            </form>
+            {searchQuery.trim() !== '' && (
+              <div style={{ position: 'absolute', top: '40px', left: 0, width: '280px', maxWidth: 'calc(100vw - 32px)', background: '#ffffff', borderRadius: '12px', padding: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.15)', zIndex: 99999, display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                {filteredResults.length > 0 ? (
+                  <>
+                    {filteredResults.slice(0, 2).map((item, idx) => (
+                      <a key={idx} href={item.url} onClick={() => setSearchQuery('')} style={{ padding: '8px 12px', borderRadius: '8px', color: '#1f2937', textDecoration: 'none', display: 'flex', flexDirection: 'column', transition: 'background 0.2s' }} onMouseOver={e=>e.currentTarget.style.background='rgba(0,0,0,0.05)'} onMouseOut={e=>e.currentTarget.style.background='transparent'}>
+                        <span style={{ fontSize: '0.85rem', fontWeight: '700' }}>{item.title}</span>
+                        <span style={{ fontSize: '0.7rem', color: '#B91C1C', fontWeight: '600' }}>{item.type}</span>
+                      </a>
+                    ))}
+                    {filteredResults.length > 2 && (
+                      <a href={`/berita?q=${encodeURIComponent(searchQuery)}`} onClick={() => setSearchQuery('')} style={{ padding: '8px', textAlign: 'center', fontSize: '0.75rem', color: '#B91C1C', fontWeight: '700', textDecoration: 'none', borderTop: '1px solid #e5e7eb', marginTop: '4px' }} onMouseOver={e=>e.currentTarget.style.textDecoration='underline'} onMouseOut={e=>e.currentTarget.style.textDecoration='none'}>
+                        Lihat {filteredResults.length - 2} hasil lainnya...
+                      </a>
+                    )}
+                  </>
+                ) : (
+                  <div style={{ padding: '24px 16px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(185,28,28,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#B91C1C', marginBottom: '4px' }}>
+                      <i className="ph-fill ph-magnifying-glass-minus" style={{ fontSize: '1.5rem' }}></i>
+                    </div>
+                    <span style={{ color: '#1f2937', fontSize: '0.9rem', fontWeight: '700' }}>
+                      Duh, nggak ketemu nih!
+                    </span>
+                    <span style={{ color: '#6b7280', fontSize: '0.75rem', lineHeight: '1.4' }}>
+                      Pencarian untuk <strong>&quot;{searchQuery}&quot;</strong> tidak ada hasilnya. Coba cek ejaan atau gunakan kata kunci lain.
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+          <div className="top-divider" style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.3)' }}></div>
            
-           <div className="top-banner-phone" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '700', background: 'rgba(255,255,255,0.15)', padding: '4px 10px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.2)', flexShrink: 0 }}>
-             <i className="ph-fill ph-headset" style={{ fontSize: '1.2rem', color: '#ffffff' }}></i> 
-             <span style={{ fontSize: '0.85rem', whiteSpace: 'nowrap' }}>0811 870 114</span>
-           </div>
+          <div className="top-banner-phone" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '700', background: '#B91C1C', padding: '4px 10px', borderRadius: '20px', boxShadow: '2px 2px 4px #7F1D1D, -2px -2px 4px #F87171', color: '#ffffff', flexShrink: 0 }}>
+            <i className="ph-fill ph-headset" style={{ fontSize: '1.2rem', color: '#ffffff' }}></i> 
+            <span style={{ fontSize: '0.85rem', whiteSpace: 'nowrap' }}>0811 870 114</span>
+          </div>
 
-           <div className="socials" style={{ display: 'flex', gap: '16px', fontSize: '1.2rem' }}>
+          <div className="socials" style={{ display: 'flex', gap: '16px', fontSize: '1.2rem' }}>
              <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-youtube-logo"></i></a>
              <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-instagram-logo"></i></a>
              <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-linkedin-logo"></i></a>
