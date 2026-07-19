@@ -371,8 +371,18 @@ export default function Home() {
           <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', lineHeight: '1.6' }}>{t("home.fak_manajemen_desc")}</p>
         </div>
         <ul style={{ listStyle: 'none', padding: '0', marginBottom: 'var(--space-4)', color: 'var(--color-muted)' }}>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Manajemen</li>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S2 Magister Manajemen</li>
+          <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', fontSize: '0.95rem' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '50%', background: 'var(--color-surface)', boxShadow: 'inset 2px 2px 4px #cbd5e1, inset -2px -2px 4px #ffffff', marginRight: '10px' }}>
+              <i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', fontSize: '1.1rem' }}></i>
+            </span>
+            S1 Manajemen
+          </li>
+          <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', fontSize: '0.95rem' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '50%', background: 'var(--color-surface)', boxShadow: 'inset 2px 2px 4px #cbd5e1, inset -2px -2px 4px #ffffff', marginRight: '10px' }}>
+              <i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', fontSize: '1.1rem' }}></i>
+            </span>
+            S2 Magister Manajemen
+          </li>
         </ul>
         <a href="/akademik?tab=manajemen" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto', borderRadius: '12px' }}>{t("home.lihat_fakultas")}</a>
       </div>
@@ -387,7 +397,12 @@ export default function Home() {
           <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', lineHeight: '1.6' }}>{t("home.fak_hukum_desc")}</p>
         </div>
         <ul style={{ listStyle: 'none', padding: '0', marginBottom: 'var(--space-4)', color: 'var(--color-muted)' }}>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Hukum</li>
+          <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', fontSize: '0.95rem' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '50%', background: 'var(--color-surface)', boxShadow: 'inset 2px 2px 4px #cbd5e1, inset -2px -2px 4px #ffffff', marginRight: '10px' }}>
+              <i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', fontSize: '1.1rem' }}></i>
+            </span>
+            S1 Ilmu Hukum
+          </li>
         </ul>
         <a href="/akademik?tab=hukum" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto', borderRadius: '12px' }}>{t("home.lihat_fakultas")}</a>
       </div>
@@ -402,9 +417,24 @@ export default function Home() {
           <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', lineHeight: '1.6' }}>{t("home.fak_ti_desc")}</p>
         </div>
         <ul style={{ listStyle: 'none', padding: '0', marginBottom: 'var(--space-4)', color: 'var(--color-muted)' }}>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Komputer</li>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Sistem &amp; TI</li>
-          <li style={{ marginBottom: '8px', display: 'flex', alignItems: 'center', fontSize: '0.9rem' }}><i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', marginRight: '10px', fontSize: '1.2rem' }}></i> S1 Ilmu Aktuaria</li>
+          <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', fontSize: '0.95rem' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '50%', background: 'var(--color-surface)', boxShadow: 'inset 2px 2px 4px #cbd5e1, inset -2px -2px 4px #ffffff', marginRight: '10px' }}>
+              <i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', fontSize: '1.1rem' }}></i>
+            </span>
+            S1 Ilmu Komputer
+          </li>
+          <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', fontSize: '0.95rem' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '50%', background: 'var(--color-surface)', boxShadow: 'inset 2px 2px 4px #cbd5e1, inset -2px -2px 4px #ffffff', marginRight: '10px' }}>
+              <i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', fontSize: '1.1rem' }}></i>
+            </span>
+            S1 Sistem &amp; TI
+          </li>
+          <li style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', fontSize: '0.95rem' }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '50%', background: 'var(--color-surface)', boxShadow: 'inset 2px 2px 4px #cbd5e1, inset -2px -2px 4px #ffffff', marginRight: '10px' }}>
+              <i className="ph ph-fill ph-check-circle" style={{ color: 'var(--umiba-red)', fontSize: '1.1rem' }}></i>
+            </span>
+            S1 Ilmu Aktuaria
+          </li>
         </ul>
         <a href="/akademik?tab=it" className="btn btn-neu" style={{ width: '100%', marginTop: 'auto', borderRadius: '12px' }}>{t("home.lihat_fakultas")}</a>
       </div>
@@ -413,27 +443,37 @@ export default function Home() {
 </section>
 
 {/*  ░░░ AKREDITASI ░░░  */}
-<section id="akreditasi" style={{ padding: 'var(--space-8) 0', background: "var(--color-bg)" }}>
+<section id="akreditasi" style={{ padding: '40px 0', background: "var(--color-bg)" }}>
   <div className="container">
     <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }} className="fade-up">
-      <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.kepercayaan_kualitas")}</span>
-      <h2>{t("home.sertifikat_akreditasi")}</h2>
+      <span className="text-red" style={{ fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem' }}>{t("home.kepercayaan_kualitas")}</span>
+      <h2 style={{ fontWeight: 900 }}>{t("home.sertifikat_akreditasi")}</h2>
     </div>
-    <div className="cert-slider fade-up" style={{ marginTop: 'var(--space-5)' }}>
-      <div className="cert-slide">
-        <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/Serifikat-Lamsama-BaikAKTUARIA-768x543.webp" alt="Akreditasi S1 Ilmu Aktuaria" width={768} height={543} style={{ width: '100%', height: 'auto' }} />
+    <div className="cert-slider fade-up" style={{ marginTop: '24px', display: 'flex', gap: '24px', overflowX: 'auto', padding: '20px 10px' }}>
+      <div className="cert-slide" style={{ flex: '0 0 320px', background: 'var(--color-surface)', padding: '16px', borderRadius: '24px', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff', border: 'none' }}>
+        <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2026/05/Serifikat-Lamsama-BaikAKTUARIA-768x543.webp" alt="Akreditasi S1 Ilmu Aktuaria" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
       </div>
-      <div className="cert-slide">
-        <Image src="https://umiba.ac.id/wp-content/uploads/2025/05/Sertifikat-UMIBA_page-0001-768x543.jpg" alt="Akreditasi Institusi UMIBA" width={768} height={543} style={{ width: '100%', height: 'auto' }} />
+      <div className="cert-slide" style={{ flex: '0 0 320px', background: 'var(--color-surface)', padding: '16px', borderRadius: '24px', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff', border: 'none' }}>
+        <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2025/05/Sertifikat-UMIBA_page-0001-768x543.jpg" alt="Akreditasi Institusi UMIBA" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
       </div>
-      <div className="cert-slide">
-        <Image src="https://umiba.ac.id/wp-content/uploads/2024/05/Sertifikat-Akreditasi-S1-Manajemen-UMIBA-768x543.jpg" alt="Akreditasi S1 Manajemen" width={768} height={543} style={{ width: '100%', height: 'auto' }} />
+      <div className="cert-slide" style={{ flex: '0 0 320px', background: 'var(--color-surface)', padding: '16px', borderRadius: '24px', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff', border: 'none' }}>
+        <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2024/05/Sertifikat-Akreditasi-S1-Manajemen-UMIBA-768x543.jpg" alt="Akreditasi S1 Manajemen" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
       </div>
-      <div className="cert-slide">
-        <Image src="https://umiba.ac.id/wp-content/uploads/2025/01/WhatsApp-Image-2025-01-23-at-3.58.34-PM-768x536.jpeg" alt="Akreditasi S2 Manajemen" width={768} height={536} style={{ width: '100%', height: 'auto' }} />
+      <div className="cert-slide" style={{ flex: '0 0 320px', background: 'var(--color-surface)', padding: '16px', borderRadius: '24px', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff', border: 'none' }}>
+        <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2025/01/WhatsApp-Image-2025-01-23-at-3.58.34-PM-768x536.jpeg" alt="Akreditasi S2 Manajemen" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
       </div>
-      <div className="cert-slide">
-        <Image src="https://umiba.ac.id/wp-content/uploads/2025/05/Sertifikat_RPL_S2_2025-2026_Ganjil-768x502.jpg" alt="Sertifikat RPL S2" width={768} height={502} style={{ width: '100%', height: 'auto' }} />
+      <div className="cert-slide" style={{ flex: '0 0 320px', background: 'var(--color-surface)', padding: '16px', borderRadius: '24px', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff', border: 'none' }}>
+        <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2025/05/Sertifikat_RPL_S2_2025-2026_Ganjil-768x502.jpg" alt="Sertifikat RPL S2" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
       </div>
     </div>
     <input type="range" className="custom-scrollbar" data-target=".cert-slider" min="0" max="100" defaultValue="0" />
@@ -508,97 +548,97 @@ export default function Home() {
 {/*  ░░░ PMB CTA ░░░  */}
 <section style={{ padding: 'var(--space-8) 0' }}>
   <div className="container">
-    <div className="neu-card grid grid-2 fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", alignItems: 'center', background: 'var(--glass-bg)' }}>
+    <div className="neu-card grid grid-2 fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 4px 4px 8px #cbd5e1, inset -4px -4px 8px #ffffff", border: "none", borderRadius: "24px", alignItems: 'center', padding: '24px' }}>
       <div>
-        <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.pendaftaran_dibuka")}</span>
-        <h2 style={{ marginTop: '8px' }}>{t("home.penerimaan_maba")}</h2>
-        <p>{t("home.penerimaan_desc")}</p>
+        <span className="text-red" style={{ fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem' }}>{t("home.pendaftaran_dibuka")}</span>
+        <h2 style={{ marginTop: '8px', fontWeight: 900 }}>{t("home.penerimaan_maba")}</h2>
+        <p style={{ color: 'var(--color-text-muted)', margin: 0 }}>{t("home.penerimaan_desc")}</p>
       </div>
       <div className="flex-center" style={{ gap: 'var(--space-3)', flexWrap: 'wrap' }}>
-        <a href="/pmb" className="btn btn-primary">{t("home.daftar_online")}</a>
-        <a href="https://wa.me/62811870114" target="_blank" className="btn btn-neu">{t("home.whatsapp_kami")}</a>
+        <a href="/pmb" className="btn btn-primary" style={{ borderRadius: '12px' }}>{t("home.daftar_online")}</a>
+        <a href="https://wa.me/62811870114" target="_blank" className="btn btn-neu" style={{ borderRadius: '12px' }}>{t("home.whatsapp_kami")}</a>
       </div>
     </div>
   </div>
 </section>
 
 {/*  ░░░ LIPUTAN MEDIA ░░░  */}
-<section style={{ padding: 'var(--space-8) 0', background: "var(--color-bg)" }}>
+<section style={{ padding: '40px 0', background: "var(--color-bg)" }}>
   <div className="container">
     <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }} className="fade-up">
-      <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.kabar_terkini")}</span>
-      <h2>{t("home.liputan_media")}</h2>
+      <span className="text-red" style={{ fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem' }}>{t("home.kabar_terkini")}</span>
+      <h2 style={{ fontWeight: 900 }}>{t("home.liputan_media")}</h2>
     </div>
     <div className="grid grid-4 scroll-mobile">
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }}>
-        <div className="media-img-wrap">
-          <Image src="https://umiba.ac.id/wp-content/uploads/2025/12/umiba-4pilar-1536x938-1.jpeg" alt="Berita 1" width={1536} height={938} style={{ width: '100%', height: 'auto' }} />
+      <div className="neu-card media-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '16px' }}>
+        <div className="media-img-wrap" style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2025/12/umiba-4pilar-1536x938-1.jpeg" alt="Berita 1" style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
-        <div className="media-content">
-          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> kompaskampus.id</div>
-          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>UMIBA Gelar Seminar Kebangsaan, Teguhkan Budaya Kampus Berbasis 4 Pilar Kebangsaan</h3>
-        </div>
-      </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.1s' }}>
-        <div className="media-img-wrap">
-          <Image src="https://umiba.ac.id/wp-content/uploads/2025/10/serba-serbi_155621_big.webp" alt="Berita 2" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
-        </div>
-        <div className="media-content">
-          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> wartaekonomi.co.id</div>
-          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>IKADIM dan Universitas Mitra Bangsa Teken MoU untuk Tingkatkan Kualitas Tri Dharma Perguruan Tinggi</h3>
+        <div className="media-content" style={{ marginTop: '12px' }}>
+          <div className="media-source" style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginBottom: '8px' }}><i className="ph ph-fill ph-newspaper"></i> kompaskampus.id</div>
+          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0', fontWeight: 800 }}>UMIBA Gelar Seminar Kebangsaan, Teguhkan Budaya Kampus Berbasis 4 Pilar Kebangsaan</h3>
         </div>
       </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.2s' }}>
-        <div className="media-img-wrap">
-          <Image src="https://umiba.ac.id/wp-content/uploads/2025/10/medium_tscom_news_photo_1759914601.jpg" alt="Berita 3" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
+      <div className="neu-card media-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '16px', transitionDelay: '0.1s' }}>
+        <div className="media-img-wrap" style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2025/10/serba-serbi_155621_big.webp" alt="Berita 2" style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
-        <div className="media-content">
-          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> teropongsenayan.com</div>
-          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>IKADIM dan Universitas Mitra Bangsa Teken MoU untuk Tingkatkan Kualitas Tri Dharma Perguruan Tinggi</h3>
+        <div className="media-content" style={{ marginTop: '12px' }}>
+          <div className="media-source" style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginBottom: '8px' }}><i className="ph ph-fill ph-newspaper"></i> wartaekonomi.co.id</div>
+          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0', fontWeight: 800 }}>IKADIM dan Universitas Mitra Bangsa Teken MoU untuk Tingkatkan Kualitas Tri Dharma Perguruan Tinggi</h3>
         </div>
       </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.3s' }}>
-        <div className="media-img-wrap">
-          <Image src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 4" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
+      <div className="neu-card media-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: '24px', padding: '16px', transitionDelay: '0.2s' }}>
+        <div className="media-img-wrap" style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2025/10/medium_tscom_news_photo_1759914601.jpg" alt="Berita 3" style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
-        <div className="media-content">
-          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> newsdetik.co</div>
-          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Universitas Mitra Bangsa Selenggarakan Gebyar Kemerdekaan HUT-RI Ke-80</h3>
+        <div className="media-content" style={{ marginTop: '12px' }}>
+          <div className="media-source" style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginBottom: '8px' }}><i className="ph ph-fill ph-newspaper"></i> teropongsenayan.com</div>
+          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0', fontWeight: 800 }}>IKADIM dan Universitas Mitra Bangsa Teken MoU untuk Tingkatkan Kualitas Tri Dharma Perguruan Tinggi</h3>
+        </div>
+      </div>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '16px', transitionDelay: '0.3s' }}>
+        <div className="media-img-wrap" style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 4" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
+        <div className="media-content" style={{ marginTop: '12px' }}>
+          <div className="media-source" style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginBottom: '8px' }}><i className="ph ph-fill ph-newspaper"></i> newsdetik.co</div>
+          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0', fontWeight: 800 }}>Universitas Mitra Bangsa Selenggarakan Gebyar Kemerdekaan HUT-RI Ke-80</h3>
         </div>
       </div>
       
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px" }}>
-        <div className="media-img-wrap">
-          <Image src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 5" width={800} height={600} style={{ width: '100%', height: 'auto' }} />
+      <div className="neu-card media-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '16px' }}>
+        <div className="media-img-wrap" style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2025/08/umiba-upacara.jpg" alt="Berita 5" style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
-        <div className="media-content">
-          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> kompaskampus.id</div>
-          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Universitas Mitra Bangsa Gelar Gebyar Kemerdekaan HUT-RI</h3>
-        </div>
-      </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.1s' }}>
-        <div className="media-img-wrap">
-          <Image src="https://umiba.ac.id/wp-content/uploads/2025/07/pilarparlemen.jpg" style={{ objectFit: 'contain', background: '#fff', width: '100%', height: 'auto' }} width={800} height={600} alt="Berita 6"/>
-        </div>
-        <div className="media-content">
-          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> pilarparlemen.id</div>
-          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>BEM UMIBA Desak Pemkot Jakarta Selatan Atasi Penumpukan Sampah di Sekitar Kampus</h3>
+        <div className="media-content" style={{ marginTop: '12px' }}>
+          <div className="media-source" style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginBottom: '8px' }}><i className="ph ph-fill ph-newspaper"></i> kompaskampus.id</div>
+          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0', fontWeight: 800 }}>Universitas Mitra Bangsa Gelar Gebyar Kemerdekaan HUT-RI</h3>
         </div>
       </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.2s' }}>
-        <div className="media-img-wrap">
-          <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 7" width={300} height={158} style={{ width: '100%', height: 'auto' }} />
+      <div className="neu-card media-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '16px', transitionDelay: '0.1s' }}>
+        <div className="media-img-wrap" style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2025/07/pilarparlemen.jpg" style={{ objectFit: 'contain', background: '#fff', width: '100%', height: 'auto', display: 'block' }} alt="Berita 6"/>
         </div>
-        <div className="media-content">
-          <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> kompaskampus.id</div>
-          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Kampus UMIBA Terima Kunjungan Kehormatan dari Anggota DPR RI dan Ketua Umum IKADIM, Dr. Jazuli Juwaini, MA</h3>
+        <div className="media-content" style={{ marginTop: '12px' }}>
+          <div className="media-source" style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginBottom: '8px' }}><i className="ph ph-fill ph-newspaper"></i> pilarparlemen.id</div>
+          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0', fontWeight: 800 }}>BEM UMIBA Desak Pemkot Jakarta Selatan Atasi Penumpukan Sampah di Sekitar Kampus</h3>
         </div>
       </div>
-      <div className="neu-card media-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: '0.3s' }}>
-        <div className="media-img-wrap">
-          <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 8" width={300} height={158} style={{ width: '100%', height: 'auto' }} />
+      <div className="neu-card media-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '16px', transitionDelay: '0.2s' }}>
+        <div className="media-img-wrap" style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 7" style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
-        <div className="media-content">
+        <div className="media-content" style={{ marginTop: '12px' }}>
+          <div className="media-source" style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', marginBottom: '8px' }}><i className="ph ph-fill ph-newspaper"></i> kompaskampus.id</div>
+          <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0', fontWeight: 800 }}>Kampus UMIBA Terima Kunjungan Kehormatan dari Anggota DPR RI dan Ketua Umum IKADIM, Dr. Jazuli Juwaini, MA</h3>
+        </div>
+      </div>
+      <div className="neu-card media-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '16px', transitionDelay: '0.3s' }}>
+        <div className="media-img-wrap" style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2026/05/audensiUMIBA-300x158.webp" alt="Berita 8" style={{ width: '100%', height: 'auto', display: 'block' }} />
+        </div>
+        <div className="media-content" style={{ marginTop: '12px' }}>
           <div className="media-source"><i className="ph ph-fill ph-newspaper"></i> newsdetik.co</div>
           <h3 style={{ fontSize: '1.05rem', lineHeight: '1.4', margin: '0' }}>Kampus UMIBA Terima Kunjungan Kehormatan dari Anggota DPR RI dan Ketua Umum IKADIM, Dr. Jazuli Juwaini, MA</h3>
         </div>
