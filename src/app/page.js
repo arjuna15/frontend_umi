@@ -160,7 +160,7 @@ export default function Home() {
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
                 <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 1 }}>
-                  <Image src="/nobcg2.png" alt="Student Model 2 Base" fill style={{ objectFit: 'contain', objectPosition: 'bottom center', height: '115%', top: '-30%' }} priority />
+                  <Image src="/nobcg2.png" alt="Student Model 2 Base" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
                 </div>
               </div>
 

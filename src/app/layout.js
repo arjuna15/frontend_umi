@@ -51,7 +51,6 @@ export default function RootLayout({ children }) {
       className="h-full antialiased"
     >
       <head>
-        <Script src="https://unpkg.com/@phosphor-icons/web" strategy="beforeInteractive" />
         <meta name="theme-color" content="#C41E3A" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -61,6 +60,7 @@ export default function RootLayout({ children }) {
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="min-h-full flex flex-col">
+        <Script src="https://unpkg.com/@phosphor-icons/web" strategy="beforeInteractive" />
         {/* PWA Animasi Splash Screen Overlay */}
         <div id="pwa-splash" className="pwa-splash-overlay">
           <div className="pwa-splash-logo-container">
