@@ -177,7 +177,7 @@ export default function Header() {
       >
   <div className="glass">
     <a href="#" className="logo" aria-label="UMIBA Home">
-      <img src="/erasebg-transformed.png" alt="Logo UMIBA" onError={(e)=>{e.target.onerror=null;e.target.src='https://via.placeholder.com/40x40/B91C1C/fff?text=U'}}/>
+      <img src="/erasebg-transformed.png" alt="Logo UMIBA" style={{ height: '60px', width: 'auto' }} onError={(e)=>{e.target.onerror=null;e.target.src='https://via.placeholder.com/40x40/B91C1C/fff?text=U'}}/>
     </a>
     <ul className={menuOpen ? "nav-links active" : "nav-links"}>
       <li className="nav-item"><a href="/" className={`nav-link ${pathname === "/" ? "active" : ""}`}>{t("nav.home")}</a></li>
