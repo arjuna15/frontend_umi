@@ -321,7 +321,7 @@ export default function Home() {
 </section>
 
 {/*  ░░░ SAMBUTAN REKTOR ░░░  */}
-<section id="sambutan" style={{ padding: 'var(--space-8) 0' }}>
+<section id="sambutan" style={{ padding: '40px 0' }}>
   <div className="container grid grid-2" style={{ alignItems: 'center' }}>
     <div className="fade-up" style={{ position: 'relative', maxWidth: '400px', margin: '0 auto', width: '100%' }}>
       <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff' }}>
@@ -352,7 +352,7 @@ export default function Home() {
 </section>
 
 {/*  ░░░ FAKULTAS & PRODI ░░░  */}
-<section id="fakultas" style={{ padding: 'var(--space-8) 0', position: 'relative' }}>
+<section id="fakultas" style={{ padding: '40px 0', position: 'relative' }}>
   <div className="container">
     <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }} className="fade-up">
       <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.pilihan_studi")}</span>
