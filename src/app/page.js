@@ -323,8 +323,8 @@ export default function Home() {
 {/*  ░░░ SAMBUTAN REKTOR ░░░  */}
 <section id="sambutan" style={{ padding: 'var(--space-8) 0' }}>
   <div className="container grid grid-2" style={{ alignItems: 'center' }}>
-    <div className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "24px", padding: '16px', overflow: 'hidden', position: 'relative', maxWidth: '400px', margin: '0 auto' }}>
-      <div style={{ borderRadius: '16px', overflow: 'hidden', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
+    <div className="fade-up" style={{ position: 'relative', maxWidth: '400px', margin: '0 auto', width: '100%' }}>
+      <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: '9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff' }}>
         <Image src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" width={400} height={600} style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block' }} onError={(e)=>{e.target.src='https://picsum.photos/400/600?random=A'}}/>
       </div>
       <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", position: 'absolute', bottom: '24px', left: '24px', right: '24px', padding: 'var(--space-3)' }}>
