@@ -63,7 +63,7 @@ export default function Page() {
 
   
   return (
-    <div className="public-neu-page">
+    <div className="public-neu-page mutu-neu-page">
       <section className="hero hero-sub public-neu-hero">
         <div className="container">
           <div className="fade-up">

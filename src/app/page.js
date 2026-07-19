@@ -33,7 +33,7 @@ export default function Home() {
   const slideBg = ['/1.jpeg', '/2.jpeg', '/3.jpeg'];
 
   return (
-    <>
+    <div className="home-neu-page">
       
 
 {/*  ░░░ HERO SECTION ░░░  */}
@@ -658,6 +658,6 @@ export default function Home() {
 
 
 
-      </>
+      </div>
   );
 }

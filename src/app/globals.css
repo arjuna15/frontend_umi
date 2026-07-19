@@ -2379,7 +2379,7 @@ header .btn-primary:hover {
 
 .btn-neu {
   background: var(--glass-bg);
-  color: var(--umiba-red-dark);
+  color: var(--umiba-red);
   border: none;
   box-shadow: var(--glass-shadow);
   transition: all var(--duration) var(--ease);
@@ -2512,4 +2512,243 @@ input:focus, textarea:focus, select:focus {
 [data-theme=dark] .lppm-neu-page .public-neu-content .glass-card > i {
   background: var(--color-surface);
   box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px rgba(255, 255, 255, 0.03);
+}
+
+
+/* The main accreditation introduction is an inset panel within the Quality page. */
+.mutu-neu-page #tentang-lpm > .container > .glass-card:first-child {
+  background: var(--color-surface) !important;
+  box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px rgba(255, 255, 255, 0.8) !important;
+}
+.mutu-neu-page #tentang-lpm > .container > .glass-card:first-child:hover {
+  transform: none !important;
+  box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px rgba(255, 255, 255, 0.8) !important;
+}
+[data-theme=dark] .mutu-neu-page #tentang-lpm > .container > .glass-card:first-child {
+  box-shadow: inset 6px 6px 12px #080a0f, inset -6px -6px 12px rgba(255, 255, 255, 0.03) !important;
+}
+
+
+/* The sticky tab rail is a recessed track; its navigation pills remain raised. */
+.profil-content > div[style*="position: sticky"] .profil-neu-card,
+.public-neu-content > div[style*="position: sticky"] .glass {
+  background: var(--color-surface) !important;
+  box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px rgba(255, 255, 255, 0.8) !important;
+}
+.profil-content > div[style*="position: sticky"] .profil-neu-card:hover,
+.public-neu-content > div[style*="position: sticky"] .glass:hover {
+  transform: none !important;
+  box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px rgba(255, 255, 255, 0.8) !important;
+}
+[data-theme=dark] .profil-content > div[style*="position: sticky"] .profil-neu-card,
+[data-theme=dark] .public-neu-content > div[style*="position: sticky"] .glass {
+  box-shadow: inset 6px 6px 12px #080a0f, inset -6px -6px 12px rgba(255, 255, 255, 0.03) !important;
+}
+
+
+/* Profile API markup still uses .glass, so it needs the same recessed tab rail. */
+.profil-content > div[style*="position: sticky"] .glass,
+.profil-content > div[style*="position: sticky"] .profil-neu-card,
+.public-neu-content > div[style*="position: sticky"] .glass {
+  width: fit-content !important;
+  max-width: calc(100vw - 40px);
+  margin-left: auto !important;
+  margin-right: auto !important;
+  background: var(--color-surface) !important;
+  box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px rgba(255, 255, 255, 0.8) !important;
+}
+[data-theme=dark] .profil-content > div[style*="position: sticky"] .glass,
+[data-theme=dark] .profil-content > div[style*="position: sticky"] .profil-neu-card,
+[data-theme=dark] .public-neu-content > div[style*="position: sticky"] .glass {
+  box-shadow: inset 6px 6px 12px #080a0f, inset -6px -6px 12px rgba(255, 255, 255, 0.03) !important;
+}
+
+
+/* Increase dark-mode contrast for the global navigation and neumorphic action labels. */
+[data-theme=dark] header .nav-link { color: #e2e8f0 !important; }
+[data-theme=dark] header .nav-link .dropdown-icon { color: #cbd5e1 !important; }
+[data-theme=dark] header .nav-link.active,
+[data-theme=dark] header .nav-link.active .dropdown-icon,
+[data-theme=dark] header .nav-link:hover,
+[data-theme=dark] header .nav-link:hover .dropdown-icon { color: #ff5a5f !important; }
+[data-theme=dark] header .logo img { filter: brightness(1.55) saturate(1.25) !important; }
+[data-theme=dark] .profil-content .btn-neu,
+[data-theme=dark] .profil-content .btn-glass,
+[data-theme=dark] .public-neu-content .btn-neu,
+[data-theme=dark] .public-neu-content .btn-glass,
+[data-theme=dark] .public-neu-content .btn-primary { color: #ff5a5f !important; }
+
+
+/* Complete the dark neumorphic interaction states on public pages only. */
+[data-theme=dark] .profil-content .glass,
+[data-theme=dark] .profil-content .glass-card,
+[data-theme=dark] .profil-content .profil-neu-card,
+[data-theme=dark] .public-neu-content .glass,
+[data-theme=dark] .public-neu-content .glass-card,
+[data-theme=dark] .portal-section .portal-card {
+  background: var(--color-surface) !important;
+  border: none !important;
+  box-shadow: 5px 5px 10px #080a0f, -5px -5px 10px #1b2130 !important;
+}
+[data-theme=dark] .profil-content .glass-card:hover,
+[data-theme=dark] .profil-content .profil-neu-card:hover,
+[data-theme=dark] .public-neu-content .glass-card:hover,
+[data-theme=dark] .portal-section .portal-card:hover {
+  background: var(--color-surface) !important;
+  box-shadow: 7px 7px 14px #080a0f, -7px -7px 14px #1b2130 !important;
+}
+[data-theme=dark] .profil-content .btn-neu,
+[data-theme=dark] .profil-content .btn-glass,
+[data-theme=dark] .public-neu-content .btn-neu,
+[data-theme=dark] .public-neu-content .btn-glass,
+[data-theme=dark] .public-neu-content .btn-primary,
+[data-theme=dark] .portal-section .portal-btn {
+  background: var(--color-surface) !important;
+  box-shadow: 4px 4px 8px #080a0f, -4px -4px 8px #1b2130 !important;
+}
+[data-theme=dark] .profil-content .btn-neu:hover,
+[data-theme=dark] .profil-content .btn-glass:hover,
+[data-theme=dark] .public-neu-content .btn-neu:hover,
+[data-theme=dark] .public-neu-content .btn-glass:hover,
+[data-theme=dark] .public-neu-content .btn-primary:hover,
+[data-theme=dark] .portal-section .portal-btn:hover {
+  background: var(--color-surface) !important;
+  box-shadow: 6px 6px 12px #080a0f, -6px -6px 12px #1b2130 !important;
+}
+[data-theme=dark] .profil-content .btn-neu:active,
+[data-theme=dark] .profil-content .btn-glass:active,
+[data-theme=dark] .public-neu-content .btn-neu:active,
+[data-theme=dark] .public-neu-content .btn-glass:active,
+[data-theme=dark] .public-neu-content .btn-primary:active {
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+}
+
+
+/* Home has explicit light inline shadows, so dark mode needs its own scoped equivalents. */
+[data-theme=dark] #beranda .neu-card,
+[data-theme=dark] #beranda .cert-slide,
+[data-theme=dark] #beranda .testi-card,
+[data-theme=dark] #beranda .prodi-card {
+  background: var(--color-surface) !important;
+  border: none !important;
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+}
+[data-theme=dark] #beranda .neu-card:hover,
+[data-theme=dark] #beranda .cert-slide:hover,
+[data-theme=dark] #beranda .testi-card:hover,
+[data-theme=dark] #beranda .prodi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 12px #080a0f, -6px -6px 12px #1b2130 !important;
+}
+[data-theme=dark] #beranda .btn-neu {
+  background: var(--color-surface) !important;
+  color: #ff5a5f !important;
+  box-shadow: 4px 4px 8px #080a0f, -4px -4px 8px #1b2130 !important;
+}
+[data-theme=dark] #beranda .btn-neu:hover {
+  background: var(--color-surface) !important;
+  box-shadow: 6px 6px 12px #080a0f, -6px -6px 12px #1b2130 !important;
+}
+[data-theme=dark] #beranda .btn-neu:active {
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+}
+[data-theme=dark] #beranda .hero-arrow,
+[data-theme=dark] #beranda .hero-dot {
+  background: var(--color-surface) !important;
+  color: var(--color-text) !important;
+  box-shadow: 3px 3px 6px #080a0f, -3px -3px 6px #1b2130 !important;
+}
+[data-theme=dark] #beranda .hero-arrow:hover,
+[data-theme=dark] #beranda .hero-dot:hover {
+  box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
+}
+
+
+/* Remove the last hard-coded light shadows from the Home hero. */
+[data-theme=dark] #beranda [style*="inset 3px 3px 6px #cbd5e1"],
+[data-theme=dark] #beranda [style*="inset 4px 4px 8px #cbd5e1"] {
+  background: var(--color-surface) !important;
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+}
+
+/* The full Home route, including sections beneath the hero, uses dark inset shadows. */
+[data-theme=dark] .home-neu-page [style*="#ffffff"],
+[data-theme=dark] .home-neu-page [style*="#cbd5e1"] {
+  background: var(--color-surface) !important;
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+}
+[data-theme=dark] .home-neu-page .neu-card,
+[data-theme=dark] .home-neu-page .cert-slide,
+[data-theme=dark] .home-neu-page .testi-card,
+[data-theme=dark] .home-neu-page .prodi-card {
+  background: var(--color-surface) !important;
+  border: none !important;
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+}
+[data-theme=dark] .home-neu-page .neu-card:hover,
+[data-theme=dark] .home-neu-page .cert-slide:hover,
+[data-theme=dark] .home-neu-page .testi-card:hover,
+[data-theme=dark] .home-neu-page .prodi-card:hover {
+  box-shadow: 6px 6px 12px #080a0f, -6px -6px 12px #1b2130 !important;
+}
+[data-theme=dark] .home-neu-page .btn-neu {
+  background: var(--color-surface) !important;
+  color: #ff5a5f !important;
+  box-shadow: 4px 4px 8px #080a0f, -4px -4px 8px #1b2130 !important;
+}
+[data-theme=dark] .home-neu-page .btn-neu:hover {
+  background: var(--color-surface) !important;
+  box-shadow: 6px 6px 12px #080a0f, -6px -6px 12px #1b2130 !important;
+}
+[data-theme=dark] .home-neu-page .btn-neu:active {
+  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+}
+
+
+/* Small Home controls also carry inline inset tokens and need dark-only shadows. */
+[data-theme=dark] .home-neu-page [style*="var(--inset-shadow-light)"] {
+  background: var(--color-surface) !important;
+  box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
+}
+[data-theme=dark] .home-neu-page .siakad-badge {
+  background: var(--color-surface) !important;
+  border: none !important;
+  box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
+}
+[data-theme=dark] .home-neu-page .custom-scrollbar {
+  background: #0c1119 !important;
+  border: none !important;
+  box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
+}
+[data-theme=dark] .home-neu-page .custom-scrollbar::-webkit-slider-thumb {
+  background: #ef4444;
+  box-shadow: 2px 2px 4px #080a0f, -2px -2px 4px #1b2130;
+}
+[data-theme=dark] .home-neu-page .custom-scrollbar::-moz-range-track {
+  background: #0c1119;
+  box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130;
+}
+[data-theme=dark] .home-neu-page .custom-scrollbar::-moz-range-thumb {
+  background: #ef4444;
+  box-shadow: 2px 2px 4px #080a0f, -2px -2px 4px #1b2130;
+}
+
+
+[data-theme=dark] .home-neu-page .hero-dot.active {
+  background: #ef4444 !important;
+  box-shadow: inset 2px 2px 4px #991b1b, inset -2px -2px 4px rgba(255, 255, 255, 0.12) !important;
+}
+
+
+
+
+/* Match the light mega-menu elevation exactly; only the shadow colors change in dark mode. */
+[data-theme=dark] header .mega-menu {
+  box-shadow: 9px 9px 18px #090b10, -9px -9px 18px #1b2130 !important;
+}
+
+
+/* Preserve mega-menu card depth while replacing inline light highlights in dark mode. */
+[data-theme=dark] header .mega-menu [style*="box-shadow"][style*="rgba(255,255,255"] {
+  box-shadow: inset 3px 3px 6px #090b10, inset -3px -3px 6px #1b2130 !important;
 }
