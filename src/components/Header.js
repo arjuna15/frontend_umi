@@ -88,11 +88,11 @@ export default function Header() {
       }}>
         {/* Kiri: Info PMB */}
         <div className="top-banner-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.15)', padding: '6px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)', flexShrink: 0 }}>
+           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#B91C1C', padding: '6px', borderRadius: '50%', boxShadow: 'inset 2px 2px 4px #7F1D1D, inset -2px -2px 4px #F87171', flexShrink: 0 }}>
              <i className="ph-fill ph-megaphone" style={{ fontSize: '1.2rem', color: '#ffffff' }}></i>
            </div>
            <div className="pmb-text-container" style={{ display: 'flex', flexDirection: 'column', flexGrow: 1, overflow: 'hidden' }}>
-             <span className="pmb-title" style={{ fontSize: 'clamp(0.75rem, 2.5vw, 0.9rem)', fontWeight: '800', letterSpacing: '0.5px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
+             <span className="pmb-title" style={{ fontSize: 'clamp(0.75rem, 2.5vw, 0.9rem)', fontWeight: '800', color: '#ffffff', letterSpacing: '0.5px', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
                <span className="d-none-mobile">PENDAFTARAN MAHASISWA BARU </span>
                <span className="d-none-desktop">PMB </span>
                2026/2027
@@ -117,11 +117,11 @@ export default function Header() {
         {/* Kanan: Search & Sosmed */}
         <div className="top-banner-right" style={{ display: 'flex', alignItems: 'center', gap: '24px', flexShrink: 0 }}>
           <div className="search-bar" style={{ position: 'relative', display: 'flex', alignItems: 'center', width: '100%', zIndex: 99999 }}>
-            <form onSubmit={(e) => { e.preventDefault(); if (searchQuery.trim() && filteredResults.length > 0) router.push(filteredResults[0].url); }} style={{ display: 'flex', width: '100%', alignItems: 'center', padding: '6px 16px', background: '#B91C1C', borderRadius: '20px', boxShadow: '3px 3px 6px #7F1D1D, -3px -3px 6px #F87171', border: 'none' }}>
-              <i className="ph-bold ph-magnifying-glass" style={{ color: '#ffffff', marginRight: '8px' }}></i>
+            <form onSubmit={(e) => { e.preventDefault(); if (searchQuery.trim() && filteredResults.length > 0) router.push(filteredResults[0].url); }} style={{ display: 'flex', width: '100%', alignItems: 'center', padding: '6px 16px', background: '#B91C1C', borderRadius: '20px', boxShadow: 'inset 3px 3px 6px #7F1D1D, inset -3px -3px 6px #F87171', border: 'none' }}>
+              <i className="ph-bold ph-magnifying-glass" style={{ color: 'rgba(255,255,255,0.8)', marginRight: '8px' }}></i>
               <input type="text" placeholder="Cari..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ border: 'none', outline: 'none', background: 'transparent', fontSize: '0.8rem', width: '100%', color: '#ffffff' }} />
               {searchQuery && (
-                <i className="ph-bold ph-x" onClick={() => setSearchQuery('')} style={{ color: '#ffffff', cursor: 'pointer', marginLeft: '8px', fontSize: '0.8rem' }}></i>
+                <i className="ph-bold ph-x" onClick={() => setSearchQuery('')} style={{ color: 'rgba(255,255,255,0.8)', cursor: 'pointer', marginLeft: '8px', fontSize: '0.8rem' }}></i>
               )}
             </form>
             {searchQuery.trim() !== '' && (
@@ -158,15 +158,15 @@ export default function Header() {
           </div>
           <div className="top-divider" style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.3)' }}></div>
            
-          <div className="top-banner-phone" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '700', background: '#B91C1C', padding: '4px 10px', borderRadius: '20px', boxShadow: '2px 2px 4px #7F1D1D, -2px -2px 4px #F87171', color: '#ffffff', flexShrink: 0 }}>
+          <div className="top-banner-phone" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '700', background: '#B91C1C', padding: '4px 10px', borderRadius: '20px', boxShadow: '3px 3px 6px #7F1D1D, -3px -3px 6px #F87171', color: '#ffffff', flexShrink: 0 }}>
             <i className="ph-fill ph-headset" style={{ fontSize: '1.2rem', color: '#ffffff' }}></i> 
             <span style={{ fontSize: '0.85rem', whiteSpace: 'nowrap' }}>0811 870 114</span>
           </div>
 
           <div className="socials" style={{ display: 'flex', gap: '16px', fontSize: '1.2rem' }}>
-             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-youtube-logo"></i></a>
-             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-instagram-logo"></i></a>
-             <a href="#" style={{ color: 'rgba(255,255,255,0.8)', transition: 'all 0.3s' }} onMouseOver={e=>{e.currentTarget.style.color='#ffffff'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.color='rgba(255,255,255,0.8)'; e.currentTarget.style.transform='translateY(0)'}}><i className="ph-fill ph-linkedin-logo"></i></a>
+             <a href="#" style={{ color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '50%', background: '#B91C1C', boxShadow: 'inset 2px 2px 4px #7F1D1D, inset -2px -2px 4px #F87171', transition: 'all 0.3s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}><i className="ph-fill ph-youtube-logo" style={{ fontSize: '1.1rem' }}></i></a>
+             <a href="#" style={{ color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '50%', background: '#B91C1C', boxShadow: 'inset 2px 2px 4px #7F1D1D, inset -2px -2px 4px #F87171', transition: 'all 0.3s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}><i className="ph-fill ph-instagram-logo" style={{ fontSize: '1.1rem' }}></i></a>
+             <a href="#" style={{ color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '50%', background: '#B91C1C', boxShadow: 'inset 2px 2px 4px #7F1D1D, inset -2px -2px 4px #F87171', transition: 'all 0.3s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}><i className="ph-fill ph-linkedin-logo" style={{ fontSize: '1.1rem' }}></i></a>
            </div>
         </div>
       </div>
