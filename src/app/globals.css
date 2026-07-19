@@ -1712,18 +1712,30 @@ header.top-transparent .lang-switch .lang-btn:not(.active) {
 /* User request: Radial gradient makes logo legible, and we boost brightness/saturation slightly to make the red pop */
 header.top-transparent .logo img {
   height: 60px;
-  filter: brightness(1.15) saturate(1.25);
+  filter: brightness(1.15) saturate(1.25) drop-shadow(3px 3px 5px rgba(0, 0, 0, 0.15));
 }
 
 header.top-transparent .theme-toggle {
-  border-color: rgba(0, 0, 0, 0.1) !important;
-  background: rgba(0, 0, 0, 0.05) !important;
+  border: none !important;
+  background: var(--color-surface) !important;
   color: #1e293b !important;
+  box-shadow: 3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff !important;
+}
+body.dark-mode header.top-transparent .theme-toggle {
+  background: var(--color-surface) !important;
+  box-shadow: 3px 3px 6px #090b10, -3px -3px 6px #1b2130 !important;
+  color: #ffffff !important;
 }
 
 header.top-transparent .lang-switch {
-  border-color: rgba(0, 0, 0, 0.1) !important;
-  background: rgba(0, 0, 0, 0.05) !important;
+  border: none !important;
+  background: var(--color-surface) !important;
+  box-shadow: 3px 3px 6px #d1d9e6, -3px -3px 6px #ffffff !important;
+  padding: 4px;
+}
+body.dark-mode header.top-transparent .lang-switch {
+  background: var(--color-surface) !important;
+  box-shadow: 3px 3px 6px #090b10, -3px -3px 6px #1b2130 !important;
 }
 
 /* Ensure hamburger menu icon is black on mobile */
@@ -1795,6 +1807,16 @@ header.top-transparent .nav-link.active .dropdown-icon {
 }
 header.top-transparent .nav-link.active::after {
   display: none;
+}
+
+/* Outset shadows on transparent header register button */
+header.top-transparent .btn-primary {
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15) !important;
+  border: none !important;
+}
+header.top-transparent .btn-primary:hover {
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25) !important;
+  transform: translateY(-2px);
 }
 
 /* Hero Mobile Fix */
