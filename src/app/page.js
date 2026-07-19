@@ -481,30 +481,30 @@ export default function Home() {
 </section>
 
 {/*  ░░░ BERITA TERBARU ░░░  */}
-<section id="berita" style={{ padding: 'var(--space-8) 0' }}>
+<section id="berita" style={{ padding: '40px 0' }}>
   <div className="container">
     <div className="flex fade-up" style={{ justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 'var(--space-6)' }}>
       <div>
-        <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.kabar_kampus")}</span>
-        <h2 style={{ marginBottom: '0' }}>{t("home.berita_pengumuman")}</h2>
+        <span className="text-red" style={{ fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem' }}>{t("home.kabar_kampus")}</span>
+        <h2 style={{ marginBottom: '0', fontWeight: 900 }}>{t("home.berita_pengumuman")}</h2>
       </div>
-      <a href="/berita" className="btn btn-neu">{t("home.lihat_semua")}</a>
+      <a href="/berita" className="btn btn-neu" style={{ borderRadius: '12px' }}>{t("home.lihat_semua")}</a>
     </div>
     <div className="grid grid-3 scroll-mobile">
       {newsData && newsData.length > 0 ? (
         newsData.map((newsItem, index) => (
-          <div key={newsItem.id} className="neu-card fade-up" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", transitionDelay: `${index * 0.1}s`, padding: 0, overflow: 'hidden' }}>
-            <div style={{ background: 'var(--color-muted)', height: '200px', overflow: 'hidden' }}>
-               <Image src={newsItem.image_url} width={400} height={300} style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt={newsItem.title}/>
+          <div key={newsItem.id} className="neu-card fade-up" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", transitionDelay: `${index * 0.1}s`, padding: '16px', overflow: 'hidden' }}>
+            <div style={{ borderRadius: '16px', height: '200px', overflow: 'hidden' }}>
+               <img src={newsItem.image_url} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} alt={newsItem.title}/>
             </div>
-            <div style={{ padding: 'var(--space-4)' }}>
-              <p style={{ fontSize: '0.8rem', marginBottom: '8px', color: 'var(--slate-500)' }}>{newsItem.date}</p>
-              <h3 style={{ fontSize: '1.1rem', margin: 0, lineHeight: '1.4' }}>{newsItem.title}</h3>
+            <div style={{ padding: '12px 4px 4px 4px' }}>
+              <p style={{ fontSize: '0.8rem', marginBottom: '8px', color: 'var(--color-text-muted)' }}>{newsItem.date}</p>
+              <h3 style={{ fontSize: '1.1rem', margin: 0, lineHeight: '1.4', fontWeight: 800 }}>{newsItem.title}</h3>
             </div>
           </div>
         ))
       ) : (
-        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px', background: "var(--color-bg)", borderRadius: '16px' }}>
+        <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px', background: "var(--color-surface)", borderRadius: '24px', boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff" }}>
           <p style={{ color: '#64748b', fontSize: '1.1rem', margin: 0 }}>{t("home.belum_ada_berita")}</p>
         </div>
       )}
@@ -513,31 +513,32 @@ export default function Home() {
 </section>
 
 {/*  ░░░ LOKASI KAMPUS ░░░  */}
-<section id="lokasi" style={{ padding: 'var(--space-8) 0', background: "var(--color-bg)" }}>
+<section id="lokasi" style={{ padding: '40px 0', background: "var(--color-bg)" }}>
   <div className="container fade-up">
     <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }}>
-      <h2 style={{ fontSize: '2.5rem', marginBottom: '8px' }}>{t("home.lokasi_kampus")}</h2>
-      <p style={{ color: 'var(--slate-600)', fontSize: '1.1rem' }}>{t("home.lokasi_desc")}</p>
+      <span className="text-red" style={{ fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem' }}>Lokasi Kami</span>
+      <h2 style={{ fontSize: '2.5rem', marginBottom: '8px', fontWeight: 900 }}>{t("home.lokasi_kampus")}</h2>
+      <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem' }}>{t("home.lokasi_desc")}</p>
     </div>
     <div className="grid grid-2" style={{ gap: 'var(--space-6)' }}>
       {/*  Kampus Pasar Minggu  */}
-      <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", padding: 'var(--space-4)' }}>
-        <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)' }}><i className="ph ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_pasar_minggu")}</h3>
-        <p style={{ color: 'var(--slate-600)', marginBottom: 'var(--space-4)', lineHeight: '1.5', fontSize: '0.95rem' }}>
+      <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '24px' }}>
+        <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)', fontWeight: 800 }}><i className="ph ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_pasar_minggu")}</h3>
+        <p style={{ color: 'var(--color-text-muted)', marginBottom: 'var(--space-4)', lineHeight: '1.5', fontSize: '0.95rem' }}>
           {t("home.alamat_pm")}
         </p>
-        <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', height: '300px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+        <div style={{ borderRadius: '16px', overflow: 'hidden', height: '300px' }}>
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8021859604723!2d106.84124877521778!3d-6.289711293699269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69eda4b9cb7a3b%3A0xa480a640215e1b50!2sUniversitas%20Mitra%20Bangsa%20Jakarta%20(UMIBA)!5e0!3m2!1sid!2sid!4v1780999630946!5m2!1sid!2sid" width="100%" height="100%" style={{ border: '0' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
       
       {/*  Kampus Bintaro  */}
-      <div className="neu-card" style={{ background: "var(--glass-bg)", boxShadow: "var(--glass-shadow)", border: "none", borderRadius: "16px", padding: 'var(--space-4)' }}>
-        <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)' }}><i className="ph ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_bintaro")}</h3>
-        <p style={{ color: 'var(--slate-600)', marginBottom: 'var(--space-4)', lineHeight: '1.5', fontSize: '0.95rem' }}>
+      <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "24px", padding: '24px' }}>
+        <h3 style={{ color: 'var(--umiba-red-dark)', marginBottom: 'var(--space-2)', fontWeight: 800 }}><i className="ph ph-fill ph-map-pin" style={{ color: 'var(--umiba-red)', marginRight: '8px' }}></i>{t("home.kampus_bintaro")}</h3>
+        <p style={{ color: 'var(--color-text-muted)', marginBottom: 'var(--space-4)', lineHeight: '1.5', fontSize: '0.95rem' }}>
           {t("home.alamat_bintaro")}
         </p>
-        <div style={{ borderRadius: 'var(--radius-md)', overflow: 'hidden', height: '300px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+        <div style={{ borderRadius: '16px', overflow: 'hidden', height: '300px' }}>
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7931.8354716433105!2d106.76112597521758!3d-6.274546893714218!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f029893119b5%3A0x83f8e2bcc968c64a!2sUniversitas%20Mitra%20Bangsa%20Bintaro%20(UMIBA)!5e0!3m2!1sid!2sid!4v1780999658632!5m2!1sid!2sid" width="100%" height="100%" style={{ border: '0' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
@@ -630,17 +631,17 @@ export default function Home() {
 </section>
 
 {/*  ░░░ TESTIMONI ALUMNI ░░░  */}
-<section className="testi-section">
+<section className="testi-section" style={{ padding: '40px 0' }}>
   <div className="container">
     <div style={{ textAlign: 'center', marginBottom: 'var(--space-6)' }} className="fade-up">
-      <span className="text-red" style={{ fontWeight: '600', textTransform: 'uppercase' }}>{t("home.kisah_sukses")}</span>
-      <h2>{t("home.testimoni_alumni")}</h2>
+      <span className="text-red" style={{ fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem' }}>{t("home.kisah_sukses")}</span>
+      <h2 style={{ fontWeight: 900 }}>{t("home.testimoni_alumni")}</h2>
     </div>
     <div className="testi-slider fade-up">
       {testiData.length > 0 ? (
         testiData.map((testi, index) => (
-          <div key={testi.id} className="testi-card">
-            <Image className="alumni-img" style={{ objectFit: 'cover' }} src={testi.image_url} width={380} height={440} alt={`Testimoni ${index + 1}`}/>
+          <div key={testi.id} className="testi-card" style={{ background: 'var(--color-surface)', borderRadius: '24px', padding: '12px', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
+            <img className="alumni-img" style={{ objectFit: 'cover', width: '100%', height: '440px', borderRadius: '16px', display: 'block' }} src={testi.image_url} alt={`Testimoni ${index + 1}`}/>
           </div>
         ))
       ) : (
