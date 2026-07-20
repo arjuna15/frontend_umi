@@ -2337,18 +2337,77 @@ header .btn-primary:hover {
   .hero-slide a[href*="wa.me"] {
     padding: 8px 16px !important;
   }
+
+  /* Responsive styles for Hero Model images & circles on tablets and small laptops (under 1024px) */
+  .hero-model-container {
+    width: 35% !important;
+    right: 10px !important;
+  }
+
+  .hero-model-container > div {
+    width: 280px !important;
+    height: 280px !important;
+    margin-right: 10px !important;
+    margin-top: 120px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  /* On tablets and smaller screens, stack elements vertically and display the circle/models cleanly below the text content or scaled down */
+  .hero-model-container {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 20px !important;
+    bottom: auto !important;
+    order: 2 !important;
+  }
+  
+  .hero-model-container > div {
+    width: 250px !important;
+    height: 250px !important;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  .hero-slide {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    min-height: 860px !important;
+    padding-top: 90px !important;
+    padding-bottom: 20px !important;
+  }
+  
+  .hero-slide .container {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
 }
 
 @media (max-width: 480px) {
   #beranda,
   #beranda > div,
   .hero-slide {
-    min-height: 780px !important;
+    min-height: 740px !important;
   }
 
   .hero-slide div[style*="gridTemplateColumns"] {
     grid-template-columns: 1fr !important;
     gap: 8px !important;
+  }
+
+  /* Very small mobile devices (under 480px) scale circle down further so text has room */
+  .hero-model-container > div {
+    width: 190px !important;
+    height: 190px !important;
+  }
+
+  .hero-slide {
+    padding-top: 75px !important;
   }
 }
 
