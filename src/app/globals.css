@@ -2388,22 +2388,29 @@ header .btn-primary:hover {
   }
 }
 
+@media (max-width: 600px) {
+  /* Completely hide the hero model circle and images on mobile screens for a cleaner text-focused layout */
+  .hero-model-container {
+    display: none !important;
+  }
+
+  #beranda,
+  #beranda > div,
+  .hero-slide {
+    min-height: 520px !important;
+  }
+}
+
 @media (max-width: 480px) {
   #beranda,
   #beranda > div,
   .hero-slide {
-    min-height: 740px !important;
+    min-height: 500px !important;
   }
 
   .hero-slide div[style*="gridTemplateColumns"] {
     grid-template-columns: 1fr !important;
     gap: 8px !important;
-  }
-
-  /* Very small mobile devices (under 480px) scale circle down further so text has room */
-  .hero-model-container > div {
-    width: 190px !important;
-    height: 190px !important;
   }
 
   .hero-slide {
