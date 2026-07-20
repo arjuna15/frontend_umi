@@ -606,16 +606,16 @@
   box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px rgba(255, 255, 255, 0.6);
 }
 [data-theme='dark'] .siakad-input {
-  background: var(--liquid-bg);
-  border-color: rgba(255, 255, 255, 0.04);
-  box-shadow: inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light);
+  background: var(--liquid-bg) !important;
+  border-color: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light) !important;
 }
 .siakad-input:focus {
   border-color: var(--apple-red);
   box-shadow: inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light), 0 0 0 3px rgba(196, 30, 58, 0.15);
 }
 [data-theme='dark'] .siakad-input:focus {
-  box-shadow: inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light), 0 0 0 3px rgba(196, 30, 58, 0.15);
+  box-shadow: inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light), 0 0 0 3px rgba(196, 30, 58, 0.15) !important;
 }
 .siakad-input:disabled {
   background: #f3f4f6;
