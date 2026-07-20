@@ -2747,7 +2747,8 @@ input:focus, textarea:focus, select:focus {
 }
 
 
-[data-theme=dark] .home-neu-page .hero-dot.active {
+[data-theme=dark] .home-neu-page .hero-dot.active,
+[data-theme=dark] #beranda .hero-dot.active {
   background: var(--umiba-red, #B91C1C) !important;
   box-shadow: inset 2px 2px 4px rgba(185, 28, 28, 0.4), inset -2px -2px 4px rgba(255, 255, 255, 0.15) !important;
 }
