@@ -2525,7 +2525,7 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-  box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px rgba(255, 255, 255, 0.8) !important;
+  box-shadow: inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light) !important;
 }
 
 /* Public variables for Neumorphism contrast shadows */
