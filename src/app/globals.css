@@ -1259,7 +1259,7 @@ body.dark-mode .hero-dot:hover {
     pointer-events: auto;
     visibility: visible;
   }
-  .nav-link { width: 100%; justify-content: space-between; font-size: 1.05rem; padding: 12px 0; }
+  .nav-link { width: 100%; justify-content: space-between; font-size: 1.05rem; padding: 12px 16px !important; }
 
   .dropdown-menu,
   .mega-menu {
@@ -1317,7 +1317,8 @@ body.dark-mode .hero-dot:hover {
     border-bottom: 1px solid rgba(255,255,255,0.05) !important;
   }
   .nav-link, .dropdown-link {
-    padding: 12px 0;
+    padding: 12px 16px !important; /* Added 16px horizontal padding to prevent hugging the left/right edges */
+    border-radius: var(--radius-sm);
     border-bottom: 1px solid rgba(0,0,0,0.05);
   }
   .dropdown-submenu .dropdown-menu { margin-left: 0; }
