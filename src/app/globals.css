@@ -2748,8 +2748,8 @@ input:focus, textarea:focus, select:focus {
 
 
 [data-theme=dark] .home-neu-page .hero-dot.active {
-  background: #ef4444 !important;
-  box-shadow: inset 2px 2px 4px #991b1b, inset -2px -2px 4px rgba(255, 255, 255, 0.12) !important;
+  background: var(--umiba-red, #B91C1C) !important;
+  box-shadow: inset 2px 2px 4px rgba(185, 28, 28, 0.4), inset -2px -2px 4px rgba(255, 255, 255, 0.15) !important;
 }
 
 /* Match the light mega-menu elevation exactly; only the shadow colors change in dark mode. */
