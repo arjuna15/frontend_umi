@@ -822,6 +822,13 @@ header.top-transparent .glass {
   pointer-events: auto;
   z-index: 2;
 }
+
+/* Force hardware compositing layer to prevent rendering glitches inside overflow:hidden containers */
+.hero-model-circle {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
 .footer-hover-link:hover { color: white !important; transform: translateX(4px); display: inline-block; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
 .hero-controls {
   position: absolute;
