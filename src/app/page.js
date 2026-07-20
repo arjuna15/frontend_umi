@@ -90,7 +90,7 @@ export default function Home() {
               <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
-                <div style={{ position: 'absolute', bottom: 0, left: '-20px', right: '-20px', height: '116%', zIndex: 1 }}>
+                <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 1 }}>
                   <Image 
                     src="/nobcg1.png" 
                     alt="Student Model 1 Base" 
@@ -159,7 +159,7 @@ export default function Home() {
               <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
-                <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 1 }}>
+                <div style={{ position: 'absolute', inset: '-100px -20px 0 -20px', zIndex: 1 }}>
                   <Image src="/nobcg2.png" alt="Student Model 2 Base" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
                 </div>
               </div>
@@ -253,7 +253,7 @@ export default function Home() {
               <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
-                <div style={{ position: 'absolute', bottom: 0, left: '-20px', right: '-20px', height: '116%', zIndex: 1 }}>
+                <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 1 }}>
                   <Image 
                     src="/nobcg3.png" 
                     alt="Student Model 3 Base" 
