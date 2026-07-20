@@ -16,6 +16,65 @@ export default function DosenQuizCreate() {
   const [category, setCategory] = useState('kuis'); // 'kuis', 'uts', 'uas'
   const [requireProctoring, setRequireProctoring] = useState(false);
 
+  // AI Quiz Generator States
+  const [showAiModal, setShowAiModal] = useState(false);
+  const [aiPrompt, setAiPrompt] = useState('');
+  const [aiType, setAiType] = useState('multiple_choice');
+  const [aiCount, setAiCount] = useState(5);
+  const [aiLoading, setAiLoading] = useState(false);
+
+  const generateAiQuestions = async () => {
+    if (!aiPrompt.trim()) {
+      window.toast('Masukkan bahan materi kuliah terlebih dahulu.');
+      return;
+    }
+    setAiLoading(true);
+    try {
+      const token = localStorage.getItem('siakad_token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+      
+      const res = await fetch(`${apiUrl}/siakad/dosen/quiz/generate-ai`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          prompt: aiPrompt,
+          type: aiType,
+          count: aiCount
+        })
+      });
+
+      if (!res.ok) throw new Error('AI Gagal merancang soal.');
+      const data = await res.json();
+      
+      if (Array.isArray(data.questions)) {
+        // Map the questions returned from Laravel AI generator
+        const formattedQuestions = data.questions.map((q) => ({
+          type: aiType,
+          question: q.question || '',
+          option_a: q.option_a || '',
+          option_b: q.option_b || '',
+          option_c: q.option_c || '',
+          option_d: q.option_d || '',
+          correct_answer: q.correct_answer || 'A',
+          correct_answer_text: q.correct_answer_text || ''
+        }));
+        
+        setQuestions(formattedQuestions);
+        setShowAiModal(false);
+        window.toast(`Berhasil membuat ${formattedQuestions.length} soal otomatis dengan AI!`);
+      } else {
+        throw new Error('Format respon AI tidak valid.');
+      }
+    } catch (err) {
+      window.toast('Error AI: ' + err.message);
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   useEffect(() => {
     const fetchDashboard = async () => {
       const token = localStorage.getItem('siakad_token');
@@ -387,7 +446,7 @@ export default function DosenQuizCreate() {
           </div>
         ))}
 
-        <div style={{ display: 'flex', gap: '16px' , flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '16px' , flexWrap: 'wrap', marginBottom: '24px' }}>
           <button 
             type="button" 
             onClick={addQuestion} 
@@ -404,8 +463,32 @@ export default function DosenQuizCreate() {
               transition: 'all 0.2s'
             }}
           >
-            <i className="ph ph-plus"></i> Tambah Soal
+            <i className="ph ph-plus"></i> Tambah Soal Manual
           </button>
+          
+          <button 
+            type="button" 
+            onClick={() => setShowAiModal(true)} 
+            style={{ 
+              flex: 1, 
+              background: 'var(--gradient-red, linear-gradient(135deg, #B91C1C 0%, #E11D48 100%))', 
+              color: 'white', 
+              border: 'none', 
+              padding: '12px 24px', 
+              borderRadius: '50px', 
+              cursor: 'pointer', 
+              fontWeight: 'bold',
+              boxShadow: '0 4px 12px rgba(185, 28, 28, 0.25)',
+              transition: 'all 0.2s',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px'
+            }}
+          >
+            <i className="ph-bold ph-sparkles"></i> Buat Soal Otomatis (AI)
+          </button>
+
           <button 
             type="submit" 
             disabled={loading} 
@@ -420,6 +503,108 @@ export default function DosenQuizCreate() {
           </button>
         </div>
       </form>
+
+      {/* AI Quiz Generator Modal */}
+      {showAiModal && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 99999, padding: '20px', boxSizing: 'border-box' }}>
+          <div className="siakad-card" style={{ width: '100%', maxWidth: '600px', padding: '28px', borderRadius: '24px', position: 'relative', background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', boxSizing: 'border-box' }}>
+            <h3 style={{ margin: '0 0 8px 0', fontWeight: '800', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <i className="ph-fill ph-sparkles" style={{ color: 'var(--umiba-red)' }}></i> AI Quiz Generator
+            </h3>
+            <p style={{ margin: '0 0 20px 0', color: 'var(--color-muted)', fontSize: '0.85rem' }}>Automasi pembuatan soal kuis SIAKAD memanfaatkan kecerdasan buatan terintegrasi.</p>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, fontSize: '0.9rem' }}>Bahan Materi Kuliah / Topik Pembahasan</label>
+                <textarea 
+                  value={aiPrompt}
+                  onChange={(e) => setAiPrompt(e.target.value)}
+                  className="siakad-input" 
+                  style={{ width: '100%', height: '120px', resize: 'vertical' }}
+                  placeholder="Masukkan ringkasan materi, silabus, atau poin penting bab kuliah yang ingin dijadikan bahan ujian..."
+                />
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, fontSize: '0.9rem' }}>Tipe Soal</label>
+                  <CustomSelect
+                    value={aiType}
+                    onChange={(val) => setAiType(val)}
+                    options={[
+                      { value: 'multiple_choice', label: 'Pilihan Ganda' },
+                      { value: 'true_false', label: 'Benar / Salah' },
+                      { value: 'essay', label: 'Esai (Essay)' }
+                    ]}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, fontSize: '0.9rem' }}>Jumlah Soal</label>
+                  <CustomSelect
+                    value={String(aiCount)}
+                    onChange={(val) => setAiCount(Number(val))}
+                    options={[
+                      { value: '3', label: '3 Soal' },
+                      { value: '5', label: '5 Soal' },
+                      { value: '10', label: '10 Soal' }
+                    ]}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <button 
+                type="button" 
+                onClick={() => setShowAiModal(false)}
+                style={{ 
+                  flex: 1, 
+                  background: 'var(--glass-bg)', 
+                  color: 'var(--color-text)', 
+                  border: 'var(--glass-border)', 
+                  padding: '12px 20px', 
+                  borderRadius: '50px', 
+                  cursor: 'pointer', 
+                  fontWeight: 'bold',
+                  boxShadow: 'var(--glass-shadow)'
+                }}
+              >
+                Batal
+              </button>
+              <button 
+                type="button" 
+                onClick={generateAiQuestions}
+                disabled={aiLoading}
+                style={{ 
+                  flex: 1, 
+                  background: 'var(--gradient-red, linear-gradient(135deg, #B91C1C 0%, #E11D48 100%))', 
+                  color: 'white', 
+                  border: 'none', 
+                  padding: '12px 20px', 
+                  borderRadius: '50px', 
+                  cursor: 'pointer', 
+                  fontWeight: 'bold',
+                  boxShadow: '0 4px 12px rgba(185, 28, 28, 0.25)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px'
+                }}
+              >
+                {aiLoading ? (
+                  <>
+                    <i className="ph ph-spinner ph-spin"></i> Merancang Soal...
+                  </>
+                ) : (
+                  <>
+                    <i className="ph-bold ph-magic-wand"></i> Generate Soal AI
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
