@@ -86,13 +86,28 @@ export default function Home() {
           <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
             <div style={{ position: 'relative', width: '380px', height: '380px', marginRight: '40px', marginTop: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               
-              {/* SIMPLIFIED FOR DEBUG - just circle + base image, NO overlays */}
-              <div className="hero-model-circle" style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden' }}>
-                <img 
-                  src="/nobcg1.png" 
-                  alt="Student Model 1" 
-                  style={{ position: 'absolute', top: '-60px', left: '-20px', right: '-20px', bottom: '0', width: 'calc(100% + 40px)', height: 'calc(100% + 60px)', objectFit: 'contain', objectPosition: 'bottom center' }} 
-                />
+              {/* The Masked Container (clips bottom body inside circle shape) */}
+              <div className="hero-model-circle" style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', zIndex: 0, transform: 'translate3d(0,0,0)' }}>
+                {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
+                <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
+                <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 1, transform: 'translate3d(0,0,0)' }}>
+                  <img 
+                    src="/nobcg1.png" 
+                    alt="Student Model 1 Base" 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center' }} 
+                  />
+                </div>
+              </div>
+
+              {/* The Pop-Out Overlay (uncut head popping out above circle, clipped below middle) */}
+              <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 45% 0px)', transform: 'translate3d(0,0,0)' }}>
+                <div style={{ position: 'relative', width: '100%', height: '100%', transform: 'translate3d(0,0,0)' }}>
+                  <img 
+                    src="/nobcg1.png" 
+                    alt="Student Model 1 Popout" 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center' }} 
+                  />
+                </div>
               </div>
 
             </div>
