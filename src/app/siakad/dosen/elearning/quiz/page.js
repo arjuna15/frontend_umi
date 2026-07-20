@@ -57,16 +57,22 @@ export default function DosenQuizCreate() {
       const data = await res.json();
       
       if (Array.isArray(data.questions)) {
-        const formattedQuestions = data.questions.map((q) => ({
-          type: aiType,
-          question: q.question || '',
-          option_a: q.option_a || '',
-          option_b: q.option_b || '',
-          option_c: q.option_c || '',
-          option_d: q.option_d || '',
-          correct_answer: q.correct_answer || 'A',
-          correct_answer_text: q.correct_answer_text || ''
-        }));
+        const formattedQuestions = data.questions.map((q) => {
+          let defAns = 'A';
+          if (aiType === 'true_false') {
+            defAns = q.correct_answer === 'False' || q.correct_answer === 'Salah' ? 'False' : 'True';
+          }
+          return {
+            type: aiType,
+            question: q.question || '',
+            option_a: aiType === 'multiple_choice' ? (q.option_a || '') : '',
+            option_b: aiType === 'multiple_choice' ? (q.option_b || '') : '',
+            option_c: aiType === 'multiple_choice' ? (q.option_c || '') : '',
+            option_d: aiType === 'multiple_choice' ? (q.option_d || '') : '',
+            correct_answer: q.correct_answer || defAns,
+            correct_answer_text: q.correct_answer_text || ''
+          };
+        });
         
         setQuestions(formattedQuestions);
         setShowAiModal(false);
