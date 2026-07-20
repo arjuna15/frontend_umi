@@ -825,8 +825,10 @@ header.top-transparent .glass {
   z-index: 2;
 }
 
-/* Force hardware compositing layer to prevent rendering glitches inside overflow:hidden containers */
+/* Hero Model Circle - all visual styling in CSS to allow dark mode overrides */
 .hero-model-circle {
+  background: var(--liquid-bg, #e0e0e0);
+  box-shadow: inset 8px 8px 16px var(--inset-shadow-dark, #bebebe), inset -8px -8px 16px var(--inset-shadow-light, #ffffff), 4px 4px 12px rgba(0,0,0,0.05);
   transform: translate3d(0, 0, 0);
   will-change: transform;
 }
