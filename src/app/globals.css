@@ -2397,7 +2397,20 @@ header .btn-primary:hover {
   #beranda,
   #beranda > div,
   .hero-slide {
-    min-height: 520px !important;
+    height: 100vh !important;
+    min-height: 640px !important;
+  }
+
+  /* Make glass list card on Slide 2 more compact on mobile to avoid overflow */
+  .hero-slide div[style*="borderRadius: '24px'"],
+  .hero-slide div[style*="borderRadius: 24px"] {
+    padding: 14px 16px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .hero-slide ul[style*="gap: '12px'"],
+  .hero-slide ul[style*="gap: 12px"] {
+    gap: 8px !important;
   }
 }
 
@@ -2405,7 +2418,8 @@ header .btn-primary:hover {
   #beranda,
   #beranda > div,
   .hero-slide {
-    min-height: 500px !important;
+    height: 100vh !important;
+    min-height: 620px !important;
   }
 
   .hero-slide div[style*="gridTemplateColumns"] {
@@ -2414,7 +2428,7 @@ header .btn-primary:hover {
   }
 
   .hero-slide {
-    padding-top: 75px !important;
+    padding-top: 65px !important;
   }
 }
 
