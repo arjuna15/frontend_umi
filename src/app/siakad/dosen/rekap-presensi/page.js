@@ -129,8 +129,19 @@ export default function RekapPresensiPage() {
               </div>
               <div style={{ position: 'relative' }}>
                 <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
-                <input type="text" placeholder="Cari mahasiswa..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)}
-                  style={{ padding: '10px 10px 10px 46px', borderRadius: '50px', border: 'var(--inset-border)', background: 'var(--liquid-bg)', color: 'var(--color-text)', outline: 'none', width: '220px', fontSize: '0.9rem', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' }} />
+                <input 
+                  type="text" 
+                  className="siakad-input" 
+                  placeholder="Cari mahasiswa..." 
+                  value={searchTerm} 
+                  onChange={e => setSearchTerm(e.target.value)}
+                  style={{ 
+                    padding: '10px 10px 10px 46px', 
+                    outline: 'none', 
+                    width: '220px', 
+                    fontSize: '0.9rem' 
+                  }} 
+                />
               </div>
             </div>
 
