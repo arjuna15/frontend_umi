@@ -27,7 +27,7 @@ export default function Header() {
     textAlign: 'center',
     minHeight: '280px',
     padding: '24px',
-    boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff',
+    boxShadow: 'var(--inset-shadow)',
   };
   const featureLogoStyle = {
     width: '92px',
@@ -44,7 +44,7 @@ export default function Header() {
     padding: '16px',
     background: 'var(--color-surface)',
     borderRadius: 'var(--radius-md)',
-    boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff',
+    boxShadow: 'var(--inset-shadow)',
   };
 
   const { theme, toggleTheme } = useTheme();
@@ -220,7 +220,7 @@ export default function Header() {
             marginTop: '-8px',
             marginBottom: '-8px'
           }}>
-            <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', marginBottom: '16px', border: '3px solid white', boxShadow: 'inset 3px 3px 6px rgba(0,0,0,0.15), inset -3px -3px 6px rgba(255,255,255,0.9)' }} />
+            <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', marginBottom: '16px', border: '3px solid var(--color-white)', boxShadow: 'var(--inset-shadow)' }} />
             <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: '800', color: 'var(--umiba-red)', whiteSpace: 'normal', wordWrap: 'break-word' }}>Sri Wahyuningsih, SE., MM</h4>
             <p style={{ margin: '0 0 16px 0', fontSize: '0.8rem', color: 'var(--color-text-muted)', fontWeight: '500', whiteSpace: 'normal', wordWrap: 'break-word' }}>Rektor Universitas Mitra Bangsa</p>
             <a href="/profil#sambutan" style={{
@@ -247,7 +247,7 @@ export default function Header() {
             <a href="/profil#visi-misi" className="dropdown-link" style={{ padding: '8px 12px', fontSize: '0.9rem' }}><i className="ph-bold ph-target" style={{ marginRight: '8px' }}></i>{t("nav.visi_misi")}</a>
             <a href="/profil#tujuan" className="dropdown-link" style={{ padding: '8px 12px', fontSize: '0.9rem' }}><i className="ph-bold ph-flag-banner" style={{ marginRight: '8px' }}></i>{t("nav.tujuan")}</a>
           </div>
-          <div style={{ background: 'rgba(185, 28, 28, 0.03)', padding: '16px', borderRadius: 'var(--radius-md)', marginTop: '-12px', boxShadow: 'inset 3px 3px 6px rgba(185, 28, 28, 0.15), inset -3px -3px 6px rgba(255, 255, 255, 0.9)' }}>
+          <div style={{ background: 'rgba(185, 28, 28, 0.03)', padding: '16px', borderRadius: 'var(--radius-md)', marginTop: '-12px', boxShadow: 'var(--inset-shadow)' }}>
             <h4 style={{ fontWeight: 'bold', fontSize: '0.8rem', color: 'var(--umiba-red)', marginBottom: '12px', textTransform: 'uppercase' }}>{t("nav.manajemen_fasilitas")}</h4>
             <a href="/profil#sasaran" className="dropdown-link" style={{ padding: '8px 12px', fontSize: '0.9rem' }}><i className="ph-bold ph-chart-line-up" style={{ marginRight: '8px' }}></i>{t("nav.strategi_pencapaian")}</a>
             <a href="/profil#struktur" className="dropdown-link" style={{ padding: '8px 12px', fontSize: '0.9rem' }}><i className="ph-bold ph-users-three" style={{ marginRight: '8px' }}></i>{t("nav.struktur_organisasi")}</a>
@@ -278,7 +278,7 @@ export default function Header() {
           </div>
           
           {/*  Column 3: Akademik Umum  */}
-          <div style={{ background: 'rgba(185, 28, 28, 0.03)', padding: '16px', borderRadius: 'var(--radius-md)', boxShadow: 'inset 3px 3px 6px rgba(185, 28, 28, 0.15), inset -3px -3px 6px rgba(255, 255, 255, 0.9)' }}>
+          <div style={{ background: 'rgba(185, 28, 28, 0.03)', padding: '16px', borderRadius: 'var(--radius-md)', boxShadow: 'var(--inset-shadow)' }}>
             <h4 style={{ fontWeight: 'bold', fontSize: '0.8rem', color: 'var(--umiba-red)', marginBottom: '12px', textTransform: 'uppercase' }}>{t("nav.layanan_akademik")}</h4>
             <a href="/kurikulum" className="dropdown-link" style={{ padding: '8px 12px', fontSize: '0.9rem' }}><i className="ph-bold ph-book-open" style={{ marginRight: '8px' }}></i>{t("nav.kurikulum")}</a>
             <a href="/kurikulum#kalender" className="dropdown-link" style={{ padding: '8px 12px', fontSize: '0.9rem' }}><i className="ph-bold ph-calendar" style={{ marginRight: '8px' }}></i>{t("nav.kalender_akademik")}</a>
