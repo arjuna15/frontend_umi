@@ -2534,8 +2534,8 @@ input:focus, textarea:focus, select:focus {
   --inset-shadow-light: rgba(255, 255, 255, 0.6);
 }
 [data-theme='dark'] {
-  --inset-shadow-dark: #080a0f;
-  --inset-shadow-light: rgba(255, 255, 255, 0.04);
+  --inset-shadow-dark: #050a0f;
+  --inset-shadow-light: #132637;
 }
 
 /* Public siakad-badge definition using neumorphic inset */
