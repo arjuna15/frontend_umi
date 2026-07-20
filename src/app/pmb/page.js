@@ -587,18 +587,25 @@ export default function PMBRegistrationPage() {
           background: var(--liquid-bg) !important;
           border: var(--inset-border) !important;
           box-shadow: inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light) !important;
+          color: var(--color-text) !important;
           color-scheme: light;
           cursor: pointer;
         }
-        body.dark-mode input[type="date"] {
+        [data-theme='dark'] input[type="date"] {
           color-scheme: dark;
+          box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+        }
+        [data-theme='dark'] input, 
+        [data-theme='dark'] select, 
+        [data-theme='dark'] textarea {
+          box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
         }
         input[type="date"]::-webkit-calendar-picker-indicator {
           filter: none;
           cursor: pointer;
           opacity: 0.6;
         }
-        body.dark-mode input[type="date"]::-webkit-calendar-picker-indicator {
+        [data-theme='dark'] input[type="date"]::-webkit-calendar-picker-indicator {
           filter: invert(1);
           opacity: 0.7;
         }
