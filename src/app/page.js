@@ -245,15 +245,6 @@ export default function Home() {
               <a href="/pmb" className="btn btn-neu" style={{ padding: '12px 28px', fontSize: 'clamp(0.9rem, 2vw, 1.1rem)', fontWeight: '800', borderRadius: '50px', textTransform: 'uppercase', transition: 'all 0.3s ease' }}>
                 {lang === "en" ? "Register Now" : "DAFTAR SEKARANG"}
               </a>
-              <a href="https://wa.me/62811870114" target="_blank" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--color-text)', textDecoration: 'none' }}>
-                <div style={{ background: 'var(--color-surface)', padding: '8px', borderRadius: '50%', display: 'flex', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
-                  <i className="ph ph-fill ph-whatsapp-logo" style={{ color: '#25D366', fontSize: '1.4rem' }}></i>
-                </div>
-                <div style={{ textAlign: 'left' }}>
-                  <div style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>{lang === "en" ? "Registration Info" : "Informasi Pendaftaran"}</div>
-                  <div style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)', fontWeight: 'bold', color: 'var(--color-text)', letterSpacing: '1px' }}>0811 870 114</div>
-                </div>
-              </a>
             </div>
           </div>
           <div className="hero-model-container" style={{ position: 'absolute', right: '0', bottom: 0, height: '100%', width: '45%', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', pointerEvents: 'none', zIndex: 1 }}>
