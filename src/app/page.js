@@ -91,12 +91,10 @@ export default function Home() {
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
                 <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 1 }}>
-                  <Image 
+                  <img 
                     src="/nobcg1.png" 
                     alt="Student Model 1 Base" 
-                    fill 
-                    style={{ objectFit: 'contain', objectPosition: 'bottom center' }} 
-                    priority 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center' }} 
                   />
                 </div>
               </div>
@@ -104,7 +102,11 @@ export default function Home() {
               {/* The Pop-Out Overlay (uncut head popping out above circle, clipped below middle) */}
               <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 45% 0px)' }}>
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                  <Image src="/nobcg1.png" alt="Student Model 1 Popout" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+                  <img 
+                    src="/nobcg1.png" 
+                    alt="Student Model 1 Popout" 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center' }} 
+                  />
                 </div>
               </div>
 
@@ -160,14 +162,22 @@ export default function Home() {
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
                 <div style={{ position: 'absolute', inset: '-100px -20px 0 -20px', zIndex: 1 }}>
-                  <Image src="/nobcg2.png" alt="Student Model 2 Base" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+                  <img 
+                    src="/nobcg2.png" 
+                    alt="Student Model 2 Base" 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center' }} 
+                  />
                 </div>
               </div>
 
               {/* The Pop-Out Overlay (uncut head popping out above circle, clipped below middle) */}
               <div style={{ position: 'absolute', inset: '-100px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 45% 0px)' }}>
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                  <Image src="/nobcg2.png" alt="Student Model 2 Popout" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+                  <img 
+                    src="/nobcg2.png" 
+                    alt="Student Model 2 Popout" 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center' }} 
+                  />
                 </div>
               </div>
 
@@ -254,12 +264,10 @@ export default function Home() {
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
                 <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 1 }}>
-                  <Image 
+                  <img 
                     src="/nobcg3.png" 
                     alt="Student Model 3 Base" 
-                    fill 
-                    style={{ objectFit: 'contain', objectPosition: 'bottom center' }} 
-                    priority 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center' }} 
                   />
                 </div>
               </div>
@@ -267,7 +275,11 @@ export default function Home() {
               {/* The Pop-Out Overlay (uncut head popping out above circle, clipped below middle) */}
               <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 3, clipPath: 'inset(0px 0px 45% 0px)' }}>
                 <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                  <Image src="/nobcg3.png" alt="Student Model 3 Popout" fill style={{ objectFit: 'contain', objectPosition: 'bottom center' }} priority />
+                  <img 
+                    src="/nobcg3.png" 
+                    alt="Student Model 3 Popout" 
+                    style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'bottom center' }} 
+                  />
                 </div>
               </div>
 
