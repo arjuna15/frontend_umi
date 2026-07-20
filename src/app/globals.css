@@ -34,6 +34,7 @@
   --font-heading: 'Outfit', system-ui, sans-serif;
 
   /* Glassmorphism Variables - Apple Liquid Glass */
+  --liquid-bg: #e0e0e0;
   --glass-bg: #e0e0e0;
   --glass-border: 1px solid rgba(255, 255, 255, 0.6);
   --glass-blur: blur(40px) saturate(210%);
@@ -82,6 +83,7 @@
   --color-text: #f1f5f9;
   --color-muted: #94a3b8;
   --color-border: rgba(255, 255, 255, 0.1);
+  --liquid-bg: #121620;
   --glass-bg: #121620;
   --glass-border: 1px solid rgba(255, 255, 255, 0.1);
   --glass-shadow: 4px 4px 8px #080a0f, -4px -4px 8px rgba(255, 255, 255, 0.03);
