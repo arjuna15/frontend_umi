@@ -2395,22 +2395,35 @@ header .btn-primary:hover {
   }
 
   #beranda,
-  #beranda > div,
+  #beranda > div {
+    height: 100vh !important;
+    min-height: auto !important;
+  }
+
   .hero-slide {
     height: 100vh !important;
-    min-height: 640px !important;
+    min-height: auto !important;
+    padding-top: 80px !important;
+    padding-bottom: 30px !important;
+    display: flex !important;
+    align-items: center !important; /* Center content vertically in the screen */
   }
 
   /* Make glass list card on Slide 2 more compact on mobile to avoid overflow */
   .hero-slide div[style*="borderRadius: '24px'"],
   .hero-slide div[style*="borderRadius: 24px"] {
-    padding: 14px 16px !important;
-    margin-bottom: 14px !important;
+    padding: 12px 14px !important;
+    margin-bottom: 12px !important;
+    border-radius: 16px !important;
   }
 
   .hero-slide ul[style*="gap: '12px'"],
   .hero-slide ul[style*="gap: 12px"] {
-    gap: 8px !important;
+    gap: 6px !important;
+  }
+
+  .hero-controls {
+    bottom: 20px !important; /* Move indicators closer to the bottom edge */
   }
 }
 
@@ -2419,16 +2432,17 @@ header .btn-primary:hover {
   #beranda > div,
   .hero-slide {
     height: 100vh !important;
-    min-height: 620px !important;
+    min-height: auto !important;
   }
 
   .hero-slide div[style*="gridTemplateColumns"] {
     grid-template-columns: 1fr !important;
-    gap: 8px !important;
+    gap: 6px !important;
   }
 
   .hero-slide {
-    padding-top: 65px !important;
+    padding-top: 75px !important;
+    padding-bottom: 35px !important;
   }
 }
 
