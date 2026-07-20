@@ -484,10 +484,10 @@ export default function PMBRegistrationPage() {
           background: var(--glass-bg);
           padding: 16px 24px;
           border-radius: 50px;
-          border: 1px solid var(--color-border);
+          border: var(--glass-border);
+          box-shadow: var(--glass-shadow);
           box-sizing: border-box !important;
           width: fit-content;
-          /* hapus margin-left/right: auto kalau masih ada, gak perlu lagi */
         }
         .pmb-step-item {
           display: flex;
@@ -551,7 +551,7 @@ export default function PMBRegistrationPage() {
 
         .custom-select {
           appearance: none !important;
-          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2712%27%20height%3D%2712%27%20viewBox%3D%270%200%2012%2012%27%3E%3Cpath%20fill%3D%27%233b82f6%27%20d%3D%27M6%208L1%203h10z%27%2F%3E%3C%2Fsvg%3E") !important;
+          background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2712%27%20height%3D%2712%27%20viewBox%3D%270%200%2012%2012%27%3E%3Cpath%20fill%3D%27%23B91C1C%27%20d%3D%27M6%208L1%203h10z%27%2F%3E%3C%2Fsvg%3E") !important;
           background-repeat: no-repeat !important;
           background-position: right 22px center !important;
           background-size: 12px !important;
@@ -559,7 +559,7 @@ export default function PMBRegistrationPage() {
           cursor: pointer;
         }
         .custom-select option {
-          background: var(--color-surface);
+          background: var(--glass-bg);
           color: var(--color-text);
         }
         .pmb-card-period:hover {
@@ -571,10 +571,58 @@ export default function PMBRegistrationPage() {
         .pmb-step-pill {
           background: var(--glass-bg);
           border: var(--glass-border);
+          box-shadow: var(--glass-shadow);
+          transition: all 0.25s ease;
+        }
+        .pmb-step-item.active-step .pmb-step-pill {
+          box-shadow: 0 4px 12px rgba(185, 28, 28, 0.25) !important;
         }
         input:focus, select:focus, textarea:focus {
           border-color: var(--umiba-red-light, #EF4444) !important;
           box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.2) !important;
+        }
+
+        /* Neumorphic datepicker / date input */
+        input[type="date"] {
+          background: var(--liquid-bg) !important;
+          border: var(--inset-border) !important;
+          box-shadow: inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light) !important;
+          color-scheme: light;
+          cursor: pointer;
+        }
+        body.dark-mode input[type="date"] {
+          color-scheme: dark;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+          filter: none;
+          cursor: pointer;
+          opacity: 0.6;
+        }
+        body.dark-mode input[type="date"]::-webkit-calendar-picker-indicator {
+          filter: invert(1);
+          opacity: 0.7;
+        }
+
+        /* Neumorphic badge for payment pending */
+        .pmb-badge-pending {
+          background: var(--glass-bg) !important;
+          border: var(--glass-border) !important;
+          box-shadow: var(--glass-shadow) !important;
+          color: #f59e0b !important;
+          padding: 6px 16px;
+          border-radius: 50px;
+          font-size: 0.85rem;
+          font-weight: 800;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        /* Section header dividers neumorphic */
+        .pmb-section-divider {
+          border-bottom: var(--glass-border) !important;
+          padding-bottom: 20px;
+          margin-bottom: 30px;
         }
         
         /* Floating Toast style */
@@ -675,9 +723,9 @@ export default function PMBRegistrationPage() {
                         gap: '8px', 
                         padding: '8px 16px', 
                         borderRadius: '50px', 
-                        background: step === s.num ? 'var(--gradient-red, linear-gradient(135deg, #B91C1C 0%, #E11D48 100%))' : step > s.num ? 'rgba(34, 197, 94, 0.1)' : 'transparent',
+                        background: step === s.num ? 'var(--gradient-red, linear-gradient(135deg, #B91C1C 0%, #E11D48 100%))' : step > s.num ? 'rgba(34, 197, 94, 0.08)' : 'var(--glass-bg)',
                         border: step === s.num ? 'none' : 'var(--glass-border)',
-                        boxShadow: step === s.num ? '0 4px 12px rgba(185, 28, 28, 0.25)' : 'none'
+                        boxShadow: step === s.num ? '0 4px 12px rgba(185, 28, 28, 0.25)' : step > s.num ? 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' : 'var(--glass-shadow)'
                       }}>
                         <i className={s.icon} style={{ fontSize: '1rem', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-muted)' }}></i>
                         <span style={{ fontSize: '0.85rem', fontWeight: '800', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-text)' }}>{s.label}</span>
@@ -735,7 +783,7 @@ export default function PMBRegistrationPage() {
                             <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--color-muted)', marginTop: '2px' }}>Tahun Akademik {p.academic_year}</p>
                           </div>
                         </div>
-                        <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '16px', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem', color: 'var(--color-muted)' }}>
+                        <div style={{ borderTop: 'var(--glass-border)', paddingTop: '16px', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem', color: 'var(--color-muted)' }}>
                           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <span><i className="ph ph-users" style={{ marginRight: '6px' }}></i> {trans.quota}:</span>
                             <span style={{ color: 'var(--color-text)', fontWeight: '700' }}>{p.quota} {trans.pendaftar}</span>
@@ -758,7 +806,7 @@ export default function PMBRegistrationPage() {
             {/* Step 2: Biodata */}
             {step === 2 && (
               <div className="siakad-pmb-card" style={cardStyle}>
-                <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', marginBottom: '30px' }}>
+                <div style={{ borderBottom: 'var(--glass-border)', paddingBottom: '20px', marginBottom: '30px' }}>
                   <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 6px 0' }}>{trans.form_title}</h2>
                   <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0 }}>{trans.form_desc}</p>
                 </div>
@@ -832,7 +880,7 @@ export default function PMBRegistrationPage() {
             {/* Step 3: File Uploads */}
             {step === 3 && (
               <div className="siakad-pmb-card" style={cardStyle}>
-                <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', marginBottom: '30px' }}>
+                <div style={{ borderBottom: 'var(--glass-border)', paddingBottom: '20px', marginBottom: '30px' }}>
                   <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 6px 0' }}>{trans.upload_title}</h2>
                   <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0 }}>{trans.upload_desc}</p>
                 </div>
@@ -868,7 +916,7 @@ export default function PMBRegistrationPage() {
             {/* Step 4: Pembayaran */}
             {step === 4 && (
               <div className="siakad-pmb-card" style={cardStyle}>
-                <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', marginBottom: '30px' }}>
+                <div style={{ borderBottom: 'var(--glass-border)', paddingBottom: '20px', marginBottom: '30px' }}>
                   <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 6px 0' }}>{trans.pay_title}</h2>
                   <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0 }}>{trans.pay_desc}</p>
                 </div>
@@ -881,8 +929,8 @@ export default function PMBRegistrationPage() {
                     </div>
                     <div>
                       <span style={labelStyle}>{trans.pay_status}</span>
-                      <span style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#f59e0b', padding: '6px 16px', borderRadius: '50px', fontSize: '0.85rem', fontWeight: '800', display: 'inline-block' }}>
-                        {trans.pay_pending}
+                      <span className="pmb-badge-pending">
+                        <i className="ph ph-clock"></i> {trans.pay_pending}
                       </span>
                     </div>
                   </div>
@@ -913,7 +961,7 @@ export default function PMBRegistrationPage() {
                   </div>
                 </div>
 
-                <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '24px' }}>
+                <div style={{ borderTop: 'var(--glass-border)', paddingTop: '24px' }}>
                   <label style={labelStyle}>{trans.pay_upload} <span style={{ color: '#ef4444' }}>*</span></label>
                   <div style={{ position: 'relative', border: '2px dashed var(--color-border)', borderRadius: '24px', padding: '24px', textAlign: 'center', background: 'var(--liquid-bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', cursor: 'pointer', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)' }} onMouseOver={e=>e.currentTarget.style.borderColor='var(--umiba-red)'} onMouseOut={e=>e.currentTarget.style.borderColor='var(--color-border)'}>
                     <input type="file" onChange={(e) => handleFileChange('bukti_bayar', e)} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer' }} />
@@ -934,7 +982,7 @@ export default function PMBRegistrationPage() {
             {/* Step 5: Review and Submit */}
             {step === 5 && (
               <div className="siakad-pmb-card" style={cardStyle}>
-                <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', marginBottom: '30px' }}>
+                <div style={{ borderBottom: 'var(--glass-border)', paddingBottom: '20px', marginBottom: '30px' }}>
                   <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 6px 0' }}>{trans.review_title}</h2>
                   <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: 0 }}>{trans.review_desc}</p>
                 </div>
@@ -1039,7 +1087,7 @@ export default function PMBRegistrationPage() {
         {/* MODE 2: STATUS CHECK & TIMELINE SELECTION */}
         {activeTab === 'status' && (
           <div className="siakad-pmb-card" style={cardStyle}>
-            <div style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '20px', marginBottom: '30px', textAlign: 'center' }}>
+            <div style={{ borderBottom: 'var(--glass-border)', paddingBottom: '20px', marginBottom: '30px', textAlign: 'center' }}>
               <h2 style={{ fontSize: '1.6rem', fontWeight: '900', color: 'var(--color-text)', margin: '0 0 6px 0' }}>{trans.check_title}</h2>
               <p style={{ color: 'var(--color-muted)', fontSize: '0.92rem', margin: 0 }}>{trans.check_desc}</p>
             </div>

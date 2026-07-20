@@ -228,7 +228,7 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
         }}
       >
         <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginRight: '8px' }}>{selectedOption ? selectedOption.label : placeholder}</span>
-        <i className="ph-bold ph-caret-down" style={{ fontSize: '1rem', color: isOpen ? '#3b82f6' : 'var(--color-muted)', transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'none', flexShrink: 0 }} />
+        <i className="ph-bold ph-caret-down" style={{ fontSize: '1rem', color: isOpen ? '#B91C1C' : 'var(--color-muted)', transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'none', flexShrink: 0 }} />
       </button>
 
       {mounted && (() => {
