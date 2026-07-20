@@ -727,8 +727,8 @@ export default function PMBRegistrationPage() {
                         border: step === s.num ? 'none' : 'var(--glass-border)',
                         boxShadow: step === s.num ? '0 4px 12px rgba(185, 28, 28, 0.25)' : step > s.num ? 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' : 'var(--glass-shadow)'
                       }}>
-                        <i className={s.icon} style={{ fontSize: '1rem', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-muted)' }}></i>
-                        <span style={{ fontSize: '0.85rem', fontWeight: '800', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-text)' }}>{s.label}</span>
+                        <i className={s.icon} style={{ fontSize: '1rem', color: step === s.num ? 'white' : step > s.num ? '#15803d' : 'var(--color-muted)' }}></i>
+                        <span style={{ fontSize: '0.85rem', fontWeight: '800', color: step === s.num ? 'white' : step > s.num ? '#15803d' : 'var(--color-text)' }}>{s.label}</span>
                       </div>
                       {i < stepLabels.length - 1 && <span className="pmb-step-divider" style={{ color: 'var(--color-muted)', fontWeight: '300', marginLeft: '8px' }}>→</span>}
                     </div>
@@ -738,8 +738,10 @@ export default function PMBRegistrationPage() {
             )}
 
             {message.text && (
-              <div style={{ padding: '16px 20px', borderRadius: '50px', marginBottom: '30px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: '#ef4444', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem', fontWeight: '600' }}>
-                <i className="ph-bold ph-warning-circle" style={{ fontSize: '1.3rem' }}></i>
+              <div className="pmb-alert-error" style={{ padding: '16px 20px', borderRadius: '20px', marginBottom: '30px', background: 'var(--glass-bg)', border: 'var(--glass-border)', color: '#ef4444', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem', fontWeight: '600', boxShadow: 'var(--glass-shadow)' }}>
+                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(239,68,68,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
+                  <i className="ph-bold ph-warning-circle" style={{ fontSize: '1.2rem' }}></i>
+                </div>
                 <span>{message.text}</span>
               </div>
             )}
@@ -754,12 +756,14 @@ export default function PMBRegistrationPage() {
 
                 {loading ? (
                   <div style={{ textAlign: 'center', padding: '60px 0' }}>
-                    <i className="ph ph-spinner ph-spin" style={{ fontSize: '2.5rem', color: '#3b82f6', marginBottom: '16px' }}></i>
+                    <i className="ph ph-spinner ph-spin" style={{ fontSize: '2.5rem', color: 'var(--umiba-red)', marginBottom: '16px' }}></i>
                     <p style={{ color: 'var(--color-muted)', fontSize: '0.95rem' }}>{trans.loading}</p>
                   </div>
                 ) : periods.length === 0 ? (
                   <div style={{ ...cardStyle, textAlign: 'center', padding: '60px 40px' }}>
-                    <i className="ph-duotone ph-calendar-blank" style={{ fontSize: '4rem', display: 'block', marginBottom: '16px', color: 'var(--color-muted)', opacity: 0.6 }}></i>
+                    <div style={{ width: '72px', height: '72px', borderRadius: '50%', background: 'var(--glass-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)' }}>
+                      <i className="ph-duotone ph-calendar-blank" style={{ fontSize: '2.5rem', color: 'var(--color-muted)', opacity: 0.6 }}></i>
+                    </div>
                     <h3 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 8px 0', fontWeight: '800' }}>{trans.empty_wave}</h3>
                     <p style={{ color: 'var(--color-muted)', margin: 0, fontSize: '0.95rem' }}>{trans.empty_wave_desc}</p>
                   </div>
@@ -775,7 +779,7 @@ export default function PMBRegistrationPage() {
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                       }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-                          <div style={{ width: '48px', height: '48px', background: 'rgba(185, 28, 28, 0.12)', color: 'var(--umiba-red)', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' }}>
+                          <div style={{ width: '48px', height: '48px', background: 'var(--glass-bg)', color: 'var(--umiba-red)', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)' }}>
                             <i className="ph-duotone ph-calendar"></i>
                           </div>
                           <div>
@@ -842,7 +846,7 @@ export default function PMBRegistrationPage() {
                   </div>
                   <div>
                     <label style={labelStyle}>{trans.label_dob} <span style={{ color: '#ef4444' }}>*</span></label>
-                    <input type="date" value={biodata.birth_date} onChange={e => setBiodata({ ...biodata, birth_date: e.target.value })} style={inputStyle} />
+                    <input type="date" value={biodata.birth_date} onChange={e => setBiodata({ ...biodata, birth_date: e.target.value })} style={{ ...inputStyle, cursor: 'pointer' }} />
                   </div>
                   <div>
                     <label style={labelStyle}>{trans.label_school} <span style={{ color: '#ef4444' }}>*</span></label>
@@ -1046,7 +1050,7 @@ export default function PMBRegistrationPage() {
             {/* Step 6: Success Output */}
             {step === 6 && (
               <div className="siakad-pmb-card" style={{ ...cardStyle, textAlign: 'center', padding: '60px 40px' }}>
-                <div style={{ width: '80px', height: '80px', background: 'rgba(16, 185, 129, 0.15)', color: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem', margin: '0 auto 24px' }}>
+                <div style={{ width: '80px', height: '80px', background: 'var(--glass-bg)', color: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem', margin: '0 auto 24px', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)' }}>
                   <i className="ph ph-check"></i>
                 </div>
                 
@@ -1117,8 +1121,10 @@ export default function PMBRegistrationPage() {
             </form>
 
             {message.text && message.type === 'error' && (
-              <div style={{ padding: '16px 20px', borderRadius: '50px', marginBottom: '30px', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: '#ef4444', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem', fontWeight: '600' }}>
-                <i className="ph-bold ph-warning-circle" style={{ fontSize: '1.3rem' }}></i>
+              <div className="pmb-alert-error" style={{ padding: '16px 20px', borderRadius: '20px', marginBottom: '30px', background: 'var(--glass-bg)', border: 'var(--glass-border)', color: '#ef4444', display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.95rem', fontWeight: '600', boxShadow: 'var(--glass-shadow)' }}>
+                <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(239,68,68,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
+                  <i className="ph-bold ph-warning-circle" style={{ fontSize: '1.2rem' }}></i>
+                </div>
                 <span>{message.text}</span>
               </div>
             )}
@@ -1150,11 +1156,11 @@ export default function PMBRegistrationPage() {
                 {/* 2. Wizard Timeline Progress */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', position: 'relative', paddingLeft: '40px' }}>
                   {/* Vertical Line Connector */}
-                  <div style={{ position: 'absolute', left: '16px', top: '24px', bottom: '24px', width: '2px', background: 'var(--color-border)' }}></div>
+                  <div style={{ position: 'absolute', left: '16px', top: '24px', bottom: '24px', width: '3px', borderRadius: '2px', background: 'var(--glass-bg)', boxShadow: 'inset 1px 1px 2px var(--inset-shadow-dark), inset -1px -1px 2px var(--inset-shadow-light)' }}></div>
 
                   {/* Stage 1: Pendaftaran Terkirim */}
                   <div style={{ position: 'relative' }}>
-                    <div style={{ position: 'absolute', left: '-32px', top: '2px', width: '24px', height: '24px', borderRadius: '50%', background: '#10b981', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem' }}>
+                    <div style={{ position: 'absolute', left: '-32px', top: '2px', width: '24px', height: '24px', borderRadius: '50%', background: 'var(--glass-bg)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', border: '2px solid #10b981', boxShadow: 'var(--glass-shadow)' }}>
                       <i className="ph ph-check"></i>
                     </div>
                     <div>
@@ -1165,7 +1171,7 @@ export default function PMBRegistrationPage() {
 
                   {/* Stage 2: Verifikasi Pembayaran */}
                   <div style={{ position: 'relative' }}>
-                    <div style={{ position: 'absolute', left: '-32px', top: '2px', width: '24px', height: '24px', borderRadius: '50%', background: '#10b981', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem' }}>
+                    <div style={{ position: 'absolute', left: '-32px', top: '2px', width: '24px', height: '24px', borderRadius: '50%', background: 'var(--glass-bg)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.75rem', border: '2px solid #10b981', boxShadow: 'var(--glass-shadow)' }}>
                       <i className="ph ph-check"></i>
                     </div>
                     <div>
@@ -1183,12 +1189,14 @@ export default function PMBRegistrationPage() {
                       width: '24px', 
                       height: '24px', 
                       borderRadius: '50%', 
-                      background: statusResult.status !== 'pending' ? '#10b981' : 'var(--umiba-red)', 
-                      color: 'white', 
+                      background: 'var(--glass-bg)', 
+                      color: statusResult.status !== 'pending' ? '#10b981' : 'var(--umiba-red)', 
+                      border: `2px solid ${statusResult.status !== 'pending' ? '#10b981' : 'var(--umiba-red)'}`,
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center', 
-                      fontSize: '0.75rem' 
+                      fontSize: '0.75rem',
+                      boxShadow: 'var(--glass-shadow)'
                     }}>
                       <i className="ph ph-sparkle"></i>
                     </div>
@@ -1210,12 +1218,14 @@ export default function PMBRegistrationPage() {
                       width: '24px', 
                       height: '24px', 
                       borderRadius: '50%', 
-                      background: statusResult.status === 'accepted' ? '#10b981' : statusResult.status === 'rejected' ? '#ef4444' : 'var(--color-border)', 
-                      color: 'white', 
+                      background: 'var(--glass-bg)', 
+                      color: statusResult.status === 'accepted' ? '#10b981' : statusResult.status === 'rejected' ? '#ef4444' : 'var(--color-muted)', 
+                      border: `2px solid ${statusResult.status === 'accepted' ? '#10b981' : statusResult.status === 'rejected' ? '#ef4444' : 'var(--color-border)'}`,
                       display: 'flex', 
                       alignItems: 'center', 
                       justifyContent: 'center', 
-                      fontSize: '0.75rem' 
+                      fontSize: '0.75rem',
+                      boxShadow: 'var(--glass-shadow)'
                     }}>
                       <i className="ph ph-flag"></i>
                     </div>
