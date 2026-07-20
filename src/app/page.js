@@ -87,7 +87,7 @@ export default function Home() {
             <div style={{ position: 'relative', width: '380px', height: '380px', marginRight: '40px', marginTop: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               
               {/* The Masked Container (clips bottom body inside circle shape) */}
-              <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
+              <div className="hero-model-circle" style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
                 <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 1 }}>
@@ -156,7 +156,7 @@ export default function Home() {
             <div style={{ position: 'relative', width: '380px', height: '380px', marginRight: '40px', marginTop: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               
               {/* The Masked Container (clips bottom body inside circle shape) */}
-              <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
+              <div className="hero-model-circle" style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
                 <div style={{ position: 'absolute', inset: '-100px -20px 0 -20px', zIndex: 1 }}>
@@ -250,7 +250,7 @@ export default function Home() {
             <div style={{ position: 'relative', width: '380px', height: '380px', marginRight: '40px', marginTop: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               
               {/* The Masked Container (clips bottom body inside circle shape) */}
-              <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
+              <div className="hero-model-circle" style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', background: 'var(--liquid-bg)', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light), 4px 4px 12px rgba(0,0,0,0.05)', zIndex: 0 }}>
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
                 <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 1 }}>

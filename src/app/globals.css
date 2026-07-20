@@ -2770,7 +2770,6 @@ input:focus, textarea:focus, select:focus {
 }
 
 /* Hero Model Masked Circle Dark Mode Background & Visibility */
-[data-theme=dark] .hero-model-container div[style*="borderRadius: '50%'"],
-[data-theme=dark] .hero-model-container div[style*="borderRadius: 50%"] {
+[data-theme=dark] .hero-model-circle {
   background: #1a202c !important;
 }
