@@ -414,10 +414,11 @@ export default function DosenGradebookPage() {
                   <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
                   <input 
                     type="text" 
+                    className="siakad-input"
                     placeholder="Cari mahasiswa..." 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ padding: '10px 10px 10px 46px', borderRadius: '50px', border: 'var(--inset-border)', background: 'var(--liquid-bg)', color: 'var(--color-text)', width: '200px', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', outline: 'none' }}
+                    style={{ padding: '10px 10px 10px 46px', outline: 'none', width: '200px' }}
                   />
                 </div>
                 
@@ -504,8 +505,9 @@ export default function DosenGradebookPage() {
                         <input 
                           type="number" min="0" max="100" placeholder="0-100"
                           value={edits.kehadiran || ''}
+                          className="siakad-input"
                           onChange={(e) => handleGradeChange(grade.id, 'kehadiran', e.target.value)}
-                          style={{ width: '100%', padding: '8px 10px', borderRadius: '50px', border: 'var(--inset-border)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', fontWeight: '600', textAlign: 'center', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', boxSizing: 'border-box' }}
+                          style={{ width: '100%', padding: '8px 10px', outline: 'none', fontWeight: '600', textAlign: 'center', boxSizing: 'border-box' }}
                         />
                       </div>
                       {/* Tugas */}
@@ -514,8 +516,9 @@ export default function DosenGradebookPage() {
                         <input 
                           type="number" min="0" max="100" placeholder="0-100"
                           value={edits.tugas || ''}
+                          className="siakad-input"
                           onChange={(e) => handleGradeChange(grade.id, 'tugas', e.target.value)}
-                          style={{ width: '100%', padding: '8px 10px', borderRadius: '50px', border: 'var(--inset-border)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', fontWeight: '600', textAlign: 'center', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', boxSizing: 'border-box' }}
+                          style={{ width: '100%', padding: '8px 10px', outline: 'none', fontWeight: '600', textAlign: 'center', boxSizing: 'border-box' }}
                         />
                       </div>
                       {/* UTS */}
@@ -524,8 +527,9 @@ export default function DosenGradebookPage() {
                         <input 
                           type="number" min="0" max="100" placeholder="0-100"
                           value={edits.uts || ''}
+                          className="siakad-input"
                           onChange={(e) => handleGradeChange(grade.id, 'uts', e.target.value)}
-                          style={{ width: '100%', padding: '8px 10px', borderRadius: '50px', border: 'var(--inset-border)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', fontWeight: '600', textAlign: 'center', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', boxSizing: 'border-box' }}
+                          style={{ width: '100%', padding: '8px 10px', outline: 'none', fontWeight: '600', textAlign: 'center', boxSizing: 'border-box' }}
                         />
                       </div>
                       {/* UAS */}
@@ -534,8 +538,9 @@ export default function DosenGradebookPage() {
                         <input 
                           type="number" min="0" max="100" placeholder="0-100"
                           value={edits.uas || ''}
+                          className="siakad-input"
                           onChange={(e) => handleGradeChange(grade.id, 'uas', e.target.value)}
-                          style={{ width: '100%', padding: '8px 10px', borderRadius: '50px', border: 'var(--inset-border)', outline: 'none', background: 'var(--liquid-bg)', color: 'var(--color-text)', fontWeight: '600', textAlign: 'center', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)', boxSizing: 'border-box' }}
+                          style={{ width: '100%', padding: '8px 10px', outline: 'none', fontWeight: '600', textAlign: 'center', boxSizing: 'border-box' }}
                         />
                       </div>
                       
