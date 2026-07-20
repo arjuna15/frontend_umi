@@ -19,14 +19,13 @@ export default function DosenQuizCreate() {
   // AI Quiz Generator States
   const [showAiModal, setShowAiModal] = useState(false);
   const [aiPrompt, setAiPrompt] = useState('');
-  const [aiFile, setAiFile] = useState(null);
-  const [aiFileName, setAiFileName] = useState('');
+  const [aiFiles, setAiFiles] = useState([]);
   const [aiType, setAiType] = useState('multiple_choice');
   const [aiCount, setAiCount] = useState(5);
   const [aiLoading, setAiLoading] = useState(false);
 
   const generateAiQuestions = async () => {
-    if (!aiPrompt.trim() && !aiFile) {
+    if (!aiPrompt.trim() && aiFiles.length === 0) {
       window.toast('Masukkan bahan materi berupa teks atau unggah berkas kuliah.');
       return;
     }
@@ -39,16 +38,15 @@ export default function DosenQuizCreate() {
       formData.append('prompt', aiPrompt);
       formData.append('type', aiType);
       formData.append('count', aiCount);
-      if (aiFile) {
-        formData.append('file', aiFile);
-      }
+      
+      aiFiles.forEach((file) => {
+        formData.append('files[]', file);
+      });
 
       const res = await fetch(`${apiUrl}/siakad/dosen/quiz/generate-ai`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
-          // Note: Do not manually set Content-Type header when sending FormData,
-          // let the browser handle boundary generation.
         },
         body: formData
       });
@@ -78,8 +76,7 @@ export default function DosenQuizCreate() {
         setShowAiModal(false);
         // Clear AI Modal Form
         setAiPrompt('');
-        setAiFile(null);
-        setAiFileName('');
+        setAiFiles([]);
         window.toast(`Berhasil membuat ${formattedQuestions.length} soal otomatis dengan AI!`);
       } else {
         throw new Error('Format respon AI tidak valid.');
@@ -535,21 +532,41 @@ export default function DosenQuizCreate() {
                 <div style={{ position: 'relative', border: '2px dashed var(--color-border)', borderRadius: '18px', padding: '16px', textAlign: 'center', background: 'var(--liquid-bg)', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' }} onMouseOver={e=>e.currentTarget.style.borderColor='var(--umiba-red)'} onMouseOut={e=>e.currentTarget.style.borderColor='var(--color-border)'}>
                   <input 
                     type="file" 
+                    multiple
                     accept=".pdf,.docx,.txt"
                     onChange={(e) => {
-                      const file = e.target.files[0];
-                      if (file) {
-                        setAiFile(file);
-                        setAiFileName(file.name);
+                      const filesArray = Array.from(e.target.files);
+                      if (filesArray.length > 0) {
+                        setAiFiles(prev => [...prev, ...filesArray]);
                       }
                     }} 
                     style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer' }} 
                   />
-                  <i className="ph ph-file-arrow-up" style={{ fontSize: '1.8rem', color: aiFileName ? 'var(--umiba-red)' : 'var(--color-muted)' }}></i>
+                  <i className="ph ph-files" style={{ fontSize: '1.8rem', color: aiFiles.length > 0 ? 'var(--umiba-red)' : 'var(--color-muted)' }}></i>
                   <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--color-text)' }}>
-                    {aiFileName || 'Seret atau Pilih Dokumen Materi Kuliah'}
+                    {aiFiles.length > 0 ? `${aiFiles.length} file dipilih (klik / seret untuk menambah)` : 'Seret atau Pilih Dokumen Materi Kuliah'}
                   </span>
                 </div>
+
+                {/* List of uploaded files with remove button */}
+                {aiFiles.length > 0 && (
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '12px', maxHeight: '100px', overflowY: 'auto', paddingRight: '4px' }}>
+                    {aiFiles.map((file, idx) => (
+                      <div key={idx} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(255,255,255,0.02)', padding: '6px 12px', borderRadius: '10px', border: 'var(--glass-border)' }}>
+                        <span style={{ fontSize: '0.78rem', color: 'var(--color-text)', display: 'flex', alignItems: 'center', gap: '6px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '85%' }}>
+                          <i className="ph ph-file-text" style={{ color: 'var(--umiba-red)' }}></i> {file.name}
+                        </span>
+                        <button 
+                          type="button" 
+                          onClick={() => setAiFiles(prev => prev.filter((_, i) => i !== idx))} 
+                          style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '0.9rem', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '4px' }}
+                        >
+                          <i className="ph ph-trash"></i>
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div>
