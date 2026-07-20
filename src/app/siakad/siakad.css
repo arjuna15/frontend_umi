@@ -18,13 +18,13 @@
 }
 
 [data-theme='dark'] {
-  /* Liquid Dark Mode Colors & Specs */
-  --liquid-bg: #121620;
-  --glass-bg: #121620;
-  --glass-border: 1px solid rgba(255, 255, 255, 0.03);
-  --glass-shadow: 6px 6px 16px #05070a, -6px -6px 16px rgba(255, 255, 255, 0.05);
-  --inset-shadow-dark: #040507;
-  --inset-shadow-light: #202637;
+  /* Liquid Dark Mode Colors & Specs - Pasted Image Theme */
+  --liquid-bg: #0c1b26;
+  --glass-bg: #0c1b26;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.04);
+  --glass-shadow: 6px 6px 16px #050a0f, -6px -6px 16px #132637;
+  --inset-shadow-dark: #050a0f;
+  --inset-shadow-light: #132637;
   --inset-border: 1px solid rgba(255, 255, 255, 0.03);
   --glass-blur: none;
   --color-text: #f1f5f9;

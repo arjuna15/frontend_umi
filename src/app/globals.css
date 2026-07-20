@@ -76,24 +76,26 @@
 
 /* -------------------- Dark Mode Overrides -------------------- */
 [data-theme='dark'] body {
-  --footer-bg: radial-gradient(circle at top right, #1e293b 0%, #0f172a 40%, #020617 80%, #000000 100%);
-  --color-bg: #121620;
-  --color-surface: #121620;
-  --color-white: #0f172a; /* Dark surface for white-based elements */
+  --footer-bg: radial-gradient(circle at top right, #0d1e28 0%, #0c1b26 40%, #050a0f 80%, #000000 100%);
+  --color-bg: #0c1b26;
+  --color-surface: #0c1b26;
+  --color-white: #0d1e28; /* Dark surface for white-based elements */
   --color-text: #f1f5f9;
   --color-muted: #94a3b8;
-  --color-border: rgba(255, 255, 255, 0.1);
-  --liquid-bg: #121620;
-  --glass-bg: #121620;
-  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
-  --glass-shadow: 4px 4px 8px #080a0f, -4px -4px 8px rgba(255, 255, 255, 0.03);
+  --color-border: rgba(255, 255, 255, 0.05);
+  --liquid-bg: #0c1b26;
+  --glass-bg: #0c1b26;
+  --glass-border: 1px solid rgba(255, 255, 255, 0.04);
+  --glass-shadow: 6px 6px 16px #050a0f, -6px -6px 16px #132637;
+  --inset-shadow-dark: #050a0f;
+  --inset-shadow-light: #132637;
   --color-background: var(--color-bg);
-  --color-background-alt: #0f172a;
+  --color-background-alt: #0d1e28;
   --color-text-muted: var(--color-muted);
-  --slate-50: #0f172a;
+  --slate-50: #0d1e28;
   --slate-500: #94a3b8;
   --slate-600: #cbd5e1;
-  --inset-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130;
+  --inset-shadow: inset 3px 3px 6px #050a0f, inset -3px -3px 6px #132637;
   background-color: var(--color-bg);
   color: var(--color-text);
 }
