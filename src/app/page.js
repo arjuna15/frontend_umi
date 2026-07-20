@@ -26,8 +26,8 @@ export default function Home() {
       { id: 6, image_url: 'https://umiba.ac.id/wp-content/uploads/2024/05/3-2.png' }
     ]);
 
-    // const slideInterval = setInterval(nextSlide, 5000);
-    // return () => clearInterval(slideInterval);
+    const slideInterval = setInterval(nextSlide, 5000);
+    return () => clearInterval(slideInterval);
   }, []);
 
   const slideBg = ['/1.jpeg', '/2.jpeg', '/3.jpeg'];
@@ -90,7 +90,7 @@ export default function Home() {
               <div className="hero-model-circle" style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', zIndex: 0, transform: 'translate3d(0,0,0)' }}>
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
-                <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 1, transform: 'translate3d(0,0,0)' }}>
+                <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 2, transform: 'translate3d(0,0,0)' }}>
                   <img 
                     src="/nobcg1.png" 
                     alt="Student Model 1 Base" 
@@ -161,7 +161,7 @@ export default function Home() {
               <div className="hero-model-circle" style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', zIndex: 0, transform: 'translate3d(0,0,0)' }}>
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
-                <div style={{ position: 'absolute', inset: '-100px -20px 0 -20px', zIndex: 1, transform: 'translate3d(0,0,0)' }}>
+                <div style={{ position: 'absolute', inset: '-100px -20px 0 -20px', zIndex: 2, transform: 'translate3d(0,0,0)' }}>
                   <img 
                     src="/nobcg2.png" 
                     alt="Student Model 2 Base" 
@@ -263,7 +263,7 @@ export default function Home() {
               <div className="hero-model-circle" style={{ position: 'absolute', inset: 0, borderRadius: '50%', overflow: 'hidden', zIndex: 0, transform: 'translate3d(0,0,0)' }}>
                 {/* Neumorphic Inner Shadow Overlay to stack on top of body but inside circle */}
                 <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', boxShadow: 'inset 8px 8px 16px var(--inset-shadow-dark), inset -8px -8px 16px var(--inset-shadow-light)', zIndex: 2, pointerEvents: 'none' }}></div>
-                <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 1, transform: 'translate3d(0,0,0)' }}>
+                <div style={{ position: 'absolute', inset: '-60px -20px 0 -20px', zIndex: 2, transform: 'translate3d(0,0,0)' }}>
                   <img 
                     src="/nobcg3.png" 
                     alt="Student Model 3 Base" 
