@@ -204,7 +204,7 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
       <button
         ref={triggerRef}
         type="button"
-        className="siakad-custom-select-trigger"
+        className="siakad-custom-select-trigger siakad-select"
         onClick={handleToggle}
         disabled={disabled}
         style={{
