@@ -330,11 +330,11 @@ export default function PMBRegistrationPage() {
   };
 
   const cardStyle = {
-    background: 'var(--color-surface)',
+    background: 'var(--glass-bg)',
     borderRadius: '24px',
     padding: '40px',
-    border: '1px solid var(--color-border)',
-    boxShadow: isDark ? '0 20px 50px rgba(0, 0, 0, 0.4)' : '0 10px 30px rgba(0, 0, 0, 0.05)',
+    border: 'var(--glass-border)',
+    boxShadow: 'var(--glass-shadow)',
     transition: 'all 0.3s ease',
     boxSizing: 'border-box',
     width: '100%'
@@ -344,14 +344,14 @@ export default function PMBRegistrationPage() {
     width: '100%',
     padding: '12px 22px',
     borderRadius: '50px',
-    border: '1px solid var(--color-border)',
-    background: 'var(--color-bg)',
+    border: 'var(--inset-border)',
+    background: 'var(--liquid-bg)',
     color: 'var(--color-text)',
     fontSize: '0.95rem',
     outline: 'none',
     boxSizing: 'border-box',
     transition: 'all 0.2s ease',
-    boxShadow: 'inset 0 3px 8px rgba(0, 0, 0, 0.12), inset 0 1px 2px rgba(0, 0, 0, 0.04)'
+    boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)'
   };
 
   const labelStyle = {
@@ -365,7 +365,7 @@ export default function PMBRegistrationPage() {
   };
 
   const btnPrimary = {
-    background: 'linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%)',
+    background: 'var(--gradient-red, linear-gradient(135deg, #B91C1C 0%, #E11D48 100%))',
     border: 'none',
     color: 'white',
     padding: '14px 28px',
@@ -377,7 +377,7 @@ export default function PMBRegistrationPage() {
     alignItems: 'center',
     gap: '10px',
     transition: 'all 0.15s ease',
-    boxShadow: '0 8px 24px rgba(29, 78, 216, 0.3)'
+    boxShadow: '0 8px 24px rgba(185, 28, 28, 0.25)'
   };
 
   const stepLabels = [
@@ -430,23 +430,40 @@ export default function PMBRegistrationPage() {
           color: var(--color-text) !important;
         }
         
-        /* Language switcher active and inactive labels stay white under stay state */
-        header:not(.sticky) .lang-switch .lang-btn:not(.active) {
+        /* Language switcher labels in light mode should be dark for visibility */
+        body:not(.dark-mode) header:not(.sticky) .lang-switch .lang-btn:not(.active) {
+          color: #1e293b !important;
+          text-shadow: none !important;
+        }
+        body:not(.dark-mode) header:not(.sticky) .lang-switch .lang-btn.active {
+          color: white !important;
+        }
+        /* In dark mode, non-active lang buttons stay white */
+        body.dark-mode header:not(.sticky) .lang-switch .lang-btn:not(.active) {
           color: #ffffff !important;
           text-shadow: none !important;
         }
-        header:not(.sticky) .lang-switch .lang-btn.active {
+        body.dark-mode header:not(.sticky) .lang-switch .lang-btn.active {
           color: white !important;
         }
 
-        /* Revert theme switch icon specifically to white color as requested */
-        header:not(.sticky) .theme-toggle i {
+        /* Theme toggle icon: dark in light mode, white in dark mode */
+        body:not(.dark-mode) header:not(.sticky) .theme-toggle i {
+          color: #1e293b !important;
+        }
+        body.dark-mode header:not(.sticky) .theme-toggle i {
           color: #ffffff !important;
         }
 
         /* Adaptive transparent backgrounds for switches */
-        header .lang-switch,
-        header .theme-toggle {
+        body:not(.dark-mode) header .lang-switch,
+        body:not(.dark-mode) header .theme-toggle {
+          background: var(--glass-bg) !important;
+          border-color: var(--color-border) !important;
+          box-shadow: var(--glass-shadow) !important;
+        }
+        body.dark-mode header .lang-switch,
+        body.dark-mode header .theme-toggle {
           background: #0003 !important;
           border-color: #fff6 !important;
         }
@@ -547,17 +564,17 @@ export default function PMBRegistrationPage() {
         }
         .pmb-card-period:hover {
           transform: translateY(-6px);
-          background: rgba(255, 255, 255, 0.03) !important;
-          border-color: rgba(59, 130, 246, 0.3) !important;
-          box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15) !important;
+          background: var(--glass-bg) !important;
+          border-color: var(--umiba-red-light) !important;
+          box-shadow: 0 15px 30px rgba(185, 28, 28, 0.15) !important;
         }
         .pmb-step-pill {
-          background: var(--color-surface);
-          border: 1px solid var(--color-border);
+          background: var(--glass-bg);
+          border: var(--glass-border);
         }
         input:focus, select:focus, textarea:focus {
-          border-color: #3b82f6 !important;
-          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25) !important;
+          border-color: var(--umiba-red-light, #EF4444) !important;
+          box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.2) !important;
         }
         
         /* Floating Toast style */
@@ -606,10 +623,10 @@ export default function PMBRegistrationPage() {
                 cursor: 'pointer',
                 fontWeight: '800',
                 fontSize: '0.95rem',
-                background: activeTab === 'register' ? 'linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%)' : 'var(--color-surface)',
+                background: activeTab === 'register' ? 'var(--gradient-red, linear-gradient(135deg, #B91C1C 0%, #E11D48 100%))' : 'var(--glass-bg)',
                 color: activeTab === 'register' ? 'white' : 'var(--color-text)',
-                border: activeTab === 'register' ? 'none' : '1px solid var(--color-border)',
-                boxShadow: activeTab === 'register' ? '0 6px 16px rgba(29, 78, 216, 0.25)' : 'none',
+                border: activeTab === 'register' ? 'none' : 'var(--glass-border)',
+                boxShadow: activeTab === 'register' ? '0 6px 16px rgba(185, 28, 28, 0.25)' : 'var(--glass-shadow)',
                 transition: 'all 0.25s ease',
                 display: 'inline-flex',
                 alignItems: 'center'
@@ -628,10 +645,10 @@ export default function PMBRegistrationPage() {
                 cursor: 'pointer',
                 fontWeight: '800',
                 fontSize: '0.95rem',
-                background: activeTab === 'status' ? 'linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%)' : 'var(--color-surface)',
+                background: activeTab === 'status' ? 'var(--gradient-red, linear-gradient(135deg, #B91C1C 0%, #E11D48 100%))' : 'var(--glass-bg)',
                 color: activeTab === 'status' ? 'white' : 'var(--color-text)',
-                border: activeTab === 'status' ? 'none' : '1px solid var(--color-border)',
-                boxShadow: activeTab === 'status' ? '0 6px 16px rgba(29, 216, 120, 0)' : 'none',
+                border: activeTab === 'status' ? 'none' : 'var(--glass-border)',
+                boxShadow: activeTab === 'status' ? '0 6px 16px rgba(185, 28, 28, 0.25)' : 'var(--glass-shadow)',
                 transition: 'all 0.25s ease',
                 display: 'inline-flex',
                 alignItems: 'center'
@@ -658,9 +675,9 @@ export default function PMBRegistrationPage() {
                         gap: '8px', 
                         padding: '8px 16px', 
                         borderRadius: '50px', 
-                        background: step === s.num ? 'linear-gradient(135deg, rgb(59, 130, 246) 0%, rgb(29, 78, 216) 100%)' : step > s.num ? 'rgba(34, 197, 94, 0.1)' : 'transparent',
-                        border: step === s.num ? 'none' : '1px solid var(--color-border)',
-                        boxShadow: step === s.num ? '0 4px 12px rgba(29, 78, 216, 0.25)' : 'none'
+                        background: step === s.num ? 'var(--gradient-red, linear-gradient(135deg, #B91C1C 0%, #E11D48 100%))' : step > s.num ? 'rgba(34, 197, 94, 0.1)' : 'transparent',
+                        border: step === s.num ? 'none' : 'var(--glass-border)',
+                        boxShadow: step === s.num ? '0 4px 12px rgba(185, 28, 28, 0.25)' : 'none'
                       }}>
                         <i className={s.icon} style={{ fontSize: '1rem', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-muted)' }}></i>
                         <span style={{ fontSize: '0.85rem', fontWeight: '800', color: step === s.num ? 'white' : step > s.num ? '#22c55e' : 'var(--color-text)' }}>{s.label}</span>
@@ -705,12 +722,12 @@ export default function PMBRegistrationPage() {
                         ...cardStyle, 
                         maxWidth: '360px',
                         cursor: 'pointer', 
-                        background: 'var(--color-surface)',
-                        borderColor: 'var(--color-border)',
+                        background: 'var(--glass-bg)',
+                        border: 'var(--glass-border)',
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                       }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px' }}>
-                          <div style={{ width: '48px', height: '48px', background: 'rgba(59, 130, 246, 0.15)', color: '#3b82f6', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' }}>
+                          <div style={{ width: '48px', height: '48px', background: 'rgba(185, 28, 28, 0.12)', color: 'var(--umiba-red)', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' }}>
                             <i className="ph-duotone ph-calendar"></i>
                           </div>
                           <div>
@@ -806,7 +823,7 @@ export default function PMBRegistrationPage() {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', gap: '16px' }}>
-                  <button onClick={() => setStep(1)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '700' }}>{trans.btn_back}</button>
+                  <button onClick={() => setStep(1)} style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '700', boxShadow: 'var(--glass-shadow)' }}>{trans.btn_back}</button>
                   <button onClick={() => validateBiodata() && setStep(3)} style={btnPrimary}>{trans.btn_continue} <i className="ph-bold ph-arrow-right"></i></button>
                 </div>
               </div>
@@ -829,7 +846,7 @@ export default function PMBRegistrationPage() {
                         <div style={{ minHeight: '40px', display: 'flex', alignItems: 'flex-end', marginBottom: '8px' }}>
                           <label style={{ ...labelStyle, marginBottom: 0 }}>{label} <span style={{ color: '#ef4444' }}>*</span></label>
                         </div>
-                        <div style={{ position: 'relative', border: '2px dashed var(--color-border)', borderRadius: '24px', padding: '24px 16px', textAlign: 'center', background: 'var(--color-bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', transition: 'all 0.2s', cursor: 'pointer' }} onMouseOver={e=>e.currentTarget.style.borderColor='#3b82f6'} onMouseOut={e=>e.currentTarget.style.borderColor='var(--color-border)'}>
+                        <div style={{ position: 'relative', border: '2px dashed var(--color-border)', borderRadius: '24px', padding: '24px 16px', textAlign: 'center', background: 'var(--liquid-bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', transition: 'all 0.2s', cursor: 'pointer', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)' }} onMouseOver={e=>e.currentTarget.style.borderColor='var(--umiba-red)'} onMouseOut={e=>e.currentTarget.style.borderColor='var(--color-border)'}>
                           <input type="file" onChange={(e) => handleFileChange(key, e)} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer' }} />
                           <i className={`ph-duotone ${fileIcon}`} style={{ fontSize: '2.5rem', color: fileNames[key] ? '#10b981' : 'var(--color-muted)' }} />
                           <span style={{ fontSize: '0.85rem', color: fileNames[key] ? 'var(--color-text)' : 'var(--color-muted)', fontWeight: '700', wordBreak: 'break-all' }}>
@@ -842,7 +859,7 @@ export default function PMBRegistrationPage() {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', gap: '16px' }}>
-                  <button onClick={() => setStep(2)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '700' }}>{trans.btn_back}</button>
+                  <button onClick={() => setStep(2)} style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '700', boxShadow: 'var(--glass-shadow)' }}>{trans.btn_back}</button>
                   <button onClick={() => setStep(4)} style={btnPrimary}>{trans.btn_continue} <i className="ph-bold ph-arrow-right"></i></button>
                 </div>
               </div>
@@ -857,7 +874,7 @@ export default function PMBRegistrationPage() {
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px', marginBottom: '32px' }}>
-                  <div style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div style={{ background: 'var(--glass-bg)', padding: '24px', borderRadius: '24px', border: 'var(--glass-border)', display: 'flex', flexDirection: 'column', gap: '16px', boxShadow: 'var(--glass-shadow)' }}>
                     <div>
                       <span style={labelStyle}>{trans.pay_cost}</span>
                       <strong style={{ fontSize: '1.8rem', color: '#10b981', fontWeight: '900' }}>Rp 250.000</strong>
@@ -886,7 +903,7 @@ export default function PMBRegistrationPage() {
                       />
                     </div>
 
-                    <div style={{ background: 'rgba(59, 130, 246, 0.08)', border: '1px solid rgba(59, 130, 246, 0.2)', padding: '16px 20px', borderRadius: '20px', fontSize: '0.9rem' }}>
+                    <div style={{ background: 'rgba(185, 28, 28, 0.06)', border: '1px solid rgba(185, 28, 28, 0.15)', padding: '16px 20px', borderRadius: '20px', fontSize: '0.9rem' }}>
                       <span style={{ display: 'block', color: 'var(--color-muted)', fontSize: '0.8rem', fontWeight: '700' }}>Nomor Rekening VA / Kode Bayar:</span>
                       <strong style={{ fontSize: '1.2rem', color: 'var(--color-text)', letterSpacing: '1px', display: 'block', margin: '4px 0' }}>
                         {paymentMethod === 'VA Mandiri' ? '8801202611982736' : paymentMethod === 'VA BNI' ? '9880120263445522' : paymentMethod === 'VA BRI' ? '1288012026778811' : 'QRIS_CODE_ACTIVE'}
@@ -898,7 +915,7 @@ export default function PMBRegistrationPage() {
 
                 <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '24px' }}>
                   <label style={labelStyle}>{trans.pay_upload} <span style={{ color: '#ef4444' }}>*</span></label>
-                  <div style={{ position: 'relative', border: '2px dashed var(--color-border)', borderRadius: '24px', padding: '24px', textAlign: 'center', background: 'var(--color-bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', cursor: 'pointer' }} onMouseOver={e=>e.currentTarget.style.borderColor='#3b82f6'} onMouseOut={e=>e.currentTarget.style.borderColor='var(--color-border)'}>
+                  <div style={{ position: 'relative', border: '2px dashed var(--color-border)', borderRadius: '24px', padding: '24px', textAlign: 'center', background: 'var(--liquid-bg)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', cursor: 'pointer', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)' }} onMouseOver={e=>e.currentTarget.style.borderColor='var(--umiba-red)'} onMouseOut={e=>e.currentTarget.style.borderColor='var(--color-border)'}>
                     <input type="file" onChange={(e) => handleFileChange('bukti_bayar', e)} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer' }} />
                     <i className="ph-duotone ph-receipt" style={{ fontSize: '2.5rem', color: fileNames.bukti_bayar ? '#10b981' : 'var(--color-muted)' }} />
                     <span style={{ fontSize: '0.85rem', color: fileNames.bukti_bayar ? 'var(--color-text)' : 'var(--color-muted)', fontWeight: '700' }}>
@@ -908,7 +925,7 @@ export default function PMBRegistrationPage() {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '40px', gap: '16px' }}>
-                  <button onClick={() => setStep(3)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '700' }}>{trans.btn_back}</button>
+                  <button onClick={() => setStep(3)} style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '700', boxShadow: 'var(--glass-shadow)' }}>{trans.btn_back}</button>
                   <button onClick={() => files.bukti_bayar ? setStep(5) : setMessage({ text: 'Mohon unggah bukti bayar terlebih dahulu.', type: 'error' })} style={btnPrimary}>{trans.btn_continue} <i className="ph-bold ph-arrow-right"></i></button>
                 </div>
               </div>
@@ -923,8 +940,8 @@ export default function PMBRegistrationPage() {
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', marginBottom: '32px' }}>
-                  <div style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
-                    <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}><i className="ph-duotone ph-identification-card" style={{ color: '#3b82f6' }}></i> {trans.review_personal}</h3>
+                  <div style={{ background: 'var(--glass-bg)', padding: '24px', borderRadius: '24px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}><i className="ph-duotone ph-identification-card" style={{ color: 'var(--umiba-red)' }}></i> {trans.review_personal}</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.9rem' }}>
                       <div><span style={{ color: 'var(--color-muted)' }}>Name:</span> <strong style={{ color: 'var(--color-text)' }}>{biodata.name}</strong></div>
                       <div><span style={{ color: 'var(--color-muted)' }}>Email:</span> <strong style={{ color: 'var(--color-text)' }}>{biodata.email}</strong></div>
@@ -934,7 +951,7 @@ export default function PMBRegistrationPage() {
                     </div>
                   </div>
 
-                  <div style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)' }}>
+                  <div style={{ background: 'var(--glass-bg)', padding: '24px', borderRadius: '24px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                     <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}><i className="ph-duotone ph-graduation-cap" style={{ color: '#8b5cf6' }}></i> {trans.review_academic}</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.9rem' }}>
                       <div><span style={{ color: 'var(--color-muted)' }}>Gelombang:</span> <strong style={{ color: 'var(--color-text)' }}>{selectedPeriod?.name}</strong></div>
@@ -944,11 +961,11 @@ export default function PMBRegistrationPage() {
                   </div>
                 </div>
 
-                <div style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)', marginBottom: '32px', boxSizing: 'border-box', width: '100%', overflow: 'hidden' }}>
+                <div style={{ background: 'var(--glass-bg)', padding: '24px', borderRadius: '24px', border: 'var(--glass-border)', marginBottom: '32px', boxSizing: 'border-box', width: '100%', overflow: 'hidden', boxShadow: 'var(--glass-shadow)' }}>
                   <h3 style={{ fontSize: '1.1rem', fontWeight: '800', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}><i className="ph-duotone ph-file-arrow-up" style={{ color: '#10b981' }}></i> {trans.review_docs}</h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', boxSizing: 'border-box' }}>
                     {['ijazah', 'foto', 'ktp', 'bukti_bayar'].map(key => (
-                      <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--color-surface)', padding: '10px 16px', borderRadius: '50px', border: '1px solid var(--color-border)', fontSize: '0.85rem', boxSizing: 'border-box', width: '100%', overflow: 'hidden' }}>
+                      <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--liquid-bg)', padding: '10px 16px', borderRadius: '50px', border: 'var(--glass-border)', fontSize: '0.85rem', boxSizing: 'border-box', width: '100%', overflow: 'hidden', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
                         <i className="ph ph-check-circle" style={{ color: fileNames[key] ? '#10b981' : 'var(--color-muted)', flexShrink: 0 }}></i>
                         <span style={{ color: 'var(--color-text)', fontWeight: '700', flexShrink: 0 }}>{key.toUpperCase()}:</span>
                         <span style={{ color: fileNames[key] ? 'var(--color-text)' : 'var(--color-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1, textAlign: 'left' }}>{fileNames[key] || 'Belum diupload'}</span>
@@ -958,7 +975,7 @@ export default function PMBRegistrationPage() {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
-                  <button onClick={() => setStep(4)} style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '700' }}>{trans.btn_back}</button>
+                  <button onClick={() => setStep(4)} style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '700', boxShadow: 'var(--glass-shadow)' }}>{trans.btn_back}</button>
                   <button onClick={submitApplication} disabled={submitting || uploading} style={btnPrimary}>
                     {submitting ? (
                       <>
@@ -990,7 +1007,7 @@ export default function PMBRegistrationPage() {
                   {trans.success_desc}
                 </p>
 
-                <div style={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', padding: '24px 32px', borderRadius: '24px', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '12px', width: 'fit-content', maxWidth: '100%', boxSizing: 'border-box', margin: '0 auto 40px' }}>
+                <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', padding: '24px 32px', borderRadius: '24px', display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: '12px', width: 'fit-content', maxWidth: '100%', boxSizing: 'border-box', margin: '0 auto 40px', boxShadow: 'var(--glass-shadow)' }}>
                   <span style={{ fontSize: '0.8rem', color: 'var(--color-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '1px' }}>{trans.success_reg}</span>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <strong style={{ fontSize: '1.8rem', color: 'var(--color-text)', letterSpacing: '2px', fontWeight: '900' }}>{registrationNumber}</strong>
@@ -1009,7 +1026,7 @@ export default function PMBRegistrationPage() {
                   </button>
                   <button 
                     onClick={() => { setStep(1); setBiodata({ name: '', email: '', phone: '', gender: '', birth_date: '', birth_place: '', address: '', school_origin: '', program_choice: '' }); setFiles({ ijazah: null, foto: null, ktp: null, bukti_bayar: null }); setFileNames({ ijazah: '', foto: '', ktp: '', bukti_bayar: '' }); }} 
-                    style={{ padding: '12px 24px', borderRadius: '50px', border: '1px solid var(--color-border)', background: 'transparent', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '700' }}
+                    style={{ padding: '12px 24px', borderRadius: '50px', border: 'var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--color-text)', cursor: 'pointer', fontWeight: '700', boxShadow: 'var(--glass-shadow)' }}
                   >
                     {trans.btn_new_reg}
                   </button>
@@ -1063,15 +1080,15 @@ export default function PMBRegistrationPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
                 
                 {/* 1. Header Ringkasan */}
-                <div style={{ background: 'var(--color-bg)', padding: '24px', borderRadius: '24px', border: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
+                <div style={{ background: 'var(--glass-bg)', padding: '24px', borderRadius: '24px', border: 'var(--glass-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', boxShadow: 'var(--glass-shadow)' }}>
                   <div>
                     <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800' }}>{statusResult.name}</h3>
                     <p style={{ margin: '4px 0 0 0', fontSize: '0.88rem', color: 'var(--color-muted)' }}>Prodi Pilihan: {statusResult.program_choice}</p>
                   </div>
                   <div>
                     <span style={{ 
-                      background: statusResult.status === 'accepted' ? 'rgba(16, 185, 129, 0.15)' : statusResult.status === 'rejected' ? 'rgba(239, 68, 68, 0.15)' : 'rgba(59, 130, 246, 0.15)', 
-                      color: statusResult.status === 'accepted' ? '#10b981' : statusResult.status === 'rejected' ? '#ef4444' : '#3b82f6', 
+                      background: statusResult.status === 'accepted' ? 'rgba(16, 185, 129, 0.15)' : statusResult.status === 'rejected' ? 'rgba(239, 68, 68, 0.15)' : 'rgba(185, 28, 28, 0.12)', 
+                      color: statusResult.status === 'accepted' ? '#10b981' : statusResult.status === 'rejected' ? '#ef4444' : 'var(--umiba-red)', 
                       padding: '8px 20px', 
                       borderRadius: '50px', 
                       fontSize: '0.9rem', 
@@ -1118,7 +1135,7 @@ export default function PMBRegistrationPage() {
                       width: '24px', 
                       height: '24px', 
                       borderRadius: '50%', 
-                      background: statusResult.status !== 'pending' ? '#10b981' : '#3b82f6', 
+                      background: statusResult.status !== 'pending' ? '#10b981' : 'var(--umiba-red)', 
                       color: 'white', 
                       display: 'flex', 
                       alignItems: 'center', 
@@ -1129,9 +1146,9 @@ export default function PMBRegistrationPage() {
                     </div>
                     <div>
                       <h4 style={{ margin: 0, fontSize: '0.98rem', fontWeight: '800' }}>{trans.test_title}</h4>
-                      <div style={{ background: 'var(--color-bg)', padding: '16px', borderRadius: '16px', marginTop: '10px', border: '1px solid var(--color-border)', display: 'inline-flex', flexDirection: 'column', gap: '8px', fontSize: '0.85rem' }}>
+                      <div style={{ background: 'var(--glass-bg)', padding: '16px', borderRadius: '16px', marginTop: '10px', border: 'var(--glass-border)', display: 'inline-flex', flexDirection: 'column', gap: '8px', fontSize: '0.85rem', boxShadow: 'var(--glass-shadow)' }}>
                         <div><span style={{ color: 'var(--color-muted)' }}>{trans.test_date}:</span> <strong>17 Agustus 2026, 09:00 - 11:30 WIB</strong></div>
-                        <div><span style={{ color: 'var(--color-muted)' }}>{trans.test_link}:</span> <a href="https://cbt.umiba.ac.id/pmb-test" target="_blank" style={{ color: '#3b82f6', fontWeight: '700' }}>cbt.umiba.ac.id/pmb-test</a></div>
+                        <div><span style={{ color: 'var(--color-muted)' }}>{trans.test_link}:</span> <a href="https://cbt.umiba.ac.id/pmb-test" target="_blank" style={{ color: 'var(--umiba-red)', fontWeight: '700' }}>cbt.umiba.ac.id/pmb-test</a></div>
                       </div>
                     </div>
                   </div>
