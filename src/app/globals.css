@@ -2431,7 +2431,7 @@ header .btn-primary:hover {
   #beranda,
   #beranda > div,
   .hero-slide {
-    height: 100vh !important;
+    height: 88vh !important;
     min-height: auto !important;
   }
 
