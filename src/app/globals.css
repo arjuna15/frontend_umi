@@ -2768,3 +2768,9 @@ input:focus, textarea:focus, select:focus {
 [data-theme=dark] header .mega-menu div[style*="inset"] {
   box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
 }
+
+/* Hero Model Masked Circle Dark Mode Background & Visibility */
+[data-theme=dark] .hero-model-container div[style*="borderRadius: '50%'"],
+[data-theme=dark] .hero-model-container div[style*="borderRadius: 50%"] {
+  background: #1a202c !important;
+}
