@@ -1744,6 +1744,11 @@ body.dark-mode header.top-transparent .theme-toggle {
   color: #ffffff !important;
 }
 
+/* User request: language buttons in dark mode top-transparent header (when not active) should be white */
+body.dark-mode header.top-transparent .lang-switch .lang-btn:not(.active) {
+  color: #ffffff !important;
+}
+
 header.top-transparent .lang-switch {
   border: none !important;
   background: var(--color-surface) !important;
@@ -1755,9 +1760,13 @@ body.dark-mode header.top-transparent .lang-switch {
   box-shadow: 3px 3px 6px #090b10, -3px -3px 6px #1b2130 !important;
 }
 
-/* Ensure hamburger menu icon is black on mobile */
+/* Ensure hamburger menu icon is black on mobile in light mode, but white in dark mode */
 header.top-transparent .menu-toggle span {
   background: #1e293b !important;
+  box-shadow: none;
+}
+body.dark-mode header.top-transparent .menu-toggle span {
+  background: #ffffff !important;
   box-shadow: none;
 }
 
