@@ -19,13 +19,15 @@ export default function DosenQuizCreate() {
   // AI Quiz Generator States
   const [showAiModal, setShowAiModal] = useState(false);
   const [aiPrompt, setAiPrompt] = useState('');
+  const [aiFile, setAiFile] = useState(null);
+  const [aiFileName, setAiFileName] = useState('');
   const [aiType, setAiType] = useState('multiple_choice');
   const [aiCount, setAiCount] = useState(5);
   const [aiLoading, setAiLoading] = useState(false);
 
   const generateAiQuestions = async () => {
-    if (!aiPrompt.trim()) {
-      window.toast('Masukkan bahan materi kuliah terlebih dahulu.');
+    if (!aiPrompt.trim() && !aiFile) {
+      window.toast('Masukkan bahan materi berupa teks atau unggah berkas kuliah.');
       return;
     }
     setAiLoading(true);
@@ -33,24 +35,28 @@ export default function DosenQuizCreate() {
       const token = localStorage.getItem('siakad_token');
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
       
+      const formData = new FormData();
+      formData.append('prompt', aiPrompt);
+      formData.append('type', aiType);
+      formData.append('count', aiCount);
+      if (aiFile) {
+        formData.append('file', aiFile);
+      }
+
       const res = await fetch(`${apiUrl}/siakad/dosen/quiz/generate-ai`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Authorization': `Bearer ${token}`
+          // Note: Do not manually set Content-Type header when sending FormData,
+          // let the browser handle boundary generation.
         },
-        body: JSON.stringify({
-          prompt: aiPrompt,
-          type: aiType,
-          count: aiCount
-        })
+        body: formData
       });
 
       if (!res.ok) throw new Error('AI Gagal merancang soal.');
       const data = await res.json();
       
       if (Array.isArray(data.questions)) {
-        // Map the questions returned from Laravel AI generator
         const formattedQuestions = data.questions.map((q) => ({
           type: aiType,
           question: q.question || '',
@@ -64,6 +70,10 @@ export default function DosenQuizCreate() {
         
         setQuestions(formattedQuestions);
         setShowAiModal(false);
+        // Clear AI Modal Form
+        setAiPrompt('');
+        setAiFile(null);
+        setAiFileName('');
         window.toast(`Berhasil membuat ${formattedQuestions.length} soal otomatis dengan AI!`);
       } else {
         throw new Error('Format respon AI tidak valid.');
@@ -515,13 +525,35 @@ export default function DosenQuizCreate() {
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
               <div>
-                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, fontSize: '0.9rem' }}>Bahan Materi Kuliah / Topik Pembahasan</label>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, fontSize: '0.9rem' }}>Unggah File Bahan Ujian (PDF / DOCX / TXT)</label>
+                <div style={{ position: 'relative', border: '2px dashed var(--color-border)', borderRadius: '18px', padding: '16px', textAlign: 'center', background: 'var(--liquid-bg)', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', transition: 'all 0.2s', boxShadow: 'inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light)' }} onMouseOver={e=>e.currentTarget.style.borderColor='var(--umiba-red)'} onMouseOut={e=>e.currentTarget.style.borderColor='var(--color-border)'}>
+                  <input 
+                    type="file" 
+                    accept=".pdf,.docx,.txt"
+                    onChange={(e) => {
+                      const file = e.target.files[0];
+                      if (file) {
+                        setAiFile(file);
+                        setAiFileName(file.name);
+                      }
+                    }} 
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: 0, cursor: 'pointer' }} 
+                  />
+                  <i className="ph ph-file-arrow-up" style={{ fontSize: '1.8rem', color: aiFileName ? 'var(--umiba-red)' : 'var(--color-muted)' }}></i>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--color-text)' }}>
+                    {aiFileName || 'Seret atau Pilih Dokumen Materi Kuliah'}
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, fontSize: '0.9rem' }}>Bahan Materi Kuliah / Topik Pembahasan (Teks Manual)</label>
                 <textarea 
                   value={aiPrompt}
                   onChange={(e) => setAiPrompt(e.target.value)}
                   className="siakad-input" 
-                  style={{ width: '100%', height: '120px', resize: 'vertical' }}
-                  placeholder="Masukkan ringkasan materi, silabus, atau poin penting bab kuliah yang ingin dijadikan bahan ujian..."
+                  style={{ width: '100%', height: '100px', resize: 'vertical' }}
+                  placeholder="Atau ketik ringkasan materi, silabus, atau poin penting bab kuliah yang ingin dijadikan bahan ujian..."
                 />
               </div>
 
