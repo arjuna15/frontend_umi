@@ -2684,9 +2684,9 @@ input:focus, textarea:focus, select:focus {
   box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
 }
 
-/* The full Home route, including sections beneath the hero, uses dark inset shadows. */
-[data-theme=dark] .home-neu-page [style*="#ffffff"],
-[data-theme=dark] .home-neu-page [style*="#cbd5e1"] {
+/* The full Home route, including sections beneath the hero, uses dark inset shadows. Exclude model images. */
+[data-theme=dark] .home-neu-page [style*="#ffffff"]:not(.hero-model-circle):not(.hero-model-circle *),
+[data-theme=dark] .home-neu-page [style*="#cbd5e1"]:not(.hero-model-circle):not(.hero-model-circle *) {
   background: var(--color-surface) !important;
   box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
 }
@@ -2782,9 +2782,5 @@ input:focus, textarea:focus, select:focus {
 
 /* Hero Model Masked Circle Dark Mode Background & Visibility */
 [data-theme=dark] .hero-model-circle {
-  background: #e0e0e0 !important;
-}
-
-[data-theme=dark] .hero-model-circle img {
-  filter: brightness(1.2) contrast(1.1) !important;
+  background: #1e293b !important;
 }
