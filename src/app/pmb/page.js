@@ -955,7 +955,7 @@ export default function PMBRegistrationPage() {
                       />
                     </div>
 
-                    <div style={{ background: 'rgba(185, 28, 28, 0.06)', border: '1px solid rgba(185, 28, 28, 0.15)', padding: '16px 20px', borderRadius: '20px', fontSize: '0.9rem' }}>
+                    <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', padding: '16px 20px', borderRadius: '20px', fontSize: '0.9rem', boxShadow: 'var(--glass-shadow)' }}>
                       <span style={{ display: 'block', color: 'var(--color-muted)', fontSize: '0.8rem', fontWeight: '700' }}>Nomor Rekening VA / Kode Bayar:</span>
                       <strong style={{ fontSize: '1.2rem', color: 'var(--color-text)', letterSpacing: '1px', display: 'block', margin: '4px 0' }}>
                         {paymentMethod === 'VA Mandiri' ? '8801202611982736' : paymentMethod === 'VA BNI' ? '9880120263445522' : paymentMethod === 'VA BRI' ? '1288012026778811' : 'QRIS_CODE_ACTIVE'}
