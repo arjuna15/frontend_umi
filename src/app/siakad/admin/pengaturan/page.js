@@ -361,11 +361,11 @@ export default function AdminPengaturan() {
             <div style={{ display: 'grid', gap: '16px', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
               <div>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Kampus Bintaro (Lat, Lng)</label>
-                <input type="text" defaultValue={coordBintaro} key={`bintaro-${coordBintaro}`} id="coordBintaro" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', padding: '10px 12px', borderRadius: '8px',    fontSize: '0.95rem' }} />
+                <input type="text" className="siakad-input" defaultValue={coordBintaro} key={`bintaro-${coordBintaro}`} id="coordBintaro" style={{ width: '100%', padding: '10px 12px', fontSize: '0.95rem' }} />
               </div>
               <div>
                 <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Kampus Ps. Minggu (Lat, Lng)</label>
-                <input type="text" defaultValue={coordPasarMinggu} key={`pm-${coordPasarMinggu}`} id="coordPasarMinggu" style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', padding: '10px 12px', borderRadius: '8px',    fontSize: '0.95rem' }} />
+                <input type="text" className="siakad-input" defaultValue={coordPasarMinggu} key={`pm-${coordPasarMinggu}`} id="coordPasarMinggu" style={{ width: '100%', padding: '10px 12px', fontSize: '0.95rem' }} />
               </div>
             </div>
           </div>
@@ -463,17 +463,17 @@ export default function AdminPengaturan() {
 
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Base URL Endpoint</label>
-              <input type="text" className="siakad-input" value={esignConfig.base_url || ''} onChange={(e) => setEsignConfig({ ...esignConfig, base_url: e.target.value })} placeholder="https://api.esign.provider.id/v1"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
+              <input type="text" className="siakad-input" value={esignConfig.base_url || ''} onChange={(e) => setEsignConfig({ ...esignConfig, base_url: e.target.value })} placeholder="https://api.esign.provider.id/v1" />
             </div>
 
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>API Key / Client ID</label>
-              <input type="text" className="siakad-input" value={esignConfig.api_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, api_key: e.target.value })} placeholder="Masukkan API Key"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
+              <input type="text" className="siakad-input" value={esignConfig.api_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, api_key: e.target.value })} placeholder="Masukkan API Key" />
             </div>
 
             <div>
               <label style={{ display: 'block', marginBottom: '8px', fontWeight: 600, color: 'var(--color-text)', fontSize: '0.9rem' }}>Secret Key</label>
-              <input type="password" className="siakad-input" value={esignConfig.secret_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, secret_key: e.target.value })} placeholder="•••••••••••••••••••••••••••••"  style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)' }} />
+              <input type="password" className="siakad-input" value={esignConfig.secret_key || ''} onChange={(e) => setEsignConfig({ ...esignConfig, secret_key: e.target.value })} placeholder="•••••••••••••••••••••••••••••" />
             </div>
 
             <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: '10px' }}>
