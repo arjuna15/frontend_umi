@@ -1272,6 +1272,10 @@
   border-color: rgba(239, 68, 68, 0.4);
 }
 
+.profile-content-card {
+  padding: 36px;
+}
+
 .profile-overview-card {
   display: flex;
   align-items: center;
@@ -1279,7 +1283,7 @@
   margin-bottom: 32px;
   background: var(--glass-bg);
   padding: 24px;
-  border-radius: 16px;
+  border-radius: 20px;
   border: 1px solid var(--color-border);
   flex-wrap: wrap;
 }
@@ -1291,15 +1295,20 @@
 }
 
 @media (max-width: 768px) {
+  .profile-content-card {
+    padding: 20px !important;
+  }
   .profile-overview-card {
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    gap: 16px;
+    flex-direction: column !important;
+    text-align: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    padding: 20px 16px !important;
   }
   .profile-badges {
-    justify-content: center;
-    margin-top: 4px;
+    justify-content: center !important;
+    margin-top: 6px !important;
   }
 }
 

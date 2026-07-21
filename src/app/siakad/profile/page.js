@@ -225,15 +225,15 @@ export default function ProfilePage() {
         </div>
 
         {/* Right Content */}
-        <div className="siakad-card" style={{ flex: 1, padding: '40px', minHeight: '500px' }}>
+        <div className="siakad-card profile-content-card" style={{ flex: 1, minHeight: '500px' }}>
           
           {/* Tab 1: Informasi Pribadi */}
           {activeTab === 'pribadi' && (
             <div className="fade-in">
               <h2 style={{ fontSize: '1.4rem', color: 'var(--color-text)', margin: '0 0 24px 0', paddingBottom: '16px', borderBottom: '1px solid var(--color-border)', fontWeight: '800' }}>Informasi Pribadi</h2>
               
-              {/* Profile Overview (Horizontal) */}
-              <div className="profile-overview-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', borderRadius: '24px', display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '24px' }}>
+              {/* Profile Overview (Horizontal on Desktop, Column on Mobile) */}
+              <div className="profile-overview-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px', borderRadius: '24px', marginBottom: '24px' }}>
                 <div style={{ position: 'relative', width: '90px', height: '90px', flexShrink: 0 }}>
                   {user.avatar_url ? (
                     <div style={{ width: '100%', height: '100%', borderRadius: '50%', padding: '3px', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)' }}>
