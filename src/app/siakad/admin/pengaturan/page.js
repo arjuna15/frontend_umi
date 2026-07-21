@@ -311,38 +311,40 @@ export default function AdminPengaturan() {
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', background: 'var(--glass-bg)', borderRadius: '16px', border: '1px solid var(--color-border)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '22px 24px', background: 'var(--glass-bg)', borderRadius: '20px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                 <div>
-                  <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Pengisian KRS Online</div>
+                  <div style={{ fontWeight: 800, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Pengisian KRS Online</div>
                   <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Buka akses bagi mahasiswa untuk mulai memilih mata kuliah semester ini.</div>
                 </div>
-                <div onClick={() => setKrsOpen(!krsOpen)} style={{ width: '54px', height: '28px', borderRadius: '50px', background: 'var(--glass-bg)', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', border: 'var(--inset-border)', position: 'relative', cursor: 'pointer', transition: 'all 0.3s ease', flexShrink: 0 }}>
-                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: krsOpen ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--color-muted)', boxShadow: krsOpen ? '0 2px 5px rgba(196,30,58,0.4)' : '0 2px 5px rgba(0,0,0,0.2)', position: 'absolute', top: '3px', left: krsOpen ? '29px' : '3px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
+                <div onClick={() => setKrsOpen(!krsOpen)} style={{ width: '60px', height: '32px', borderRadius: '50px', background: 'var(--liquid-bg)', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', border: 'var(--inset-border)', position: 'relative', cursor: 'pointer', transition: 'all 0.3s ease', flexShrink: 0 }}>
+                  <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: krsOpen ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'var(--glass-bg)', boxShadow: krsOpen ? '0 4px 14px rgba(196, 30, 58, 0.55)' : 'var(--glass-shadow)', position: 'absolute', top: '3px', left: krsOpen ? '32px' : '3px', transform: krsOpen ? 'scale(1.08)' : 'scale(1)', transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', background: 'var(--glass-bg)', borderRadius: '16px', border: '1px solid var(--color-border)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '22px 24px', background: 'var(--glass-bg)', borderRadius: '20px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                 <div>
-                  <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Akses Cetak KHS</div>
+                  <div style={{ fontWeight: 800, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Akses Cetak KHS</div>
                   <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Izinkan mahasiswa melihat dan mencetak Kartu Hasil Studi (KHS).</div>
                 </div>
-                <div onClick={() => setKhsOpen(!khsOpen)} style={{ width: '54px', height: '28px', borderRadius: '50px', background: 'var(--glass-bg)', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', border: 'var(--inset-border)', position: 'relative', cursor: 'pointer', transition: 'all 0.3s ease', flexShrink: 0 }}>
-                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: khsOpen ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--color-muted)', boxShadow: khsOpen ? '0 2px 5px rgba(196,30,58,0.4)' : '0 2px 5px rgba(0,0,0,0.2)', position: 'absolute', top: '3px', left: khsOpen ? '29px' : '3px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
+                <div onClick={() => setKhsOpen(!khsOpen)} style={{ width: '60px', height: '32px', borderRadius: '50px', background: 'var(--liquid-bg)', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', border: 'var(--inset-border)', position: 'relative', cursor: 'pointer', transition: 'all 0.3s ease', flexShrink: 0 }}>
+                  <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: khsOpen ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'var(--glass-bg)', boxShadow: khsOpen ? '0 4px 14px rgba(196, 30, 58, 0.55)' : 'var(--glass-shadow)', position: 'absolute', top: '3px', left: khsOpen ? '32px' : '3px', transform: khsOpen ? 'scale(1.08)' : 'scale(1)', transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '20px', background: 'var(--glass-bg)', borderRadius: '16px', border: '1px solid var(--color-border)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '22px 24px', background: 'var(--glass-bg)', borderRadius: '20px', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)' }}>
                 <div>
-                  <div style={{ fontWeight: 700, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Input Nilai Dosen</div>
+                  <div style={{ fontWeight: 800, color: 'var(--color-text)', fontSize: '1.05rem', marginBottom: '4px' }}>Input Nilai Dosen</div>
                   <div style={{ fontSize: '0.85rem', color: 'var(--color-muted)', lineHeight: '1.4' }}>Buka portal bagi dosen untuk memasukkan dan mengubah nilai mahasiswa.</div>
                 </div>
                 <div
                   onClick={() => setNilaiOpen(!nilaiOpen)}
-                  style={{ width: '54px', height: '28px', borderRadius: '50px', background: 'var(--glass-bg)', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', border: 'var(--inset-border)', position: 'relative', cursor: 'pointer', transition: 'all 0.3s ease', flexShrink: 0 }}
+                  style={{ width: '60px', height: '32px', borderRadius: '50px', background: 'var(--liquid-bg)', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', border: 'var(--inset-border)', position: 'relative', cursor: 'pointer', transition: 'all 0.3s ease', flexShrink: 0 }}
                 >
-                  <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: nilaiOpen ? 'linear-gradient(135deg, #C41E3A, #9b1c2e)' : 'var(--color-muted)', boxShadow: nilaiOpen ? '0 2px 5px rgba(196,30,58,0.4)' : '0 2px 5px rgba(0,0,0,0.2)', position: 'absolute', top: '3px', left: nilaiOpen ? '29px' : '3px', transition: 'left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
+                  <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: nilaiOpen ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'var(--glass-bg)', boxShadow: nilaiOpen ? '0 4px 14px rgba(196, 30, 58, 0.55)' : 'var(--glass-shadow)', position: 'absolute', top: '3px', left: nilaiOpen ? '32px' : '3px', transform: nilaiOpen ? 'scale(1.08)' : 'scale(1)', transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }} />
                 </div>
               </div>
+            </div>
             </div>
           </div>
 
