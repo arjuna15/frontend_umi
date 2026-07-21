@@ -2811,58 +2811,79 @@ input:focus, textarea:focus, select:focus {
 }
 
 
-/* Remove the last hard-coded light shadows from the Home hero. */
-[data-theme=dark] #beranda [style*="inset 3px 3px 6px #cbd5e1"],
-[data-theme=dark] #beranda [style*="inset 4px 4px 8px #cbd5e1"] {
+/* GLOBAL DARK MODE OVERRIDES ACROSS THE ENTIRE WEBSITE */
+[data-theme=dark] [style*="#cbd5e1"]:not(.hero-model-circle):not(.hero-model-circle *),
+[data-theme=dark] [style*="#ffffff"]:not(.hero-model-circle):not(.hero-model-circle *),
+[data-theme=dark] [style*="#bebebe"]:not(.hero-model-circle):not(.hero-model-circle *),
+body.dark-mode [style*="#cbd5e1"]:not(.hero-model-circle):not(.hero-model-circle *),
+body.dark-mode [style*="#ffffff"]:not(.hero-model-circle):not(.hero-model-circle *),
+body.dark-mode [style*="#bebebe"]:not(.hero-model-circle):not(.hero-model-circle *) {
   background: var(--color-surface) !important;
-  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+  box-shadow: inset 4px 4px 8px #050a0f, inset -4px -4px 8px #132637 !important;
 }
 
-/* The full Home route, including sections beneath the hero, uses dark inset shadows. Exclude model images. */
-[data-theme=dark] .home-neu-page [style*="#ffffff"]:not(.hero-model-circle):not(.hero-model-circle *),
-[data-theme=dark] .home-neu-page [style*="#cbd5e1"]:not(.hero-model-circle):not(.hero-model-circle *) {
-  background: var(--color-surface) !important;
-  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
-}
-[data-theme=dark] .home-neu-page .neu-card,
-[data-theme=dark] .home-neu-page .cert-slide,
-[data-theme=dark] .home-neu-page .prodi-card {
+[data-theme=dark] .neu-card,
+[data-theme=dark] .cert-slide,
+[data-theme=dark] .prodi-card,
+[data-theme=dark] .profil-neu-card,
+body.dark-mode .neu-card,
+body.dark-mode .cert-slide,
+body.dark-mode .prodi-card,
+body.dark-mode .profil-neu-card {
   background: var(--color-surface) !important;
   border: none !important;
-  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+  box-shadow: 6px 6px 16px #050a0f, -6px -6px 16px #132637 !important;
 }
-[data-theme=dark] .home-neu-page .testi-card {
+
+[data-theme=dark] .testi-card,
+body.dark-mode .testi-card {
   background: var(--glass-bg) !important;
   border: var(--glass-border) !important;
-  box-shadow: var(--glass-shadow) !important;
+  box-shadow: 6px 6px 16px #050a0f, -6px -6px 16px #132637 !important;
 }
-[data-theme=dark] .home-neu-page .neu-card:hover,
-[data-theme=dark] .home-neu-page .cert-slide:hover,
-[data-theme=dark] .home-neu-page .testi-card:hover,
-[data-theme=dark] .home-neu-page .prodi-card:hover {
-  box-shadow: var(--glass-shadow) !important;
+
+[data-theme=dark] .neu-card:hover,
+[data-theme=dark] .cert-slide:hover,
+[data-theme=dark] .testi-card:hover,
+[data-theme=dark] .prodi-card:hover,
+[data-theme=dark] .profil-neu-card:hover,
+body.dark-mode .neu-card:hover,
+body.dark-mode .cert-slide:hover,
+body.dark-mode .testi-card:hover,
+body.dark-mode .prodi-card:hover,
+body.dark-mode .profil-neu-card:hover {
+  box-shadow: 9px 9px 20px #050a0f, -9px -9px 20px #132637 !important;
 }
-[data-theme=dark] .home-neu-page .btn-neu {
+
+[data-theme=dark] .btn-neu,
+body.dark-mode .btn-neu {
   background: var(--color-surface) !important;
   color: #ff5a5f !important;
-  box-shadow: 4px 4px 8px #080a0f, -4px -4px 8px #1b2130 !important;
-}
-[data-theme=dark] .home-neu-page .btn-neu:hover {
-  background: var(--color-surface) !important;
-  box-shadow: 6px 6px 12px #080a0f, -6px -6px 12px #1b2130 !important;
-}
-[data-theme=dark] .home-neu-page .btn-neu:active {
-  box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+  box-shadow: 4px 4px 8px #050a0f, -4px -4px 8px #132637 !important;
 }
 
-
-/* Small Home controls also carry inline inset tokens and need dark-only shadows. */
-[data-theme=dark] .home-neu-page [style*="var(--inset-shadow-light)"] {
+[data-theme=dark] .btn-neu:hover,
+body.dark-mode .btn-neu:hover {
   background: var(--color-surface) !important;
-  box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
+  box-shadow: 6px 6px 12px #050a0f, -6px -6px 12px #132637 !important;
 }
-[data-theme=dark] .home-neu-page .siakad-badge {
+
+[data-theme=dark] .btn-neu:active,
+body.dark-mode .btn-neu:active {
+  box-shadow: inset 4px 4px 8px #050a0f, inset -4px -4px 8px #132637 !important;
+}
+
+[data-theme=dark] [style*="var(--inset-shadow-light)"],
+body.dark-mode [style*="var(--inset-shadow-light)"] {
   background: var(--color-surface) !important;
+  box-shadow: inset 3px 3px 6px #050a0f, inset -3px -3px 6px #132637 !important;
+}
+
+[data-theme=dark] .siakad-badge,
+body.dark-mode .siakad-badge {
+  background: var(--color-surface) !important;
+  box-shadow: 4px 4px 8px #050a0f, -4px -4px 8px #132637 !important;
+}
   border: none !important;
   box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
 }
