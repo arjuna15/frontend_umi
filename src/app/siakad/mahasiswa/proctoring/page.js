@@ -225,8 +225,19 @@ export default function ProctoringStudentPage() {
 
         <div style={{ display: 'flex', justifyContent: 'center', padding: '40px 0' }}>
           <div className="siakad-card" style={{ padding: '40px', width: '100%', maxWidth: '460px', textAlign: 'center' }}>
-            <div style={{ width: '70px', height: '70px', borderRadius: '18px', background: 'rgba(59,130,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
-              <i className="ph ph-laptop" style={{ fontSize: '2.2rem', color: '#3b82f6' }}></i>
+            <div style={{ 
+              width: '80px', 
+              height: '80px', 
+              borderRadius: '50%', 
+              background: 'var(--liquid-bg)', 
+              border: 'var(--inset-border)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              margin: '0 auto 24px',
+              boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)'
+            }}>
+              <i className="ph ph-laptop" style={{ fontSize: '2.4rem', color: '#3b82f6' }}></i>
             </div>
             <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Masuk Sesi Ujian</h2>
             <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: '0 0 28px 0' }}>Masukkan token yang diberikan dosen/pengawas ujian Anda.</p>
