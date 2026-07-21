@@ -75,11 +75,11 @@ export default function RootLayout({ children }) {
               window.addEventListener('load', function() {
                 var splash = document.getElementById('pwa-splash');
                 if (splash) {
-                  // Tambahkan class fade-out untuk fade transition
+                  // Tambahkan class fade-out untuk slide-down transition
                   splash.classList.add('fade-out');
                   setTimeout(function() {
                     splash.style.display = 'none';
-                  }, 800); // Cocok dengan durasi CSS transition 0.8s
+                  }, 700); // Cocok dengan durasi CSS transition 0.7s
                 }
               });
               // Fallback jika window load terlalu cepat atau lambat
@@ -89,7 +89,7 @@ export default function RootLayout({ children }) {
                   splash.classList.add('fade-out');
                   setTimeout(function() {
                     splash.style.display = 'none';
-                  }, 800);
+                  }, 700);
                 }
               }, 2000);
             })();

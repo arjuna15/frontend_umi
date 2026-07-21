@@ -2177,9 +2177,10 @@ header .btn-primary:hover {
   align-items: center;
   justify-content: center;
   z-index: 999999;
-  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+  transition: transform 0.7s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.7s cubic-bezier(0.7, 0, 0.3, 1), visibility 0.7s;
   opacity: 1;
   visibility: visible;
+  transform: translateY(0);
 }
 
 [data-theme='dark'] .pwa-splash-overlay {
@@ -2187,6 +2188,7 @@ header .btn-primary:hover {
 }
 
 .pwa-splash-overlay.fade-out {
+  transform: translateY(100%);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
