@@ -182,7 +182,7 @@ export default function PerpustakaanPage() {
         <div style={{ display: 'flex', gap: '10px', marginBottom: '24px' }}>
           <div style={{ position: 'relative', flex: 1 }}>
             <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
-            <input id="input-search-catalog" type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} onKeyDown={e => e.key === 'Enter' && searchCatalog()} placeholder="Cari judul buku, penulis, ISBN..." style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '100%', padding: '12px 14px 12px 40px', fontSize: '0.95rem', borderRadius: '30px',    boxSizing: 'border-box' }} />
+            <input id="input-search-catalog" type="text" className="siakad-input" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} onKeyDown={e => e.key === 'Enter' && searchCatalog()} placeholder="Cari judul buku, penulis, ISBN..." style={{ width: '100%', padding: '12px 14px 12px 40px', fontSize: '0.95rem', borderRadius: '30px', boxSizing: 'border-box' }} />
           </div>
           <button id="btn-search-catalog" onClick={searchCatalog} disabled={searching} className="btn" style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '30px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
             <i className="ph ph-magnifying-glass"></i> {searching ? 'Mencari...' : 'Cari'}

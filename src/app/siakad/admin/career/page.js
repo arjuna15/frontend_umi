@@ -192,7 +192,7 @@ export default function CareerCenterPage() {
         {tab === 'lowongan' && (
           <>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
-              <input id="search-career" className="siakad-input" type="text" placeholder="Cari perusahaan atau posisi..." value={search} onChange={e => setSearch(e.target.value)} style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '280px' }} />
+              <input id="search-career" className="siakad-input" type="text" placeholder="Cari perusahaan atau posisi..." value={search} onChange={e => setSearch(e.target.value)} style={{ width: '280px' }} />
               <button id="btn-add-job" onClick={() => { resetForm(); setShowModal(true); }} className="siakad-btn-primary" style={{ background: 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)', color: 'white', border: 'none', boxShadow: '0 4px 12px rgba(196, 30, 58, 0.25)', padding: '10px 24px' }}><i className="ph ph-plus"></i> Tambah Lowongan</button>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '16px' }}>

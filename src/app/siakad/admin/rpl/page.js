@@ -172,7 +172,7 @@ export default function RPLPage() {
       <div className="siakad-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', padding: '24px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'var(--color-text)', margin: 0 }}>Daftar Pengajuan RPL</h2>
-          <input id="search-rpl" className="siakad-input" type="text" placeholder="Cari nama atau institusi..." value={search} onChange={e => setSearch(e.target.value)} style={{ boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)', background: 'var(--liquid-bg)', border: 'var(--inset-border)', color: 'var(--color-text)', width: '280px' }} />
+          <input id="search-rpl" className="siakad-input" type="text" placeholder="Cari nama atau institusi..." value={search} onChange={e => setSearch(e.target.value)} style={{ width: '280px' }} />
         </div>
         <div style={{ overflowX: 'auto' }}>
           <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 12px' }}>
