@@ -2171,7 +2171,7 @@ header .btn-primary:hover {
 .pwa-splash-overlay {
   position: fixed;
   inset: 0;
-  background: #ffffff;
+  background: var(--liquid-bg, #e0e5ec);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2183,7 +2183,7 @@ header .btn-primary:hover {
 }
 
 [data-theme='dark'] .pwa-splash-overlay {
-  background: #020617;
+  background: var(--liquid-bg, #0c1220);
 }
 
 .pwa-splash-overlay.fade-out {
@@ -2199,7 +2199,15 @@ header .btn-primary:hover {
   justify-content: center;
   width: 140px;
   height: 140px;
+  background: var(--liquid-bg, #e0e5ec);
+  border-radius: 50%;
+  box-shadow: 8px 8px 16px var(--shadow-dark, #bebebe), -8px -8px 16px var(--shadow-light, #ffffff);
   animation: pwaLogoPop 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+[data-theme='dark'] .pwa-splash-logo-container {
+  background: var(--liquid-bg, #0c1220);
+  box-shadow: 8px 8px 16px #050a0f, -8px -8px 16px #132637;
 }
 
 .pwa-splash-logo {
@@ -2212,10 +2220,10 @@ header .btn-primary:hover {
 
 .pwa-splash-ring {
   position: absolute;
-  inset: 0;
+  inset: -4px;
   border: 2px solid var(--umiba-red);
   border-radius: 50%;
-  opacity: 0.15;
+  opacity: 0.25;
   animation: pwaRingPulse 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }
 
@@ -2223,11 +2231,18 @@ header .btn-primary:hover {
   margin-top: 24px;
   width: 32px;
   height: 32px;
-  border: 3px solid rgba(185, 28, 28, 0.1);
+  border: 3px solid rgba(185, 28, 28, 0.15);
   border-radius: 50%;
   border-top-color: var(--umiba-red);
   animation: pwaSpin 0.8s linear infinite;
   opacity: 0.8;
+  box-shadow: 4px 4px 8px var(--shadow-dark, #bebebe), -4px -4px 8px var(--shadow-light, #ffffff);
+}
+
+[data-theme='dark'] .pwa-splash-spinner {
+  border-color: rgba(185, 28, 28, 0.1);
+  border-top-color: var(--umiba-red);
+  box-shadow: 4px 4px 8px #050a0f, -4px -4px 8px #132637;
 }
 
 @keyframes pwaLogoPop {
