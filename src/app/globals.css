@@ -1302,12 +1302,14 @@ body.dark-mode .hero-dot:hover {
     box-sizing: border-box !important;
   }
   .mega-menu > div,
+  .mega-menu > div > div,
   .mega-menu .neu-card,
   .mega-menu .glass-card,
   .mega-menu .profil-neu-card {
     margin-bottom: 0 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+    margin-top: 8px !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
