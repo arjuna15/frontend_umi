@@ -2067,7 +2067,7 @@ table td:last-child {
 
 /* ====== GLOBAL NEUMORPHIC BUTTONS & BADGES ====== */
 .btn, 
-button:not(.siakad-btn-primary):not(.siakad-btn-success):not(.aurora-checkbox):not(.siakad-header button):not(.siakad-sidebar button):not(.btn-logout-icon):not(.siakad-custom-select-trigger):not(.siakad-select-option):not(.siakad-attendance-btn):not(.active) {
+button:not(.siakad-btn-primary):not(.siakad-btn-success):not(.aurora-checkbox):not(.siakad-header button):not(.siakad-sidebar button):not(.btn-logout-icon):not(.siakad-custom-select-trigger):not(.siakad-select-option):not(.siakad-attendance-btn):not(.siakad-edom-score-btn):not(.active) {
   background: var(--glass-bg) !important;
   border: var(--glass-border) !important;
   color: var(--color-text) !important;
@@ -2077,8 +2077,24 @@ button:not(.siakad-btn-primary):not(.siakad-btn-success):not(.aurora-checkbox):n
   border-radius: 50px !important;
 }
 
+.siakad-edom-score-btn {
+  background: var(--glass-bg) !important;
+  border: var(--glass-border) !important;
+  color: var(--color-text) !important;
+  box-shadow: var(--glass-shadow) !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.siakad-edom-score-btn.active {
+  background: #C41E3A !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 6px 16px rgba(196, 30, 58, 0.55) !important;
+  transform: scale(1.08) !important;
+}
+
 .btn:active, 
-button:not(.siakad-btn-primary):not(.siakad-btn-success):not(.aurora-checkbox):not(.siakad-header button):not(.siakad-sidebar button):not(.btn-logout-icon):not(.siakad-custom-select-trigger):not(.siakad-select-option):not(.siakad-attendance-btn):not(.active):active {
+button:not(.siakad-btn-primary):not(.siakad-btn-success):not(.aurora-checkbox):not(.siakad-header button):not(.siakad-sidebar button):not(.btn-logout-icon):not(.siakad-custom-select-trigger):not(.siakad-select-option):not(.siakad-attendance-btn):not(.siakad-edom-score-btn):not(.active):active {
   box-shadow: inset 2px 2px 5px var(--inset-shadow-dark), inset -2px -2px 5px var(--inset-shadow-light) !important;
   transform: translateY(1px) !important;
 }

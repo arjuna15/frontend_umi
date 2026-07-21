@@ -208,15 +208,12 @@ export default function EdomMahasiswaPage() {
                   <button 
                     key={score} 
                     type="button"
+                    className={`siakad-edom-score-btn ${isSelected ? 'active' : ''}`}
                     onClick={() => setScore(q.id, score)} 
                     style={{
                       width: '44px', 
                       height: '44px', 
                       borderRadius: '50%', 
-                      border: isSelected ? 'none' : 'var(--glass-border)',
-                      background: isSelected ? '#C41E3A' : 'var(--glass-bg)', 
-                      color: isSelected ? '#ffffff' : 'var(--color-text)',
-                      boxShadow: isSelected ? '0 4px 12px rgba(196, 30, 58, 0.4)' : 'var(--glass-shadow)',
                       fontSize: '1.05rem', 
                       fontWeight: '800', 
                       cursor: 'pointer', 
