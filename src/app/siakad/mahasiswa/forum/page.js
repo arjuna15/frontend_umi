@@ -52,7 +52,7 @@ export default function MahasiswaForumPage() {
             <div>
               <h1 style={{ color: 'white', fontSize: '2.2rem', fontWeight: '800', margin: '0 0 8px 0', letterSpacing: '-0.03em' }}>Forum Diskusi Kelas</h1>
             </div>
-            <div style={{ position: 'relative', width: '300px' }}>
+            <div style={{ position: 'relative', maxWidth: '320px', width: '100%' }}>
               <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1rem' }}></i>
               <input 
                 type="text" 

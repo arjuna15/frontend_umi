@@ -1689,19 +1689,19 @@ input[type="file"], .siakad-file-input {
 }
 
 /* Global Neumorphic Inset for Page Header Icon Container Boxes */
-.siakad-page-header div[style*="width:"],
-.siakad-page-header div[style*="width :"],
-.siakad-page-header div[style*="width: '"],
-.siakad-page-header div[style*="width:'"] {
+.siakad-page-header div[style*="width:"]:not(:has(input)),
+.siakad-page-header div[style*="width :"]:not(:has(input)),
+.siakad-page-header div[style*="width: '"]:not(:has(input)),
+.siakad-page-header div[style*="width:'"]:not(:has(input)) {
   background: var(--glass-bg) !important;
   border: 1px solid rgba(255, 255, 255, 0.55) !important;
   box-shadow: inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff !important;
 }
 
-[data-theme='dark'] .siakad-page-header div[style*="width:"],
-[data-theme='dark'] .siakad-page-header div[style*="width :"],
-[data-theme='dark'] .siakad-page-header div[style*="width: '"],
-[data-theme='dark'] .siakad-page-header div[style*="width:'"] {
+[data-theme='dark'] .siakad-page-header div[style*="width:"]:not(:has(input)),
+[data-theme='dark'] .siakad-page-header div[style*="width :"]:not(:has(input)),
+[data-theme='dark'] .siakad-page-header div[style*="width: '"]:not(:has(input)),
+[data-theme='dark'] .siakad-page-header div[style*="width:'"]:not(:has(input)) {
   background: var(--glass-bg) !important;
   border-color: rgba(255, 255, 255, 0.03) !important;
   box-shadow: inset 2px 2px 5px #080a0f, inset -2px -2px 5px #1c2231 !important;
