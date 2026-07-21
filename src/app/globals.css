@@ -2887,41 +2887,36 @@ input:focus, textarea:focus, select:focus {
     box-shadow: 9px 9px 18px #090b10, -9px -9px 18px #1b2130 !important;
     border-color: rgba(255, 255, 255, 0.03) !important;
   }
+}
 
-  /* Preserve mega-menu card depth while replacing inline light highlights in dark mode. */
-  [data-theme=dark] header .mega-menu div[style*="box-shadow"],
-  [data-theme=dark] header .mega-menu [style*="box-shadow"] {
-    box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
-  }
+/* Mega Menu Sub-Cards (Manajemen & Fasilitas, Layanan Akademik, Rektor Card) in Dark Mode */
+[data-theme=dark] header .mega-menu div[style*="background: rgba(185, 28, 28, 0.03)"],
+[data-theme=dark] header .mega-menu div[style*="background:rgba(185,28,28,0.03)"],
+[data-theme=dark] .mega-menu div[style*="background: rgba(185, 28, 28, 0.03)"],
+[data-theme=dark] .mega-menu div[style*="background:rgba(185,28,28,0.03)"] {
+  background: rgba(185, 28, 28, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
+  border-radius: var(--radius-md) !important;
+}
 
-  [data-theme=dark] header .mega-menu img[style*="box-shadow"] {
-    border-color: #1e293b !important;
-    box-shadow: inset 3px 3px 6px rgba(0,0,0,0.6), inset -3px -3px 6px rgba(255,255,255,0.05) !important;
-  }
+[data-theme=dark] header .mega-menu div[style*="var(--inset-shadow)"],
+[data-theme=dark] .mega-menu div[style*="var(--inset-shadow)"] {
+  background: var(--liquid-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
+  border-radius: var(--radius-md) !important;
+}
 
-  [data-theme=dark] header .mega-menu div[style*="background: rgba(185, 28, 28, 0.03)"],
-  [data-theme=dark] header .mega-menu div[style*="background:rgba(185,28,28,0.03)"] {
-    background: rgba(185, 28, 28, 0.08) !important;
-    box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
-  }
-
-  /* Specific selector targeting inline styled neumorphic containers in dark header */
-  [data-theme=dark] header .mega-menu div[style*="inset"] {
-    box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
-  }
+[data-theme=dark] header .mega-menu img[style*="box-shadow"],
+[data-theme=dark] .mega-menu img[style*="box-shadow"] {
+  border-color: #1e293b !important;
+  box-shadow: inset 3px 3px 6px rgba(0,0,0,0.6), inset -3px -3px 6px rgba(255,255,255,0.05) !important;
 }
 
 @media (max-width: 991px) {
   [data-theme=dark] header .mega-menu,
   [data-theme=dark] .mega-menu {
-    box-shadow: none !important;
-    border: none !important;
-    background: transparent !important;
-  }
-  [data-theme=dark] header .mega-menu div[style*="box-shadow"],
-  [data-theme=dark] header .mega-menu [style*="box-shadow"],
-  [data-theme=dark] .mega-menu div[style*="box-shadow"],
-  [data-theme=dark] .mega-menu [style*="box-shadow"] {
     box-shadow: none !important;
     border: none !important;
     background: transparent !important;
