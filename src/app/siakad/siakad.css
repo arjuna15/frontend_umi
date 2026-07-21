@@ -1521,6 +1521,44 @@ textarea::placeholder {
   padding: 10px 18px !important;
 }
 
+/* Native File Input Neumorphic Dark Mode Fix */
+input[type="file"], .siakad-file-input {
+  border-radius: 50px !important;
+  padding: 6px 14px !important;
+  cursor: pointer;
+  outline: none !important;
+}
+
+[data-theme='dark'] input[type="file"],
+[data-theme='dark'] .siakad-file-input {
+  background: var(--liquid-bg) !important;
+  border: var(--inset-border) !important;
+  box-shadow: inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light) !important;
+  color: var(--color-text) !important;
+}
+
+[data-theme='dark'] input[type="file"]::-webkit-file-upload-button,
+[data-theme='dark'] input[type="file"]::file-selector-button,
+[data-theme='dark'] .siakad-file-input::-webkit-file-upload-button,
+[data-theme='dark'] .siakad-file-input::file-selector-button {
+  background: #0d1e28 !important;
+  color: #f1f5f9 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 30px !important;
+  padding: 6px 16px !important;
+  margin-right: 12px !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
+  box-shadow: 2px 2px 5px #050a0f, -2px -2px 5px #132637 !important;
+  transition: all 0.2s ease !important;
+}
+
+[data-theme='dark'] input[type="file"]::-webkit-file-upload-button:hover,
+[data-theme='dark'] input[type="file"]::file-selector-button:hover {
+  background: #112634 !important;
+  color: #ffffff !important;
+}
+
 /* Premium Buttons inside Modals */
 .siakad-modal-content button[type="submit"],
 .siakad-modal-content button.siakad-btn-primary {
