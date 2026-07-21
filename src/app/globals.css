@@ -2616,6 +2616,45 @@ input:focus, textarea:focus, select:focus {
 .public-neu-content .glass-card:hover { box-shadow: 6px 6px 12px #bebebe, -6px -6px 12px rgba(255, 255, 255, 0.8) !important; }
 .public-neu-content .btn-neu, .public-neu-content .btn-glass, .public-neu-content .btn-primary { background: var(--color-surface) !important; color: var(--umiba-red-dark) !important; border: none !important; box-shadow: var(--glass-shadow) !important; }
 .public-neu-content .btn-neu:active, .public-neu-content .btn-glass:active, .public-neu-content .btn-primary:active { box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px rgba(255, 255, 255, 0.7) !important; }
+
+/* Dokumen section cards: inset Neumorphic (pressed-in) */
+.public-neu-content #dokumen .glass-card {
+  box-shadow: inset 4px 4px 8px var(--shadow-dark, #bebebe), inset -4px -4px 8px var(--shadow-light, #ffffff) !important;
+  border: none !important;
+  padding: 32px 24px !important;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.public-neu-content #dokumen .glass-card:hover {
+  box-shadow: inset 5px 5px 10px var(--shadow-dark, #bebebe), inset -5px -5px 10px var(--shadow-light, #ffffff) !important;
+}
+/* Dokumen icon: raised Neumorphic circle */
+.public-neu-content #dokumen .glass-card > i[class*="ph-duotone"] {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: var(--liquid-bg, #e0e5ec);
+  box-shadow: 6px 6px 12px var(--shadow-dark, #bebebe), -6px -6px 12px var(--shadow-light, #ffffff);
+  margin-bottom: 20px !important;
+  font-size: 1.8rem !important;
+}
+/* Dark mode dokumen cards */
+[data-theme=dark] .public-neu-content #dokumen .glass-card {
+  box-shadow: inset 4px 4px 8px #050a0f, inset -4px -4px 8px #132637 !important;
+}
+[data-theme=dark] .public-neu-content #dokumen .glass-card:hover {
+  box-shadow: inset 5px 5px 10px #050a0f, inset -5px -5px 10px #132637 !important;
+}
+[data-theme=dark] .public-neu-content #dokumen .glass-card > i[class*="ph-duotone"] {
+  background: var(--liquid-bg, #0c1220);
+  box-shadow: 6px 6px 12px #050a0f, -6px -6px 12px #132637;
+}
+
 .portal-section { background: var(--color-bg) !important; }
 .portal-section > div:first-child, .portal-section > .hero-overlay-red { display: none !important; }
 .portal-section h1, .portal-section p { color: var(--color-text) !important; text-shadow: none !important; }
