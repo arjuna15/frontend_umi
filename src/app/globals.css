@@ -2883,9 +2883,7 @@ body.dark-mode [style*="var(--inset-shadow-light)"] {
 body.dark-mode .siakad-badge {
   background: var(--color-surface) !important;
   box-shadow: 4px 4px 8px #050a0f, -4px -4px 8px #132637 !important;
-}
   border: none !important;
-  box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
 }
 [data-theme=dark] .home-neu-page .custom-scrollbar {
   background: #0c1119 !important;
