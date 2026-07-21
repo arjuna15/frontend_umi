@@ -2812,12 +2812,12 @@ input:focus, textarea:focus, select:focus {
 
 
 /* GLOBAL DARK MODE OVERRIDES ACROSS THE ENTIRE WEBSITE */
-[data-theme=dark] [style*="#cbd5e1"]:not(.hero-model-circle):not(.hero-model-circle *),
-[data-theme=dark] [style*="#ffffff"]:not(.hero-model-circle):not(.hero-model-circle *),
-[data-theme=dark] [style*="#bebebe"]:not(.hero-model-circle):not(.hero-model-circle *),
-body.dark-mode [style*="#cbd5e1"]:not(.hero-model-circle):not(.hero-model-circle *),
-body.dark-mode [style*="#ffffff"]:not(.hero-model-circle):not(.hero-model-circle *),
-body.dark-mode [style*="#bebebe"]:not(.hero-model-circle):not(.hero-model-circle *) {
+[data-theme=dark] [style*="#cbd5e1"]:not(.hero-model-circle):not(.hero-model-circle *):not(.top-banner):not(.top-banner *),
+[data-theme=dark] [style*="#ffffff"]:not(.hero-model-circle):not(.hero-model-circle *):not(.top-banner):not(.top-banner *),
+[data-theme=dark] [style*="#bebebe"]:not(.hero-model-circle):not(.hero-model-circle *):not(.top-banner):not(.top-banner *),
+body.dark-mode [style*="#cbd5e1"]:not(.hero-model-circle):not(.hero-model-circle *):not(.top-banner):not(.top-banner *),
+body.dark-mode [style*="#ffffff"]:not(.hero-model-circle):not(.hero-model-circle *):not(.top-banner):not(.top-banner *),
+body.dark-mode [style*="#bebebe"]:not(.hero-model-circle):not(.hero-model-circle *):not(.top-banner):not(.top-banner *) {
   background: var(--color-surface) !important;
   box-shadow: inset 4px 4px 8px #050a0f, inset -4px -4px 8px #132637 !important;
 }
