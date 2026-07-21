@@ -167,19 +167,15 @@ export default function KrsApprovalPage() {
               <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '1.05rem' }}></i>
               <input 
                 type="text" 
+                className="siakad-input"
                 placeholder="Cari nama, NIM, atau status..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{ 
                   width: '100%', 
                   padding: '10px 12px 10px 46px', 
-                  borderRadius: '50px', 
-                  border: 'var(--inset-border)', 
                   outline: 'none', 
-                  background: 'var(--liquid-bg)', 
-                  color: 'var(--color-text)',
-                  fontSize: '0.85rem',
-                  boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)'
+                  fontSize: '0.9rem'
                 }} 
               />
             </div>

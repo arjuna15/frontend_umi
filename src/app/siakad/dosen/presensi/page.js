@@ -266,10 +266,11 @@ export default function DosenPresensiPage() {
               <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)' }}></i>
               <input 
                 type="text" 
+                className="siakad-input"
                 placeholder="Cari mahasiswa..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ padding: '10px 10px 10px 46px', borderRadius: '50px', border: 'var(--inset-border)', background: 'var(--liquid-bg)', color: 'var(--color-text)', width: '220px', maxWidth: '100%', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', outline: 'none' }}
+                style={{ padding: '10px 10px 10px 46px', width: '220px', maxWidth: '100%', outline: 'none' }}
               />
             </div>
           </div>

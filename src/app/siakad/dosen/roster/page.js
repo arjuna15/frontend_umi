@@ -169,19 +169,15 @@ export default function RosterPage() {
                 <i className="ph ph-magnifying-glass" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-muted)', fontSize: '0.9rem' }}></i>
                 <input
                   type="text"
+                  className="siakad-input"
                   placeholder="Cari NIM atau Nama..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   style={{
                     padding: '10px 14px 10px 46px',
-                    background: 'var(--glass-bg)',
-                    border: 'var(--inset-border)',
-                    borderRadius: '50px',
-                    color: 'var(--color-text)',
                     width: '240px',
                     outline: 'none',
-                    fontSize: '0.88rem',
-                    boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)',
+                    fontSize: '0.88rem'
                   }}
                 />
               </div>

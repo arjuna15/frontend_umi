@@ -149,6 +149,7 @@ export default function DosenBimbinganPage() {
             <div style={{ position: 'relative' }}>
               <input
                 type="text"
+                className="siakad-input"
                 placeholder="Cari nama atau NIM..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
