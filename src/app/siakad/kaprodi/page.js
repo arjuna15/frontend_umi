@@ -108,30 +108,71 @@ export default function KaprodiDashboard() {
 
       <div className="siakad-card stagger-4" style={{ marginBottom: '30px', padding: '24px' }}>
         <h3 style={{ margin: '0 0 20px 0', color: 'var(--color-text)', fontWeight: 'bold' }}>Persentase Kehadiran Dosen (Bulan Ini)</h3>
-        <div style={{ height: '320px', width: '100%', padding: '20px 16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '20px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
+        <div style={{ position: 'relative', height: '350px', width: '100%', padding: '20px 16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '24px', boxShadow: 'inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {pieData.length > 0 ? (
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={pieData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={80}
-                  outerRadius={110}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {pieData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip
-                  contentStyle={{ background: 'var(--color-bg)', border: '1px solid var(--color-border)', borderRadius: '8px', color: 'var(--color-text)' }}
-                  itemStyle={{ color: 'var(--color-text)' }}
-                />
-                <Legend verticalAlign="bottom" height={36} />
-              </PieChart>
-            </ResponsiveContainer>
+            <>
+              {/* Neumorphic 3D Inset Hub in the Donut Hole */}
+              <div style={{
+                position: 'absolute',
+                top: 'calc(50% - 24px)',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '125px',
+                height: '125px',
+                borderRadius: '50%',
+                background: 'var(--liquid-bg)',
+                border: 'var(--inset-border)',
+                boxShadow: 'inset 4px 4px 10px var(--inset-shadow-dark), inset -4px -4px 10px var(--inset-shadow-light)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                pointerEvents: 'none',
+                zIndex: 1
+              }}>
+                <i className="ph ph-chart-pie-slice" style={{ fontSize: '1.8rem', color: '#10b981', filter: 'drop-shadow(0 2px 4px rgba(16,185,129,0.3))' }}></i>
+                <span style={{ fontSize: '0.72rem', fontWeight: '800', color: 'var(--color-muted)', marginTop: '2px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Kehadiran</span>
+              </div>
+
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={72}
+                    outerRadius={104}
+                    paddingAngle={6}
+                    cornerRadius={8}
+                    dataKey="value"
+                    stroke="none"
+                    style={{ filter: 'drop-shadow(0px 6px 12px rgba(0,0,0,0.35))' }}
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell 
+                        key={`cell-${index}`} 
+                        fill={COLORS[index % COLORS.length]} 
+                        stroke="var(--glass-bg)"
+                        strokeWidth={2}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    contentStyle={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '16px', color: 'var(--color-text)', boxShadow: 'var(--glass-shadow)', fontWeight: 'bold' }}
+                    itemStyle={{ color: 'var(--color-text)' }}
+                  />
+                  <Legend 
+                    verticalAlign="bottom" 
+                    height={40}
+                    formatter={(value) => (
+                      <span style={{ color: 'var(--color-text)', fontWeight: '700', fontSize: '0.85rem', padding: '4px 12px', borderRadius: '50px', background: 'var(--glass-bg)', boxShadow: 'var(--glass-shadow)', border: 'var(--glass-border)', display: 'inline-flex', alignItems: 'center', gap: '6px', margin: '0 4px' }}>
+                        {value}
+                      </span>
+                    )}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </>
           ) : (
             <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-muted)', textAlign: 'center' }}>
               <div>
