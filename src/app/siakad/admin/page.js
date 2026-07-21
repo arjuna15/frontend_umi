@@ -89,21 +89,29 @@ export default function AdminDashboard() {
       </div>
 
       <div className="siakad-card stagger-3" style={{ marginBottom: '32px', padding: '24px' }}>
-        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0' }}>Distribusi Mahasiswa per Prodi</h2>
-        <div style={{ height: '320px', width: '100%', padding: '20px 16px 10px 16px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '20px', boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)' }}>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--color-text)', margin: '0 0 20px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <i className="ph ph-chart-bar" style={{ color: '#C41E3A' }}></i> Distribusi Mahasiswa per Prodi
+        </h2>
+        <div style={{ height: '340px', width: '100%', padding: '24px 20px 12px 10px', background: 'var(--liquid-bg)', border: 'var(--inset-border)', borderRadius: '24px', boxShadow: 'inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light)' }}>
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
-              <XAxis dataKey="name" stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)', fontSize: '0.8rem' }} axisLine={false} tickLine={false} />
-              <YAxis stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)', fontSize: '0.8rem' }} axisLine={false} tickLine={false} />
+            <BarChart data={chartData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="4 4" stroke="var(--color-border)" vertical={false} opacity={0.5} />
+              <XAxis dataKey="name" stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)', fontSize: '0.8rem', fontWeight: '600' }} axisLine={false} tickLine={false} />
+              <YAxis stroke="var(--color-muted)" tick={{ fill: 'var(--color-muted)', fontSize: '0.8rem', fontWeight: '600' }} axisLine={false} tickLine={false} />
               <Tooltip 
-                contentStyle={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '12px', color: 'var(--color-text)', boxShadow: 'var(--glass-shadow)' }}
-                cursor={{ fill: 'var(--color-border)', opacity: 0.15 }}
+                contentStyle={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', borderRadius: '16px', color: 'var(--color-text)', boxShadow: 'var(--glass-shadow)', fontWeight: 'bold' }}
+                cursor={{ fill: 'rgba(255,255,255,0.03)', radius: [12, 12, 4, 4] }}
               />
-              <Bar dataKey="users" radius={[8, 8, 0, 0]}>
-                {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={index % 2 === 0 ? '#C41E3A' : '#f59e0b'} />
-                ))}
+              <Bar 
+                dataKey="users" 
+                radius={[12, 12, 4, 4]} 
+                background={{ fill: 'rgba(0, 0, 0, 0.06)', radius: [12, 12, 4, 4] }}
+                style={{ filter: 'drop-shadow(3px 5px 8px rgba(0,0,0,0.3))' }}
+              >
+                {chartData.map((entry, index) => {
+                  const palette = ['#C41E3A', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'];
+                  return <Cell key={`cell-${index}`} fill={palette[index % palette.length]} />;
+                })}
               </Bar>
             </BarChart>
           </ResponsiveContainer>
