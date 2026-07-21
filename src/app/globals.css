@@ -2746,18 +2746,22 @@ input:focus, textarea:focus, select:focus {
 /* Home has explicit light inline shadows, so dark mode needs its own scoped equivalents. */
 [data-theme=dark] #beranda .neu-card,
 [data-theme=dark] #beranda .cert-slide,
-[data-theme=dark] #beranda .testi-card,
 [data-theme=dark] #beranda .prodi-card {
   background: var(--color-surface) !important;
   border: none !important;
   box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
+}
+[data-theme=dark] #beranda .testi-card {
+  background: var(--glass-bg) !important;
+  border: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
 }
 [data-theme=dark] #beranda .neu-card:hover,
 [data-theme=dark] #beranda .cert-slide:hover,
 [data-theme=dark] #beranda .testi-card:hover,
 [data-theme=dark] #beranda .prodi-card:hover {
   transform: translateY(-2px);
-  box-shadow: 6px 6px 12px #080a0f, -6px -6px 12px #1b2130 !important;
+  box-shadow: var(--glass-shadow) !important;
 }
 [data-theme=dark] #beranda .btn-neu {
   background: var(--color-surface) !important;
@@ -2798,17 +2802,21 @@ input:focus, textarea:focus, select:focus {
 }
 [data-theme=dark] .home-neu-page .neu-card,
 [data-theme=dark] .home-neu-page .cert-slide,
-[data-theme=dark] .home-neu-page .testi-card,
 [data-theme=dark] .home-neu-page .prodi-card {
   background: var(--color-surface) !important;
   border: none !important;
   box-shadow: inset 4px 4px 8px #080a0f, inset -4px -4px 8px #1b2130 !important;
 }
+[data-theme=dark] .home-neu-page .testi-card {
+  background: var(--glass-bg) !important;
+  border: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow) !important;
+}
 [data-theme=dark] .home-neu-page .neu-card:hover,
 [data-theme=dark] .home-neu-page .cert-slide:hover,
 [data-theme=dark] .home-neu-page .testi-card:hover,
 [data-theme=dark] .home-neu-page .prodi-card:hover {
-  box-shadow: 6px 6px 12px #080a0f, -6px -6px 12px #1b2130 !important;
+  box-shadow: var(--glass-shadow) !important;
 }
 [data-theme=dark] .home-neu-page .btn-neu {
   background: var(--color-surface) !important;

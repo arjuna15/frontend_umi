@@ -643,7 +643,7 @@ export default function Home() {
     <div className="testi-slider fade-up">
       {testiData.length > 0 ? (
         testiData.map((testi, index) => (
-          <div key={testi.id} className="testi-card" style={{ background: 'var(--color-surface)', borderRadius: '24px', padding: '12px', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
+          <div key={testi.id} className="testi-card" style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', borderRadius: '24px', padding: '12px' }}>
             <img className="alumni-img" style={{ objectFit: 'cover', width: '100%', height: '440px', borderRadius: '16px', display: 'block' }} src={testi.image_url} alt={`Testimoni ${index + 1}`}/>
           </div>
         ))
