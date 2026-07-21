@@ -2904,7 +2904,7 @@ input:focus, textarea:focus, select:focus {
 [data-theme=dark] header .mega-menu div[style*="background:rgba(185,28,28,0.03)"],
 [data-theme=dark] .mega-menu div[style*="background: rgba(185, 28, 28, 0.03)"],
 [data-theme=dark] .mega-menu div[style*="background:rgba(185,28,28,0.03)"] {
-  background: rgba(185, 28, 28, 0.12) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
   border: 1px solid rgba(255, 255, 255, 0.05) !important;
   box-shadow: inset 3px 3px 6px #080a0f, inset -3px -3px 6px #1b2130 !important;
   border-radius: var(--radius-md) !important;
