@@ -199,18 +199,17 @@ export default function EdomMahasiswaPage() {
                     type="button"
                     onClick={() => setScore(q.id, score)} 
                     style={{
-                      width: '46px', 
-                      height: '46px', 
+                      width: '44px', 
+                      height: '44px', 
                       borderRadius: '50%', 
                       border: isSelected ? 'none' : 'var(--glass-border)',
-                      background: isSelected ? 'linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%)' : 'var(--glass-bg)', 
+                      background: isSelected ? '#C41E3A' : 'var(--glass-bg)', 
                       color: isSelected ? '#ffffff' : 'var(--color-text)',
-                      boxShadow: isSelected ? '0 4px 14px rgba(196, 30, 58, 0.45), inset 0 0 0 1px rgba(255,255,255,0.3)' : 'var(--glass-shadow)',
+                      boxShadow: isSelected ? '0 4px 12px rgba(196, 30, 58, 0.4)' : 'var(--glass-shadow)',
                       fontSize: '1.05rem', 
                       fontWeight: '800', 
                       cursor: 'pointer', 
-                      transform: isSelected ? 'scale(1.12)' : 'scale(1)',
-                      transition: 'all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                      transition: 'all 0.2s ease'
                     }}
                   >
                     {score}
