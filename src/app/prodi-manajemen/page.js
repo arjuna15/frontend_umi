@@ -154,27 +154,33 @@ export default function Page() {
     <div class="grid grid-3" style="gap: 24px;">
       
       <!-- Kurikulum -->
-      <div class="glass glass-card fade-up" style="display: flex; flex-direction: column; text-align: center;">
-        <i class="ph-duotone ph-book-open" style="font-size: 3rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
+      <div class="glass glass-card fade-up" style="display: flex; flex-direction: column; text-align: center; align-items: center; box-shadow: inset 4px 4px 8px var(--shadow-dark, #bebebe), inset -4px -4px 8px var(--shadow-light, #ffffff); border: none; padding: 32px 24px;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--liquid-bg, #e0e5ec); box-shadow: 6px 6px 12px var(--shadow-dark, #bebebe), -6px -6px 12px var(--shadow-light, #ffffff); margin-bottom: 20px;">
+          <i class="ph-duotone ph-book-open" style="font-size: 1.8rem; color: var(--umiba-red);"></i>
+        </div>
         <h4 style="margin-bottom: 8px;">Buku Kurikulum</h4>
         <p style="font-size: 0.85rem; margin-bottom: 24px;">Pedoman sebaran mata kuliah (SKS) dari semester 1 hingga akhir kelulusan.</p>
-        <a href="#" class="btn btn-glass" style="margin-top: auto; width: 100%;"><i class="ph-bold ph-download-simple"></i> Unduh PDF</a>
+        <a href="#" class="btn btn-neu" style="margin-top: auto; width: 100%;"><i class="ph-bold ph-download-simple"></i> Unduh PDF</a>
       </div>
 
       <!-- SK Pendirian -->
-      <div class="glass glass-card fade-up" style="transition-delay: 0.1s; display: flex; flex-direction: column; text-align: center;">
-        <i class="ph-duotone ph-certificate" style="font-size: 3rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
+      <div class="glass glass-card fade-up" style="transition-delay: 0.1s; display: flex; flex-direction: column; text-align: center; align-items: center; box-shadow: inset 4px 4px 8px var(--shadow-dark, #bebebe), inset -4px -4px 8px var(--shadow-light, #ffffff); border: none; padding: 32px 24px;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--liquid-bg, #e0e5ec); box-shadow: 6px 6px 12px var(--shadow-dark, #bebebe), -6px -6px 12px var(--shadow-light, #ffffff); margin-bottom: 20px;">
+          <i class="ph-duotone ph-certificate" style="font-size: 1.8rem; color: var(--umiba-red);"></i>
+        </div>
         <h4 style="margin-bottom: 8px;">SK Pendirian Prodi</h4>
         <p style="font-size: 0.85rem; margin-bottom: 24px;">Legalitas resmi pembukaan program studi dari Kemendikbudristek RI.</p>
-        <a href="#" class="btn btn-glass" style="margin-top: auto; width: 100%;"><i class="ph-bold ph-download-simple"></i> Unduh SK</a>
+        <a href="#" class="btn btn-neu" style="margin-top: auto; width: 100%;"><i class="ph-bold ph-download-simple"></i> Unduh SK</a>
       </div>
 
       <!-- Akreditasi -->
-      <div class="glass glass-card fade-up" style="transition-delay: 0.2s; display: flex; flex-direction: column; text-align: center;">
-        <i class="ph-duotone ph-medal" style="font-size: 3rem; color: var(--umiba-red); margin-bottom: 16px;"></i>
+      <div class="glass glass-card fade-up" style="transition-delay: 0.2s; display: flex; flex-direction: column; text-align: center; align-items: center; box-shadow: inset 4px 4px 8px var(--shadow-dark, #bebebe), inset -4px -4px 8px var(--shadow-light, #ffffff); border: none; padding: 32px 24px;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--liquid-bg, #e0e5ec); box-shadow: 6px 6px 12px var(--shadow-dark, #bebebe), -6px -6px 12px var(--shadow-light, #ffffff); margin-bottom: 20px;">
+          <i class="ph-duotone ph-medal" style="font-size: 1.8rem; color: var(--umiba-red);"></i>
+        </div>
         <h4 style="margin-bottom: 8px;">Sertifikat Akreditasi</h4>
         <p style="font-size: 0.85rem; margin-bottom: 24px;">Sertifikat Akreditasi resmi dari BAN-PT / LAM untuk program studi ini.</p>
-        <a href="#" class="btn btn-glass" style="margin-top: auto; width: 100%;"><i class="ph-bold ph-download-simple"></i> Unduh Sertifikat</a>
+        <a href="#" class="btn btn-neu" style="margin-top: auto; width: 100%;"><i class="ph-bold ph-download-simple"></i> Unduh Sertifikat</a>
       </div>
 
     </div>
