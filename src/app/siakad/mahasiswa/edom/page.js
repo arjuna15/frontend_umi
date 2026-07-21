@@ -36,7 +36,7 @@ export default function EdomMahasiswaPage() {
       const qData = await qRes.json();
       const qs = qData.data || [];
       setQuestions(qs);
-      setForm(prev => ({ ...prev, answers: qs.map(q => ({ question_id: q.id, score: 0 })) }));
+      const initialAnswers = qs.map(q => ({ question_id: q.id, score: 0 }));
 
       if (cRes.ok) {
         const cData = await cRes.json();
@@ -44,12 +44,16 @@ export default function EdomMahasiswaPage() {
         setMyCourses(courses);
         if (courses.length > 0) {
           setSelectedCourseIndex('0');
-          setForm(prev => ({
-            ...prev,
+          setForm({
             course_id: courses[0].course_id,
-            dosen_id: courses[0].dosen_id
-          }));
+            dosen_id: courses[0].dosen_id,
+            answers: initialAnswers
+          });
+        } else {
+          setForm(prev => ({ ...prev, answers: initialAnswers }));
         }
+      } else {
+        setForm(prev => ({ ...prev, answers: initialAnswers }));
       }
     } catch(e) {
       console.error(e);
@@ -71,7 +75,14 @@ export default function EdomMahasiswaPage() {
   };
 
   const setScore = (qId, score) => {
-    setForm(prev => ({ ...prev, answers: prev.answers.map(a => a.question_id === qId ? { ...a, score } : a) }));
+    setForm(prev => {
+      const answers = prev.answers || [];
+      const exists = answers.some(a => a.question_id === qId);
+      const updatedAnswers = exists
+        ? answers.map(a => a.question_id === qId ? { ...a, score } : a)
+        : [...answers, { question_id: qId, score }];
+      return { ...prev, answers: updatedAnswers };
+    });
   };
 
   const handleSubmit = async () => {

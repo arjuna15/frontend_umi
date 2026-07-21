@@ -154,6 +154,7 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
             />
             <input
               type="text"
+              className="siakad-input"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Cari..."
@@ -161,13 +162,8 @@ export default function CustomSelect({ value, onChange, options, placeholder = "
                 width: '100%',
                 padding: '8px 12px 8px 36px',
                 fontSize: '0.85rem',
-                borderRadius: '50px',
-                border: 'var(--inset-border)',
-                background: 'var(--liquid-bg)',
-                color: 'var(--color-text)',
                 outline: 'none',
-                boxSizing: 'border-box',
-                boxShadow: 'inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light)'
+                boxSizing: 'border-box'
               }}
               autoFocus
             />
