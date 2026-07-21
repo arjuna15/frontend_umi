@@ -191,7 +191,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <div dangerouslySetInnerHTML={{ __html: dynamicHtml || mainHtml }} />
+      <div className="public-neu-content" dangerouslySetInnerHTML={{ __html: dynamicHtml || mainHtml }} />
     </div>
   );
 }
