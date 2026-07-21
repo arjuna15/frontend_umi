@@ -15,8 +15,9 @@ export default function SiakadLogin() {
   const [rememberMe, setRememberMe] = useState(false);
 
   useEffect(() => {
-    // Paksa tema kembali ke light mode saat masuk halaman login agar teks tidak tidak kelihatan
-    document.documentElement.setAttribute('data-theme', 'light');
+    // Preserve active theme or default to system/light
+    const savedTheme = localStorage.getItem('siakad_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
 
   const handleLogin = async (e) => {
@@ -91,7 +92,7 @@ export default function SiakadLogin() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: #eef2f7; /* Soft slate neumorphic baseline */
+          background: var(--liquid-bg);
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Outfit', sans-serif;
           position: relative;
           overflow: hidden;
@@ -155,10 +156,10 @@ export default function SiakadLogin() {
           width: 100%;
           max-width: 1000px;
           min-height: 580px;
-          background: #eef2f7;
-          border: 1px solid rgba(255, 255, 255, 0.45);
+          background: var(--glass-bg);
+          border: var(--glass-border);
           border-radius: 28px;
-          box-shadow: 9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff;
+          box-shadow: var(--glass-shadow);
           display: flex;
           position: relative;
           z-index: 10;
@@ -189,13 +190,13 @@ export default function SiakadLogin() {
         }
         .aurora-header h1 {
           font-size: 2.8rem;
-          color: #1d1d1f;
+          color: var(--color-text);
           margin: 0 0 8px 0;
           font-weight: 800;
           letter-spacing: -0.04em;
         }
         .aurora-header p {
-          color: #86868b;
+          color: var(--color-muted);
           font-size: 1rem;
           margin: 0;
           font-weight: 500;
@@ -215,7 +216,7 @@ export default function SiakadLogin() {
           left: 18px;
           top: 50%;
           transform: translateY(-50%);
-          color: #86868b;
+          color: var(--color-muted);
           font-size: 1.2rem;
           z-index: 5;
           transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
@@ -223,28 +224,27 @@ export default function SiakadLogin() {
         .aurora-input {
           width: 100%;
           padding: 16px 20px 16px 52px;
-          border: 1px solid rgba(0, 0, 0, 0.08);
-          background: rgba(255, 255, 255, 0.45);
-          border-radius: 14px;
+          border: var(--inset-border);
+          background: var(--liquid-bg);
+          border-radius: 16px;
           font-size: 0.95rem;
-          color: #1d1d1f;
+          color: var(--color-text);
           outline: none;
-          box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff;
+          box-shadow: inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light);
           transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
           font-weight: 500;
         }
         .aurora-input:focus {
-          background: rgba(255, 255, 255, 0.8);
-          border-color: #B91C1C;
-          box-shadow: 0 0 0 4px rgba(185, 28, 28, 0.15), inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff;
+          border-color: #C41E3A;
+          box-shadow: inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light), 0 0 0 3px rgba(196, 30, 58, 0.18);
         }
         .aurora-input:focus + .aurora-icon-box, 
         .aurora-input-group:focus-within .aurora-icon-box {
-          color: #B91C1C;
+          color: #C41E3A;
           transform: translateY(-50%) scale(1.08);
         }
         .aurora-input::placeholder {
-          color: #86868b;
+          color: var(--color-muted);
           font-weight: 500;
         }
 
@@ -253,13 +253,13 @@ export default function SiakadLogin() {
           right: 18px;
           top: 50%;
           transform: translateY(-50%);
-          color: #86868b;
+          color: var(--color-muted);
           cursor: pointer;
           font-size: 1.15rem;
           transition: all 0.3s;
         }
         .aurora-eye:hover { 
-          color: #B91C1C; 
+          color: #C41E3A; 
         }
 
         .aurora-options {
@@ -268,7 +268,7 @@ export default function SiakadLogin() {
           max-width: 380px;
           margin: 0 auto 32px auto;
           font-size: 0.88rem;
-          color: #86868b;
+          color: var(--color-muted);
           font-weight: 500;
         }
         
@@ -281,19 +281,19 @@ export default function SiakadLogin() {
         .aurora-checkbox {
           width: 18px;
           height: 18px;
-          border-radius: 5px;
-          background: #eef2f7;
-          border: 1px solid rgba(0, 0, 0, 0.06);
+          border-radius: 6px;
+          background: var(--liquid-bg);
+          border: var(--inset-border);
           display: flex;
           align-items: center;
           justify-content: center;
           transition: all 0.2s;
-          box-shadow: inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff;
+          box-shadow: inset 2px 2px 4px var(--inset-shadow-dark), inset -2px -2px 4px var(--inset-shadow-light);
         }
         input:checked + .aurora-checkbox {
           background: #C41E3A;
           border-color: #C41E3A;
-          box-shadow: 0 0 8px rgba(196, 30, 58, 0.3);
+          box-shadow: 0 0 8px rgba(196, 30, 58, 0.4);
         }
 
         .aurora-btn {
@@ -304,26 +304,25 @@ export default function SiakadLogin() {
           padding: 16px;
           border-radius: 50px;
           border: none;
-          background: linear-gradient(135deg, #C41E3A, #9b1c2e);
+          background: linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%);
           color: white;
           font-size: 1rem;
           font-weight: 800;
           cursor: pointer;
-          box-shadow: 3px 3px 8px #a3b1c6, -3px -3px 8px rgba(255, 255, 255, 0.6);
+          box-shadow: 0 4px 14px rgba(196, 30, 58, 0.35);
           transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
           letter-spacing: 0.05em;
           text-transform: uppercase;
         }
         .aurora-btn:hover {
           transform: translateY(-2px);
-          box-shadow: 6px 6px 12px #a3b1c6, -6px -6px 12px rgba(255, 255, 255, 0.6);
+          box-shadow: 0 6px 18px rgba(196, 30, 58, 0.5);
         }
         .aurora-btn:active {
           transform: translateY(1px);
-          box-shadow: inset 3px 3px 6px #a3b1c6, inset -3px -3px 6px rgba(255, 255, 255, 0.6);
         }
         .aurora-btn:disabled {
-          background: #86868b;
+          background: var(--color-muted);
           box-shadow: none;
           cursor: not-allowed;
           transform: none;
@@ -339,8 +338,8 @@ export default function SiakadLogin() {
           align-items: center;
           text-align: center;
           padding: 40px;
-          background: #eef2f7;
-          border-left: 1px solid rgba(255, 255, 255, 0.45);
+          background: var(--glass-bg);
+          border-left: 1px solid var(--color-border);
           overflow: hidden;
         }
 
@@ -365,11 +364,11 @@ export default function SiakadLogin() {
         .aurora-visual-content {
           z-index: 10;
           position: relative;
-          background: #eef2f7;
+          background: var(--glass-bg);
           padding: 40px 32px;
           border-radius: 24px;
-          border: 1px solid rgba(255, 255, 255, 0.45);
-          box-shadow: 9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff;
+          border: var(--glass-border);
+          box-shadow: var(--glass-shadow);
           max-width: 380px;
         }
         
@@ -382,22 +381,22 @@ export default function SiakadLogin() {
           width: 120px;
           height: 120px;
           border-radius: 50%;
-          background: #eef2f7;
-          border: 1px solid rgba(255, 255, 255, 0.45);
-          box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff;
+          background: var(--liquid-bg);
+          border: var(--inset-border);
+          box-shadow: inset 4px 4px 8px var(--inset-shadow-dark), inset -4px -4px 8px var(--inset-shadow-light);
         }
 
         .aurora-visual-content h2 {
           font-size: 1.8rem;
           font-weight: 800;
           margin: 0 0 12px 0;
-          color: #1d1d1f;
+          color: var(--color-text);
           letter-spacing: -0.02em;
         }
         .aurora-visual-content p {
           font-size: 0.98rem;
           line-height: 1.6;
-          color: #86868b;
+          color: var(--color-muted);
           margin: 0;
         }
 
@@ -420,7 +419,7 @@ export default function SiakadLogin() {
         @media (max-width: 900px) {
           .dark-glass-card { flex-direction: column-reverse; min-height: auto; margin-top: 24px; }
           .aurora-form-section { padding: 36px 20px; }
-          .aurora-visual-section { padding: 48px 20px; border-left: none; border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+          .aurora-visual-section { padding: 48px 20px; border-left: none; border-bottom: 1px solid var(--color-border); }
         }
 
         @media (max-width: 480px) {
@@ -445,12 +444,12 @@ export default function SiakadLogin() {
         }
         .siakad-login-modal {
           width: min(100%, 450px);
-          background: #eef2f7;
-          border: 1px solid rgba(255, 255, 255, 0.45);
-          box-shadow: 9px 9px 18px #d1d9e6, -9px -9px 18px #ffffff;
+          background: var(--glass-bg);
+          border: var(--glass-border);
+          box-shadow: var(--glass-shadow);
           border-radius: 24px;
           padding: 32px 28px;
-          color: #1d1d1f;
+          color: var(--color-text);
           text-align: center;
         }
         .siakad-login-modal-icon {
@@ -461,19 +460,20 @@ export default function SiakadLogin() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: #eef2f7;
-          border: 1px solid rgba(255, 255, 255, 0.45);
-          box-shadow: inset 2px 2px 4px #d1d9e6, inset -2px -2px 4px #ffffff;
+          background: var(--liquid-bg);
+          border: var(--inset-border);
+          box-shadow: inset 3px 3px 6px var(--inset-shadow-dark), inset -3px -3px 6px var(--inset-shadow-light);
         }
         .siakad-login-modal h3 {
           margin: 0 0 8px 0;
           font-size: 1.35rem;
           font-weight: 800;
+          color: var(--color-text);
           letter-spacing: -0.02em;
         }
         .siakad-login-modal p {
           margin: 0 0 24px 0;
-          color: #86868b;
+          color: var(--color-muted);
           line-height: 1.5;
           font-size: 0.95rem;
         }
@@ -494,21 +494,21 @@ export default function SiakadLogin() {
           transform: translateY(-2px);
         }
         .siakad-login-modal-btn.secondary {
-          background: #eef2f7;
-          color: #1d1d1f;
-          border: 1px solid rgba(255, 255, 255, 0.45);
-          box-shadow: 3px 3px 8px #a3b1c6, -3px -3px 8px rgba(255, 255, 255, 0.6);
+          background: var(--glass-bg);
+          color: var(--color-text);
+          border: var(--glass-border);
+          box-shadow: var(--glass-shadow);
         }
         .siakad-login-modal-btn.secondary:hover {
-          box-shadow: 6px 6px 12px #a3b1c6, -6px -6px 12px rgba(255, 255, 255, 0.6);
+          box-shadow: var(--glass-shadow);
         }
         .siakad-login-modal-btn.primary {
-          background: linear-gradient(135deg, #C41E3A, #9b1c2e);
+          background: linear-gradient(135deg, #C41E3A 0%, #9b1c2e 100%);
           color: white;
-          box-shadow: 3px 3px 8px #a3b1c6, -3px -3px 8px rgba(255, 255, 255, 0.6);
+          box-shadow: 0 4px 14px rgba(196, 30, 58, 0.35);
         }
         .siakad-login-modal-btn.primary:hover {
-          box-shadow: 6px 6px 12px #a3b1c6, -6px -6px 12px rgba(255, 255, 255, 0.6);
+          box-shadow: 0 6px 18px rgba(196, 30, 58, 0.5);
         }
         @media (max-width: 480px) {
           .siakad-login-modal {
