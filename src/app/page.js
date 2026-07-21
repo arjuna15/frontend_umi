@@ -327,27 +327,29 @@ export default function Home() {
 <section id="sambutan" style={{ padding: '40px 0' }}>
   <div className="container grid grid-2" style={{ alignItems: 'center' }}>
     <div className="fade-up" style={{ position: 'relative', maxWidth: '400px', margin: '0 auto', width: '100%' }}>
-      <div style={{ borderRadius: '24px', overflow: 'hidden', boxShadow: 'inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff' }}>
-        <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block' }}/>
-      </div>
-      <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "16px", position: 'absolute', bottom: '24px', left: '24px', right: '24px', padding: 'var(--space-3)' }}>
-        <h3 style={{ margin: '0 0 4px 0', fontSize: '1.1rem', fontWeight: 800 }}>{t("home.sambutan_rektor")}</h3>
-        <p style={{ margin: '0', fontSize: '0.85rem', color: 'var(--color-text-muted)', fontStyle: 'italic' }}>{t("home.quote_rektor")}</p>
+      <div style={{ background: 'var(--glass-bg)', border: 'var(--glass-border)', boxShadow: 'var(--glass-shadow)', borderRadius: '24px', padding: '12px', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
+          <img src="https://umiba.ac.id/wp-content/uploads/2026/05/rektor-UMIBA-2026.jpeg" alt="Rektor UMIBA" style={{ width: '100%', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'top', display: 'block' }}/>
+        </div>
+        <div className="neu-card" style={{ background: "var(--glass-bg)", border: "var(--glass-border)", boxShadow: "var(--glass-shadow)", borderRadius: "16px", position: 'absolute', bottom: '24px', left: '24px', right: '24px', padding: '16px', backdropFilter: 'blur(10px)' }}>
+          <h3 style={{ margin: '0 0 4px 0', fontSize: '1.1rem', fontWeight: 800, color: 'var(--color-text)' }}>{t("home.sambutan_rektor")}</h3>
+          <p style={{ margin: '0', fontSize: '0.85rem', color: 'var(--color-muted)', fontStyle: 'italic' }}>{t("home.quote_rektor")}</p>
+        </div>
       </div>
     </div>
     <div className="fade-up" style={{ paddingLeft: 'var(--space-4)' }}>
       <span className="text-red" style={{ fontWeight: '800', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.9rem' }}>{t("home.pesan_pimpinan")}</span>
-      <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 900, marginBottom: '20px' }}>{t("home.selamat_datang")}</h2>
+      <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 900, marginBottom: '20px', color: 'var(--color-text)' }}>{t("home.selamat_datang")}</h2>
       <p style={{ lineHeight: '1.7', color: 'var(--color-text)', marginBottom: '16px' }}>{t("home.sambutan_p1")}</p>
       <p style={{ lineHeight: '1.7', color: 'var(--color-text)', marginBottom: '24px' }}>{t("home.sambutan_p2")}</p>
       <div className="grid grid-2" style={{ gap: '20px' }}>
-        <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "20px", padding: '20px' }}>
-          <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', fontWeight: 800 }}>{t("home.kurikulum_modern")}</h3>
-          <p style={{ fontSize: '0.85rem', margin: '0', color: 'var(--color-text-muted)', lineHeight: '1.5' }}>{t("home.kurikulum_desc")}</p>
+        <div className="neu-card" style={{ background: "var(--glass-bg)", border: "var(--glass-border)", boxShadow: "var(--glass-shadow)", borderRadius: "20px", padding: '20px' }}>
+          <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', fontWeight: 800, color: 'var(--color-text)' }}>{t("home.kurikulum_modern")}</h3>
+          <p style={{ fontSize: '0.85rem', margin: '0', color: 'var(--color-muted)', lineHeight: '1.5' }}>{t("home.kurikulum_desc")}</p>
         </div>
-        <div className="neu-card" style={{ background: "var(--color-surface)", boxShadow: "inset 3px 3px 6px #cbd5e1, inset -3px -3px 6px #ffffff", border: "none", borderRadius: "20px", padding: '20px' }}>
-          <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', fontWeight: 800 }}>{t("home.kemitraan_industri")}</h3>
-          <p style={{ fontSize: '0.85rem', margin: '0', color: 'var(--color-text-muted)', lineHeight: '1.5' }}>{t("home.kemitraan_desc")}</p>
+        <div className="neu-card" style={{ background: "var(--glass-bg)", border: "var(--glass-border)", boxShadow: "var(--glass-shadow)", borderRadius: "20px", padding: '20px' }}>
+          <h3 style={{ fontSize: '1.1rem', marginBottom: '8px', fontWeight: 800, color: 'var(--color-text)' }}>{t("home.kemitraan_industri")}</h3>
+          <p style={{ fontSize: '0.85rem', margin: '0', color: 'var(--color-muted)', lineHeight: '1.5' }}>{t("home.kemitraan_desc")}</p>
         </div>
       </div>
     </div>
