@@ -172,7 +172,7 @@ export default function ElearningPage() {
                         </div>
                         {quiz.require_proctoring === true || quiz.require_proctoring === 1 ? (
                           <button type="button" onClick={() => router.push('/siakad/mahasiswa/proctoring')} style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white', border: 'none', padding: '8px 18px', borderRadius: '50px', fontSize: '0.85rem', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 2px 6px rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                            <i className="ph ph-eye"></i> Ujian Diawasi
+                            <i className="ph ph-laptop"></i> Ujian Diawasi
                           </button>
                         ) : (
                           <button type="button" onClick={() => router.push(`/siakad/mahasiswa/elearning/quiz?quizId=${quiz.id}`)} className="siakad-btn-primary" style={{ padding: '8px 18px', borderRadius: '50px', fontSize: '0.85rem' }}>

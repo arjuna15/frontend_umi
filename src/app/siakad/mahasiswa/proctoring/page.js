@@ -226,11 +226,11 @@ export default function ProctoringStudentPage() {
         <div style={{ display: 'flex', justifyContent: 'center', padding: '40px 0' }}>
           <div className="siakad-card" style={{ padding: '40px', width: '100%', maxWidth: '460px', textAlign: 'center' }}>
             <div style={{ width: '70px', height: '70px', borderRadius: '18px', background: 'rgba(59,130,246,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 24px' }}>
-              <i className="ph ph-eye" style={{ fontSize: '2.2rem', color: '#3b82f6' }}></i>
+              <i className="ph ph-laptop" style={{ fontSize: '2.2rem', color: '#3b82f6' }}></i>
             </div>
             <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: 'var(--color-text)', margin: '0 0 8px 0' }}>Masuk Sesi Ujian</h2>
             <p style={{ color: 'var(--color-muted)', fontSize: '0.9rem', margin: '0 0 28px 0' }}>Masukkan token yang diberikan dosen/pengawas ujian Anda.</p>
-            <input id="input-exam-token" type="text" placeholder="Masukkan token ujian..." value={token} onChange={e => setToken(e.target.value.toUpperCase())} onKeyDown={e => e.key === 'Enter' && joinSession()} style={{ width: '100%', padding: '14px 18px', fontSize: '1.1rem', textAlign: 'center', letterSpacing: '0.15em', fontWeight: '700', boxSizing: 'border-box', color: 'var(--color-text)' }} />
+            <input id="input-exam-token" type="text" className="siakad-input" placeholder="Masukkan token ujian..." value={token} onChange={e => setToken(e.target.value.toUpperCase())} onKeyDown={e => e.key === 'Enter' && joinSession()} style={{ width: '100%', padding: '14px 18px', fontSize: '1.1rem', textAlign: 'center', letterSpacing: '0.15em', fontWeight: '700', boxSizing: 'border-box' }} />
             <button id="btn-join-session" onClick={joinSession} disabled={joining || !token.trim()} style={{ width: '100%', marginTop: '16px', background: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)', color: 'white', border: 'none', padding: '14px', borderRadius: '14px', fontWeight: 'bold', cursor: 'pointer', fontSize: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', opacity: (joining || !token.trim()) ? 0.6 : 1 }}>
               {joining ? <><i className="ph ph-spinner" style={{ animation: 'pwaSpin 1s linear infinite' }}></i> Bergabung...</> : <><i className="ph ph-sign-in"></i> Gabung Ujian</>}
             </button>
